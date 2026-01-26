@@ -190,6 +190,48 @@
             margin-top: 0.25rem;
         }
 
+        .pronunciation {
+            font-style: italic;
+            color: #666;
+            font-size: 0.95rem;
+            margin-top: 0.25rem;
+            padding: 0.5rem;
+            background: #f5f5f5;
+            border-radius: 5px;
+            border-left: 3px solid var(--gold);
+        }
+
+        .wine-card .producer {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.25rem;
+        }
+
+        .blend-detail {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 0.25rem;
+        }
+
+        .tech-specs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            padding: 0.75rem;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .tech-spec {
+            font-size: 0.85rem;
+        }
+
+        .tech-spec-label {
+            color: var(--burgundy);
+            font-weight: 600;
+        }
+
         /* Flashcard Section */
         .flashcard-container {
             max-width: 700px;
@@ -572,177 +614,257 @@
                 name: "Château de la Chaize Brouilly",
                 vintage: "2022",
                 type: "red",
-                grape: "Gamay",
+                grape: "100% Gamay",
+                grapeDetail: "Gamay Noir à Jus Blanc - the only grape allowed in Beaujolais Crus",
                 region: "Brouilly, Beaujolais",
                 country: "France",
-                tasting: "Fresh red fruits (cherry, raspberry), light-bodied with silky tannins, floral notes, and a hint of minerality. Classic Beaujolais elegance.",
-                food: "Charcuterie, roast chicken, light pasta dishes, mild cheeses",
-                notes: "Brouilly is one of the 10 Beaujolais Crus. The estate is known for its historic château and large vineyard."
+                pronunciation: "sha-TOH duh lah SHEZZ broo-YEE | Gamay: gah-MAY",
+                winemaker: "Château de la Chaize (owned by Groupe Castel since 2017). One of Beaujolais' largest and most historic estates, with a 17th-century château designed by the architect of Versailles.",
+                tasting: "Fresh red fruits (cherry, raspberry), light-bodied with silky tannins, floral notes (violet, peony), and a hint of granite minerality. Classic Beaujolais elegance with a slightly spicy finish.",
+                food: "Charcuterie, roast chicken, light pasta dishes, mild cheeses, terrine",
+                alcohol: "13%",
+                serving: "Slightly chilled (55-60°F / 13-15°C)",
+                notes: "Brouilly is the largest of the 10 Beaujolais Crus. The estate covers 99 hectares with vines averaging 40 years old on granite and pink porphyry soils."
             },
             {
                 name: "Château de Trignon Côtes du Rhône",
                 vintage: "2022",
                 type: "red",
-                grape: "Grenache, Syrah, Mourvèdre",
+                grape: "Grenache 60%, Syrah 30%, Mourvèdre 10%",
+                grapeDetail: "Classic GSM (Grenache-Syrah-Mourvèdre) Southern Rhône blend",
                 region: "Côtes du Rhône",
                 country: "France",
-                tasting: "Ripe dark fruits, spice, garrigue herbs, medium body with soft tannins and a warm finish.",
-                food: "Grilled meats, lamb, Mediterranean dishes, aged cheeses",
-                notes: "Classic Southern Rhône blend. GSM (Grenache-Syrah-Mourvèdre) is the traditional style of this region."
+                pronunciation: "sha-TOH duh tree-NYOHN coat doo ROHN | Grenache: greh-NAHSH | Mourvèdre: moor-VED-ruh",
+                winemaker: "Famille Quiot - 5th generation winemakers. The Quiot family has been making wine in the Southern Rhône since 1748, now managing over 165 hectares.",
+                tasting: "Ripe dark fruits (blackberry, plum), spice (white pepper, clove), garrigue herbs (thyme, lavender, rosemary), medium body with soft tannins and a warm, lingering finish.",
+                food: "Grilled meats, lamb, Mediterranean dishes, aged cheeses, ratatouille",
+                alcohol: "14%",
+                serving: "Room temperature (60-65°F / 16-18°C)",
+                notes: "Garrigue refers to the wild herbs that grow in the Mediterranean scrubland and infuse Rhône wines with their aromatic character."
             },
             {
                 name: "Domaine Les Pins Bourgueil",
                 vintage: "2020",
                 type: "red",
-                grape: "Cabernet Franc",
+                grape: "100% Cabernet Franc",
+                grapeDetail: "Locally called 'Breton' - Cabernet Franc is THE grape of the Loire reds",
                 region: "Bourgueil, Loire Valley",
                 country: "France",
-                tasting: "Red bell pepper, raspberry, graphite, violet notes. Medium body with fresh acidity and earthy undertones.",
-                food: "Pork, game birds, mushroom dishes, goat cheese",
-                notes: "Bourgueil is known for producing some of the finest Cabernet Franc in the world. Best served slightly chilled."
+                pronunciation: "doh-MEHN lay PAN boor-GUH-yuh | Cabernet Franc: cab-er-NAY FRAHNK",
+                winemaker: "Domaine Les Pins - Small family estate in the heart of Bourgueil. Traditional winemaking with minimal intervention.",
+                tasting: "Red bell pepper, raspberry, graphite, violet notes. Medium body with fresh acidity, earthy undertones, and characteristic pencil-lead minerality from the tuffeau limestone.",
+                food: "Pork rillettes, game birds, mushroom dishes, goat cheese (especially Sainte-Maure de Touraine)",
+                alcohol: "12.5%",
+                serving: "Slightly chilled (55-60°F / 13-15°C)",
+                notes: "Bourgueil sits on tuffeau (chalk) and gravel soils. Loire Cabernet Franc shows green pepper notes when cool, turning to raspberry when ripe. Best served slightly chilled."
             },
             {
                 name: "3SAPAS Malbec",
                 vintage: "2022",
                 type: "red",
-                grape: "Malbec",
+                grape: "100% Malbec",
+                grapeDetail: "Also known as Côt in France. Argentine Malbec is softer and fruitier than its French ancestor from Cahors",
                 region: "Mendoza",
                 country: "Argentina",
-                tasting: "Plum, blackberry, violet, and hints of cocoa. Full-bodied with velvety tannins and a juicy finish.",
-                food: "Grilled steak, BBQ, empanadas, hard cheeses",
-                notes: "Argentina is famous for Malbec, originally from Cahors, France. High altitude vineyards produce concentrated flavors."
+                pronunciation: "trays sah-PAHS mal-BEK",
+                winemaker: "Bodega 3SAPAS - A boutique winery in Mendoza's Uco Valley. The name means 'Three Toads' in Spanish, referencing a local legend.",
+                tasting: "Plum, blackberry, violet, and hints of cocoa and vanilla. Full-bodied with velvety tannins, juicy dark fruit, and a smooth, lingering finish.",
+                food: "Grilled steak (especially Argentine asado), BBQ, empanadas, hard cheeses",
+                alcohol: "14%",
+                serving: "Room temperature (60-65°F / 16-18°C)",
+                notes: "Mendoza's high-altitude vineyards (900-1,500m) produce concentrated Malbec with intense color. The UV exposure at altitude creates thicker skins and deeper pigments."
             },
             {
                 name: "Long Valley Ranch Cabernet Sauvignon",
                 vintage: "2021",
                 type: "red",
-                grape: "Cabernet Sauvignon",
+                grape: "85% Cabernet Sauvignon, 10% Merlot, 5% Petit Verdot",
+                grapeDetail: "California Cab often includes small amounts of Merlot (softness) and Petit Verdot (color/structure)",
                 region: "California",
                 country: "USA",
-                tasting: "Blackcurrant, dark cherry, vanilla, cedar. Full-bodied with firm tannins and a long finish.",
-                food: "Prime rib, lamb chops, hearty stews, aged cheddar",
-                notes: "California Cabernet is known for its ripe, fruit-forward style compared to Bordeaux."
+                pronunciation: "cab-er-NAY saw-vee-NYOHN | Petit Verdot: peh-TEE vair-DOH",
+                winemaker: "Long Valley Ranch Winery - Family-owned California producer focusing on sustainable viticulture.",
+                tasting: "Blackcurrant (cassis), dark cherry, vanilla, cedar, hints of eucalyptus and dark chocolate. Full-bodied with firm but approachable tannins and a long finish.",
+                food: "Prime rib, lamb chops, hearty stews, aged cheddar, grilled portobello",
+                alcohol: "14.5%",
+                serving: "Room temperature (65°F / 18°C), consider decanting 30 min",
+                notes: "California Cabernet is known for its ripe, fruit-forward style with more obvious oak influence compared to Bordeaux. The warm climate produces higher alcohol and softer tannins."
             },
             {
                 name: "Colle Corviano Montepulciano d'Abruzzo",
                 vintage: "2022",
                 type: "red",
-                grape: "Montepulciano",
+                grape: "100% Montepulciano",
+                grapeDetail: "NOT to be confused with Vino Nobile di Montepulciano (which uses Sangiovese from Tuscany). This is the Montepulciano GRAPE from Abruzzo.",
                 region: "Abruzzo",
                 country: "Italy",
-                tasting: "Dark cherry, plum, dried herbs, earthy notes. Medium to full body with moderate tannins.",
-                food: "Pizza, pasta with red sauce, lamb, grilled vegetables",
-                notes: "Don't confuse with Vino Nobile di Montepulciano (made from Sangiovese in Tuscany). This is the Montepulciano grape."
+                pronunciation: "KOH-leh kor-vee-AH-noh mon-teh-pool-CHAH-noh dah-BROOD-zoh",
+                winemaker: "Colle Corviano - Part of the Fantini Group (Farnese Vini), one of Abruzzo's most respected wine producers, known for excellent value Italian wines.",
+                tasting: "Dark cherry, plum, dried herbs (oregano, thyme), earthy notes, hint of black pepper. Medium to full body with moderate tannins and good acidity.",
+                food: "Pizza, pasta with red sauce (especially arrabbiata), lamb, grilled vegetables, aged pecorino",
+                alcohol: "13.5%",
+                serving: "Room temperature (60-65°F / 16-18°C)",
+                notes: "Abruzzo is on Italy's Adriatic coast. Montepulciano d'Abruzzo is one of Italy's best value reds - the grape gives deep color and soft, approachable tannins."
             },
             {
                 name: "Famille Bouey Cuvée 58",
                 vintage: "2020",
                 type: "red",
-                grape: "Merlot, Cabernet Sauvignon",
+                grape: "60% Merlot, 40% Cabernet Sauvignon",
+                grapeDetail: "Classic Right Bank-style Bordeaux blend with Merlot dominant for softness",
                 region: "Bordeaux",
                 country: "France",
-                tasting: "Red and black fruits, subtle oak, smooth tannins, hints of tobacco and spice.",
-                food: "Beef, duck, lamb, mature cheeses",
-                notes: "Classic Bordeaux blend. The '58' refers to the year 1958 when the family house was established."
+                pronunciation: "fah-MEE-yuh boo-AY koo-VAY san-KWONT-weet | Bordeaux: bor-DOH",
+                winemaker: "Maison Bouey - Family négociant house established in 1821. The Cuvée 58 honors the year 1958 when the family moved to their current headquarters.",
+                tasting: "Red and black fruits (cherry, blackcurrant), subtle oak (toast, vanilla), smooth tannins, hints of tobacco, cedar, and baking spice. Elegant and balanced.",
+                food: "Beef, duck confit, lamb, mature cheeses, mushroom dishes",
+                alcohol: "13.5%",
+                serving: "Room temperature (64°F / 18°C)",
+                notes: "Bordeaux blends are categorized by 'bank' - Right Bank (Merlot-dominant, softer) vs Left Bank (Cabernet-dominant, more structured). This is Right Bank style."
             },
             {
                 name: "Three Wine Company Old Vines Zinfandel",
                 vintage: "2018",
                 type: "red",
-                grape: "Zinfandel",
-                region: "California",
+                grape: "95% Zinfandel, 5% Petite Sirah",
+                grapeDetail: "Old vines (50-100+ years) produce smaller yields with more concentrated flavors. Small Petite Sirah addition adds color and structure.",
+                region: "Contra Costa County, California",
                 country: "USA",
-                tasting: "Jammy blackberry, raspberry, black pepper, baking spices. Bold and rich with high alcohol.",
-                food: "BBQ ribs, burgers, spicy dishes, blue cheese",
-                notes: "Old vines (typically 50+ years) produce more concentrated, complex wines. Zinfandel is California's signature grape."
+                pronunciation: "ZIN-fan-dell | Petite Sirah: peh-TEET see-RAH",
+                winemaker: "Three Wine Company - Founded by Matt Cline, from the famous Cline family of California Zinfandel pioneers. Focuses on old vine heritage vineyards.",
+                tasting: "Jammy blackberry, raspberry, black pepper, baking spices (cinnamon, clove), hints of bramble and licorice. Bold and rich with high alcohol and a long, warm finish.",
+                food: "BBQ ribs, burgers, spicy sausage, blue cheese, chocolate desserts",
+                alcohol: "15%",
+                serving: "Slightly below room temp (62°F / 17°C)",
+                notes: "Contra Costa County has sandy soils and ungrafted old vines (phylloxera-resistant). These 'heritage' vines produce intense, concentrated wines. Zinfandel is genetically identical to Croatian Crljenak and Italian Primitivo."
             },
             {
                 name: "Terrebonne Estate Pinot Noir",
                 vintage: "2023",
                 type: "red",
-                grape: "Pinot Noir",
-                region: "California/Oregon",
+                grape: "100% Pinot Noir",
+                grapeDetail: "Pinot Noir is thin-skinned, resulting in lighter color but intense aromatics",
+                region: "Sonoma Coast, California",
                 country: "USA",
-                tasting: "Red cherry, strawberry, earthy mushroom, subtle oak. Light to medium body with silky texture.",
-                food: "Salmon, duck, mushroom risotto, soft cheeses",
-                notes: "Pinot Noir is notoriously difficult to grow. It thrives in cooler climates and produces elegant, aromatic wines."
+                pronunciation: "tehr-BOHN | Pinot Noir: PEE-noh NWAHR",
+                winemaker: "Terrebonne Estate - Small-production winery on California's cool Sonoma Coast, where fog influence creates ideal conditions for Pinot Noir.",
+                tasting: "Red cherry, strawberry, earthy mushroom, subtle oak (vanilla, baking spice), hints of dried rose and forest floor. Light to medium body with silky texture.",
+                food: "Salmon, duck, mushroom risotto, soft cheeses like Brie, roasted beets",
+                alcohol: "13.5%",
+                serving: "Slightly chilled (55-60°F / 13-15°C)",
+                notes: "Pinot Noir is called the 'heartbreak grape' because it's difficult to grow. It needs cool climates but enough sun to ripen. Sonoma Coast fog provides this balance."
             },
             {
                 name: "Mas Janeil C2",
                 vintage: "2022",
                 type: "red",
-                grape: "Grenache, Carignan, Syrah",
+                grape: "50% Grenache, 30% Carignan, 20% Syrah",
+                grapeDetail: "Traditional Roussillon blend. Carignan adds rusticity and structure, Grenache brings fruit, Syrah adds spice.",
                 region: "Côtes du Roussillon",
                 country: "France",
-                tasting: "Dark fruits, Mediterranean herbs, licorice, spice. Full-bodied with rustic character.",
-                food: "Cassoulet, grilled lamb, hearty stews, aged gouda",
-                notes: "Roussillon is in the far south of France near Spain. Known for powerful, sun-drenched wines."
+                pronunciation: "mahs zhah-NAY-yuh say-DUH | Côtes du Roussillon: coat doo roo-see-YOHN | Carignan: cah-ree-NYAHN",
+                winemaker: "François Lurton - Part of the famous Lurton wine family from Bordeaux. Mas Janeil is their Roussillon estate, practicing organic viticulture.",
+                tasting: "Dark fruits (blackberry, black cherry), Mediterranean herbs (thyme, rosemary), licorice, black olive, spice. Full-bodied with rustic, grippy tannins and garrigue complexity.",
+                food: "Cassoulet, grilled lamb, hearty stews, aged gouda, tapenade",
+                alcohol: "14.5%",
+                serving: "Room temperature (64°F / 18°C), decant 30 min",
+                notes: "Roussillon is France's sunniest wine region, near the Spanish border. The Tramontane wind and schist soils create concentrated, powerful wines. 'C2' indicates their Côtes du Roussillon cuvée."
             },
             {
                 name: "Terre di Bo Chianti",
                 vintage: "2022",
                 type: "red",
-                grape: "Sangiovese",
+                grape: "90% Sangiovese, 10% Canaiolo",
+                grapeDetail: "Sangiovese means 'Blood of Jove (Jupiter)'. Canaiolo is a traditional blending grape that softens Sangiovese's acidity.",
                 region: "Chianti, Tuscany",
                 country: "Italy",
-                tasting: "Sour cherry, tomato leaf, dried herbs, leather. Medium body with bright acidity and dusty tannins.",
-                food: "Tomato-based pasta, pizza, grilled meats, pecorino cheese",
-                notes: "Chianti must be at least 80% Sangiovese. The high acidity makes it perfect for food pairing."
+                pronunciation: "TEH-reh dee BOH kee-AHN-tee | Sangiovese: san-joh-VAY-zeh | Canaiolo: kah-nah-YOH-loh",
+                winemaker: "Terre di Bo - Small Tuscan producer in the Chianti hills, practicing traditional winemaking methods with indigenous yeasts.",
+                tasting: "Sour cherry (amarena), tomato leaf, dried herbs (oregano), leather, hints of tobacco. Medium body with bright acidity and dusty, fine-grained tannins.",
+                food: "Tomato-based pasta, pizza margherita, grilled meats, pecorino cheese, bruschetta",
+                alcohol: "13%",
+                serving: "Slightly cool room temp (60-64°F / 16-18°C)",
+                notes: "Chianti DOCG requires minimum 80% Sangiovese. The high acidity is intentional - it's designed to pair with Tuscany's olive oil-rich, tomato-based cuisine."
             },
             {
                 name: "Hermanos Lurton Toro Tempranillo",
                 vintage: "2019",
                 type: "red",
-                grape: "Tempranillo (Tinta de Toro)",
-                region: "Toro",
+                grape: "100% Tempranillo (Tinta de Toro)",
+                grapeDetail: "In Toro, Tempranillo is called 'Tinta de Toro' - a local clone that's thicker-skinned and more concentrated than Rioja Tempranillo",
+                region: "Toro, Castilla y León",
                 country: "Spain",
-                tasting: "Blackberry, plum, leather, tobacco, earthy spice. Full-bodied with robust tannins.",
-                food: "Lamb, beef stew, cured meats, manchego cheese",
-                notes: "Toro's Tempranillo is called 'Tinta de Toro' and produces bolder wines than Rioja due to the extreme climate."
+                pronunciation: "air-MAH-nohs loor-TOHN TOH-roh tem-prah-NEE-yoh | Tinta de Toro: TEEN-tah deh TOH-roh",
+                winemaker: "Hermanos Lurton (Lurton Brothers) - Jacques and François Lurton, famous French winemakers who brought Bordeaux techniques to Spain's rugged Toro region.",
+                tasting: "Blackberry, plum, leather, tobacco, earthy spice, hints of licorice and dark chocolate. Full-bodied with robust, chewy tannins and a powerful finish.",
+                food: "Lamb, beef stew, cured meats (jamón ibérico), manchego cheese, hearty bean dishes",
+                alcohol: "14.5%",
+                serving: "Room temperature (65°F / 18°C), decant 1 hour",
+                notes: "Toro has extreme temperatures (hot summers, cold winters) and sandy soils that create bolder, more tannic wines than Rioja. Vines here survived phylloxera due to the sandy soil."
             },
             {
                 name: "Buzet",
                 vintage: "2019",
                 type: "red",
-                grape: "Merlot, Cabernet Sauvignon, Cabernet Franc",
+                grape: "50% Merlot, 30% Cabernet Sauvignon, 20% Cabernet Franc",
+                grapeDetail: "Same grape varieties as Bordeaux - Buzet was historically part of the Bordeaux wine trade",
                 region: "Buzet, Southwest France",
                 country: "France",
-                tasting: "Plum, blackcurrant, subtle oak, herbal notes. Medium body with balanced tannins.",
-                food: "Duck confit, cassoulet, grilled meats, semi-hard cheeses",
-                notes: "Buzet makes Bordeaux-style wines but at a fraction of the price. Great value region."
+                pronunciation: "boo-ZAY | Cabernet Franc: cab-er-NAY FRAHNK",
+                winemaker: "Les Vignerons de Buzet - Award-winning cooperative of 180 growers, known for sustainable practices and excellent value.",
+                tasting: "Plum, blackcurrant, subtle oak, herbal notes (bay leaf), hints of violet. Medium body with balanced, supple tannins and fresh acidity.",
+                food: "Duck confit, cassoulet, grilled meats, semi-hard cheeses, charcuterie",
+                alcohol: "13.5%",
+                serving: "Room temperature (62°F / 17°C)",
+                notes: "Buzet makes Bordeaux-style wines at a fraction of the price. Located between Bordeaux and Toulouse, it was only granted its own AOC in 1973 after centuries of being sold as 'Bordeaux.'"
             },
             {
                 name: "Château Roc Meynard",
                 vintage: "2019",
                 type: "red",
-                grape: "Merlot, Cabernet Franc",
+                grape: "70% Merlot, 30% Cabernet Franc",
+                grapeDetail: "Right Bank Bordeaux style with Merlot dominant. Cabernet Franc adds structure and herbal complexity.",
                 region: "Bordeaux Supérieur",
                 country: "France",
-                tasting: "Red fruits, plum, subtle earthy notes, gentle oak. Medium body with soft, approachable tannins.",
-                food: "Roast beef, lamb, duck, aged cheeses",
-                notes: "Bordeaux Supérieur indicates slightly higher quality standards than basic Bordeaux AOC."
+                pronunciation: "sha-TOH rock may-NAHR bor-DOH soo-peh-ree-UHR",
+                winemaker: "Château Roc Meynard - Family estate in the Bordeaux Supérieur appellation, practicing sustainable viticulture on clay-limestone soils.",
+                tasting: "Red fruits (raspberry, red currant), plum, subtle earthy notes (wet stone), gentle oak, hints of herbs and cedar. Medium body with soft, approachable tannins.",
+                food: "Roast beef, lamb, duck, aged cheeses, beef bourguignon",
+                alcohol: "13.5%",
+                serving: "Room temperature (64°F / 18°C)",
+                notes: "Bordeaux Supérieur has stricter requirements than basic Bordeaux AOC: lower yields, higher alcohol, and longer aging. It's often the best value tier in Bordeaux."
             },
             {
                 name: "Ercole Barbera",
                 vintage: "2022",
                 type: "red",
-                grape: "Barbera",
-                region: "Piedmont",
+                grape: "100% Barbera",
+                grapeDetail: "Barbera is Piedmont's workhorse grape - high acidity, low tannins, makes it incredibly food-friendly",
+                region: "Monferrato, Piedmont",
                 country: "Italy",
-                tasting: "Bright cherry, raspberry, dried herbs, hints of almond. Medium body with high acidity and low tannins.",
-                food: "Pizza, pasta, risotto, prosciutto, aged parmesan",
-                notes: "Barbera is known for high acidity and low tannins, making it incredibly food-friendly and refreshing."
+                pronunciation: "AIR-koh-leh bar-BEH-rah pee-ay-MOHN-tay",
+                winemaker: "Ercole Wines - Named after Ercole (Hercules), referencing the strength and character of Piedmontese wines. Part of the Braida di Giacomo Bologna legacy.",
+                tasting: "Bright cherry (morello), raspberry, dried herbs, hints of almond and black pepper. Medium body with high acidity, low tannins, and a refreshing, tangy finish.",
+                food: "Pizza, pasta (especially with tomato sauce), risotto, prosciutto, aged parmesan, truffle dishes",
+                alcohol: "13%",
+                serving: "Slightly chilled (55-60°F / 13-15°C)",
+                notes: "Barbera is Piedmont's most-planted grape (ahead of Nebbiolo). Its high acidity makes it perfect for rich, fatty Italian cuisine. Traditionally fermented in steel to preserve freshness."
             },
             {
                 name: "Escudo Rojo Carmenère",
                 vintage: "2021",
                 type: "red",
-                grape: "Carmenère",
-                region: "Central Valley",
+                grape: "85% Carmenère, 10% Cabernet Sauvignon, 5% Syrah",
+                grapeDetail: "Carmenère was a Bordeaux grape thought extinct after phylloxera. Rediscovered in Chile in 1994, where it had been mislabeled as Merlot.",
+                region: "Maipo & Rapel Valleys, Central Chile",
                 country: "Chile",
-                tasting: "Green bell pepper, dark cherry, chocolate, coffee, smoke. Medium to full body with soft tannins.",
-                food: "Grilled meats, BBQ, Mexican cuisine, smoky dishes",
-                notes: "Carmenère was thought extinct until rediscovered in Chile in 1994. It's now Chile's signature grape."
+                pronunciation: "es-KOO-doh ROH-hoh car-men-YAIR",
+                winemaker: "Baron Philippe de Rothschild Chile - The Chilean venture of the famous Bordeaux family (Mouton Rothschild). 'Escudo Rojo' means 'Red Shield' in Spanish.",
+                tasting: "Green bell pepper, dark cherry, chocolate, coffee, smoke, hints of eucalyptus. Medium to full body with soft, velvety tannins and a savory finish.",
+                food: "Grilled meats, BBQ, Mexican cuisine, smoky dishes, empanadas",
+                alcohol: "14%",
+                serving: "Room temperature (62-65°F / 17-18°C)",
+                notes: "The green bell pepper note is from pyrazines - a signature of Carmenère (and Cab Franc). Chile's warm days and cool nights are ideal for this grape. Carmenère needs a long growing season to fully ripen."
             },
 
             // WHITE WINES
@@ -750,67 +872,97 @@
                 name: "St. Christopher Piesporter Goldtropfchen Riesling Kabinett",
                 vintage: "2023",
                 type: "white",
-                grape: "Riesling",
+                grape: "100% Riesling",
+                grapeDetail: "Kabinett is the lightest of Germany's Prädikat quality levels, made from ripe but not overripe grapes",
                 region: "Mosel (Piesporter Goldtropfchen vineyard)",
                 country: "Germany",
-                tasting: "Green apple, white peach, lime, slate minerality. Off-dry with vibrant acidity and delicate sweetness.",
-                food: "Spicy Asian cuisine, Thai food, seafood, light appetizers",
-                notes: "Kabinett is the lightest Prädikat level. 'Goldtropfchen' means 'golden droplets' - a famous vineyard site. Low alcohol (7-9%)."
+                pronunciation: "PEEZ-por-ter GOLT-tropf-khen REEZ-ling kah-bee-NET | Prädikat: PRAY-dee-kaht",
+                winemaker: "Weingut St. Christopher - Traditional Mosel producer in Piesport. The Goldtropfchen vineyard faces south on steep slate slopes above the Mosel River.",
+                tasting: "Green apple, white peach, lime, slate/wet stone minerality. Off-dry (slight sweetness) with vibrant acidity and delicate floral notes. Light and refreshing.",
+                food: "Spicy Asian cuisine (Thai, Vietnamese), sushi, seafood, light appetizers, fruit desserts",
+                alcohol: "8%",
+                serving: "Well chilled (45-50°F / 7-10°C)",
+                notes: "Goldtropfchen means 'golden droplets' - one of Germany's finest vineyard sites. Low alcohol (7-9%) is typical for Kabinett. The residual sugar balances the high acidity. Blue slate soil gives characteristic minerality."
             },
             {
                 name: "La Petite Roche",
                 vintage: "2023",
                 type: "white",
-                grape: "Sauvignon Blanc",
-                region: "Loire Valley",
+                grape: "100% Sauvignon Blanc",
+                grapeDetail: "Loire Sauvignon Blanc is more mineral and less tropical than New Zealand style",
+                region: "Touraine, Loire Valley",
                 country: "France",
-                tasting: "Citrus, white flowers, green apple, flinty minerality. Crisp acidity with a clean, refreshing finish.",
-                food: "Oysters, goat cheese, salads, light fish dishes",
-                notes: "Loire Valley Sauvignon Blanc is known for its mineral-driven, less tropical style compared to New Zealand."
+                pronunciation: "lah peh-TEET ROHSH saw-vee-NYOHN BLAHN | Touraine: too-REHN",
+                winemaker: "Les Vignerons de la Noue - Respected cooperative in Touraine, producing terroir-driven Loire Valley wines with sustainable practices.",
+                tasting: "Citrus (lemon, grapefruit), white flowers, green apple, flinty/chalky minerality. Crisp acidity with a clean, refreshing finish and subtle herbaceous notes.",
+                food: "Oysters, goat cheese (Crottin de Chavignol), green salads, light fish dishes, asparagus",
+                alcohol: "12.5%",
+                serving: "Well chilled (45-50°F / 7-10°C)",
+                notes: "La Petite Roche means 'The Little Rock' - referring to the limestone/flint (silex) soils that give Loire Sauvignon its distinctive flinty, mineral character."
             },
             {
                 name: "Tattoo Girl Chardonnay",
                 vintage: "2020",
                 type: "white",
-                grape: "Chardonnay",
+                grape: "100% Chardonnay",
+                grapeDetail: "Washington Chardonnay typically sees moderate oak, balancing fruit with structure",
                 region: "Columbia Valley, Washington State",
                 country: "USA",
-                tasting: "Apple, pear, tropical fruits, hints of vanilla and butter. Medium body with balanced oak influence.",
-                food: "Roast chicken, creamy pasta, lobster, mild cheeses",
-                notes: "Washington State Chardonnay balances between California's richness and Burgundy's elegance."
+                pronunciation: "shar-doh-NAY",
+                winemaker: "William Church Winery - Woodinville-based winery. 'Tattoo Girl' is their approachable, artistically-labeled line celebrating Pacific Northwest culture.",
+                tasting: "Apple, pear, tropical fruits (pineapple, mango), hints of vanilla, butter, and toasted oak. Medium body with balanced acidity and a creamy texture.",
+                food: "Roast chicken, creamy pasta (alfredo, carbonara), lobster, mild cheeses, corn chowder",
+                alcohol: "13.5%",
+                serving: "Chilled (50-55°F / 10-13°C)",
+                notes: "Columbia Valley has warm days and cool nights, creating balanced Chardonnay. Washington State is now the second-largest wine producer in the US after California."
             },
             {
                 name: "Les Champs de Clos Sancerre",
                 vintage: "2023",
                 type: "white",
-                grape: "Sauvignon Blanc",
+                grape: "100% Sauvignon Blanc",
+                grapeDetail: "Sancerre is always 100% Sauvignon Blanc - it's the benchmark for the variety worldwide",
                 region: "Sancerre, Loire Valley",
                 country: "France",
-                tasting: "Grapefruit, lime, gooseberry, flint, and chalk. Bone-dry with razor-sharp acidity.",
-                food: "Goat cheese (especially Crottin de Chavignol), oysters, asparagus, seafood",
-                notes: "Sancerre is considered the benchmark for Sauvignon Blanc. Always 100% Sauvignon Blanc."
+                pronunciation: "lay SHAHM duh KLOH sahn-SEHR",
+                winemaker: "Domaine Les Champs de Clos - Small family domaine in Sancerre, farming organically on silex (flint) and limestone soils.",
+                tasting: "Grapefruit, lime, gooseberry, flint, and chalk. Bone-dry with razor-sharp acidity, mineral intensity, and a long, clean finish. Classic Sancerre precision.",
+                food: "Goat cheese (especially Crottin de Chavignol from nearby), oysters, asparagus, seafood, ceviche",
+                alcohol: "13%",
+                serving: "Well chilled (45-50°F / 7-10°C)",
+                notes: "Sancerre and Pouilly-Fumé (across the river) are the world's most famous Sauvignon Blanc regions. Sancerre has three soil types: silex (flint), limestone (Kimmeridgian), and clay - each giving different character."
             },
             {
                 name: "Villa Noria Picpoul de Pinet",
                 vintage: "2023",
                 type: "white",
-                grape: "Picpoul (Piquepoul)",
-                region: "Languedoc (Picpoul de Pinet AOC)",
+                grape: "100% Picpoul (Piquepoul Blanc)",
+                grapeDetail: "Picpoul means 'lip stinger' in Occitan - named for its high, bracing acidity",
+                region: "Picpoul de Pinet AOC, Languedoc",
                 country: "France",
-                tasting: "Lemon, lime, green apple, white flowers, saline finish. Light body with zesty acidity.",
-                food: "Oysters, mussels, fried fish, Mediterranean seafood",
-                notes: "Picpoul means 'lip stinger' due to its high acidity. The classic pairing is with local oysters from Bouzigues."
+                pronunciation: "VEE-lah NOR-ee-ah peek-POOL duh pee-NAY | Languedoc: lahn-guh-DOK",
+                winemaker: "Villa Noria - Estate in the Picpoul de Pinet appellation near the Étang de Thau lagoon, where oysters are farmed alongside the vineyards.",
+                tasting: "Lemon, lime, green apple, white flowers, saline/briny finish. Light body with zesty, mouthwatering acidity and a clean, mineral finish.",
+                food: "Oysters (especially Bouzigues oysters!), mussels, fried fish, Mediterranean seafood, ceviche",
+                alcohol: "13%",
+                serving: "Very cold (40-45°F / 4-7°C)",
+                notes: "Picpoul de Pinet is the Languedoc's answer to Muscadet. The vines grow next to the Thau lagoon oyster beds - the perfect local pairing. France's most-exported white wine appellation."
             },
             {
                 name: "Monte degli Angeli Pinot Grigio",
                 vintage: "2023",
                 type: "white",
-                grape: "Pinot Grigio",
-                region: "Delle Venezie",
+                grape: "100% Pinot Grigio",
+                grapeDetail: "Italian Pinot Grigio is typically fermented in steel for freshness. Same grape as French Pinot Gris but made in a lighter style.",
+                region: "Delle Venezie IGT, Veneto/Friuli",
                 country: "Italy",
-                tasting: "Pear, apple, citrus, almond notes. Light and crisp with subtle minerality.",
-                food: "Light salads, seafood, antipasti, mild cheeses",
-                notes: "Italian Pinot Grigio is typically lighter and more neutral than Alsatian Pinot Gris."
+                pronunciation: "MON-teh DEL-yee ahn-JEH-lee PEE-noh GREE-joh",
+                winemaker: "Monte degli Angeli (Mountain of Angels) - Northeastern Italian producer in the Delle Venezie region, using modern winemaking to preserve freshness.",
+                tasting: "Pear, apple, citrus (lemon), almond notes. Light and crisp with subtle minerality, clean finish, and refreshing acidity.",
+                food: "Light salads, seafood, antipasti, mild cheeses, prosciutto e melone",
+                alcohol: "12%",
+                serving: "Well chilled (45-50°F / 7-10°C)",
+                notes: "Delle Venezie is a large IGT covering Veneto, Friuli, and Trentino. Italian Pinot Grigio is typically lighter and more neutral than Alsatian Pinot Gris, which is richer and more aromatic."
             },
 
             // ROSÉ WINES
@@ -818,12 +970,17 @@
                 name: "Folly by Mascaronne Rosé",
                 vintage: "2023",
                 type: "rose",
-                grape: "Grenache, Cinsault, Syrah",
-                region: "Provence",
+                grape: "40% Grenache, 35% Cinsault, 25% Syrah",
+                grapeDetail: "Classic Provence blend. Cinsault brings pale color and delicacy, Grenache adds fruit, Syrah contributes structure.",
+                region: "Côtes de Provence",
                 country: "France",
-                tasting: "Strawberry, white peach, citrus, herbs de Provence. Pale salmon color, dry with refreshing acidity.",
-                food: "Salads, grilled fish, Mediterranean cuisine, light appetizers",
-                notes: "Provence sets the standard for dry rosé worldwide. The pale color indicates quality, not weakness."
+                pronunciation: "FOL-ee by mas-kah-ROHN roh-ZAY | Cinsault: san-SOH | Provence: proh-VAHNS",
+                winemaker: "Château Mascaronne - Owned by Tom Bove, with winemaking by celebrated consultant Bertrand Léon. The estate focuses exclusively on premium Provence rosé.",
+                tasting: "Strawberry, white peach, citrus (pink grapefruit), herbs de Provence (thyme, lavender). Pale salmon color, dry with refreshing acidity and elegant minerality.",
+                food: "Salads (Niçoise!), grilled fish, Mediterranean cuisine, light appetizers, sushi",
+                alcohol: "13%",
+                serving: "Very cold (40-45°F / 4-7°C)",
+                notes: "Provence rosé gets its pale color from brief skin contact (2-12 hours) using the direct press method. Pale color = quality in Provence. The region produces 40% of France's rosé."
             },
 
             // ORANGE WINE
@@ -831,12 +988,17 @@
                 name: "Les Fumées Blanches Orange Lurton",
                 vintage: "2022",
                 type: "orange",
-                grape: "Sauvignon Blanc",
-                region: "Pays d'Oc, Languedoc",
+                grape: "100% Sauvignon Blanc",
+                grapeDetail: "White grapes fermented with skin contact (like red wine), creating amber color and tannic texture. Ancient technique from Georgia (the country).",
+                region: "Pays d'Oc IGP, Languedoc",
                 country: "France",
-                tasting: "Dried apricot, honey, orange peel, nutty notes, tannic texture. Full-bodied with unique complexity.",
-                food: "Rich seafood, Asian cuisine, curry, aged cheeses, charcuterie",
-                notes: "Orange wine is white wine made with extended skin contact (like red wine). Ancient technique, modern revival."
+                pronunciation: "lay foo-MAY BLAHN-sh oh-RAHNJ loor-TOHN | Pays d'Oc: pay-ee DOCK",
+                winemaker: "François Lurton - Pioneering French winemaker who works globally. Les Fumées Blanches ('The White Smokes') is his innovative Languedoc project.",
+                tasting: "Dried apricot, honey, orange peel, nutty notes (hazelnut), tannic texture like tea. Full-bodied with unique complexity, oxidative notes, and a long, savory finish.",
+                food: "Rich seafood, Asian cuisine (Korean, Japanese), curry, aged cheeses, charcuterie, Moroccan tagines",
+                alcohol: "12.5%",
+                serving: "Lightly chilled (50-55°F / 10-13°C)",
+                notes: "Orange wine is the 'fourth color' of wine. Made by fermenting white grapes with their skins (7-14+ days), extracting tannins, color, and texture. This technique originated 8,000 years ago in Georgia using clay qvevri vessels."
             }
         ];
 
@@ -863,15 +1025,34 @@
                     <div class="wine-card-header">
                         <h3>${wine.name}</h3>
                         <div class="vintage">${wine.vintage}</div>
+                        <div class="producer">${wine.winemaker.split(' - ')[0]}</div>
                     </div>
                     <div class="wine-card-body">
+                        ${wine.pronunciation ? `
+                        <div class="wine-detail">
+                            <div class="wine-detail-label">Pronunciation</div>
+                            <div class="pronunciation">${wine.pronunciation}</div>
+                        </div>
+                        ` : ''}
                         <div class="wine-detail">
                             <div class="wine-detail-label">Grape(s)</div>
-                            <div class="wine-detail-value">${wine.grape}</div>
+                            <div class="wine-detail-value"><strong>${wine.grape}</strong></div>
+                            <div class="blend-detail">${wine.grapeDetail}</div>
                         </div>
                         <div class="wine-detail">
                             <div class="wine-detail-label">Region</div>
                             <div class="wine-detail-value">${wine.region}, ${wine.country}</div>
+                        </div>
+                        <div class="wine-detail">
+                            <div class="wine-detail-label">Winemaker / Producer</div>
+                            <div class="wine-detail-value">${wine.winemaker}</div>
+                        </div>
+                        <div class="wine-detail">
+                            <div class="wine-detail-label">Technical Details</div>
+                            <div class="tech-specs">
+                                <div class="tech-spec"><span class="tech-spec-label">Alcohol:</span> ${wine.alcohol}</div>
+                                <div class="tech-spec"><span class="tech-spec-label">Serving:</span> ${wine.serving}</div>
+                            </div>
                         </div>
                         <div class="wine-detail">
                             <div class="wine-detail-label">Tasting Notes</div>
