@@ -1297,7 +1297,6 @@
 
     <footer>
         <p>Ardoa Wine Bar - Study Guide</p>
-        <p>Good luck on your first day!</p>
     </footer>
 
     <script>
@@ -2494,6 +2493,26 @@
         let correctCount = 0;
         let incorrectCount = 0;
 
+        // Helper function to remove grape names from wine name for grape questions
+        function removeGrapeFromName(wineName) {
+            const grapeNames = [
+                'Malbec', 'Cabernet Sauvignon', 'Cabernet', 'Montepulciano', 'Zinfandel',
+                'Pinot Noir', 'Pinot Grigio', 'Pinot Gris', 'Tempranillo', 'Barbera',
+                'Carmenère', 'Carmenere', 'Riesling', 'Chardonnay', 'Picpoul',
+                'Sauvignon Blanc', 'Sauvignon', 'Grenache', 'Syrah', 'Merlot',
+                'Gamay', 'Sangiovese', 'Nebbiolo', 'Mourvèdre', 'Mourvedre'
+            ];
+
+            let cleanName = wineName;
+            grapeNames.forEach(grape => {
+                const regex = new RegExp('\\s*' + grape + '\\s*', 'gi');
+                cleanName = cleanName.replace(regex, ' ');
+            });
+
+            // Clean up extra spaces
+            return cleanName.replace(/\s+/g, ' ').trim();
+        }
+
         function generateQuestions() {
             const questions = [];
             const qGrape = document.getElementById('q-grape').checked;
@@ -2504,8 +2523,10 @@
 
             wines.forEach(wine => {
                 if (qGrape) {
+                    // Remove grape name from wine name to avoid revealing the answer
+                    const cleanWineName = removeGrapeFromName(wine.name);
                     questions.push({
-                        wine: `${wine.name} ${wine.vintage}`,
+                        wine: `${cleanWineName} ${wine.vintage}`,
                         question: "What grape(s) is this wine made from?",
                         answer: wine.grape,
                         type: 'text'
