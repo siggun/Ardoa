@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ardoa Wine Bar - Study Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --burgundy: #722F37;
+            --burgundy-dark: #4A1C23;
+            --burgundy-light: #8B3A42;
+            --gold: #C9A227;
+            --gold-light: #E8D5A3;
+            --cream: #FAF7F2;
+            --charcoal: #2C2C2C;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--burgundy-dark) 0%, var(--burgundy) 100%);
+            color: var(--cream);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--gold-light);
+            font-style: italic;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--charcoal);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav button {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        nav button:hover, nav button.active {
+            background: var(--gold);
+            color: var(--charcoal);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            display: none;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        /* Filter Buttons */
+        .filter-bar {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--cream);
+            border: 2px solid var(--burgundy);
+            color: var(--burgundy);
+            padding: 0.5rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 25px;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--burgundy);
+            color: var(--cream);
+        }
+
+        .filter-btn.red { border-color: #8B0000; }
+        .filter-btn.red.active, .filter-btn.red:hover { background: #8B0000; }
+        .filter-btn.white { border-color: #DAA520; }
+        .filter-btn.white.active, .filter-btn.white:hover { background: #DAA520; color: var(--charcoal); }
+        .filter-btn.rose { border-color: #E8B4B8; }
+        .filter-btn.rose.active, .filter-btn.rose:hover { background: #E8B4B8; color: var(--charcoal); }
+        .filter-btn.orange { border-color: #CC7722; }
+        .filter-btn.orange.active, .filter-btn.orange:hover { background: #CC7722; }
+
+        /* Wine Cards Grid */
+        .wine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .wine-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .wine-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .wine-card-header {
+            padding: 1.5rem;
+            color: white;
+        }
+
+        .wine-card.red .wine-card-header { background: linear-gradient(135deg, #8B0000, #4A0000); }
+        .wine-card.white .wine-card-header { background: linear-gradient(135deg, #DAA520, #B8860B); }
+        .wine-card.rose .wine-card-header { background: linear-gradient(135deg, #E8B4B8, #D4919A); }
+        .wine-card.orange .wine-card-header { background: linear-gradient(135deg, #CC7722, #A66000); }
+
+        .wine-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .wine-card .vintage {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .wine-card-body {
+            padding: 1.5rem;
+        }
+
+        .wine-detail {
+            margin-bottom: 1rem;
+        }
+
+        .wine-detail-label {
+            font-weight: bold;
+            color: var(--burgundy);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .wine-detail-value {
+            color: var(--charcoal);
+            margin-top: 0.25rem;
+        }
+
+        /* Flashcard Section */
+        .flashcard-container {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .score-display {
+            background: var(--charcoal);
+            color: var(--gold);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .flashcard {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            padding: 3rem 2rem;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .flashcard:hover {
+            transform: scale(1.02);
+        }
+
+        .flashcard-question {
+            font-size: 1.3rem;
+            color: var(--burgundy);
+            margin-bottom: 1rem;
+        }
+
+        .flashcard-wine-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--charcoal);
+            margin-bottom: 2rem;
+        }
+
+        .flashcard-answer {
+            font-size: 1.4rem;
+            color: var(--burgundy-dark);
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .flashcard.revealed .flashcard-answer {
+            opacity: 1;
+        }
+
+        .flashcard-hint {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 2rem;
+        }
+
+        .flashcard-controls {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .flashcard-btn {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reveal {
+            background: var(--burgundy);
+            color: white;
+        }
+
+        .btn-reveal:hover {
+            background: var(--burgundy-dark);
+        }
+
+        .btn-correct {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-correct:hover {
+            background: #1e7e34;
+        }
+
+        .btn-incorrect {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-incorrect:hover {
+            background: #c82333;
+        }
+
+        .btn-next {
+            background: var(--gold);
+            color: var(--charcoal);
+        }
+
+        .btn-next:hover {
+            background: #b8922b;
+        }
+
+        .btn-reset {
+            background: var(--charcoal);
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background: #1a1a1a;
+        }
+
+        .quiz-settings {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .quiz-settings h3 {
+            margin-bottom: 1rem;
+            color: var(--burgundy);
+        }
+
+        .quiz-options {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .quiz-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quiz-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--burgundy);
+        }
+
+        /* Quick Reference Table */
+        .quick-ref {
+            overflow-x: auto;
+        }
+
+        .quick-ref table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .quick-ref th, .quick-ref td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .quick-ref th {
+            background: var(--burgundy);
+            color: white;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+
+        .quick-ref tr:hover {
+            background: #f9f9f9;
+        }
+
+        .type-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .type-badge.red { background: #8B0000; color: white; }
+        .type-badge.white { background: #DAA520; color: white; }
+        .type-badge.rose { background: #E8B4B8; color: #333; }
+        .type-badge.orange { background: #CC7722; color: white; }
+
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: var(--cream);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+                letter-spacing: 4px;
+            }
+
+            nav {
+                gap: 0.5rem;
+            }
+
+            nav button {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .wine-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flashcard {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ardoa</h1>
+        <p>Wine Bar Study Guide</p>
+    </header>
+
+    <nav>
+        <button class="active" onclick="showSection('techsheets')">Tech Sheets</button>
+        <button onclick="showSection('flashcards')">Flashcards</button>
+        <button onclick="showSection('quickref')">Quick Reference</button>
+    </nav>
+
+    <main>
+        <!-- Tech Sheets Section -->
+        <section id="techsheets" class="active">
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterWines('all')">All Wines</button>
+                <button class="filter-btn red" onclick="filterWines('red')">Red</button>
+                <button class="filter-btn white" onclick="filterWines('white')">White</button>
+                <button class="filter-btn rose" onclick="filterWines('rose')">Rosé</button>
+                <button class="filter-btn orange" onclick="filterWines('orange')">Orange</button>
+            </div>
+
+            <div class="wine-grid" id="wineGrid">
+                <!-- Wine cards will be inserted here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Flashcards Section -->
+        <section id="flashcards">
+            <div class="flashcard-container">
+                <div class="quiz-settings">
+                    <h3>Quiz Settings - Select Question Types</h3>
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="checkbox" id="q-grape" checked> Grape Variety
+                        </label>
+                        <label class="quiz-option">
+                            <input type="checkbox" id="q-region" checked> Region
+                        </label>
+                        <label class="quiz-option">
+                            <input type="checkbox" id="q-country" checked> Country
+                        </label>
+                        <label class="quiz-option">
+                            <input type="checkbox" id="q-type" checked> Wine Type
+                        </label>
+                        <label class="quiz-option">
+                            <input type="checkbox" id="q-food"> Food Pairing
+                        </label>
+                    </div>
+                </div>
+
+                <div class="score-display">
+                    <div class="score-item">
+                        <div class="score-number" id="correctCount">0</div>
+                        <div class="score-label">Correct</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-number" id="incorrectCount">0</div>
+                        <div class="score-label">Incorrect</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-number" id="percentScore">0%</div>
+                        <div class="score-label">Score</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-number" id="remainingCount">0</div>
+                        <div class="score-label">Remaining</div>
+                    </div>
+                </div>
+
+                <div class="flashcard" id="flashcard" onclick="revealAnswer()">
+                    <div class="flashcard-question" id="flashcardQuestion">Loading...</div>
+                    <div class="flashcard-wine-name" id="flashcardWine"></div>
+                    <div class="flashcard-answer" id="flashcardAnswer"></div>
+                    <div class="flashcard-hint">Click to reveal answer</div>
+                </div>
+
+                <div class="flashcard-controls">
+                    <button class="flashcard-btn btn-reveal" onclick="revealAnswer()">Reveal Answer</button>
+                    <button class="flashcard-btn btn-correct" onclick="markAnswer(true)">Got It!</button>
+                    <button class="flashcard-btn btn-incorrect" onclick="markAnswer(false)">Missed It</button>
+                    <button class="flashcard-btn btn-next" onclick="nextCard()">Skip</button>
+                    <button class="flashcard-btn btn-reset" onclick="resetQuiz()">Reset Quiz</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Reference Section -->
+        <section id="quickref">
+            <div class="quick-ref">
+                <table id="quickRefTable">
+                    <thead>
+                        <tr>
+                            <th>Wine</th>
+                            <th>Type</th>
+                            <th>Grape(s)</th>
+                            <th>Region</th>
+                            <th>Country</th>
+                        </tr>
+                    </thead>
+                    <tbody id="quickRefBody">
+                        <!-- Table rows will be inserted by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Ardoa Wine Bar - Study Guide</p>
+        <p>Good luck on your first day!</p>
+    </footer>
+
+    <script>
+        // Wine Data - All 24 wines with detailed information
+        const wines = [
+            // RED WINES
+            {
+                name: "Château de la Chaize Brouilly",
+                vintage: "2022",
+                type: "red",
+                grape: "Gamay",
+                region: "Brouilly, Beaujolais",
+                country: "France",
+                tasting: "Fresh red fruits (cherry, raspberry), light-bodied with silky tannins, floral notes, and a hint of minerality. Classic Beaujolais elegance.",
+                food: "Charcuterie, roast chicken, light pasta dishes, mild cheeses",
+                notes: "Brouilly is one of the 10 Beaujolais Crus. The estate is known for its historic château and large vineyard."
+            },
+            {
+                name: "Château de Trignon Côtes du Rhône",
+                vintage: "2022",
+                type: "red",
+                grape: "Grenache, Syrah, Mourvèdre",
+                region: "Côtes du Rhône",
+                country: "France",
+                tasting: "Ripe dark fruits, spice, garrigue herbs, medium body with soft tannins and a warm finish.",
+                food: "Grilled meats, lamb, Mediterranean dishes, aged cheeses",
+                notes: "Classic Southern Rhône blend. GSM (Grenache-Syrah-Mourvèdre) is the traditional style of this region."
+            },
+            {
+                name: "Domaine Les Pins Bourgueil",
+                vintage: "2020",
+                type: "red",
+                grape: "Cabernet Franc",
+                region: "Bourgueil, Loire Valley",
+                country: "France",
+                tasting: "Red bell pepper, raspberry, graphite, violet notes. Medium body with fresh acidity and earthy undertones.",
+                food: "Pork, game birds, mushroom dishes, goat cheese",
+                notes: "Bourgueil is known for producing some of the finest Cabernet Franc in the world. Best served slightly chilled."
+            },
+            {
+                name: "3SAPAS Malbec",
+                vintage: "2022",
+                type: "red",
+                grape: "Malbec",
+                region: "Mendoza",
+                country: "Argentina",
+                tasting: "Plum, blackberry, violet, and hints of cocoa. Full-bodied with velvety tannins and a juicy finish.",
+                food: "Grilled steak, BBQ, empanadas, hard cheeses",
+                notes: "Argentina is famous for Malbec, originally from Cahors, France. High altitude vineyards produce concentrated flavors."
+            },
+            {
+                name: "Long Valley Ranch Cabernet Sauvignon",
+                vintage: "2021",
+                type: "red",
+                grape: "Cabernet Sauvignon",
+                region: "California",
+                country: "USA",
+                tasting: "Blackcurrant, dark cherry, vanilla, cedar. Full-bodied with firm tannins and a long finish.",
+                food: "Prime rib, lamb chops, hearty stews, aged cheddar",
+                notes: "California Cabernet is known for its ripe, fruit-forward style compared to Bordeaux."
+            },
+            {
+                name: "Colle Corviano Montepulciano d'Abruzzo",
+                vintage: "2022",
+                type: "red",
+                grape: "Montepulciano",
+                region: "Abruzzo",
+                country: "Italy",
+                tasting: "Dark cherry, plum, dried herbs, earthy notes. Medium to full body with moderate tannins.",
+                food: "Pizza, pasta with red sauce, lamb, grilled vegetables",
+                notes: "Don't confuse with Vino Nobile di Montepulciano (made from Sangiovese in Tuscany). This is the Montepulciano grape."
+            },
+            {
+                name: "Famille Bouey Cuvée 58",
+                vintage: "2020",
+                type: "red",
+                grape: "Merlot, Cabernet Sauvignon",
+                region: "Bordeaux",
+                country: "France",
+                tasting: "Red and black fruits, subtle oak, smooth tannins, hints of tobacco and spice.",
+                food: "Beef, duck, lamb, mature cheeses",
+                notes: "Classic Bordeaux blend. The '58' refers to the year 1958 when the family house was established."
+            },
+            {
+                name: "Three Wine Company Old Vines Zinfandel",
+                vintage: "2018",
+                type: "red",
+                grape: "Zinfandel",
+                region: "California",
+                country: "USA",
+                tasting: "Jammy blackberry, raspberry, black pepper, baking spices. Bold and rich with high alcohol.",
+                food: "BBQ ribs, burgers, spicy dishes, blue cheese",
+                notes: "Old vines (typically 50+ years) produce more concentrated, complex wines. Zinfandel is California's signature grape."
+            },
+            {
+                name: "Terrebonne Estate Pinot Noir",
+                vintage: "2023",
+                type: "red",
+                grape: "Pinot Noir",
+                region: "California/Oregon",
+                country: "USA",
+                tasting: "Red cherry, strawberry, earthy mushroom, subtle oak. Light to medium body with silky texture.",
+                food: "Salmon, duck, mushroom risotto, soft cheeses",
+                notes: "Pinot Noir is notoriously difficult to grow. It thrives in cooler climates and produces elegant, aromatic wines."
+            },
+            {
+                name: "Mas Janeil C2",
+                vintage: "2022",
+                type: "red",
+                grape: "Grenache, Carignan, Syrah",
+                region: "Côtes du Roussillon",
+                country: "France",
+                tasting: "Dark fruits, Mediterranean herbs, licorice, spice. Full-bodied with rustic character.",
+                food: "Cassoulet, grilled lamb, hearty stews, aged gouda",
+                notes: "Roussillon is in the far south of France near Spain. Known for powerful, sun-drenched wines."
+            },
+            {
+                name: "Terre di Bo Chianti",
+                vintage: "2022",
+                type: "red",
+                grape: "Sangiovese",
+                region: "Chianti, Tuscany",
+                country: "Italy",
+                tasting: "Sour cherry, tomato leaf, dried herbs, leather. Medium body with bright acidity and dusty tannins.",
+                food: "Tomato-based pasta, pizza, grilled meats, pecorino cheese",
+                notes: "Chianti must be at least 80% Sangiovese. The high acidity makes it perfect for food pairing."
+            },
+            {
+                name: "Hermanos Lurton Toro Tempranillo",
+                vintage: "2019",
+                type: "red",
+                grape: "Tempranillo (Tinta de Toro)",
+                region: "Toro",
+                country: "Spain",
+                tasting: "Blackberry, plum, leather, tobacco, earthy spice. Full-bodied with robust tannins.",
+                food: "Lamb, beef stew, cured meats, manchego cheese",
+                notes: "Toro's Tempranillo is called 'Tinta de Toro' and produces bolder wines than Rioja due to the extreme climate."
+            },
+            {
+                name: "Buzet",
+                vintage: "2019",
+                type: "red",
+                grape: "Merlot, Cabernet Sauvignon, Cabernet Franc",
+                region: "Buzet, Southwest France",
+                country: "France",
+                tasting: "Plum, blackcurrant, subtle oak, herbal notes. Medium body with balanced tannins.",
+                food: "Duck confit, cassoulet, grilled meats, semi-hard cheeses",
+                notes: "Buzet makes Bordeaux-style wines but at a fraction of the price. Great value region."
+            },
+            {
+                name: "Château Roc Meynard",
+                vintage: "2019",
+                type: "red",
+                grape: "Merlot, Cabernet Franc",
+                region: "Bordeaux Supérieur",
+                country: "France",
+                tasting: "Red fruits, plum, subtle earthy notes, gentle oak. Medium body with soft, approachable tannins.",
+                food: "Roast beef, lamb, duck, aged cheeses",
+                notes: "Bordeaux Supérieur indicates slightly higher quality standards than basic Bordeaux AOC."
+            },
+            {
+                name: "Ercole Barbera",
+                vintage: "2022",
+                type: "red",
+                grape: "Barbera",
+                region: "Piedmont",
+                country: "Italy",
+                tasting: "Bright cherry, raspberry, dried herbs, hints of almond. Medium body with high acidity and low tannins.",
+                food: "Pizza, pasta, risotto, prosciutto, aged parmesan",
+                notes: "Barbera is known for high acidity and low tannins, making it incredibly food-friendly and refreshing."
+            },
+            {
+                name: "Escudo Rojo Carmenère",
+                vintage: "2021",
+                type: "red",
+                grape: "Carmenère",
+                region: "Central Valley",
+                country: "Chile",
+                tasting: "Green bell pepper, dark cherry, chocolate, coffee, smoke. Medium to full body with soft tannins.",
+                food: "Grilled meats, BBQ, Mexican cuisine, smoky dishes",
+                notes: "Carmenère was thought extinct until rediscovered in Chile in 1994. It's now Chile's signature grape."
+            },
+
+            // WHITE WINES
+            {
+                name: "St. Christopher Piesporter Goldtropfchen Riesling Kabinett",
+                vintage: "2023",
+                type: "white",
+                grape: "Riesling",
+                region: "Mosel (Piesporter Goldtropfchen vineyard)",
+                country: "Germany",
+                tasting: "Green apple, white peach, lime, slate minerality. Off-dry with vibrant acidity and delicate sweetness.",
+                food: "Spicy Asian cuisine, Thai food, seafood, light appetizers",
+                notes: "Kabinett is the lightest Prädikat level. 'Goldtropfchen' means 'golden droplets' - a famous vineyard site. Low alcohol (7-9%)."
+            },
+            {
+                name: "La Petite Roche",
+                vintage: "2023",
+                type: "white",
+                grape: "Sauvignon Blanc",
+                region: "Loire Valley",
+                country: "France",
+                tasting: "Citrus, white flowers, green apple, flinty minerality. Crisp acidity with a clean, refreshing finish.",
+                food: "Oysters, goat cheese, salads, light fish dishes",
+                notes: "Loire Valley Sauvignon Blanc is known for its mineral-driven, less tropical style compared to New Zealand."
+            },
+            {
+                name: "Tattoo Girl Chardonnay",
+                vintage: "2020",
+                type: "white",
+                grape: "Chardonnay",
+                region: "Columbia Valley, Washington State",
+                country: "USA",
+                tasting: "Apple, pear, tropical fruits, hints of vanilla and butter. Medium body with balanced oak influence.",
+                food: "Roast chicken, creamy pasta, lobster, mild cheeses",
+                notes: "Washington State Chardonnay balances between California's richness and Burgundy's elegance."
+            },
+            {
+                name: "Les Champs de Clos Sancerre",
+                vintage: "2023",
+                type: "white",
+                grape: "Sauvignon Blanc",
+                region: "Sancerre, Loire Valley",
+                country: "France",
+                tasting: "Grapefruit, lime, gooseberry, flint, and chalk. Bone-dry with razor-sharp acidity.",
+                food: "Goat cheese (especially Crottin de Chavignol), oysters, asparagus, seafood",
+                notes: "Sancerre is considered the benchmark for Sauvignon Blanc. Always 100% Sauvignon Blanc."
+            },
+            {
+                name: "Villa Noria Picpoul de Pinet",
+                vintage: "2023",
+                type: "white",
+                grape: "Picpoul (Piquepoul)",
+                region: "Languedoc (Picpoul de Pinet AOC)",
+                country: "France",
+                tasting: "Lemon, lime, green apple, white flowers, saline finish. Light body with zesty acidity.",
+                food: "Oysters, mussels, fried fish, Mediterranean seafood",
+                notes: "Picpoul means 'lip stinger' due to its high acidity. The classic pairing is with local oysters from Bouzigues."
+            },
+            {
+                name: "Monte degli Angeli Pinot Grigio",
+                vintage: "2023",
+                type: "white",
+                grape: "Pinot Grigio",
+                region: "Delle Venezie",
+                country: "Italy",
+                tasting: "Pear, apple, citrus, almond notes. Light and crisp with subtle minerality.",
+                food: "Light salads, seafood, antipasti, mild cheeses",
+                notes: "Italian Pinot Grigio is typically lighter and more neutral than Alsatian Pinot Gris."
+            },
+
+            // ROSÉ WINES
+            {
+                name: "Folly by Mascaronne Rosé",
+                vintage: "2023",
+                type: "rose",
+                grape: "Grenache, Cinsault, Syrah",
+                region: "Provence",
+                country: "France",
+                tasting: "Strawberry, white peach, citrus, herbs de Provence. Pale salmon color, dry with refreshing acidity.",
+                food: "Salads, grilled fish, Mediterranean cuisine, light appetizers",
+                notes: "Provence sets the standard for dry rosé worldwide. The pale color indicates quality, not weakness."
+            },
+
+            // ORANGE WINE
+            {
+                name: "Les Fumées Blanches Orange Lurton",
+                vintage: "2022",
+                type: "orange",
+                grape: "Sauvignon Blanc",
+                region: "Pays d'Oc, Languedoc",
+                country: "France",
+                tasting: "Dried apricot, honey, orange peel, nutty notes, tannic texture. Full-bodied with unique complexity.",
+                food: "Rich seafood, Asian cuisine, curry, aged cheeses, charcuterie",
+                notes: "Orange wine is white wine made with extended skin contact (like red wine). Ancient technique, modern revival."
+            }
+        ];
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderWineCards();
+            renderQuickRef();
+            initializeFlashcards();
+        });
+
+        // Section Navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Render Wine Cards
+        function renderWineCards() {
+            const grid = document.getElementById('wineGrid');
+            grid.innerHTML = wines.map(wine => `
+                <div class="wine-card ${wine.type}" data-type="${wine.type}">
+                    <div class="wine-card-header">
+                        <h3>${wine.name}</h3>
+                        <div class="vintage">${wine.vintage}</div>
+                    </div>
+                    <div class="wine-card-body">
+                        <div class="wine-detail">
+                            <div class="wine-detail-label">Grape(s)</div>
+                            <div class="wine-detail-value">${wine.grape}</div>
+                        </div>
+                        <div class="wine-detail">
+                            <div class="wine-detail-label">Region</div>
+                            <div class="wine-detail-value">${wine.region}, ${wine.country}</div>
+                        </div>
+                        <div class="wine-detail">
+                            <div class="wine-detail-label">Tasting Notes</div>
+                            <div class="wine-detail-value">${wine.tasting}</div>
+                        </div>
+                        <div class="wine-detail">
+                            <div class="wine-detail-label">Food Pairing</div>
+                            <div class="wine-detail-value">${wine.food}</div>
+                        </div>
+                        <div class="wine-detail">
+                            <div class="wine-detail-label">Key Facts</div>
+                            <div class="wine-detail-value">${wine.notes}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter Wines
+        function filterWines(type) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.querySelectorAll('.wine-card').forEach(card => {
+                if (type === 'all' || card.dataset.type === type) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Render Quick Reference Table
+        function renderQuickRef() {
+            const tbody = document.getElementById('quickRefBody');
+            tbody.innerHTML = wines.map(wine => `
+                <tr>
+                    <td><strong>${wine.name}</strong> ${wine.vintage}</td>
+                    <td><span class="type-badge ${wine.type}">${wine.type.charAt(0).toUpperCase() + wine.type.slice(1)}</span></td>
+                    <td>${wine.grape}</td>
+                    <td>${wine.region}</td>
+                    <td>${wine.country}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Flashcard System
+        let flashcardQueue = [];
+        let currentCard = null;
+        let correctCount = 0;
+        let incorrectCount = 0;
+
+        function generateQuestions() {
+            const questions = [];
+            const qGrape = document.getElementById('q-grape').checked;
+            const qRegion = document.getElementById('q-region').checked;
+            const qCountry = document.getElementById('q-country').checked;
+            const qType = document.getElementById('q-type').checked;
+            const qFood = document.getElementById('q-food').checked;
+
+            wines.forEach(wine => {
+                if (qGrape) {
+                    questions.push({
+                        wine: `${wine.name} ${wine.vintage}`,
+                        question: "What grape(s) is this wine made from?",
+                        answer: wine.grape
+                    });
+                }
+                if (qRegion) {
+                    questions.push({
+                        wine: `${wine.name} ${wine.vintage}`,
+                        question: "What region is this wine from?",
+                        answer: wine.region
+                    });
+                }
+                if (qCountry) {
+                    questions.push({
+                        wine: `${wine.name} ${wine.vintage}`,
+                        question: "What country is this wine from?",
+                        answer: wine.country
+                    });
+                }
+                if (qType) {
+                    questions.push({
+                        wine: `${wine.name} ${wine.vintage}`,
+                        question: "What type of wine is this? (Red/White/Rosé/Orange)",
+                        answer: wine.type.charAt(0).toUpperCase() + wine.type.slice(1)
+                    });
+                }
+                if (qFood) {
+                    questions.push({
+                        wine: `${wine.name} ${wine.vintage}`,
+                        question: "What foods pair well with this wine?",
+                        answer: wine.food
+                    });
+                }
+            });
+
+            return shuffleArray(questions);
+        }
+
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function initializeFlashcards() {
+            flashcardQueue = generateQuestions();
+            correctCount = 0;
+            incorrectCount = 0;
+            updateScore();
+            nextCard();
+        }
+
+        function nextCard() {
+            if (flashcardQueue.length === 0) {
+                flashcardQueue = generateQuestions();
+                if (flashcardQueue.length === 0) {
+                    document.getElementById('flashcardQuestion').textContent = "No questions selected!";
+                    document.getElementById('flashcardWine').textContent = "Please select at least one question type above.";
+                    document.getElementById('flashcardAnswer').textContent = "";
+                    return;
+                }
+            }
+
+            currentCard = flashcardQueue.shift();
+            document.getElementById('flashcard').classList.remove('revealed');
+            document.getElementById('flashcardQuestion').textContent = currentCard.question;
+            document.getElementById('flashcardWine').textContent = currentCard.wine;
+            document.getElementById('flashcardAnswer').textContent = currentCard.answer;
+            updateScore();
+        }
+
+        function revealAnswer() {
+            document.getElementById('flashcard').classList.add('revealed');
+        }
+
+        function markAnswer(correct) {
+            if (correct) {
+                correctCount++;
+            } else {
+                incorrectCount++;
+                // Add back to queue for review
+                flashcardQueue.push(currentCard);
+            }
+            updateScore();
+            nextCard();
+        }
+
+        function updateScore() {
+            const total = correctCount + incorrectCount;
+            const percent = total > 0 ? Math.round((correctCount / total) * 100) : 0;
+
+            document.getElementById('correctCount').textContent = correctCount;
+            document.getElementById('incorrectCount').textContent = incorrectCount;
+            document.getElementById('percentScore').textContent = percent + '%';
+            document.getElementById('remainingCount').textContent = flashcardQueue.length;
+        }
+
+        function resetQuiz() {
+            initializeFlashcards();
+        }
+
+        // Re-initialize flashcards when settings change
+        document.querySelectorAll('.quiz-option input').forEach(checkbox => {
+            checkbox.addEventListener('change', initializeFlashcards);
+        });
+    </script>
+</body>
+</html>
