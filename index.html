@@ -576,28 +576,405 @@
             opacity: 0.7;
         }
 
-        /* Responsive */
+        /* Responsive - Tablets */
+        @media (max-width: 1024px) {
+            .wine-grid, .food-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+
+            main {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Responsive - Mobile */
         @media (max-width: 768px) {
             header h1 {
                 font-size: 2rem;
                 letter-spacing: 4px;
             }
 
+            header {
+                padding: 1.5rem 1rem;
+            }
+
             nav {
                 gap: 0.5rem;
+                padding: 0.75rem;
             }
 
             nav button {
-                padding: 0.5rem 1rem;
-                font-size: 0.85rem;
+                padding: 0.5rem 0.75rem;
+                font-size: 0.75rem;
+                letter-spacing: 1px;
             }
 
-            .wine-grid {
+            main {
+                padding: 1rem;
+            }
+
+            .wine-grid, .food-grid {
                 grid-template-columns: 1fr;
+                gap: 1rem;
             }
 
             .flashcard {
                 padding: 2rem 1rem;
+                min-height: 250px;
+            }
+
+            .flashcard-question {
+                font-size: 1.1rem;
+            }
+
+            .flashcard-wine-name {
+                font-size: 1.2rem;
+            }
+
+            .flashcard-answer {
+                font-size: 1.2rem;
+            }
+
+            .flashcard-controls {
+                gap: 0.5rem;
+            }
+
+            .flashcard-btn {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .score-display {
+                padding: 0.75rem 1rem;
+                gap: 0.5rem;
+            }
+
+            .score-number {
+                font-size: 1.5rem;
+            }
+
+            .score-label {
+                font-size: 0.75rem;
+            }
+
+            .quiz-settings {
+                padding: 1rem;
+            }
+
+            .quiz-options {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .quick-ref th, .quick-ref td {
+                padding: 0.5rem;
+                font-size: 0.8rem;
+            }
+
+            .food-section-title {
+                font-size: 1.4rem;
+            }
+
+            .filter-bar {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.4rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Responsive - Small Mobile */
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.6rem;
+                letter-spacing: 3px;
+            }
+
+            header p {
+                font-size: 0.9rem;
+            }
+
+            nav button {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.65rem;
+                letter-spacing: 0.5px;
+            }
+
+            .wine-card h3, .food-card h3 {
+                font-size: 1rem;
+            }
+
+            .wine-card-body, .food-card-body {
+                padding: 1rem;
+            }
+
+            .wine-detail-label {
+                font-size: 0.8rem;
+            }
+
+            .tech-specs {
+                grid-template-columns: 1fr;
+            }
+
+            .pronunciation {
+                font-size: 0.85rem;
+            }
+
+            .flashcard-controls {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .flashcard-btn {
+                width: 100%;
+            }
+
+            .print-cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .print-card h3 {
+                font-size: 1rem;
+            }
+
+            .print-card-body {
+                padding: 1rem;
+            }
+
+            .print-label {
+                font-size: 0.75rem;
+            }
+
+            .print-value {
+                font-size: 0.85rem;
+            }
+
+            .pairing-item {
+                font-size: 0.85rem;
+            }
+
+            .print-intro h2 {
+                font-size: 1.3rem;
+            }
+
+            .print-intro p {
+                font-size: 0.9rem;
+            }
+
+            .print-btn {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .print-category-title {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Print Cards Section Styles */
+        .print-intro {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .print-intro h2 {
+            color: var(--burgundy);
+            margin-bottom: 0.5rem;
+        }
+
+        .print-intro p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .print-btn {
+            background: var(--burgundy);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .print-btn:hover {
+            background: var(--burgundy-dark);
+        }
+
+        .print-category-title {
+            text-align: center;
+            color: var(--burgundy);
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .print-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .print-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            page-break-inside: avoid;
+        }
+
+        .print-card-header {
+            padding: 1rem 1.25rem;
+            color: white;
+        }
+
+        .print-card.red .print-card-header { background: linear-gradient(135deg, #8B0000, #4A0000); }
+        .print-card.white .print-card-header { background: linear-gradient(135deg, #DAA520, #B8860B); }
+        .print-card.rose .print-card-header { background: linear-gradient(135deg, #E8B4B8, #D4919A); }
+        .print-card.orange .print-card-header { background: linear-gradient(135deg, #CC7722, #A66000); }
+        .print-card.cheese .print-card-header { background: linear-gradient(135deg, #D4A84B, #B8922B); }
+        .print-card.charcuterie .print-card-header { background: linear-gradient(135deg, #8B4513, #5D2E0C); }
+        .print-card.other-food .print-card-header { background: linear-gradient(135deg, #6B8E23, #4A6B1A); }
+
+        .print-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .print-card .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .print-card-body {
+            padding: 1.25rem;
+        }
+
+        .print-field {
+            margin-bottom: 0.75rem;
+        }
+
+        .print-field:last-child {
+            margin-bottom: 0;
+        }
+
+        .print-label {
+            font-weight: bold;
+            color: var(--burgundy);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.25rem;
+        }
+
+        .print-value {
+            color: var(--charcoal);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .pairing-item {
+            margin-bottom: 0.5rem;
+            padding-left: 0.5rem;
+            border-left: 2px solid var(--gold);
+        }
+
+        .pairing-name {
+            font-weight: 600;
+            color: var(--burgundy-dark);
+        }
+
+        .pairing-reason {
+            font-size: 0.85rem;
+            color: #555;
+            font-style: italic;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                font-size: 10pt;
+            }
+
+            header, nav, footer, .print-intro, .filter-bar, .quiz-settings, .flashcard-controls {
+                display: none !important;
+            }
+
+            main {
+                max-width: 100%;
+                padding: 0;
+                margin: 0;
+            }
+
+            section {
+                display: block !important;
+            }
+
+            section:not(#printcards) {
+                display: none !important;
+            }
+
+            #printcards {
+                display: block !important;
+            }
+
+            .print-cards-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+
+            .print-card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            .print-card-header {
+                padding: 0.5rem 0.75rem;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .print-card-body {
+                padding: 0.75rem;
+            }
+
+            .print-card h3 {
+                font-size: 0.95rem;
+            }
+
+            .print-field {
+                margin-bottom: 0.5rem;
+            }
+
+            .print-label {
+                font-size: 0.7rem;
+            }
+
+            .print-value {
+                font-size: 0.8rem;
+            }
+
+            .print-category-title {
+                font-size: 1.2rem;
+                page-break-before: always;
+                margin-top: 0;
+            }
+
+            .print-category-title:first-of-type {
+                page-break-before: avoid;
             }
         }
     </style>
@@ -613,6 +990,7 @@
         <button onclick="showSection('food')">Food Menu</button>
         <button onclick="showSection('flashcards')">Flashcards</button>
         <button onclick="showSection('quickref')">Quick Reference</button>
+        <button onclick="showSection('printcards')">Print Cards</button>
     </nav>
 
     <main>
@@ -743,6 +1121,35 @@
                 </table>
             </div>
         </section>
+
+        <!-- Printable Cards Section -->
+        <section id="printcards">
+            <div class="print-intro">
+                <h2>Printable Study Cards</h2>
+                <p>Print these cards to study away from your computer. Each card includes all key information with food pairing explanations.</p>
+                <button class="print-btn" onclick="window.print()">Print All Cards</button>
+            </div>
+
+            <h3 class="print-category-title">Wine Cards</h3>
+            <div class="print-cards-grid" id="printWineGrid">
+                <!-- Wine print cards inserted by JavaScript -->
+            </div>
+
+            <h3 class="print-category-title">Cheese Cards</h3>
+            <div class="print-cards-grid" id="printCheeseGrid">
+                <!-- Cheese print cards inserted by JavaScript -->
+            </div>
+
+            <h3 class="print-category-title">Charcuterie Cards</h3>
+            <div class="print-cards-grid" id="printCharcuterieGrid">
+                <!-- Charcuterie print cards inserted by JavaScript -->
+            </div>
+
+            <h3 class="print-category-title">Flatbreads, Tapas & More</h3>
+            <div class="print-cards-grid" id="printOtherFoodGrid">
+                <!-- Other food print cards inserted by JavaScript -->
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -766,6 +1173,13 @@
                 winemaker: "Château de la Chaize (owned by Groupe Castel since 2017). One of Beaujolais' largest and most historic estates, with a 17th-century château designed by the architect of Versailles.",
                 tasting: "Fresh red fruits (cherry, raspberry), light-bodied with silky tannins, floral notes (violet, peony), and a hint of granite minerality. Classic Beaujolais elegance with a slightly spicy finish.",
                 food: "Prosciutto di Parma, Black Pepper Salami, Saint Angel, Petit Basque, The Basque flatbread",
+                foodPairings: [
+                    { item: "Prosciutto di Parma", why: "The wine's fresh acidity cuts through the ham's salt and fat, while fruity cherry notes complement the meat's sweetness" },
+                    { item: "Black Pepper Salami", why: "Pepper spice echoes the wine's slightly spicy finish, and the light body won't overpower the salami" },
+                    { item: "Saint Angel", why: "The rich triple-crème needs a light, fruity wine to cleanse the palate between bites" },
+                    { item: "Petit Basque", why: "Mild sheep's milk cheese pairs perfectly with the wine's delicate floral and fruit notes" },
+                    { item: "The Basque flatbread", why: "Fig jam sweetness and prosciutto echo the wine's fruit-forward, savory balance" }
+                ],
                 alcohol: "13%",
                 serving: "Slightly chilled (55-60°F / 13-15°C)",
                 notes: "Brouilly is the largest of the 10 Beaujolais Crus. The estate covers 99 hectares with vines averaging 40 years old on granite and pink porphyry soils."
@@ -782,6 +1196,13 @@
                 winemaker: "Famille Quiot - 5th generation winemakers. The Quiot family has been making wine in the Southern Rhône since 1748, now managing over 165 hectares.",
                 tasting: "Ripe dark fruits (blackberry, plum), spice (white pepper, clove), garrigue herbs (thyme, lavender, rosemary), medium body with soft tannins and a warm, lingering finish.",
                 food: "Chorizo, Salchichon De Bellota, Ewephoria, Mimolette, Tapenade",
+                foodPairings: [
+                    { item: "Chorizo", why: "Spanish paprika spice mirrors the wine's peppery, herbal notes - a Mediterranean match" },
+                    { item: "Salchichon De Bellota", why: "The nutty, rich Ibérico pork complements the wine's dark fruit and garrigue complexity" },
+                    { item: "Ewephoria", why: "Aged sheep Gouda's butterscotch sweetness balances the wine's spicy, herbal character" },
+                    { item: "Mimolette", why: "Nutty, caramel notes in the cheese echo the wine's warm, lingering finish" },
+                    { item: "Tapenade", why: "Briny olives and capers match the wine's Mediterranean herb profile perfectly" }
+                ],
                 alcohol: "14%",
                 serving: "Room temperature (60-65°F / 16-18°C)",
                 notes: "Garrigue refers to the wild herbs that grow in the Mediterranean scrubland and infuse Rhône wines with their aromatic character."
@@ -798,6 +1219,13 @@
                 winemaker: "Domaine Les Pins - Small family estate in the heart of Bourgueil. Traditional winemaking with minimal intervention.",
                 tasting: "Red bell pepper, raspberry, graphite, violet notes. Medium body with fresh acidity, earthy undertones, and characteristic pencil-lead minerality from the tuffeau limestone.",
                 food: "Duck Rillettes, Pâté de Campagne, Black Truffle Goat, Petit Basque, Black Pepper Salami",
+                foodPairings: [
+                    { item: "Duck Rillettes", why: "Classic Loire pairing - the wine's acidity cuts through rich duck fat while earthy notes complement" },
+                    { item: "Pâté de Campagne", why: "Rustic country pâté matches the wine's earthy, herbal character - traditional French bistro pairing" },
+                    { item: "Black Truffle Goat", why: "Truffle earthiness harmonizes with the wine's graphite minerality and forest floor notes" },
+                    { item: "Petit Basque", why: "Mild sheep cheese won't overpower the wine's delicate raspberry and violet aromatics" },
+                    { item: "Black Pepper Salami", why: "Pepper spice complements the wine's bell pepper notes - a natural flavor bridge" }
+                ],
                 alcohol: "12.5%",
                 serving: "Slightly chilled (55-60°F / 13-15°C)",
                 notes: "Bourgueil sits on tuffeau (chalk) and gravel soils. Loire Cabernet Franc shows green pepper notes when cool, turning to raspberry when ripe. Best served slightly chilled."
@@ -814,6 +1242,13 @@
                 winemaker: "Bodega 3SAPAS - A boutique winery in Mendoza's Uco Valley. The name means 'Three Toads' in Spanish, referencing a local legend.",
                 tasting: "Plum, blackberry, violet, and hints of cocoa and vanilla. Full-bodied with velvety tannins, juicy dark fruit, and a smooth, lingering finish.",
                 food: "Salchichon De Bellota, Chorizo, Ewephoria, Mimolette, Red Wine Cheddar",
+                foodPairings: [
+                    { item: "Salchichon De Bellota", why: "Rich, nutty Ibérico pork stands up to the wine's full body and dark fruit intensity" },
+                    { item: "Chorizo", why: "Smoky paprika spice complements the wine's cocoa and vanilla hints" },
+                    { item: "Ewephoria", why: "Caramel and butterscotch notes in the cheese echo the wine's smooth, sweet-fruited finish" },
+                    { item: "Mimolette", why: "Aged cheese's nutty depth pairs well with the wine's plum and blackberry richness" },
+                    { item: "Red Wine Cheddar", why: "Wine-soaked cheese creates a harmonious echo with the Malbec's fruit character" }
+                ],
                 alcohol: "14%",
                 serving: "Room temperature (60-65°F / 16-18°C)",
                 notes: "Mendoza's high-altitude vineyards (900-1,500m) produce concentrated Malbec with intense color. The UV exposure at altitude creates thicker skins and deeper pigments."
@@ -830,6 +1265,13 @@
                 winemaker: "Long Valley Ranch Winery - Family-owned California producer focusing on sustainable viticulture.",
                 tasting: "Blackcurrant (cassis), dark cherry, vanilla, cedar, hints of eucalyptus and dark chocolate. Full-bodied with firm but approachable tannins and a long finish.",
                 food: "Bresaola, Red Wine Cheddar, Ewephoria, Blue d'Auvergne, Mimolette",
+                foodPairings: [
+                    { item: "Bresaola", why: "Lean, delicate cured beef lets the wine's complexity shine without competing" },
+                    { item: "Red Wine Cheddar", why: "Wine-infused cheese creates flavor harmony with the Cabernet's dark fruit" },
+                    { item: "Ewephoria", why: "Sweet, caramelized notes soften the wine's firm tannins" },
+                    { item: "Blue d'Auvergne", why: "Bold blue cheese needs a powerful wine - the tannins cut through the richness" },
+                    { item: "Mimolette", why: "Nutty aged cheese complements the wine's cedar and vanilla oak notes" }
+                ],
                 alcohol: "14.5%",
                 serving: "Room temperature (65°F / 18°C), consider decanting 30 min",
                 notes: "California Cabernet is known for its ripe, fruit-forward style with more obvious oak influence compared to Bordeaux. The warm climate produces higher alcohol and softer tannins."
@@ -846,6 +1288,13 @@
                 winemaker: "Colle Corviano - Part of the Fantini Group (Farnese Vini), one of Abruzzo's most respected wine producers, known for excellent value Italian wines.",
                 tasting: "Dark cherry, plum, dried herbs (oregano, thyme), earthy notes, hint of black pepper. Medium to full body with moderate tannins and good acidity.",
                 food: "Felino Salami, Prosciutto di Parma, Gruyere, The Basque flatbread, Antipasto Vegetable Blend",
+                foodPairings: [
+                    { item: "Felino Salami", why: "Classic Italian pairing - the wine's herb notes echo traditional salami seasonings" },
+                    { item: "Prosciutto di Parma", why: "Both are Italian classics; the wine's acidity balances the ham's salt and fat" },
+                    { item: "Gruyere", why: "Nutty Swiss cheese complements the wine's earthy, herbal complexity" },
+                    { item: "The Basque flatbread", why: "Prosciutto and fig on the flatbread mirror the wine's fruit and savory balance" },
+                    { item: "Antipasto Vegetable Blend", why: "Italian pickled vegetables match the wine's oregano and thyme herb notes" }
+                ],
                 alcohol: "13.5%",
                 serving: "Room temperature (60-65°F / 16-18°C)",
                 notes: "Abruzzo is on Italy's Adriatic coast. Montepulciano d'Abruzzo is one of Italy's best value reds - the grape gives deep color and soft, approachable tannins."
@@ -862,6 +1311,13 @@
                 winemaker: "Maison Bouey - Family négociant house established in 1821. The Cuvée 58 honors the year 1958 when the family moved to their current headquarters.",
                 tasting: "Red and black fruits (cherry, blackcurrant), subtle oak (toast, vanilla), smooth tannins, hints of tobacco, cedar, and baking spice. Elegant and balanced.",
                 food: "Duck Rillettes, Soppressata Salame w/ Burgundy, Mimolette, Red Wine Cheddar, Pâté de Campagne",
+                foodPairings: [
+                    { item: "Duck Rillettes", why: "Rich duck fat is balanced by the wine's smooth tannins and fresh acidity" },
+                    { item: "Soppressata Salame w/ Burgundy", why: "Wine-infused salami creates a beautiful echo with this French red" },
+                    { item: "Mimolette", why: "Nutty, caramel cheese notes complement the wine's toasted oak character" },
+                    { item: "Red Wine Cheddar", why: "Wine-soaked cheese harmonizes with the Bordeaux's fruit and tannin structure" },
+                    { item: "Pâté de Campagne", why: "Classic French bistro pairing - country pâté loves elegant Bordeaux" }
+                ],
                 alcohol: "13.5%",
                 serving: "Room temperature (64°F / 18°C)",
                 notes: "Bordeaux blends are categorized by 'bank' - Right Bank (Merlot-dominant, softer) vs Left Bank (Cabernet-dominant, more structured). This is Right Bank style."
@@ -878,6 +1334,13 @@
                 winemaker: "Three Wine Company - Founded by Matt Cline, from the famous Cline family of California Zinfandel pioneers. Focuses on old vine heritage vineyards.",
                 tasting: "Jammy blackberry, raspberry, black pepper, baking spices (cinnamon, clove), hints of bramble and licorice. Bold and rich with high alcohol and a long, warm finish.",
                 food: "Hot Coppa, Chorizo, Blue d'Auvergne, The Mighty Spicy flatbread, Chocolate Truffle",
+                foodPairings: [
+                    { item: "Hot Coppa", why: "Spicy cured meat matches the wine's bold, peppery intensity - heat meets heat" },
+                    { item: "Chorizo", why: "Smoky paprika spice complements the wine's baking spice notes (cinnamon, clove)" },
+                    { item: "Blue d'Auvergne", why: "Bold blue cheese needs a powerful, fruity wine to balance its pungency" },
+                    { item: "The Mighty Spicy flatbread", why: "Spicy chorizo and chili cheddar can handle this big, bold wine" },
+                    { item: "Chocolate Truffle", why: "Jammy fruit and high alcohol pair beautifully with dark chocolate richness" }
+                ],
                 alcohol: "15%",
                 serving: "Slightly below room temp (62°F / 17°C)",
                 notes: "Contra Costa County has sandy soils and ungrafted old vines (phylloxera-resistant). These 'heritage' vines produce intense, concentrated wines. Zinfandel is genetically identical to Croatian Crljenak and Italian Primitivo."
@@ -894,6 +1357,13 @@
                 winemaker: "Terrebonne Estate - Small-production winery on California's cool Sonoma Coast, where fog influence creates ideal conditions for Pinot Noir.",
                 tasting: "Red cherry, strawberry, earthy mushroom, subtle oak (vanilla, baking spice), hints of dried rose and forest floor. Light to medium body with silky texture.",
                 food: "Duck Rillettes, Prosciutto di Parma, Saint Angel, Black Truffle Goat, Foie Gras with Black Truffle",
+                foodPairings: [
+                    { item: "Duck Rillettes", why: "Earthy mushroom notes in the wine complement rich duck; silky texture matches silky fat" },
+                    { item: "Prosciutto di Parma", why: "Delicate ham won't overpower this elegant wine; cherry fruit complements pork sweetness" },
+                    { item: "Saint Angel", why: "Rich triple-crème is balanced by the wine's fresh acidity and bright fruit" },
+                    { item: "Black Truffle Goat", why: "Forest floor and truffle earthiness create a harmonious, umami-rich pairing" },
+                    { item: "Foie Gras with Black Truffle", why: "Luxurious pairing - silky Pinot cuts through rich liver while matching truffle earthiness" }
+                ],
                 alcohol: "13.5%",
                 serving: "Slightly chilled (55-60°F / 13-15°C)",
                 notes: "Pinot Noir is called the 'heartbreak grape' because it's difficult to grow. It needs cool climates but enough sun to ripen. Sonoma Coast fog provides this balance."
@@ -910,6 +1380,13 @@
                 winemaker: "François Lurton - Part of the famous Lurton wine family from Bordeaux. Mas Janeil is their Roussillon estate, practicing organic viticulture.",
                 tasting: "Dark fruits (blackberry, black cherry), Mediterranean herbs (thyme, rosemary), licorice, black olive, spice. Full-bodied with rustic, grippy tannins and garrigue complexity.",
                 food: "Chorizo, Salchichon De Bellota, Ewephoria, Tapenade, The Mighty Spicy flatbread",
+                foodPairings: [
+                    { item: "Chorizo", why: "Spanish chorizo near the Spanish border - paprika spice echoes the wine's garrigue herbs" },
+                    { item: "Salchichon De Bellota", why: "Rich Ibérico pork matches the wine's full body and Mediterranean complexity" },
+                    { item: "Ewephoria", why: "Sweet, aged cheese softens the wine's rustic, grippy tannins" },
+                    { item: "Tapenade", why: "Black olive in the tapenade mirrors the wine's olive and herb notes perfectly" },
+                    { item: "The Mighty Spicy flatbread", why: "Spicy, bold flavors can handle this powerful, full-bodied wine" }
+                ],
                 alcohol: "14.5%",
                 serving: "Room temperature (64°F / 18°C), decant 30 min",
                 notes: "Roussillon is France's sunniest wine region, near the Spanish border. The Tramontane wind and schist soils create concentrated, powerful wines. 'C2' indicates their Côtes du Roussillon cuvée."
@@ -926,6 +1403,13 @@
                 winemaker: "Terre di Bo - Small Tuscan producer in the Chianti hills, practicing traditional winemaking methods with indigenous yeasts.",
                 tasting: "Intense bright red color. Red fruits, blackberries, black currant with pleasant vanilla traces. Well-balanced with softness and acidity, harmonious, savory, slightly tannic yet soft and mellow.",
                 food: "Felino Salami, Prosciutto di Parma, Gruyere, Red Wine Cheddar, Antipasto Vegetable Blend",
+                foodPairings: [
+                    { item: "Felino Salami", why: "Italian salami with Italian wine - the wine's acidity cuts through the salami's fat" },
+                    { item: "Prosciutto di Parma", why: "Classic Tuscan pairing; the savory wine complements the ham's sweetness" },
+                    { item: "Gruyere", why: "Nutty cheese balances the wine's bright acidity and red fruit character" },
+                    { item: "Red Wine Cheddar", why: "Wine-soaked cheese echoes the Chianti's red fruit notes" },
+                    { item: "Antipasto Vegetable Blend", why: "Italian pickled vegetables designed to pair with Italian wines - natural match" }
+                ],
                 alcohol: "13%",
                 serving: "Slightly cool room temp (60-64°F / 16-18°C)",
                 notes: "Chianti DOCG requires minimum 80% Sangiovese. The high acidity is intentional - it's designed to pair with Tuscany's olive oil-rich, tomato-based cuisine."
@@ -942,6 +1426,13 @@
                 winemaker: "Hermanos Lurton (Lurton Brothers) - Jacques and François Lurton, famous French winemakers who brought Bordeaux techniques to Spain's rugged Toro region.",
                 tasting: "Blackberry, plum, leather, tobacco, earthy spice, hints of licorice and dark chocolate. Full-bodied with robust, chewy tannins and a powerful finish.",
                 food: "Chorizo, Salchichon De Bellota, Ewephoria, Mimolette, Black Truffle Salami",
+                foodPairings: [
+                    { item: "Chorizo", why: "Spanish wine with Spanish meat - smoky paprika matches the wine's earthy spice" },
+                    { item: "Salchichon De Bellota", why: "Premium Ibérico pork matches this premium Spanish wine's intensity and power" },
+                    { item: "Ewephoria", why: "Caramelized aged cheese softens the wine's robust, chewy tannins" },
+                    { item: "Mimolette", why: "Nutty aged cheese complements the wine's leather and tobacco complexity" },
+                    { item: "Black Truffle Salami", why: "Earthy truffle intensity matches this powerful wine's dark chocolate and spice notes" }
+                ],
                 alcohol: "14.5%",
                 serving: "Room temperature (65°F / 18°C), decant 1 hour",
                 notes: "Toro has extreme temperatures (hot summers, cold winters) and sandy soils that create bolder, more tannic wines than Rioja. Vines here survived phylloxera due to the sandy soil."
@@ -958,6 +1449,13 @@
                 winemaker: "Les Vignerons de Buzet - Award-winning cooperative of 180 growers, known for sustainable practices and excellent value.",
                 tasting: "Plum, blackcurrant, subtle oak, herbal notes (bay leaf), hints of violet. Medium body with balanced, supple tannins and fresh acidity.",
                 food: "Duck Rillettes, Black Pepper Salami, Red Wine Cheddar, Pâté de Campagne, Soppressata Salame w/ Burgundy",
+                foodPairings: [
+                    { item: "Duck Rillettes", why: "Southwest French specialties together - the wine's acidity cuts through rich duck fat" },
+                    { item: "Black Pepper Salami", why: "Pepper spice complements the wine's herbal bay leaf notes" },
+                    { item: "Red Wine Cheddar", why: "Wine-infused cheese harmonizes with the Bordeaux-style fruit character" },
+                    { item: "Pâté de Campagne", why: "Classic French bistro pairing - rustic pâté with supple, food-friendly wine" },
+                    { item: "Soppressata Salame w/ Burgundy", why: "Wine-infused salami bridges perfectly with this French red" }
+                ],
                 alcohol: "13.5%",
                 serving: "Room temperature (62°F / 17°C)",
                 notes: "Buzet makes Bordeaux-style wines at a fraction of the price. Located between Bordeaux and Toulouse, it was only granted its own AOC in 1973 after centuries of being sold as 'Bordeaux.'"
@@ -974,6 +1472,13 @@
                 winemaker: "Château Roc Meynard - Family estate in the Bordeaux Supérieur appellation, practicing sustainable viticulture on clay-limestone soils.",
                 tasting: "Red fruits (raspberry, red currant), plum, subtle earthy notes (wet stone), gentle oak, hints of herbs and cedar. Medium body with soft, approachable tannins.",
                 food: "Soppressata Salame w/ Burgundy, Duck Rillettes, Mimolette, Red Wine Cheddar, Ewephoria",
+                foodPairings: [
+                    { item: "Soppressata Salame w/ Burgundy", why: "Wine-infused salami creates harmony with this approachable French red" },
+                    { item: "Duck Rillettes", why: "Soft tannins and fresh acidity balance rich duck fat beautifully" },
+                    { item: "Mimolette", why: "Nutty cheese notes complement the wine's gentle oak and cedar hints" },
+                    { item: "Red Wine Cheddar", why: "Wine-soaked cheese echoes the Bordeaux's red fruit character" },
+                    { item: "Ewephoria", why: "Sweet caramelized notes soften the wine's soft, approachable tannins" }
+                ],
                 alcohol: "13.5%",
                 serving: "Room temperature (64°F / 18°C)",
                 notes: "Bordeaux Supérieur has stricter requirements than basic Bordeaux AOC: lower yields, higher alcohol, and longer aging. It's often the best value tier in Bordeaux."
@@ -990,6 +1495,13 @@
                 winemaker: "Ercole Wines - Named after Ercole (Hercules), referencing the strength and character of Piedmontese wines. Part of the Braida di Giacomo Bologna legacy.",
                 tasting: "Bright cherry (morello), raspberry, dried herbs, hints of almond and black pepper. Medium body with high acidity, low tannins, and a refreshing, tangy finish.",
                 food: "Prosciutto di Parma, Felino Salami, Gruyere, Black Truffle Salami, The Basque flatbread",
+                foodPairings: [
+                    { item: "Prosciutto di Parma", why: "Italian wine with Italian ham - high acidity cuts through the fat perfectly" },
+                    { item: "Felino Salami", why: "Both from Northern Italy; the wine's bright acidity balances the salami's richness" },
+                    { item: "Gruyere", why: "Nutty cheese complements the wine's almond hints and herbal notes" },
+                    { item: "Black Truffle Salami", why: "Earthy truffle pairs with the wine's dried herb character" },
+                    { item: "The Basque flatbread", why: "The wine's acidity cuts through rich cheese and prosciutto toppings" }
+                ],
                 alcohol: "13%",
                 serving: "Slightly chilled (55-60°F / 13-15°C)",
                 notes: "Barbera is Piedmont's most-planted grape (ahead of Nebbiolo). Its high acidity makes it perfect for rich, fatty Italian cuisine. Traditionally fermented in steel to preserve freshness."
@@ -1006,6 +1518,13 @@
                 winemaker: "Baron Philippe de Rothschild Chile - The Chilean venture of the famous Bordeaux family (Mouton Rothschild). 'Escudo Rojo' means 'Red Shield' in Spanish.",
                 tasting: "Green bell pepper, dark cherry, chocolate, coffee, smoke, hints of eucalyptus. Medium to full body with soft, velvety tannins and a savory finish.",
                 food: "Chorizo, Hot Coppa, Smoked Chili Cheddar, The Mighty Spicy flatbread, Pimento Cheese Dip",
+                foodPairings: [
+                    { item: "Chorizo", why: "Smoky paprika complements the wine's smoke and coffee notes" },
+                    { item: "Hot Coppa", why: "Spicy meat matches the wine's savory, peppery character" },
+                    { item: "Smoked Chili Cheddar", why: "Smoked cheese and heat pair with the wine's smoke and herbal pyrazines" },
+                    { item: "The Mighty Spicy flatbread", why: "Bold, spicy flavors stand up to this medium-full bodied wine" },
+                    { item: "Pimento Cheese Dip", why: "Jalapeño heat and creamy cheese balance the wine's bell pepper and velvety tannins" }
+                ],
                 alcohol: "14%",
                 serving: "Room temperature (62-65°F / 17-18°C)",
                 notes: "The green bell pepper note is from pyrazines - a signature of Carmenère (and Cab Franc). Chile's warm days and cool nights are ideal for this grape. Carmenère needs a long growing season to fully ripen."
@@ -1024,6 +1543,13 @@
                 winemaker: "Weingut St. Christopher - Traditional Mosel producer in Piesport. The Goldtropfchen vineyard faces south on steep slate slopes above the Mosel River.",
                 tasting: "Green apple, white peach, lime, slate/wet stone minerality. Off-dry (slight sweetness) with vibrant acidity and delicate floral notes. Light and refreshing.",
                 food: "Pimento Cheese Dip, Hummus, Maple Bourbon Goat, Lemoncello Tartufo, Exotic Bomba",
+                foodPairings: [
+                    { item: "Pimento Cheese Dip", why: "Off-dry sweetness cools jalapeño heat - classic sweet-spicy balance" },
+                    { item: "Hummus", why: "Light, refreshing wine complements the creamy, mild chickpea dip" },
+                    { item: "Maple Bourbon Goat", why: "Sweet cheese with sweet wine - the flavors complement rather than clash" },
+                    { item: "Lemoncello Tartufo", why: "Citrus dessert with citrus-driven wine creates perfect harmony" },
+                    { item: "Exotic Bomba", why: "Tropical fruit sorbetto loves fruity, off-dry Riesling" }
+                ],
                 alcohol: "8%",
                 serving: "Well chilled (45-50°F / 7-10°C)",
                 notes: "Goldtropfchen means 'golden droplets' - one of Germany's finest vineyard sites. Low alcohol (7-9%) is typical for Kabinett. The residual sugar balances the high acidity. Blue slate soil gives characteristic minerality."
@@ -1040,6 +1566,13 @@
                 winemaker: "Les Vignerons de la Noue - Respected cooperative in Touraine, producing terroir-driven Loire Valley wines with sustainable practices.",
                 tasting: "Citrus (lemon, grapefruit), white flowers, green apple, flinty/chalky minerality. Crisp acidity with a clean, refreshing finish and subtle herbaceous notes.",
                 food: "Black Truffle Goat, Hummus, Prosciutto di Parma, The Veg flatbread, Petit Basque",
+                foodPairings: [
+                    { item: "Black Truffle Goat", why: "Classic pairing - Loire Sauvignon Blanc is THE match for goat cheese" },
+                    { item: "Hummus", why: "Crisp, clean wine refreshes the palate between creamy bites" },
+                    { item: "Prosciutto di Parma", why: "Wine's acidity cuts through ham's saltiness; citrus brightens the pairing" },
+                    { item: "The Veg flatbread", why: "Fresh, herbal wine complements the vegetarian Mediterranean flavors" },
+                    { item: "Petit Basque", why: "Mild sheep cheese pairs beautifully with the wine's flinty minerality" }
+                ],
                 alcohol: "12.5%",
                 serving: "Well chilled (45-50°F / 7-10°C)",
                 notes: "La Petite Roche means 'The Little Rock' - referring to the limestone/flint (silex) soils that give Loire Sauvignon its distinctive flinty, mineral character."
@@ -1056,6 +1589,13 @@
                 winemaker: "William Church Winery - Woodinville-based winery. 'Tattoo Girl' is their approachable, artistically-labeled line celebrating Pacific Northwest culture.",
                 tasting: "Apple, pear, tropical fruits (pineapple, mango), hints of vanilla, butter, and toasted oak. Medium body with balanced acidity and a creamy texture.",
                 food: "Saint Angel, Gruyere, Prosciutto di Parma, Honey Bee Gouda, Foie Gras with Black Truffle",
+                foodPairings: [
+                    { item: "Saint Angel", why: "Creamy wine with creamy cheese - butter meets butter in the best way" },
+                    { item: "Gruyere", why: "Nutty cheese complements the wine's toasted oak and vanilla notes" },
+                    { item: "Prosciutto di Parma", why: "Rich, oaked Chardonnay stands up to the ham's salt and sweetness" },
+                    { item: "Honey Bee Gouda", why: "Honey sweetness echoes the wine's tropical fruit and vanilla character" },
+                    { item: "Foie Gras with Black Truffle", why: "Rich, buttery wine matches luxurious, fatty foie gras perfectly" }
+                ],
                 alcohol: "13.5%",
                 serving: "Chilled (50-55°F / 10-13°C)",
                 notes: "Columbia Valley has warm days and cool nights, creating balanced Chardonnay. Washington State is now the second-largest wine producer in the US after California."
@@ -1072,6 +1612,13 @@
                 winemaker: "Domaine Les Champs de Clos - Small family domaine in Sancerre, farming organically on silex (flint) and limestone soils.",
                 tasting: "Grapefruit, lime, gooseberry, flint, and chalk. Bone-dry with razor-sharp acidity, mineral intensity, and a long, clean finish. Classic Sancerre precision.",
                 food: "Black Truffle Goat, Petit Basque, Hummus, The Veg flatbread, Bresaola",
+                foodPairings: [
+                    { item: "Black Truffle Goat", why: "THE classic pairing - Sancerre and chèvre are from the same Loire region" },
+                    { item: "Petit Basque", why: "Sheep cheese's mild nuttiness complements the wine's mineral precision" },
+                    { item: "Hummus", why: "Clean, refreshing wine cuts through the tahini richness" },
+                    { item: "The Veg flatbread", why: "Herbal, citrus-driven wine loves fresh vegetable and arugula flavors" },
+                    { item: "Bresaola", why: "Lean beef doesn't overpower the wine; acidity brightens the delicate meat" }
+                ],
                 alcohol: "13%",
                 serving: "Well chilled (45-50°F / 7-10°C)",
                 notes: "Sancerre and Pouilly-Fumé (across the river) are the world's most famous Sauvignon Blanc regions. Sancerre has three soil types: silex (flint), limestone (Kimmeridgian), and clay - each giving different character."
@@ -1088,6 +1635,13 @@
                 winemaker: "Villa Noria - Estate in the Picpoul de Pinet appellation near the Étang de Thau lagoon, where oysters are farmed alongside the vineyards.",
                 tasting: "Lemon, lime, green apple, white flowers, saline/briny finish. Light body with zesty, mouthwatering acidity and a clean, mineral finish.",
                 food: "Hummus, Tapenade, Antipasto Vegetable Blend, Petit Basque, Bresaola",
+                foodPairings: [
+                    { item: "Hummus", why: "Light, zesty wine refreshes after rich, creamy chickpea dip" },
+                    { item: "Tapenade", why: "Saline wine echoes the briny olives - Mediterranean flavors unite" },
+                    { item: "Antipasto Vegetable Blend", why: "High acidity matches pickled vegetable tang perfectly" },
+                    { item: "Petit Basque", why: "Mild cheese won't overpower this delicate, mineral wine" },
+                    { item: "Bresaola", why: "Light wine with lean meat - neither overpowers the other" }
+                ],
                 alcohol: "13%",
                 serving: "Very cold (40-45°F / 4-7°C)",
                 notes: "Picpoul de Pinet is the Languedoc's answer to Muscadet. The vines grow next to the Thau lagoon oyster beds - the perfect local pairing. France's most-exported white wine appellation."
@@ -1104,6 +1658,13 @@
                 winemaker: "Monte degli Angeli (Mountain of Angels) - Northeastern Italian producer in the Delle Venezie region, using modern winemaking to preserve freshness.",
                 tasting: "Pear, apple, citrus (lemon), almond notes. Light and crisp with subtle minerality, clean finish, and refreshing acidity.",
                 food: "Prosciutto di Parma, Bresaola, Saint Angel, Hummus, Antipasto Vegetable Blend",
+                foodPairings: [
+                    { item: "Prosciutto di Parma", why: "Italian wine with Italian ham - light, crisp wine cuts through salty fat" },
+                    { item: "Bresaola", why: "Delicate lean beef pairs with this neutral, refreshing wine" },
+                    { item: "Saint Angel", why: "Rich cream cheese needs a crisp, clean wine to refresh the palate" },
+                    { item: "Hummus", why: "Neutral wine lets the hummus flavors shine while cleansing the palate" },
+                    { item: "Antipasto Vegetable Blend", why: "Italian pickled veggies with Italian wine - classic aperitivo pairing" }
+                ],
                 alcohol: "12%",
                 serving: "Well chilled (45-50°F / 7-10°C)",
                 notes: "Delle Venezie is a large IGT covering Veneto, Friuli, and Trentino. Italian Pinot Grigio is typically lighter and more neutral than Alsatian Pinot Gris, which is richer and more aromatic."
@@ -1122,6 +1683,13 @@
                 winemaker: "Château Mascaronne - Owned by Tom Bove, with winemaking by celebrated consultant Bertrand Léon. The estate focuses exclusively on premium Provence rosé.",
                 tasting: "Strawberry, white peach, citrus (pink grapefruit), herbs de Provence (thyme, lavender). Pale salmon color, dry with refreshing acidity and elegant minerality.",
                 food: "Prosciutto di Parma, Black Pepper Salami, Hummus, Tapenade, The Veg flatbread",
+                foodPairings: [
+                    { item: "Prosciutto di Parma", why: "Delicate rosé and delicate ham - fresh fruit notes complement pork sweetness" },
+                    { item: "Black Pepper Salami", why: "Pepper spice echoes the wine's Provence herb character" },
+                    { item: "Hummus", why: "Light, refreshing wine perfect for casual snacking and dipping" },
+                    { item: "Tapenade", why: "Mediterranean rosé with Mediterranean olive spread - regional harmony" },
+                    { item: "The Veg flatbread", why: "Fresh, herbal wine complements vegetables, arugula, and sun-dried tomatoes" }
+                ],
                 alcohol: "13%",
                 serving: "Very cold (40-45°F / 4-7°C)",
                 notes: "Provence rosé gets its pale color from brief skin contact (2-12 hours) using the direct press method. Pale color = quality in Provence. The region produces 40% of France's rosé."
@@ -1140,6 +1708,13 @@
                 winemaker: "François Lurton - Pioneering French winemaker who works globally. Les Fumées Blanches ('The White Smokes') is his innovative Languedoc project.",
                 tasting: "Dried apricot, honey, orange peel, nutty notes (hazelnut), tannic texture like tea. Full-bodied with unique complexity, oxidative notes, and a long, savory finish.",
                 food: "Ewephoria, Mimolette, Black Truffle Salami, Foie Gras with Black Truffle, Chorizo",
+                foodPairings: [
+                    { item: "Ewephoria", why: "Nutty, caramelized cheese matches the wine's hazelnut and honey notes" },
+                    { item: "Mimolette", why: "Aged cheese complexity complements the wine's unique oxidative character" },
+                    { item: "Black Truffle Salami", why: "Earthy truffle and savory pork match this wine's savory, tannic texture" },
+                    { item: "Foie Gras with Black Truffle", why: "Rich, complex liver pâté needs an equally complex, full-bodied wine" },
+                    { item: "Chorizo", why: "Smoky, spicy meat can stand up to this tannic, full-bodied orange wine" }
+                ],
                 alcohol: "12.5%",
                 serving: "Lightly chilled (50-55°F / 10-13°C)",
                 notes: "Orange wine is the 'fourth color' of wine. Made by fermenting white grapes with their skins (7-14+ days), extracting tannins, color, and texture. This technique originated 8,000 years ago in Georgia using clay qvevri vessels."
@@ -1445,6 +2020,7 @@
             renderWineCards();
             renderFoodCards();
             renderQuickRef();
+            renderPrintCards();
             initializeFlashcards();
         });
 
@@ -1477,6 +2053,159 @@
                             <div class="wine-pairings-list">${item.pairings}</div>
                         </div>
                         ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render Print Cards
+        function renderPrintCards() {
+            // Render Wine Print Cards
+            const wineGrid = document.getElementById('printWineGrid');
+            wineGrid.innerHTML = wines.map(wine => `
+                <div class="print-card ${wine.type}">
+                    <div class="print-card-header">
+                        <h3>${wine.name}</h3>
+                        <div class="subtitle">${wine.vintage} | ${wine.type.charAt(0).toUpperCase() + wine.type.slice(1)}</div>
+                    </div>
+                    <div class="print-card-body">
+                        ${wine.pronunciation ? `
+                        <div class="print-field">
+                            <div class="print-label">Pronunciation</div>
+                            <div class="print-value">${wine.pronunciation}</div>
+                        </div>
+                        ` : ''}
+                        <div class="print-field">
+                            <div class="print-label">Grape(s)</div>
+                            <div class="print-value"><strong>${wine.grape}</strong></div>
+                        </div>
+                        <div class="print-field">
+                            <div class="print-label">Region / Country</div>
+                            <div class="print-value">${wine.region}, ${wine.country}</div>
+                        </div>
+                        <div class="print-field">
+                            <div class="print-label">Tasting Notes</div>
+                            <div class="print-value">${wine.tasting}</div>
+                        </div>
+                        <div class="print-field">
+                            <div class="print-label">ABV / Serving</div>
+                            <div class="print-value">${wine.alcohol} | ${wine.serving}</div>
+                        </div>
+                        <div class="print-field">
+                            <div class="print-label">Food Pairings (Why?)</div>
+                            <div class="print-value">
+                                ${wine.foodPairings ? wine.foodPairings.map(p => `
+                                    <div class="pairing-item">
+                                        <span class="pairing-name">${p.item}:</span>
+                                        <span class="pairing-reason">${p.why}</span>
+                                    </div>
+                                `).join('') : wine.food}
+                            </div>
+                        </div>
+                        <div class="print-field">
+                            <div class="print-label">Key Facts</div>
+                            <div class="print-value">${wine.notes}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Render Cheese Print Cards
+            const cheeseGrid = document.getElementById('printCheeseGrid');
+            cheeseGrid.innerHTML = cheeses.map(cheese => `
+                <div class="print-card cheese">
+                    <div class="print-card-header">
+                        <h3>${cheese.name}</h3>
+                        <div class="subtitle">${cheese.price} | ${cheese.origin}</div>
+                    </div>
+                    <div class="print-card-body">
+                        <div class="print-field">
+                            <div class="print-label">Type</div>
+                            <div class="print-value">${cheese.type}</div>
+                        </div>
+                        ${cheese.pronunciation ? `
+                        <div class="print-field">
+                            <div class="print-label">Pronunciation</div>
+                            <div class="print-value">${cheese.pronunciation}</div>
+                        </div>
+                        ` : ''}
+                        <div class="print-field">
+                            <div class="print-label">Description</div>
+                            <div class="print-value">${cheese.description}</div>
+                        </div>
+                        <div class="print-field">
+                            <div class="print-label">Wine Pairings</div>
+                            <div class="print-value">${cheese.pairings}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Render Charcuterie Print Cards
+            const charcuterieGrid = document.getElementById('printCharcuterieGrid');
+            charcuterieGrid.innerHTML = charcuterie.map(item => `
+                <div class="print-card charcuterie">
+                    <div class="print-card-header">
+                        <h3>${item.name}</h3>
+                        <div class="subtitle">${item.price} | ${item.origin}</div>
+                    </div>
+                    <div class="print-card-body">
+                        <div class="print-field">
+                            <div class="print-label">Type</div>
+                            <div class="print-value">${item.type}</div>
+                        </div>
+                        ${item.pronunciation ? `
+                        <div class="print-field">
+                            <div class="print-label">Pronunciation</div>
+                            <div class="print-value">${item.pronunciation}</div>
+                        </div>
+                        ` : ''}
+                        <div class="print-field">
+                            <div class="print-label">Description</div>
+                            <div class="print-value">${item.description}</div>
+                        </div>
+                        <div class="print-field">
+                            <div class="print-label">Wine Pairings</div>
+                            <div class="print-value">${item.pairings}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Render Other Food Print Cards (Flatbreads, Tapas, Pates, Desserts)
+            const otherFoodGrid = document.getElementById('printOtherFoodGrid');
+            const otherFoods = [
+                ...flatbreads.map(f => ({...f, category: 'Flatbread'})),
+                ...tapas.map(f => ({...f, category: 'Tapas'})),
+                ...pates.map(f => ({...f, category: 'Pâté'})),
+                ...desserts.map(f => ({...f, category: 'Dessert'}))
+            ];
+
+            otherFoodGrid.innerHTML = otherFoods.map(item => `
+                <div class="print-card other-food">
+                    <div class="print-card-header">
+                        <h3>${item.name}</h3>
+                        <div class="subtitle">${item.price} | ${item.category}${item.origin ? ' | ' + item.origin : ''}</div>
+                    </div>
+                    <div class="print-card-body">
+                        <div class="print-field">
+                            <div class="print-label">Type</div>
+                            <div class="print-value">${item.type}</div>
+                        </div>
+                        ${item.pronunciation ? `
+                        <div class="print-field">
+                            <div class="print-label">Pronunciation</div>
+                            <div class="print-value">${item.pronunciation}</div>
+                        </div>
+                        ` : ''}
+                        <div class="print-field">
+                            <div class="print-label">Description</div>
+                            <div class="print-value">${item.description}</div>
+                        </div>
+                        <div class="print-field">
+                            <div class="print-label">Wine Pairings</div>
+                            <div class="print-value">${item.pairings}</div>
+                        </div>
                     </div>
                 </div>
             `).join('');
