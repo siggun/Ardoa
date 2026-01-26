@@ -30,25 +30,61 @@
 
         /* Header */
         header {
-            background: linear-gradient(135deg, var(--burgundy-dark) 0%, var(--burgundy) 100%);
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(201, 162, 39, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(201, 162, 39, 0.1) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 50%, rgba(139, 58, 66, 0.3) 0%, transparent 60%),
+                linear-gradient(135deg, var(--burgundy-dark) 0%, var(--burgundy) 50%, var(--burgundy-light) 100%);
             color: var(--cream);
-            padding: 2rem;
+            padding: 3rem 2rem;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 C30 5 25 15 25 25 C25 32 27 35 30 35 C33 35 35 32 35 25 C35 15 30 5 30 5 Z' fill='none' stroke='rgba(201,162,39,0.08)' stroke-width='1'/%3E%3Ccircle cx='30' cy='40' r='8' fill='none' stroke='rgba(201,162,39,0.08)' stroke-width='1'/%3E%3Cline x1='30' y1='48' x2='30' y2='55' stroke='rgba(201,162,39,0.08)' stroke-width='2'/%3E%3Cline x1='25' y1='55' x2='35' y2='55' stroke='rgba(201,162,39,0.08)' stroke-width='2'/%3E%3C/svg%3E");
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, transparent 0%, rgba(74, 28, 35, 0.3) 100%);
+            pointer-events: none;
         }
 
         header h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 300;
-            letter-spacing: 8px;
+            letter-spacing: 12px;
             margin-bottom: 0.5rem;
             text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
         }
 
         header p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--gold-light);
             font-style: italic;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
         }
 
         /* Navigation */
@@ -313,6 +349,57 @@
             font-size: 0.9rem;
             color: #888;
             margin-top: 2rem;
+        }
+
+        .flashcard-options {
+            display: none;
+            flex-direction: column;
+            gap: 0.75rem;
+            width: 100%;
+            max-width: 600px;
+            margin: 1rem 0;
+        }
+
+        .flashcard-options.active {
+            display: flex;
+        }
+
+        .flashcard-option {
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .flashcard-option:hover {
+            border-color: var(--burgundy);
+            background: #fff;
+        }
+
+        .flashcard-option.selected {
+            border-color: var(--burgundy);
+            background: rgba(114, 47, 55, 0.1);
+        }
+
+        .flashcard-option.correct {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.15);
+        }
+
+        .flashcard-option.incorrect {
+            border-color: #dc3545;
+            background: rgba(220, 53, 69, 0.15);
+        }
+
+        .flashcard-option.correct-answer {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.2);
+            font-weight: 600;
         }
 
         .flashcard-controls {
@@ -986,9 +1073,9 @@
     </header>
 
     <nav>
-        <button class="active" onclick="showSection('techsheets')">Tech Sheets</button>
+        <button class="active" onclick="showSection('techsheets')">Wine List</button>
         <button onclick="showSection('food')">Food Menu</button>
-        <button onclick="showSection('flashcards')">Flashcards</button>
+        <button onclick="showSection('flashcards')">Wine Quiz</button>
         <button onclick="showSection('quickref')">Quick Reference</button>
         <button onclick="showSection('printcards')">Print Cards</button>
     </nav>
@@ -1058,7 +1145,7 @@
                             <input type="checkbox" id="q-country" checked> Country
                         </label>
                         <label class="quiz-option">
-                            <input type="checkbox" id="q-type" checked> Wine Type
+                            <input type="checkbox" id="q-tasting" checked> Tasting Notes
                         </label>
                         <label class="quiz-option">
                             <input type="checkbox" id="q-food"> Food Pairing
@@ -1085,11 +1172,12 @@
                     </div>
                 </div>
 
-                <div class="flashcard" id="flashcard" onclick="revealAnswer()">
+                <div class="flashcard" id="flashcard" onclick="handleFlashcardClick(event)">
                     <div class="flashcard-question" id="flashcardQuestion">Loading...</div>
                     <div class="flashcard-wine-name" id="flashcardWine"></div>
+                    <div class="flashcard-options" id="flashcardOptions"></div>
                     <div class="flashcard-answer" id="flashcardAnswer"></div>
-                    <div class="flashcard-hint">Click to reveal answer</div>
+                    <div class="flashcard-hint" id="flashcardHint">Click to reveal answer</div>
                 </div>
 
                 <div class="flashcard-controls">
@@ -1104,6 +1192,7 @@
 
         <!-- Quick Reference Section -->
         <section id="quickref">
+            <h2 class="food-section-title">Wine Quick Reference</h2>
             <div class="quick-ref">
                 <table id="quickRefTable">
                     <thead>
@@ -1117,6 +1206,60 @@
                     </thead>
                     <tbody id="quickRefBody">
                         <!-- Table rows will be inserted by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="food-section-title">Cheese Quick Reference</h2>
+            <div class="quick-ref">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cheese</th>
+                            <th>Price</th>
+                            <th>Type</th>
+                            <th>Origin</th>
+                            <th>Wine Pairings</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cheeseRefBody">
+                        <!-- Cheese rows will be inserted by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="food-section-title">Charcuterie Quick Reference</h2>
+            <div class="quick-ref">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Price</th>
+                            <th>Type</th>
+                            <th>Origin</th>
+                            <th>Wine Pairings</th>
+                        </tr>
+                    </thead>
+                    <tbody id="charcuterieRefBody">
+                        <!-- Charcuterie rows will be inserted by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="food-section-title">Other Food Quick Reference</h2>
+            <div class="quick-ref">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Price</th>
+                            <th>Category</th>
+                            <th>Type</th>
+                            <th>Wine Pairings</th>
+                        </tr>
+                    </thead>
+                    <tbody id="otherFoodRefBody">
+                        <!-- Other food rows will be inserted by JavaScript -->
                     </tbody>
                 </table>
             </div>
@@ -2287,16 +2430,60 @@
             });
         }
 
-        // Render Quick Reference Table
+        // Render Quick Reference Tables
         function renderQuickRef() {
-            const tbody = document.getElementById('quickRefBody');
-            tbody.innerHTML = wines.map(wine => `
+            // Wine table
+            const wineBody = document.getElementById('quickRefBody');
+            wineBody.innerHTML = wines.map(wine => `
                 <tr>
                     <td><strong>${wine.name}</strong> ${wine.vintage}</td>
                     <td><span class="type-badge ${wine.type}">${wine.type.charAt(0).toUpperCase() + wine.type.slice(1)}</span></td>
                     <td>${wine.grape}</td>
                     <td>${wine.region}</td>
                     <td>${wine.country}</td>
+                </tr>
+            `).join('');
+
+            // Cheese table
+            const cheeseBody = document.getElementById('cheeseRefBody');
+            cheeseBody.innerHTML = cheeses.map(cheese => `
+                <tr>
+                    <td><strong>${cheese.name}</strong></td>
+                    <td>${cheese.price}</td>
+                    <td>${cheese.type}</td>
+                    <td>${cheese.origin}</td>
+                    <td>${cheese.pairings}</td>
+                </tr>
+            `).join('');
+
+            // Charcuterie table
+            const charcuterieBody = document.getElementById('charcuterieRefBody');
+            charcuterieBody.innerHTML = charcuterie.map(item => `
+                <tr>
+                    <td><strong>${item.name}</strong></td>
+                    <td>${item.price}</td>
+                    <td>${item.type}</td>
+                    <td>${item.origin}</td>
+                    <td>${item.pairings}</td>
+                </tr>
+            `).join('');
+
+            // Other food table (flatbreads, tapas, pates, desserts)
+            const otherFoodBody = document.getElementById('otherFoodRefBody');
+            const otherFoods = [
+                ...flatbreads.map(f => ({...f, category: 'Flatbread', origin: '-'})),
+                ...tapas.map(f => ({...f, category: 'Tapas', origin: '-'})),
+                ...pates.map(f => ({...f, category: 'Pâté'})),
+                ...desserts.map(f => ({...f, category: 'Dessert', origin: '-'}))
+            ];
+
+            otherFoodBody.innerHTML = otherFoods.map(item => `
+                <tr>
+                    <td><strong>${item.name}</strong></td>
+                    <td>${item.price}</td>
+                    <td>${item.category}</td>
+                    <td>${item.type}</td>
+                    <td>${item.pairings || '-'}</td>
                 </tr>
             `).join('');
         }
@@ -2312,7 +2499,7 @@
             const qGrape = document.getElementById('q-grape').checked;
             const qRegion = document.getElementById('q-region').checked;
             const qCountry = document.getElementById('q-country').checked;
-            const qType = document.getElementById('q-type').checked;
+            const qTasting = document.getElementById('q-tasting').checked;
             const qFood = document.getElementById('q-food').checked;
 
             wines.forEach(wine => {
@@ -2320,35 +2507,46 @@
                     questions.push({
                         wine: `${wine.name} ${wine.vintage}`,
                         question: "What grape(s) is this wine made from?",
-                        answer: wine.grape
+                        answer: wine.grape,
+                        type: 'text'
                     });
                 }
                 if (qRegion) {
                     questions.push({
                         wine: `${wine.name} ${wine.vintage}`,
                         question: "What region is this wine from?",
-                        answer: wine.region
+                        answer: wine.region,
+                        type: 'text'
                     });
                 }
                 if (qCountry) {
                     questions.push({
                         wine: `${wine.name} ${wine.vintage}`,
                         question: "What country is this wine from?",
-                        answer: wine.country
+                        answer: wine.country,
+                        type: 'text'
                     });
                 }
-                if (qType) {
+                if (qTasting) {
+                    // Generate multiple choice tasting notes question
+                    const otherWines = wines.filter(w => w.name !== wine.name);
+                    const wrongAnswers = shuffleArray(otherWines).slice(0, 3).map(w => w.tasting);
+                    const allAnswers = shuffleArray([wine.tasting, ...wrongAnswers]);
+
                     questions.push({
                         wine: `${wine.name} ${wine.vintage}`,
-                        question: "What type of wine is this? (Red/White/Rosé/Orange)",
-                        answer: wine.type.charAt(0).toUpperCase() + wine.type.slice(1)
+                        question: "Which tasting notes describe this wine?",
+                        answer: wine.tasting,
+                        type: 'multiple-choice',
+                        options: allAnswers
                     });
                 }
                 if (qFood) {
                     questions.push({
                         wine: `${wine.name} ${wine.vintage}`,
                         question: "What foods pair well with this wine?",
-                        answer: wine.food
+                        answer: wine.food,
+                        type: 'text'
                     });
                 }
             });
@@ -2380,20 +2578,83 @@
                     document.getElementById('flashcardQuestion').textContent = "No questions selected!";
                     document.getElementById('flashcardWine').textContent = "Please select at least one question type above.";
                     document.getElementById('flashcardAnswer').textContent = "";
+                    document.getElementById('flashcardOptions').innerHTML = "";
+                    document.getElementById('flashcardOptions').classList.remove('active');
                     return;
                 }
             }
 
             currentCard = flashcardQueue.shift();
-            document.getElementById('flashcard').classList.remove('revealed');
+            const flashcard = document.getElementById('flashcard');
+            const optionsContainer = document.getElementById('flashcardOptions');
+            const answerEl = document.getElementById('flashcardAnswer');
+            const hintEl = document.getElementById('flashcardHint');
+
+            flashcard.classList.remove('revealed');
             document.getElementById('flashcardQuestion').textContent = currentCard.question;
             document.getElementById('flashcardWine').textContent = currentCard.wine;
-            document.getElementById('flashcardAnswer').textContent = currentCard.answer;
+
+            if (currentCard.type === 'multiple-choice') {
+                // Multiple choice question
+                optionsContainer.classList.add('active');
+                optionsContainer.innerHTML = currentCard.options.map((option, idx) => `
+                    <div class="flashcard-option" data-idx="${idx}" onclick="selectOption(this, '${encodeURIComponent(option)}')">${option}</div>
+                `).join('');
+                answerEl.textContent = '';
+                hintEl.textContent = 'Select the correct answer above';
+            } else {
+                // Text answer question
+                optionsContainer.classList.remove('active');
+                optionsContainer.innerHTML = '';
+                answerEl.textContent = currentCard.answer;
+                hintEl.textContent = 'Click to reveal answer';
+            }
             updateScore();
         }
 
+        function selectOption(element, encodedOption) {
+            const option = decodeURIComponent(encodedOption);
+            const allOptions = document.querySelectorAll('.flashcard-option');
+            const isCorrect = option === currentCard.answer;
+
+            // Disable further clicks
+            allOptions.forEach(opt => {
+                opt.onclick = null;
+                opt.style.cursor = 'default';
+            });
+
+            // Mark selected option
+            element.classList.add('selected');
+
+            if (isCorrect) {
+                element.classList.add('correct');
+                document.getElementById('flashcardHint').textContent = 'Correct!';
+                setTimeout(() => markAnswer(true), 1000);
+            } else {
+                element.classList.add('incorrect');
+                // Highlight the correct answer
+                allOptions.forEach(opt => {
+                    const optText = opt.textContent;
+                    if (optText === currentCard.answer) {
+                        opt.classList.add('correct-answer');
+                    }
+                });
+                document.getElementById('flashcardHint').textContent = 'Incorrect - the correct answer is highlighted';
+                setTimeout(() => markAnswer(false), 2500);
+            }
+        }
+
+        function handleFlashcardClick(event) {
+            // Only trigger reveal for text questions, not multiple choice
+            if (currentCard && currentCard.type !== 'multiple-choice') {
+                revealAnswer();
+            }
+        }
+
         function revealAnswer() {
-            document.getElementById('flashcard').classList.add('revealed');
+            if (currentCard && currentCard.type !== 'multiple-choice') {
+                document.getElementById('flashcard').classList.add('revealed');
+            }
         }
 
         function markAnswer(correct) {
