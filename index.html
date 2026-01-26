@@ -453,6 +453,116 @@
         .type-badge.rose { background: #E8B4B8; color: #333; }
         .type-badge.orange { background: #CC7722; color: white; }
 
+        /* Food Menu Section */
+        .food-section-title {
+            text-align: center;
+            color: var(--burgundy);
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .food-section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .food-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .food-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .food-card-header {
+            padding: 1rem 1.25rem;
+            color: white;
+        }
+
+        .food-card.cheese .food-card-header { background: linear-gradient(135deg, #D4A84B, #B8922B); }
+        .food-card.charcuterie .food-card-header { background: linear-gradient(135deg, #8B4513, #5D2E0C); }
+        .food-card.flatbread .food-card-header { background: linear-gradient(135deg, #CD853F, #A0522D); }
+        .food-card.tapas .food-card-header { background: linear-gradient(135deg, #6B8E23, #4A6B1A); }
+        .food-card.pate .food-card-header { background: linear-gradient(135deg, #8B6914, #6B4F0F); }
+        .food-card.dessert .food-card-header { background: linear-gradient(135deg, #C71585, #8B0A50); }
+
+        .food-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .food-card .food-price {
+            font-size: 1rem;
+            font-weight: bold;
+            opacity: 0.9;
+        }
+
+        .food-card .food-origin {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 0.25rem;
+        }
+
+        .food-card-body {
+            padding: 1.25rem;
+        }
+
+        .food-card .food-type {
+            font-size: 0.85rem;
+            color: var(--burgundy);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .food-card .food-description {
+            color: var(--charcoal);
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .food-card .wine-pairings {
+            background: #f9f9f9;
+            padding: 0.75rem;
+            border-radius: 5px;
+            border-left: 3px solid var(--burgundy);
+        }
+
+        .food-card .wine-pairings-label {
+            font-size: 0.8rem;
+            color: var(--burgundy);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.25rem;
+        }
+
+        .food-card .wine-pairings-list {
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .food-pronunciation {
+            font-style: italic;
+            color: #888;
+            font-size: 0.85rem;
+        }
+
         /* Footer */
         footer {
             background: var(--charcoal);
@@ -500,6 +610,7 @@
 
     <nav>
         <button class="active" onclick="showSection('techsheets')">Tech Sheets</button>
+        <button onclick="showSection('food')">Food Menu</button>
         <button onclick="showSection('flashcards')">Flashcards</button>
         <button onclick="showSection('quickref')">Quick Reference</button>
     </nav>
@@ -517,6 +628,39 @@
 
             <div class="wine-grid" id="wineGrid">
                 <!-- Wine cards will be inserted here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Food Menu Section -->
+        <section id="food">
+            <h2 class="food-section-title">Cheese Selection</h2>
+            <div class="food-grid" id="cheeseGrid">
+                <!-- Cheese cards inserted by JavaScript -->
+            </div>
+
+            <h2 class="food-section-title">Charcuterie</h2>
+            <div class="food-grid" id="charcuterieGrid">
+                <!-- Charcuterie cards inserted by JavaScript -->
+            </div>
+
+            <h2 class="food-section-title">Flatbreads</h2>
+            <div class="food-grid" id="flatbreadGrid">
+                <!-- Flatbread cards inserted by JavaScript -->
+            </div>
+
+            <h2 class="food-section-title">Tapas & Dips</h2>
+            <div class="food-grid" id="tapasGrid">
+                <!-- Tapas cards inserted by JavaScript -->
+            </div>
+
+            <h2 class="food-section-title">Pate & Spreads</h2>
+            <div class="food-grid" id="pateGrid">
+                <!-- Pate cards inserted by JavaScript -->
+            </div>
+
+            <h2 class="food-section-title">Desserts</h2>
+            <div class="food-grid" id="dessertGrid">
+                <!-- Dessert cards inserted by JavaScript -->
             </div>
         </section>
 
@@ -621,7 +765,7 @@
                 pronunciation: "sha-TOH duh lah SHEZZ broo-YEE | Gamay: gah-MAY",
                 winemaker: "Château de la Chaize (owned by Groupe Castel since 2017). One of Beaujolais' largest and most historic estates, with a 17th-century château designed by the architect of Versailles.",
                 tasting: "Fresh red fruits (cherry, raspberry), light-bodied with silky tannins, floral notes (violet, peony), and a hint of granite minerality. Classic Beaujolais elegance with a slightly spicy finish.",
-                food: "Charcuterie, roast chicken, light pasta dishes, mild cheeses, terrine",
+                food: "Prosciutto di Parma, Black Pepper Salami, Saint Angel, Petit Basque, The Basque flatbread",
                 alcohol: "13%",
                 serving: "Slightly chilled (55-60°F / 13-15°C)",
                 notes: "Brouilly is the largest of the 10 Beaujolais Crus. The estate covers 99 hectares with vines averaging 40 years old on granite and pink porphyry soils."
@@ -637,7 +781,7 @@
                 pronunciation: "sha-TOH duh tree-NYOHN coat doo ROHN | Grenache: greh-NAHSH | Mourvèdre: moor-VED-ruh",
                 winemaker: "Famille Quiot - 5th generation winemakers. The Quiot family has been making wine in the Southern Rhône since 1748, now managing over 165 hectares.",
                 tasting: "Ripe dark fruits (blackberry, plum), spice (white pepper, clove), garrigue herbs (thyme, lavender, rosemary), medium body with soft tannins and a warm, lingering finish.",
-                food: "Grilled meats, lamb, Mediterranean dishes, aged cheeses, ratatouille",
+                food: "Chorizo, Salchichon De Bellota, Ewephoria, Mimolette, Tapenade",
                 alcohol: "14%",
                 serving: "Room temperature (60-65°F / 16-18°C)",
                 notes: "Garrigue refers to the wild herbs that grow in the Mediterranean scrubland and infuse Rhône wines with their aromatic character."
@@ -653,7 +797,7 @@
                 pronunciation: "doh-MEHN lay PAN boor-GUH-yuh | Cabernet Franc: cab-er-NAY FRAHNK",
                 winemaker: "Domaine Les Pins - Small family estate in the heart of Bourgueil. Traditional winemaking with minimal intervention.",
                 tasting: "Red bell pepper, raspberry, graphite, violet notes. Medium body with fresh acidity, earthy undertones, and characteristic pencil-lead minerality from the tuffeau limestone.",
-                food: "Pork rillettes, game birds, mushroom dishes, goat cheese (especially Sainte-Maure de Touraine)",
+                food: "Duck Rillettes, Pâté de Campagne, Black Truffle Goat, Petit Basque, Black Pepper Salami",
                 alcohol: "12.5%",
                 serving: "Slightly chilled (55-60°F / 13-15°C)",
                 notes: "Bourgueil sits on tuffeau (chalk) and gravel soils. Loire Cabernet Franc shows green pepper notes when cool, turning to raspberry when ripe. Best served slightly chilled."
@@ -669,7 +813,7 @@
                 pronunciation: "trays sah-PAHS mal-BEK",
                 winemaker: "Bodega 3SAPAS - A boutique winery in Mendoza's Uco Valley. The name means 'Three Toads' in Spanish, referencing a local legend.",
                 tasting: "Plum, blackberry, violet, and hints of cocoa and vanilla. Full-bodied with velvety tannins, juicy dark fruit, and a smooth, lingering finish.",
-                food: "Grilled steak (especially Argentine asado), BBQ, empanadas, hard cheeses",
+                food: "Salchichon De Bellota, Chorizo, Ewephoria, Mimolette, Red Wine Cheddar",
                 alcohol: "14%",
                 serving: "Room temperature (60-65°F / 16-18°C)",
                 notes: "Mendoza's high-altitude vineyards (900-1,500m) produce concentrated Malbec with intense color. The UV exposure at altitude creates thicker skins and deeper pigments."
@@ -685,7 +829,7 @@
                 pronunciation: "cab-er-NAY saw-vee-NYOHN | Petit Verdot: peh-TEE vair-DOH",
                 winemaker: "Long Valley Ranch Winery - Family-owned California producer focusing on sustainable viticulture.",
                 tasting: "Blackcurrant (cassis), dark cherry, vanilla, cedar, hints of eucalyptus and dark chocolate. Full-bodied with firm but approachable tannins and a long finish.",
-                food: "Prime rib, lamb chops, hearty stews, aged cheddar, grilled portobello",
+                food: "Bresaola, Red Wine Cheddar, Ewephoria, Blue d'Auvergne, Mimolette",
                 alcohol: "14.5%",
                 serving: "Room temperature (65°F / 18°C), consider decanting 30 min",
                 notes: "California Cabernet is known for its ripe, fruit-forward style with more obvious oak influence compared to Bordeaux. The warm climate produces higher alcohol and softer tannins."
@@ -701,7 +845,7 @@
                 pronunciation: "KOH-leh kor-vee-AH-noh mon-teh-pool-CHAH-noh dah-BROOD-zoh",
                 winemaker: "Colle Corviano - Part of the Fantini Group (Farnese Vini), one of Abruzzo's most respected wine producers, known for excellent value Italian wines.",
                 tasting: "Dark cherry, plum, dried herbs (oregano, thyme), earthy notes, hint of black pepper. Medium to full body with moderate tannins and good acidity.",
-                food: "Pizza, pasta with red sauce (especially arrabbiata), lamb, grilled vegetables, aged pecorino",
+                food: "Felino Salami, Prosciutto di Parma, Gruyere, The Basque flatbread, Antipasto Vegetable Blend",
                 alcohol: "13.5%",
                 serving: "Room temperature (60-65°F / 16-18°C)",
                 notes: "Abruzzo is on Italy's Adriatic coast. Montepulciano d'Abruzzo is one of Italy's best value reds - the grape gives deep color and soft, approachable tannins."
@@ -717,7 +861,7 @@
                 pronunciation: "fah-MEE-yuh boo-AY koo-VAY san-KWONT-weet | Bordeaux: bor-DOH",
                 winemaker: "Maison Bouey - Family négociant house established in 1821. The Cuvée 58 honors the year 1958 when the family moved to their current headquarters.",
                 tasting: "Red and black fruits (cherry, blackcurrant), subtle oak (toast, vanilla), smooth tannins, hints of tobacco, cedar, and baking spice. Elegant and balanced.",
-                food: "Beef, duck confit, lamb, mature cheeses, mushroom dishes",
+                food: "Duck Rillettes, Soppressata Salame w/ Burgundy, Mimolette, Red Wine Cheddar, Pâté de Campagne",
                 alcohol: "13.5%",
                 serving: "Room temperature (64°F / 18°C)",
                 notes: "Bordeaux blends are categorized by 'bank' - Right Bank (Merlot-dominant, softer) vs Left Bank (Cabernet-dominant, more structured). This is Right Bank style."
@@ -733,7 +877,7 @@
                 pronunciation: "ZIN-fan-dell | Petite Sirah: peh-TEET see-RAH",
                 winemaker: "Three Wine Company - Founded by Matt Cline, from the famous Cline family of California Zinfandel pioneers. Focuses on old vine heritage vineyards.",
                 tasting: "Jammy blackberry, raspberry, black pepper, baking spices (cinnamon, clove), hints of bramble and licorice. Bold and rich with high alcohol and a long, warm finish.",
-                food: "BBQ ribs, burgers, spicy sausage, blue cheese, chocolate desserts",
+                food: "Hot Coppa, Chorizo, Blue d'Auvergne, The Mighty Spicy flatbread, Chocolate Truffle",
                 alcohol: "15%",
                 serving: "Slightly below room temp (62°F / 17°C)",
                 notes: "Contra Costa County has sandy soils and ungrafted old vines (phylloxera-resistant). These 'heritage' vines produce intense, concentrated wines. Zinfandel is genetically identical to Croatian Crljenak and Italian Primitivo."
@@ -749,7 +893,7 @@
                 pronunciation: "tehr-BOHN | Pinot Noir: PEE-noh NWAHR",
                 winemaker: "Terrebonne Estate - Small-production winery on California's cool Sonoma Coast, where fog influence creates ideal conditions for Pinot Noir.",
                 tasting: "Red cherry, strawberry, earthy mushroom, subtle oak (vanilla, baking spice), hints of dried rose and forest floor. Light to medium body with silky texture.",
-                food: "Salmon, duck, mushroom risotto, soft cheeses like Brie, roasted beets",
+                food: "Duck Rillettes, Prosciutto di Parma, Saint Angel, Black Truffle Goat, Foie Gras with Black Truffle",
                 alcohol: "13.5%",
                 serving: "Slightly chilled (55-60°F / 13-15°C)",
                 notes: "Pinot Noir is called the 'heartbreak grape' because it's difficult to grow. It needs cool climates but enough sun to ripen. Sonoma Coast fog provides this balance."
@@ -765,7 +909,7 @@
                 pronunciation: "mahs zhah-NAY-yuh say-DUH | Côtes du Roussillon: coat doo roo-see-YOHN | Carignan: cah-ree-NYAHN",
                 winemaker: "François Lurton - Part of the famous Lurton wine family from Bordeaux. Mas Janeil is their Roussillon estate, practicing organic viticulture.",
                 tasting: "Dark fruits (blackberry, black cherry), Mediterranean herbs (thyme, rosemary), licorice, black olive, spice. Full-bodied with rustic, grippy tannins and garrigue complexity.",
-                food: "Cassoulet, grilled lamb, hearty stews, aged gouda, tapenade",
+                food: "Chorizo, Salchichon De Bellota, Ewephoria, Tapenade, The Mighty Spicy flatbread",
                 alcohol: "14.5%",
                 serving: "Room temperature (64°F / 18°C), decant 30 min",
                 notes: "Roussillon is France's sunniest wine region, near the Spanish border. The Tramontane wind and schist soils create concentrated, powerful wines. 'C2' indicates their Côtes du Roussillon cuvée."
@@ -780,8 +924,8 @@
                 country: "Italy",
                 pronunciation: "TEH-reh dee BOH kee-AHN-tee | Sangiovese: san-joh-VAY-zeh | Canaiolo: kah-nah-YOH-loh",
                 winemaker: "Terre di Bo - Small Tuscan producer in the Chianti hills, practicing traditional winemaking methods with indigenous yeasts.",
-                tasting: "Sour cherry (amarena), tomato leaf, dried herbs (oregano), leather, hints of tobacco. Medium body with bright acidity and dusty, fine-grained tannins.",
-                food: "Tomato-based pasta, pizza margherita, grilled meats, pecorino cheese, bruschetta",
+                tasting: "Intense bright red color. Red fruits, blackberries, black currant with pleasant vanilla traces. Well-balanced with softness and acidity, harmonious, savory, slightly tannic yet soft and mellow.",
+                food: "Felino Salami, Prosciutto di Parma, Gruyere, Red Wine Cheddar, Antipasto Vegetable Blend",
                 alcohol: "13%",
                 serving: "Slightly cool room temp (60-64°F / 16-18°C)",
                 notes: "Chianti DOCG requires minimum 80% Sangiovese. The high acidity is intentional - it's designed to pair with Tuscany's olive oil-rich, tomato-based cuisine."
@@ -797,7 +941,7 @@
                 pronunciation: "air-MAH-nohs loor-TOHN TOH-roh tem-prah-NEE-yoh | Tinta de Toro: TEEN-tah deh TOH-roh",
                 winemaker: "Hermanos Lurton (Lurton Brothers) - Jacques and François Lurton, famous French winemakers who brought Bordeaux techniques to Spain's rugged Toro region.",
                 tasting: "Blackberry, plum, leather, tobacco, earthy spice, hints of licorice and dark chocolate. Full-bodied with robust, chewy tannins and a powerful finish.",
-                food: "Lamb, beef stew, cured meats (jamón ibérico), manchego cheese, hearty bean dishes",
+                food: "Chorizo, Salchichon De Bellota, Ewephoria, Mimolette, Black Truffle Salami",
                 alcohol: "14.5%",
                 serving: "Room temperature (65°F / 18°C), decant 1 hour",
                 notes: "Toro has extreme temperatures (hot summers, cold winters) and sandy soils that create bolder, more tannic wines than Rioja. Vines here survived phylloxera due to the sandy soil."
@@ -813,7 +957,7 @@
                 pronunciation: "boo-ZAY | Cabernet Franc: cab-er-NAY FRAHNK",
                 winemaker: "Les Vignerons de Buzet - Award-winning cooperative of 180 growers, known for sustainable practices and excellent value.",
                 tasting: "Plum, blackcurrant, subtle oak, herbal notes (bay leaf), hints of violet. Medium body with balanced, supple tannins and fresh acidity.",
-                food: "Duck confit, cassoulet, grilled meats, semi-hard cheeses, charcuterie",
+                food: "Duck Rillettes, Black Pepper Salami, Red Wine Cheddar, Pâté de Campagne, Soppressata Salame w/ Burgundy",
                 alcohol: "13.5%",
                 serving: "Room temperature (62°F / 17°C)",
                 notes: "Buzet makes Bordeaux-style wines at a fraction of the price. Located between Bordeaux and Toulouse, it was only granted its own AOC in 1973 after centuries of being sold as 'Bordeaux.'"
@@ -829,7 +973,7 @@
                 pronunciation: "sha-TOH rock may-NAHR bor-DOH soo-peh-ree-UHR",
                 winemaker: "Château Roc Meynard - Family estate in the Bordeaux Supérieur appellation, practicing sustainable viticulture on clay-limestone soils.",
                 tasting: "Red fruits (raspberry, red currant), plum, subtle earthy notes (wet stone), gentle oak, hints of herbs and cedar. Medium body with soft, approachable tannins.",
-                food: "Roast beef, lamb, duck, aged cheeses, beef bourguignon",
+                food: "Soppressata Salame w/ Burgundy, Duck Rillettes, Mimolette, Red Wine Cheddar, Ewephoria",
                 alcohol: "13.5%",
                 serving: "Room temperature (64°F / 18°C)",
                 notes: "Bordeaux Supérieur has stricter requirements than basic Bordeaux AOC: lower yields, higher alcohol, and longer aging. It's often the best value tier in Bordeaux."
@@ -845,7 +989,7 @@
                 pronunciation: "AIR-koh-leh bar-BEH-rah pee-ay-MOHN-tay",
                 winemaker: "Ercole Wines - Named after Ercole (Hercules), referencing the strength and character of Piedmontese wines. Part of the Braida di Giacomo Bologna legacy.",
                 tasting: "Bright cherry (morello), raspberry, dried herbs, hints of almond and black pepper. Medium body with high acidity, low tannins, and a refreshing, tangy finish.",
-                food: "Pizza, pasta (especially with tomato sauce), risotto, prosciutto, aged parmesan, truffle dishes",
+                food: "Prosciutto di Parma, Felino Salami, Gruyere, Black Truffle Salami, The Basque flatbread",
                 alcohol: "13%",
                 serving: "Slightly chilled (55-60°F / 13-15°C)",
                 notes: "Barbera is Piedmont's most-planted grape (ahead of Nebbiolo). Its high acidity makes it perfect for rich, fatty Italian cuisine. Traditionally fermented in steel to preserve freshness."
@@ -861,7 +1005,7 @@
                 pronunciation: "es-KOO-doh ROH-hoh car-men-YAIR",
                 winemaker: "Baron Philippe de Rothschild Chile - The Chilean venture of the famous Bordeaux family (Mouton Rothschild). 'Escudo Rojo' means 'Red Shield' in Spanish.",
                 tasting: "Green bell pepper, dark cherry, chocolate, coffee, smoke, hints of eucalyptus. Medium to full body with soft, velvety tannins and a savory finish.",
-                food: "Grilled meats, BBQ, Mexican cuisine, smoky dishes, empanadas",
+                food: "Chorizo, Hot Coppa, Smoked Chili Cheddar, The Mighty Spicy flatbread, Pimento Cheese Dip",
                 alcohol: "14%",
                 serving: "Room temperature (62-65°F / 17-18°C)",
                 notes: "The green bell pepper note is from pyrazines - a signature of Carmenère (and Cab Franc). Chile's warm days and cool nights are ideal for this grape. Carmenère needs a long growing season to fully ripen."
@@ -879,7 +1023,7 @@
                 pronunciation: "PEEZ-por-ter GOLT-tropf-khen REEZ-ling kah-bee-NET | Prädikat: PRAY-dee-kaht",
                 winemaker: "Weingut St. Christopher - Traditional Mosel producer in Piesport. The Goldtropfchen vineyard faces south on steep slate slopes above the Mosel River.",
                 tasting: "Green apple, white peach, lime, slate/wet stone minerality. Off-dry (slight sweetness) with vibrant acidity and delicate floral notes. Light and refreshing.",
-                food: "Spicy Asian cuisine (Thai, Vietnamese), sushi, seafood, light appetizers, fruit desserts",
+                food: "Pimento Cheese Dip, Hummus, Maple Bourbon Goat, Lemoncello Tartufo, Exotic Bomba",
                 alcohol: "8%",
                 serving: "Well chilled (45-50°F / 7-10°C)",
                 notes: "Goldtropfchen means 'golden droplets' - one of Germany's finest vineyard sites. Low alcohol (7-9%) is typical for Kabinett. The residual sugar balances the high acidity. Blue slate soil gives characteristic minerality."
@@ -895,7 +1039,7 @@
                 pronunciation: "lah peh-TEET ROHSH saw-vee-NYOHN BLAHN | Touraine: too-REHN",
                 winemaker: "Les Vignerons de la Noue - Respected cooperative in Touraine, producing terroir-driven Loire Valley wines with sustainable practices.",
                 tasting: "Citrus (lemon, grapefruit), white flowers, green apple, flinty/chalky minerality. Crisp acidity with a clean, refreshing finish and subtle herbaceous notes.",
-                food: "Oysters, goat cheese (Crottin de Chavignol), green salads, light fish dishes, asparagus",
+                food: "Black Truffle Goat, Hummus, Prosciutto di Parma, The Veg flatbread, Petit Basque",
                 alcohol: "12.5%",
                 serving: "Well chilled (45-50°F / 7-10°C)",
                 notes: "La Petite Roche means 'The Little Rock' - referring to the limestone/flint (silex) soils that give Loire Sauvignon its distinctive flinty, mineral character."
@@ -911,7 +1055,7 @@
                 pronunciation: "shar-doh-NAY",
                 winemaker: "William Church Winery - Woodinville-based winery. 'Tattoo Girl' is their approachable, artistically-labeled line celebrating Pacific Northwest culture.",
                 tasting: "Apple, pear, tropical fruits (pineapple, mango), hints of vanilla, butter, and toasted oak. Medium body with balanced acidity and a creamy texture.",
-                food: "Roast chicken, creamy pasta (alfredo, carbonara), lobster, mild cheeses, corn chowder",
+                food: "Saint Angel, Gruyere, Prosciutto di Parma, Honey Bee Gouda, Foie Gras with Black Truffle",
                 alcohol: "13.5%",
                 serving: "Chilled (50-55°F / 10-13°C)",
                 notes: "Columbia Valley has warm days and cool nights, creating balanced Chardonnay. Washington State is now the second-largest wine producer in the US after California."
@@ -927,7 +1071,7 @@
                 pronunciation: "lay SHAHM duh KLOH sahn-SEHR",
                 winemaker: "Domaine Les Champs de Clos - Small family domaine in Sancerre, farming organically on silex (flint) and limestone soils.",
                 tasting: "Grapefruit, lime, gooseberry, flint, and chalk. Bone-dry with razor-sharp acidity, mineral intensity, and a long, clean finish. Classic Sancerre precision.",
-                food: "Goat cheese (especially Crottin de Chavignol from nearby), oysters, asparagus, seafood, ceviche",
+                food: "Black Truffle Goat, Petit Basque, Hummus, The Veg flatbread, Bresaola",
                 alcohol: "13%",
                 serving: "Well chilled (45-50°F / 7-10°C)",
                 notes: "Sancerre and Pouilly-Fumé (across the river) are the world's most famous Sauvignon Blanc regions. Sancerre has three soil types: silex (flint), limestone (Kimmeridgian), and clay - each giving different character."
@@ -943,7 +1087,7 @@
                 pronunciation: "VEE-lah NOR-ee-ah peek-POOL duh pee-NAY | Languedoc: lahn-guh-DOK",
                 winemaker: "Villa Noria - Estate in the Picpoul de Pinet appellation near the Étang de Thau lagoon, where oysters are farmed alongside the vineyards.",
                 tasting: "Lemon, lime, green apple, white flowers, saline/briny finish. Light body with zesty, mouthwatering acidity and a clean, mineral finish.",
-                food: "Oysters (especially Bouzigues oysters!), mussels, fried fish, Mediterranean seafood, ceviche",
+                food: "Hummus, Tapenade, Antipasto Vegetable Blend, Petit Basque, Bresaola",
                 alcohol: "13%",
                 serving: "Very cold (40-45°F / 4-7°C)",
                 notes: "Picpoul de Pinet is the Languedoc's answer to Muscadet. The vines grow next to the Thau lagoon oyster beds - the perfect local pairing. France's most-exported white wine appellation."
@@ -959,7 +1103,7 @@
                 pronunciation: "MON-teh DEL-yee ahn-JEH-lee PEE-noh GREE-joh",
                 winemaker: "Monte degli Angeli (Mountain of Angels) - Northeastern Italian producer in the Delle Venezie region, using modern winemaking to preserve freshness.",
                 tasting: "Pear, apple, citrus (lemon), almond notes. Light and crisp with subtle minerality, clean finish, and refreshing acidity.",
-                food: "Light salads, seafood, antipasti, mild cheeses, prosciutto e melone",
+                food: "Prosciutto di Parma, Bresaola, Saint Angel, Hummus, Antipasto Vegetable Blend",
                 alcohol: "12%",
                 serving: "Well chilled (45-50°F / 7-10°C)",
                 notes: "Delle Venezie is a large IGT covering Veneto, Friuli, and Trentino. Italian Pinot Grigio is typically lighter and more neutral than Alsatian Pinot Gris, which is richer and more aromatic."
@@ -977,7 +1121,7 @@
                 pronunciation: "FOL-ee by mas-kah-ROHN roh-ZAY | Cinsault: san-SOH | Provence: proh-VAHNS",
                 winemaker: "Château Mascaronne - Owned by Tom Bove, with winemaking by celebrated consultant Bertrand Léon. The estate focuses exclusively on premium Provence rosé.",
                 tasting: "Strawberry, white peach, citrus (pink grapefruit), herbs de Provence (thyme, lavender). Pale salmon color, dry with refreshing acidity and elegant minerality.",
-                food: "Salads (Niçoise!), grilled fish, Mediterranean cuisine, light appetizers, sushi",
+                food: "Prosciutto di Parma, Black Pepper Salami, Hummus, Tapenade, The Veg flatbread",
                 alcohol: "13%",
                 serving: "Very cold (40-45°F / 4-7°C)",
                 notes: "Provence rosé gets its pale color from brief skin contact (2-12 hours) using the direct press method. Pale color = quality in Provence. The region produces 40% of France's rosé."
@@ -995,19 +1139,348 @@
                 pronunciation: "lay foo-MAY BLAHN-sh oh-RAHNJ loor-TOHN | Pays d'Oc: pay-ee DOCK",
                 winemaker: "François Lurton - Pioneering French winemaker who works globally. Les Fumées Blanches ('The White Smokes') is his innovative Languedoc project.",
                 tasting: "Dried apricot, honey, orange peel, nutty notes (hazelnut), tannic texture like tea. Full-bodied with unique complexity, oxidative notes, and a long, savory finish.",
-                food: "Rich seafood, Asian cuisine (Korean, Japanese), curry, aged cheeses, charcuterie, Moroccan tagines",
+                food: "Ewephoria, Mimolette, Black Truffle Salami, Foie Gras with Black Truffle, Chorizo",
                 alcohol: "12.5%",
                 serving: "Lightly chilled (50-55°F / 10-13°C)",
                 notes: "Orange wine is the 'fourth color' of wine. Made by fermenting white grapes with their skins (7-14+ days), extracting tannins, color, and texture. This technique originated 8,000 years ago in Georgia using clay qvevri vessels."
             }
         ];
 
+        // Food Data
+        const cheeses = [
+            {
+                name: "Black Truffle Goat",
+                price: "$8",
+                origin: "France",
+                type: "Goat, Soft and Ripened",
+                description: "A luxurious French goat cheese infused with earthy black truffle. Creamy, tangy, and aromatic with an unmistakable truffle flavor that lingers on the palate.",
+                pronunciation: "truh-FULL",
+                pairings: "Domaine Les Pins Bourgueil, Terrebonne Pinot Noir, La Petite Roche, Sancerre"
+            },
+            {
+                name: "Maple Bourbon Goat",
+                price: "$8",
+                origin: "Wisconsin, USA",
+                type: "Goat, Sweet, Fruity, Tangy",
+                description: "American artisan goat cheese with sweet maple and warm bourbon notes. The tangy goat milk base balances the sweetness perfectly. A unique sweet-savory experience.",
+                pairings: "St. Christopher Riesling Kabinett, pairs beautifully with off-dry whites"
+            },
+            {
+                name: "Saint Angel",
+                price: "$8",
+                origin: "France",
+                type: "Cow, Soft, Triple Crème",
+                pronunciation: "san ahn-ZHEL",
+                description: "An indulgent triple-crème cheese (75% butterfat) from Burgundy. Incredibly rich, buttery, and cloud-like with a bloomy rind. Melts on the tongue like butter.",
+                pairings: "Brouilly, Terrebonne Pinot Noir, Tattoo Girl Chardonnay, Monte degli Angeli Pinot Grigio"
+            },
+            {
+                name: "Ewephoria",
+                price: "$8",
+                origin: "Netherlands",
+                type: "Sheep, Firm, Aged Gouda",
+                pronunciation: "yoo-FOR-ee-ah",
+                description: "A sheep's milk Gouda aged 9+ months. Sweet, nutty, with butterscotch and caramel notes. Crunchy protein crystals add texture. The name is a play on 'euphoria.'",
+                pairings: "Côtes du Rhône, 3SAPAS Malbec, Mas Janeil C2, Toro Tempranillo, Orange Lurton"
+            },
+            {
+                name: "Smoked Chili Cheddar",
+                price: "$8",
+                origin: "Vermont, USA",
+                type: "Cow, Firm, Habanero",
+                description: "Sharp Vermont cheddar with smoky undertones and a habanero kick. The heat builds gradually while the smoke adds depth. Bold and memorable.",
+                pairings: "Escudo Rojo Carmenère, The Mighty Spicy flatbread - for those who like heat!"
+            },
+            {
+                name: "Mimolette",
+                price: "$8",
+                origin: "France",
+                type: "Cow, Firm, Sharp, Aged",
+                pronunciation: "mee-moh-LET",
+                description: "A French cheese with a distinctive bright orange interior (from annatto). Aged versions develop nutty, butterscotch flavors and a slightly crumbly texture. Similar to aged Gouda.",
+                pairings: "Côtes du Rhône, 3SAPAS Malbec, Cuvée 58, Château Roc Meynard, Orange Lurton"
+            },
+            {
+                name: "Blue d'Auvergne",
+                price: "$8",
+                origin: "France",
+                type: "Cow, Semi-Firm, Tangy Blue",
+                pronunciation: "bluh doh-VAIRN-yuh",
+                description: "A classic French blue from the volcanic Auvergne region. Creamy with bold, tangy blue veins. Less intense than Roquefort, more approachable. Spicy and piquant.",
+                pairings: "Long Valley Ranch Cabernet, Old Vines Zinfandel - bold wines for bold cheese"
+            },
+            {
+                name: "Red Wine Cheddar",
+                price: "$8",
+                origin: "Ireland",
+                type: "Cow, Semi-Firm, Fruity",
+                description: "Irish cheddar soaked in red wine, creating a beautiful purple marbled rind. Creamy, slightly tangy with subtle wine-infused fruity notes. Stunning presentation.",
+                pairings: "3SAPAS Malbec, Cuvée 58, Buzet, Château Roc Meynard, Chianti"
+            },
+            {
+                name: "Petit Basque",
+                price: "$8",
+                origin: "France",
+                type: "Sheep, Semi-Firm, Mild",
+                pronunciation: "peh-TEE BASK",
+                description: "A mild, approachable sheep's milk cheese from the French Pyrenees. Nutty, slightly sweet with a smooth, buttery texture. Great for those new to sheep's milk cheese.",
+                pairings: "Brouilly, Bourgueil, La Petite Roche, Sancerre, Picpoul de Pinet"
+            },
+            {
+                name: "Gruyère",
+                price: "$8",
+                origin: "Switzerland",
+                type: "Cow, Semi-Firm, Swiss",
+                pronunciation: "groo-YAIR",
+                description: "The king of Swiss cheeses. Aged 5+ months, it develops complex nutty, earthy flavors with a slight sweetness. Perfect for melting but equally delicious on a board.",
+                pairings: "Chianti, Montepulciano d'Abruzzo, Ercole Barbera, Tattoo Girl Chardonnay"
+            },
+            {
+                name: "Honey Bee Gouda",
+                price: "$8",
+                origin: "Netherlands",
+                type: "Goat, Firm, Honey Infused",
+                description: "A Dutch goat's milk Gouda with clover honey crystals throughout. Sweet, tangy, and utterly unique. The honey complements the goat's milk tanginess beautifully.",
+                pairings: "Tattoo Girl Chardonnay, pairs well with sweeter/richer whites"
+            }
+        ];
+
+        const charcuterie = [
+            {
+                name: "Salchichón De Bellota",
+                price: "$12",
+                origin: "Spain",
+                type: "Ibérico Salami, Acorn-Fed",
+                pronunciation: "sal-chee-CHOHN deh beh-YOH-tah",
+                description: "The pinnacle of Spanish cured meats. Made from acorn-fed (bellota) Ibérico pigs, which roam oak forests eating only acorns. Rich, nutty, with a melt-in-your-mouth texture. Worth every penny.",
+                pairings: "Côtes du Rhône, 3SAPAS Malbec, Mas Janeil C2, Toro Tempranillo"
+            },
+            {
+                name: "Felino Salami",
+                price: "$8",
+                origin: "Italy",
+                type: "Peppercorn and Red Wine, Pork",
+                pronunciation: "feh-LEE-noh",
+                description: "A classic Italian salami from Parma, seasoned with peppercorns and red wine. Delicate, mildly sweet with a silky texture. Named after the town of Felino near Parma.",
+                pairings: "Chianti, Montepulciano d'Abruzzo, Ercole Barbera - classic Italian pairings"
+            },
+            {
+                name: "Black Pepper Salami",
+                price: "$8",
+                origin: "France",
+                type: "Rolled in Black Pepper, Pork",
+                description: "French dry-cured salami with a generous black pepper crust. The pepper adds a spicy bite that contrasts the fatty, savory pork interior. Rustic and satisfying.",
+                pairings: "Brouilly, Bourgueil, Buzet, Rosé - French wines for French salami"
+            },
+            {
+                name: "Bresaola",
+                price: "$8",
+                origin: "Italy",
+                type: "Italian Lean Cured Beef",
+                pronunciation: "breh-ZOW-lah",
+                description: "Air-dried, salted beef from Lombardy. Deep ruby red, lean, and delicate with a subtle, slightly sweet flavor. Often served with olive oil, lemon, and arugula.",
+                pairings: "Long Valley Ranch Cabernet, Sancerre, Picpoul de Pinet, Pinot Grigio"
+            },
+            {
+                name: "Prosciutto di Parma",
+                price: "$8",
+                origin: "Italy",
+                type: "Italian Cured Pork Ham",
+                pronunciation: "proh-SHOO-toh dee PAR-mah",
+                description: "The world's most famous cured ham. Aged 12+ months in Parma, where the sea air and tradition create silky, nutty, sweet slices of perfection. DOP protected.",
+                pairings: "Brouilly, Chianti, Ercole Barbera, La Petite Roche, Pinot Grigio, Rosé"
+            },
+            {
+                name: "Hot Coppa",
+                price: "$8",
+                origin: "Italy",
+                type: "Cured Spicy Pork, Paprika",
+                pronunciation: "KOH-pah",
+                description: "Dry-cured pork shoulder (capocollo) with hot paprika. Marbled with fat, spicy, and deeply savory. The heat is present but not overwhelming. A spice-lover's delight.",
+                pairings: "Old Vines Zinfandel, Escudo Rojo Carmenère - bold wines for spicy meat"
+            },
+            {
+                name: "Soppressata Salame w/ Burgundy",
+                price: "$8",
+                origin: "Italy",
+                type: "Italian Dried Salami infused with Burgundy wine",
+                pronunciation: "soh-preh-SAH-tah",
+                description: "Traditional Italian soppressata infused with Burgundy wine. Coarse-ground, well-marbled, with wine adding fruity depth. The wine tenderizes and flavors the meat beautifully.",
+                pairings: "Cuvée 58, Buzet, Château Roc Meynard - Bordeaux-style wines complement the Burgundy"
+            },
+            {
+                name: "Chorizo",
+                price: "$8",
+                origin: "Spain",
+                type: "Spanish Dried Salami, Paprika",
+                pronunciation: "choh-REE-thoh (Spanish) / choh-REE-zoh",
+                description: "Spanish dry-cured sausage with smoked paprika (pimentón). Deep red color, smoky, slightly spicy. The signature taste of Spain. Not to be confused with Mexican fresh chorizo.",
+                pairings: "Côtes du Rhône, 3SAPAS Malbec, Mas Janeil C2, Toro Tempranillo, Carmenère, Orange Lurton"
+            },
+            {
+                name: "Black Truffle Salami",
+                price: "$11",
+                origin: "France",
+                type: "Pork, Earthy",
+                description: "French artisan salami studded with real black truffle pieces. Rich pork flavor elevated by earthy, aromatic truffle. A luxurious upgrade to any charcuterie board.",
+                pairings: "Toro Tempranillo, Ercole Barbera, Orange Lurton - wines that match its intensity"
+            }
+        ];
+
+        const flatbreads = [
+            {
+                name: "The Basque",
+                price: "$15",
+                type: "Fig Jam, Black Truffle Goat, Prosciutto, Arugula",
+                description: "Sweet fig jam meets earthy truffle goat cheese, topped with silky prosciutto and peppery arugula. A perfect balance of sweet, savory, and earthy. Our most popular flatbread.",
+                pairings: "Brouilly, Montepulciano d'Abruzzo, Ercole Barbera"
+            },
+            {
+                name: "The Mighty Spicy",
+                price: "$14",
+                type: "Smoked Chili Cheddar, Chorizo, Mushroom, Olives",
+                description: "For heat-seekers! Spicy cheddar and smoky chorizo with earthy mushrooms and briny olives. Bold, spicy, and deeply satisfying. Bring water.",
+                pairings: "Old Vines Zinfandel, Mas Janeil C2, Escudo Rojo Carmenère"
+            },
+            {
+                name: "The Veg",
+                price: "$14",
+                type: "Gruyère, Sun Dried Tomatoes, Olives, Arugula",
+                description: "Nutty Gruyère with sweet sun-dried tomatoes, briny olives, and fresh arugula. Vegetarian but never boring. Mediterranean-inspired and utterly delicious.",
+                pairings: "La Petite Roche, Sancerre, Rosé"
+            }
+        ];
+
+        const tapas = [
+            {
+                name: "Tapenade",
+                price: "$9",
+                type: "Olive Dip",
+                pronunciation: "TAH-pen-ahd",
+                description: "Classic Provençal olive spread made from black olives, capers, anchovies, and olive oil. Briny, savory, and intensely Mediterranean. Perfect with crusty bread.",
+                pairings: "Côtes du Rhône, Mas Janeil C2, Rosé, Picpoul de Pinet"
+            },
+            {
+                name: "Hummus",
+                price: "$7",
+                type: "Chickpea Dip",
+                description: "Creamy, garlicky chickpea dip with tahini and lemon. A crowd-pleaser that goes with almost everything. Smooth, tangy, and utterly satisfying.",
+                pairings: "Riesling, La Petite Roche, Sancerre, Picpoul de Pinet, Pinot Grigio, Rosé"
+            },
+            {
+                name: "Pimento Cheese Dip",
+                price: "$7",
+                type: "with Jalapeño, Made Locally",
+                description: "A Southern classic with a kick! Sharp cheddar, roasted pimentos, and fresh jalapeño made by a local producer. Creamy, cheesy, and spicy. Pairs great with crackers.",
+                pairings: "Riesling, Escudo Rojo Carmenère - the sweetness of Riesling balances the heat"
+            },
+            {
+                name: "Antipasto Vegetable Blend",
+                price: "$6",
+                type: "Assortment of Pickled Vegetables",
+                pronunciation: "ahn-tee-PAH-stoh",
+                description: "Italian-style pickled vegetables including artichokes, peppers, and more. Tangy, crunchy, and bright. A refreshing palate cleanser between rich bites.",
+                pairings: "Chianti, Montepulciano d'Abruzzo, Picpoul de Pinet, Pinot Grigio"
+            }
+        ];
+
+        const pates = [
+            {
+                name: "Duck Rillettes",
+                price: "$11",
+                origin: "France",
+                type: "Duck Confit Pâté",
+                pronunciation: "ree-YEHT",
+                description: "Shredded duck confit slowly cooked in its own fat until silky and spreadable. Rich, deeply savory, with a rustic texture. A French bistro classic.",
+                pairings: "Bourgueil, Cuvée 58, Buzet, Château Roc Meynard, Terrebonne Pinot Noir"
+            },
+            {
+                name: "Pâté de Campagne",
+                price: "$10",
+                origin: "France",
+                type: "Pork, Country Style",
+                pronunciation: "pah-TAY duh kahm-PAHN-yuh",
+                description: "Rustic French country pâté made from coarsely ground pork with herbs and spices. Dense, meaty, and earthy. The everyday pâté of the French countryside.",
+                pairings: "Bourgueil, Cuvée 58, Buzet - Southwestern French wines"
+            },
+            {
+                name: "Foie Gras with Black Truffle",
+                price: "$13",
+                origin: "France",
+                type: "Goose Liver with Black Truffles",
+                pronunciation: "fwah GRAH",
+                description: "The ultimate luxury. Silky goose liver pâté studded with black truffle. Buttery, rich, and incredibly decadent. A truly special experience. Serve with toast points.",
+                pairings: "Terrebonne Pinot Noir, Tattoo Girl Chardonnay, Orange Lurton"
+            }
+        ];
+
+        const desserts = [
+            {
+                name: "Lemoncello Tartufo",
+                price: "$8",
+                type: "Lemon Ice Cream with Lemon Confit",
+                pronunciation: "leh-mon-CHEL-oh tar-TOO-foh",
+                description: "Italian frozen dessert with creamy lemon ice cream, candied lemon confit, and a boozy limoncello kick. Bright, refreshing, and the perfect palate cleanser.",
+                pairings: "St. Christopher Riesling Kabinett - sweet pairs with sweet"
+            },
+            {
+                name: "Chocolate Truffle",
+                price: "$15",
+                type: "Assortment of 6 Flavors",
+                description: "A curated selection of six artisan chocolate truffles in rotating flavors. Rich, velvety ganache in a thin chocolate shell. Pure indulgence in every bite.",
+                pairings: "Old Vines Zinfandel - the bold fruit complements chocolate beautifully"
+            },
+            {
+                name: "Exotic Bomba",
+                price: "$12",
+                type: "Mango, Passion Fruit & Raspberry Sorbetta, coated in White Chocolate",
+                pronunciation: "BOM-bah",
+                description: "A tropical explosion! Three layers of exotic fruit sorbetto encased in white chocolate. Bright, fruity, refreshing, and visually stunning.",
+                pairings: "St. Christopher Riesling Kabinett - off-dry Riesling loves tropical fruit"
+            }
+        ];
+
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
             renderWineCards();
+            renderFoodCards();
             renderQuickRef();
             initializeFlashcards();
         });
+
+        // Render Food Cards
+        function renderFoodCards() {
+            renderFoodCategory('cheeseGrid', cheeses, 'cheese');
+            renderFoodCategory('charcuterieGrid', charcuterie, 'charcuterie');
+            renderFoodCategory('flatbreadGrid', flatbreads, 'flatbread');
+            renderFoodCategory('tapasGrid', tapas, 'tapas');
+            renderFoodCategory('pateGrid', pates, 'pate');
+            renderFoodCategory('dessertGrid', desserts, 'dessert');
+        }
+
+        function renderFoodCategory(gridId, items, category) {
+            const grid = document.getElementById(gridId);
+            grid.innerHTML = items.map(item => `
+                <div class="food-card ${category}">
+                    <div class="food-card-header">
+                        <h3>${item.name}</h3>
+                        <div class="food-price">${item.price}</div>
+                        ${item.origin ? `<div class="food-origin">${item.origin}</div>` : ''}
+                    </div>
+                    <div class="food-card-body">
+                        <div class="food-type">${item.type}</div>
+                        ${item.pronunciation ? `<div class="food-pronunciation">"${item.pronunciation}"</div>` : ''}
+                        <div class="food-description">${item.description}</div>
+                        ${item.pairings ? `
+                        <div class="wine-pairings">
+                            <div class="wine-pairings-label">Wine Pairings</div>
+                            <div class="wine-pairings-list">${item.pairings}</div>
+                        </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
 
         // Section Navigation
         function showSection(sectionId) {
