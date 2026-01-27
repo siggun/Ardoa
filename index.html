@@ -1022,11 +1022,17 @@
             font-style: italic;
         }
 
-        /* Print Styles */
+        /* Print Styles - Ink efficient, compact */
         @media print {
+            * {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
             body {
                 background: white;
-                font-size: 10pt;
+                font-size: 8pt;
+                line-height: 1.3;
             }
 
             header, nav, footer, .print-intro, .filter-bar, .quiz-settings, .flashcard-controls {
@@ -1051,53 +1057,128 @@
                 display: block !important;
             }
 
-            .print-cards-grid {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.75rem;
-            }
-
-            .print-card {
-                box-shadow: none;
-                border: 1px solid #ddd;
-                page-break-inside: avoid;
-                break-inside: avoid;
-            }
-
-            .print-card-header {
-                padding: 0.5rem 0.75rem;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-
-            .print-card-body {
-                padding: 0.75rem;
-            }
-
-            .print-card h3 {
-                font-size: 0.95rem;
-            }
-
-            .print-field {
-                margin-bottom: 0.5rem;
-            }
-
-            .print-label {
-                font-size: 0.7rem;
-            }
-
-            .print-value {
-                font-size: 0.8rem;
-            }
-
             .print-category-title {
-                font-size: 1.2rem;
-                page-break-before: always;
-                margin-top: 0;
+                font-size: 10pt;
+                font-weight: bold;
+                border-bottom: 1px solid #000;
+                margin: 8pt 0 4pt 0;
+                padding-bottom: 2pt;
+                page-break-after: avoid;
             }
 
             .print-category-title:first-of-type {
-                page-break-before: avoid;
+                margin-top: 0;
+            }
+
+            .print-cards-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6pt;
+            }
+
+            .print-card {
+                border: 0.5pt solid #999;
+                page-break-inside: avoid;
+                break-inside: avoid;
+                background: white !important;
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            .print-card-header {
+                background: none !important;
+                color: black !important;
+                padding: 3pt 5pt;
+                border-bottom: 0.5pt solid #999;
+            }
+
+            .print-card.red .print-card-header,
+            .print-card.white .print-card-header,
+            .print-card.rose .print-card-header,
+            .print-card.orange .print-card-header,
+            .print-card.cheese .print-card-header,
+            .print-card.charcuterie .print-card-header,
+            .print-card.other-food .print-card-header {
+                background: none !important;
+                color: black !important;
+            }
+
+            .print-card h3 {
+                font-size: 8pt;
+                font-weight: bold;
+                margin: 0;
+            }
+
+            .print-card .subtitle {
+                font-size: 6pt;
+                color: #333;
+            }
+
+            .print-card-body {
+                padding: 4pt 5pt;
+            }
+
+            .print-field {
+                margin-bottom: 2pt;
+            }
+
+            .print-field:last-child {
+                margin-bottom: 0;
+            }
+
+            .print-label {
+                font-size: 6pt;
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #000;
+                margin-bottom: 0;
+                display: inline;
+            }
+
+            .print-label::after {
+                content: ": ";
+            }
+
+            .print-value {
+                font-size: 7pt;
+                color: #000;
+                display: inline;
+                line-height: 1.2;
+            }
+
+            .pairing-item {
+                margin-bottom: 1pt;
+                padding-left: 0;
+                border-left: none;
+                font-size: 6pt;
+            }
+
+            .pairing-name {
+                font-weight: bold;
+                color: #000;
+            }
+
+            .pairing-reason {
+                font-size: 6pt;
+                color: #333;
+                font-style: normal;
+            }
+
+            /* Hide food pairing details in print to save space */
+            .print-card .pairing-reason {
+                display: none;
+            }
+
+            .print-card .pairing-item {
+                display: inline;
+            }
+
+            .print-card .pairing-item::after {
+                content: ", ";
+            }
+
+            .print-card .pairing-item:last-child::after {
+                content: "";
             }
         }
     </style>
