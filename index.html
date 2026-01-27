@@ -940,6 +940,135 @@
             border-bottom: 2px solid var(--gold);
         }
 
+        /* Wine Regions Section */
+        .regions-intro {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .regions-intro h2 {
+            color: var(--burgundy);
+            margin-bottom: 0.5rem;
+        }
+
+        .regions-intro p {
+            color: #666;
+        }
+
+        .country-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .country-title {
+            font-size: 1.8rem;
+            color: var(--burgundy);
+            border-bottom: 3px solid var(--gold);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .country-flag {
+            font-size: 2rem;
+        }
+
+        .regions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .region-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .region-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .region-card-header {
+            background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-dark) 100%);
+            color: white;
+            padding: 1rem 1.25rem;
+        }
+
+        .region-card-header h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .region-card-header .region-location {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .region-card-body {
+            padding: 1.25rem;
+        }
+
+        .region-description {
+            color: var(--charcoal);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .region-wines {
+            background: var(--cream);
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .region-wines-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--burgundy);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .region-wines-list {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .region-facts {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .region-fact {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .region-fact-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #888;
+        }
+
+        .region-fact-value {
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+
         .print-cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -1194,6 +1323,7 @@
         <button onclick="showSection('food')">Food Menu</button>
         <button onclick="showSection('flashcards')">Wine Quiz</button>
         <button onclick="showSection('quickref')">Quick Reference</button>
+        <button onclick="showSection('wineregions')">Wine Regions</button>
         <button onclick="showSection('printcards')">Print Cards</button>
     </nav>
 
@@ -1379,6 +1509,524 @@
                         <!-- Other food rows will be inserted by JavaScript -->
                     </tbody>
                 </table>
+            </div>
+        </section>
+
+        <!-- Wine Regions Section -->
+        <section id="wineregions">
+            <div class="regions-intro">
+                <h2>Wine Regions of the World</h2>
+                <p>Explore the regions where Ardoa's wines are produced. Each region has unique terroir, climate, and winemaking traditions.</p>
+            </div>
+
+            <!-- France -->
+            <div class="country-section">
+                <h2 class="country-title"><span class="country-flag">🇫🇷</span> France</h2>
+                <div class="regions-grid">
+                    <div class="region-card">
+                        <div class="region-card-header">
+                            <h3>Beaujolais (Brouilly)</h3>
+                            <div class="region-location">Burgundy Region, Eastern France</div>
+                        </div>
+                        <div class="region-card-body">
+                            <div class="region-description">
+                                Beaujolais lies just south of Burgundy, producing wines exclusively from Gamay grapes. Brouilly is the largest of the 10 Beaujolais Crus, known for elegant, fruit-forward wines with granite and volcanic soils that add minerality. The region pioneered carbonic maceration, creating wines that are fresh, aromatic, and lower in tannin.
+                            </div>
+                            <div class="region-facts">
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Climate</span>
+                                    <span class="region-fact-value">Continental</span>
+                                </div>
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Key Grape</span>
+                                    <span class="region-fact-value">Gamay</span>
+                                </div>
+                            </div>
+                            <div class="region-wines">
+                                <div class="region-wines-title">Our Wine from Here</div>
+                                <div class="region-wines-list">Château de la Chaize Brouilly 2022</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="region-card">
+                        <div class="region-card-header">
+                            <h3>Côtes du Rhône</h3>
+                            <div class="region-location">Rhône Valley, Southern France</div>
+                        </div>
+                        <div class="region-card-body">
+                            <div class="region-description">
+                                The Southern Rhône is known for warm Mediterranean climate and GSM blends (Grenache, Syrah, Mourvèdre). The region's signature "garrigue" - wild herbs like thyme, lavender, and rosemary - grows among the vines and infuses the wines with their aromatic character. Hot days and the Mistral wind create concentrated, spicy wines.
+                            </div>
+                            <div class="region-facts">
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Climate</span>
+                                    <span class="region-fact-value">Mediterranean</span>
+                                </div>
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Key Grapes</span>
+                                    <span class="region-fact-value">Grenache, Syrah</span>
+                                </div>
+                            </div>
+                            <div class="region-wines">
+                                <div class="region-wines-title">Our Wine from Here</div>
+                                <div class="region-wines-list">Château de Trignon Côtes du Rhône 2022</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="region-card">
+                        <div class="region-card-header">
+                            <h3>Loire Valley (Bourgueil & Touraine)</h3>
+                            <div class="region-location">Central France</div>
+                        </div>
+                        <div class="region-card-body">
+                            <div class="region-description">
+                                France's longest river creates diverse wine regions. Bourgueil produces elegant Cabernet Franc reds on tuffeau limestone, while Touraine is famous for crisp Sauvignon Blanc. The cool climate preserves acidity and creates wines with fresh, vibrant character. The Loire is called "the Garden of France" for its produce and wine.
+                            </div>
+                            <div class="region-facts">
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Climate</span>
+                                    <span class="region-fact-value">Cool Continental</span>
+                                </div>
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Key Grapes</span>
+                                    <span class="region-fact-value">Cab Franc, Sauv Blanc</span>
+                                </div>
+                            </div>
+                            <div class="region-wines">
+                                <div class="region-wines-title">Our Wines from Here</div>
+                                <div class="region-wines-list">Domaine Les Pins Bourgueil, La Petite Roche Sauvignon Blanc</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="region-card">
+                        <div class="region-card-header">
+                            <h3>Sancerre</h3>
+                            <div class="region-location">Upper Loire Valley, Central France</div>
+                        </div>
+                        <div class="region-card-body">
+                            <div class="region-description">
+                                Sancerre is the world benchmark for Sauvignon Blanc. Perched on hills overlooking the Loire River, the vineyards grow on three distinct soil types: silex (flint), limestone, and clay. The flinty soils create wines with distinctive "gunflint" minerality. Sancerre and local goat cheese (Crottin de Chavignol) are a legendary pairing.
+                            </div>
+                            <div class="region-facts">
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Climate</span>
+                                    <span class="region-fact-value">Cool Continental</span>
+                                </div>
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Key Grape</span>
+                                    <span class="region-fact-value">Sauvignon Blanc</span>
+                                </div>
+                            </div>
+                            <div class="region-wines">
+                                <div class="region-wines-title">Our Wine from Here</div>
+                                <div class="region-wines-list">Les Champs de Clos Sancerre 2023</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="region-card">
+                        <div class="region-card-header">
+                            <h3>Bordeaux</h3>
+                            <div class="region-location">Southwest France, Atlantic Coast</div>
+                        </div>
+                        <div class="region-card-body">
+                            <div class="region-description">
+                                The world's most famous wine region, Bordeaux is divided by the Gironde estuary into Left Bank (Cabernet Sauvignon dominant) and Right Bank (Merlot dominant). Maritime climate moderates temperatures. Bordeaux established the château system and classification that influenced winemaking worldwide. Buzet, nearby, makes similar wines at great value.
+                            </div>
+                            <div class="region-facts">
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Climate</span>
+                                    <span class="region-fact-value">Maritime</span>
+                                </div>
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Key Grapes</span>
+                                    <span class="region-fact-value">Merlot, Cab Sauv</span>
+                                </div>
+                            </div>
+                            <div class="region-wines">
+                                <div class="region-wines-title">Our Wines from Here</div>
+                                <div class="region-wines-list">Famille Bouey Cuvée 58, Château Roc Meynard, Buzet</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="region-card">
+                        <div class="region-card-header">
+                            <h3>Côtes du Roussillon</h3>
+                            <div class="region-location">Languedoc-Roussillon, Near Spain</div>
+                        </div>
+                        <div class="region-card-body">
+                            <div class="region-description">
+                                France's sunniest wine region borders Spain in the Pyrenees foothills. The Tramontane wind keeps vines healthy and concentrates flavors. Traditional varieties include Grenache, Carignan, and Syrah. Ancient schist and granite soils produce powerful, rustic wines with Mediterranean herb character. Also home to innovative orange wines.
+                            </div>
+                            <div class="region-facts">
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Climate</span>
+                                    <span class="region-fact-value">Hot Mediterranean</span>
+                                </div>
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Key Grapes</span>
+                                    <span class="region-fact-value">Grenache, Carignan</span>
+                                </div>
+                            </div>
+                            <div class="region-wines">
+                                <div class="region-wines-title">Our Wines from Here</div>
+                                <div class="region-wines-list">Mas Janeil C2, Les Fumées Blanches Orange</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="region-card">
+                        <div class="region-card-header">
+                            <h3>Picpoul de Pinet</h3>
+                            <div class="region-location">Languedoc, Mediterranean Coast</div>
+                        </div>
+                        <div class="region-card-body">
+                            <div class="region-description">
+                                This small appellation sits on the Étang de Thau lagoon, where oysters are farmed alongside vineyards. Picpoul ("lip stinger") refers to the grape's bracing acidity. The maritime influence and limestone soils create crisp, saline whites perfect for seafood. It's France's most-exported white wine appellation and the Languedoc's answer to Muscadet.
+                            </div>
+                            <div class="region-facts">
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Climate</span>
+                                    <span class="region-fact-value">Mediterranean</span>
+                                </div>
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Key Grape</span>
+                                    <span class="region-fact-value">Picpoul Blanc</span>
+                                </div>
+                            </div>
+                            <div class="region-wines">
+                                <div class="region-wines-title">Our Wine from Here</div>
+                                <div class="region-wines-list">Villa Noria Picpoul de Pinet 2023</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="region-card">
+                        <div class="region-card-header">
+                            <h3>Provence</h3>
+                            <div class="region-location">Southeast France, Mediterranean</div>
+                        </div>
+                        <div class="region-card-body">
+                            <div class="region-description">
+                                The world's rosé capital produces 40% of France's rosé wines. The pale, elegant style comes from brief skin contact using the direct press method. Warm Mediterranean sun, cooling Mistral winds, and limestone/schist soils create wines with delicate fruit and herbal notes. Provence rosé defines summer drinking worldwide.
+                            </div>
+                            <div class="region-facts">
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Climate</span>
+                                    <span class="region-fact-value">Mediterranean</span>
+                                </div>
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Key Grapes</span>
+                                    <span class="region-fact-value">Grenache, Cinsault</span>
+                                </div>
+                            </div>
+                            <div class="region-wines">
+                                <div class="region-wines-title">Our Wine from Here</div>
+                                <div class="region-wines-list">Folly by Mascaronne Rosé 2023</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Italy -->
+            <div class="country-section">
+                <h2 class="country-title"><span class="country-flag">🇮🇹</span> Italy</h2>
+                <div class="regions-grid">
+                    <div class="region-card">
+                        <div class="region-card-header">
+                            <h3>Chianti, Tuscany</h3>
+                            <div class="region-location">Central Italy</div>
+                        </div>
+                        <div class="region-card-body">
+                            <div class="region-description">
+                                Tuscany's most famous wine region has produced Sangiovese-based wines for centuries. Rolling hills, cypress trees, and medieval villages define the landscape. Chianti DOCG requires minimum 80% Sangiovese, creating wines with bright cherry fruit, high acidity, and savory character designed to pair with the region's olive oil-rich cuisine.
+                            </div>
+                            <div class="region-facts">
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Climate</span>
+                                    <span class="region-fact-value">Mediterranean</span>
+                                </div>
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Key Grape</span>
+                                    <span class="region-fact-value">Sangiovese</span>
+                                </div>
+                            </div>
+                            <div class="region-wines">
+                                <div class="region-wines-title">Our Wine from Here</div>
+                                <div class="region-wines-list">Terre di Bo Chianti 2022</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="region-card">
+                        <div class="region-card-header">
+                            <h3>Abruzzo</h3>
+                            <div class="region-location">Central Italy, Adriatic Coast</div>
+                        </div>
+                        <div class="region-card-body">
+                            <div class="region-description">
+                                Abruzzo lies on Italy's Adriatic coast, sheltered by the Apennine mountains. The Montepulciano grape (not to be confused with the Tuscan town) thrives here, producing deeply colored, soft wines with dark fruit and herb notes. One of Italy's best value regions, Abruzzo offers quality wines at accessible prices.
+                            </div>
+                            <div class="region-facts">
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Climate</span>
+                                    <span class="region-fact-value">Mediterranean/Mountain</span>
+                                </div>
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Key Grape</span>
+                                    <span class="region-fact-value">Montepulciano</span>
+                                </div>
+                            </div>
+                            <div class="region-wines">
+                                <div class="region-wines-title">Our Wine from Here</div>
+                                <div class="region-wines-list">Colle Corviano Montepulciano d'Abruzzo 2022</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="region-card">
+                        <div class="region-card-header">
+                            <h3>Piedmont (Monferrato)</h3>
+                            <div class="region-location">Northwest Italy</div>
+                        </div>
+                        <div class="region-card-body">
+                            <div class="region-description">
+                                "At the foot of the mountains," Piedmont is Italy's most prestigious region for red wines. While famous for Nebbiolo (Barolo, Barbaresco), Barbera is the workhorse grape—high acidity, low tannins, bright cherry fruit. Monferrato's rolling hills and continental climate produce food-friendly wines perfect for the region's rich cuisine.
+                            </div>
+                            <div class="region-facts">
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Climate</span>
+                                    <span class="region-fact-value">Continental</span>
+                                </div>
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Key Grapes</span>
+                                    <span class="region-fact-value">Barbera, Nebbiolo</span>
+                                </div>
+                            </div>
+                            <div class="region-wines">
+                                <div class="region-wines-title">Our Wine from Here</div>
+                                <div class="region-wines-list">Ercole Barbera 2022</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="region-card">
+                        <div class="region-card-header">
+                            <h3>Delle Venezie (Veneto/Friuli)</h3>
+                            <div class="region-location">Northeast Italy</div>
+                        </div>
+                        <div class="region-card-body">
+                            <div class="region-description">
+                                This large IGT covers Veneto, Friuli, and Trentino in Italy's northeast. Cool Alpine influences create crisp, refreshing whites. Italian Pinot Grigio here is made in a light, neutral style—fermented in steel to preserve freshness. The region's proximity to Austria and Slovenia shows in its emphasis on aromatic white varieties.
+                            </div>
+                            <div class="region-facts">
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Climate</span>
+                                    <span class="region-fact-value">Cool Continental</span>
+                                </div>
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Key Grapes</span>
+                                    <span class="region-fact-value">Pinot Grigio, Glera</span>
+                                </div>
+                            </div>
+                            <div class="region-wines">
+                                <div class="region-wines-title">Our Wine from Here</div>
+                                <div class="region-wines-list">Monte degli Angeli Pinot Grigio 2023</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spain -->
+            <div class="country-section">
+                <h2 class="country-title"><span class="country-flag">🇪🇸</span> Spain</h2>
+                <div class="regions-grid">
+                    <div class="region-card">
+                        <div class="region-card-header">
+                            <h3>Toro</h3>
+                            <div class="region-location">Castilla y León, Northwest Spain</div>
+                        </div>
+                        <div class="region-card-body">
+                            <div class="region-description">
+                                Toro means "bull" and the wines live up to the name—powerful, bold, and intense. Extreme temperatures (freezing winters, scorching summers) and sandy soils create concentrated Tempranillo (called Tinta de Toro locally). The region's old vines survived phylloxera due to sandy soils, producing some of Spain's most intense reds.
+                            </div>
+                            <div class="region-facts">
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Climate</span>
+                                    <span class="region-fact-value">Extreme Continental</span>
+                                </div>
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Key Grape</span>
+                                    <span class="region-fact-value">Tinta de Toro</span>
+                                </div>
+                            </div>
+                            <div class="region-wines">
+                                <div class="region-wines-title">Our Wine from Here</div>
+                                <div class="region-wines-list">Hermanos Lurton Toro Tempranillo 2019</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Germany -->
+            <div class="country-section">
+                <h2 class="country-title"><span class="country-flag">🇩🇪</span> Germany</h2>
+                <div class="regions-grid">
+                    <div class="region-card">
+                        <div class="region-card-header">
+                            <h3>Mosel</h3>
+                            <div class="region-location">Western Germany</div>
+                        </div>
+                        <div class="region-card-body">
+                            <div class="region-description">
+                                Germany's most famous wine river winds through steep slate slopes, some at 65° angles. Riesling vines cling to these hills, capturing reflected heat from the river. Blue slate soils give distinctive minerality. Cool climate means lower alcohol (often 7-9%) and the residual sugar balances razor-sharp acidity. Piesporter Goldtröpfchen ("golden droplets") is a legendary vineyard.
+                            </div>
+                            <div class="region-facts">
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Climate</span>
+                                    <span class="region-fact-value">Cool Continental</span>
+                                </div>
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Key Grape</span>
+                                    <span class="region-fact-value">Riesling</span>
+                                </div>
+                            </div>
+                            <div class="region-wines">
+                                <div class="region-wines-title">Our Wine from Here</div>
+                                <div class="region-wines-list">St. Christopher Piesporter Goldtröpfchen Riesling Kabinett 2023</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- USA -->
+            <div class="country-section">
+                <h2 class="country-title"><span class="country-flag">🇺🇸</span> United States</h2>
+                <div class="regions-grid">
+                    <div class="region-card">
+                        <div class="region-card-header">
+                            <h3>California</h3>
+                            <div class="region-location">West Coast, USA</div>
+                        </div>
+                        <div class="region-card-body">
+                            <div class="region-description">
+                                America's wine heartland produces 80% of US wine. Diverse climates range from cool, foggy Sonoma Coast (ideal for Pinot Noir) to warm inland valleys. California Cabernet and Chardonnay are known for ripe fruit and oak influence. Contra Costa County preserves heritage old-vine Zinfandel in sandy, phylloxera-resistant soils.
+                            </div>
+                            <div class="region-facts">
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Climate</span>
+                                    <span class="region-fact-value">Mediterranean (varied)</span>
+                                </div>
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Key Grapes</span>
+                                    <span class="region-fact-value">Cab Sauv, Chard, Zin</span>
+                                </div>
+                            </div>
+                            <div class="region-wines">
+                                <div class="region-wines-title">Our Wines from Here</div>
+                                <div class="region-wines-list">Long Valley Ranch Cabernet, Three Wine Co. Zinfandel, Terrebonne Pinot Noir</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="region-card">
+                        <div class="region-card-header">
+                            <h3>Washington State (Columbia Valley)</h3>
+                            <div class="region-location">Pacific Northwest, USA</div>
+                        </div>
+                        <div class="region-card-body">
+                            <div class="region-description">
+                                America's second-largest wine producer, Washington's vineyards sit in the rain shadow of the Cascades. Hot days and cool nights create balanced wines with bright acidity. The Columbia Valley's volcanic soils and long summer daylight hours (2 more hours than California) produce excellent Chardonnay, Cabernet, and Syrah.
+                            </div>
+                            <div class="region-facts">
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Climate</span>
+                                    <span class="region-fact-value">Desert Continental</span>
+                                </div>
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Key Grapes</span>
+                                    <span class="region-fact-value">Chardonnay, Cab, Syrah</span>
+                                </div>
+                            </div>
+                            <div class="region-wines">
+                                <div class="region-wines-title">Our Wine from Here</div>
+                                <div class="region-wines-list">Tattoo Girl Chardonnay 2020</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Argentina -->
+            <div class="country-section">
+                <h2 class="country-title"><span class="country-flag">🇦🇷</span> Argentina</h2>
+                <div class="regions-grid">
+                    <div class="region-card">
+                        <div class="region-card-header">
+                            <h3>Mendoza</h3>
+                            <div class="region-location">Western Argentina, Andes Foothills</div>
+                        </div>
+                        <div class="region-card-body">
+                            <div class="region-description">
+                                At the foot of the Andes, Mendoza's high-altitude vineyards (900-1,500m) produce Argentina's signature grape: Malbec. Originally from Cahors, France, Malbec found its true home here. Intense UV light at altitude creates thicker skins and deeper color. Desert climate requires irrigation from Andean snowmelt. The wines are plush, fruity, and approachable.
+                            </div>
+                            <div class="region-facts">
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Climate</span>
+                                    <span class="region-fact-value">High Desert</span>
+                                </div>
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Key Grape</span>
+                                    <span class="region-fact-value">Malbec</span>
+                                </div>
+                            </div>
+                            <div class="region-wines">
+                                <div class="region-wines-title">Our Wine from Here</div>
+                                <div class="region-wines-list">3SAPAS Malbec 2022</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chile -->
+            <div class="country-section">
+                <h2 class="country-title"><span class="country-flag">🇨🇱</span> Chile</h2>
+                <div class="regions-grid">
+                    <div class="region-card">
+                        <div class="region-card-header">
+                            <h3>Central Valley (Maipo & Rapel)</h3>
+                            <div class="region-location">Central Chile</div>
+                        </div>
+                        <div class="region-card-body">
+                            <div class="region-description">
+                                Chile's wine heartland runs between the Andes and the Pacific. The country's isolation (desert north, mountains east, ocean west, ice south) kept it phylloxera-free. Carmenère, thought extinct in Bordeaux, was rediscovered here in 1994. Warm days and cool Pacific nights create wines with ripe fruit and fresh acidity.
+                            </div>
+                            <div class="region-facts">
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Climate</span>
+                                    <span class="region-fact-value">Mediterranean</span>
+                                </div>
+                                <div class="region-fact">
+                                    <span class="region-fact-label">Key Grapes</span>
+                                    <span class="region-fact-value">Carmenère, Cab Sauv</span>
+                                </div>
+                            </div>
+                            <div class="region-wines">
+                                <div class="region-wines-title">Our Wine from Here</div>
+                                <div class="region-wines-list">Escudo Rojo Carmenère 2021</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
