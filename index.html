@@ -2351,7 +2351,7 @@
                             <div class="print-value">${wine.alcohol} | ${wine.serving}</div>
                         </div>
                         <div class="print-field">
-                            <div class="print-label">Food Pairings (Why?)</div>
+                            <div class="print-label">Food Pairings</div>
                             <div class="print-value">
                                 ${wine.foodPairings ? wine.foodPairings.map(p => `
                                     <div class="pairing-item">
@@ -2481,12 +2481,27 @@
         // Render Wine Cards
         function renderWineCards() {
             const grid = document.getElementById('wineGrid');
+
+            // Helper to extract just producer name
+            function getProducerName(winemaker) {
+                // Try splitting by " - " first
+                let name = winemaker.split(' - ')[0];
+                // If still too long, cut at first parenthesis or period
+                if (name.length > 40) {
+                    const parenIdx = name.indexOf('(');
+                    const periodIdx = name.indexOf('.');
+                    if (parenIdx > 0) name = name.substring(0, parenIdx).trim();
+                    else if (periodIdx > 0) name = name.substring(0, periodIdx).trim();
+                }
+                return name;
+            }
+
             grid.innerHTML = wines.map(wine => `
                 <div class="wine-card ${wine.type}" data-type="${wine.type}">
                     <div class="wine-card-header">
                         <h3>${wine.name}</h3>
                         <div class="vintage">${wine.vintage}</div>
-                        <div class="producer">${wine.winemaker.split(' - ')[0]}</div>
+                        <div class="producer">${getProducerName(wine.winemaker)}</div>
                     </div>
                     <div class="wine-card-body">
                         ${wine.pronunciation ? `
