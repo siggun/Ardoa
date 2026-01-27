@@ -30,17 +30,21 @@
 
         /* Header */
         header {
-            background:
-                radial-gradient(ellipse at 20% 80%, rgba(201, 162, 39, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(201, 162, 39, 0.1) 0%, transparent 40%),
-                radial-gradient(ellipse at 50% 50%, rgba(139, 58, 66, 0.3) 0%, transparent 60%),
-                linear-gradient(135deg, var(--burgundy-dark) 0%, var(--burgundy) 50%, var(--burgundy-light) 100%);
+            background: linear-gradient(-45deg, #4A1C23, #722F37, #8B3A42, #5D2228, #722F37);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             color: var(--cream);
-            padding: 3rem 2rem;
+            padding: 3.5rem 2rem;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
             position: relative;
             overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         header::before {
@@ -50,21 +54,35 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image:
-                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 C30 5 25 15 25 25 C25 32 27 35 30 35 C33 35 35 32 35 25 C35 15 30 5 30 5 Z' fill='none' stroke='rgba(201,162,39,0.08)' stroke-width='1'/%3E%3Ccircle cx='30' cy='40' r='8' fill='none' stroke='rgba(201,162,39,0.08)' stroke-width='1'/%3E%3Cline x1='30' y1='48' x2='30' y2='55' stroke='rgba(201,162,39,0.08)' stroke-width='2'/%3E%3Cline x1='25' y1='55' x2='35' y2='55' stroke='rgba(201,162,39,0.08)' stroke-width='2'/%3E%3C/svg%3E");
-            opacity: 0.6;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(201, 162, 39, 0.2) 0%, transparent 35%),
+                radial-gradient(circle at 80% 50%, rgba(201, 162, 39, 0.15) 0%, transparent 35%),
+                radial-gradient(circle at 50% 100%, rgba(201, 162, 39, 0.1) 0%, transparent 50%);
             pointer-events: none;
         }
 
         header::after {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
+            top: 0;
+            left: -100%;
             width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, transparent 0%, rgba(74, 28, 35, 0.3) 100%);
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(255,255,255,0.03) 45%,
+                rgba(255,255,255,0.08) 50%,
+                rgba(255,255,255,0.03) 55%,
+                transparent 100%
+            );
+            animation: shimmer 8s ease-in-out infinite;
             pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(50%); }
         }
 
         header h1 {
@@ -73,7 +91,7 @@
             letter-spacing: 12px;
             margin-bottom: 0.5rem;
             text-transform: uppercase;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.4), 0 0 40px rgba(201, 162, 39, 0.3);
             position: relative;
             z-index: 1;
         }
@@ -82,7 +100,7 @@
             font-size: 1.2rem;
             color: var(--gold-light);
             font-style: italic;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
             position: relative;
             z-index: 1;
         }
@@ -331,14 +349,32 @@
             font-weight: bold;
             color: var(--charcoal);
             margin-bottom: 2rem;
+            white-space: pre-line;
+            line-height: 1.4;
+        }
+
+        .flashcard-wine-name small,
+        .flashcard-pronunciation {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: normal;
+            color: #666;
+            font-style: italic;
+            margin-top: 0.25rem;
         }
 
         .flashcard-answer {
-            font-size: 1.4rem;
+            font-size: 1.1rem;
             color: var(--burgundy-dark);
-            font-weight: bold;
+            font-weight: normal;
             opacity: 0;
             transition: opacity 0.3s ease;
+            white-space: pre-line;
+            text-align: left;
+            max-width: 600px;
+            line-height: 1.6;
+            max-height: 300px;
+            overflow-y: auto;
         }
 
         .flashcard.revealed .flashcard-answer {
@@ -2513,6 +2549,27 @@
             return cleanName.replace(/\s+/g, ' ').trim();
         }
 
+        // Format wine name with pronunciation for quiz display
+        function formatWineWithPronunciation(wine) {
+            let display = `${wine.name} ${wine.vintage}`;
+            if (wine.pronunciation) {
+                // Extract just the wine name pronunciation (before the grape pronunciation)
+                const mainPronunciation = wine.pronunciation.split('|')[0].trim();
+                display += `\n(${mainPronunciation})`;
+            }
+            return display;
+        }
+
+        // Format food pairings with reasons
+        function formatFoodPairingsWithReasons(wine) {
+            if (wine.foodPairings && wine.foodPairings.length > 0) {
+                return wine.foodPairings.map(p =>
+                    `${p.item} - ${p.why}`
+                ).join('\n\n');
+            }
+            return wine.food;
+        }
+
         function generateQuestions() {
             const questions = [];
             const qGrape = document.getElementById('q-grape').checked;
@@ -2525,8 +2582,13 @@
                 if (qGrape) {
                     // Remove grape name from wine name to avoid revealing the answer
                     const cleanWineName = removeGrapeFromName(wine.name);
+                    let wineDisplay = `${cleanWineName} ${wine.vintage}`;
+                    if (wine.pronunciation) {
+                        const mainPronunciation = wine.pronunciation.split('|')[0].trim();
+                        wineDisplay += `\n(${mainPronunciation})`;
+                    }
                     questions.push({
-                        wine: `${cleanWineName} ${wine.vintage}`,
+                        wine: wineDisplay,
                         question: "What grape(s) is this wine made from?",
                         answer: wine.grape,
                         type: 'text'
@@ -2534,7 +2596,7 @@
                 }
                 if (qRegion) {
                     questions.push({
-                        wine: `${wine.name} ${wine.vintage}`,
+                        wine: formatWineWithPronunciation(wine),
                         question: "What region is this wine from?",
                         answer: wine.region,
                         type: 'text'
@@ -2542,7 +2604,7 @@
                 }
                 if (qCountry) {
                     questions.push({
-                        wine: `${wine.name} ${wine.vintage}`,
+                        wine: formatWineWithPronunciation(wine),
                         question: "What country is this wine from?",
                         answer: wine.country,
                         type: 'text'
@@ -2555,7 +2617,7 @@
                     const allAnswers = shuffleArray([wine.tasting, ...wrongAnswers]);
 
                     questions.push({
-                        wine: `${wine.name} ${wine.vintage}`,
+                        wine: formatWineWithPronunciation(wine),
                         question: "Which tasting notes describe this wine?",
                         answer: wine.tasting,
                         type: 'multiple-choice',
@@ -2564,9 +2626,9 @@
                 }
                 if (qFood) {
                     questions.push({
-                        wine: `${wine.name} ${wine.vintage}`,
-                        question: "What foods pair well with this wine?",
-                        answer: wine.food,
+                        wine: formatWineWithPronunciation(wine),
+                        question: "What foods pair well with this wine and why?",
+                        answer: formatFoodPairingsWithReasons(wine),
                         type: 'text'
                     });
                 }
