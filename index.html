@@ -2549,17 +2549,6 @@
             return cleanName.replace(/\s+/g, ' ').trim();
         }
 
-        // Format wine name with pronunciation for quiz display
-        function formatWineWithPronunciation(wine) {
-            let display = `${wine.name} ${wine.vintage}`;
-            if (wine.pronunciation) {
-                // Extract just the wine name pronunciation (before the grape pronunciation)
-                const mainPronunciation = wine.pronunciation.split('|')[0].trim();
-                display += `\n(${mainPronunciation})`;
-            }
-            return display;
-        }
-
         // Format food pairings with reasons
         function formatFoodPairingsWithReasons(wine) {
             if (wine.foodPairings && wine.foodPairings.length > 0) {
@@ -2568,6 +2557,14 @@
                 ).join('\n\n');
             }
             return wine.food;
+        }
+
+        // Get pronunciation line for answer
+        function getPronunciationLine(wine) {
+            if (wine.pronunciation) {
+                return `\n\nPronunciation: ${wine.pronunciation}`;
+            }
+            return '';
         }
 
         function generateQuestions() {
@@ -2579,34 +2576,32 @@
             const qFood = document.getElementById('q-food').checked;
 
             wines.forEach(wine => {
+                const wineDisplay = `${wine.name} ${wine.vintage}`;
+
                 if (qGrape) {
                     // Remove grape name from wine name to avoid revealing the answer
                     const cleanWineName = removeGrapeFromName(wine.name);
-                    let wineDisplay = `${cleanWineName} ${wine.vintage}`;
-                    if (wine.pronunciation) {
-                        const mainPronunciation = wine.pronunciation.split('|')[0].trim();
-                        wineDisplay += `\n(${mainPronunciation})`;
-                    }
+                    const cleanWineDisplay = `${cleanWineName} ${wine.vintage}`;
                     questions.push({
-                        wine: wineDisplay,
+                        wine: cleanWineDisplay,
                         question: "What grape(s) is this wine made from?",
-                        answer: wine.grape,
+                        answer: wine.grape + getPronunciationLine(wine),
                         type: 'text'
                     });
                 }
                 if (qRegion) {
                     questions.push({
-                        wine: formatWineWithPronunciation(wine),
+                        wine: wineDisplay,
                         question: "What region is this wine from?",
-                        answer: wine.region,
+                        answer: wine.region + getPronunciationLine(wine),
                         type: 'text'
                     });
                 }
                 if (qCountry) {
                     questions.push({
-                        wine: formatWineWithPronunciation(wine),
+                        wine: wineDisplay,
                         question: "What country is this wine from?",
-                        answer: wine.country,
+                        answer: wine.country + getPronunciationLine(wine),
                         type: 'text'
                     });
                 }
@@ -2617,7 +2612,7 @@
                     const allAnswers = shuffleArray([wine.tasting, ...wrongAnswers]);
 
                     questions.push({
-                        wine: formatWineWithPronunciation(wine),
+                        wine: wineDisplay,
                         question: "Which tasting notes describe this wine?",
                         answer: wine.tasting,
                         type: 'multiple-choice',
@@ -2626,9 +2621,9 @@
                 }
                 if (qFood) {
                     questions.push({
-                        wine: formatWineWithPronunciation(wine),
+                        wine: wineDisplay,
                         question: "What foods pair well with this wine and why?",
-                        answer: formatFoodPairingsWithReasons(wine),
+                        answer: formatFoodPairingsWithReasons(wine) + getPronunciationLine(wine),
                         type: 'text'
                     });
                 }
