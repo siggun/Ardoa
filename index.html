@@ -1555,7 +1555,7 @@
                         </div>
                         <div class="region-card-body">
                             <div class="region-description">
-                                The Southern Rhône is known for warm Mediterranean climate and GSM blends (Grenache, Syrah, Mourvèdre). The region's signature "garrigue" - wild herbs like thyme, lavender, and rosemary - grows among the vines and infuses the wines with their aromatic character. Hot days and the Mistral wind create concentrated, spicy wines.
+                                The Southern Rhône is known for warm Mediterranean climate and GSM blends (Grenache, Syrah, Mourvèdre). The region's signature "garrigue" - wild herbs like thyme, lavender, and rosemary - grows among the vines and infuses the wines with their aromatic character. Plan de Dieu is a named village within Côtes du Rhône Villages, known for powerful wines from the "Plain of God."
                             </div>
                             <div class="region-facts">
                                 <div class="region-fact">
@@ -1568,8 +1568,8 @@
                                 </div>
                             </div>
                             <div class="region-wines">
-                                <div class="region-wines-title">Our Wine from Here</div>
-                                <div class="region-wines-list">Château de Trignon Côtes du Rhône 2022</div>
+                                <div class="region-wines-title">Our Wines from Here</div>
+                                <div class="region-wines-list">Château de Trignon Côtes du Rhône 2022, Domaine Verquière Plan de Dieu 2024</div>
                             </div>
                         </div>
                     </div>
@@ -1621,7 +1621,7 @@
                             </div>
                             <div class="region-wines">
                                 <div class="region-wines-title">Our Wines from Here</div>
-                                <div class="region-wines-list">Château Roc Meynard Bordeaux Supérieur, Famille Bouey Cuvée 58</div>
+                                <div class="region-wines-list">Château Roc Meynard Bordeaux Supérieur</div>
                             </div>
                         </div>
                     </div>
@@ -2115,10 +2115,9 @@
         <p>Ardoa Wine Bar - Study Guide</p>
     </footer>
 
-    <script>
-        // Wine Data - All 24 wines with detailed information
+        // Wine Data - All 24 wines ordered by Enomatic dispenser position (1-24, left to right)
         const wines = [
-            // RED WINES
+            // Position 1
             {
                 name: "Ercole Barbera del Monferrato",
                 vintage: "2024",
@@ -2127,8 +2126,7 @@
                 grapeDetail: "Barbera is Piedmont's workhorse grape - high acidity, low tannins, makes it incredibly food-friendly",
                 region: "Monferrato, Piedmont",
                 country: "Italy",
-                pronunciation: "AIR-koh-leh bar-BEH-rah del mon-feh-RAH-toh",
-                winemaker: "Ercole Wines - Named after Ercole (Hercules), referencing the strength and character of Piedmontese wines. Part of the Braida di Giacomo Bologna legacy.",
+                winemaker: "Ercole Wines - Named after Ercole (Hercules), referencing the strength and character of Piedmontese wines.",
                 tasting: "Bright cherry (morello), raspberry, dried herbs, hints of almond and black pepper. Medium body with high acidity, low tannins, and a refreshing, tangy finish.",
                 food: "Prosciutto di Parma, Felino Salami, Gruyere, Black Truffle Salami, The Basque flatbread",
                 foodPairings: [
@@ -2140,8 +2138,9 @@
                 ],
                 alcohol: "13%",
                 serving: "Slightly chilled (55-60°F / 13-15°C)",
-                notes: "Barbera is Piedmont's most-planted grape (ahead of Nebbiolo). Its high acidity makes it perfect for rich, fatty Italian cuisine. Traditionally fermented in steel to preserve freshness."
+                notes: "Barbera is Piedmont's most-planted grape (ahead of Nebbiolo). Its high acidity makes it perfect for rich, fatty Italian cuisine."
             },
+            // Position 2
             {
                 name: "Château Roc Meynard Bordeaux Supérieur",
                 vintage: "2019",
@@ -2163,8 +2162,9 @@
                 ],
                 alcohol: "13.5%",
                 serving: "Room temperature (64°F / 18°C)",
-                notes: "Bordeaux Supérieur has stricter requirements than basic Bordeaux AOC: lower yields, higher alcohol, and longer aging. It's often the best value tier in Bordeaux."
+                notes: "Bordeaux Supérieur has stricter requirements than basic Bordeaux AOC: lower yields, higher alcohol, and longer aging."
             },
+            // Position 3
             {
                 name: "Château de Trignon Côtes du Rhône",
                 vintage: "2022",
@@ -2173,8 +2173,8 @@
                 grapeDetail: "Classic GSM (Grenache-Syrah-Mourvèdre) Southern Rhône blend",
                 region: "Côtes du Rhône",
                 country: "France",
-                pronunciation: "sha-TOH duh tree-NYOHN coat doo ROHN | Grenache: greh-NAHSH | Mourvèdre: moor-VED-ruh",
-                winemaker: "Famille Quiot - 5th generation winemakers. The Quiot family has been making wine in the Southern Rhône since 1748, now managing over 165 hectares.",
+                pronunciation: "sha-TOH duh tree-NYOHN coat doo ROHN",
+                winemaker: "Famille Quiot - 5th generation winemakers. The Quiot family has been making wine in the Southern Rhône since 1748.",
                 tasting: "Ripe dark fruits (blackberry, plum), spice (white pepper, clove), garrigue herbs (thyme, lavender, rosemary), medium body with soft tannins and a warm, lingering finish.",
                 food: "Chorizo, Salchichon De Bellota, Ewephoria, Mimolette, Tapenade",
                 foodPairings: [
@@ -2188,6 +2188,7 @@
                 serving: "Room temperature (60-65°F / 16-18°C)",
                 notes: "Garrigue refers to the wild herbs that grow in the Mediterranean scrubland and infuse Rhône wines with their aromatic character."
             },
+            // Position 4
             {
                 name: "Colle Corviano Montepulciano d'Abruzzo",
                 vintage: "2023",
@@ -2196,8 +2197,7 @@
                 grapeDetail: "NOT to be confused with Vino Nobile di Montepulciano (which uses Sangiovese from Tuscany). This is the Montepulciano GRAPE from Abruzzo.",
                 region: "Abruzzo",
                 country: "Italy",
-                pronunciation: "KOH-leh kor-vee-AH-noh mon-teh-pool-CHAH-noh dah-BROOD-zoh",
-                winemaker: "Colle Corviano - Part of the Fantini Group (Farnese Vini), one of Abruzzo's most respected wine producers, known for excellent value Italian wines.",
+                winemaker: "Colle Corviano - Part of the Fantini Group (Farnese Vini), one of Abruzzo's most respected wine producers.",
                 tasting: "Dark cherry, plum, dried herbs (oregano, thyme), earthy notes, hint of black pepper. Medium to full body with moderate tannins and good acidity.",
                 food: "Felino Salami, Prosciutto di Parma, Gruyere, The Basque flatbread, Antipasto Vegetable Blend",
                 foodPairings: [
@@ -2209,8 +2209,9 @@
                 ],
                 alcohol: "13.5%",
                 serving: "Room temperature (60-65°F / 16-18°C)",
-                notes: "Abruzzo is on Italy's Adriatic coast. Montepulciano d'Abruzzo is one of Italy's best value reds - the grape gives deep color and soft, approachable tannins."
+                notes: "Abruzzo is on Italy's Adriatic coast. Montepulciano d'Abruzzo is one of Italy's best value reds."
             },
+            // Position 5
             {
                 name: "Massimo Ribeira Sacra",
                 vintage: "2023",
@@ -2219,7 +2220,6 @@
                 grapeDetail: "Mencía is Spain's answer to Pinot Noir - elegant, aromatic, with bright acidity. Native to Galicia and Bierzo.",
                 region: "Ribeira Sacra",
                 country: "Spain",
-                pronunciation: "MAH-see-moh ree-BAY-rah SAH-krah | Mencía: men-THEE-ah",
                 winemaker: "Bodegas Massimo - Small producer in the dramatic steep-terraced vineyards of Ribeira Sacra along the Sil River canyon.",
                 tasting: "Fresh red berries (raspberry, redcurrant), violets, slate minerality, hints of herbs and wet stone. Medium body with vibrant acidity and fine tannins.",
                 food: "Prosciutto di Parma, Black Pepper Salami, Petit Basque, Duck Rillettes, Saint Angel",
@@ -2232,8 +2232,9 @@
                 ],
                 alcohol: "13%",
                 serving: "Slightly chilled (55-60°F / 13-15°C)",
-                notes: "Ribeira Sacra means 'Sacred Riverbank' - home to ancient monasteries and some of Europe's steepest vineyards. Heroic viticulture on terraces dating to Roman times."
+                notes: "Ribeira Sacra means 'Sacred Riverbank' - home to ancient monasteries and some of Europe's steepest vineyards."
             },
+            // Position 6
             {
                 name: "Orsa Cabernet Sauvignon",
                 vintage: "2020",
@@ -2242,7 +2243,6 @@
                 grapeDetail: "Cabernet Sauvignon is the world's most planted wine grape - known for structure, aging potential, and blackcurrant flavors.",
                 region: "Central Valley",
                 country: "Chile",
-                pronunciation: "OR-sah cab-er-NAY saw-vee-NYOHN",
                 winemaker: "Viña Orsa - Chilean producer in the fertile Central Valley, known for approachable, fruit-forward wines at excellent value.",
                 tasting: "Blackcurrant, dark cherry, hints of bell pepper and eucalyptus. Medium to full body with smooth tannins and a clean finish.",
                 food: "Chorizo, Ewephoria, Red Wine Cheddar, Mimolette, The Mighty Spicy flatbread",
@@ -2255,8 +2255,9 @@
                 ],
                 alcohol: "13.5%",
                 serving: "Room temperature (62-65°F / 17-18°C)",
-                notes: "Chile's Central Valley benefits from Andes mountain cooling and Pacific Ocean influence, creating excellent conditions for Cabernet Sauvignon at accessible prices."
+                notes: "Chile's Central Valley benefits from Andes mountain cooling and Pacific Ocean influence, creating excellent conditions for Cabernet Sauvignon."
             },
+            // Position 7
             {
                 name: "Domaine Les Pins Les Rochettes Bourgueil",
                 vintage: "2021",
@@ -2265,7 +2266,7 @@
                 grapeDetail: "Locally called 'Breton' - Cabernet Franc is THE grape of the Loire reds",
                 region: "Bourgueil, Loire Valley",
                 country: "France",
-                pronunciation: "doh-MEHN lay PAN lay roh-SHET boor-GUH-yuh | Cabernet Franc: cab-er-NAY FRAHNK",
+                pronunciation: "doh-MEHN lay PAN lay roh-SHET boor-GUH-yuh",
                 winemaker: "Domaine Les Pins - Small family estate in the heart of Bourgueil. 'Les Rochettes' refers to their rocky terroir parcel.",
                 tasting: "Red bell pepper, raspberry, graphite, violet notes. Medium body with fresh acidity, earthy undertones, and characteristic pencil-lead minerality from the tuffeau limestone.",
                 food: "Duck Rillettes, Pâté de Campagne, Black Truffle Goat, Petit Basque, Black Pepper Salami",
@@ -2278,8 +2279,9 @@
                 ],
                 alcohol: "12.5%",
                 serving: "Slightly chilled (55-60°F / 13-15°C)",
-                notes: "Bourgueil sits on tuffeau (chalk) and gravel soils. Loire Cabernet Franc shows green pepper notes when cool, turning to raspberry when ripe. Best served slightly chilled."
+                notes: "Bourgueil sits on tuffeau (chalk) and gravel soils. Loire Cabernet Franc shows green pepper notes when cool, turning to raspberry when ripe."
             },
+            // Position 8
             {
                 name: "Beaujolais Villages Marine Decome Mary Taylor",
                 vintage: "2023",
@@ -2288,7 +2290,7 @@
                 grapeDetail: "Gamay Noir à Jus Blanc - the signature grape of Beaujolais, known for bright fruit and low tannins",
                 region: "Beaujolais Villages",
                 country: "France",
-                pronunciation: "boh-zhoh-LAY vee-LAHZH mah-REEN deh-KOHM | Gamay: gah-MAY",
+                pronunciation: "boh-zhoh-LAY vee-LAHZH mah-REEN deh-KOHM",
                 winemaker: "Marine Decome - Young female winemaker imported by Mary Taylor Wines, known for discovering authentic, terroir-driven French wines from small producers.",
                 tasting: "Fresh red fruits (cherry, raspberry, strawberry), light-bodied with silky texture, floral notes (violet), and a hint of minerality. Juicy and refreshing.",
                 food: "Prosciutto di Parma, Black Pepper Salami, Saint Angel, Petit Basque, The Basque flatbread",
@@ -2301,8 +2303,196 @@
                 ],
                 alcohol: "12.5%",
                 serving: "Slightly chilled (55-60°F / 13-15°C)",
-                notes: "Beaujolais Villages is a step up from basic Beaujolais, from 38 designated villages with better terroir. Mary Taylor specializes in importing authentic, small-production French wines."
+                notes: "Beaujolais Villages is a step up from basic Beaujolais, from 38 designated villages with better terroir."
             },
+            // Position 9
+            {
+                name: "Monte degli Angeli Pinot Grigio",
+                vintage: "2024",
+                type: "white",
+                grape: "100% Pinot Grigio",
+                grapeDetail: "Italian Pinot Grigio is typically fermented in steel for freshness. Same grape as French Pinot Gris but made in a lighter style.",
+                region: "Delle Venezie IGT, Veneto/Friuli",
+                country: "Italy",
+                winemaker: "Monte degli Angeli (Mountain of Angels) - Northeastern Italian producer in the Delle Venezie region, using modern winemaking to preserve freshness.",
+                tasting: "Pear, apple, citrus (lemon), almond notes. Light and crisp with subtle minerality, clean finish, and refreshing acidity.",
+                food: "Prosciutto di Parma, Bresaola, Saint Angel, Hummus, Antipasto Vegetable Blend",
+                foodPairings: [
+                    { item: "Prosciutto di Parma", why: "Italian wine with Italian ham - light, crisp wine cuts through salty fat" },
+                    { item: "Bresaola", why: "Delicate lean beef pairs with this neutral, refreshing wine" },
+                    { item: "Saint Angel", why: "Rich cream cheese needs a crisp, clean wine to refresh the palate" },
+                    { item: "Hummus", why: "Neutral wine lets the hummus flavors shine while cleansing the palate" },
+                    { item: "Antipasto Vegetable Blend", why: "Italian pickled veggies with Italian wine - classic aperitivo pairing" }
+                ],
+                alcohol: "12%",
+                serving: "Well chilled (45-50°F / 7-10°C)",
+                notes: "Delle Venezie is a large IGT covering Veneto, Friuli, and Trentino. Italian Pinot Grigio is typically lighter and more neutral than Alsatian Pinot Gris."
+            },
+            // Position 10
+            {
+                name: "Pouilly-Fumé Dezat",
+                vintage: "2024",
+                type: "white",
+                grape: "100% Sauvignon Blanc",
+                grapeDetail: "Pouilly-Fumé is always 100% Sauvignon Blanc - the 'Fumé' refers to the smoky/flinty character from silex soils, not oak.",
+                region: "Pouilly-Fumé, Loire Valley",
+                country: "France",
+                pronunciation: "poo-YEE foo-MAY deh-ZAH",
+                winemaker: "Domaine Dezat - Multi-generational family estate in Pouilly-sur-Loire, crafting mineral-driven Sauvignon Blanc from silex (flint) soils.",
+                tasting: "Citrus (grapefruit, lemon), flint/gunsmoke, white flowers, gooseberry. Bone-dry with razor-sharp acidity, pronounced minerality, and a long, clean finish.",
+                food: "Black Truffle Goat, Petit Basque, Hummus, The Veg flatbread, Bresaola",
+                foodPairings: [
+                    { item: "Black Truffle Goat", why: "THE classic pairing - Loire Sauvignon Blanc and goat cheese are legendary together" },
+                    { item: "Petit Basque", why: "Sheep cheese's mild nuttiness complements the wine's mineral precision" },
+                    { item: "Hummus", why: "Clean, refreshing wine cuts through the tahini richness" },
+                    { item: "The Veg flatbread", why: "Herbal, citrus-driven wine loves fresh vegetable and arugula flavors" },
+                    { item: "Bresaola", why: "Lean beef doesn't overpower the wine; acidity brightens the delicate meat" }
+                ],
+                alcohol: "13%",
+                serving: "Well chilled (45-50°F / 7-10°C)",
+                notes: "Pouilly-Fumé sits across the Loire from Sancerre. The 'fumé' (smoky) character comes from silex (flint) soils that give a distinctive gunflint minerality."
+            },
+            // Position 11
+            {
+                name: "Gorghi Tondi Rosa dei Venti Nerello Mascalese",
+                vintage: "2023",
+                type: "rose",
+                grape: "100% Nerello Mascalese",
+                grapeDetail: "Nerello Mascalese is usually a red grape from Mt. Etna. This rosé expression showcases its aromatic, delicate side.",
+                region: "Sicily",
+                country: "Italy",
+                winemaker: "Gorghi Tondi - Organic estate in western Sicily. 'Rosa dei Venti' means 'Compass Rose' - reflecting the Mediterranean winds that shape their vineyards.",
+                tasting: "White peach, citrus, almond, delicate floral notes. Light to medium body with fresh acidity and subtle minerality. Unique and aromatic.",
+                food: "Prosciutto di Parma, Hummus, Petit Basque, Antipasto Vegetable Blend, The Veg flatbread",
+                foodPairings: [
+                    { item: "Prosciutto di Parma", why: "Delicate, aromatic wine complements the ham's sweetness without overpowering" },
+                    { item: "Hummus", why: "Light, refreshing wine perfect for casual Mediterranean snacking" },
+                    { item: "Petit Basque", why: "Mild sheep cheese pairs with the wine's almond and floral notes" },
+                    { item: "Antipasto Vegetable Blend", why: "Italian wine with Italian antipasto - natural pairing" },
+                    { item: "The Veg flatbread", why: "Aromatic wine complements fresh vegetables and Mediterranean flavors" }
+                ],
+                alcohol: "12.5%",
+                serving: "Well chilled (45-50°F / 7-10°C)",
+                notes: "Nerello Mascalese is usually the star of Etna Rosso, but this unique rosé expression showcases its aromatic, delicate potential."
+            },
+            // Position 12
+            {
+                name: "Presqu'ile Chardonnay",
+                vintage: "2023",
+                type: "white",
+                grape: "100% Chardonnay",
+                grapeDetail: "Santa Barbara County Chardonnay benefits from cool Pacific fog, creating a balanced style between rich Napa and lean Burgundy.",
+                region: "Santa Barbara County, California",
+                country: "USA",
+                winemaker: "Presqu'ile Winery - Estate winery in the Santa Maria Valley, one of California's coolest wine regions. The name is French for 'peninsula.'",
+                tasting: "Green apple, citrus, white peach, subtle oak (vanilla, toast), hints of butter and minerality. Medium body with balanced acidity and a creamy texture.",
+                food: "Saint Angel, Gruyere, Prosciutto di Parma, Honey Bee Gouda, Duck Rillettes",
+                foodPairings: [
+                    { item: "Saint Angel", why: "Creamy wine with creamy cheese - butter meets butter beautifully" },
+                    { item: "Gruyere", why: "Nutty cheese complements the wine's toasted oak and vanilla notes" },
+                    { item: "Prosciutto di Parma", why: "Rich, balanced Chardonnay stands up to the ham's salt and sweetness" },
+                    { item: "Honey Bee Gouda", why: "Honey sweetness echoes the wine's stone fruit and vanilla character" },
+                    { item: "Duck Rillettes", why: "Rich, buttery wine matches luxurious duck fat perfectly" }
+                ],
+                alcohol: "13.5%",
+                serving: "Chilled (50-55°F / 10-13°C)",
+                notes: "Santa Maria Valley is one of California's coolest AVAs - the transverse mountain ranges funnel Pacific fog inland."
+            },
+            // Position 13
+            {
+                name: "Les Fumées Blanches Orange",
+                vintage: "2024",
+                type: "orange",
+                grape: "100% Sauvignon Blanc",
+                grapeDetail: "White grapes fermented with skin contact (like red wine), creating amber color and tannic texture. Ancient technique from Georgia (the country).",
+                region: "Pays d'Oc IGP, Languedoc",
+                country: "France",
+                pronunciation: "lay foo-MAY BLAHN-sh oh-RAHNJ",
+                winemaker: "François Lurton - Pioneering French winemaker who works globally. Les Fumées Blanches ('The White Smokes') is his innovative Languedoc project.",
+                tasting: "Dried apricot, honey, orange peel, nutty notes (hazelnut), tannic texture like tea. Full-bodied with unique complexity, oxidative notes, and a long, savory finish.",
+                food: "Ewephoria, Mimolette, Black Truffle Salami, Foie Gras with Black Truffle, Chorizo",
+                foodPairings: [
+                    { item: "Ewephoria", why: "Nutty, caramelized cheese matches the wine's hazelnut and honey notes" },
+                    { item: "Mimolette", why: "Aged cheese complexity complements the wine's unique oxidative character" },
+                    { item: "Black Truffle Salami", why: "Earthy truffle and savory pork match this wine's savory, tannic texture" },
+                    { item: "Foie Gras with Black Truffle", why: "Rich, complex liver pâté needs an equally complex, full-bodied wine" },
+                    { item: "Chorizo", why: "Smoky, spicy meat can stand up to this tannic, full-bodied orange wine" }
+                ],
+                alcohol: "12.5%",
+                serving: "Lightly chilled (50-55°F / 10-13°C)",
+                notes: "Orange wine is the 'fourth color' of wine. Made by fermenting white grapes with their skins (7-14+ days), extracting tannins, color, and texture."
+            },
+            // Position 14
+            {
+                name: "Marola Albariño Rías Baixas",
+                vintage: "2023",
+                type: "white",
+                grape: "100% Albariño",
+                grapeDetail: "Albariño is Spain's premier white grape, from the rainy, green region of Galicia. Known for bright acidity and stone fruit.",
+                region: "Rías Baixas, Galicia",
+                country: "Spain",
+                winemaker: "Bodegas Marola - Small producer in the Val do Salnés subzone of Rías Baixas, where Albariño thrives on granite soils near the Atlantic coast.",
+                tasting: "White peach, apricot, citrus (lemon, grapefruit), saline minerality. Medium body with vibrant acidity and a refreshing, slightly briny finish.",
+                food: "Hummus, Tapenade, Prosciutto di Parma, Petit Basque, Antipasto Vegetable Blend",
+                foodPairings: [
+                    { item: "Hummus", why: "Crisp, refreshing wine cleanses the palate between creamy bites" },
+                    { item: "Tapenade", why: "Saline wine echoes the briny olives - Mediterranean coastal harmony" },
+                    { item: "Prosciutto di Parma", why: "Bright acidity cuts through the ham's salt and fat" },
+                    { item: "Petit Basque", why: "Mild sheep cheese pairs with the wine's stone fruit and minerality" },
+                    { item: "Antipasto Vegetable Blend", why: "High acidity matches pickled vegetable tang perfectly" }
+                ],
+                alcohol: "12.5%",
+                serving: "Well chilled (45-50°F / 7-10°C)",
+                notes: "Rías Baixas is in Galicia, Spain's lush, rainy northwest corner. The 'rías' are fjord-like inlets, and the maritime influence gives Albariño its characteristic salinity."
+            },
+            // Position 15
+            {
+                name: "La Petite Roche Anjou",
+                vintage: "2023",
+                type: "white",
+                grape: "100% Chenin Blanc",
+                grapeDetail: "Chenin Blanc is the signature white grape of the Loire's Anjou region - versatile from bone-dry to lusciously sweet.",
+                region: "Anjou, Loire Valley",
+                country: "France",
+                pronunciation: "lah peh-TEET ROHSH ahn-ZHOO",
+                winemaker: "La Petite Roche - Small estate in Anjou, producing terroir-driven Chenin Blanc. The name means 'The Little Rock' referring to the schist and limestone soils.",
+                tasting: "Green apple, quince, honey, white flowers, wet stone minerality. Medium body with bright acidity, subtle sweetness, and a long, mineral finish.",
+                food: "Black Truffle Goat, Hummus, Petit Basque, Maple Bourbon Goat, The Veg flatbread",
+                foodPairings: [
+                    { item: "Black Truffle Goat", why: "Loire Chenin loves goat cheese - acidity cuts through richness, fruit complements truffle" },
+                    { item: "Hummus", why: "Refreshing wine perfect for casual snacking and dipping" },
+                    { item: "Petit Basque", why: "Mild sheep cheese pairs beautifully with the wine's apple and honey notes" },
+                    { item: "Maple Bourbon Goat", why: "The wine's subtle sweetness complements the cheese's maple notes" },
+                    { item: "The Veg flatbread", why: "Fresh, mineral wine loves vegetable Mediterranean flavors" }
+                ],
+                alcohol: "12%",
+                serving: "Well chilled (45-50°F / 7-10°C)",
+                notes: "Anjou Chenin can range from dry to off-dry to sweet. This bottling is on the drier side with just a hint of residual sugar."
+            },
+            // Position 16
+            {
+                name: "Braunewell Unser Täglich Scheurebe",
+                vintage: "2023",
+                type: "white",
+                grape: "100% Scheurebe",
+                grapeDetail: "Scheurebe is a German crossing of Riesling and an unknown grape. Named after its creator Georg Scheu, it's aromatic with exotic fruit character.",
+                region: "Rheinhessen (Selztal)",
+                country: "Germany",
+                winemaker: "Weingut Braunewell - Family estate in the Selztal (Selz Valley) of Rheinhessen, Germany's largest wine region. 'Unser Täglich' means 'Our Daily' - an everyday drinking wine.",
+                tasting: "Grapefruit, passionfruit, elderflower, tropical notes, hint of fresh herbs. Medium body with vibrant acidity and an aromatic, refreshing finish.",
+                food: "Pimento Cheese Dip, Hummus, Maple Bourbon Goat, Exotic Bomba, Spicy Asian dishes",
+                foodPairings: [
+                    { item: "Pimento Cheese Dip", why: "Aromatic wine with a touch of sweetness cools jalapeño heat beautifully" },
+                    { item: "Hummus", why: "Exotic fruit notes add interest to the creamy chickpea dip" },
+                    { item: "Maple Bourbon Goat", why: "Sweet cheese with aromatic, fruity wine - complementary flavors" },
+                    { item: "Exotic Bomba", why: "Tropical fruit sorbetto loves tropical-fruited Scheurebe" },
+                    { item: "Spicy Asian dishes", why: "Aromatic German whites are classic with Asian cuisine - fruit tames spice" }
+                ],
+                alcohol: "11.5%",
+                serving: "Well chilled (45-50°F / 7-10°C)",
+                notes: "Scheurebe was created in 1916 and is having a renaissance. It's more aromatic than Riesling with exotic tropical and grapefruit notes."
+            },
+            // Position 17
             {
                 name: "Krasno Pinot Noir",
                 vintage: "2022",
@@ -2311,7 +2501,6 @@
                 grapeDetail: "Pinot Noir is thin-skinned, resulting in lighter color but intense aromatics. Slovenia has a long winemaking tradition.",
                 region: "Goriška Brda",
                 country: "Slovenia",
-                pronunciation: "KRAHZ-noh PEE-noh NWAHR | Goriška Brda: gor-EESH-kah BUR-dah",
                 winemaker: "Krasno Wines - Producer in Slovenia's premier wine region Goriška Brda, bordering Italy's Friuli. The name means 'beautiful' in Slovenian.",
                 tasting: "Red cherry, strawberry, earthy notes, hints of spice and dried herbs. Light to medium body with silky tannins and fresh acidity.",
                 food: "Duck Rillettes, Prosciutto di Parma, Saint Angel, Black Truffle Goat, Petit Basque",
@@ -2326,6 +2515,7 @@
                 serving: "Slightly chilled (55-60°F / 13-15°C)",
                 notes: "Goriška Brda is Slovenia's most prestigious wine region, sharing the same hills as Italy's Collio. The cool climate produces elegant, European-style Pinot Noir."
             },
+            // Position 18
             {
                 name: "Garnatxa Meretat Mont-Rubí",
                 vintage: "2022",
@@ -2334,7 +2524,6 @@
                 grapeDetail: "Garnatxa is the Catalan name for Grenache/Garnacha - Spain's most planted red grape, known for red fruit and spice.",
                 region: "Penedès (Font-Rubí)",
                 country: "Spain",
-                pronunciation: "gar-NAH-chah meh-reh-TAHT mont-roo-BEE | Penedès: peh-neh-DESS",
                 winemaker: "Mont-Rubí S.A. - Family estate in L'Avella, Font-Rubí in the Penedès region, practicing organic viticulture in the Catalan countryside.",
                 tasting: "Ripe red berries (raspberry, strawberry), Mediterranean herbs, hints of white pepper and garrigue. Medium body with soft tannins and a warm finish.",
                 food: "Chorizo, Salchichon De Bellota, Ewephoria, Tapenade, Manchego",
@@ -2347,8 +2536,9 @@
                 ],
                 alcohol: "14%",
                 serving: "Room temperature (60-65°F / 16-18°C)",
-                notes: "Penedès is famous for Cava but also produces excellent still wines. Font-Rubí's high altitude (400-600m) gives fresh, aromatic Garnacha with good acidity."
+                notes: "Penedès is famous for Cava but also produces excellent still wines. Font-Rubí's high altitude (400-600m) gives fresh, aromatic Garnacha."
             },
+            // Position 19
             {
                 name: "Gorghi Tondi Dume Frappato",
                 vintage: "2023",
@@ -2357,7 +2547,6 @@
                 grapeDetail: "Frappato is a light, aromatic Sicilian grape - often blended in Cerasuolo di Vittoria but delicious on its own.",
                 region: "Sicily",
                 country: "Italy",
-                pronunciation: "GOR-gee TOHN-dee DOO-meh frah-PAH-toh",
                 winemaker: "Gorghi Tondi - Organic estate in western Sicily near Marsala. 'Dume' means 'two' in Sicilian dialect, referencing their two founding families.",
                 tasting: "Fresh red cherry, wild strawberry, rose petals, hints of herbs and Mediterranean scrub. Light body with bright acidity and silky texture.",
                 food: "Prosciutto di Parma, Felino Salami, Saint Angel, Petit Basque, Antipasto Vegetable Blend",
@@ -2370,8 +2559,9 @@
                 ],
                 alcohol: "12.5%",
                 serving: "Slightly chilled (55-60°F / 13-15°C)",
-                notes: "Frappato is one of Sicily's indigenous treasures - light like Gamay but distinctly Mediterranean. Best served slightly chilled for maximum refreshment."
+                notes: "Frappato is one of Sicily's indigenous treasures - light like Gamay but distinctly Mediterranean. Best served slightly chilled."
             },
+            // Position 20
             {
                 name: "Les Cousins L'Inconscient",
                 vintage: "2023",
@@ -2380,7 +2570,6 @@
                 grapeDetail: "A bold Priorat-style blend from the rising Montsant region, combining power with Mediterranean character.",
                 region: "Montsant",
                 country: "Spain",
-                pronunciation: "lay koo-ZAN lan-kohn-see-AHNT | Montsant: mont-SAHNT",
                 winemaker: "Marc and Adrià Pérez - Brothers who created Les Cousins as a passion project. L'Inconscient means 'The Unconscious' - wines made from the heart, not calculation.",
                 tasting: "Dark fruits (blackberry, plum), Mediterranean herbs, licorice, mineral notes from slate soils. Full-bodied with firm tannins and a long, spicy finish.",
                 food: "Chorizo, Salchichon De Bellota, Ewephoria, Mimolette, The Mighty Spicy flatbread",
@@ -2395,6 +2584,7 @@
                 serving: "Room temperature (64°F / 18°C), decant 30 min",
                 notes: "Montsant surrounds the famous Priorat region and shares its slate (llicorella) soils. Often called 'baby Priorat' - similar style at friendlier prices."
             },
+            // Position 21
             {
                 name: "Encomienda de Cervera Horten",
                 vintage: "2023",
@@ -2403,7 +2593,6 @@
                 grapeDetail: "Tempranillo is Spain's noble grape - the backbone of Rioja and Ribera del Duero, known for cherry fruit and aging potential.",
                 region: "Castilla-La Mancha",
                 country: "Spain",
-                pronunciation: "en-koh-mee-EN-dah deh thair-VEH-rah or-TEN | Tempranillo: tem-prah-NEE-yoh",
                 winemaker: "Encomienda de Cervera - Historic estate in Castilla-La Mancha, Spain's largest wine region. 'Horten' refers to their garden vineyard parcels.",
                 tasting: "Red cherry, plum, leather, hints of vanilla and tobacco. Medium to full body with moderate tannins and a smooth finish.",
                 food: "Chorizo, Manchego, Ewephoria, Red Wine Cheddar, Salchichon De Bellota",
@@ -2416,8 +2605,9 @@
                 ],
                 alcohol: "13.5%",
                 serving: "Room temperature (62-65°F / 17-18°C)",
-                notes: "Castilla-La Mancha is Spain's wine heartland - vast plains south of Madrid producing excellent value wines. The continental climate creates ripe, approachable Tempranillo."
+                notes: "Castilla-La Mancha is Spain's wine heartland - vast plains south of Madrid producing excellent value wines."
             },
+            // Position 22
             {
                 name: "Rocca di Castagnoli Chianti Classico",
                 vintage: "2022",
@@ -2426,7 +2616,6 @@
                 grapeDetail: "Chianti Classico requires minimum 80% Sangiovese. The Classico zone is the original, historic heart of Chianti.",
                 region: "Chianti Classico, Tuscany",
                 country: "Italy",
-                pronunciation: "ROH-kah dee kah-stahn-YOH-lee kee-AHN-tee KLAH-see-koh | Sangiovese: san-joh-VAY-zeh",
                 winemaker: "Rocca di Castagnoli - Historic estate in the Gaiole in Chianti zone, one of Chianti Classico's most prestigious areas. The name means 'Fortress of the Chestnut Trees.'",
                 tasting: "Red cherry, dried herbs (oregano, thyme), leather, earthy notes with hints of tobacco. Medium body with firm acidity and well-integrated tannins.",
                 food: "Felino Salami, Prosciutto di Parma, Gruyere, Pecorino, Antipasto Vegetable Blend",
@@ -2439,8 +2628,9 @@
                 ],
                 alcohol: "13.5%",
                 serving: "Slightly cool room temp (60-64°F / 16-18°C)",
-                notes: "Chianti Classico is distinguished by the Black Rooster (Gallo Nero) seal. The Classico zone between Florence and Siena produces more structured, age-worthy wines than regular Chianti."
+                notes: "Chianti Classico is distinguished by the Black Rooster (Gallo Nero) seal. The Classico zone between Florence and Siena produces more structured wines."
             },
+            // Position 23
             {
                 name: "Palmeri Navalta Farnacha",
                 vintage: "2018",
@@ -2449,7 +2639,6 @@
                 grapeDetail: "Old vine Garnacha from high-altitude Spanish vineyards, showing concentration and complexity.",
                 region: "Calatayud",
                 country: "Spain",
-                pronunciation: "pahl-MEH-ree nah-VAHL-tah gar-NAH-chah | Calatayud: kah-lah-tah-YOOD",
                 winemaker: "Bodegas Palmeri - Small producer in the mountainous Calatayud region of Aragón, working with old vine Garnacha at high altitude.",
                 tasting: "Ripe red and dark fruits (cherry, blackberry), spice, dried herbs, mineral notes. Full body with velvety tannins and a long, warm finish.",
                 food: "Chorizo, Salchichon De Bellota, Ewephoria, Mimolette, Blue d'Auvergne",
@@ -2462,218 +2651,31 @@
                 ],
                 alcohol: "14.5%",
                 serving: "Room temperature (64°F / 18°C)",
-                notes: "Calatayud has some of Spain's highest vineyards (800-1000m). Old vine Garnacha from these altitudes produces concentrated wines with fresh acidity despite the power."
+                notes: "Calatayud has some of Spain's highest vineyards (800-1000m). Old vine Garnacha from these altitudes produces concentrated wines with fresh acidity."
             },
+            // Position 24
             {
-                name: "Famille Bouey Cuvée 58",
-                vintage: "2020",
+                name: "Domaine Verquière Plan de Dieu",
+                vintage: "2024",
                 type: "red",
-                grape: "60% Merlot, 40% Cabernet Sauvignon",
-                grapeDetail: "Classic Right Bank-style Bordeaux blend with Merlot dominant for softness",
-                region: "Bordeaux",
+                grape: "Grenache 70%, Syrah 20%, Mourvèdre 10%",
+                grapeDetail: "Plan de Dieu is a named village within Côtes du Rhône Villages, known for powerful, concentrated wines from the 'Plain of God.'",
+                region: "Côtes du Rhône Villages Plan de Dieu",
                 country: "France",
-                pronunciation: "fah-MEE-yuh boo-AY koo-VAY san-KWONT-weet | Bordeaux: bor-DOH",
-                winemaker: "Maison Bouey - Family négociant house established in 1821. The Cuvée 58 honors the year 1958 when the family moved to their current headquarters.",
-                tasting: "Red and black fruits (cherry, blackcurrant), subtle oak (toast, vanilla), smooth tannins, hints of tobacco, cedar, and baking spice. Elegant and balanced.",
-                food: "Duck Rillettes, Soppressata Salame w/ Burgundy, Mimolette, Red Wine Cheddar, Pâté de Campagne",
+                pronunciation: "doh-MEHN vair-kee-AIR plahn duh DYUH",
+                winemaker: "Domaine Verquière - Family estate in the Rhône Valley producing authentic, terroir-driven wines from the prestigious Plan de Dieu appellation.",
+                tasting: "Dark fruits (blackberry, black cherry), garrigue herbs (thyme, rosemary), black pepper, hints of licorice. Full-bodied with ripe tannins and a long, spicy finish.",
+                food: "Chorizo, Salchichon De Bellota, Ewephoria, Mimolette, Tapenade",
                 foodPairings: [
-                    { item: "Duck Rillettes", why: "Rich duck fat is balanced by the wine's smooth tannins and fresh acidity" },
-                    { item: "Soppressata Salame w/ Burgundy", why: "Wine-infused salami creates a beautiful echo with this French red" },
-                    { item: "Mimolette", why: "Nutty, caramel cheese notes complement the wine's toasted oak character" },
-                    { item: "Red Wine Cheddar", why: "Wine-soaked cheese harmonizes with the Bordeaux's fruit and tannin structure" },
-                    { item: "Pâté de Campagne", why: "Classic French bistro pairing - country pâté loves elegant Bordeaux" }
+                    { item: "Chorizo", why: "Smoky paprika spice complements the wine's peppery, herbal character" },
+                    { item: "Salchichon De Bellota", why: "Rich Ibérico pork matches the wine's full body and dark fruit intensity" },
+                    { item: "Ewephoria", why: "Sweet, aged cheese softens the wine's ripe tannins" },
+                    { item: "Mimolette", why: "Nutty, caramel notes echo the wine's warm, lingering finish" },
+                    { item: "Tapenade", why: "Briny olives and capers match the wine's Mediterranean herb profile" }
                 ],
-                alcohol: "13.5%",
-                serving: "Room temperature (64°F / 18°C)",
-                notes: "Bordeaux blends are categorized by 'bank' - Right Bank (Merlot-dominant, softer) vs Left Bank (Cabernet-dominant, more structured). This is Right Bank style."
-            },
-
-            // WHITE WINES
-            {
-                name: "Monte degli Angeli Pinot Grigio",
-                vintage: "2024",
-                type: "white",
-                grape: "100% Pinot Grigio",
-                grapeDetail: "Italian Pinot Grigio is typically fermented in steel for freshness. Same grape as French Pinot Gris but made in a lighter style.",
-                region: "Delle Venezie IGT, Veneto/Friuli",
-                country: "Italy",
-                pronunciation: "MON-teh DEL-yee ahn-JEH-lee PEE-noh GREE-joh",
-                winemaker: "Monte degli Angeli (Mountain of Angels) - Northeastern Italian producer in the Delle Venezie region, using modern winemaking to preserve freshness.",
-                tasting: "Pear, apple, citrus (lemon), almond notes. Light and crisp with subtle minerality, clean finish, and refreshing acidity.",
-                food: "Prosciutto di Parma, Bresaola, Saint Angel, Hummus, Antipasto Vegetable Blend",
-                foodPairings: [
-                    { item: "Prosciutto di Parma", why: "Italian wine with Italian ham - light, crisp wine cuts through salty fat" },
-                    { item: "Bresaola", why: "Delicate lean beef pairs with this neutral, refreshing wine" },
-                    { item: "Saint Angel", why: "Rich cream cheese needs a crisp, clean wine to refresh the palate" },
-                    { item: "Hummus", why: "Neutral wine lets the hummus flavors shine while cleansing the palate" },
-                    { item: "Antipasto Vegetable Blend", why: "Italian pickled veggies with Italian wine - classic aperitivo pairing" }
-                ],
-                alcohol: "12%",
-                serving: "Well chilled (45-50°F / 7-10°C)",
-                notes: "Delle Venezie is a large IGT covering Veneto, Friuli, and Trentino. Italian Pinot Grigio is typically lighter and more neutral than Alsatian Pinot Gris, which is richer and more aromatic."
-            },
-            {
-                name: "Pouilly-Fumé Dezat",
-                vintage: "2024",
-                type: "white",
-                grape: "100% Sauvignon Blanc",
-                grapeDetail: "Pouilly-Fumé is always 100% Sauvignon Blanc - the 'Fumé' refers to the smoky/flinty character from silex soils, not oak.",
-                region: "Pouilly-Fumé, Loire Valley",
-                country: "France",
-                pronunciation: "poo-YEE foo-MAY deh-ZAH | Sauvignon Blanc: saw-vee-NYOHN BLAHN",
-                winemaker: "Domaine Dezat - Multi-generational family estate in Pouilly-sur-Loire, crafting mineral-driven Sauvignon Blanc from silex (flint) soils.",
-                tasting: "Citrus (grapefruit, lemon), flint/gunsmoke, white flowers, gooseberry. Bone-dry with razor-sharp acidity, pronounced minerality, and a long, clean finish.",
-                food: "Black Truffle Goat, Petit Basque, Hummus, The Veg flatbread, Bresaola",
-                foodPairings: [
-                    { item: "Black Truffle Goat", why: "THE classic pairing - Loire Sauvignon Blanc and goat cheese are legendary together" },
-                    { item: "Petit Basque", why: "Sheep cheese's mild nuttiness complements the wine's mineral precision" },
-                    { item: "Hummus", why: "Clean, refreshing wine cuts through the tahini richness" },
-                    { item: "The Veg flatbread", why: "Herbal, citrus-driven wine loves fresh vegetable and arugula flavors" },
-                    { item: "Bresaola", why: "Lean beef doesn't overpower the wine; acidity brightens the delicate meat" }
-                ],
-                alcohol: "13%",
-                serving: "Well chilled (45-50°F / 7-10°C)",
-                notes: "Pouilly-Fumé sits across the Loire from Sancerre. The 'fumé' (smoky) character comes from silex (flint) soils that give a distinctive gunflint minerality. Never oaked."
-            },
-            {
-                name: "Gorghi Tondi Rosa dei Venti Nerello Mascalese",
-                vintage: "2023",
-                type: "white",
-                grape: "100% Nerello Mascalese (vinified white)",
-                grapeDetail: "Nerello Mascalese is usually a red grape from Mt. Etna, but when pressed immediately (blanc de noirs style), it makes an aromatic white.",
-                region: "Sicily",
-                country: "Italy",
-                pronunciation: "GOR-gee TOHN-dee ROH-zah day VEN-tee neh-REL-loh mah-skah-LEH-zeh",
-                winemaker: "Gorghi Tondi - Organic estate in western Sicily. 'Rosa dei Venti' means 'Compass Rose' - reflecting the Mediterranean winds that shape their vineyards.",
-                tasting: "White peach, citrus, almond, delicate floral notes. Light to medium body with fresh acidity and subtle minerality. Unique and aromatic.",
-                food: "Prosciutto di Parma, Hummus, Petit Basque, Antipasto Vegetable Blend, The Veg flatbread",
-                foodPairings: [
-                    { item: "Prosciutto di Parma", why: "Delicate, aromatic wine complements the ham's sweetness without overpowering" },
-                    { item: "Hummus", why: "Light, refreshing wine perfect for casual Mediterranean snacking" },
-                    { item: "Petit Basque", why: "Mild sheep cheese pairs with the wine's almond and floral notes" },
-                    { item: "Antipasto Vegetable Blend", why: "Italian wine with Italian antipasto - natural pairing" },
-                    { item: "The Veg flatbread", why: "Aromatic wine complements fresh vegetables and Mediterranean flavors" }
-                ],
-                alcohol: "12.5%",
-                serving: "Well chilled (45-50°F / 7-10°C)",
-                notes: "Making white wine from red grapes (blanc de noirs) is rare in Sicily. Nerello Mascalese is usually the star of Etna Rosso, but this unique expression showcases its aromatic potential."
-            },
-            {
-                name: "Presqu'ile Chardonnay",
-                vintage: "2023",
-                type: "white",
-                grape: "100% Chardonnay",
-                grapeDetail: "Santa Barbara County Chardonnay benefits from cool Pacific fog, creating a balanced style between rich Napa and lean Burgundy.",
-                region: "Santa Barbara County, California",
-                country: "USA",
-                pronunciation: "presk-EEL shar-doh-NAY",
-                winemaker: "Presqu'ile Winery - Estate winery in the Santa Maria Valley, one of California's coolest wine regions. The name is French for 'peninsula.'",
-                tasting: "Green apple, citrus, white peach, subtle oak (vanilla, toast), hints of butter and minerality. Medium body with balanced acidity and a creamy texture.",
-                food: "Saint Angel, Gruyere, Prosciutto di Parma, Honey Bee Gouda, Duck Rillettes",
-                foodPairings: [
-                    { item: "Saint Angel", why: "Creamy wine with creamy cheese - butter meets butter beautifully" },
-                    { item: "Gruyere", why: "Nutty cheese complements the wine's toasted oak and vanilla notes" },
-                    { item: "Prosciutto di Parma", why: "Rich, balanced Chardonnay stands up to the ham's salt and sweetness" },
-                    { item: "Honey Bee Gouda", why: "Honey sweetness echoes the wine's stone fruit and vanilla character" },
-                    { item: "Duck Rillettes", why: "Rich, buttery wine matches luxurious duck fat perfectly" }
-                ],
-                alcohol: "13.5%",
-                serving: "Chilled (50-55°F / 10-13°C)",
-                notes: "Santa Maria Valley is one of California's coolest AVAs - the transverse mountain ranges funnel Pacific fog inland. This creates elegant Chardonnay with both richness and freshness."
-            },
-            {
-                name: "Marola Albariño Rías Baixas",
-                vintage: "2023",
-                type: "white",
-                grape: "100% Albariño",
-                grapeDetail: "Albariño is Spain's premier white grape, from the rainy, green region of Galicia. Known for bright acidity and stone fruit.",
-                region: "Rías Baixas, Galicia",
-                country: "Spain",
-                pronunciation: "mah-ROH-lah ahl-bah-REE-nyoh REE-ahs BYE-shahss",
-                winemaker: "Bodegas Marola - Small producer in the Val do Salnés subzone of Rías Baixas, where Albariño thrives on granite soils near the Atlantic coast.",
-                tasting: "White peach, apricot, citrus (lemon, grapefruit), saline minerality. Medium body with vibrant acidity and a refreshing, slightly briny finish.",
-                food: "Hummus, Tapenade, Prosciutto di Parma, Petit Basque, Antipasto Vegetable Blend",
-                foodPairings: [
-                    { item: "Hummus", why: "Crisp, refreshing wine cleanses the palate between creamy bites" },
-                    { item: "Tapenade", why: "Saline wine echoes the briny olives - Mediterranean coastal harmony" },
-                    { item: "Prosciutto di Parma", why: "Bright acidity cuts through the ham's salt and fat" },
-                    { item: "Petit Basque", why: "Mild sheep cheese pairs with the wine's stone fruit and minerality" },
-                    { item: "Antipasto Vegetable Blend", why: "High acidity matches pickled vegetable tang perfectly" }
-                ],
-                alcohol: "12.5%",
-                serving: "Well chilled (45-50°F / 7-10°C)",
-                notes: "Rías Baixas is in Galicia, Spain's lush, rainy northwest corner. The 'rías' are fjord-like inlets, and the maritime influence gives Albariño its characteristic salinity. Perfect with seafood."
-            },
-            {
-                name: "La Petite Roche Anjou",
-                vintage: "2023",
-                type: "white",
-                grape: "100% Chenin Blanc",
-                grapeDetail: "Chenin Blanc is the signature white grape of the Loire's Anjou region - versatile from bone-dry to lusciously sweet.",
-                region: "Anjou, Loire Valley",
-                country: "France",
-                pronunciation: "lah peh-TEET ROHSH ahn-ZHOO | Chenin Blanc: sheh-NAN BLAHN",
-                winemaker: "La Petite Roche - Small estate in Anjou, producing terroir-driven Chenin Blanc. The name means 'The Little Rock' referring to the schist and limestone soils.",
-                tasting: "Green apple, quince, honey, white flowers, wet stone minerality. Medium body with bright acidity, subtle sweetness, and a long, mineral finish.",
-                food: "Black Truffle Goat, Hummus, Petit Basque, Maple Bourbon Goat, The Veg flatbread",
-                foodPairings: [
-                    { item: "Black Truffle Goat", why: "Loire Chenin loves goat cheese - acidity cuts through richness, fruit complements truffle" },
-                    { item: "Hummus", why: "Refreshing wine perfect for casual snacking and dipping" },
-                    { item: "Petit Basque", why: "Mild sheep cheese pairs beautifully with the wine's apple and honey notes" },
-                    { item: "Maple Bourbon Goat", why: "The wine's subtle sweetness complements the cheese's maple notes" },
-                    { item: "The Veg flatbread", why: "Fresh, mineral wine loves vegetable Mediterranean flavors" }
-                ],
-                alcohol: "12%",
-                serving: "Well chilled (45-50°F / 7-10°C)",
-                notes: "Anjou Chenin can range from dry to off-dry to sweet. This bottling is on the drier side with just a hint of residual sugar that balances the high acidity."
-            },
-            {
-                name: "Braunewell Unser Täglich Scheurebe",
-                vintage: "2023",
-                type: "white",
-                grape: "100% Scheurebe",
-                grapeDetail: "Scheurebe is a German crossing of Riesling and an unknown grape. Named after its creator Georg Scheu, it's aromatic with exotic fruit character.",
-                region: "Rheinhessen (Selztal)",
-                country: "Germany",
-                pronunciation: "BROW-neh-vel OON-zer TEG-likh SHOY-reh-beh | Rheinhessen: rine-HESS-en",
-                winemaker: "Weingut Braunewell - Family estate in the Selztal (Selz Valley) of Rheinhessen, Germany's largest wine region. 'Unser Täglich' means 'Our Daily' - an everyday drinking wine.",
-                tasting: "Grapefruit, passionfruit, elderflower, tropical notes, hint of fresh herbs. Medium body with vibrant acidity and an aromatic, refreshing finish.",
-                food: "Pimento Cheese Dip, Hummus, Maple Bourbon Goat, Exotic Bomba, Spicy Asian dishes",
-                foodPairings: [
-                    { item: "Pimento Cheese Dip", why: "Aromatic wine with a touch of sweetness cools jalapeño heat beautifully" },
-                    { item: "Hummus", why: "Exotic fruit notes add interest to the creamy chickpea dip" },
-                    { item: "Maple Bourbon Goat", why: "Sweet cheese with aromatic, fruity wine - complementary flavors" },
-                    { item: "Exotic Bomba", why: "Tropical fruit sorbetto loves tropical-fruited Scheurebe" },
-                    { item: "Spicy Asian dishes", why: "Aromatic German whites are classic with Asian cuisine - fruit tames spice" }
-                ],
-                alcohol: "11.5%",
-                serving: "Well chilled (45-50°F / 7-10°C)",
-                notes: "Scheurebe was created in 1916 and is having a renaissance. It's more aromatic than Riesling with exotic tropical and grapefruit notes. Rheinhessen's warm climate ripens it beautifully."
-            },
-
-            // ORANGE WINE
-            {
-                name: "Les Fumées Blanches Orange",
-                vintage: "2024",
-                type: "orange",
-                grape: "100% Sauvignon Blanc",
-                grapeDetail: "White grapes fermented with skin contact (like red wine), creating amber color and tannic texture. Ancient technique from Georgia (the country).",
-                region: "Pays d'Oc IGP, Languedoc",
-                country: "France",
-                pronunciation: "lay foo-MAY BLAHN-sh oh-RAHNJ | Pays d'Oc: pay-ee DOCK",
-                winemaker: "François Lurton - Pioneering French winemaker who works globally. Les Fumées Blanches ('The White Smokes') is his innovative Languedoc project.",
-                tasting: "Dried apricot, honey, orange peel, nutty notes (hazelnut), tannic texture like tea. Full-bodied with unique complexity, oxidative notes, and a long, savory finish.",
-                food: "Ewephoria, Mimolette, Black Truffle Salami, Foie Gras with Black Truffle, Chorizo",
-                foodPairings: [
-                    { item: "Ewephoria", why: "Nutty, caramelized cheese matches the wine's hazelnut and honey notes" },
-                    { item: "Mimolette", why: "Aged cheese complexity complements the wine's unique oxidative character" },
-                    { item: "Black Truffle Salami", why: "Earthy truffle and savory pork match this wine's savory, tannic texture" },
-                    { item: "Foie Gras with Black Truffle", why: "Rich, complex liver pâté needs an equally complex, full-bodied wine" },
-                    { item: "Chorizo", why: "Smoky, spicy meat can stand up to this tannic, full-bodied orange wine" }
-                ],
-                alcohol: "12.5%",
-                serving: "Lightly chilled (50-55°F / 10-13°C)",
-                notes: "Orange wine is the 'fourth color' of wine. Made by fermenting white grapes with their skins (7-14+ days), extracting tannins, color, and texture. This technique originated 8,000 years ago in Georgia using clay qvevri vessels."
+                alcohol: "14.5%",
+                serving: "Room temperature (62-65°F / 17-18°C)",
+                notes: "Plan de Dieu ('Plain of God') is one of the top Côtes du Rhône Villages. The name comes from medieval times when the Knights Templar cultivated vines here."
             }
         ];
 
