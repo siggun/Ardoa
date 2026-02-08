@@ -1316,6 +1316,210 @@
                 content: "";
             }
         }
+
+        /* Online Flashcards Styles */
+        .flashcard-controls {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .flashcard-controls button {
+            background: var(--burgundy);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .flashcard-controls button:hover {
+            background: var(--burgundy-dark);
+            transform: translateY(-2px);
+        }
+
+        .flashcard-controls button.active {
+            background: var(--gold);
+            color: var(--charcoal);
+        }
+
+        .flashcard-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .flashcard-wrapper {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 500px;
+            height: 350px;
+            margin-bottom: 2rem;
+        }
+
+        .flashcard {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease;
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-front,
+        .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .flashcard-front {
+            background: linear-gradient(135deg, var(--burgundy), var(--burgundy-dark));
+            color: white;
+        }
+
+        .flashcard-front.wine-white {
+            background: linear-gradient(135deg, #DAA520, #B8860B);
+        }
+
+        .flashcard-front.wine-rose {
+            background: linear-gradient(135deg, #E8B4B8, #D4919A);
+            color: var(--charcoal);
+        }
+
+        .flashcard-front.wine-orange {
+            background: linear-gradient(135deg, #CC7722, #A66000);
+        }
+
+        .flashcard-front.cheese {
+            background: linear-gradient(135deg, #F4D03F, #C9A227);
+            color: var(--charcoal);
+        }
+
+        .flashcard-back {
+            background: white;
+            color: var(--charcoal);
+            transform: rotateY(180deg);
+            text-align: center;
+        }
+
+        .flashcard-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .flashcard-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .flashcard-hint {
+            position: absolute;
+            bottom: 1rem;
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        .flashcard-back .flashcard-info {
+            margin-bottom: 0.75rem;
+        }
+
+        .flashcard-back .flashcard-label {
+            font-weight: bold;
+            color: var(--burgundy);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .flashcard-back .flashcard-value {
+            font-size: 1.1rem;
+            margin-top: 0.25rem;
+        }
+
+        .flashcard-nav {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .flashcard-nav button {
+            background: var(--burgundy);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flashcard-nav button:hover {
+            background: var(--burgundy-dark);
+            transform: scale(1.1);
+        }
+
+        .flashcard-counter {
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .flashcard-shuffle {
+            margin-top: 1rem;
+        }
+
+        .flashcard-shuffle button {
+            background: var(--gold);
+            color: var(--charcoal);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .flashcard-shuffle button:hover {
+            background: #E8D5A3;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            .flashcard-wrapper {
+                height: 300px;
+            }
+
+            .flashcard-title {
+                font-size: 1.25rem;
+            }
+
+            .flashcard-back .flashcard-value {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1327,6 +1531,7 @@
         <button class="active" onclick="showSection('techsheets')">Wine List</button>
         <button onclick="showSection('food')">Food Menu</button>
         <button onclick="showSection('flashcards')">Wine Quiz</button>
+        <button onclick="showSection('onlineflashcards')">Online Flashcards</button>
         <button onclick="showSection('quickref')">Quick Reference</button>
         <button onclick="showSection('wineregions')">Wine Regions</button>
         <button onclick="showSection('printcards')">Print Cards</button>
@@ -1514,6 +1719,36 @@
                         <!-- Other food rows will be inserted by JavaScript -->
                     </tbody>
                 </table>
+            </div>
+        </section>
+
+        <!-- Online Flashcards Section -->
+        <section id="onlineflashcards">
+            <div class="flashcard-controls">
+                <button class="active" onclick="switchFlashcardDeck('wine')">Wine Cards</button>
+                <button onclick="switchFlashcardDeck('cheese')">Cheese Cards</button>
+            </div>
+            <div class="flashcard-container">
+                <div class="flashcard-wrapper">
+                    <div class="flashcard" id="currentFlashcard" onclick="flipCard()">
+                        <div class="flashcard-front" id="flashcardFront">
+                            <div class="flashcard-title" id="flashcardFrontTitle">Wine Name</div>
+                            <div class="flashcard-subtitle" id="flashcardFrontSubtitle">Vintage</div>
+                            <div class="flashcard-hint">Tap to flip</div>
+                        </div>
+                        <div class="flashcard-back" id="flashcardBack">
+                            <!-- Back content filled by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                <div class="flashcard-nav">
+                    <button onclick="prevCard()">&#8592;</button>
+                    <span class="flashcard-counter" id="flashcardCounter">1 / 24</span>
+                    <button onclick="nextCard()">&#8594;</button>
+                </div>
+                <div class="flashcard-shuffle">
+                    <button onclick="shuffleCards()">Shuffle Cards</button>
+                </div>
             </div>
         </section>
 
@@ -3566,6 +3801,131 @@
         // Re-initialize flashcards when settings change
         document.querySelectorAll('.quiz-option input').forEach(checkbox => {
             checkbox.addEventListener('change', initializeFlashcards);
+        });
+
+        // ==========================================
+        // ONLINE FLASHCARDS FUNCTIONALITY
+        // ==========================================
+
+        let onlineFlashcardDeck = 'wine';
+        let onlineCardIndex = 0;
+        let onlineCards = [];
+
+        function initOnlineFlashcards() {
+            buildOnlineCardDeck();
+            showOnlineCard();
+        }
+
+        function buildOnlineCardDeck() {
+            if (onlineFlashcardDeck === 'wine') {
+                onlineCards = wines.map(wine => ({
+                    type: 'wine',
+                    wineType: wine.type,
+                    frontTitle: wine.name,
+                    frontSubtitle: wine.vintage,
+                    backData: [
+                        { label: 'Type', value: wine.type.charAt(0).toUpperCase() + wine.type.slice(1) },
+                        { label: 'Grape(s)', value: wine.grape },
+                        { label: 'Region', value: wine.region },
+                        { label: 'Country', value: wine.country }
+                    ]
+                }));
+            } else {
+                onlineCards = cheeses.map(cheese => ({
+                    type: 'cheese',
+                    frontTitle: cheese.name,
+                    frontSubtitle: cheese.price,
+                    backData: [
+                        { label: 'Type', value: cheese.type },
+                        { label: 'Origin', value: cheese.origin },
+                        { label: 'Pairings', value: cheese.pairings || 'Various wines' }
+                    ]
+                }));
+            }
+            onlineCardIndex = 0;
+        }
+
+        function showOnlineCard() {
+            if (onlineCards.length === 0) return;
+
+            const card = onlineCards[onlineCardIndex];
+            const flashcard = document.getElementById('currentFlashcard');
+            const front = document.getElementById('flashcardFront');
+            const back = document.getElementById('flashcardBack');
+
+            // Reset flip state
+            flashcard.classList.remove('flipped');
+
+            // Update front
+            document.getElementById('flashcardFrontTitle').textContent = card.frontTitle;
+            document.getElementById('flashcardFrontSubtitle').textContent = card.frontSubtitle;
+
+            // Update front styling based on type
+            front.className = 'flashcard-front';
+            if (card.type === 'wine') {
+                if (card.wineType === 'white') front.classList.add('wine-white');
+                else if (card.wineType === 'rose') front.classList.add('wine-rose');
+                else if (card.wineType === 'orange') front.classList.add('wine-orange');
+            } else {
+                front.classList.add('cheese');
+            }
+
+            // Update back
+            back.innerHTML = card.backData.map(item => `
+                <div class="flashcard-info">
+                    <div class="flashcard-label">${item.label}</div>
+                    <div class="flashcard-value">${item.value}</div>
+                </div>
+            `).join('') + '<div class="flashcard-hint">Tap to flip back</div>';
+
+            // Update counter
+            document.getElementById('flashcardCounter').textContent =
+                `${onlineCardIndex + 1} / ${onlineCards.length}`;
+        }
+
+        function flipCard() {
+            const flashcard = document.getElementById('currentFlashcard');
+            flashcard.classList.toggle('flipped');
+        }
+
+        function nextCard() {
+            if (onlineCards.length === 0) return;
+            onlineCardIndex = (onlineCardIndex + 1) % onlineCards.length;
+            showOnlineCard();
+        }
+
+        function prevCard() {
+            if (onlineCards.length === 0) return;
+            onlineCardIndex = (onlineCardIndex - 1 + onlineCards.length) % onlineCards.length;
+            showOnlineCard();
+        }
+
+        function shuffleCards() {
+            // Fisher-Yates shuffle
+            for (let i = onlineCards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [onlineCards[i], onlineCards[j]] = [onlineCards[j], onlineCards[i]];
+            }
+            onlineCardIndex = 0;
+            showOnlineCard();
+        }
+
+        function switchFlashcardDeck(deck) {
+            onlineFlashcardDeck = deck;
+
+            // Update button states
+            document.querySelectorAll('.flashcard-controls button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            buildOnlineCardDeck();
+            showOnlineCard();
+        }
+
+        // Initialize online flashcards when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initOnlineFlashcards();
         });
     </script>
 </body>
