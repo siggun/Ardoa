@@ -2345,247 +2345,138 @@
         <div class="header-content">
             <!-- Gothic Logo: Haunting Dark Tree with Realistic White Raven holding Grapes -->
             <svg class="gothic-logo" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background Glow -->
                 <defs>
-                    <!-- Moon Glow -->
-                    <radialGradient id="moonGlow" cx="50%" cy="25%" r="50%">
-                        <stop offset="0%" style="stop-color:#3a2845;stop-opacity:0.9"/>
-                        <stop offset="60%" style="stop-color:#1a1025;stop-opacity:0.4"/>
+                    <radialGradient id="moonGlow" cx="50%" cy="30%" r="60%">
+                        <stop offset="0%" style="stop-color:#2a2035;stop-opacity:0.8"/>
                         <stop offset="100%" style="stop-color:transparent;stop-opacity:0"/>
                     </radialGradient>
-                    <!-- Raven Glow -->
-                    <filter id="ravenGlow">
-                        <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
                         <feMerge>
                             <feMergeNode in="coloredBlur"/>
                             <feMergeNode in="SourceGraphic"/>
                         </feMerge>
                     </filter>
-                    <!-- Feather Texture -->
-                    <pattern id="featherTexture" patternUnits="userSpaceOnUse" width="4" height="4">
-                        <path d="M0,2 Q2,0 4,2 Q2,4 0,2" fill="none" stroke="#d0ccc4" stroke-width="0.3" opacity="0.5"/>
-                    </pattern>
-                    <!-- Grape Gradient -->
-                    <radialGradient id="grapeShine" cx="30%" cy="30%" r="70%">
-                        <stop offset="0%" style="stop-color:#6a1a2a"/>
-                        <stop offset="100%" style="stop-color:#3d0a15"/>
-                    </radialGradient>
                 </defs>
 
-                <!-- Ethereal Moon/Mist Background -->
-                <ellipse cx="140" cy="50" rx="100" ry="70" fill="url(#moonGlow)"/>
+                <!-- Moon/Mist Background -->
+                <ellipse cx="140" cy="60" rx="80" ry="60" fill="url(#moonGlow)"/>
 
-                <!-- Distant Mist Wisps -->
-                <path d="M20,80 Q60,70 100,85 Q130,75 160,82 Q200,72 240,88" stroke="#2a2035" stroke-width="0.5" fill="none" opacity="0.5"/>
-                <path d="M30,95 Q70,88 110,98 Q150,85 190,95 Q230,88 260,100" stroke="#2a2035" stroke-width="0.4" fill="none" opacity="0.4"/>
+                <!-- Dark Tree Trunk -->
+                <path d="M140,195 L140,120 Q138,100 130,85 L125,70
+                         M140,120 Q142,105 150,90 L155,75
+                         M140,140 Q130,135 115,130
+                         M140,140 Q150,138 165,135"
+                      stroke="#1a1520" stroke-width="8" fill="none" stroke-linecap="round"/>
 
-                <!-- Gnarled Dark Tree - More Intricate -->
-                <!-- Main Trunk with texture -->
-                <path d="M140,198 C138,180 142,160 140,140 C138,125 136,110 132,95 L128,80
-                         M140,140 C145,130 148,120 152,105 L156,88"
-                      stroke="#12101a" stroke-width="10" fill="none" stroke-linecap="round"/>
-                <path d="M140,198 C139,185 141,170 140,155 C138,140 137,125 134,110"
-                      stroke="#1a1520" stroke-width="6" fill="none" stroke-linecap="round"/>
+                <!-- Tree Branches - Gnarled and Gothic - MANY MORE BRANCHES -->
+                <path d="M125,70 Q115,55 100,45 Q85,38 70,40
+                         M125,70 Q120,50 110,35 Q100,25 95,20
+                         M155,75 Q165,60 180,50 Q195,45 210,48
+                         M155,75 Q160,55 175,40 Q185,30 195,25
+                         M115,130 Q95,125 75,130 Q60,135 50,145
+                         M165,135 Q185,130 205,135 Q220,140 230,150"
+                      stroke="#1a1520" stroke-width="4" fill="none" stroke-linecap="round"/>
 
-                <!-- Bark Texture on Trunk -->
-                <path d="M135,180 Q137,175 134,170 M143,185 Q145,178 142,172 M136,160 Q138,155 135,150 M144,165 Q146,158 143,152"
-                      stroke="#0a0810" stroke-width="1" fill="none" opacity="0.6"/>
+                <!-- Additional Upper Branches -->
+                <path d="M125,70 Q130,55 125,40 Q120,28 110,18
+                         M125,70 Q108,62 92,58 Q78,55 65,60
+                         M155,75 Q150,58 155,42 Q160,28 172,18
+                         M155,75 Q172,68 188,65 Q202,62 218,68"
+                      stroke="#1a1520" stroke-width="3.5" fill="none" stroke-linecap="round"/>
 
-                <!-- Left Branch System - Twisted and Gnarled -->
-                <path d="M128,80 C115,65 105,55 85,48 C70,43 55,45 40,52
-                         M128,80 C118,60 108,45 95,32 C85,22 72,15 58,12
-                         M85,48 C75,42 62,40 48,45
-                         M95,32 C88,25 78,20 65,18"
-                      stroke="#12101a" stroke-width="5" fill="none" stroke-linecap="round"/>
-                <path d="M128,80 C120,68 112,58 98,50" stroke="#1a1520" stroke-width="3" fill="none"/>
+                <!-- Mid-level Branches -->
+                <path d="M130,95 Q115,88 98,92 Q82,96 68,105
+                         M150,95 Q165,88 182,92 Q198,96 212,105
+                         M135,110 Q118,105 100,110 Q85,116 72,128
+                         M145,110 Q162,105 180,110 Q195,116 208,128"
+                      stroke="#1a1520" stroke-width="3" fill="none" stroke-linecap="round"/>
 
-                <!-- Left Branch Fine Twigs -->
-                <path d="M40,52 C32,48 25,50 18,55 M40,52 C35,58 28,62 20,65
-                         M48,45 C42,38 35,35 26,36 M48,45 C45,52 40,58 32,62
-                         M58,12 C52,5 44,2 35,4 M58,12 C62,6 68,2 75,0
-                         M65,18 C58,12 50,10 42,12"
-                      stroke="#12101a" stroke-width="2" fill="none" stroke-linecap="round"/>
-                <path d="M18,55 C12,58 8,63 5,70 M20,65 C14,70 10,76 8,84
-                         M26,36 C20,32 14,30 8,32 M32,62 C26,68 22,75 20,83"
-                      stroke="#12101a" stroke-width="1" fill="none" stroke-linecap="round"/>
+                <!-- Smaller Twigs - Original -->
+                <path d="M70,40 Q60,35 55,30 M70,40 Q65,50 58,55
+                         M95,20 Q90,12 82,8 M95,20 Q102,15 108,10
+                         M210,48 Q220,42 228,38 M210,48 Q215,58 222,62
+                         M195,25 Q200,18 208,15 M195,25 Q188,20 182,15
+                         M50,145 Q40,150 35,158 M50,145 Q45,138 38,135
+                         M230,150 Q240,155 248,162 M230,150 Q235,142 242,138"
+                      stroke="#1a1520" stroke-width="2" fill="none" stroke-linecap="round"/>
 
-                <!-- Right Branch System - Where Raven Perches -->
-                <path d="M156,88 C168,72 182,60 200,54 C215,50 232,52 248,58
-                         M156,88 C165,68 178,52 195,40 C210,30 228,25 245,28"
-                      stroke="#12101a" stroke-width="5" fill="none" stroke-linecap="round"/>
-                <path d="M156,88 C165,75 176,65 190,58" stroke="#1a1520" stroke-width="3" fill="none"/>
+                <!-- More Fine Twigs -->
+                <path d="M110,18 Q105,10 98,5 M110,18 Q118,12 125,8
+                         M65,60 Q55,58 48,62 M65,60 Q60,68 52,75
+                         M172,18 Q178,10 185,5 M172,18 Q165,12 158,8
+                         M218,68 Q228,65 238,70 M218,68 Q222,78 230,85
+                         M68,105 Q58,102 50,108 M68,105 Q62,115 55,122
+                         M212,105 Q222,102 230,108 M212,105 Q218,115 225,122
+                         M72,128 Q62,132 55,140 M72,128 Q68,138 60,148
+                         M208,128 Q218,132 225,140 M208,128 Q212,138 220,148"
+                      stroke="#1a1520" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
-                <!-- Right Branch Fine Twigs -->
-                <path d="M248,58 C258,55 266,58 275,64 M248,58 C252,66 258,72 268,76
-                         M245,28 C255,22 265,20 276,24 M245,28 C250,35 258,40 268,42"
-                      stroke="#12101a" stroke-width="2" fill="none" stroke-linecap="round"/>
-                <path d="M275,64 C280,68 283,74 284,82 M268,76 C274,82 278,90 280,98
-                         M276,24 C282,20 286,18 290,20"
-                      stroke="#12101a" stroke-width="1" fill="none" stroke-linecap="round"/>
+                <!-- Tiny Twig Details -->
+                <path d="M55,30 Q48,25 42,28 M58,55 Q52,60 48,68
+                         M82,8 Q75,2 68,5 M108,10 Q115,4 122,6
+                         M228,38 Q235,32 242,35 M222,62 Q228,68 235,72
+                         M208,15 Q215,8 222,10 M182,15 Q175,8 168,10
+                         M35,158 Q28,165 22,168 M38,135 Q30,130 24,132
+                         M248,162 Q255,168 260,172 M242,138 Q250,132 258,135
+                         M98,5 Q92,0 85,2 M125,8 Q132,2 140,4
+                         M185,5 Q192,0 200,2 M158,8 Q150,2 142,4"
+                      stroke="#1a1520" stroke-width="1" fill="none" stroke-linecap="round"/>
 
-                <!-- Lower Drooping Branches -->
-                <path d="M140,155 C125,152 108,155 90,162 C72,170 58,180 48,192
-                         M140,155 C155,152 172,155 190,162 C208,170 222,180 232,192"
-                      stroke="#12101a" stroke-width="4" fill="none" stroke-linecap="round"/>
-                <path d="M90,162 C78,158 65,158 52,165 M190,162 C202,158 215,158 228,165"
-                      stroke="#12101a" stroke-width="2" fill="none" stroke-linecap="round"/>
-                <path d="M48,192 C40,196 35,198 30,198 M232,192 C240,196 245,198 250,198"
-                      stroke="#12101a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <!-- Grape Vine on Left Branch -->
+                <path d="M75,130 Q65,120 60,105 Q58,95 65,85"
+                      stroke="#3d2a3d" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <!-- Grape Leaves -->
+                <path d="M62,100 Q55,95 52,102 Q50,108 56,112 Q62,108 62,100" fill="#2d1f2d"/>
+                <path d="M68,90 Q63,85 58,88 Q55,93 60,97 Q66,95 68,90" fill="#2d1f2d"/>
+                <!-- Grapes Cluster on Vine -->
+                <circle cx="58" cy="118" r="4" fill="#4a0e1a"/>
+                <circle cx="65" cy="120" r="4" fill="#3d0a15"/>
+                <circle cx="61" cy="125" r="4" fill="#4a0e1a"/>
+                <circle cx="55" cy="124" r="3.5" fill="#3d0a15"/>
+                <circle cx="68" cy="126" r="3.5" fill="#4a0e1a"/>
+                <circle cx="62" cy="131" r="3.5" fill="#3d0a15"/>
+                <circle cx="56" cy="130" r="3" fill="#4a0e1a"/>
 
-                <!-- Hanging Vines from Left Branches -->
-                <path d="M65,50 C62,60 64,72 60,85 C58,95 55,108 58,120"
-                      stroke="#2d1f2d" stroke-width="1" fill="none" stroke-linecap="round"/>
-                <path d="M48,48 C46,58 48,70 45,82 C43,92 42,105 45,115"
-                      stroke="#2d1f2d" stroke-width="0.8" fill="none" stroke-linecap="round"/>
-                <!-- Vine Leaves -->
-                <path d="M60,75 C54,72 50,76 52,82 C55,86 60,84 62,78 C61,76 60,75 60,75" fill="#251a25" opacity="0.8"/>
-                <path d="M45,90 C40,88 37,92 39,97 C42,100 46,98 47,93 C46,91 45,90 45,90" fill="#251a25" opacity="0.8"/>
-                <path d="M58,105 C53,103 50,107 52,112 C55,115 59,113 60,108" fill="#251a25" opacity="0.7"/>
+                <!-- White Crow Perched on Right Branch -->
+                <g filter="url(#glow)">
+                    <!-- Crow Body -->
+                    <ellipse cx="195" cy="42" rx="12" ry="8" fill="#e8e4dc"/>
+                    <!-- Crow Head -->
+                    <circle cx="207" cy="36" r="7" fill="#e8e4dc"/>
+                    <!-- Beak - pointing down to hold grapes -->
+                    <path d="M213,36 L220,42 L213,40 Z" fill="#1a1520"/>
+                    <!-- Eye -->
+                    <circle cx="210" cy="35" r="2" fill="#1a1520"/>
+                    <circle cx="210.5" cy="34.5" r="0.5" fill="#4a0e1a"/>
+                    <!-- Wing -->
+                    <path d="M185,40 Q190,48 200,50 Q195,45 188,38 Z" fill="#d4d0c8"/>
+                    <!-- Tail Feathers -->
+                    <path d="M183,42 L170,48 M183,44 L172,52 M183,46 L175,55" stroke="#e8e4dc" stroke-width="2" stroke-linecap="round"/>
+                    <!-- Crow Feet on Branch -->
+                    <path d="M192,50 L190,56 M194,50 L196,56 M196,50 L200,55" stroke="#1a1520" stroke-width="1.5" stroke-linecap="round"/>
 
-                <!-- ========== REALISTIC WHITE RAVEN ========== -->
-                <g filter="url(#ravenGlow)" transform="translate(175, 28)">
-                    <!-- Raven Body - Detailed Shape -->
-                    <path d="M0,28
-                             C-5,25 -12,22 -18,24
-                             C-24,26 -28,32 -26,38
-                             C-24,44 -18,48 -10,48
-                             C-2,48 5,45 8,40
-                             C10,36 8,30 0,28"
-                          fill="#e8e4dc"/>
-
-                    <!-- Body Feather Details -->
-                    <path d="M-8,30 C-5,32 -2,31 0,33 M-12,34 C-9,36 -5,35 -2,37 M-15,38 C-11,40 -7,39 -4,41"
-                          stroke="#d4d0c8" stroke-width="0.5" fill="none"/>
-                    <path d="M-20,32 C-17,30 -14,31 -12,29 M-22,36 C-19,35 -16,36 -14,34"
-                          stroke="#ccc8c0" stroke-width="0.4" fill="none"/>
-
-                    <!-- Raven Wing - Folded with Detailed Feathers -->
-                    <path d="M-8,32
-                             C-15,35 -22,40 -28,48
-                             C-32,54 -30,58 -24,56
-                             C-18,54 -10,48 -5,42
-                             C-2,38 -4,34 -8,32"
-                          fill="#d8d4cc"/>
-                    <!-- Wing Feather Lines -->
-                    <path d="M-10,36 L-22,48 M-12,38 L-24,50 M-14,40 L-26,52 M-8,34 L-18,45"
-                          stroke="#c4c0b8" stroke-width="0.6" fill="none"/>
-                    <path d="M-16,42 L-25,50 M-18,44 L-26,51"
-                          stroke="#b8b4ac" stroke-width="0.4" fill="none"/>
-
-                    <!-- Tail Feathers - Long and Detailed -->
-                    <path d="M-26,38 C-35,42 -45,48 -52,56" stroke="#e8e4dc" stroke-width="3" stroke-linecap="round" fill="none"/>
-                    <path d="M-26,40 C-36,45 -46,52 -54,62" stroke="#e0dcd4" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                    <path d="M-25,42 C-34,48 -44,56 -52,68" stroke="#d8d4cc" stroke-width="2" stroke-linecap="round" fill="none"/>
-                    <path d="M-24,44 C-32,50 -40,58 -46,70" stroke="#d0ccc4" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-                    <!-- Tail Feather Details -->
-                    <path d="M-40,50 L-42,52 M-44,54 L-46,56 M-48,60 L-50,62"
-                          stroke="#c8c4bc" stroke-width="0.5" fill="none"/>
-
-                    <!-- Raven Neck -->
-                    <path d="M5,32 C10,28 14,24 16,20 C18,16 17,14 15,14"
-                          fill="#e8e4dc" stroke="#e8e4dc" stroke-width="4"/>
-
-                    <!-- Raven Head - Detailed -->
-                    <ellipse cx="18" cy="10" rx="8" ry="7" fill="#ece8e0"/>
-                    <!-- Head Feather Texture -->
-                    <path d="M12,8 C14,6 16,7 18,5 M14,12 C16,10 18,11 20,9 M22,8 C24,10 25,8 26,10"
-                          stroke="#dedad2" stroke-width="0.4" fill="none"/>
-
-                    <!-- Raven Eye - Piercing and Intelligent -->
-                    <ellipse cx="22" cy="8" rx="2.5" ry="2.8" fill="#0a0808"/>
-                    <ellipse cx="22.5" cy="7.5" rx="1.8" ry="2" fill="#1a1515"/>
-                    <circle cx="23" cy="7" r="0.8" fill="#4a2030"/>
-                    <circle cx="23.3" cy="6.7" r="0.3" fill="#e8e4dc"/>
-                    <!-- Eye Ring -->
-                    <ellipse cx="22" cy="8" rx="2.8" ry="3.1" fill="none" stroke="#c4c0b8" stroke-width="0.3"/>
-
-                    <!-- Raven Beak - Strong and Curved, Holding Grapes -->
-                    <path d="M25,10 C28,9 32,10 35,12 C37,13 36,15 34,16 C32,17 28,16 26,14 C25,13 25,11 25,10"
-                          fill="#1a1520" stroke="#0a0810" stroke-width="0.5"/>
-                    <!-- Beak Detail/Nostril -->
-                    <circle cx="28" cy="11" r="0.6" fill="#0a0810"/>
-                    <!-- Upper Beak Curve -->
-                    <path d="M26,10 C28,9 31,9 34,11" stroke="#2a2530" stroke-width="0.3" fill="none"/>
-
-                    <!-- GRAPE CLUSTER IN BEAK -->
-                    <g transform="translate(32, 16)">
-                        <!-- Grape Stem from beak -->
-                        <path d="M0,0 C2,2 3,5 2,8" stroke="#2d1f2d" stroke-width="0.8" fill="none"/>
-                        <!-- Individual Grapes with Highlights -->
-                        <ellipse cx="4" cy="6" rx="3.5" ry="4" fill="url(#grapeShine)"/>
-                        <ellipse cx="4.5" cy="5" rx="1" ry="1.2" fill="#7a2a3a" opacity="0.5"/>
-
-                        <ellipse cx="0" cy="9" rx="3.2" ry="3.8" fill="url(#grapeShine)"/>
-                        <ellipse cx="0.5" cy="8" rx="0.9" ry="1.1" fill="#7a2a3a" opacity="0.5"/>
-
-                        <ellipse cx="7" cy="10" rx="3" ry="3.5" fill="url(#grapeShine)"/>
-                        <ellipse cx="7.5" cy="9" rx="0.8" ry="1" fill="#7a2a3a" opacity="0.5"/>
-
-                        <ellipse cx="3" cy="13" rx="3.3" ry="3.8" fill="url(#grapeShine)"/>
-                        <ellipse cx="3.5" cy="12" rx="0.9" ry="1.1" fill="#7a2a3a" opacity="0.5"/>
-
-                        <ellipse cx="-2" cy="14" rx="2.8" ry="3.2" fill="url(#grapeShine)"/>
-
-                        <ellipse cx="6" cy="15" rx="2.5" ry="3" fill="url(#grapeShine)"/>
-
-                        <ellipse cx="1" cy="18" rx="2.8" ry="3.2" fill="url(#grapeShine)"/>
-                        <ellipse cx="1.5" cy="17" rx="0.7" ry="0.9" fill="#7a2a3a" opacity="0.5"/>
-                    </g>
-
-                    <!-- Crown Feathers - Ruffled -->
-                    <path d="M12,4 C10,1 12,-2 15,-2 M14,3 C13,0 15,-3 18,-2 M16,3 C16,-1 19,-3 22,-1"
-                          stroke="#e8e4dc" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-
-                    <!-- Throat Feathers -->
-                    <path d="M10,16 C8,18 7,20 8,22 M12,17 C11,19 10,21 11,23 M14,17 C14,19 13,21 14,23"
-                          stroke="#dedad2" stroke-width="0.6" fill="none"/>
-
-                    <!-- Raven Legs/Feet Gripping Branch -->
-                    <g transform="translate(0, 48)">
-                        <!-- Left Leg -->
-                        <path d="M-8,0 C-8,4 -10,8 -12,10" stroke="#2a2530" stroke-width="1.8" fill="none"/>
-                        <!-- Left Foot Talons -->
-                        <path d="M-12,10 C-15,12 -18,11 -20,13" stroke="#2a2530" stroke-width="1.2" fill="none"/>
-                        <path d="M-12,10 C-13,14 -12,16 -14,18" stroke="#2a2530" stroke-width="1.2" fill="none"/>
-                        <path d="M-12,10 C-10,13 -8,15 -8,18" stroke="#2a2530" stroke-width="1.2" fill="none"/>
-
-                        <!-- Right Leg -->
-                        <path d="M0,0 C2,4 2,8 4,10" stroke="#2a2530" stroke-width="1.8" fill="none"/>
-                        <!-- Right Foot Talons -->
-                        <path d="M4,10 C6,13 8,14 10,16" stroke="#2a2530" stroke-width="1.2" fill="none"/>
-                        <path d="M4,10 C5,14 4,16 5,19" stroke="#2a2530" stroke-width="1.2" fill="none"/>
-                        <path d="M4,10 C2,13 0,15 -1,18" stroke="#2a2530" stroke-width="1.2" fill="none"/>
-                    </g>
+                    <!-- GRAPES IN BEAK -->
+                    <circle cx="218" cy="48" r="3.5" fill="#4a0e1a"/>
+                    <circle cx="222" cy="52" r="3.5" fill="#3d0a15"/>
+                    <circle cx="216" cy="54" r="3" fill="#4a0e1a"/>
+                    <circle cx="220" cy="57" r="3" fill="#3d0a15"/>
+                    <circle cx="224" cy="48" r="3" fill="#4a0e1a"/>
+                    <circle cx="214" cy="50" r="2.5" fill="#3d0a15"/>
+                    <!-- Grape stem to beak -->
+                    <path d="M218,44 L218,48" stroke="#3d2a3d" stroke-width="1" fill="none"/>
                 </g>
 
-                <!-- Old Wine Cask at Base - More Detailed -->
-                <g transform="translate(140, 185)">
-                    <!-- Cask Shadow -->
-                    <ellipse cx="0" cy="12" rx="38" ry="6" fill="#0a0810" opacity="0.5"/>
-                    <!-- Cask Body -->
-                    <path d="M-38,0 C-40,5 -38,10 -35,12 L35,12 C38,10 40,5 38,0 Z" fill="#2d1f2d" stroke="#3d2a3d" stroke-width="0.5"/>
-                    <!-- Cask Top -->
-                    <ellipse cx="0" cy="0" rx="38" ry="7" fill="#3d2a3d"/>
-                    <ellipse cx="0" cy="0" rx="32" ry="5" fill="#352535" opacity="0.5"/>
-                    <!-- Cask Wood Grain -->
-                    <path d="M-30,0 C-28,2 -25,2 -22,0 M-15,0 C-12,2 -8,2 -5,0 M5,0 C8,2 12,2 15,0 M22,0 C25,2 28,2 30,0"
-                          stroke="#4a3a4a" stroke-width="0.4" fill="none"/>
-                    <!-- Metal Bands -->
-                    <ellipse cx="0" cy="3" rx="37" ry="5" fill="none" stroke="#5a4a5a" stroke-width="1.5"/>
-                    <ellipse cx="0" cy="8" rx="36" ry="4" fill="none" stroke="#5a4a5a" stroke-width="1.5"/>
-                    <!-- Band Rivets -->
-                    <circle cx="-30" cy="3" r="0.8" fill="#6a5a6a"/>
-                    <circle cx="-15" cy="3" r="0.8" fill="#6a5a6a"/>
-                    <circle cx="0" cy="3" r="0.8" fill="#6a5a6a"/>
-                    <circle cx="15" cy="3" r="0.8" fill="#6a5a6a"/>
-                    <circle cx="30" cy="3" r="0.8" fill="#6a5a6a"/>
-                    <!-- Bung Hole -->
-                    <circle cx="0" cy="0" r="3.5" fill="#251a25" stroke="#3d2a3d" stroke-width="0.5"/>
-                    <circle cx="0" cy="0" r="2" fill="#1a1015"/>
-                </g>
-
-                <!-- Additional Atmosphere - Falling Leaves/Debris -->
-                <path d="M25,120 Q28,125 25,130 Q22,135 25,140" stroke="#2d1f2d" stroke-width="0.5" fill="none" opacity="0.4"/>
-                <path d="M255,100 Q258,108 254,115" stroke="#2d1f2d" stroke-width="0.4" fill="none" opacity="0.3"/>
+                <!-- Old Wine Cask at Base -->
+                <ellipse cx="140" cy="192" rx="35" ry="8" fill="#1a1520"/>
+                <path d="M105,180 Q100,185 105,192 L175,192 Q180,185 175,180 Z" fill="#2d1f2d" stroke="#3d2a3d" stroke-width="1"/>
+                <ellipse cx="140" cy="180" rx="35" ry="7" fill="#3d2a3d" stroke="#4a3a4a" stroke-width="0.5"/>
+                <!-- Cask Bands -->
+                <path d="M108,183 Q140,186 172,183" stroke="#5a4a5a" stroke-width="1.5" fill="none"/>
+                <path d="M106,188 Q140,191 174,188" stroke="#5a4a5a" stroke-width="1.5" fill="none"/>
+                <!-- Cask Bung -->
+                <circle cx="140" cy="180" r="3" fill="#4a3a4a"/>
             </svg>
 
             <h1>Ardoa</h1>
