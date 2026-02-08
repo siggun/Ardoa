@@ -1781,6 +1781,378 @@
             transform: translateY(-2px);
         }
 
+        /* Enomatic Section Styles */
+        .enomatic-hero {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-dark) 100%);
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .enomatic-hero h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .enomatic-tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .enomatic-intro {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .enomatic-intro h3 {
+            color: var(--burgundy);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .enomatic-intro p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            color: var(--charcoal);
+        }
+
+        .enomatic-benefits {
+            margin-bottom: 2rem;
+        }
+
+        .enomatic-benefits h3 {
+            color: var(--burgundy);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .benefit-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card h4 {
+            color: var(--burgundy);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .benefit-card p {
+            color: var(--charcoal);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .enomatic-models {
+            margin-bottom: 2rem;
+        }
+
+        .enomatic-models h3 {
+            color: var(--burgundy);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .models-intro {
+            text-align: center;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .model-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .model-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .model-header {
+            background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-dark) 100%);
+            color: white;
+            padding: 1rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .model-header h4 {
+            font-size: 1.15rem;
+            margin: 0;
+        }
+
+        .model-badge {
+            background: var(--gold);
+            color: var(--charcoal);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .model-badge.legacy {
+            background: #888;
+            color: white;
+        }
+
+        .model-body {
+            padding: 1.25rem;
+        }
+
+        .model-description {
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .model-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1rem;
+        }
+
+        .model-features li {
+            padding: 0.4rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.9rem;
+            color: var(--charcoal);
+        }
+
+        .model-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--burgundy);
+            font-weight: bold;
+        }
+
+        .model-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .model-specs span {
+            background: var(--cream);
+            color: var(--charcoal);
+            padding: 0.3rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .enomatic-resources {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .enomatic-resources h3 {
+            color: var(--burgundy);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .enomatic-resources > p {
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .resource-category h4 {
+            color: var(--burgundy);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .resource-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .resource-links li {
+            padding: 0.5rem 0;
+        }
+
+        .resource-links a {
+            color: var(--burgundy);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .resource-links a:hover {
+            color: var(--gold);
+            text-decoration: underline;
+        }
+
+        .resource-links a::before {
+            content: "→";
+            margin-right: 0.5rem;
+            color: var(--gold);
+        }
+
+        .enomatic-cta {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: linear-gradient(135deg, var(--gold) 0%, #B8860B 100%);
+            color: var(--charcoal);
+            border-radius: 10px;
+        }
+
+        .enomatic-cta h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .enomatic-cta p {
+            font-size: 1.05rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Enomatic Mobile Styles */
+        @media (max-width: 768px) {
+            .enomatic-hero {
+                padding: 2rem 1.5rem;
+            }
+
+            .enomatic-hero h2 {
+                font-size: 1.6rem;
+            }
+
+            .enomatic-tagline {
+                font-size: 1rem;
+            }
+
+            .enomatic-intro,
+            .enomatic-resources {
+                padding: 1.5rem;
+            }
+
+            .enomatic-intro h3,
+            .enomatic-benefits h3,
+            .enomatic-models h3,
+            .enomatic-resources h3 {
+                font-size: 1.3rem;
+            }
+
+            .benefits-grid,
+            .models-grid,
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .model-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .enomatic-cta {
+                padding: 2rem 1.5rem;
+            }
+
+            .enomatic-cta h3 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .enomatic-hero {
+                padding: 1.5rem 1rem;
+                border-radius: 10px;
+            }
+
+            .enomatic-hero h2 {
+                font-size: 1.4rem;
+            }
+
+            .enomatic-tagline {
+                font-size: 0.9rem;
+            }
+
+            .benefit-icon {
+                font-size: 2rem;
+            }
+
+            .benefit-card h4 {
+                font-size: 1rem;
+            }
+
+            .benefit-card p {
+                font-size: 0.9rem;
+            }
+
+            .model-header h4 {
+                font-size: 1.05rem;
+            }
+
+            .model-specs {
+                flex-direction: column;
+            }
+
+            .enomatic-cta p {
+                font-size: 0.95rem;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -1795,6 +2167,7 @@
         <button onclick="showSection('onlineflashcards')">Online Flashcards</button>
         <button onclick="showSection('quickref')">Quick Reference</button>
         <button onclick="showSection('wineregions')">Wine Regions</button>
+        <button onclick="showSection('enomatic')">Enomatic System</button>
         <button onclick="showSection('printcards')">Print Cards</button>
     </nav>
 
@@ -2580,6 +2953,189 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Enomatic System Section -->
+        <section id="enomatic">
+            <div class="enomatic-hero">
+                <h2>Enomatic Wine Dispensing System</h2>
+                <p class="enomatic-tagline">The World's Leading Wine Preservation & Dispensing Technology</p>
+            </div>
+
+            <div class="enomatic-intro">
+                <div class="enomatic-intro-content">
+                    <h3>What is Enomatic?</h3>
+                    <p>Enomatic is an Italian-made wine dispensing and preservation system used by wine bars, restaurants, and tasting rooms worldwide. At Ardoa Wine Bar, we use Enomatic dispensers to serve our wines by the glass while maintaining perfect freshness for weeks after opening.</p>
+                    <p>The system allows guests to taste wines by the ounce, half glass, or full pour—while maintaining each bottle's integrity and flavor profile. This means you can explore premium wines without committing to a full bottle.</p>
+                </div>
+            </div>
+
+            <div class="enomatic-benefits">
+                <h3>How It Works & Key Benefits</h3>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🍷</div>
+                        <h4>Nitrogen/Argon Preservation</h4>
+                        <p>Using food-grade inert gas, the system creates a protective blanket over the wine, preventing oxidation. This preserves the wine's organoleptic integrity—taste, aroma, body, and color—for <strong>30+ days</strong> after opening.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🌡️</div>
+                        <h4>Precise Temperature Control</h4>
+                        <p>Each dispenser maintains optimal serving temperatures. Dual-zone systems can serve whites and rosés chilled (45-50°F) while keeping reds at cellar temperature (55-65°F)—all in the same unit.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">📏</div>
+                        <h4>Portion Control</h4>
+                        <p>Programmable pour sizes (1oz taste, 3oz half glass, 6oz full pour) ensure consistent servings every time. No overpouring, no waste, and fair pricing for every guest.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">✨</div>
+                        <h4>Self-Serve Experience</h4>
+                        <p>Using smart cards or integrated POS systems, guests can serve themselves directly. Explore at your own pace, try multiple wines, and discover new favorites without waiting for service.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🍇</div>
+                        <h4>Access Premium Wines</h4>
+                        <p>Without preservation, expensive bottles are risky to open by the glass. Enomatic makes it possible to offer premium and rare wines in tasting portions, making fine wine accessible to everyone.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🌍</div>
+                        <h4>Made in Italy</h4>
+                        <p>Enomatic systems are designed and manufactured in Italy, combining elegant aesthetics with precision engineering. Distributed in over 70 countries, they're the industry standard for wine preservation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="enomatic-models">
+                <h3>Enomatic Product Line</h3>
+                <p class="models-intro">Enomatic offers a range of wine dispensing systems for different needs, from compact 2-bottle units to large modular installations.</p>
+
+                <div class="models-grid">
+                    <div class="model-card">
+                        <div class="model-header">
+                            <h4>Unica Series</h4>
+                            <span class="model-badge">Current Generation</span>
+                        </div>
+                        <div class="model-body">
+                            <p class="model-description">The latest generation of Enomatic dispensers featuring smart modularity, high performance, and integrated connectivity.</p>
+                            <ul class="model-features">
+                                <li><strong>Unica 4 / 8:</strong> 4 or 8 bottle capacity with refrigeration</li>
+                                <li><strong>Unica 16 / 20 / 24:</strong> Larger modular configurations</li>
+                                <li><strong>Unica Start 4 & 8:</strong> Ready-to-use systems for behind-bar use</li>
+                                <li><strong>Unica Bubbles:</strong> Designed for sparkling wines</li>
+                                <li><strong>Unica Bag:</strong> For bag-in-box wine dispensing</li>
+                            </ul>
+                            <div class="model-specs">
+                                <span>3 programmable pour volumes</span>
+                                <span>Dual temperature zones</span>
+                                <span>Touch screen interface</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="model-card">
+                        <div class="model-header">
+                            <h4>EnoOne PLUS</h4>
+                            <span class="model-badge">Compact</span>
+                        </div>
+                        <div class="model-body">
+                            <p class="model-description">A compact 2-bottle modular system perfect for small spaces or adding capacity. Features elegant backlit controls and self-centering bottle positioning.</p>
+                            <ul class="model-features">
+                                <li>2-bottle capacity in a compact footprint</li>
+                                <li>Thermo-electric cooling (no drain required)</li>
+                                <li>Modular design—combine multiple units seamlessly</li>
+                                <li>Available in black or white finish</li>
+                            </ul>
+                            <div class="model-specs">
+                                <span>23.5" × 10.6" × 13.8"</span>
+                                <span>28 lbs</span>
+                                <span>Plug & play</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="model-card">
+                        <div class="model-header">
+                            <h4>Enoline Elite</h4>
+                            <span class="model-badge legacy">Legacy Model</span>
+                        </div>
+                        <div class="model-body">
+                            <p class="model-description">The classic Enomatic system that set the industry standard. While discontinued, many establishments still use these reliable workhorses.</p>
+                            <ul class="model-features">
+                                <li><strong>Elite 4:</strong> 4-bottle capacity (RT or refrigerated)</li>
+                                <li><strong>Elite 8:</strong> 8-bottle capacity with dual-zone option (4+4 or 5+3)</li>
+                                <li>Glass-protected touch screens</li>
+                                <li>Drain-free refrigeration</li>
+                                <li>Pneumatic bottle lift system</li>
+                            </ul>
+                            <div class="model-specs">
+                                <span>Elite 8: 26.4" × 13.9"</span>
+                                <span>Up to 159 lbs</span>
+                                <span>110V / 220V</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="model-card">
+                        <div class="model-header">
+                            <h4>Sparkling Wine System</h4>
+                            <span class="model-badge">Specialty</span>
+                        </div>
+                        <div class="model-body">
+                            <p class="model-description">Purpose-built for Champagne, Prosecco, and sparkling wines. Maintains carbonation while allowing by-the-glass service.</p>
+                            <ul class="model-features">
+                                <li>Preserves effervescence and bubbles</li>
+                                <li>18cm color touch screen</li>
+                                <li>RFID smart card compatible</li>
+                                <li>3 programmable pour volumes</li>
+                                <li>Adjustable temperature control</li>
+                            </ul>
+                            <div class="model-specs">
+                                <span>Self-serve or bar use</span>
+                                <span>Vertical card reader</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="enomatic-resources">
+                <h3>Documentation & Resources</h3>
+                <p>Access official Enomatic manuals, specification sheets, and support documentation.</p>
+
+                <div class="resources-grid">
+                    <div class="resource-category">
+                        <h4>User Manuals</h4>
+                        <ul class="resource-links">
+                            <li><a href="https://neodistributing.com/wp-content/uploads/2016/08/enoline_4_basic_manual.pdf" target="_blank" rel="noopener">Enoline 4 Basic Operating Manual (PDF)</a></li>
+                            <li><a href="https://neodistributing.com/wp-content/uploads/2016/08/ELITE-2.5-English.pdf" target="_blank" rel="noopener">Enoline Elite 2.5 User Manual (PDF)</a></li>
+                            <li><a href="https://abetterpour.com/wp-content/uploads/2017/01/Enoline_enomodule_ENG.pdf" target="_blank" rel="noopener">Enoline/Enomodule User Manual (PDF)</a></li>
+                            <li><a href="https://www.manualslib.com/manual/1198740/Enomatic-Enoline-4-Smart.html" target="_blank" rel="noopener">Enoline 4 Smart Manual (ManualsLib)</a></li>
+                        </ul>
+                    </div>
+                    <div class="resource-category">
+                        <h4>Specification Sheets</h4>
+                        <ul class="resource-links">
+                            <li><a href="https://neodistributing.com/wp-content/uploads/2017/11/Enomatic_Elite_Wine_Dispenser_Product_Sheet.pdf" target="_blank" rel="noopener">Enoline Elite Product Sheet (PDF)</a></li>
+                            <li><a href="https://neodistributing.com/downloads/" target="_blank" rel="noopener">All Enomatic Downloads (Neo Distributing)</a></li>
+                        </ul>
+                    </div>
+                    <div class="resource-category">
+                        <h4>Official Websites</h4>
+                        <ul class="resource-links">
+                            <li><a href="https://enomatic.com/" target="_blank" rel="noopener">Enomatic International</a></li>
+                            <li><a href="https://neodistributing.com/" target="_blank" rel="noopener">Enomatic USA (Neo Distributing)</a></li>
+                            <li><a href="https://enomatic.ca/" target="_blank" rel="noopener">Enomatic Canada</a></li>
+                            <li><a href="https://enostore.wine/" target="_blank" rel="noopener">Enostore (Products & Accessories)</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="enomatic-cta">
+                <h3>Experience It at Ardoa</h3>
+                <p>Visit Ardoa Wine Bar to experience our Enomatic wine dispensing system firsthand. Explore 24 wines by the taste or glass, served at perfect temperature, and preserved to perfection.</p>
             </div>
         </section>
 
