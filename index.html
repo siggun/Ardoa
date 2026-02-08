@@ -186,8 +186,14 @@
         /* Wine Cards Grid */
         .wine-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .wine-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .wine-card {
@@ -2127,7 +2133,7 @@
                 grapeDetail: "Barbera is Piedmont's workhorse grape - high acidity, low tannins, makes it incredibly food-friendly",
                 region: "Monferrato, Piedmont",
                 country: "Italy",
-                winemaker: "Ercole Wines - Named after Ercole (Hercules), referencing the strength and character of Piedmontese wines.",
+                winemaker: "Ercole Wines - Named after Ercole (Hercules), referencing the strength and character of Piedmontese wines. This project focuses on bringing authentic Piedmontese varieties to a wider audience, working with local growers who practice sustainable viticulture in the rolling hills of Monferrato. The winery emphasizes minimal intervention and respecting traditional winemaking methods passed down through generations.",
                 tasting: "Bright cherry (morello), raspberry, dried herbs, hints of almond and black pepper. Medium body with high acidity, low tannins, and a refreshing, tangy finish.",
                 food: "Prosciutto di Parma, Felino Salami, Gruyere, Black Truffle Salami, The Basque flatbread",
                 foodPairings: [
@@ -2139,7 +2145,7 @@
                 ],
                 alcohol: "13%",
                 serving: "Slightly chilled (55-60°F / 13-15°C)",
-                notes: "Barbera is Piedmont's most-planted grape (ahead of Nebbiolo). Its high acidity makes it perfect for rich, fatty Italian cuisine."
+                notes: "Barbera is Piedmont's most-planted grape (ahead of Nebbiolo), covering over 50% of the region's vineyards. Its naturally high acidity and low tannins make it incredibly food-friendly and perfect for rich, fatty Italian cuisine. Fun fact: Barbera was once considered a 'peasant grape' but has risen to prominence thanks to modern winemaking. The Monferrato DOC was established in 1994 and sits between the famous Langhe and Asti zones."
             },
             // Position 2
             {
@@ -2151,7 +2157,7 @@
                 region: "Bordeaux Supérieur",
                 country: "France",
                 pronunciation: "sha-TOH rock may-NAHR bor-DOH soo-peh-ree-UHR",
-                winemaker: "Château Roc Meynard - Family estate in the Bordeaux Supérieur appellation, practicing sustainable viticulture on clay-limestone soils.",
+                winemaker: "Château Roc Meynard - A historic family estate in the Bordeaux Supérieur appellation, located in the commune of Saint-Seurin-de-Bourg on the Right Bank. The property has been family-owned for five generations, practicing sustainable viticulture on prized clay-limestone soils that provide excellent drainage. The château ages its wines in a combination of French oak barrels and concrete tanks to preserve fruit purity while adding subtle complexity.",
                 tasting: "Red fruits (raspberry, red currant), plum, subtle earthy notes (wet stone), gentle oak, hints of herbs and cedar. Medium body with soft, approachable tannins.",
                 food: "Soppressata Salame w/ Burgundy, Duck Rillettes, Mimolette, Red Wine Cheddar, Ewephoria",
                 foodPairings: [
@@ -2163,7 +2169,7 @@
                 ],
                 alcohol: "13.5%",
                 serving: "Room temperature (64°F / 18°C)",
-                notes: "Bordeaux Supérieur has stricter requirements than basic Bordeaux AOC: lower yields, higher alcohol, and longer aging."
+                notes: "Bordeaux Supérieur has stricter requirements than basic Bordeaux AOC: lower maximum yields (50 vs 55 hl/ha), higher minimum alcohol (10.5% vs 10%), and mandatory aging before release. The 2019 vintage in Bordeaux was exceptional—warm and dry with a long, even growing season, producing wines with ripe tannins and excellent aging potential. Right Bank Bordeaux (like this wine) features Merlot dominance, offering softer, more approachable wines than Left Bank Cabernet blends."
             },
             // Position 3
             {
@@ -2175,7 +2181,7 @@
                 region: "Côtes du Rhône",
                 country: "France",
                 pronunciation: "sha-TOH duh tree-NYOHN coat doo ROHN",
-                winemaker: "Famille Quiot - 5th generation winemakers. The Quiot family has been making wine in the Southern Rhône since 1748.",
+                winemaker: "Famille Quiot - 5th generation winemakers in the Southern Rhône since 1748, making them one of the region's oldest wine families. Château de Trignon sits in the heart of the Côtes du Rhône near Sablet, with 60 hectares of vines across multiple appellations. The family practices organic viticulture and uses a mix of concrete tanks and large oak foudres to preserve the wine's fresh fruit character while adding subtle complexity. Their motto: respect the land, express the terroir.",
                 tasting: "Ripe dark fruits (blackberry, plum), spice (white pepper, clove), garrigue herbs (thyme, lavender, rosemary), medium body with soft tannins and a warm, lingering finish.",
                 food: "Chorizo, Salchichon De Bellota, Ewephoria, Mimolette, Tapenade",
                 foodPairings: [
@@ -2187,7 +2193,7 @@
                 ],
                 alcohol: "14%",
                 serving: "Room temperature (60-65°F / 16-18°C)",
-                notes: "Garrigue refers to the wild herbs that grow in the Mediterranean scrubland and infuse Rhône wines with their aromatic character."
+                notes: "GSM (Grenache-Syrah-Mourvèdre) is the signature blend of the Southern Rhône. 'Garrigue' refers to the wild Mediterranean scrubland—thyme, lavender, rosemary, and juniper grow wild among the vines and infuse the wines with their aromatic character. The Mistral wind (cold, dry, blowing down the Rhône Valley) is crucial here: it dries the grapes, preventing disease and concentrating flavors. Côtes du Rhône is France's second-largest AOC after Bordeaux."
             },
             // Position 4
             {
@@ -2198,7 +2204,7 @@
                 grapeDetail: "NOT to be confused with Vino Nobile di Montepulciano (which uses Sangiovese from Tuscany). This is the Montepulciano GRAPE from Abruzzo.",
                 region: "Abruzzo",
                 country: "Italy",
-                winemaker: "Colle Corviano - Part of the Fantini Group (Farnese Vini), one of Abruzzo's most respected wine producers.",
+                winemaker: "Colle Corviano - Part of the Fantini Group (Farnese Vini), one of Abruzzo's most awarded and respected wine producers. Founded in 1994, the Fantini Group has become a benchmark for quality Abruzzo wines, working with over 500 local growers across the region. Their philosophy combines modern winemaking technology with respect for traditional Abruzzese varieties. The vineyards benefit from both Adriatic Sea breezes and the protective Apennine Mountains.",
                 tasting: "Dark cherry, plum, dried herbs (oregano, thyme), earthy notes, hint of black pepper. Medium to full body with moderate tannins and good acidity.",
                 food: "Felino Salami, Prosciutto di Parma, Gruyere, The Basque flatbread, Antipasto Vegetable Blend",
                 foodPairings: [
@@ -2210,7 +2216,7 @@
                 ],
                 alcohol: "13.5%",
                 serving: "Room temperature (60-65°F / 16-18°C)",
-                notes: "Abruzzo is on Italy's Adriatic coast. Montepulciano d'Abruzzo is one of Italy's best value reds."
+                notes: "Important distinction: Montepulciano d'Abruzzo is the GRAPE from Abruzzo. Vino Nobile di Montepulciano is a PLACE in Tuscany (using Sangiovese). Don't confuse them! Abruzzo lies on Italy's central Adriatic coast, wild and mountainous. Montepulciano d'Abruzzo is one of Italy's best-value reds—rich, full-flavored wines at friendly prices. The grape produces dark, thick-skinned berries with soft tannins and natural food-friendliness."
             },
             // Position 5
             {
@@ -2221,7 +2227,7 @@
                 grapeDetail: "Mencía is Spain's answer to Pinot Noir - elegant, aromatic, with bright acidity. Native to Galicia and Bierzo.",
                 region: "Ribeira Sacra",
                 country: "Spain",
-                winemaker: "Bodegas Massimo - Small producer in the dramatic steep-terraced vineyards of Ribeira Sacra along the Sil River canyon.",
+                winemaker: "Bodegas Massimo - A small, passionate producer farming some of Europe's most dramatic vineyards in Ribeira Sacra. The steep terraced hillsides along the Sil River canyon (slopes up to 60°!) require all work to be done by hand—no tractors can navigate these ancient stone terraces. Many vines are over 80 years old, their roots digging deep into the slate and granite soils. The winery practices sustainable viticulture and focuses exclusively on indigenous Galician varieties.",
                 tasting: "Fresh red berries (raspberry, redcurrant), violets, slate minerality, hints of herbs and wet stone. Medium body with vibrant acidity and fine tannins.",
                 food: "Prosciutto di Parma, Black Pepper Salami, Petit Basque, Duck Rillettes, Saint Angel",
                 foodPairings: [
@@ -2233,7 +2239,7 @@
                 ],
                 alcohol: "13%",
                 serving: "Slightly chilled (55-60°F / 13-15°C)",
-                notes: "Ribeira Sacra means 'Sacred Riverbank' - home to ancient monasteries and some of Europe's steepest vineyards."
+                notes: "Ribeira Sacra ('Sacred Riverbank') is named for the many medieval monasteries built along the Sil and Miño river canyons—monks planted these terraced vineyards centuries ago. The region has some of Europe's steepest vineyards, called 'heroic viticulture' because harvesting requires cables and harnesses! Mencía (men-THEE-ah) is often compared to Pinot Noir for its elegance and aromatic complexity. This is one of Spain's most exciting wine regions to watch."
             },
             // Position 6
             {
@@ -2244,7 +2250,7 @@
                 grapeDetail: "Cabernet Sauvignon is the world's most planted wine grape - known for structure, aging potential, and blackcurrant flavors.",
                 region: "Central Valley",
                 country: "Chile",
-                winemaker: "Viña Orsa - Chilean producer in the fertile Central Valley, known for approachable, fruit-forward wines at excellent value.",
+                winemaker: "Viña Orsa - A Chilean producer in the fertile Central Valley, crafting approachable, fruit-forward wines at excellent value. Chile's wine industry boomed in the 1990s as international winemakers discovered its ideal climate and phylloxera-free vines. The Central Valley's hot days and cool nights (thanks to Andes mountain breezes and Pacific Ocean fog) allow grapes to develop rich flavors while retaining balancing acidity. Orsa focuses on clean, modern winemaking to highlight pure fruit expression.",
                 tasting: "Blackcurrant, dark cherry, hints of bell pepper and eucalyptus. Medium to full body with smooth tannins and a clean finish.",
                 food: "Chorizo, Ewephoria, Red Wine Cheddar, Mimolette, The Mighty Spicy flatbread",
                 foodPairings: [
@@ -2256,7 +2262,7 @@
                 ],
                 alcohol: "13.5%",
                 serving: "Room temperature (62-65°F / 17-18°C)",
-                notes: "Chile's Central Valley benefits from Andes mountain cooling and Pacific Ocean influence, creating excellent conditions for Cabernet Sauvignon."
+                notes: "Chile is a viticultural paradise: the Andes Mountains to the east, Pacific Ocean to the west, Atacama Desert to the north, and Patagonian ice to the south create natural barriers that kept phylloxera (the vine-killing pest) out—Chilean vines grow on their own roots! The Central Valley produces 80% of Chile's wine. The eucalyptus note in Chilean Cabernet comes from actual eucalyptus trees planted as windbreaks in vineyards."
             },
             // Position 7
             {
@@ -2268,7 +2274,7 @@
                 region: "Bourgueil, Loire Valley",
                 country: "France",
                 pronunciation: "doh-MEHN lay PAN lay roh-SHET boor-GUH-yuh",
-                winemaker: "Domaine Les Pins - Small family estate in the heart of Bourgueil. 'Les Rochettes' refers to their rocky terroir parcel.",
+                winemaker: "Domaine Les Pins - A small family estate in the heart of Bourgueil, run with passion and attention to terroir expression. 'Les Rochettes' is their prized single-vineyard parcel on rocky, well-drained soils that stress the vines and concentrate flavors. The family practices lutte raisonnée (sustainable farming), avoiding pesticides whenever possible and hand-harvesting all grapes. Fermentation uses natural yeasts, and the wine sees minimal oak to preserve the pure Cabernet Franc character.",
                 tasting: "Red bell pepper, raspberry, graphite, violet notes. Medium body with fresh acidity, earthy undertones, and characteristic pencil-lead minerality from the tuffeau limestone.",
                 food: "Duck Rillettes, Pâté de Campagne, Black Truffle Goat, Petit Basque, Black Pepper Salami",
                 foodPairings: [
@@ -2280,7 +2286,7 @@
                 ],
                 alcohol: "12.5%",
                 serving: "Slightly chilled (55-60°F / 13-15°C)",
-                notes: "Bourgueil sits on tuffeau (chalk) and gravel soils. Loire Cabernet Franc shows green pepper notes when cool, turning to raspberry when ripe."
+                notes: "In the Loire, Cabernet Franc is called 'Breton' because it arrived from Bordeaux via the town of Nantes in Brittany (Bretagne). Bourgueil sits on tuffeau—the same soft limestone used to build Loire châteaux—giving wines their characteristic minerality. The bell pepper note (pyrazines) appears when grapes are less ripe; when fully ripe, you get raspberry and violet. Loire reds are famously food-friendly: serve them slightly chilled for maximum refreshment."
             },
             // Position 8
             {
@@ -2292,7 +2298,7 @@
                 region: "Beaujolais Villages",
                 country: "France",
                 pronunciation: "boh-zhoh-LAY vee-LAHZH mah-REEN deh-KOHM",
-                winemaker: "Marine Decome - Young female winemaker imported by Mary Taylor Wines, known for discovering authentic, terroir-driven French wines from small producers.",
+                winemaker: "Marine Decome - A rising star among young French winemakers, crafting pure, expressive Gamay in Beaujolais. Her wines are imported by Mary Taylor Wines, a company dedicated to discovering authentic, terroir-driven French wines from small, often female-led producers. Marine farms organically and uses carbonic maceration (whole-cluster fermentation), the traditional Beaujolais technique that creates those signature juicy, aromatic wines. Her approach is minimal intervention: native yeasts, no fining or filtration.",
                 tasting: "Fresh red fruits (cherry, raspberry, strawberry), light-bodied with silky texture, floral notes (violet), and a hint of minerality. Juicy and refreshing.",
                 food: "Prosciutto di Parma, Black Pepper Salami, Saint Angel, Petit Basque, The Basque flatbread",
                 foodPairings: [
@@ -2304,7 +2310,7 @@
                 ],
                 alcohol: "12.5%",
                 serving: "Slightly chilled (55-60°F / 13-15°C)",
-                notes: "Beaujolais Villages is a step up from basic Beaujolais, from 38 designated villages with better terroir."
+                notes: "Beaujolais Villages is a step up from basic Beaujolais, coming from 38 designated villages with superior terroir—granite and schist soils that give wines more structure and minerality. The region uses 'carbonic maceration': whole grape clusters ferment in a carbon dioxide atmosphere, extracting color and flavor without harsh tannins. This creates Gamay's signature juicy, fruity style. Serve Beaujolais slightly chilled—it's the perfect 'red wine for white wine lovers.'"
             },
             // Position 9
             {
@@ -2315,7 +2321,7 @@
                 grapeDetail: "Italian Pinot Grigio is typically fermented in steel for freshness. Same grape as French Pinot Gris but made in a lighter style.",
                 region: "Delle Venezie IGT, Veneto/Friuli",
                 country: "Italy",
-                winemaker: "Monte degli Angeli (Mountain of Angels) - Northeastern Italian producer in the Delle Venezie region, using modern winemaking to preserve freshness.",
+                winemaker: "Monte degli Angeli ('Mountain of Angels') - A northeastern Italian producer in the scenic Delle Venezie region, where the foothills of the Alps meet the Adriatic plain. The winery uses modern stainless steel fermentation and cold stabilization to preserve maximum freshness and fruit purity. Their vineyards benefit from cool Alpine breezes that sweep down at night, giving grapes crisp natural acidity. The philosophy is simple: clean, refreshing wines for everyday enjoyment.",
                 tasting: "Pear, apple, citrus (lemon), almond notes. Light and crisp with subtle minerality, clean finish, and refreshing acidity.",
                 food: "Prosciutto di Parma, Bresaola, Saint Angel, Hummus, Antipasto Vegetable Blend",
                 foodPairings: [
@@ -2327,7 +2333,7 @@
                 ],
                 alcohol: "12%",
                 serving: "Well chilled (45-50°F / 7-10°C)",
-                notes: "Delle Venezie is a large IGT covering Veneto, Friuli, and Trentino. Italian Pinot Grigio is typically lighter and more neutral than Alsatian Pinot Gris."
+                notes: "Pinot Grigio and Pinot Gris are the same grape—just different styles! Italian Grigio is typically light, crisp, and neutral (stainless steel fermented); Alsatian Gris is richer and more aromatic. Delle Venezie IGT covers Veneto, Friuli, and Trentino—the heart of Italian Pinot Grigio production. Fun fact: Pinot Grigio is a mutation of Pinot Noir; the 'grigio' (gray) refers to the grape's pinkish-gray skin color."
             },
             // Position 10
             {
@@ -2339,7 +2345,7 @@
                 region: "Pouilly-Fumé, Loire Valley",
                 country: "France",
                 pronunciation: "poo-YEE foo-MAY deh-ZAH",
-                winemaker: "Domaine Dezat - Multi-generational family estate in Pouilly-sur-Loire, crafting mineral-driven Sauvignon Blanc from silex (flint) soils.",
+                winemaker: "Domaine Dezat - A multi-generational family estate in Pouilly-sur-Loire, with roots going back several centuries. The Dezat family owns prime vineyard parcels on the famous silex (flint) soils that give Pouilly-Fumé its distinctive smoky minerality. They practice sustainable viticulture, hand-harvest their grapes, and ferment in temperature-controlled stainless steel to preserve the wine's crystalline purity. The family motto: let the terroir speak through the wine.",
                 tasting: "Citrus (grapefruit, lemon), flint/gunsmoke, white flowers, gooseberry. Bone-dry with razor-sharp acidity, pronounced minerality, and a long, clean finish.",
                 food: "Black Truffle Goat, Petit Basque, Hummus, The Veg flatbread, Bresaola",
                 foodPairings: [
@@ -2351,7 +2357,7 @@
                 ],
                 alcohol: "13%",
                 serving: "Well chilled (45-50°F / 7-10°C)",
-                notes: "Pouilly-Fumé sits across the Loire from Sancerre. The 'fumé' (smoky) character comes from silex (flint) soils that give a distinctive gunflint minerality."
+                notes: "Pouilly-Fumé and Sancerre face each other across the Loire River—both make world-class Sauvignon Blanc but from different soils. The 'fumé' (smoky) name comes from the gunflint character created by silex (flint) soils—strike two pieces together and smell the sulfurous smoke! Loire Sauvignon is bone-dry with laser acidity, unlike sweeter New Zealand styles. Classic pairing secret: Loire Sauvignon + goat cheese (chèvre) is one of wine's most perfect matches."
             },
             // Position 11
             {
@@ -2362,7 +2368,7 @@
                 grapeDetail: "Nerello Mascalese is usually a red grape from Mt. Etna. This rosé expression showcases its aromatic, delicate side.",
                 region: "Sicily",
                 country: "Italy",
-                winemaker: "Gorghi Tondi - Organic estate in western Sicily. 'Rosa dei Venti' means 'Compass Rose' - reflecting the Mediterranean winds that shape their vineyards.",
+                winemaker: "Gorghi Tondi - A certified organic estate in western Sicily near Marsala, founded by the Ferreri family. 'Rosa dei Venti' means 'Compass Rose'—a poetic name reflecting the Mediterranean winds (Scirocco, Maestrale) that constantly sweep across their coastal vineyards, naturally protecting against disease and concentrating flavors. The winery focuses on indigenous Sicilian varieties, believing they best express the island's unique terroir. All wines are certified organic.",
                 tasting: "White peach, citrus, almond, delicate floral notes. Light to medium body with fresh acidity and subtle minerality. Unique and aromatic.",
                 food: "Prosciutto di Parma, Hummus, Petit Basque, Antipasto Vegetable Blend, The Veg flatbread",
                 foodPairings: [
@@ -2374,7 +2380,7 @@
                 ],
                 alcohol: "12.5%",
                 serving: "Well chilled (45-50°F / 7-10°C)",
-                notes: "Nerello Mascalese is usually the star of Etna Rosso, but this unique rosé expression showcases its aromatic, delicate potential."
+                notes: "Nerello Mascalese is usually famous for red Etna Rosso wines from the volcanic slopes of Mt. Etna, where it's often compared to Nebbiolo or Pinot Noir. This rosé expression is unusual and exciting—it showcases the grape's delicate, aromatic side rather than its tannic structure. Sicily is Italy's largest island and one of its most exciting wine regions, with indigenous grapes found nowhere else. The name means 'little black grape from Mascali,' a town on Etna's slopes."
             },
             // Position 12
             {
@@ -2385,7 +2391,7 @@
                 grapeDetail: "Santa Barbara County Chardonnay benefits from cool Pacific fog, creating a balanced style between rich Napa and lean Burgundy.",
                 region: "Santa Barbara County, California",
                 country: "USA",
-                winemaker: "Presqu'ile Winery - Estate winery in the Santa Maria Valley, one of California's coolest wine regions. The name is French for 'peninsula.'",
+                winemaker: "Presqu'ile Winery - An acclaimed estate winery in California's Santa Maria Valley, founded by the Murphy family in 2007. The name is French for 'almost an island' (peninsula), reflecting the family's French heritage. They farm 73 acres of certified sustainable vineyards on a unique east-west running valley that funnels cool Pacific fog directly over the vines. Their focus is Burgundian varieties (Chardonnay, Pinot Noir) made with minimal intervention: native yeast fermentation, whole-cluster pressing, and judicious French oak aging.",
                 tasting: "Green apple, citrus, white peach, subtle oak (vanilla, toast), hints of butter and minerality. Medium body with balanced acidity and a creamy texture.",
                 food: "Saint Angel, Gruyere, Prosciutto di Parma, Honey Bee Gouda, Duck Rillettes",
                 foodPairings: [
@@ -2397,7 +2403,7 @@
                 ],
                 alcohol: "13.5%",
                 serving: "Chilled (50-55°F / 10-13°C)",
-                notes: "Santa Maria Valley is one of California's coolest AVAs - the transverse mountain ranges funnel Pacific fog inland."
+                notes: "Santa Maria Valley is uniquely cool for California—the only valley running east-west, it funnels Pacific Ocean fog deep inland. This creates a Burgundy-like climate perfect for Chardonnay and Pinot Noir. California Chardonnay styles range from rich/oaky (Napa) to lean/mineral (Sonoma Coast). Santa Barbara sits in the middle: balanced, with both fruit and freshness. The 'buttery' character in Chardonnay comes from malolactic fermentation, which converts sharp malic acid to creamy lactic acid."
             },
             // Position 13
             {
@@ -2409,7 +2415,7 @@
                 region: "Pays d'Oc IGP, Languedoc",
                 country: "France",
                 pronunciation: "lay foo-MAY BLAHN-sh oh-RAHNJ",
-                winemaker: "François Lurton - Pioneering French winemaker who works globally. Les Fumées Blanches ('The White Smokes') is his innovative Languedoc project.",
+                winemaker: "François Lurton - One of France's most innovative and traveled winemakers, with projects spanning from Bordeaux to Argentina to Portugal. Les Fumées Blanches ('The White Smokes') is his creative Languedoc project, pushing boundaries with unusual techniques like this orange wine. The Lurton family is Bordeaux royalty—François's father and uncle own famous châteaux—but François chose to explore the world. This orange wine macerates Sauvignon Blanc on its skins for extended contact, extracting color, tannins, and unique aromatics.",
                 tasting: "Dried apricot, honey, orange peel, nutty notes (hazelnut), tannic texture like tea. Full-bodied with unique complexity, oxidative notes, and a long, savory finish.",
                 food: "Ewephoria, Mimolette, Black Truffle Salami, Foie Gras with Black Truffle, Chorizo",
                 foodPairings: [
@@ -2421,7 +2427,7 @@
                 ],
                 alcohol: "12.5%",
                 serving: "Lightly chilled (50-55°F / 10-13°C)",
-                notes: "Orange wine is the 'fourth color' of wine. Made by fermenting white grapes with their skins (7-14+ days), extracting tannins, color, and texture."
+                notes: "Orange wine is the 'fourth color' of wine—not made from oranges! It's white grapes fermented WITH their skins (like red wine), extracting amber color, tannins, and complex flavors. The technique is 8,000+ years old, originating in Georgia (the country) using clay qvevri vessels. Modern orange wines range from light and aromatic to deeply tannic and oxidative. This style is having a major renaissance among natural wine lovers. Think of it as 'a white wine you can pair with meat.'"
             },
             // Position 14
             {
@@ -2432,7 +2438,7 @@
                 grapeDetail: "Albariño is Spain's premier white grape, from the rainy, green region of Galicia. Known for bright acidity and stone fruit.",
                 region: "Rías Baixas, Galicia",
                 country: "Spain",
-                winemaker: "Bodegas Marola - Small producer in the Val do Salnés subzone of Rías Baixas, where Albariño thrives on granite soils near the Atlantic coast.",
+                winemaker: "Bodegas Marola - A small, artisan producer in the Val do Salnés subzone of Rías Baixas, considered the birthplace and heartland of Albariño. The winery farms old vines on decomposed granite soils just kilometers from the Atlantic Ocean, where the maritime influence creates morning fog and constant sea breezes. Traditionally, Albariño vines here are trained on pergolas (parrales) to lift grapes above the damp ground and prevent rot. The wines are fermented in stainless steel to preserve their bright, fresh character.",
                 tasting: "White peach, apricot, citrus (lemon, grapefruit), saline minerality. Medium body with vibrant acidity and a refreshing, slightly briny finish.",
                 food: "Hummus, Tapenade, Prosciutto di Parma, Petit Basque, Antipasto Vegetable Blend",
                 foodPairings: [
@@ -2444,7 +2450,7 @@
                 ],
                 alcohol: "12.5%",
                 serving: "Well chilled (45-50°F / 7-10°C)",
-                notes: "Rías Baixas is in Galicia, Spain's lush, rainy northwest corner. The 'rías' are fjord-like inlets, and the maritime influence gives Albariño its characteristic salinity."
+                notes: "Rías Baixas (REE-ahs BY-shus) is in Galicia, Spain's green, Celtic northwest corner—it rains more here than anywhere else in Spain! The 'rías' are fjord-like inlets carved by glaciers, and Atlantic breezes give Albariño its signature saline minerality. Galicians say 'Albariño was born to be paired with seafood'—it's the perfect match for oysters, mussels, and pulpo (octopus). The grape has thick skin to resist the damp climate, giving wines aromatic intensity."
             },
             // Position 15
             {
@@ -2456,7 +2462,7 @@
                 region: "Anjou, Loire Valley",
                 country: "France",
                 pronunciation: "lah peh-TEET ROHSH ahn-ZHOO",
-                winemaker: "La Petite Roche - Small estate in Anjou, producing terroir-driven Chenin Blanc. The name means 'The Little Rock' referring to the schist and limestone soils.",
+                winemaker: "La Petite Roche ('The Little Rock') - A small family estate in Anjou, named for the rocky schist and limestone soils that stress the vines and concentrate flavors. The Loire Valley's Anjou region is Chenin Blanc's spiritual home—the grape has grown here for over 1,000 years. The estate practices sustainable viticulture, harvesting by hand and fermenting with native yeasts. Chenin's naturally high acidity means it can be made in every style from bone-dry to lusciously sweet, but this bottling aims for an elegant off-dry balance.",
                 tasting: "Green apple, quince, honey, white flowers, wet stone minerality. Medium body with bright acidity, subtle sweetness, and a long, mineral finish.",
                 food: "Black Truffle Goat, Hummus, Petit Basque, Maple Bourbon Goat, The Veg flatbread",
                 foodPairings: [
@@ -2468,7 +2474,7 @@
                 ],
                 alcohol: "12%",
                 serving: "Well chilled (45-50°F / 7-10°C)",
-                notes: "Anjou Chenin can range from dry to off-dry to sweet. This bottling is on the drier side with just a hint of residual sugar."
+                notes: "Chenin Blanc is the world's most versatile grape—it can make dry, off-dry, sweet, and sparkling wines! In the Loire, it ranges from bone-dry Savennières to lusciously sweet Coteaux du Layon. High natural acidity makes even sweet versions refreshing. Quince (a fruit related to apple and pear) is Chenin's signature aroma—if you've never tasted quince, try quince paste (membrillo) with cheese to understand the flavor. Anjou is the heart of Loire Chenin territory."
             },
             // Position 16
             {
@@ -2479,7 +2485,7 @@
                 grapeDetail: "Scheurebe is a German crossing of Riesling and an unknown grape. Named after its creator Georg Scheu, it's aromatic with exotic fruit character.",
                 region: "Rheinhessen (Selztal)",
                 country: "Germany",
-                winemaker: "Weingut Braunewell - Family estate in the Selztal (Selz Valley) of Rheinhessen, Germany's largest wine region. 'Unser Täglich' means 'Our Daily' - an everyday drinking wine.",
+                winemaker: "Weingut Braunewell - A family estate in the Selztal (Selz Valley) of Rheinhessen, Germany's largest and sunniest wine region. Run by the Braunewell family for generations, they specialize in aromatic white varieties. 'Unser Täglich' means 'Our Daily'—a philosophy that great wine should be affordable for everyday enjoyment. The vineyards sit on diverse soils including limestone and loess, and the winery practices sustainable viticulture with minimal intervention in the cellar to preserve aromatic freshness.",
                 tasting: "Grapefruit, passionfruit, elderflower, tropical notes, hint of fresh herbs. Medium body with vibrant acidity and an aromatic, refreshing finish.",
                 food: "Pimento Cheese Dip, Hummus, Maple Bourbon Goat, Exotic Bomba, Spicy Asian dishes",
                 foodPairings: [
@@ -2491,7 +2497,7 @@
                 ],
                 alcohol: "11.5%",
                 serving: "Well chilled (45-50°F / 7-10°C)",
-                notes: "Scheurebe was created in 1916 and is having a renaissance. It's more aromatic than Riesling with exotic tropical and grapefruit notes."
+                notes: "Scheurebe (SHOY-reh-beh) was created in 1916 by Georg Scheu, who crossed Riesling with an unknown variety. For decades it was considered 'Riesling's weird cousin,' but it's having a major renaissance! The grape produces intensely aromatic wines with pink grapefruit, passionfruit, and elderflower—more tropical than Riesling. Rheinhessen is Germany's largest wine region, known for gentle rolling hills called 'Rheinhessische Schweiz' (Rheinhessen Switzerland). Lower alcohol and slight sweetness make it perfect with spicy foods."
             },
             // Position 17
             {
@@ -2502,7 +2508,7 @@
                 grapeDetail: "Pinot Noir is thin-skinned, resulting in lighter color but intense aromatics. Slovenia has a long winemaking tradition.",
                 region: "Goriška Brda",
                 country: "Slovenia",
-                winemaker: "Krasno Wines - Producer in Slovenia's premier wine region Goriška Brda, bordering Italy's Friuli. The name means 'beautiful' in Slovenian.",
+                winemaker: "Krasno Wines - A quality-focused producer in Slovenia's premier wine region, Goriška Brda. The name 'Krasno' means 'beautiful' in Slovenian—fitting for this stunning hillside region that shares the same slopes as Italy's famous Collio. Slovenia has an ancient winemaking tradition dating back to Roman times, though it remained obscure during the communist era. Now free and thriving, Slovenian wines are gaining international acclaim. Krasno crafts elegant, European-style wines that emphasize finesse over power.",
                 tasting: "Red cherry, strawberry, earthy notes, hints of spice and dried herbs. Light to medium body with silky tannins and fresh acidity.",
                 food: "Duck Rillettes, Prosciutto di Parma, Saint Angel, Black Truffle Goat, Petit Basque",
                 foodPairings: [
@@ -2514,7 +2520,7 @@
                 ],
                 alcohol: "13%",
                 serving: "Slightly chilled (55-60°F / 13-15°C)",
-                notes: "Goriška Brda is Slovenia's most prestigious wine region, sharing the same hills as Italy's Collio. The cool climate produces elegant, European-style Pinot Noir."
+                notes: "Slovenia is one of Europe's hidden wine gems! Goriška Brda (gor-ISH-kah BREE-dah) literally means 'the hills of Gorizia' and is continuous with Italy's Collio—same terroir, divided by politics. The ponca (flysch) soils of sandstone and marl create elegant, mineral wines. Slovenia has the world's oldest vine (400+ years old!) in Maribor. Pinot Noir thrives in this cool Alpine climate, producing wines with Burgundian elegance at friendlier prices."
             },
             // Position 18
             {
@@ -2525,7 +2531,7 @@
                 grapeDetail: "Garnatxa is the Catalan name for Grenache/Garnacha - Spain's most planted red grape, known for red fruit and spice.",
                 region: "Penedès (Font-Rubí)",
                 country: "Spain",
-                winemaker: "Mont-Rubí S.A. - Family estate in L'Avella, Font-Rubí in the Penedès region, practicing organic viticulture in the Catalan countryside.",
+                winemaker: "Mont-Rubí S.A. - A family estate in L'Avella, Font-Rubí, in the heart of Catalonia's Penedès region. The winery has been certified organic since 2002, working with old Garnacha vines that produce small, concentrated berries. 'Meretat' means 'deserved' or 'earned' in Catalan—reflecting the hard work of organic farming. The high-altitude vineyards (400-600m) experience dramatic day-night temperature swings that preserve acidity while building ripe fruit character. Mont-Rubí is part of the new wave of quality-focused Catalan producers.",
                 tasting: "Ripe red berries (raspberry, strawberry), Mediterranean herbs, hints of white pepper and garrigue. Medium body with soft tannins and a warm finish.",
                 food: "Chorizo, Salchichon De Bellota, Ewephoria, Tapenade, Manchego",
                 foodPairings: [
@@ -2537,7 +2543,7 @@
                 ],
                 alcohol: "14%",
                 serving: "Room temperature (60-65°F / 16-18°C)",
-                notes: "Penedès is famous for Cava but also produces excellent still wines. Font-Rubí's high altitude (400-600m) gives fresh, aromatic Garnacha."
+                notes: "Garnacha (Grenache in France, Cannonau in Sardinia) is Spain's most planted red grape—it originated in Aragón and spread across the Mediterranean. Penedès is famous for Cava (sparkling wine), but the high-altitude zones like Font-Rubí are proving excellent for still wines. 'Garnatxa' is the Catalan spelling. The grape produces wines with red fruit, white pepper, and herbal garrigue notes. Old vines (viñas viejas) produce smaller yields but more concentrated, complex wines."
             },
             // Position 19
             {
@@ -2548,7 +2554,7 @@
                 grapeDetail: "Frappato is a light, aromatic Sicilian grape - often blended in Cerasuolo di Vittoria but delicious on its own.",
                 region: "Sicily",
                 country: "Italy",
-                winemaker: "Gorghi Tondi - Organic estate in western Sicily near Marsala. 'Dume' means 'two' in Sicilian dialect, referencing their two founding families.",
+                winemaker: "Gorghi Tondi - The same organic estate in western Sicily that produces our Rosa dei Venti rosé. 'Dume' means 'two' in Sicilian dialect, honoring the two founding families who established the estate. Located near the ancient town of Marsala, the vineyards benefit from constant sea breezes that keep vines healthy without chemicals. Gorghi Tondi is passionate about reviving Sicily's indigenous grape varieties, believing they best express the island's sun-drenched Mediterranean character. All wines are certified organic.",
                 tasting: "Fresh red cherry, wild strawberry, rose petals, hints of herbs and Mediterranean scrub. Light body with bright acidity and silky texture.",
                 food: "Prosciutto di Parma, Felino Salami, Saint Angel, Petit Basque, Antipasto Vegetable Blend",
                 foodPairings: [
@@ -2560,7 +2566,7 @@
                 ],
                 alcohol: "12.5%",
                 serving: "Slightly chilled (55-60°F / 13-15°C)",
-                notes: "Frappato is one of Sicily's indigenous treasures - light like Gamay but distinctly Mediterranean. Best served slightly chilled."
+                notes: "Frappato (frah-PAH-toh) is one of Sicily's indigenous treasures—light-bodied, aromatic, and refreshing, often compared to Beaujolais or Loire reds. It's half of the blend in DOCG Cerasuolo di Vittoria (with Nero d'Avola), but shines solo as a chillable red. The name may come from the Sicilian word for 'to beat or shake'—referring to how the grapes were traditionally harvested. Sicily has more indigenous grape varieties than any other Italian region!"
             },
             // Position 20
             {
@@ -2571,7 +2577,7 @@
                 grapeDetail: "A bold Priorat-style blend from the rising Montsant region, combining power with Mediterranean character.",
                 region: "Montsant",
                 country: "Spain",
-                winemaker: "Marc and Adrià Pérez - Brothers who created Les Cousins as a passion project. L'Inconscient means 'The Unconscious' - wines made from the heart, not calculation.",
+                winemaker: "Marc and Adrià Pérez - Two brothers who created Les Cousins as a passion project with their cousin Gerard while working at their family's main estate, Celler Mas Alta. L'Inconscient ('The Unconscious') represents their philosophy: wines made from intuition and heart, not calculation or market trends. They farm old-vine Grenache and Carignan on the steep slate slopes of Montsant, hand-harvesting everything and using traditional cement and clay amphora fermentation. The wines are bold, authentic, and unapologetically powerful.",
                 tasting: "Dark fruits (blackberry, plum), Mediterranean herbs, licorice, mineral notes from slate soils. Full-bodied with firm tannins and a long, spicy finish.",
                 food: "Chorizo, Salchichon De Bellota, Ewephoria, Mimolette, The Mighty Spicy flatbread",
                 foodPairings: [
@@ -2583,7 +2589,7 @@
                 ],
                 alcohol: "14.5%",
                 serving: "Room temperature (64°F / 18°C), decant 30 min",
-                notes: "Montsant surrounds the famous Priorat region and shares its slate (llicorella) soils. Often called 'baby Priorat' - similar style at friendlier prices."
+                notes: "Montsant (mont-SAHNT, meaning 'holy mountain') is a DO that literally surrounds Priorat like a donut—same slate/llicorella soils, similar old-vine Grenache and Carignan, but at friendlier prices. Often called 'baby Priorat.' The region was only recognized in 2001 but is rapidly gaining acclaim. The wine's name 'L'Inconscient' reflects the natural wine philosophy: trust the grapes, minimal intervention, let terroir speak. Decanting is recommended to let this powerful wine open up."
             },
             // Position 21
             {
@@ -2594,7 +2600,7 @@
                 grapeDetail: "Tempranillo is Spain's noble grape - the backbone of Rioja and Ribera del Duero, known for cherry fruit and aging potential.",
                 region: "Castilla-La Mancha",
                 country: "Spain",
-                winemaker: "Encomienda de Cervera - Historic estate in Castilla-La Mancha, Spain's largest wine region. 'Horten' refers to their garden vineyard parcels.",
+                winemaker: "Encomienda de Cervera - A historic estate in Castilla-La Mancha, taking its name from an ancient 'encomienda' (medieval land grant from the Spanish crown). The estate dates back centuries and now produces modern, accessible wines from Spain's vast central plateau. 'Horten' refers to their prized garden vineyard parcels, where old-vine Tempranillo grows on chalky, limestone-rich soils. The extreme continental climate (scorching summers, cold winters) stresses vines naturally, concentrating flavors without irrigation.",
                 tasting: "Red cherry, plum, leather, hints of vanilla and tobacco. Medium to full body with moderate tannins and a smooth finish.",
                 food: "Chorizo, Manchego, Ewephoria, Red Wine Cheddar, Salchichon De Bellota",
                 foodPairings: [
@@ -2606,7 +2612,7 @@
                 ],
                 alcohol: "13.5%",
                 serving: "Room temperature (62-65°F / 17-18°C)",
-                notes: "Castilla-La Mancha is Spain's wine heartland - vast plains south of Madrid producing excellent value wines."
+                notes: "Tempranillo (tem-prah-NEE-yo) is Spain's noble grape—the backbone of Rioja, Ribera del Duero, and many other regions. The name comes from 'temprano' (early) because it ripens earlier than other Spanish varieties. Castilla-La Mancha is the world's largest wine region by vineyard area—a vast plateau south of Madrid that Don Quixote famously tilted at windmills in. The region offers incredible value: quality wine at everyday prices."
             },
             // Position 22
             {
@@ -2617,7 +2623,7 @@
                 grapeDetail: "Chianti Classico requires minimum 80% Sangiovese. The Classico zone is the original, historic heart of Chianti.",
                 region: "Chianti Classico, Tuscany",
                 country: "Italy",
-                winemaker: "Rocca di Castagnoli - Historic estate in the Gaiole in Chianti zone, one of Chianti Classico's most prestigious areas. The name means 'Fortress of the Chestnut Trees.'",
+                winemaker: "Rocca di Castagnoli - A historic estate in Gaiole in Chianti, one of Chianti Classico's most prestigious sub-zones. The name means 'Fortress of the Chestnut Trees,' referencing the ancient castle and chestnut forests on the property. The estate dates back to the 10th century and spans 180 hectares at high elevation (400-500m), where cool nights preserve acidity and extend the growing season. They practice sustainable viticulture and use traditional large Slavonian oak barrels (botti) for aging, giving wines elegance rather than new-oak heaviness.",
                 tasting: "Red cherry, dried herbs (oregano, thyme), leather, earthy notes with hints of tobacco. Medium body with firm acidity and well-integrated tannins.",
                 food: "Felino Salami, Prosciutto di Parma, Gruyere, Pecorino, Antipasto Vegetable Blend",
                 foodPairings: [
@@ -2629,7 +2635,7 @@
                 ],
                 alcohol: "13.5%",
                 serving: "Slightly cool room temp (60-64°F / 16-18°C)",
-                notes: "Chianti Classico is distinguished by the Black Rooster (Gallo Nero) seal. The Classico zone between Florence and Siena produces more structured wines."
+                notes: "Chianti Classico is the historic heart of Chianti, distinguished by the Gallo Nero (Black Rooster) seal—a symbol dating back to a medieval legend about a border dispute with Siena. The Classico zone requires minimum 80% Sangiovese (vs. 70% for regular Chianti) and produces more structured, age-worthy wines. Sangiovese means 'blood of Jove' and is Italy's most planted red grape. The wine's high acidity and savory character make it one of the world's most food-friendly reds."
             },
             // Position 23
             {
@@ -2640,7 +2646,7 @@
                 grapeDetail: "Old vine Garnacha from high-altitude Spanish vineyards, showing concentration and complexity.",
                 region: "Calatayud",
                 country: "Spain",
-                winemaker: "Bodegas Palmeri - Small producer in the mountainous Calatayud region of Aragón, working with old vine Garnacha at high altitude.",
+                winemaker: "Bodegas Palmeri - A small, quality-driven producer in the mountainous Calatayud region of Aragón. They specialize in old-vine Garnacha, many plants over 50 years old, grown at extreme elevations (800-1000m) on slate and limestone soils. 'Navalta' comes from the Aragonese dialect. The harsh continental climate (scorching days, freezing nights) naturally limits yields and concentrates flavors. Despite Calatayud's ancient winemaking history (dating to Roman times), it only became a DO in 1989 and remains relatively undiscovered.",
                 tasting: "Ripe red and dark fruits (cherry, blackberry), spice, dried herbs, mineral notes. Full body with velvety tannins and a long, warm finish.",
                 food: "Chorizo, Salchichon De Bellota, Ewephoria, Mimolette, Blue d'Auvergne",
                 foodPairings: [
@@ -2652,7 +2658,7 @@
                 ],
                 alcohol: "14.5%",
                 serving: "Room temperature (64°F / 18°C)",
-                notes: "Calatayud has some of Spain's highest vineyards (800-1000m). Old vine Garnacha from these altitudes produces concentrated wines with fresh acidity."
+                notes: "Calatayud (cal-ah-tah-YOOD) is one of Spain's highest wine regions, with vineyards up to 1,000 meters elevation in the Sistema Ibérico mountains. The extreme altitude creates huge temperature swings—up to 25°C between day and night—preserving acidity while building concentration. Old-vine Garnacha (viñas viejas) here can be 80+ years old, producing tiny yields of intensely flavored wine. The 2018 vintage was excellent in Aragón, with balanced growing conditions."
             },
             // Position 24
             {
@@ -2664,7 +2670,7 @@
                 region: "Côtes du Rhône Villages Plan de Dieu",
                 country: "France",
                 pronunciation: "doh-MEHN vair-kee-AIR plahn duh DYUH",
-                winemaker: "Domaine Verquière - Family estate in the Rhône Valley producing authentic, terroir-driven wines from the prestigious Plan de Dieu appellation.",
+                winemaker: "Domaine Verquière - A family estate in the Rhône Valley since 1960, now run by third-generation winemaker Louis Bernard. Located in the village of Sablet, they own prime parcels in the prestigious Plan de Dieu appellation. The estate practices sustainable viticulture on the plateau's famous galets roulés (large round stones) that store heat during the day and radiate it back at night. Fermentation uses traditional cement tanks and large oak foudres, with the goal of expressing pure terroir rather than winemaker intervention.",
                 tasting: "Dark fruits (blackberry, black cherry), garrigue herbs (thyme, rosemary), black pepper, hints of licorice. Full-bodied with ripe tannins and a long, spicy finish.",
                 food: "Chorizo, Salchichon De Bellota, Ewephoria, Mimolette, Tapenade",
                 foodPairings: [
@@ -2676,7 +2682,7 @@
                 ],
                 alcohol: "14.5%",
                 serving: "Room temperature (62-65°F / 17-18°C)",
-                notes: "Plan de Dieu ('Plain of God') is one of the top Côtes du Rhône Villages. The name comes from medieval times when the Knights Templar cultivated vines here."
+                notes: "Plan de Dieu ('Plain of God') is one of the 22 named villages within Côtes du Rhône Villages—a step up from basic Côtes du Rhône. The name dates to medieval times when Knights Templar monks cultivated vines here on their way to the Crusades. The terroir features galets roulés (large river stones) that act like heat batteries, keeping vines warm at night. The classic Southern Rhône GSM blend (Grenache-Syrah-Mourvèdre) creates wines with dark fruit, spice, and characteristic garrigue herbs."
             }
         ];
 
