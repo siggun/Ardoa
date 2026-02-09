@@ -815,7 +815,7 @@
 
         .food-card .food-type {
             font-size: 0.85rem;
-            color: var(--burgundy);
+            color: var(--pale-gold);
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -823,21 +823,21 @@
         }
 
         .food-card .food-description {
-            color: var(--charcoal);
+            color: var(--bone);
             margin-bottom: 0.75rem;
             font-size: 0.95rem;
         }
 
         .food-card .wine-pairings {
-            background: #f9f9f9;
+            background: rgba(74, 14, 26, 0.3);
             padding: 0.75rem;
             border-radius: 5px;
-            border-left: 3px solid var(--burgundy);
+            border-left: 3px solid var(--pale-gold);
         }
 
         .food-card .wine-pairings-label {
             font-size: 0.8rem;
-            color: var(--burgundy);
+            color: var(--pale-gold);
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -846,7 +846,7 @@
 
         .food-card .wine-pairings-list {
             font-size: 0.85rem;
-            color: #555;
+            color: var(--bone);
         }
 
         .food-pronunciation {
@@ -2345,7 +2345,6 @@
         <div class="header-content">
             <!-- Gothic Logo: Haunting Dark Tree with Realistic White Raven holding Grapes -->
             <svg class="gothic-logo" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
-                <!-- Background Glow -->
                 <defs>
                     <radialGradient id="moonGlow" cx="50%" cy="30%" r="60%">
                         <stop offset="0%" style="stop-color:#2a2035;stop-opacity:0.8"/>
@@ -2361,153 +2360,111 @@
                 </defs>
 
                 <!-- Moon/Mist Background -->
-                <ellipse cx="140" cy="60" rx="80" ry="60" fill="url(#moonGlow)"/>
+                <ellipse cx="140" cy="60" rx="90" ry="65" fill="url(#moonGlow)"/>
 
-                <!-- Dark Tree Trunk -->
-                <path d="M140,195 L140,120 Q138,100 130,85 L125,70
-                         M140,120 Q142,105 150,90 L155,75
-                         M140,140 Q130,135 115,130
-                         M140,140 Q150,138 165,135"
-                      stroke="#1a1520" stroke-width="8" fill="none" stroke-linecap="round"/>
+                <!-- WIDE TREE TRUNK -->
+                <path d="M120,195 C115,180 110,160 115,140 C118,125 122,115 125,105
+                         M160,195 C165,180 170,160 165,140 C162,125 158,115 155,105
+                         M125,105 C128,95 132,85 140,75
+                         M155,105 C152,95 148,85 140,75"
+                      fill="#1a1520"/>
+                <!-- Trunk fill -->
+                <path d="M120,195 C115,180 110,160 115,140 C118,125 122,115 125,105
+                         C128,95 132,85 140,75
+                         C148,85 152,95 155,105
+                         C158,115 162,125 165,140 C170,160 165,180 160,195 Z"
+                      fill="#1a1520"/>
+                <!-- Trunk texture -->
+                <path d="M130,180 Q135,170 128,160 M145,185 Q150,175 143,165 M135,155 Q140,145 133,135 M148,150 Q153,140 146,130"
+                      stroke="#0d0a12" stroke-width="1.5" fill="none" opacity="0.6"/>
 
-                <!-- Tree Branches - Gnarled and Gothic - MANY MORE BRANCHES -->
-                <path d="M125,70 Q115,55 100,45 Q85,38 70,40
-                         M125,70 Q120,50 110,35 Q100,25 95,20
-                         M155,75 Q165,60 180,50 Q195,45 210,48
-                         M155,75 Q160,55 175,40 Q185,30 195,25
-                         M115,130 Q95,125 75,130 Q60,135 50,145
-                         M165,135 Q185,130 205,135 Q220,140 230,150"
+                <!-- Main branches from trunk -->
+                <path d="M125,110 C110,100 90,95 70,100 M155,110 C170,100 190,95 210,100"
+                      stroke="#1a1520" stroke-width="6" fill="none" stroke-linecap="round"/>
+                <path d="M128,95 C115,85 95,80 75,82 M152,95 C165,85 185,80 205,82"
+                      stroke="#1a1520" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <path d="M135,82 C125,70 110,60 90,55 M145,82 C155,70 170,60 190,55"
                       stroke="#1a1520" stroke-width="4" fill="none" stroke-linecap="round"/>
 
-                <!-- Additional Upper Branches -->
-                <path d="M125,70 Q130,55 125,40 Q120,28 110,18
-                         M125,70 Q108,62 92,58 Q78,55 65,60
-                         M155,75 Q150,58 155,42 Q160,28 172,18
-                         M155,75 Q172,68 188,65 Q202,62 218,68"
-                      stroke="#1a1520" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                <!-- FULL LEAF CANOPY - Layer 1 (Back/Darkest) -->
+                <ellipse cx="140" cy="55" rx="75" ry="45" fill="#151015"/>
 
-                <!-- Mid-level Branches -->
-                <path d="M130,95 Q115,88 98,92 Q82,96 68,105
-                         M150,95 Q165,88 182,92 Q198,96 212,105
-                         M135,110 Q118,105 100,110 Q85,116 72,128
-                         M145,110 Q162,105 180,110 Q195,116 208,128"
-                      stroke="#1a1520" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <!-- Leaf Canopy - Layer 2 -->
+                <ellipse cx="120" cy="50" rx="55" ry="35" fill="#1a1520"/>
+                <ellipse cx="160" cy="50" rx="55" ry="35" fill="#1a1520"/>
+                <ellipse cx="140" cy="40" rx="50" ry="30" fill="#1a1520"/>
 
-                <!-- Smaller Twigs - Original -->
-                <path d="M70,40 Q60,35 55,30 M70,40 Q65,50 58,55
-                         M95,20 Q90,12 82,8 M95,20 Q102,15 108,10
-                         M210,48 Q220,42 228,38 M210,48 Q215,58 222,62
-                         M195,25 Q200,18 208,15 M195,25 Q188,20 182,15
-                         M50,145 Q40,150 35,158 M50,145 Q45,138 38,135
-                         M230,150 Q240,155 248,162 M230,150 Q235,142 242,138"
-                      stroke="#1a1520" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <!-- Leaf Canopy - Layer 3 (Mid tones) -->
+                <ellipse cx="85" cy="60" rx="35" ry="25" fill="#1f1525"/>
+                <ellipse cx="195" cy="60" rx="35" ry="25" fill="#1f1525"/>
+                <ellipse cx="140" cy="35" rx="40" ry="22" fill="#1f1525"/>
+                <ellipse cx="110" cy="45" rx="30" ry="20" fill="#201520"/>
+                <ellipse cx="170" cy="45" rx="30" ry="20" fill="#201520"/>
 
-                <!-- More Fine Twigs -->
-                <path d="M110,18 Q105,10 98,5 M110,18 Q118,12 125,8
-                         M65,60 Q55,58 48,62 M65,60 Q60,68 52,75
-                         M172,18 Q178,10 185,5 M172,18 Q165,12 158,8
-                         M218,68 Q228,65 238,70 M218,68 Q222,78 230,85
-                         M68,105 Q58,102 50,108 M68,105 Q62,115 55,122
-                         M212,105 Q222,102 230,108 M212,105 Q218,115 225,122
-                         M72,128 Q62,132 55,140 M72,128 Q68,138 60,148
-                         M208,128 Q218,132 225,140 M208,128 Q212,138 220,148"
-                      stroke="#1a1520" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <!-- Leaf Canopy - Layer 4 (Texture clusters) -->
+                <ellipse cx="70" cy="70" rx="25" ry="18" fill="#251a25"/>
+                <ellipse cx="210" cy="70" rx="25" ry="18" fill="#251a25"/>
+                <ellipse cx="55" cy="85" rx="20" ry="15" fill="#1a1520"/>
+                <ellipse cx="225" cy="85" rx="20" ry="15" fill="#1a1520"/>
+                <ellipse cx="100" cy="55" rx="22" ry="16" fill="#251a25"/>
+                <ellipse cx="180" cy="55" rx="22" ry="16" fill="#251a25"/>
+                <ellipse cx="140" cy="25" rx="35" ry="18" fill="#201520"/>
 
-                <!-- Tiny Twig Details -->
-                <path d="M55,30 Q48,25 42,28 M58,55 Q52,60 48,68
-                         M82,8 Q75,2 68,5 M108,10 Q115,4 122,6
-                         M228,38 Q235,32 242,35 M222,62 Q228,68 235,72
-                         M208,15 Q215,8 222,10 M182,15 Q175,8 168,10
-                         M35,158 Q28,165 22,168 M38,135 Q30,130 24,132
-                         M248,162 Q255,168 260,172 M242,138 Q250,132 258,135
-                         M98,5 Q92,0 85,2 M125,8 Q132,2 140,4
-                         M185,5 Q192,0 200,2 M158,8 Q150,2 142,4"
-                      stroke="#1a1520" stroke-width="1" fill="none" stroke-linecap="round"/>
+                <!-- Leaf Canopy - Layer 5 (Top highlights) -->
+                <ellipse cx="120" cy="30" rx="25" ry="15" fill="#2a1f2a"/>
+                <ellipse cx="160" cy="30" rx="25" ry="15" fill="#2a1f2a"/>
+                <ellipse cx="90" cy="42" rx="18" ry="12" fill="#2a1f2a"/>
+                <ellipse cx="190" cy="42" rx="18" ry="12" fill="#2a1f2a"/>
+                <ellipse cx="140" cy="18" rx="28" ry="14" fill="#2a1f2a"/>
 
-                <!-- Tree Leaves - Scattered Throughout -->
-                <!-- Upper Left Leaf Clusters -->
-                <ellipse cx="52" cy="28" rx="8" ry="5" fill="#1a1520" transform="rotate(-20 52 28)"/>
-                <ellipse cx="42" cy="35" rx="7" ry="4" fill="#251a25" transform="rotate(-35 42 35)"/>
-                <ellipse cx="68" cy="8" rx="9" ry="5" fill="#1a1520" transform="rotate(15 68 8)"/>
-                <ellipse cx="85" cy="5" rx="8" ry="4" fill="#201520" transform="rotate(-10 85 5)"/>
-                <ellipse cx="98" cy="12" rx="7" ry="4" fill="#251a25" transform="rotate(25 98 12)"/>
-                <ellipse cx="110" cy="5" rx="8" ry="5" fill="#1a1520" transform="rotate(-5 110 5)"/>
-                <ellipse cx="125" cy="10" rx="7" ry="4" fill="#201520" transform="rotate(20 125 10)"/>
-                <ellipse cx="140" cy="5" rx="9" ry="5" fill="#1a1520" transform="rotate(0 140 5)"/>
+                <!-- Individual leaf details on edges -->
+                <ellipse cx="45" cy="75" rx="12" ry="8" fill="#1a1520" transform="rotate(-20 45 75)"/>
+                <ellipse cx="235" cy="75" rx="12" ry="8" fill="#1a1520" transform="rotate(20 235 75)"/>
+                <ellipse cx="40" cy="95" rx="10" ry="7" fill="#251a25" transform="rotate(-30 40 95)"/>
+                <ellipse cx="240" cy="95" rx="10" ry="7" fill="#251a25" transform="rotate(30 240 95)"/>
+                <ellipse cx="60" cy="55" rx="10" ry="6" fill="#201520" transform="rotate(15 60 55)"/>
+                <ellipse cx="220" cy="55" rx="10" ry="6" fill="#201520" transform="rotate(-15 220 55)"/>
+                <ellipse cx="75" cy="40" rx="11" ry="7" fill="#1a1520" transform="rotate(-10 75 40)"/>
+                <ellipse cx="205" cy="40" rx="11" ry="7" fill="#1a1520" transform="rotate(10 205 40)"/>
+                <ellipse cx="100" cy="25" rx="12" ry="7" fill="#251a25" transform="rotate(25 100 25)"/>
+                <ellipse cx="180" cy="25" rx="12" ry="7" fill="#251a25" transform="rotate(-25 180 25)"/>
+                <ellipse cx="140" cy="8" rx="15" ry="8" fill="#201520"/>
+                <ellipse cx="115" cy="12" rx="10" ry="6" fill="#1a1520" transform="rotate(-15 115 12)"/>
+                <ellipse cx="165" cy="12" rx="10" ry="6" fill="#1a1520" transform="rotate(15 165 12)"/>
 
-                <!-- Upper Right Leaf Clusters -->
-                <ellipse cx="158" cy="8" rx="8" ry="5" fill="#251a25" transform="rotate(-15 158 8)"/>
-                <ellipse cx="175" cy="12" rx="7" ry="4" fill="#1a1520" transform="rotate(30 175 12)"/>
-                <ellipse cx="188" cy="5" rx="8" ry="5" fill="#201520" transform="rotate(-25 188 5)"/>
-                <ellipse cx="200" cy="10" rx="9" ry="5" fill="#1a1520" transform="rotate(10 200 10)"/>
-                <ellipse cx="215" cy="18" rx="7" ry="4" fill="#251a25" transform="rotate(-20 215 18)"/>
-                <ellipse cx="228" cy="35" rx="8" ry="5" fill="#1a1520" transform="rotate(25 228 35)"/>
-                <ellipse cx="238" cy="42" rx="7" ry="4" fill="#201520" transform="rotate(-30 238 42)"/>
-                <ellipse cx="242" cy="30" rx="6" ry="4" fill="#251a25" transform="rotate(15 242 30)"/>
+                <!-- Lower hanging foliage -->
+                <ellipse cx="65" cy="105" rx="15" ry="10" fill="#1a1520" transform="rotate(-25 65 105)"/>
+                <ellipse cx="215" cy="105" rx="15" ry="10" fill="#1a1520" transform="rotate(25 215 105)"/>
+                <ellipse cx="80" cy="115" rx="12" ry="8" fill="#251a25" transform="rotate(-15 80 115)"/>
+                <ellipse cx="200" cy="115" rx="12" ry="8" fill="#251a25" transform="rotate(15 200 115)"/>
 
-                <!-- Mid-Left Leaves -->
-                <ellipse cx="48" cy="55" rx="8" ry="5" fill="#1a1520" transform="rotate(-25 48 55)"/>
-                <ellipse cx="55" cy="68" rx="7" ry="4" fill="#251a25" transform="rotate(20 55 68)"/>
-                <ellipse cx="62" cy="58" rx="6" ry="4" fill="#201520" transform="rotate(-10 62 58)"/>
-                <ellipse cx="50" cy="105" rx="8" ry="5" fill="#1a1520" transform="rotate(35 50 105)"/>
-                <ellipse cx="58" cy="115" rx="7" ry="4" fill="#251a25" transform="rotate(-15 58 115)"/>
-                <ellipse cx="55" cy="125" rx="8" ry="5" fill="#1a1520" transform="rotate(25 55 125)"/>
-                <ellipse cx="62" cy="135" rx="6" ry="4" fill="#201520" transform="rotate(-20 62 135)"/>
-                <ellipse cx="48" cy="140" rx="7" ry="4" fill="#251a25" transform="rotate(30 48 140)"/>
-
-                <!-- Mid-Right Leaves -->
-                <ellipse cx="225" cy="62" rx="8" ry="5" fill="#1a1520" transform="rotate(25 225 62)"/>
-                <ellipse cx="232" cy="75" rx="7" ry="4" fill="#251a25" transform="rotate(-20 232 75)"/>
-                <ellipse cx="218" cy="85" rx="6" ry="4" fill="#201520" transform="rotate(10 218 85)"/>
-                <ellipse cx="225" cy="105" rx="8" ry="5" fill="#1a1520" transform="rotate(-35 225 105)"/>
-                <ellipse cx="215" cy="118" rx="7" ry="4" fill="#251a25" transform="rotate(15 215 118)"/>
-                <ellipse cx="222" cy="130" rx="8" ry="5" fill="#1a1520" transform="rotate(-25 222 130)"/>
-                <ellipse cx="232" cy="142" rx="6" ry="4" fill="#201520" transform="rotate(20 232 142)"/>
-                <ellipse cx="245" cy="155" rx="7" ry="4" fill="#251a25" transform="rotate(-30 245 155)"/>
-
-                <!-- Lower Leaves -->
-                <ellipse cx="35" cy="155" rx="7" ry="4" fill="#1a1520" transform="rotate(-15 35 155)"/>
-                <ellipse cx="28" cy="165" rx="6" ry="4" fill="#251a25" transform="rotate(25 28 165)"/>
-                <ellipse cx="252" cy="165" rx="7" ry="4" fill="#1a1520" transform="rotate(15 252 165)"/>
-                <ellipse cx="258" cy="155" rx="6" ry="4" fill="#201520" transform="rotate(-25 258 155)"/>
-
-                <!-- Center Crown Leaves -->
-                <ellipse cx="92" cy="55" rx="7" ry="4" fill="#1a1520" transform="rotate(-30 92 55)"/>
-                <ellipse cx="78" cy="52" rx="6" ry="4" fill="#251a25" transform="rotate(20 78 52)"/>
-                <ellipse cx="188" cy="58" rx="7" ry="4" fill="#1a1520" transform="rotate(30 188 58)"/>
-                <ellipse cx="202" cy="55" rx="6" ry="4" fill="#201520" transform="rotate(-20 202 55)"/>
-                <ellipse cx="100" cy="90" rx="7" ry="4" fill="#251a25" transform="rotate(15 100 90)"/>
-                <ellipse cx="180" cy="90" rx="7" ry="4" fill="#1a1520" transform="rotate(-15 180 90)"/>
-                <ellipse cx="85" cy="108" rx="6" ry="4" fill="#201520" transform="rotate(-25 85 108)"/>
-                <ellipse cx="195" cy="108" rx="6" ry="4" fill="#251a25" transform="rotate(25 195 108)"/>
-
-                <!-- White Crow Perched on Right Branch -->
+                <!-- White Crow Perched on Branch -->
                 <g filter="url(#glow)">
                     <!-- Crow Body -->
-                    <ellipse cx="195" cy="42" rx="12" ry="8" fill="#e8e4dc"/>
+                    <ellipse cx="195" cy="72" rx="12" ry="8" fill="#e8e4dc"/>
                     <!-- Crow Head -->
-                    <circle cx="207" cy="36" r="7" fill="#e8e4dc"/>
+                    <circle cx="207" cy="66" r="7" fill="#e8e4dc"/>
                     <!-- Beak - pointing down to hold grapes -->
-                    <path d="M213,36 L220,42 L213,40 Z" fill="#1a1520"/>
+                    <path d="M213,66 L220,72 L213,70 Z" fill="#1a1520"/>
                     <!-- Eye -->
-                    <circle cx="210" cy="35" r="2" fill="#1a1520"/>
-                    <circle cx="210.5" cy="34.5" r="0.5" fill="#4a0e1a"/>
+                    <circle cx="210" cy="65" r="2" fill="#1a1520"/>
+                    <circle cx="210.5" cy="64.5" r="0.5" fill="#4a0e1a"/>
                     <!-- Wing -->
-                    <path d="M185,40 Q190,48 200,50 Q195,45 188,38 Z" fill="#d4d0c8"/>
+                    <path d="M185,70 Q190,78 200,80 Q195,75 188,68 Z" fill="#d4d0c8"/>
                     <!-- Tail Feathers -->
-                    <path d="M183,42 L170,48 M183,44 L172,52 M183,46 L175,55" stroke="#e8e4dc" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M183,72 L170,78 M183,74 L172,82 M183,76 L175,85" stroke="#e8e4dc" stroke-width="2" stroke-linecap="round"/>
                     <!-- Crow Feet on Branch -->
-                    <path d="M192,50 L190,56 M194,50 L196,56 M196,50 L200,55" stroke="#1a1520" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M192,80 L190,86 M194,80 L196,86 M196,80 L200,85" stroke="#1a1520" stroke-width="1.5" stroke-linecap="round"/>
 
                     <!-- GRAPES IN BEAK -->
-                    <circle cx="218" cy="48" r="3.5" fill="#4a0e1a"/>
-                    <circle cx="222" cy="52" r="3.5" fill="#3d0a15"/>
-                    <circle cx="216" cy="54" r="3" fill="#4a0e1a"/>
-                    <circle cx="220" cy="57" r="3" fill="#3d0a15"/>
-                    <circle cx="224" cy="48" r="3" fill="#4a0e1a"/>
-                    <circle cx="214" cy="50" r="2.5" fill="#3d0a15"/>
+                    <circle cx="218" cy="78" r="3.5" fill="#4a0e1a"/>
+                    <circle cx="222" cy="82" r="3.5" fill="#3d0a15"/>
+                    <circle cx="216" cy="84" r="3" fill="#4a0e1a"/>
+                    <circle cx="220" cy="87" r="3" fill="#3d0a15"/>
+                    <circle cx="224" cy="78" r="3" fill="#4a0e1a"/>
+                    <circle cx="214" cy="80" r="2.5" fill="#3d0a15"/>
                     <!-- Grape stem to beak -->
-                    <path d="M218,44 L218,48" stroke="#3d2a3d" stroke-width="1" fill="none"/>
+                    <path d="M218,74 L218,78" stroke="#3d2a3d" stroke-width="1" fill="none"/>
                 </g>
 
                 <!-- Old Wine Cask at Base -->
@@ -3374,28 +3331,72 @@
             </div>
 
             <div class="enomatic-models">
-                <h3>Enomatic Product Line</h3>
-                <p class="models-intro">Enomatic offers a range of wine dispensing systems for different needs, from compact 2-bottle units to large modular installations.</p>
+                <h3>Unica Series - Current Generation</h3>
+                <p class="models-intro">The Unica series represents Enomatic's latest generation of wine dispensing systems, featuring smart modularity, high performance, and integrated connectivity.</p>
 
                 <div class="models-grid">
                     <div class="model-card">
                         <div class="model-header">
-                            <h4>Unica Series</h4>
-                            <span class="model-badge">Current Generation</span>
+                            <h4>Unica Standard Models</h4>
+                            <span class="model-badge">Core Line</span>
                         </div>
                         <div class="model-body">
-                            <p class="model-description">The latest generation of Enomatic dispensers featuring smart modularity, high performance, and integrated connectivity.</p>
+                            <p class="model-description">The primary Unica dispensers for wine bars, restaurants, and tasting rooms. Available in multiple configurations.</p>
                             <ul class="model-features">
-                                <li><strong>Unica 4 / 8:</strong> 4 or 8 bottle capacity with refrigeration</li>
-                                <li><strong>Unica 16 / 20 / 24:</strong> Larger modular configurations</li>
-                                <li><strong>Unica Start 4 & 8:</strong> Ready-to-use systems for behind-bar use</li>
-                                <li><strong>Unica Bubbles:</strong> Designed for sparkling wines</li>
-                                <li><strong>Unica Bag:</strong> For bag-in-box wine dispensing</li>
+                                <li><strong>Unica 4:</strong> 4-bottle capacity with single-zone refrigeration</li>
+                                <li><strong>Unica 8:</strong> 8-bottle capacity with dual-zone refrigeration</li>
+                                <li><strong>Unica 12:</strong> 12-bottle modular configuration</li>
+                                <li><strong>Unica 16:</strong> 16-bottle modular configuration</li>
+                                <li><strong>Unica 20:</strong> 20-bottle modular configuration</li>
+                                <li><strong>Unica 24:</strong> 24-bottle modular configuration</li>
                             </ul>
                             <div class="model-specs">
                                 <span>3 programmable pour volumes</span>
                                 <span>Dual temperature zones</span>
-                                <span>Touch screen interface</span>
+                                <span>10" touch screen</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="model-card">
+                        <div class="model-header">
+                            <h4>Unica Start Series</h4>
+                            <span class="model-badge">Ready-to-Use</span>
+                        </div>
+                        <div class="model-body">
+                            <p class="model-description">Pre-configured systems designed for immediate deployment behind the bar with elegant furniture housing.</p>
+                            <ul class="model-features">
+                                <li><strong>Unica Start 4:</strong> 4-bottle ready-to-use system</li>
+                                <li><strong>Unica Start 8:</strong> 8-bottle ready-to-use system</li>
+                                <li>Integrated furniture cabinet included</li>
+                                <li>No installation required—plug and pour</li>
+                                <li>Front-facing display for customer interaction</li>
+                            </ul>
+                            <div class="model-specs">
+                                <span>Self-contained unit</span>
+                                <span>Behind-bar ready</span>
+                                <span>Premium finish</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="model-card">
+                        <div class="model-header">
+                            <h4>Unica Specialty Models</h4>
+                            <span class="model-badge">Specialty</span>
+                        </div>
+                        <div class="model-body">
+                            <p class="model-description">Purpose-built variants for specific wine types and service styles.</p>
+                            <ul class="model-features">
+                                <li><strong>Unica Bubbles 4:</strong> 4-bottle sparkling wine dispenser—preserves carbonation</li>
+                                <li><strong>Unica Bubbles 8:</strong> 8-bottle sparkling wine dispenser</li>
+                                <li><strong>Unica Bag 4:</strong> 4-position bag-in-box dispenser</li>
+                                <li><strong>Unica Bag 8:</strong> 8-position bag-in-box dispenser</li>
+                            </ul>
+                            <div class="model-specs">
+                                <span>CO2 preservation system</span>
+                                <span>Extended freshness</span>
+                                <span>RFID compatible</span>
                             </div>
                         </div>
                     </div>
@@ -3403,63 +3404,21 @@
                     <div class="model-card">
                         <div class="model-header">
                             <h4>EnoOne PLUS</h4>
-                            <span class="model-badge">Compact</span>
+                            <span class="model-badge">Compact Modular</span>
                         </div>
                         <div class="model-body">
-                            <p class="model-description">A compact 2-bottle modular system perfect for small spaces or adding capacity. Features elegant backlit controls and self-centering bottle positioning.</p>
+                            <p class="model-description">Ultra-compact 2-bottle modular units that can be combined for flexible configurations.</p>
                             <ul class="model-features">
-                                <li>2-bottle capacity in a compact footprint</li>
+                                <li><strong>EnoOne PLUS:</strong> 2-bottle capacity per unit</li>
+                                <li>Combine multiple units seamlessly</li>
                                 <li>Thermo-electric cooling (no drain required)</li>
-                                <li>Modular design—combine multiple units seamlessly</li>
                                 <li>Available in black or white finish</li>
+                                <li>Backlit touch controls</li>
                             </ul>
                             <div class="model-specs">
                                 <span>23.5" × 10.6" × 13.8"</span>
-                                <span>28 lbs</span>
+                                <span>28 lbs per unit</span>
                                 <span>Plug & play</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="model-card">
-                        <div class="model-header">
-                            <h4>Enoline Elite</h4>
-                            <span class="model-badge legacy">Legacy Model</span>
-                        </div>
-                        <div class="model-body">
-                            <p class="model-description">The classic Enomatic system that set the industry standard. While discontinued, many establishments still use these reliable workhorses.</p>
-                            <ul class="model-features">
-                                <li><strong>Elite 4:</strong> 4-bottle capacity (RT or refrigerated)</li>
-                                <li><strong>Elite 8:</strong> 8-bottle capacity with dual-zone option (4+4 or 5+3)</li>
-                                <li>Glass-protected touch screens</li>
-                                <li>Drain-free refrigeration</li>
-                                <li>Pneumatic bottle lift system</li>
-                            </ul>
-                            <div class="model-specs">
-                                <span>Elite 8: 26.4" × 13.9"</span>
-                                <span>Up to 159 lbs</span>
-                                <span>110V / 220V</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="model-card">
-                        <div class="model-header">
-                            <h4>Sparkling Wine System</h4>
-                            <span class="model-badge">Specialty</span>
-                        </div>
-                        <div class="model-body">
-                            <p class="model-description">Purpose-built for Champagne, Prosecco, and sparkling wines. Maintains carbonation while allowing by-the-glass service.</p>
-                            <ul class="model-features">
-                                <li>Preserves effervescence and bubbles</li>
-                                <li>18cm color touch screen</li>
-                                <li>RFID smart card compatible</li>
-                                <li>3 programmable pour volumes</li>
-                                <li>Adjustable temperature control</li>
-                            </ul>
-                            <div class="model-specs">
-                                <span>Self-serve or bar use</span>
-                                <span>Vertical card reader</span>
                             </div>
                         </div>
                     </div>
@@ -3468,23 +3427,23 @@
 
             <div class="enomatic-resources">
                 <h3>Documentation & Resources</h3>
-                <p>Access official Enomatic manuals, specification sheets, and support documentation.</p>
+                <p>Access official Enomatic documentation for the Unica series and support resources.</p>
 
                 <div class="resources-grid">
                     <div class="resource-category">
-                        <h4>User Manuals</h4>
+                        <h4>Unica Series Documentation</h4>
                         <ul class="resource-links">
-                            <li><a href="https://neodistributing.com/wp-content/uploads/2016/08/enoline_4_basic_manual.pdf" target="_blank" rel="noopener">Enoline 4 Basic Operating Manual (PDF)</a></li>
-                            <li><a href="https://neodistributing.com/wp-content/uploads/2016/08/ELITE-2.5-English.pdf" target="_blank" rel="noopener">Enoline Elite 2.5 User Manual (PDF)</a></li>
-                            <li><a href="https://abetterpour.com/wp-content/uploads/2017/01/Enoline_enomodule_ENG.pdf" target="_blank" rel="noopener">Enoline/Enomodule User Manual (PDF)</a></li>
-                            <li><a href="https://www.manualslib.com/manual/1198740/Enomatic-Enoline-4-Smart.html" target="_blank" rel="noopener">Enoline 4 Smart Manual (ManualsLib)</a></li>
+                            <li><a href="https://enomatic.com/en/products/unica/" target="_blank" rel="noopener">Unica Product Overview (Official)</a></li>
+                            <li><a href="https://enomatic.com/en/products/unica-start/" target="_blank" rel="noopener">Unica Start Product Page</a></li>
+                            <li><a href="https://enomatic.com/en/products/unica-bubbles/" target="_blank" rel="noopener">Unica Bubbles Product Page</a></li>
+                            <li><a href="https://neodistributing.com/downloads/" target="_blank" rel="noopener">All Enomatic Downloads (Neo Distributing)</a></li>
                         </ul>
                     </div>
                     <div class="resource-category">
-                        <h4>Specification Sheets</h4>
+                        <h4>EnoOne Documentation</h4>
                         <ul class="resource-links">
-                            <li><a href="https://neodistributing.com/wp-content/uploads/2017/11/Enomatic_Elite_Wine_Dispenser_Product_Sheet.pdf" target="_blank" rel="noopener">Enoline Elite Product Sheet (PDF)</a></li>
-                            <li><a href="https://neodistributing.com/downloads/" target="_blank" rel="noopener">All Enomatic Downloads (Neo Distributing)</a></li>
+                            <li><a href="https://enomatic.com/en/products/enoone-plus/" target="_blank" rel="noopener">EnoOne PLUS Product Page</a></li>
+                            <li><a href="https://neodistributing.com/product/eno-one-plus/" target="_blank" rel="noopener">EnoOne PLUS (Neo Distributing)</a></li>
                         </ul>
                     </div>
                     <div class="resource-category">
@@ -5007,6 +4966,7 @@
                     frontTitle: wine.name,
                     frontSubtitle: wine.vintage,
                     backData: [
+                        { label: 'Vintage', value: wine.vintage },
                         { label: 'Type', value: wine.type.charAt(0).toUpperCase() + wine.type.slice(1) },
                         { label: 'Grape(s)', value: wine.grape },
                         { label: 'Region', value: wine.region },
