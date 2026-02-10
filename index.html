@@ -269,6 +269,16 @@
         .filter-btn.sparkling { border-color: #c4a875; }
         .filter-btn.sparkling.active, .filter-btn.sparkling:hover { background: rgba(196, 168, 117, 0.4); }
 
+        /* Beer Filter Buttons */
+        .filter-btn.ale { border-color: #8b4513; }
+        .filter-btn.ale.active, .filter-btn.ale:hover { background: rgba(139, 69, 19, 0.4); border-color: #a0522d; }
+        .filter-btn.lager { border-color: #daa520; }
+        .filter-btn.lager.active, .filter-btn.lager:hover { background: rgba(218, 165, 32, 0.3); border-color: #f0c040; }
+        .filter-btn.ipa { border-color: #228b22; }
+        .filter-btn.ipa.active, .filter-btn.ipa:hover { background: rgba(34, 139, 34, 0.3); border-color: #32cd32; }
+        .filter-btn.other { border-color: #708090; }
+        .filter-btn.other.active, .filter-btn.other:hover { background: rgba(112, 128, 144, 0.3); border-color: #a0a0a0; }
+
         /* Wine Cards Grid */
         .wine-grid {
             display: grid;
@@ -437,6 +447,139 @@
         }
 
         .tech-spec-label {
+            color: var(--pale-gold);
+            font-weight: 600;
+        }
+
+        /* Beer Cards Grid */
+        .beer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .beer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Gothic Beer Cards */
+        .beer-card {
+            background: linear-gradient(145deg, rgba(26, 16, 37, 0.9), rgba(10, 10, 15, 0.95));
+            border: 1px solid rgba(196, 168, 117, 0.2);
+            border-radius: 0;
+            box-shadow:
+                0 4px 20px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(196, 168, 117, 0.1);
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+            position: relative;
+        }
+
+        .beer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--pale-gold), transparent);
+            opacity: 0.5;
+        }
+
+        .beer-card:hover {
+            transform: translateY(-8px);
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.6),
+                0 0 30px rgba(139, 69, 19, 0.3);
+            border-color: rgba(196, 168, 117, 0.4);
+        }
+
+        .beer-card-header {
+            padding: 1.5rem;
+            color: var(--bone);
+            position: relative;
+        }
+
+        .beer-card.ale .beer-card-header {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.8), rgba(101, 50, 14, 0.9));
+            border-bottom: 1px solid rgba(160, 82, 45, 0.5);
+        }
+        .beer-card.lager .beer-card-header {
+            background: linear-gradient(135deg, rgba(218, 165, 32, 0.7), rgba(184, 134, 11, 0.8));
+            border-bottom: 1px solid rgba(240, 192, 64, 0.4);
+        }
+        .beer-card.ipa .beer-card-header {
+            background: linear-gradient(135deg, rgba(34, 139, 34, 0.7), rgba(25, 100, 25, 0.8));
+            border-bottom: 1px solid rgba(50, 205, 50, 0.4);
+        }
+        .beer-card.other .beer-card-header {
+            background: linear-gradient(135deg, rgba(112, 128, 144, 0.7), rgba(80, 90, 100, 0.8));
+            border-bottom: 1px solid rgba(160, 160, 160, 0.4);
+        }
+
+        .beer-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .beer-card .brewery {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 0.25rem;
+            color: var(--mist);
+        }
+
+        .beer-card .style-abv {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .beer-card-body {
+            padding: 1.5rem;
+            background: rgba(10, 10, 15, 0.5);
+        }
+
+        .beer-detail {
+            margin-bottom: 1rem;
+        }
+
+        .beer-detail-label {
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            color: var(--pale-gold);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .beer-detail-value {
+            color: var(--bone);
+            margin-top: 0.25rem;
+            font-size: 0.95rem;
+        }
+
+        .beer-specs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            padding: 0.75rem;
+            background: rgba(26, 16, 37, 0.5);
+            border: 1px solid rgba(196, 168, 117, 0.1);
+        }
+
+        .beer-spec {
+            font-size: 0.85rem;
+            color: var(--bone);
+        }
+
+        .beer-spec-label {
             color: var(--pale-gold);
             font-weight: 600;
         }
@@ -755,6 +898,10 @@
         .type-badge.white { background: rgba(139, 115, 85, 0.8); color: var(--bone); }
         .type-badge.rose { background: rgba(154, 107, 122, 0.8); color: var(--bone); }
         .type-badge.orange { background: rgba(139, 90, 43, 0.8); color: var(--bone); }
+        .type-badge.ale { background: rgba(139, 69, 19, 0.8); color: var(--bone); }
+        .type-badge.lager { background: rgba(218, 165, 32, 0.8); color: var(--midnight); }
+        .type-badge.ipa { background: rgba(34, 139, 34, 0.8); color: var(--bone); }
+        .type-badge.other { background: rgba(112, 128, 144, 0.8); color: var(--bone); }
 
         /* Food Menu Section - Gothic */
         .food-section-title {
@@ -1612,6 +1759,10 @@
         .print-card.cheese .print-card-header { background: linear-gradient(135deg, #D4A84B, #B8922B); }
         .print-card.charcuterie .print-card-header { background: linear-gradient(135deg, #8B4513, #5D2E0C); }
         .print-card.other-food .print-card-header { background: linear-gradient(135deg, #6B8E23, #4A6B1A); }
+        .print-card.beer.ale .print-card-header { background: linear-gradient(135deg, #8B4513, #5D2E0C); }
+        .print-card.beer.lager .print-card-header { background: linear-gradient(135deg, #DAA520, #B8860B); }
+        .print-card.beer.ipa .print-card-header { background: linear-gradient(135deg, #228B22, #196619); }
+        .print-card.beer.other .print-card-header { background: linear-gradient(135deg, #708090, #505860); }
 
         .print-card h3 {
             font-size: 1.1rem;
@@ -1743,7 +1894,11 @@
             .print-card.orange .print-card-header,
             .print-card.cheese .print-card-header,
             .print-card.charcuterie .print-card-header,
-            .print-card.other-food .print-card-header {
+            .print-card.other-food .print-card-header,
+            .print-card.beer.ale .print-card-header,
+            .print-card.beer.lager .print-card-header,
+            .print-card.beer.ipa .print-card-header,
+            .print-card.beer.other .print-card-header {
                 background: none !important;
                 color: black !important;
             }
@@ -2600,6 +2755,7 @@
 
     <nav>
         <button class="active" onclick="showSection('techsheets', this)">Wine List</button>
+        <button onclick="showSection('beerlist', this)">Beer List</button>
         <button onclick="showSection('food', this)">Food Menu</button>
         <button onclick="showSection('flashcards', this)">Wine Quiz</button>
         <button onclick="showSection('onlineflashcards', this)">Online Flashcards</button>
@@ -2623,6 +2779,21 @@
 
             <div class="wine-grid" id="wineGrid">
                 <!-- Wine cards will be inserted here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Beer List Section -->
+        <section id="beerlist">
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterBeers('all', this)">All Beers</button>
+                <button class="filter-btn ale" onclick="filterBeers('ale', this)">Ales</button>
+                <button class="filter-btn lager" onclick="filterBeers('lager', this)">Lagers</button>
+                <button class="filter-btn ipa" onclick="filterBeers('ipa', this)">IPAs</button>
+                <button class="filter-btn other" onclick="filterBeers('other', this)">Other</button>
+            </div>
+
+            <div class="beer-grid" id="beerGrid">
+                <!-- Beer cards will be inserted here by JavaScript -->
             </div>
         </section>
 
@@ -2736,6 +2907,24 @@
                     </thead>
                     <tbody id="quickRefBody">
                         <!-- Table rows will be inserted by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="food-section-title">Beer Quick Reference</h2>
+            <div class="quick-ref">
+                <table id="beerRefTable">
+                    <thead>
+                        <tr>
+                            <th>Beer</th>
+                            <th>Style</th>
+                            <th>ABV</th>
+                            <th>Brewery</th>
+                            <th>Location</th>
+                        </tr>
+                    </thead>
+                    <tbody id="beerRefBody">
+                        <!-- Beer rows will be inserted by JavaScript -->
                     </tbody>
                 </table>
             </div>
@@ -3594,6 +3783,11 @@
                 <!-- Wine print cards inserted by JavaScript -->
             </div>
 
+            <h3 class="print-category-title">Beer Cards</h3>
+            <div class="print-cards-grid" id="printBeerGrid">
+                <!-- Beer print cards inserted by JavaScript -->
+            </div>
+
             <h3 class="print-category-title">Cheese Cards</h3>
             <div class="print-cards-grid" id="printCheeseGrid">
                 <!-- Cheese print cards inserted by JavaScript -->
@@ -4275,6 +4469,7 @@
                 brewery: "Edmund's Oast Brewing Co.",
                 location: "Charleston, SC",
                 style: "Blonde Ale",
+                type: "ale",
                 abv: "4.8%",
                 body: "Light",
                 tasting: "Crisp, clean, subtle malt sweetness with light hop bitterness. Refreshing and highly drinkable with a smooth finish.",
@@ -4285,6 +4480,7 @@
                 brewery: "Against the Grain Brewery",
                 location: "Louisville, KY",
                 style: "Double IPA",
+                type: "ipa",
                 abv: "8.2%",
                 body: "Medium-Full",
                 tasting: "Intense tropical fruit, grapefruit, mango, passionfruit from Citra hops. Bold hop bitterness balanced by malt backbone with a warming finish.",
@@ -4295,6 +4491,7 @@
                 brewery: "Westbrook Brewing Co.",
                 location: "Mt. Pleasant, SC",
                 style: "American Lager",
+                type: "lager",
                 abv: "4.5%",
                 body: "Light",
                 tasting: "Clean, crisp, refreshing with subtle grain character. Light floral hop notes and a dry, thirst-quenching finish.",
@@ -4305,6 +4502,7 @@
                 brewery: "Revelry Brewing Co.",
                 location: "Charleston, SC",
                 style: "Brown Ale",
+                type: "ale",
                 abv: "5.5%",
                 body: "Medium",
                 tasting: "Toasted bread, caramel, chocolate, subtle nuttiness. Smooth and malty with balanced hop bitterness and a clean finish.",
@@ -4315,6 +4513,7 @@
                 brewery: "Burial Beer Co.",
                 location: "Asheville, NC",
                 style: "IPA",
+                type: "ipa",
                 abv: "6.0%",
                 body: "Medium",
                 tasting: "Citrus, tropical fruit, pine, resinous hops. Balanced bitterness with a dry, hoppy finish. Very aromatic.",
@@ -4325,6 +4524,7 @@
                 brewery: "Revelry Brewing Co.",
                 location: "Charleston, SC",
                 style: "IPA",
+                type: "ipa",
                 abv: "6.5%",
                 body: "Medium",
                 tasting: "Bright citrus, grapefruit, tropical notes with balanced malt sweetness. Crisp bitterness and a refreshing finish.",
@@ -4335,6 +4535,7 @@
                 brewery: "Blue Moon Brewing Co.",
                 location: "Golden, CO",
                 style: "Belgian-Style Wheat (NA)",
+                type: "other",
                 abv: "0.5%",
                 body: "Light-Medium",
                 tasting: "Orange peel, coriander, wheat, subtle sweetness. Creamy mouthfeel with citrus notes and a refreshing finish.",
@@ -4345,6 +4546,7 @@
                 brewery: "Exner Cider",
                 location: "Asturias, Spain",
                 style: "Spanish Sidra Natural",
+                type: "other",
                 abv: "6.0%",
                 body: "Light-Medium",
                 tasting: "Tart apple, funky farmhouse notes, slight acidity, dry finish. Unfiltered with natural effervescence.",
@@ -4656,6 +4858,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             try {
                 renderWineCards();
+                renderBeerCards();
                 renderFoodCards();
                 renderQuickRef();
                 renderPrintCards();
@@ -4748,6 +4951,39 @@
                         <div class="print-field">
                             <div class="print-label">Key Facts</div>
                             <div class="print-value">${wine.notes}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Render Beer Print Cards
+            const beerGrid = document.getElementById('printBeerGrid');
+            beerGrid.innerHTML = beers.map(beer => `
+                <div class="print-card beer ${beer.type}">
+                    <div class="print-card-header">
+                        <h3>${beer.name}</h3>
+                        <div class="subtitle">${beer.style} | ${beer.abv}</div>
+                    </div>
+                    <div class="print-card-body">
+                        <div class="print-field">
+                            <div class="print-label">Brewery</div>
+                            <div class="print-value">${beer.brewery}</div>
+                        </div>
+                        <div class="print-field">
+                            <div class="print-label">Location</div>
+                            <div class="print-value">${beer.location}</div>
+                        </div>
+                        <div class="print-field">
+                            <div class="print-label">Body</div>
+                            <div class="print-value">${beer.body}</div>
+                        </div>
+                        <div class="print-field">
+                            <div class="print-label">Tasting Notes</div>
+                            <div class="print-value">${beer.tasting}</div>
+                        </div>
+                        <div class="print-field">
+                            <div class="print-label">About</div>
+                            <div class="print-value">${beer.notes}</div>
                         </div>
                     </div>
                 </div>
@@ -4940,10 +5176,60 @@
 
         // Filter Wines
         function filterWines(type, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('#techsheets .filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
             document.querySelectorAll('.wine-card').forEach(card => {
+                if (type === 'all' || card.dataset.type === type) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Render Beer Cards
+        function renderBeerCards() {
+            const grid = document.getElementById('beerGrid');
+
+            grid.innerHTML = beers.map(beer => `
+                <div class="beer-card ${beer.type}" data-type="${beer.type}">
+                    <div class="beer-card-header">
+                        <h3>${beer.name}</h3>
+                        <div class="style-abv">${beer.style} | ${beer.abv}</div>
+                        <div class="brewery">${beer.brewery}</div>
+                    </div>
+                    <div class="beer-card-body">
+                        <div class="beer-detail">
+                            <div class="beer-detail-label">Location</div>
+                            <div class="beer-detail-value">${beer.location}</div>
+                        </div>
+                        <div class="beer-detail">
+                            <div class="beer-detail-label">Technical Details</div>
+                            <div class="beer-specs">
+                                <div class="beer-spec"><span class="beer-spec-label">ABV:</span> ${beer.abv}</div>
+                                <div class="beer-spec"><span class="beer-spec-label">Body:</span> ${beer.body}</div>
+                            </div>
+                        </div>
+                        <div class="beer-detail">
+                            <div class="beer-detail-label">Tasting Notes</div>
+                            <div class="beer-detail-value">${beer.tasting}</div>
+                        </div>
+                        <div class="beer-detail">
+                            <div class="beer-detail-label">About</div>
+                            <div class="beer-detail-value">${beer.notes}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter Beers
+        function filterBeers(type, btn) {
+            document.querySelectorAll('#beerlist .filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            document.querySelectorAll('.beer-card').forEach(card => {
                 if (type === 'all' || card.dataset.type === type) {
                     card.style.display = 'block';
                 } else {
@@ -4963,6 +5249,18 @@
                     <td>${wine.grape}</td>
                     <td>${wine.region}</td>
                     <td>${wine.country}</td>
+                </tr>
+            `).join('');
+
+            // Beer table
+            const beerBody = document.getElementById('beerRefBody');
+            beerBody.innerHTML = beers.map(beer => `
+                <tr>
+                    <td><strong>${beer.name}</strong></td>
+                    <td><span class="type-badge ${beer.type}">${beer.style}</span></td>
+                    <td>${beer.abv}</td>
+                    <td>${beer.brewery}</td>
+                    <td>${beer.location}</td>
                 </tr>
             `).join('');
 
