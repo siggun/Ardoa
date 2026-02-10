@@ -229,14 +229,6 @@
             text-shadow: 0 0 20px rgba(196, 168, 117, 0.3);
         }
 
-        section {
-            display: none;
-        }
-
-        section.active {
-            display: block;
-        }
-
         /* Filter Buttons - Gothic Style */
         .filter-bar {
             display: flex;
@@ -2550,14 +2542,14 @@
     </header>
 
     <nav>
-        <button class="active" onclick="showSection('techsheets')">Wine List</button>
-        <button onclick="showSection('food')">Food Menu</button>
-        <button onclick="showSection('flashcards')">Wine Quiz</button>
-        <button onclick="showSection('onlineflashcards')">Online Flashcards</button>
-        <button onclick="showSection('quickref')">Quick Reference</button>
-        <button onclick="showSection('wineregions')">Wine Regions</button>
-        <button onclick="showSection('enomatic')">Enomatic System</button>
-        <button onclick="showSection('printcards')">Print Cards</button>
+        <button class="active" onclick="showSection('techsheets', this)">Wine List</button>
+        <button onclick="showSection('food', this)">Food Menu</button>
+        <button onclick="showSection('flashcards', this)">Wine Quiz</button>
+        <button onclick="showSection('onlineflashcards', this)">Online Flashcards</button>
+        <button onclick="showSection('quickref', this)">Quick Reference</button>
+        <button onclick="showSection('wineregions', this)">Wine Regions</button>
+        <button onclick="showSection('enomatic', this)">Enomatic System</button>
+        <button onclick="showSection('printcards', this)">Print Cards</button>
     </nav>
 
     <main>
@@ -4794,11 +4786,11 @@
         }
 
         // Section Navigation
-        function showSection(sectionId) {
+        function showSection(sectionId, btn) {
             document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
             document.getElementById(sectionId).classList.add('active');
-            event.target.classList.add('active');
+            btn.classList.add('active');
         }
 
         // Render Wine Cards
