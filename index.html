@@ -2714,7 +2714,7 @@
                     <button class="flashcard-btn btn-reveal" onclick="revealAnswer()">Reveal Answer</button>
                     <button class="flashcard-btn btn-correct" onclick="markAnswer(true)">Got It!</button>
                     <button class="flashcard-btn btn-incorrect" onclick="markAnswer(false)">Missed It</button>
-                    <button class="flashcard-btn btn-next" onclick="nextCard()">Skip</button>
+                    <button class="flashcard-btn btn-next" onclick="nextQuizCard()">Skip</button>
                     <button class="flashcard-btn btn-reset" onclick="resetQuiz()">Reset Quiz</button>
                 </div>
             </div>
@@ -2816,9 +2816,9 @@
                     </div>
                 </div>
                 <div class="flashcard-nav">
-                    <button onclick="prevCard()">&#8592;</button>
+                    <button onclick="prevOnlineCard()">&#8592;</button>
                     <span class="flashcard-counter" id="flashcardCounter">1 / 24</span>
-                    <button onclick="nextCard()">&#8594;</button>
+                    <button onclick="nextOnlineCard()">&#8594;</button>
                 </div>
                 <div class="flashcard-shuffle">
                     <button onclick="shuffleCards()">Shuffle Cards</button>
@@ -5127,10 +5127,10 @@
             correctCount = 0;
             incorrectCount = 0;
             updateScore();
-            nextCard();
+            nextQuizCard();
         }
 
-        function nextCard() {
+        function nextQuizCard() {
             if (flashcardQueue.length === 0) {
                 flashcardQueue = generateQuestions();
                 if (flashcardQueue.length === 0) {
@@ -5225,7 +5225,7 @@
                 flashcardQueue.push(currentCard);
             }
             updateScore();
-            nextCard();
+            nextQuizCard();
         }
 
         function updateScore() {
@@ -5348,13 +5348,13 @@
             flashcard.classList.toggle('flipped');
         }
 
-        function nextCard() {
+        function nextOnlineCard() {
             if (onlineCards.length === 0) return;
             onlineCardIndex = (onlineCardIndex + 1) % onlineCards.length;
             showOnlineCard();
         }
 
-        function prevCard() {
+        function prevOnlineCard() {
             if (onlineCards.length === 0) return;
             onlineCardIndex = (onlineCardIndex - 1 + onlineCards.length) % onlineCards.length;
             showOnlineCard();
