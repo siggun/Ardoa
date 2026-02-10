@@ -274,6 +274,8 @@
         .filter-btn.rose.active, .filter-btn.rose:hover { background: rgba(154, 107, 122, 0.3); }
         .filter-btn.orange { border-color: #8b5a2b; }
         .filter-btn.orange.active, .filter-btn.orange:hover { background: rgba(139, 90, 43, 0.4); }
+        .filter-btn.sparkling { border-color: #c4a875; }
+        .filter-btn.sparkling.active, .filter-btn.sparkling:hover { background: rgba(196, 168, 117, 0.4); }
 
         /* Wine Cards Grid */
         .wine-grid {
@@ -341,6 +343,10 @@
         .wine-card.orange .wine-card-header {
             background: linear-gradient(135deg, rgba(139, 90, 43, 0.7), rgba(100, 65, 30, 0.8));
             border-bottom: 1px solid rgba(170, 120, 60, 0.4);
+        }
+        .wine-card.sparkling .wine-card-header {
+            background: linear-gradient(135deg, rgba(196, 168, 117, 0.7), rgba(139, 115, 85, 0.8));
+            border-bottom: 1px solid rgba(220, 200, 150, 0.4);
         }
 
         .wine-card h3 {
@@ -2563,6 +2569,7 @@
                 <button class="filter-btn white" onclick="filterWines('white')">White</button>
                 <button class="filter-btn rose" onclick="filterWines('rose')">Rosé</button>
                 <button class="filter-btn orange" onclick="filterWines('orange')">Orange</button>
+                <button class="filter-btn sparkling" onclick="filterWines('sparkling')">Sparkling</button>
             </div>
 
             <div class="wine-grid" id="wineGrid">
@@ -2744,6 +2751,7 @@
             <div class="flashcard-controls">
                 <button class="active" onclick="switchFlashcardDeck('wine')">Wine Cards</button>
                 <button onclick="switchFlashcardDeck('cheese')">Cheese Cards</button>
+                <button onclick="switchFlashcardDeck('beer')">Beer Cards</button>
             </div>
             <div class="flashcard-container">
                 <div class="flashcard-wrapper">
@@ -4120,6 +4128,178 @@
                 alcohol: "14.5%",
                 serving: "Room temperature (62-65°F / 17-18°C)",
                 notes: "Plan de Dieu ('Plain of God') is one of the 22 named villages within Côtes du Rhône Villages—a step up from basic Côtes du Rhône. The name dates to medieval times when Knights Templar monks cultivated vines here on their way to the Crusades. The terroir features galets roulés (large river stones) that act like heat batteries, keeping vines warm at night. The classic Southern Rhône GSM blend (Grenache-Syrah-Mourvèdre) creates wines with dark fruit, spice, and characteristic garrigue herbs."
+            },
+            // Sparkling Wines (Not in Enomatic)
+            {
+                name: "François Montand Blanc de Blancs",
+                vintage: "NV",
+                type: "sparkling",
+                grape: "100% Chardonnay",
+                grapeDetail: "Blanc de Blancs means 'white from whites' - made exclusively from white grapes (Chardonnay)",
+                region: "Jura",
+                country: "France",
+                pronunciation: "frahn-SWAH mon-TAHN blahn duh BLAHN",
+                winemaker: "François Montand - A family-owned producer in the Jura region of Eastern France, known for producing high-quality sparkling wines using traditional methods. The Jura sits in the foothills of the Alps, with unique terroir and a winemaking tradition dating back centuries.",
+                tasting: "Crisp green apple, citrus, white flowers, brioche, fine persistent bubbles. Light-bodied, refreshing with bright acidity and a clean mineral finish.",
+                food: "Oysters, Aged Goat Cheese, Prosciutto, Caviar",
+                foodPairings: [
+                    { item: "Oysters", why: "Briny minerality matches the wine's clean, crisp acidity" },
+                    { item: "Aged Goat Cheese", why: "Tangy cheese pairs with the wine's citrus notes and refreshing bubbles" },
+                    { item: "Prosciutto", why: "Delicate bubbles cut through the ham's salt and fat" },
+                    { item: "Caviar", why: "Classic luxury pairing - the wine's minerality complements the sea-brine of caviar" }
+                ],
+                alcohol: "12%",
+                serving: "Well chilled (40-45°F / 4-7°C)",
+                notes: "Blanc de Blancs sparkling wines are prized for their elegance and finesse. Made using the traditional method (méthode traditionnelle), the wine undergoes secondary fermentation in bottle, creating fine, persistent bubbles. The Jura region is also famous for its unique Vin Jaune and has a long history of sparkling wine production rivaling Champagne."
+            },
+            {
+                name: "L.A. Cetto Brut",
+                vintage: "NV",
+                type: "sparkling",
+                grape: "Chenin Blanc, Colombard",
+                grapeDetail: "Mexican sparkling wine blending Chenin Blanc's honeyed notes with Colombard's bright acidity",
+                region: "Valle de Guadalupe, Baja California",
+                country: "Mexico",
+                winemaker: "L.A. Cetto - Mexico's largest and most acclaimed winery, founded in 1928 by Italian immigrant Angelo Cetto in the Valle de Guadalupe. Now run by the third generation, the winery has put Mexican wines on the international map, winning numerous awards for their quality and value.",
+                tasting: "Fresh pear, green apple, tropical hints, citrus zest. Light-bodied with lively bubbles, crisp acidity, and a clean refreshing finish.",
+                food: "Ceviche, Fish Tacos, Manchego, Fresh Fruit",
+                foodPairings: [
+                    { item: "Ceviche", why: "Mexican wine with Mexican cuisine - citrus notes echo the lime-cured fish" },
+                    { item: "Fish Tacos", why: "Light bubbles and bright acidity cut through the richness of fried fish" },
+                    { item: "Manchego", why: "Nutty sheep's milk cheese complements the wine's pear and apple notes" },
+                    { item: "Fresh Fruit", why: "Tropical hints in the wine pair naturally with fresh fruit desserts" }
+                ],
+                alcohol: "12%",
+                serving: "Well chilled (40-45°F / 4-7°C)",
+                notes: "Valle de Guadalupe is Mexico's premier wine region, located in Baja California just 70 miles south of San Diego. The region has a Mediterranean climate similar to Southern France, producing world-class wines that have gained international recognition. L.A. Cetto pioneered quality winemaking in Mexico and remains the country's flagship producer."
+            },
+            {
+                name: "Tiamo Prosecco Split",
+                vintage: "NV",
+                type: "sparkling",
+                grape: "100% Glera",
+                grapeDetail: "Glera is the grape variety used in Prosecco - light, fruity, and refreshing",
+                region: "Veneto",
+                country: "Italy",
+                pronunciation: "tee-AH-mo pro-SEK-ko",
+                winemaker: "Tiamo Wines - An organic Italian producer focused on sustainable, environmentally-friendly winemaking. Tiamo means 'I love you' in Italian, reflecting their love for the land and commitment to producing quality wines without harmful chemicals.",
+                tasting: "Fresh green apple, white peach, pear, delicate floral notes. Light-bodied with soft, frothy bubbles and a crisp, dry finish.",
+                food: "Prosciutto, Bruschetta, Light Appetizers, Brunch dishes",
+                foodPairings: [
+                    { item: "Prosciutto", why: "Classic Italian pairing - bubbles and acidity cut through the salty, fatty ham" },
+                    { item: "Bruschetta", why: "Fresh tomatoes and basil complement the wine's fruity, refreshing character" },
+                    { item: "Light Appetizers", why: "Prosecco's versatility makes it perfect for aperitivo-style snacks" },
+                    { item: "Brunch dishes", why: "The perfect brunch sparkler - pairs with everything from eggs to pastries" }
+                ],
+                alcohol: "11%",
+                serving: "Well chilled (38-45°F / 3-7°C)",
+                notes: "Prosecco is made using the Charmat method (tank fermentation) rather than traditional bottle fermentation, giving it lighter, frothier bubbles than Champagne. Split bottles (187ml) are perfect single servings. Tiamo's organic certification means no synthetic pesticides or fertilizers are used in the vineyard, resulting in a pure expression of the Glera grape."
+            },
+            {
+                name: "Prosecco DOC",
+                vintage: "NV",
+                type: "sparkling",
+                grape: "100% Glera",
+                grapeDetail: "The signature grape of Italy's most popular sparkling wine",
+                region: "Veneto/Friuli Venezia Giulia",
+                country: "Italy",
+                pronunciation: "pro-SEK-ko",
+                winemaker: "Traditional Italian producer from the Prosecco DOC region, which spans the Veneto and Friuli Venezia Giulia regions of northeastern Italy. The DOC designation ensures quality standards and regional authenticity.",
+                tasting: "Crisp green apple, pear, white flowers, citrus, hint of almond. Light and refreshing with fine, persistent bubbles and bright acidity.",
+                food: "Cheese boards, Seafood, Light Pasta, Celebrations",
+                foodPairings: [
+                    { item: "Cheese boards", why: "Versatile bubbles pair with a variety of cheeses from mild to aged" },
+                    { item: "Seafood", why: "Crisp acidity and light body complement shellfish and light fish dishes" },
+                    { item: "Light Pasta", why: "Refreshing palate cleanser between bites of creamy or oily pasta" },
+                    { item: "Celebrations", why: "The quintessential celebration wine - festive, approachable, and crowd-pleasing" }
+                ],
+                alcohol: "11%",
+                serving: "Well chilled (38-45°F / 3-7°C)",
+                notes: "Prosecco is Italy's answer to Champagne, though made differently using the Charmat method for tank fermentation. The DOC (Denominazione di Origine Controllata) designation was established in 2009 to protect the Prosecco name and ensure quality standards. Prosecco must contain at least 85% Glera grapes, with the remaining 15% from other approved local varieties."
+            }
+        ];
+
+        // Beer Data
+        const beers = [
+            {
+                name: "Edmund's Oast Something Cold Blonde",
+                brewery: "Edmund's Oast Brewing Co.",
+                location: "Charleston, SC",
+                style: "Blonde Ale",
+                abv: "4.8%",
+                body: "Light",
+                tasting: "Crisp, clean, subtle malt sweetness with light hop bitterness. Refreshing and highly drinkable with a smooth finish.",
+                notes: "A classic American Blonde Ale perfect for hot Charleston days. Edmund's Oast is a beloved local brewery known for approachable, well-crafted beers."
+            },
+            {
+                name: "Citra Ass Down Double IPA",
+                brewery: "Against the Grain Brewery",
+                location: "Louisville, KY",
+                style: "Double IPA",
+                abv: "8.2%",
+                body: "Medium-Full",
+                tasting: "Intense tropical fruit, grapefruit, mango, passionfruit from Citra hops. Bold hop bitterness balanced by malt backbone with a warming finish.",
+                notes: "A hop-forward Double IPA showcasing the famous Citra hop variety. Despite the high ABV, it drinks smoothly with explosive tropical fruit character."
+            },
+            {
+                name: "Shore Leave Lager",
+                brewery: "Westbrook Brewing Co.",
+                location: "Mt. Pleasant, SC",
+                style: "American Lager",
+                abv: "4.5%",
+                body: "Light",
+                tasting: "Clean, crisp, refreshing with subtle grain character. Light floral hop notes and a dry, thirst-quenching finish.",
+                notes: "A no-frills, perfectly executed American lager from one of South Carolina's premier craft breweries. Ideal for easy drinking."
+            },
+            {
+                name: "Revelry Poke the Bear",
+                brewery: "Revelry Brewing Co.",
+                location: "Charleston, SC",
+                style: "Brown Ale",
+                abv: "5.5%",
+                body: "Medium",
+                tasting: "Toasted bread, caramel, chocolate, subtle nuttiness. Smooth and malty with balanced hop bitterness and a clean finish.",
+                notes: "A classic American Brown Ale with great depth of flavor. Revelry is a Charleston favorite known for creative, quality beers."
+            },
+            {
+                name: "Burial Surf Wax IPA",
+                brewery: "Burial Beer Co.",
+                location: "Asheville, NC",
+                style: "IPA",
+                abv: "6.0%",
+                body: "Medium",
+                tasting: "Citrus, tropical fruit, pine, resinous hops. Balanced bitterness with a dry, hoppy finish. Very aromatic.",
+                notes: "A West Coast-style IPA from one of Asheville's most acclaimed breweries. Burial is known for their artistic branding and exceptional hop-forward beers."
+            },
+            {
+                name: "Revelry Lefty Loosey IPA",
+                brewery: "Revelry Brewing Co.",
+                location: "Charleston, SC",
+                style: "IPA",
+                abv: "6.5%",
+                body: "Medium",
+                tasting: "Bright citrus, grapefruit, tropical notes with balanced malt sweetness. Crisp bitterness and a refreshing finish.",
+                notes: "Revelry's flagship IPA - a crowd-pleasing, well-balanced American IPA that showcases modern hop flavors without being overwhelming."
+            },
+            {
+                name: "Blue Moon Belgian White (Non-Alcoholic)",
+                brewery: "Blue Moon Brewing Co.",
+                location: "Golden, CO",
+                style: "Belgian-Style Wheat (NA)",
+                abv: "0.5%",
+                body: "Light-Medium",
+                tasting: "Orange peel, coriander, wheat, subtle sweetness. Creamy mouthfeel with citrus notes and a refreshing finish.",
+                notes: "The non-alcoholic version of the iconic Belgian-style wheat beer. Brewed with Valencia orange peel and coriander for signature Blue Moon flavor without the alcohol."
+            },
+            {
+                name: "Exner Spanish Cider",
+                brewery: "Exner Cider",
+                location: "Asturias, Spain",
+                style: "Spanish Sidra Natural",
+                abv: "6.0%",
+                body: "Light-Medium",
+                tasting: "Tart apple, funky farmhouse notes, slight acidity, dry finish. Unfiltered with natural effervescence.",
+                notes: "Traditional Spanish sidra from Asturias, the cider capital of Spain. Traditionally poured from height (escanciar) to aerate and release aromatics. Dry, tart, and refreshingly different from sweet American ciders."
             }
         ];
 
@@ -5041,7 +5221,7 @@
                         ...(wine.pronunciation ? [{ label: 'Pronunciation', value: wine.pronunciation }] : [])
                     ]
                 }));
-            } else {
+            } else if (onlineFlashcardDeck === 'cheese') {
                 onlineCards = cheeses.map(cheese => ({
                     type: 'cheese',
                     frontTitle: cheese.name,
@@ -5050,6 +5230,20 @@
                         { label: 'Type', value: cheese.type },
                         { label: 'Origin', value: cheese.origin },
                         { label: 'Pairings', value: cheese.pairings || 'Various wines' }
+                    ]
+                }));
+            } else if (onlineFlashcardDeck === 'beer') {
+                onlineCards = beers.map(beer => ({
+                    type: 'beer',
+                    frontTitle: beer.name,
+                    frontSubtitle: beer.style,
+                    backData: [
+                        { label: 'Style', value: beer.style },
+                        { label: 'Brewery', value: beer.brewery },
+                        { label: 'Location', value: beer.location },
+                        { label: 'ABV', value: beer.abv },
+                        { label: 'Body', value: beer.body },
+                        { label: 'Tasting Notes', value: beer.tasting }
                     ]
                 }));
             }
