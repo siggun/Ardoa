@@ -4646,6 +4646,12 @@
             }
         ];
 
+        // Flashcard System Variables (must be declared before DOMContentLoaded)
+        let flashcardQueue = [];
+        let currentCard = null;
+        let correctCount = 0;
+        let incorrectCount = 0;
+
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
             try {
@@ -5003,12 +5009,6 @@
                 </tr>
             `).join('');
         }
-
-        // Flashcard System
-        let flashcardQueue = [];
-        let currentCard = null;
-        let correctCount = 0;
-        let incorrectCount = 0;
 
         // Helper function to remove grape names from wine name for grape questions
         function removeGrapeFromName(wineName) {
