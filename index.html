@@ -1309,7 +1309,8 @@
                 font-size: 0.85rem;
             }
 
-            .flashcard-hint {
+            .flashcard-front .flashcard-hint,
+            .flashcard-back .flashcard-hint {
                 font-size: 0.65rem;
                 bottom: 0.4rem;
             }
@@ -1386,7 +1387,8 @@
                 font-size: 0.75rem;
             }
 
-            .flashcard-hint {
+            .flashcard-front .flashcard-hint,
+            .flashcard-back .flashcard-hint {
                 font-size: 0.6rem;
                 bottom: 0.3rem;
             }
@@ -1942,7 +1944,8 @@
             opacity: 0.9;
         }
 
-        .flashcard-hint {
+        .flashcard-front .flashcard-hint,
+        .flashcard-back .flashcard-hint {
             position: absolute;
             bottom: 0.5rem;
             font-size: 0.75rem;
@@ -2610,12 +2613,12 @@
         <!-- Tech Sheets Section -->
         <section id="techsheets" class="active">
             <div class="filter-bar">
-                <button class="filter-btn active" onclick="filterWines('all')">All Wines</button>
-                <button class="filter-btn red" onclick="filterWines('red')">Red</button>
-                <button class="filter-btn white" onclick="filterWines('white')">White</button>
-                <button class="filter-btn rose" onclick="filterWines('rose')">Rosé</button>
-                <button class="filter-btn orange" onclick="filterWines('orange')">Orange</button>
-                <button class="filter-btn sparkling" onclick="filterWines('sparkling')">Sparkling</button>
+                <button class="filter-btn active" onclick="filterWines('all', this)">All Wines</button>
+                <button class="filter-btn red" onclick="filterWines('red', this)">Red</button>
+                <button class="filter-btn white" onclick="filterWines('white', this)">White</button>
+                <button class="filter-btn rose" onclick="filterWines('rose', this)">Rosé</button>
+                <button class="filter-btn orange" onclick="filterWines('orange', this)">Orange</button>
+                <button class="filter-btn sparkling" onclick="filterWines('sparkling', this)">Sparkling</button>
             </div>
 
             <div class="wine-grid" id="wineGrid">
@@ -4645,11 +4648,17 @@
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
-            renderWineCards();
-            renderFoodCards();
-            renderQuickRef();
-            renderPrintCards();
-            initializeFlashcards();
+            try {
+                renderWineCards();
+                renderFoodCards();
+                renderQuickRef();
+                renderPrintCards();
+                initializeFlashcards();
+            } catch (e) {
+                console.error('Initialization error:', e);
+                const questionEl = document.getElementById('flashcardQuestion');
+                if (questionEl) questionEl.textContent = 'Error loading quiz: ' + e.message;
+            }
         });
 
         // Render Food Cards
@@ -4924,9 +4933,9 @@
         }
 
         // Filter Wines
-        function filterWines(type) {
+        function filterWines(type, btn) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
+            btn.classList.add('active');
 
             document.querySelectorAll('.wine-card').forEach(card => {
                 if (type === 'all' || card.dataset.type === type) {
