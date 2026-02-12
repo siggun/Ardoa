@@ -76,17 +76,6 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* Vines Overlay */
-        .vines-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,20 Q10,25 5,40 T10,60 Q15,75 5,90' stroke='%234a0e1a' stroke-width='0.3' fill='none' opacity='0.3'/%3E%3Cpath d='M100,30 Q90,35 95,50 T90,70 Q85,85 95,95' stroke='%234a0e1a' stroke-width='0.3' fill='none' opacity='0.3'/%3E%3Ccircle cx='8' cy='45' r='1.5' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='6' cy='48' r='1.2' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='10' cy='47' r='1' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='92' cy='55' r='1.5' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='94' cy='58' r='1.2' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='90' cy='57' r='1' fill='%234a0e1a' opacity='0.4'/%3E%3C/svg%3E");
-            background-size: 100% 100%;
-            pointer-events: none;
-        }
 
         /* Header with Logo */
         header {
@@ -106,13 +95,6 @@
             cursor: default;
         }
 
-        /* SVG Logo */
-        .gothic-logo {
-            width: 280px;
-            height: 120px;
-            margin: 0 auto 1rem;
-            filter: drop-shadow(0 0 20px rgba(196, 168, 117, 0.3));
-        }
 
         header h1 {
             font-family: 'Cinzel', serif;
@@ -2565,65 +2547,10 @@
     <!-- Gothic Background Layers -->
     <div class="gothic-background">
         <div class="fog-layer"></div>
-        <div class="vines-overlay"></div>
     </div>
 
     <header>
         <div class="header-content">
-            <!-- Gothic Logo: Wine Cask -->
-            <svg class="gothic-logo" viewBox="0 0 280 120" xmlns="http://www.w3.org/2000/svg">
-                <!-- Background Glow -->
-                <defs>
-                    <radialGradient id="moonGlow" cx="50%" cy="50%" r="60%">
-                        <stop offset="0%" style="stop-color:#2a2035;stop-opacity:0.8"/>
-                        <stop offset="100%" style="stop-color:transparent;stop-opacity:0"/>
-                    </radialGradient>
-                    <filter id="glow">
-                        <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                        <feMerge>
-                            <feMergeNode in="coloredBlur"/>
-                            <feMergeNode in="SourceGraphic"/>
-                        </feMerge>
-                    </filter>
-                </defs>
-
-                <!-- Subtle Background -->
-                <ellipse cx="140" cy="60" rx="100" ry="50" fill="url(#moonGlow)"/>
-
-                <!-- Wine Cask - Centered and Larger -->
-                <g transform="translate(0, -20)">
-                    <!-- Cask Shadow -->
-                    <ellipse cx="140" cy="112" rx="50" ry="12" fill="#1a1520" opacity="0.6"/>
-
-                    <!-- Cask Body -->
-                    <path d="M85,85 Q75,95 85,108 L195,108 Q205,95 195,85 Z" fill="#2d1f2d" stroke="#3d2a3d" stroke-width="1.5"/>
-
-                    <!-- Cask Top -->
-                    <ellipse cx="140" cy="85" rx="55" ry="12" fill="#3d2a3d" stroke="#4a3a4a" stroke-width="1"/>
-
-                    <!-- Cask Bands -->
-                    <path d="M88,90 Q140,94 192,90" stroke="#5a4a5a" stroke-width="2" fill="none"/>
-                    <path d="M86,98 Q140,102 194,98" stroke="#5a4a5a" stroke-width="2" fill="none"/>
-                    <path d="M88,105 Q140,108 192,105" stroke="#5a4a5a" stroke-width="2" fill="none"/>
-
-                    <!-- Cask Bung (cork) -->
-                    <circle cx="140" cy="85" r="5" fill="#4a3a4a" stroke="#5a4a5a" stroke-width="0.5"/>
-
-                    <!-- Decorative grape cluster on cask -->
-                    <g filter="url(#glow)" transform="translate(140, 55)">
-                        <circle cx="0" cy="0" r="4" fill="#4a0e1a"/>
-                        <circle cx="-6" cy="3" r="3.5" fill="#3d0a15"/>
-                        <circle cx="6" cy="3" r="3.5" fill="#4a0e1a"/>
-                        <circle cx="-3" cy="7" r="3.5" fill="#4a0e1a"/>
-                        <circle cx="3" cy="7" r="3.5" fill="#3d0a15"/>
-                        <circle cx="0" cy="11" r="3" fill="#4a0e1a"/>
-                        <!-- Grape stem and leaf -->
-                        <path d="M0,-4 L0,-12 Q5,-15 8,-12" stroke="#3d2a3d" stroke-width="1.5" fill="none"/>
-                        <ellipse cx="10" cy="-14" rx="6" ry="4" fill="#2d1f2d" transform="rotate(30 10 -14)"/>
-                    </g>
-                </g>
-            </svg>
-
             <h1>Ardoa</h1>
             <p>Wine Bar & Tasting Room</p>
         </div>
