@@ -41,20 +41,23 @@
             color: var(--bone);
             line-height: 1.7;
             min-height: 100vh;
-            -webkit-transform: translate3d(0, 0, 0);
+            min-height: 100dvh; /* iOS Safari dynamic viewport height */
+            min-height: -webkit-fill-available; /* Older iOS fallback */
+            position: relative;
+            overflow-x: hidden;
         }
 
-        /* Gothic Background with Parallax Layers */
-        .gothic-background {
+        /* Background gradient via pseudo-element - fixes iOS Safari stacking bug */
+        body::before {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            overflow: hidden;
+            height: 100dvh;
+            z-index: 0;
             pointer-events: none;
-            -webkit-transform: translate3d(0, 0, 0);
             background: linear-gradient(180deg,
                 var(--midnight) 0%,
                 var(--deep-purple) 30%,
@@ -62,13 +65,17 @@
                 var(--midnight) 100%);
         }
 
-        /* Fog Layer */
-        .fog-layer {
-            position: absolute;
+        /* Fog layer via body::after */
+        body::after {
+            content: '';
+            position: fixed;
             top: 0;
             left: 0;
             width: 200%;
             height: 100%;
+            height: 100dvh;
+            z-index: 0;
+            pointer-events: none;
             background: url("data:image/svg+xml,%3Csvg viewBox='0 0 800 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.15'/%3E%3C/svg%3E");
             opacity: 0.4;
             animation: fogDrift 60s linear infinite;
@@ -79,16 +86,25 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* Vines Overlay */
-        .vines-overlay {
-            position: absolute;
+        /* Page wrapper - establishes clean stacking context above background */
+        #page-wrapper {
+            position: relative;
+            z-index: 1;
+            isolation: isolate;
+        }
+
+        /* Vines overlay inside wrapper */
+        #page-wrapper::before {
+            content: '';
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            z-index: -1;
+            pointer-events: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,20 Q10,25 5,40 T10,60 Q15,75 5,90' stroke='%234a0e1a' stroke-width='0.3' fill='none' opacity='0.3'/%3E%3Cpath d='M100,30 Q90,35 95,50 T90,70 Q85,85 95,95' stroke='%234a0e1a' stroke-width='0.3' fill='none' opacity='0.3'/%3E%3Ccircle cx='8' cy='45' r='1.5' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='6' cy='48' r='1.2' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='10' cy='47' r='1' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='92' cy='55' r='1.5' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='94' cy='58' r='1.2' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='90' cy='57' r='1' fill='%234a0e1a' opacity='0.4'/%3E%3C/svg%3E");
             background-size: 100% 100%;
-            pointer-events: none;
         }
 
         /* Header with Logo */
@@ -209,9 +225,6 @@
             margin: 0 auto;
             padding: 2rem;
             position: relative;
-            z-index: 10;
-            -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
         }
 
         /* Section Styling */
@@ -222,10 +235,6 @@
 
         section.active {
             display: block;
-            -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-            position: relative;
-            z-index: 1;
         }
 
         @keyframes fadeIn {
@@ -295,8 +304,6 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
-            position: relative;
-            z-index: 1;
         }
 
         @media (max-width: 900px) {
@@ -469,8 +476,6 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
-            position: relative;
-            z-index: 1;
         }
 
         @media (max-width: 900px) {
@@ -940,8 +945,6 @@
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
-            position: relative;
-            z-index: 1;
         }
 
         .food-card {
@@ -1081,6 +1084,17 @@
 
         /* Responsive - Tablet */
         @media (max-width: 768px) {
+            /* Disable expensive animations on mobile for iOS Safari performance */
+            body::after {
+                animation: none;
+                width: 100%;
+            }
+
+            /* Hide vines overlay on mobile */
+            #page-wrapper::before {
+                display: none;
+            }
+
             header h1 {
                 font-size: 2rem;
                 letter-spacing: 4px;
@@ -2808,11 +2822,8 @@
     </style>
 </head>
 <body>
-    <!-- Gothic Background Layers -->
-    <div class="gothic-background">
-        <div class="fog-layer"></div>
-        <div class="vines-overlay"></div>
-    </div>
+    <!-- Page wrapper for iOS Safari stacking context fix -->
+    <div id="page-wrapper">
 
     <header>
         <div class="header-content">
@@ -4067,6 +4078,8 @@
     <footer>
         <p>Ardoa Wine Bar - Study Guide</p>
     </footer>
+
+    </div><!-- End page-wrapper -->
 
     <script>
         // Wine Data - All 24 wines ordered by Enomatic dispenser position (1-24, left to right)
