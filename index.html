@@ -41,6 +41,7 @@
             color: var(--bone);
             line-height: 1.7;
             min-height: 100vh;
+            -webkit-transform: translate3d(0, 0, 0);
         }
 
         /* Gothic Background with Parallax Layers */
@@ -205,6 +206,7 @@
             padding: 2rem;
             position: relative;
             z-index: 1;
+            -webkit-transform: translate3d(0, 0, 0);
         }
 
         /* Section Styling */
@@ -215,6 +217,7 @@
 
         section.active {
             display: block;
+            -webkit-transform: translate3d(0, 0, 0);
         }
 
         @keyframes fadeIn {
@@ -2561,143 +2564,6 @@
 
         /* ==================== FAQ SECTION STYLES ==================== */
 
-        /* FAQ Container */
-        .faq-container {
-            position: relative;
-            min-height: 600px;
-        }
-
-        /* Enomatic Scene Background */
-        .faq-scene {
-            position: relative;
-            background: linear-gradient(180deg,
-                rgba(26, 16, 37, 0.95) 0%,
-                rgba(10, 10, 15, 0.98) 100%);
-            border: 1px solid rgba(196, 168, 117, 0.2);
-            border-radius: 0;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            overflow: hidden;
-        }
-
-        .faq-scene::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--pale-gold), transparent);
-            opacity: 0.5;
-        }
-
-        /* Wine Machine Wall - SVG Background */
-        .wine-machine-wall {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            opacity: 0.3;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Crect fill='%230a0a0f' width='800' height='400'/%3E%3Cg fill='none' stroke='%23c4a875' stroke-width='0.5'%3E%3Crect x='50' y='50' width='150' height='300' rx='5'/%3E%3Crect x='220' y='50' width='150' height='300' rx='5'/%3E%3Crect x='390' y='50' width='150' height='300' rx='5'/%3E%3Crect x='560' y='50' width='150' height='300' rx='5'/%3E%3C/g%3E%3Cg fill='%234a0e1a'%3E%3Cellipse cx='125' cy='120' rx='20' ry='50'/%3E%3Cellipse cx='125' cy='230' rx='20' ry='50'/%3E%3Cellipse cx='295' cy='120' rx='20' ry='50'/%3E%3Cellipse cx='295' cy='230' rx='20' ry='50'/%3E%3Cellipse cx='465' cy='120' rx='20' ry='50'/%3E%3Cellipse cx='465' cy='230' rx='20' ry='50'/%3E%3Cellipse cx='635' cy='120' rx='20' ry='50'/%3E%3Cellipse cx='635' cy='230' rx='20' ry='50'/%3E%3C/g%3E%3Cg fill='%23c4a875' opacity='0.6'%3E%3Ccircle cx='125' cy='320' r='8'/%3E%3Ccircle cx='295' cy='320' r='8'/%3E%3Ccircle cx='465' cy='320' r='8'/%3E%3Ccircle cx='635' cy='320' r='8'/%3E%3C/g%3E%3C/svg%3E");
-            background-size: cover;
-            background-position: center;
-            pointer-events: none;
-        }
-
-        /* Animated Character */
-        .faq-character {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: flex-start;
-            gap: 1.5rem;
-            padding: 1rem;
-        }
-
-        .character-figure {
-            flex-shrink: 0;
-            width: 120px;
-            height: 180px;
-            animation: characterBob 3s ease-in-out infinite;
-        }
-
-        @keyframes characterBob {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        /* Character SVG */
-        .character-svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
-        }
-
-        /* Speech Bubble */
-        .speech-bubble {
-            position: relative;
-            background: linear-gradient(135deg, rgba(74, 14, 26, 0.9), rgba(26, 16, 37, 0.95));
-            border: 2px solid var(--pale-gold);
-            border-radius: 20px;
-            padding: 1.5rem 2rem;
-            max-width: 500px;
-            box-shadow:
-                0 4px 20px rgba(0, 0, 0, 0.5),
-                0 0 30px rgba(196, 168, 117, 0.2);
-            animation: bubblePulse 4s ease-in-out infinite;
-        }
-
-        @keyframes bubblePulse {
-            0%, 100% { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(196, 168, 117, 0.2); }
-            50% { box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6), 0 0 40px rgba(196, 168, 117, 0.3); }
-        }
-
-        .speech-bubble::before {
-            content: '';
-            position: absolute;
-            left: -20px;
-            top: 30px;
-            border: 10px solid transparent;
-            border-right-color: var(--pale-gold);
-        }
-
-        .speech-bubble::after {
-            content: '';
-            position: absolute;
-            left: -14px;
-            top: 32px;
-            border: 8px solid transparent;
-            border-right-color: rgba(74, 14, 26, 0.9);
-        }
-
-        .current-question {
-            font-family: 'Crimson Text', serif;
-            font-size: 1.3rem;
-            color: var(--bone);
-            font-style: italic;
-            line-height: 1.5;
-            margin: 0;
-        }
-
-        .current-question::before {
-            content: '"';
-            color: var(--pale-gold);
-            font-size: 2rem;
-            line-height: 0;
-            vertical-align: -0.3em;
-            margin-right: 0.25rem;
-        }
-
-        .current-question::after {
-            content: '"';
-            color: var(--pale-gold);
-            font-size: 2rem;
-            line-height: 0;
-            vertical-align: -0.3em;
-            margin-left: 0.1rem;
-        }
-
         /* FAQ Title */
         .faq-title {
             font-family: 'Cinzel', serif;
@@ -2911,38 +2777,8 @@
             font-style: normal;
         }
 
-        /* Mobile adjustments for FAQ scene */
+        /* Mobile adjustments for FAQ */
         @media (max-width: 768px) {
-            .faq-character {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            .character-figure {
-                width: 100px;
-                height: 150px;
-            }
-
-            .speech-bubble {
-                max-width: 100%;
-            }
-
-            .speech-bubble::before,
-            .speech-bubble::after {
-                left: 50%;
-                top: -20px;
-                transform: translateX(-50%) rotate(90deg);
-            }
-
-            .speech-bubble::after {
-                top: -14px;
-            }
-
-            .current-question {
-                font-size: 1.1rem;
-            }
-
             .faq-title {
                 font-size: 1.5rem;
                 letter-spacing: 2px;
@@ -2951,29 +2787,6 @@
             .faq-question-text {
                 font-size: 0.95rem;
             }
-        }
-
-        /* Random Question Button */
-        .random-question-btn {
-            display: block;
-            margin: 0 auto 2rem;
-            font-family: 'Cinzel', serif;
-            background: linear-gradient(135deg, rgba(74, 14, 26, 0.8), rgba(26, 16, 37, 0.9));
-            border: 2px solid var(--pale-gold);
-            color: var(--pale-gold);
-            padding: 1rem 2rem;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .random-question-btn:hover {
-            background: rgba(196, 168, 117, 0.2);
-            color: var(--bone);
-            box-shadow: 0 0 25px rgba(196, 168, 117, 0.4);
-            transform: translateY(-2px);
         }
 
     </style>
@@ -4216,51 +4029,6 @@
         <section id="faq">
             <h2 class="faq-title">Wine Bar FAQ</h2>
             <p class="faq-subtitle">Common questions from our guests - click any question to reveal the answer</p>
-
-            <!-- Animated Scene with Character -->
-            <div class="faq-scene">
-                <div class="wine-machine-wall"></div>
-                <div class="faq-character">
-                    <!-- Animated Customer Figure -->
-                    <div class="character-figure">
-                        <svg class="character-svg" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Head -->
-                            <circle cx="50" cy="25" r="18" fill="#e8d4c4" stroke="#c4a875" stroke-width="1"/>
-                            <!-- Hair -->
-                            <path d="M32 20 Q35 5 50 8 Q65 5 68 20 Q70 12 65 10 Q55 2 45 2 Q35 2 30 10 Q25 12 32 20" fill="#4a3728"/>
-                            <!-- Eyes -->
-                            <circle cx="43" cy="23" r="2.5" fill="#2a1810"/>
-                            <circle cx="57" cy="23" r="2.5" fill="#2a1810"/>
-                            <!-- Smile -->
-                            <path d="M44 32 Q50 37 56 32" stroke="#8b6b5a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                            <!-- Neck -->
-                            <rect x="45" y="42" width="10" height="8" fill="#e8d4c4"/>
-                            <!-- Body - Elegant Dress/Blouse -->
-                            <path d="M30 50 L45 48 L55 48 L70 50 L75 100 L25 100 Z" fill="#6b1c2e"/>
-                            <!-- Dress detail -->
-                            <path d="M30 50 Q50 55 70 50" stroke="#c4a875" stroke-width="1" fill="none"/>
-                            <!-- Arms -->
-                            <path d="M30 55 L20 80 L25 82 L32 60" fill="#e8d4c4"/>
-                            <path d="M70 55 L80 80 L75 82 L68 60" fill="#e8d4c4"/>
-                            <!-- Wine glass in hand -->
-                            <path d="M78 78 L82 78 L80 90 L80 95 L77 97 L83 97" stroke="#c4a875" stroke-width="1.5" fill="none"/>
-                            <ellipse cx="80" cy="78" rx="6" ry="8" fill="rgba(107, 28, 46, 0.6)" stroke="#c4a875" stroke-width="0.5"/>
-                            <!-- Legs -->
-                            <rect x="38" y="100" width="10" height="45" fill="#1a1025"/>
-                            <rect x="52" y="100" width="10" height="45" fill="#1a1025"/>
-                            <!-- Shoes -->
-                            <ellipse cx="43" cy="148" rx="8" ry="4" fill="#2a1810"/>
-                            <ellipse cx="57" cy="148" rx="8" ry="4" fill="#2a1810"/>
-                        </svg>
-                    </div>
-                    <!-- Speech Bubble with Current Question -->
-                    <div class="speech-bubble">
-                        <p class="current-question" id="currentQuestion">What's your lightest white wine?</p>
-                    </div>
-                </div>
-            </div>
-
-            <button class="random-question-btn" onclick="showRandomQuestion()">Ask Another Question</button>
 
             <!-- FAQ Filter Buttons -->
             <div class="faq-filter-bar">
@@ -6545,21 +6313,6 @@
         }
 
         // Show random question in speech bubble
-        function showRandomQuestion() {
-            const randomFaq = faqs[Math.floor(Math.random() * faqs.length)];
-            const questionEl = document.getElementById('currentQuestion');
-
-            // Animate out
-            questionEl.style.opacity = '0';
-            questionEl.style.transform = 'translateY(-10px)';
-
-            setTimeout(() => {
-                questionEl.textContent = randomFaq.question;
-                questionEl.style.opacity = '1';
-                questionEl.style.transform = 'translateY(0)';
-            }, 300);
-        }
-
         // Initialize all content when page loads
         document.addEventListener('DOMContentLoaded', function() {
             renderWineCards();
