@@ -2559,6 +2559,423 @@
             }
         }
 
+        /* ==================== FAQ SECTION STYLES ==================== */
+
+        /* FAQ Container */
+        .faq-container {
+            position: relative;
+            min-height: 600px;
+        }
+
+        /* Enomatic Scene Background */
+        .faq-scene {
+            position: relative;
+            background: linear-gradient(180deg,
+                rgba(26, 16, 37, 0.95) 0%,
+                rgba(10, 10, 15, 0.98) 100%);
+            border: 1px solid rgba(196, 168, 117, 0.2);
+            border-radius: 0;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .faq-scene::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--pale-gold), transparent);
+            opacity: 0.5;
+        }
+
+        /* Wine Machine Wall - SVG Background */
+        .wine-machine-wall {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.3;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Crect fill='%230a0a0f' width='800' height='400'/%3E%3Cg fill='none' stroke='%23c4a875' stroke-width='0.5'%3E%3Crect x='50' y='50' width='150' height='300' rx='5'/%3E%3Crect x='220' y='50' width='150' height='300' rx='5'/%3E%3Crect x='390' y='50' width='150' height='300' rx='5'/%3E%3Crect x='560' y='50' width='150' height='300' rx='5'/%3E%3C/g%3E%3Cg fill='%234a0e1a'%3E%3Cellipse cx='125' cy='120' rx='20' ry='50'/%3E%3Cellipse cx='125' cy='230' rx='20' ry='50'/%3E%3Cellipse cx='295' cy='120' rx='20' ry='50'/%3E%3Cellipse cx='295' cy='230' rx='20' ry='50'/%3E%3Cellipse cx='465' cy='120' rx='20' ry='50'/%3E%3Cellipse cx='465' cy='230' rx='20' ry='50'/%3E%3Cellipse cx='635' cy='120' rx='20' ry='50'/%3E%3Cellipse cx='635' cy='230' rx='20' ry='50'/%3E%3C/g%3E%3Cg fill='%23c4a875' opacity='0.6'%3E%3Ccircle cx='125' cy='320' r='8'/%3E%3Ccircle cx='295' cy='320' r='8'/%3E%3Ccircle cx='465' cy='320' r='8'/%3E%3Ccircle cx='635' cy='320' r='8'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+            pointer-events: none;
+        }
+
+        /* Animated Character */
+        .faq-character {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 1rem;
+        }
+
+        .character-figure {
+            flex-shrink: 0;
+            width: 120px;
+            height: 180px;
+            animation: characterBob 3s ease-in-out infinite;
+        }
+
+        @keyframes characterBob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Character SVG */
+        .character-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+        }
+
+        /* Speech Bubble */
+        .speech-bubble {
+            position: relative;
+            background: linear-gradient(135deg, rgba(74, 14, 26, 0.9), rgba(26, 16, 37, 0.95));
+            border: 2px solid var(--pale-gold);
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            max-width: 500px;
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.5),
+                0 0 30px rgba(196, 168, 117, 0.2);
+            animation: bubblePulse 4s ease-in-out infinite;
+        }
+
+        @keyframes bubblePulse {
+            0%, 100% { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(196, 168, 117, 0.2); }
+            50% { box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6), 0 0 40px rgba(196, 168, 117, 0.3); }
+        }
+
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 30px;
+            border: 10px solid transparent;
+            border-right-color: var(--pale-gold);
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            left: -14px;
+            top: 32px;
+            border: 8px solid transparent;
+            border-right-color: rgba(74, 14, 26, 0.9);
+        }
+
+        .current-question {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.3rem;
+            color: var(--bone);
+            font-style: italic;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .current-question::before {
+            content: '"';
+            color: var(--pale-gold);
+            font-size: 2rem;
+            line-height: 0;
+            vertical-align: -0.3em;
+            margin-right: 0.25rem;
+        }
+
+        .current-question::after {
+            content: '"';
+            color: var(--pale-gold);
+            font-size: 2rem;
+            line-height: 0;
+            vertical-align: -0.3em;
+            margin-left: 0.1rem;
+        }
+
+        /* FAQ Title */
+        .faq-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--pale-gold);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px rgba(196, 168, 117, 0.3);
+        }
+
+        .faq-subtitle {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.1rem;
+            color: var(--mist);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        /* FAQ Filter Buttons */
+        .faq-filter-bar {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .faq-filter-btn {
+            font-family: 'Cinzel', serif;
+            background: transparent;
+            border: 1px solid var(--antique-gold);
+            color: var(--pale-gold);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.75rem;
+        }
+
+        .faq-filter-btn:hover, .faq-filter-btn.active {
+            background: rgba(196, 168, 117, 0.2);
+            color: var(--bone);
+            box-shadow: 0 0 15px rgba(196, 168, 117, 0.3);
+        }
+
+        /* FAQ Grid */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* FAQ Card */
+        .faq-card {
+            background: linear-gradient(145deg, rgba(26, 16, 37, 0.9), rgba(10, 10, 15, 0.95));
+            border: 1px solid rgba(196, 168, 117, 0.2);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .faq-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--pale-gold), transparent);
+            opacity: 0.5;
+        }
+
+        .faq-card:hover {
+            transform: translateY(-4px);
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(74, 14, 26, 0.3);
+            border-color: rgba(196, 168, 117, 0.4);
+        }
+
+        .faq-card.expanded {
+            border-color: var(--pale-gold);
+            box-shadow: 0 0 25px rgba(196, 168, 117, 0.3);
+        }
+
+        /* FAQ Question */
+        .faq-question {
+            padding: 1.25rem 1.5rem;
+            background: linear-gradient(135deg, rgba(74, 14, 26, 0.6), rgba(26, 16, 37, 0.8));
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .faq-card:hover .faq-question {
+            background: linear-gradient(135deg, rgba(74, 14, 26, 0.8), rgba(26, 16, 37, 0.9));
+        }
+
+        .faq-icon {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: rgba(196, 168, 117, 0.2);
+            border: 1px solid var(--pale-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .faq-card:hover .faq-icon {
+            background: rgba(196, 168, 117, 0.3);
+            transform: scale(1.1);
+        }
+
+        .faq-question-text {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.05rem;
+            color: var(--bone);
+            flex: 1;
+            line-height: 1.4;
+        }
+
+        .faq-expand-icon {
+            color: var(--pale-gold);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-card.expanded .faq-expand-icon {
+            transform: rotate(180deg);
+        }
+
+        /* FAQ Answer */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            background: rgba(10, 10, 15, 0.5);
+        }
+
+        .faq-card.expanded .faq-answer {
+            max-height: 500px;
+            padding: 1.5rem;
+        }
+
+        .faq-answer-content {
+            font-family: 'Crimson Text', serif;
+            font-size: 1rem;
+            color: var(--mist);
+            line-height: 1.7;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+        }
+
+        .faq-card.expanded .faq-answer-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faq-answer-content strong {
+            color: var(--pale-gold);
+        }
+
+        .faq-answer-content em {
+            color: var(--bone);
+        }
+
+        /* Category Badge */
+        .faq-category-badge {
+            display: inline-block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.2rem 0.5rem;
+            background: rgba(196, 168, 117, 0.2);
+            border: 1px solid rgba(196, 168, 117, 0.3);
+            color: var(--pale-gold);
+            margin-top: 0.75rem;
+        }
+
+        /* Tip callout in answers */
+        .faq-tip {
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            background: rgba(74, 14, 26, 0.3);
+            border-left: 3px solid var(--pale-gold);
+            font-style: italic;
+        }
+
+        .faq-tip::before {
+            content: '✦ Tip: ';
+            color: var(--pale-gold);
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        /* Mobile adjustments for FAQ scene */
+        @media (max-width: 768px) {
+            .faq-character {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .character-figure {
+                width: 100px;
+                height: 150px;
+            }
+
+            .speech-bubble {
+                max-width: 100%;
+            }
+
+            .speech-bubble::before,
+            .speech-bubble::after {
+                left: 50%;
+                top: -20px;
+                transform: translateX(-50%) rotate(90deg);
+            }
+
+            .speech-bubble::after {
+                top: -14px;
+            }
+
+            .current-question {
+                font-size: 1.1rem;
+            }
+
+            .faq-title {
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+            }
+
+            .faq-question-text {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Random Question Button */
+        .random-question-btn {
+            display: block;
+            margin: 0 auto 2rem;
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(135deg, rgba(74, 14, 26, 0.8), rgba(26, 16, 37, 0.9));
+            border: 2px solid var(--pale-gold);
+            color: var(--pale-gold);
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .random-question-btn:hover {
+            background: rgba(196, 168, 117, 0.2);
+            color: var(--bone);
+            box-shadow: 0 0 25px rgba(196, 168, 117, 0.4);
+            transform: translateY(-2px);
+        }
+
     </style>
 </head>
 <body>
@@ -2753,6 +3170,7 @@
         <button onclick="showSection('wineregions', this)">Wine Regions</button>
         <button onclick="showSection('enomatic', this)">Enomatic System</button>
         <button onclick="showSection('printcards', this)">Print Cards</button>
+        <button onclick="showSection('faq', this)">Wine FAQ</button>
     </nav>
 
     <main>
@@ -3791,6 +4209,73 @@
             <h3 class="print-category-title">Flatbreads, Tapas & More</h3>
             <div class="print-cards-grid" id="printOtherFoodGrid">
                 <!-- Other food print cards inserted by JavaScript -->
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq">
+            <h2 class="faq-title">Wine Bar FAQ</h2>
+            <p class="faq-subtitle">Common questions from our guests - click any question to reveal the answer</p>
+
+            <!-- Animated Scene with Character -->
+            <div class="faq-scene">
+                <div class="wine-machine-wall"></div>
+                <div class="faq-character">
+                    <!-- Animated Customer Figure -->
+                    <div class="character-figure">
+                        <svg class="character-svg" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Head -->
+                            <circle cx="50" cy="25" r="18" fill="#e8d4c4" stroke="#c4a875" stroke-width="1"/>
+                            <!-- Hair -->
+                            <path d="M32 20 Q35 5 50 8 Q65 5 68 20 Q70 12 65 10 Q55 2 45 2 Q35 2 30 10 Q25 12 32 20" fill="#4a3728"/>
+                            <!-- Eyes -->
+                            <circle cx="43" cy="23" r="2.5" fill="#2a1810"/>
+                            <circle cx="57" cy="23" r="2.5" fill="#2a1810"/>
+                            <!-- Smile -->
+                            <path d="M44 32 Q50 37 56 32" stroke="#8b6b5a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                            <!-- Neck -->
+                            <rect x="45" y="42" width="10" height="8" fill="#e8d4c4"/>
+                            <!-- Body - Elegant Dress/Blouse -->
+                            <path d="M30 50 L45 48 L55 48 L70 50 L75 100 L25 100 Z" fill="#6b1c2e"/>
+                            <!-- Dress detail -->
+                            <path d="M30 50 Q50 55 70 50" stroke="#c4a875" stroke-width="1" fill="none"/>
+                            <!-- Arms -->
+                            <path d="M30 55 L20 80 L25 82 L32 60" fill="#e8d4c4"/>
+                            <path d="M70 55 L80 80 L75 82 L68 60" fill="#e8d4c4"/>
+                            <!-- Wine glass in hand -->
+                            <path d="M78 78 L82 78 L80 90 L80 95 L77 97 L83 97" stroke="#c4a875" stroke-width="1.5" fill="none"/>
+                            <ellipse cx="80" cy="78" rx="6" ry="8" fill="rgba(107, 28, 46, 0.6)" stroke="#c4a875" stroke-width="0.5"/>
+                            <!-- Legs -->
+                            <rect x="38" y="100" width="10" height="45" fill="#1a1025"/>
+                            <rect x="52" y="100" width="10" height="45" fill="#1a1025"/>
+                            <!-- Shoes -->
+                            <ellipse cx="43" cy="148" rx="8" ry="4" fill="#2a1810"/>
+                            <ellipse cx="57" cy="148" rx="8" ry="4" fill="#2a1810"/>
+                        </svg>
+                    </div>
+                    <!-- Speech Bubble with Current Question -->
+                    <div class="speech-bubble">
+                        <p class="current-question" id="currentQuestion">What's your lightest white wine?</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="random-question-btn" onclick="showRandomQuestion()">Ask Another Question</button>
+
+            <!-- FAQ Filter Buttons -->
+            <div class="faq-filter-bar">
+                <button class="faq-filter-btn active" onclick="filterFAQs('all', this)">All Questions</button>
+                <button class="faq-filter-btn" onclick="filterFAQs('beginner', this)">Beginner</button>
+                <button class="faq-filter-btn" onclick="filterFAQs('red', this)">Red Wine</button>
+                <button class="faq-filter-btn" onclick="filterFAQs('white', this)">White Wine</button>
+                <button class="faq-filter-btn" onclick="filterFAQs('food', this)">Food Pairing</button>
+                <button class="faq-filter-btn" onclick="filterFAQs('service', this)">Service</button>
+                <button class="faq-filter-btn" onclick="filterFAQs('enomatic', this)">Enomatic</button>
+            </div>
+
+            <!-- FAQ Cards Grid -->
+            <div class="faq-grid" id="faqGrid">
+                <!-- FAQ cards will be inserted here by JavaScript -->
             </div>
         </section>
     </main>
@@ -5669,6 +6154,412 @@
             showOnlineCard();
         }
 
+        // ==================== FAQ DATA AND FUNCTIONS ====================
+
+        const faqs = [
+            // Beginner Questions - Light/Easy Wines
+            {
+                question: "What's your lightest white wine?",
+                answer: "Our <strong>Pinot Grigio from Famiglia Boron</strong> is the lightest—crisp green apple, pear, and citrus with bright acidity. It's refreshing, neutral, and perfect if you want something easy-drinking. If you'd like a bit more complexity while staying light, try the <strong>Pouilly-Fumé</strong>—still bone-dry but with interesting flinty minerality.",
+                category: "beginner",
+                icon: "🍋"
+            },
+            {
+                question: "I usually drink beer—what wine would I like?",
+                answer: "Start with something refreshing and not too complex. Our <strong>Beaujolais Villages</strong> (Gamay grape) is like the craft beer lover's red wine—fruity, light, low tannins, best served slightly chilled. For white, the <strong>Pinot Grigio</strong> is crisp and easy like a pilsner. Both are approachable without being overwhelming.",
+                category: "beginner",
+                icon: "🍺"
+            },
+            {
+                question: "What's a good wine for someone who doesn't usually drink wine?",
+                answer: "I'd suggest our <strong>Gorghi Tondi Rosé</strong>—it's light, refreshing, with peach and citrus notes. Not too dry, not too sweet, served cold. It's often the gateway wine for new wine drinkers. If you prefer something slightly sweet, the rosé's delicate fruit makes it very approachable.",
+                category: "beginner",
+                icon: "🌸"
+            },
+            {
+                question: "Which wine has the least alcohol?",
+                answer: "Our lowest alcohol wines are the <strong>Pinot Grigio</strong> at 12%, the <strong>Beaujolais Villages</strong> at 12.5%, and the <strong>Bourgueil Cabernet Franc</strong> at 12.5%. These lighter wines tend to be more refreshing and easier to enjoy over a longer evening without feeling heavy.",
+                category: "beginner",
+                icon: "📊"
+            },
+            {
+                question: "I don't like dry wine—what do you have?",
+                answer: "All our wines are technically dry (not sweet), but some taste softer and fruitier. Try the <strong>Rosé</strong>—the fresh fruit character makes it feel less austere. For reds, our <strong>Montepulciano d'Abruzzo</strong> has ripe dark fruit that reads as softer. If you really want sweetness, we do have some dessert options—ask about our dessert pairings!",
+                category: "beginner",
+                icon: "🍬"
+            },
+
+            // Red Wine Specific Questions
+            {
+                question: "What's your smoothest red?",
+                answer: "The <strong>Bordeaux Supérieur from Château Roc Meynard</strong> is very smooth—Merlot-dominant with soft, approachable tannins. It's velvety with red fruits and gentle oak. If you want even lighter, the <strong>Beaujolais Villages</strong> is silky with almost no tannin grip at all.",
+                category: "red",
+                icon: "🍷"
+            },
+            {
+                question: "I love big, bold red wines—what's your fullest-bodied option?",
+                answer: "Go for the <strong>Côtes du Rhône from Château de Trignon</strong>—it's a GSM blend (Grenache-Syrah-Mourvèdre) with dark fruits, spice, and a warm, lingering finish at 14% alcohol. The <strong>Chilean Cabernet Sauvignon</strong> is also full-bodied with blackcurrant and structure. Both will satisfy that big red craving.",
+                category: "red",
+                icon: "💪"
+            },
+            {
+                question: "Do you have any Pinot Noir?",
+                answer: "We don't have a Pinot Noir specifically, but if you love that style—light-bodied, elegant, aromatic—try our <strong>Mencía from Ribeira Sacra</strong>. Mencía is often called 'Spain's answer to Pinot Noir' with fresh red berries, violets, and beautiful minerality. Or the <strong>Beaujolais Villages</strong> (Gamay) for something similarly light and fruity.",
+                category: "red",
+                icon: "🍇"
+            },
+            {
+                question: "What's the difference between your Italian reds?",
+                answer: "We have two: <strong>Barbera</strong> (from Piedmont) is bright and tangy with cherry flavors and high acidity—great food wine. <strong>Montepulciano d'Abruzzo</strong> is darker, richer, with plum and herbs—more full-bodied. Barbera is like the energetic younger sibling; Montepulciano is the mellow, easygoing one.",
+                category: "red",
+                icon: "🇮🇹"
+            },
+            {
+                question: "Which red pairs best with steak?",
+                answer: "The <strong>Chilean Cabernet Sauvignon</strong> is your classic steak wine—blackcurrant, structure, smooth tannins that complement beef beautifully. The <strong>Côtes du Rhône</strong> also works wonderfully if you want something with more spice and earthiness. Both have the body to stand up to a rich cut of meat.",
+                category: "red",
+                icon: "🥩"
+            },
+            {
+                question: "I'm looking for a red that's good chilled—do you have one?",
+                answer: "Absolutely! The <strong>Beaujolais Villages</strong>, <strong>Barbera</strong>, and <strong>Mencía</strong> are all fantastic slightly chilled (55-60°F). Lower tannins and higher acidity make them refreshing cold. It's actually a French tradition to chill light reds in summer!",
+                category: "red",
+                icon: "❄️"
+            },
+            {
+                question: "What's a good red for someone who usually drinks white?",
+                answer: "Start with our <strong>Beaujolais Villages</strong>—it's light, fruity, low in tannins, and served slightly chilled. Many people call Gamay 'a red for white wine lovers.' The <strong>Mencía</strong> is another great bridge wine with its fresh, aromatic character.",
+                category: "red",
+                icon: "🌉"
+            },
+
+            // White Wine Specific Questions
+            {
+                question: "What's your most aromatic white?",
+                answer: "The <strong>Pouilly-Fumé</strong> is wonderfully aromatic—citrus, flint, white flowers, and gooseberry. It's expressive and interesting without being heavy. The Sauvignon Blanc grape here really shows its aromatic potential with that distinctive Loire minerality.",
+                category: "white",
+                icon: "💐"
+            },
+            {
+                question: "Do you have an oaky Chardonnay?",
+                answer: "Our <strong>Presqu'ile Chardonnay</strong> from Santa Barbara has subtle oak influence—vanilla, toast, and a creamy texture while still maintaining balance and acidity. It's not heavily oaked like some Napa styles, but you'll definitely taste that butterscotch character from malolactic fermentation and barrel aging.",
+                category: "white",
+                icon: "🪵"
+            },
+            {
+                question: "What's the difference between your Chardonnays?",
+                answer: "The <strong>Presqu'ile</strong> (Santa Barbara) sees oak aging—creamy, vanilla, toasty notes with stone fruit. The <strong>My Story Chardonnay</strong> is unoaked—crisp, clean, pure fruit expression with green apple and citrus. One is rich and buttery; the other is bright and refreshing. Same grape, totally different wines!",
+                category: "white",
+                icon: "⚖️"
+            },
+            {
+                question: "Do you have a Sauvignon Blanc?",
+                answer: "Yes! Our <strong>Pouilly-Fumé</strong> is 100% Sauvignon Blanc from France's Loire Valley. It's bone-dry with citrus, gooseberry, and that famous flinty/smoky minerality. Very different from New Zealand styles—more restrained, mineral, and food-friendly. Perfect with goat cheese!",
+                category: "white",
+                icon: "🇫🇷"
+            },
+            {
+                question: "I want something crisp and refreshing—what white do you recommend?",
+                answer: "The <strong>Pinot Grigio</strong> is our crispest—clean, citrusy, very refreshing. The <strong>Pouilly-Fumé</strong> adds more complexity while staying razor-sharp. Both are perfect for a hot day or as an aperitif before dinner.",
+                category: "white",
+                icon: "✨"
+            },
+
+            // Food Pairing Questions
+            {
+                question: "I'm getting the cheese board—what wine goes best?",
+                answer: "Depends on the cheese! For soft cheeses like <strong>Saint Angel</strong> (triple-crème), try the <strong>Presqu'ile Chardonnay</strong>—butter meets butter. For aged cheeses like <strong>Gruyere</strong> or <strong>Ewephoria</strong>, the <strong>Côtes du Rhône</strong> or <strong>Cabernet Sauvignon</strong> work beautifully. For goat cheese, the <strong>Pouilly-Fumé</strong> is a legendary pairing!",
+                category: "food",
+                icon: "🧀"
+            },
+            {
+                question: "What pairs well with your charcuterie?",
+                answer: "Our Italian reds—<strong>Barbera</strong> and <strong>Montepulciano</strong>—are fantastic with prosciutto and salami. The <strong>Bordeaux</strong> loves duck rillettes. For lighter cured meats, the <strong>Mencía</strong> or <strong>Beaujolais</strong> won't overpower them. The high acidity in all these wines cuts through the fat beautifully.",
+                category: "food",
+                icon: "🥓"
+            },
+            {
+                question: "What wine goes with spicy food?",
+                answer: "Off-dry wines with lower alcohol work best with spice, but since our wines are dry, go for the <strong>Rosé</strong> (served very cold) or the <strong>Pinot Grigio</strong>. For reds, the <strong>Beaujolais</strong> chilled is refreshing enough to handle some heat. Avoid high-alcohol, tannic reds—they'll make spice feel hotter!",
+                category: "food",
+                icon: "🌶️"
+            },
+            {
+                question: "I'm vegetarian—what wine pairs with your veggie options?",
+                answer: "The <strong>Rosé</strong> is incredibly versatile with vegetables. For the Veg flatbread, try <strong>Pouilly-Fumé</strong>—its herbal, citrus character loves fresh vegetables. The <strong>Pinot Grigio</strong> works great with hummus and antipasto. If you want red, the <strong>Bourgueil Cabernet Franc</strong> has lovely herbal notes that complement plant-based dishes.",
+                category: "food",
+                icon: "🥗"
+            },
+            {
+                question: "What's your go-to pairing for the flatbreads?",
+                answer: "For <strong>The Basque</strong> (prosciutto, fig): the <strong>Beaujolais</strong>—its fruit echoes the fig, acidity cuts through prosciutto. For <strong>The Mighty Spicy</strong>: <strong>Cabernet Sauvignon</strong> stands up to bold flavors. For <strong>The Veg</strong>: <strong>Pouilly-Fumé</strong> complements the fresh arugula and vegetables beautifully.",
+                category: "food",
+                icon: "🫓"
+            },
+            {
+                question: "Does wine really need to match food?",
+                answer: "Not always! Drink what you enjoy. But thoughtful pairing can elevate both the food and wine. General rules: match weight (light food = light wine), use acidity to cut fat, consider complementary or contrasting flavors. That said, a wine you love will always taste good to you, regardless of what you're eating!",
+                category: "food",
+                icon: "🤔"
+            },
+            {
+                question: "What if I don't like the wine I ordered with my food?",
+                answer: "That's what our Enomatic system is for! You can taste wines by the ounce before committing. If a pairing isn't working, try something else. Wine is about enjoyment, not rules. Our staff can always suggest alternatives based on what you're tasting.",
+                category: "food",
+                icon: "🔄"
+            },
+
+            // Service and Enomatic Questions
+            {
+                question: "How does the self-serve wine system work?",
+                answer: "It's our <strong>Enomatic</strong> system! Get a card from the bar, load credit, then choose your wine. Select your pour size (1oz taste, 3oz half, 6oz full), hold your glass under the spout, and insert your card. The wine is perfectly preserved with nitrogen, so every pour is fresh. Return the card when done for any remaining credit.",
+                category: "enomatic",
+                icon: "🎫"
+            },
+            {
+                question: "Why are the wines kept in those machines?",
+                answer: "That's our <strong>Enomatic</strong> system—it's Italian technology that keeps wines fresh for weeks after opening. Nitrogen gas creates a protective blanket over the wine, preventing oxidation. Plus, temperature is precisely controlled. This lets us offer premium wines by the glass without them going bad!",
+                category: "enomatic",
+                icon: "🔬"
+            },
+            {
+                question: "What pour sizes do you offer?",
+                answer: "Three sizes: <strong>1oz taste</strong> (perfect for sampling multiple wines), <strong>3oz half glass</strong> (nice for pairing with courses), and <strong>6oz full pour</strong> (standard glass). The taste pour lets you explore without committing—try several before choosing your favorite!",
+                category: "enomatic",
+                icon: "📏"
+            },
+            {
+                question: "Can I try a wine before buying a full glass?",
+                answer: "Absolutely! That's one of the best features of our system. Get a 1oz taste first—it's very affordable and lets you sample before committing. Many guests try 3-4 different wines before settling on their favorite. It's the best way to discover something new!",
+                category: "enomatic",
+                icon: "👍"
+            },
+            {
+                question: "How do you keep opened bottles fresh?",
+                answer: "Our Enomatic system uses <strong>nitrogen/argon gas</strong>—food-grade inert gases that blanket the wine, preventing oxidation. Wines stay fresh for 30+ days after opening. Temperature is also precisely controlled: whites at 45-50°F, reds at 55-65°F. It's the gold standard in wine preservation.",
+                category: "enomatic",
+                icon: "🧪"
+            },
+            {
+                question: "Why is your selection limited to 24 wines?",
+                answer: "That's how many positions we have in our Enomatic dispensers! We rotate wines regularly to offer variety. Having 24 carefully curated wines means each one is there for a reason—quality over quantity. We also keep bottles and specialty wines available if you want something beyond the machines.",
+                category: "enomatic",
+                icon: "2️⃣4️⃣"
+            },
+
+            // General Wine Knowledge Questions
+            {
+                question: "What does 'dry' mean in wine?",
+                answer: "Dry means <strong>not sweet</strong>—the opposite of dessert wine. During fermentation, yeast converts grape sugar to alcohol. In dry wines, nearly all sugar is converted, leaving little residual sweetness. Even 'fruity' wines can be dry—fruit flavors aren't the same as sweetness!",
+                category: "beginner",
+                icon: "📚"
+            },
+            {
+                question: "Why do some wines have higher alcohol?",
+                answer: "More sugar in grapes = more alcohol after fermentation. Warmer climates produce riper, sweeter grapes, resulting in higher alcohol wines (13-15%+). Cooler climates make lighter wines (11-13%). Our Southern Rhône at 14% comes from sunny Southern France; our Bourgueil at 12.5% is from the cooler Loire Valley.",
+                category: "beginner",
+                icon: "🌡️"
+            },
+            {
+                question: "What are tannins?",
+                answer: "Tannins are compounds from grape skins, seeds, and sometimes oak that create that <strong>drying, astringent sensation</strong> in your mouth—like over-steeped tea. Red wines have more tannins because they ferment with their skins. Tannins add structure and aging potential. Our <strong>Cabernet Sauvignon</strong> has notable tannins; the <strong>Beaujolais</strong> has almost none.",
+                category: "beginner",
+                icon: "🫖"
+            },
+            {
+                question: "What's the difference between Old World and New World wines?",
+                answer: "<strong>Old World</strong> = Europe (France, Italy, Spain)—typically more restrained, mineral, terroir-focused. <strong>New World</strong> = Americas, Australia, etc.—often more fruit-forward, bolder, modern. Our French and Italian wines show Old World elegance; our California Chardonnay and Chilean Cabernet are New World expressions.",
+                category: "beginner",
+                icon: "🌍"
+            },
+            {
+                question: "Why does the same grape taste different in different wines?",
+                answer: "Terroir! Soil, climate, altitude, and winemaking all affect flavor. Our two Chardonnays prove it: <strong>Presqu'ile</strong> (California) is creamy with vanilla; <strong>My Story</strong> (unoaked) is crisp and citrusy. Same grape, different expressions based on where and how it's made.",
+                category: "beginner",
+                icon: "🗺️"
+            },
+            {
+                question: "What temperature should wine be served?",
+                answer: "General rules: <strong>Whites and rosé: 45-55°F</strong> (refrigerator cold to cool). <strong>Light reds: 55-60°F</strong> (slight chill—Beaujolais, Barbera). <strong>Full reds: 60-65°F</strong> (cellar temperature, not room temp!). Serving wine too warm makes alcohol feel hot; too cold mutes flavors. Our Enomatic maintains perfect temperatures automatically!",
+                category: "service",
+                icon: "🌡️"
+            },
+            {
+                question: "Should I let red wine breathe?",
+                answer: "Some benefit from it! Young, tannic reds (like our <strong>Cabernet Sauvignon</strong>) can soften with 15-30 minutes of air. Light reds (<strong>Beaujolais</strong>, <strong>Barbera</strong>) are meant to be fresh—no decanting needed. Our Enomatic wines are already exposed to a bit of air when poured, so they're ready to enjoy!",
+                category: "service",
+                icon: "💨"
+            },
+            {
+                question: "What does GSM stand for?",
+                answer: "<strong>Grenache-Syrah-Mourvèdre</strong>—the classic Southern Rhône blend. Our <strong>Côtes du Rhône</strong> is a GSM (60% Grenache, 30% Syrah, 10% Mourvèdre). Grenache brings fruit and alcohol, Syrah adds color and spice, Mourvèdre contributes structure and earthiness. Together, they're greater than the sum of their parts!",
+                category: "red",
+                icon: "🔤"
+            },
+            {
+                question: "What's the deal with natural wine?",
+                answer: "Natural wine is made with minimal intervention—often organic/biodynamic grapes, native yeasts, little/no added sulfites, no fining or filtration. They can be funky, cloudy, unpredictable. We focus on well-made wines from quality producers, some using low-intervention methods. Our <strong>Beaujolais</strong> from Marine Decome is a great example of minimal intervention done right.",
+                category: "beginner",
+                icon: "🌿"
+            },
+            {
+                question: "Why are some wines more expensive?",
+                answer: "Many factors: <strong>region prestige</strong> (Burgundy vs. generic), <strong>production costs</strong> (hand-harvesting steep slopes costs more), <strong>yield limits</strong> (less wine = higher price per bottle), <strong>aging</strong> (oak barrels are expensive), and <strong>reputation</strong>. Our affordable wines offer great value; our pricier options reflect rarity, labor, or famous terroir.",
+                category: "beginner",
+                icon: "💰"
+            },
+
+            // Specific Wine Questions
+            {
+                question: "What's special about the Ribeira Sacra wine?",
+                answer: "It's from one of Europe's most dramatic wine regions! The <strong>Mencía</strong> grapes grow on terrifyingly steep terraces along river canyons—some slopes are 60 degrees! All harvesting is done by hand with cables and harnesses. Called 'heroic viticulture,' it produces elegant, mineral wines you won't find anywhere else. Monks planted these vineyards centuries ago.",
+                category: "red",
+                icon: "⛰️"
+            },
+            {
+                question: "Is Montepulciano the same as Vino Nobile di Montepulciano?",
+                answer: "No! Common confusion. <strong>Montepulciano d'Abruzzo</strong> is the GRAPE (from Abruzzo, central Italy). <strong>Vino Nobile di Montepulciano</strong> is a PLACE (in Tuscany) that uses Sangiovese! Our wine is the grape—dark, plummy, herbal. Remember: if it says 'd'Abruzzo,' it's the grape. If it's just 'Montepulciano,' it's probably the Tuscan town.",
+                category: "red",
+                icon: "❓"
+            },
+            {
+                question: "What does Pouilly-Fumé mean?",
+                answer: "'Fumé' means <strong>smoky</strong> in French. It refers to the gunflint character from the silex (flint) soils—strike two pieces of flint together and smell that sulfurous smoke! The wine isn't literally smoked. Fun fact: Pouilly-Fumé and Sancerre face each other across the Loire River, both making world-class Sauvignon Blanc.",
+                category: "white",
+                icon: "💨"
+            },
+            {
+                question: "Why is Beaujolais served chilled?",
+                answer: "The <strong>Gamay</strong> grape produces wines with low tannins and high fruit. Chilling (55-60°F) enhances their refreshing character. It's actually traditional in France! The light body and bright acidity make Beaujolais perfect slightly cold—think of it as a red that drinks like a white. Try it and you'll understand!",
+                category: "red",
+                icon: "🧊"
+            },
+            {
+                question: "What's Cabernet Franc like compared to Cabernet Sauvignon?",
+                answer: "<strong>Cabernet Franc</strong> (our Bourgueil) is the parent grape of Cabernet Sauvignon—lighter, more aromatic, with herbal/bell pepper notes and fresh acidity. <strong>Cabernet Sauvignon</strong> (our Chilean) is bolder, darker fruit, more tannic and structured. Franc is elegant and food-friendly; Sauvignon is powerful and age-worthy. Both are delicious!",
+                category: "red",
+                icon: "👨‍👦"
+            },
+            {
+                question: "Why do you have two rosés?",
+                answer: "We actually have one rosé currently—the <strong>Gorghi Tondi</strong> from Sicily made from Nerello Mascalese, an unusual volcanic grape usually used for red wines. Its rosé expression is unique and aromatic with white peach and almond notes. We rotate our selection, so different rosés may appear seasonally!",
+                category: "white",
+                icon: "🌹"
+            },
+            {
+                question: "What makes California Chardonnay different from French?",
+                answer: "Climate and style! California is warmer, producing riper, more tropical fruit. French Burgundy is cooler, giving leaner, more mineral wines. California winemakers often use more oak and malolactic fermentation (buttery style). Our <strong>Presqu'ile</strong> from Santa Barbara is balanced—not too heavy—because the coastal fog keeps it cool.",
+                category: "white",
+                icon: "🇺🇸"
+            },
+            {
+                question: "Do you have anything from Spain?",
+                answer: "Yes! Our <strong>Mencía from Ribeira Sacra</strong>—elegant, mineral, with fresh red berries. It's from Galicia in northwestern Spain, one of the country's most exciting regions. The steep terraced vineyards and slate soils create wines unlike anything else from Spain. It's like discovering a hidden gem!",
+                category: "red",
+                icon: "🇪🇸"
+            },
+
+            // Situational Questions
+            {
+                question: "I'm celebrating—what should I order?",
+                answer: "For celebrations, treat yourself! Our <strong>Pouilly-Fumé</strong> is elegant and special—Loire Valley prestige. The <strong>Presqu'ile Chardonnay</strong> from Santa Barbara is luxurious and complex. For red, the <strong>Bordeaux Supérieur</strong> has that classic celebratory feel. Pair any with our cheese selection for a proper toast!",
+                category: "service",
+                icon: "🎉"
+            },
+            {
+                question: "What's good for a first date?",
+                answer: "Something approachable and easy to discuss! The <strong>Rosé</strong> is universally loved and safe. The <strong>Côtes du Rhône</strong> is interesting enough to spark conversation (talk about the GSM blend!). Avoid anything too challenging or polarizing. And definitely use the 1oz tastes to sample together—it's interactive and fun!",
+                category: "service",
+                icon: "💕"
+            },
+            {
+                question: "I'm here with friends who all want different things—what can we share?",
+                answer: "The Enomatic system is perfect for groups! Everyone can sample different wines at their own pace. For sharing by the glass: <strong>Rosé</strong> and <strong>Côtes du Rhône</strong> are crowd-pleasers that most people enjoy. Get a cheese board to share—it pairs with almost everything on our menu!",
+                category: "service",
+                icon: "👯"
+            },
+            {
+                question: "What would you recommend for a rainy afternoon?",
+                answer: "Cozy weather calls for something warming! The <strong>Côtes du Rhône</strong> with its spice and dark fruit is perfect. Or the <strong>Bordeaux Supérieur</strong>—mellow, soft, contemplative. Pair with our duck rillettes or a rich cheese like Ewephoria. Sometimes weather sets the perfect mood for certain wines!",
+                category: "service",
+                icon: "🌧️"
+            },
+            {
+                question: "I'm just here for a quick glass—what's reliable?",
+                answer: "Can't go wrong with our <strong>Pinot Grigio</strong> (white) or <strong>Montepulciano d'Abruzzo</strong> (red)—both are crowd-pleasers that deliver exactly what you expect. No surprises, just solid, enjoyable wines. Sometimes you don't want an adventure, you just want a good glass. We get it!",
+                category: "service",
+                icon: "⏱️"
+            }
+        ];
+
+        // Render FAQ cards
+        function renderFAQCards() {
+            const grid = document.getElementById('faqGrid');
+            grid.innerHTML = faqs.map((faq, index) => `
+                <div class="faq-card" data-category="${faq.category}" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        <div class="faq-icon">${faq.icon}</div>
+                        <div class="faq-question-text">${faq.question}</div>
+                        <div class="faq-expand-icon">▼</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            ${faq.answer}
+                            <div class="faq-category-badge">${faq.category}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Toggle FAQ card expansion
+        function toggleFAQ(card) {
+            // Close any other open cards (optional - remove these lines if you want multiple open)
+            document.querySelectorAll('.faq-card.expanded').forEach(c => {
+                if (c !== card) c.classList.remove('expanded');
+            });
+
+            card.classList.toggle('expanded');
+
+            // Update the character's speech bubble with this question
+            if (card.classList.contains('expanded')) {
+                const questionText = card.querySelector('.faq-question-text').textContent;
+                document.getElementById('currentQuestion').textContent = questionText;
+            }
+        }
+
+        // Filter FAQs by category
+        function filterFAQs(category, btn) {
+            // Update active button
+            document.querySelectorAll('.faq-filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Filter cards
+            document.querySelectorAll('.faq-card').forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Show random question in speech bubble
+        function showRandomQuestion() {
+            const randomFaq = faqs[Math.floor(Math.random() * faqs.length)];
+            const questionEl = document.getElementById('currentQuestion');
+
+            // Animate out
+            questionEl.style.opacity = '0';
+            questionEl.style.transform = 'translateY(-10px)';
+
+            setTimeout(() => {
+                questionEl.textContent = randomFaq.question;
+                questionEl.style.opacity = '1';
+                questionEl.style.transform = 'translateY(0)';
+            }, 300);
+        }
+
         // Initialize all content when page loads
         document.addEventListener('DOMContentLoaded', function() {
             renderWineCards();
@@ -5678,6 +6569,7 @@
             renderPrintCards();
             initializeFlashcards();
             initOnlineFlashcards();
+            renderFAQCards();
         });
     </script>
 </body>
