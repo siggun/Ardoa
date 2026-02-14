@@ -37,7 +37,7 @@
 
         body {
             font-family: 'Crimson Text', Georgia, serif;
-            background-color: var(--midnight);
+            background: var(--midnight);
             color: var(--bone);
             line-height: 1.7;
             min-height: 100%;
@@ -45,27 +45,14 @@
             padding: 0;
         }
 
-        /* Background layer - uses real DOM element for iOS Safari compatibility */
+        /* Background layer - kept for fallback but hidden (background now on body) */
         .background-layer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 0;
-            pointer-events: none;
-            background: linear-gradient(180deg,
-                var(--midnight) 0%,
-                var(--deep-purple) 30%,
-                var(--wine-blood) 70%,
-                var(--midnight) 100%);
+            display: none;
         }
 
-        /* Content layer - uses isolation for iOS Safari stacking context (translate3d conflicts with sticky/backdrop-filter) */
+        /* Content layer - no stacking tricks needed when background is on body */
         .content-layer {
             position: relative;
-            z-index: 1;
-            isolation: isolate;
         }
 
         /* Header with Logo */
@@ -186,20 +173,13 @@
             position: relative;
         }
 
-        /* Section Styling - opacity-only animation for iOS Safari compatibility */
+        /* Section Styling - no animation to avoid iOS Safari opacity bugs */
         section {
             display: none;
-            opacity: 1;
         }
 
         section.active {
             display: block;
-            animation: fadeIn 0.4s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         /* Gothic Section Headers */
@@ -274,7 +254,7 @@
 
         /* Gothic Wine Cards */
         .wine-card {
-            background: linear-gradient(145deg, rgba(26, 16, 37, 0.9), rgba(10, 10, 15, 0.95));
+            background: linear-gradient(145deg, #1a1025, #0b0b10);
             border: 1px solid rgba(196, 168, 117, 0.2);
             border-radius: 0;
             box-shadow:
@@ -445,7 +425,7 @@
 
         /* Gothic Beer Cards */
         .beer-card {
-            background: linear-gradient(145deg, rgba(26, 16, 37, 0.9), rgba(10, 10, 15, 0.95));
+            background: linear-gradient(145deg, #1a1025, #0b0b10);
             border: 1px solid rgba(196, 168, 117, 0.2);
             border-radius: 0;
             box-shadow:
@@ -906,7 +886,7 @@
         }
 
         .food-card {
-            background: linear-gradient(145deg, rgba(26, 16, 37, 0.9), rgba(10, 10, 15, 0.95));
+            background: linear-gradient(145deg, #1a1025, #0b0b10);
             border: 1px solid rgba(196, 168, 117, 0.15);
             border-radius: 0;
             box-shadow: 0 4px 20px rgba(0,0,0,0.4);
