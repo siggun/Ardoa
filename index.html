@@ -262,18 +262,6 @@
                 inset 0 1px 0 rgba(196, 168, 117, 0.1);
             overflow: hidden;
             transition: box-shadow 0.4s ease, border-color 0.4s ease;
-            position: relative;
-        }
-
-        .wine-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--pale-gold), transparent);
-            opacity: 0.5;
         }
 
         .wine-card:hover {
@@ -290,24 +278,24 @@
         }
 
         .wine-card.red .wine-card-header {
-            background: linear-gradient(135deg, rgba(107, 28, 46, 0.8), rgba(74, 14, 26, 0.9));
-            border-bottom: 1px solid rgba(139, 42, 64, 0.5);
+            background: linear-gradient(135deg, #551c2e, #3e0e1a);
+            border-bottom: 1px solid #462a30;
         }
         .wine-card.white .wine-card-header {
-            background: linear-gradient(135deg, rgba(139, 115, 85, 0.7), rgba(107, 87, 60, 0.8));
-            border-bottom: 1px solid rgba(196, 168, 117, 0.4);
+            background: linear-gradient(135deg, #5a4a37, #443b28);
+            border-bottom: 1px solid #5e4e3a;
         }
         .wine-card.rose .wine-card-header {
-            background: linear-gradient(135deg, rgba(154, 107, 122, 0.7), rgba(120, 80, 95, 0.8));
-            border-bottom: 1px solid rgba(180, 130, 150, 0.4);
+            background: linear-gradient(135deg, #5e4350, #3e2a32);
+            border-bottom: 1px solid #5a4050;
         }
         .wine-card.orange .wine-card-header {
-            background: linear-gradient(135deg, rgba(139, 90, 43, 0.7), rgba(100, 65, 30, 0.8));
-            border-bottom: 1px solid rgba(170, 120, 60, 0.4);
+            background: linear-gradient(135deg, #573b1e, #362316);
+            border-bottom: 1px solid #55401e;
         }
         .wine-card.sparkling .wine-card-header {
-            background: linear-gradient(135deg, rgba(196, 168, 117, 0.7), rgba(139, 115, 85, 0.8));
-            border-bottom: 1px solid rgba(220, 200, 150, 0.4);
+            background: linear-gradient(135deg, #7a6440, #564a38);
+            border-bottom: 1px solid #6e6040;
         }
 
         .wine-card h3 {
@@ -326,7 +314,7 @@
 
         .wine-card-body {
             padding: 1.5rem;
-            background: rgba(10, 10, 15, 0.5);
+            background: #05050a;
         }
 
         .wine-detail {
@@ -354,7 +342,7 @@
             font-size: 0.9rem;
             margin-top: 0.25rem;
             padding: 0.5rem 0.75rem;
-            background: rgba(74, 14, 26, 0.3);
+            background: #1a0a10;
             border-radius: 0;
             border-left: 2px solid var(--pale-gold);
         }
@@ -396,7 +384,7 @@
             gap: 0.5rem;
             margin-top: 0.5rem;
             padding: 0.75rem;
-            background: rgba(26, 16, 37, 0.5);
+            background: #0d0813;
             border: 1px solid rgba(196, 168, 117, 0.1);
         }
 
@@ -433,18 +421,6 @@
                 inset 0 1px 0 rgba(196, 168, 117, 0.1);
             overflow: hidden;
             transition: box-shadow 0.4s ease, border-color 0.4s ease;
-            position: relative;
-        }
-
-        .beer-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--pale-gold), transparent);
-            opacity: 0.5;
         }
 
         .beer-card:hover {
@@ -461,20 +437,20 @@
         }
 
         .beer-card.ale .beer-card-header {
-            background: linear-gradient(135deg, rgba(139, 69, 19, 0.8), rgba(101, 50, 14, 0.9));
-            border-bottom: 1px solid rgba(160, 82, 45, 0.5);
+            background: linear-gradient(135deg, #572c10, #3a220a);
+            border-bottom: 1px solid #50291d;
         }
         .beer-card.lager .beer-card-header {
-            background: linear-gradient(135deg, rgba(218, 165, 32, 0.7), rgba(184, 134, 11, 0.8));
-            border-bottom: 1px solid rgba(240, 192, 64, 0.4);
+            background: linear-gradient(135deg, #8a6818, #5c440c);
+            border-bottom: 1px solid #6e5020;
         }
         .beer-card.ipa .beer-card-header {
-            background: linear-gradient(135deg, rgba(34, 139, 34, 0.7), rgba(25, 100, 25, 0.8));
-            border-bottom: 1px solid rgba(50, 205, 50, 0.4);
+            background: linear-gradient(135deg, #1a5718, #123214);
+            border-bottom: 1px solid #1e6618;
         }
         .beer-card.other .beer-card-header {
-            background: linear-gradient(135deg, rgba(112, 128, 144, 0.7), rgba(80, 90, 100, 0.8));
-            border-bottom: 1px solid rgba(160, 160, 160, 0.4);
+            background: linear-gradient(135deg, #3a4248, #2a2e34);
+            border-bottom: 1px solid #484e54;
         }
 
         .beer-card h3 {
@@ -500,7 +476,7 @@
 
         .beer-card-body {
             padding: 1.5rem;
-            background: rgba(10, 10, 15, 0.5);
+            background: #05050a;
         }
 
         .beer-detail {
@@ -528,7 +504,7 @@
             gap: 0.5rem;
             margin-top: 0.5rem;
             padding: 0.75rem;
-            background: rgba(26, 16, 37, 0.5);
+            background: #0d0813;
             border: 1px solid rgba(196, 168, 117, 0.1);
         }
 
@@ -904,12 +880,12 @@
             color: var(--bone);
         }
 
-        .food-card.cheese .food-card-header { background: linear-gradient(135deg, rgba(139, 115, 85, 0.6), rgba(100, 80, 55, 0.7)); }
-        .food-card.charcuterie .food-card-header { background: linear-gradient(135deg, rgba(107, 28, 46, 0.6), rgba(74, 14, 26, 0.7)); }
-        .food-card.flatbread .food-card-header { background: linear-gradient(135deg, rgba(139, 90, 43, 0.6), rgba(100, 60, 25, 0.7)); }
-        .food-card.tapas .food-card-header { background: linear-gradient(135deg, rgba(60, 80, 40, 0.6), rgba(40, 55, 25, 0.7)); }
-        .food-card.pate .food-card-header { background: linear-gradient(135deg, rgba(100, 75, 40, 0.6), rgba(70, 50, 25, 0.7)); }
-        .food-card.dessert .food-card-header { background: linear-gradient(135deg, rgba(120, 40, 80, 0.6), rgba(80, 20, 50, 0.7)); }
+        .food-card.cheese .food-card-header { background: linear-gradient(135deg, #4a3e2c, #302818); }
+        .food-card.charcuterie .food-card-header { background: linear-gradient(135deg, #401220, #2a0c14); }
+        .food-card.flatbread .food-card-header { background: linear-gradient(135deg, #563a1e, #362010); }
+        .food-card.tapas .food-card-header { background: linear-gradient(135deg, #1e2c16, #161e0e); }
+        .food-card.pate .food-card-header { background: linear-gradient(135deg, #3a2e18, #241a0e); }
+        .food-card.dessert .food-card-header { background: linear-gradient(135deg, #4a1a32, #2e0e1e); }
 
         .food-card h3 {
             font-size: 1.1rem;
@@ -948,7 +924,7 @@
         }
 
         .food-card .wine-pairings {
-            background: rgba(74, 14, 26, 0.3);
+            background: #1a0a10;
             padding: 0.75rem;
             border-radius: 5px;
             border-left: 3px solid var(--pale-gold);
@@ -5275,6 +5251,13 @@
             `).join('');
         }
 
+        // Force iOS Safari to repaint a section's card content
+        function forceRepaint(el) {
+            el.style.display = 'none';
+            el.offsetHeight; // trigger reflow
+            el.style.display = '';
+        }
+
         // Section Navigation - with iOS Safari repaint trigger
         function showSection(sectionId, btn) {
             document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
@@ -5282,8 +5265,9 @@
             const section = document.getElementById(sectionId);
             section.classList.add('active');
             btn.classList.add('active');
-            // Force repaint for iOS Safari
-            section.offsetHeight;
+            // Force repaint for iOS Safari - toggle display to flush compositor
+            forceRepaint(section);
+            window.scrollTo(0, 0);
         }
 
         // Render Wine Cards
@@ -6270,6 +6254,14 @@
                 initializeFlashcards();
                 initOnlineFlashcards();
                 renderFAQCards();
+
+                // Force iOS Safari to paint dynamically inserted card content.
+                // Without this, innerHTML content may remain invisible because
+                // the compositor never schedules a paint for the new layers.
+                var active = document.querySelector('section.active');
+                if (active) {
+                    forceRepaint(active);
+                }
             } catch (e) {
                 console.error('Initialization error:', e);
             }
