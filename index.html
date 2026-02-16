@@ -3029,6 +3029,203 @@
             }
         }
 
+        /* ==================== PRONUNCIATION GUIDE ==================== */
+        .pronunciation-guide {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .pronunciation-guide h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            text-align: center;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .pronunciation-guide .section-subtitle {
+            text-align: center;
+            color: var(--mist);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .pron-group {
+            margin-bottom: 2rem;
+        }
+
+        .pron-group-title {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #e8e0d8;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .pron-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.5rem 0.75rem;
+            border-bottom: 1px solid #f0ebe5;
+        }
+
+        .pron-item:last-child {
+            border-bottom: none;
+        }
+
+        .pron-word {
+            font-weight: 600;
+            color: var(--bone);
+            font-size: 1rem;
+        }
+
+        .pron-phonetic {
+            font-style: italic;
+            color: #888;
+            font-size: 0.95rem;
+            text-align: right;
+        }
+
+        @media (max-width: 480px) {
+            .pron-item {
+                flex-direction: column;
+                gap: 0.15rem;
+            }
+
+            .pron-phonetic {
+                text-align: left;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ==================== INVENTORY CHECKLIST ==================== */
+        .checklist-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .checklist-container h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            text-align: center;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .checklist-container .section-subtitle {
+            text-align: center;
+            color: var(--mist);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .checklist-actions {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .checklist-actions button {
+            font-family: 'Cinzel', serif;
+            background: #4a1a28;
+            color: #ffffff;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+        }
+
+        .checklist-actions button:hover {
+            background: #6b2d3e;
+        }
+
+        .checklist-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .checklist-group-title {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #e8e0d8;
+            padding-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .checklist-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .checklist-table th {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--mist);
+            padding: 0.4rem 0.5rem;
+            text-align: center;
+            border-bottom: 1px solid #e8e0d8;
+        }
+
+        .checklist-table th:first-child {
+            text-align: left;
+        }
+
+        .checklist-table td {
+            padding: 0.4rem 0.5rem;
+            border-bottom: 1px solid #f0ebe5;
+            font-size: 0.95rem;
+            color: var(--bone);
+        }
+
+        .checklist-table td:not(:first-child) {
+            text-align: center;
+            width: 80px;
+        }
+
+        .checklist-table input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #4a1a28;
+        }
+
+        @media (max-width: 480px) {
+            .checklist-table td:not(:first-child) {
+                width: 55px;
+            }
+
+            .checklist-table th {
+                font-size: 0.6rem;
+            }
+
+            .checklist-table td {
+                font-size: 0.85rem;
+                padding: 0.35rem 0.3rem;
+            }
+
+            .checklist-table input[type="checkbox"] {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
         /* ==================== THEME TOGGLE BUTTON ==================== */
         .theme-toggle {
             position: absolute;
@@ -3658,6 +3855,24 @@
             }
         }
 
+        /* Dark mode - Pronunciation Guide */
+        [data-theme="dark"] .pron-group-title { color: #c4a875; border-bottom-color: #2a1a25; }
+        [data-theme="dark"] .pron-item { border-bottom-color: #1a1025; }
+        [data-theme="dark"] .pron-word { color: #e8e4dc; }
+        [data-theme="dark"] .pron-phonetic { color: #b8b4ac; }
+        [data-theme="dark"] .pronunciation-guide h2 { color: #c4a875; }
+        [data-theme="dark"] .pronunciation-guide .section-subtitle { color: #b8b4ac; }
+
+        /* Dark mode - Inventory Checklist */
+        [data-theme="dark"] .checklist-container h2 { color: #c4a875; }
+        [data-theme="dark"] .checklist-container .section-subtitle { color: #b8b4ac; }
+        [data-theme="dark"] .checklist-group-title { color: #c4a875; border-bottom-color: #2a1a25; }
+        [data-theme="dark"] .checklist-table th { color: #b8b4ac; border-bottom-color: #2a1a25; }
+        [data-theme="dark"] .checklist-table td { color: #e8e4dc; border-bottom-color: #1a1025; }
+        [data-theme="dark"] .checklist-actions button { background: #c4a875; color: #0a0a0f; }
+        [data-theme="dark"] .checklist-actions button:hover { background: #d4c4a8; }
+        [data-theme="dark"] .checklist-table input[type="checkbox"] { accent-color: #c4a875; }
+
     </style>
 </head>
 <body>
@@ -3716,6 +3931,8 @@
         <button onclick="showSection('enomatic', this)">Enomatic System</button>
         <button onclick="showSection('printcards', this)">Print Cards</button>
         <button onclick="showSection('faq', this)">Wine FAQ</button>
+        <button onclick="showSection('pronunciations', this)">Pronunciations</button>
+        <button onclick="showSection('checklist', this)">Opening Checklist</button>
     </nav>
 
     <main>
@@ -4699,6 +4916,31 @@
                 <!-- FAQ cards will be inserted here by JavaScript -->
             </div>
         </section>
+
+        <!-- Pronunciation Guide Section -->
+        <section id="pronunciations">
+            <div class="pronunciation-guide">
+                <h2>Pronunciation Guide</h2>
+                <p class="section-subtitle">How to say it like you mean it</p>
+                <div id="pronunciationContent">
+                    <!-- Pronunciation groups inserted by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Opening Checklist Section -->
+        <section id="checklist">
+            <div class="checklist-container">
+                <h2>Opening Checklist</h2>
+                <p class="section-subtitle">Verify everything is stocked and ready for service</p>
+                <div class="checklist-actions">
+                    <button onclick="resetChecklist()">Reset All</button>
+                </div>
+                <div id="checklistContent">
+                    <!-- Checklist groups inserted by JavaScript -->
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -5495,7 +5737,7 @@
                 origin: "Vermont, USA",
                 type: "Cow, Firm, Habanero",
                 description: "Sharp Vermont cheddar with smoky undertones and a habanero kick. The heat builds gradually while the smoke adds depth. Bold and memorable.",
-                pairings: "Orsa Cabernet Sauvignon, The Mighty Spicy flatbread - for those who like heat!"
+                pairings: "Orsa Cabernet Sauvignon, Les Cousins L'Inconscient - bold wines to match the bold heat!"
             },
             {
                 name: "Mimolette",
@@ -5683,6 +5925,13 @@
                 pronunciation: "ahn-tee-PAH-stoh",
                 description: "Italian-style pickled vegetables including artichokes, peppers, and more. Tangy, crunchy, and bright. A refreshing palate cleanser between rich bites.",
                 pairings: "Chianti Classico, Montepulciano d'Abruzzo, Marola Albariño, Pinot Grigio"
+            },
+            {
+                name: "Whipped Honey Goat Cheese",
+                price: "TBD",
+                type: "Small Bowl, Topped with Walnuts, Dried Cranberries & Honey",
+                description: "Light, airy whipped goat cheese served in a small bowl and topped with crunchy walnuts, sweet-tart dried cranberries, and a drizzle of honey. Creamy, sweet, tangy, and texturally delightful.",
+                pairings: "Braunewell Scheurebe, Presqu'ile Chardonnay, Rosé - aromatic whites complement the honey and tangy goat cheese"
             }
         ];
 
@@ -6231,7 +6480,8 @@
                 'Pinot Noir', 'Pinot Grigio', 'Pinot Gris', 'Tempranillo', 'Barbera',
                 'Carmenère', 'Carmenere', 'Riesling', 'Chardonnay', 'Picpoul',
                 'Sauvignon Blanc', 'Sauvignon', 'Grenache', 'Syrah', 'Merlot',
-                'Gamay', 'Sangiovese', 'Nebbiolo', 'Mourvèdre', 'Mourvedre'
+                'Gamay', 'Sangiovese', 'Nebbiolo', 'Mourvèdre', 'Mourvedre',
+                'Albariño', 'Albarino', 'Frappato', 'Folle Blanche', 'Scheurebe'
             ];
 
             let cleanName = wineName;
@@ -7039,6 +7289,182 @@
             }
         }
 
+        // Render Pronunciation Guide
+        function renderPronunciationGuide() {
+            const container = document.getElementById('pronunciationContent');
+
+            // Collect pronunciations from all data sources
+            const groups = [
+                {
+                    title: 'Wines & Regions',
+                    items: wines.filter(w => w.pronunciation).map(w => ({
+                        word: w.name + ' ' + w.vintage,
+                        phonetic: w.pronunciation
+                    }))
+                },
+                {
+                    title: 'Cheeses',
+                    items: cheeses.filter(c => c.pronunciation).map(c => ({
+                        word: c.name,
+                        phonetic: c.pronunciation
+                    }))
+                },
+                {
+                    title: 'Charcuterie',
+                    items: charcuterie.filter(c => c.pronunciation).map(c => ({
+                        word: c.name,
+                        phonetic: c.pronunciation
+                    }))
+                },
+                {
+                    title: 'Tapas & Dips',
+                    items: tapas.filter(t => t.pronunciation).map(t => ({
+                        word: t.name,
+                        phonetic: t.pronunciation
+                    }))
+                },
+                {
+                    title: 'Pates & Spreads',
+                    items: pates.filter(p => p.pronunciation).map(p => ({
+                        word: p.name,
+                        phonetic: p.pronunciation
+                    }))
+                },
+                {
+                    title: 'Desserts',
+                    items: desserts.filter(d => d.pronunciation).map(d => ({
+                        word: d.name,
+                        phonetic: d.pronunciation
+                    }))
+                }
+            ];
+
+            // Also add common wine terms
+            const wineTerms = [
+                { word: 'Sommelier', phonetic: 'soh-mel-YAY' },
+                { word: 'Terroir', phonetic: 'teh-RWAHR' },
+                { word: 'Cuvée', phonetic: 'koo-VAY' },
+                { word: 'Appellation', phonetic: 'ah-peh-lah-SYOHN' },
+                { word: 'Tannin', phonetic: 'TAN-in' },
+                { word: 'Brut', phonetic: 'BROOT' },
+                { word: 'Demi-sec', phonetic: 'deh-mee-SEK' },
+                { word: 'Blanc de Blancs', phonetic: 'blahnk duh BLAHNK' },
+                { word: 'Crémant', phonetic: 'kray-MAHN' },
+                { word: 'Mise en bouteille', phonetic: 'meez ahn boo-TAY' },
+                { word: 'Côtes du Rhône', phonetic: 'koht doo ROHN' },
+                { word: 'Château', phonetic: 'shah-TOH' },
+                { word: 'Domaine', phonetic: 'doh-MEHN' },
+                { word: 'Enomatic', phonetic: 'ee-noh-MAT-ik' }
+            ];
+            groups.push({ title: 'Common Wine Terms', items: wineTerms });
+
+            container.innerHTML = groups.filter(g => g.items.length > 0).map(group => `
+                <div class="pron-group">
+                    <h3 class="pron-group-title">${group.title}</h3>
+                    ${group.items.map(item => `
+                        <div class="pron-item">
+                            <span class="pron-word">${item.word}</span>
+                            <span class="pron-phonetic">${item.phonetic}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `).join('');
+        }
+
+        // Render Opening Checklist
+        function renderChecklist() {
+            const container = document.getElementById('checklistContent');
+
+            // Build checklist groups from all data + supplies
+            const checklistGroups = [
+                {
+                    title: 'Wines (Enomatic)',
+                    items: wines.map(w => w.name + ' ' + w.vintage)
+                },
+                {
+                    title: 'Beers & Cider',
+                    items: beers.map(b => b.name)
+                },
+                {
+                    title: 'Cheeses',
+                    items: cheeses.map(c => c.name)
+                },
+                {
+                    title: 'Charcuterie',
+                    items: charcuterie.map(c => c.name)
+                },
+                {
+                    title: 'Flatbread Toppings',
+                    items: ['Smoked Chili Cheddar (flatbread)', 'Gruyère (flatbread)', 'Black Truffle Goat (flatbread)', 'Chorizo', 'Prosciutto', 'Mushrooms', 'Olives', 'Sun Dried Tomatoes', 'Arugula', 'Fig Jam']
+                },
+                {
+                    title: 'Tapas & Dips',
+                    items: tapas.map(t => t.name)
+                },
+                {
+                    title: 'Pates & Spreads',
+                    items: pates.map(p => p.name)
+                },
+                {
+                    title: 'Desserts',
+                    items: desserts.map(d => d.name)
+                },
+                {
+                    title: 'Kitchen & Prep Supplies',
+                    items: ['Baguettes', 'Dijon Mustard', 'Paprika', 'Fig Jam', 'Honey', 'Walnuts', 'Dried Cranberries', 'Olives', 'Mushrooms']
+                },
+                {
+                    title: 'Service Supplies',
+                    items: ['Gloves', 'Toilet Paper', 'Paper Towels', 'Wine Bags']
+                }
+            ];
+
+            // Load saved state from localStorage
+            const saved = JSON.parse(localStorage.getItem('ardoa-checklist') || '{}');
+
+            container.innerHTML = checklistGroups.map((group, gi) => `
+                <div class="checklist-group">
+                    <h3 class="checklist-group-title">${group.title}</h3>
+                    <table class="checklist-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Stocked</th>
+                                <th>Backup</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${group.items.map((item, ii) => {
+                                const key = gi + '-' + ii;
+                                const stocked = saved[key + '-s'] ? 'checked' : '';
+                                const backup = saved[key + '-b'] ? 'checked' : '';
+                                return `<tr>
+                                    <td>${item}</td>
+                                    <td><input type="checkbox" ${stocked} onchange="saveChecklist('${key}-s', this.checked)"></td>
+                                    <td><input type="checkbox" ${backup} onchange="saveChecklist('${key}-b', this.checked)"></td>
+                                </tr>`;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `).join('');
+        }
+
+        function saveChecklist(key, value) {
+            const saved = JSON.parse(localStorage.getItem('ardoa-checklist') || '{}');
+            if (value) {
+                saved[key] = true;
+            } else {
+                delete saved[key];
+            }
+            localStorage.setItem('ardoa-checklist', JSON.stringify(saved));
+        }
+
+        function resetChecklist() {
+            localStorage.removeItem('ardoa-checklist');
+            renderChecklist();
+        }
+
         function initTheme() {
             const saved = localStorage.getItem('ardoa-theme');
             if (saved === 'dark') {
@@ -7059,6 +7485,8 @@
                 initializeFlashcards();
                 initOnlineFlashcards();
                 renderFAQCards();
+                renderPronunciationGuide();
+                renderChecklist();
 
                 // Force iOS Safari to paint dynamically inserted card content.
                 // Without this, innerHTML content may remain invisible because
