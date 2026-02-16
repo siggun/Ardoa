@@ -1939,7 +1939,7 @@
             }
 
             /* Hide card grids that aren't selected for printing */
-            [data-print-hide="true"] {
+            #printcards [data-print-hide="true"] {
                 display: none !important;
             }
 
@@ -2146,6 +2146,11 @@
 
         .flashcard-front.wine-orange {
             background: linear-gradient(135deg, #CC7722, #A66000);
+        }
+
+        .flashcard-front.wine-sparkling {
+            background: linear-gradient(135deg, #8FBCCC, #6E9DB2);
+            color: var(--charcoal);
         }
 
         .flashcard-front.cheese {
@@ -3522,6 +3527,29 @@
             background: linear-gradient(135deg, #6b1c2e, #4a0e1a);
         }
 
+        [data-theme="dark"] .flashcard-front.wine-white {
+            background: linear-gradient(135deg, #DAA520, #B8860B);
+        }
+
+        [data-theme="dark"] .flashcard-front.wine-rose {
+            background: linear-gradient(135deg, #E8B4B8, #D4919A);
+            color: #1a1025;
+        }
+
+        [data-theme="dark"] .flashcard-front.wine-orange {
+            background: linear-gradient(135deg, #CC7722, #A66000);
+        }
+
+        [data-theme="dark"] .flashcard-front.wine-sparkling {
+            background: linear-gradient(135deg, #8FBCCC, #6E9DB2);
+            color: #1a1025;
+        }
+
+        [data-theme="dark"] .flashcard-front.cheese {
+            background: linear-gradient(135deg, #F4D03F, #C9A227);
+            color: #1a1025;
+        }
+
         /* Dark mode - Model header */
         [data-theme="dark"] .model-header {
             background: linear-gradient(135deg, #6b1c2e 0%, #4a0e1a 100%);
@@ -4628,8 +4656,8 @@
                 <p>Print study cards to review away from your computer. Choose which set to print below.</p>
                 <div class="print-btn-group">
                     <button class="print-btn" onclick="printCards('all')">Print All Cards</button>
-                    <button class="print-btn" onclick="printCards('drinks')">Print Drinks Only</button>
-                    <button class="print-btn" onclick="printCards('food')">Print Food Only</button>
+                    <button class="print-btn" onclick="printCards('drinks')">Print Drinks Cards</button>
+                    <button class="print-btn" onclick="printCards('food')">Print Food Cards</button>
                 </div>
             </div>
 
@@ -6242,7 +6270,10 @@
             const qTasting = document.getElementById('q-tasting').checked;
             const qFood = document.getElementById('q-food').checked;
 
-            wines.forEach(wine => {
+            // Only quiz on wines currently on the list (exclude sparkling wines not in Enomatic)
+            const quizWines = wines.filter(w => w.type !== 'sparkling');
+
+            quizWines.forEach(wine => {
                 const wineDisplay = `${wine.name} ${wine.vintage}`;
 
                 if (qGrape) {
@@ -6274,7 +6305,7 @@
                 }
                 if (qTasting) {
                     // Generate multiple choice tasting notes question
-                    const otherWines = wines.filter(w => w.name !== wine.name);
+                    const otherWines = quizWines.filter(w => w.name !== wine.name);
                     const wrongAnswers = shuffleArray(otherWines).slice(0, 3).map(w => w.tasting);
                     const allAnswers = shuffleArray([wine.tasting, ...wrongAnswers]);
 
@@ -6536,6 +6567,7 @@
                 if (card.wineType === 'white') front.classList.add('wine-white');
                 else if (card.wineType === 'rose') front.classList.add('wine-rose');
                 else if (card.wineType === 'orange') front.classList.add('wine-orange');
+                else if (card.wineType === 'sparkling') front.classList.add('wine-sparkling');
             } else {
                 front.classList.add('cheese');
             }
