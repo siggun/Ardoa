@@ -1625,6 +1625,13 @@
             margin-bottom: 1rem;
         }
 
+        .print-btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
         .print-btn {
             background: var(--burgundy);
             color: white;
@@ -1638,6 +1645,11 @@
 
         .print-btn:hover {
             background: var(--burgundy-dark);
+        }
+
+        /* Hide print-only elements on screen */
+        .print-only {
+            display: none !important;
         }
 
         .print-category-title {
@@ -1873,18 +1885,29 @@
 
         /* Print Styles - Ink efficient, compact */
         @media print {
-            * {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
+            /* Force white backgrounds - no ink wasted on backgrounds */
+            *, *::before, *::after {
+                background: transparent !important;
+                color: #000 !important;
+                box-shadow: none !important;
+                text-shadow: none !important;
             }
 
-            body {
-                background: white;
+            html, body {
+                background: white !important;
                 font-size: 8pt;
                 line-height: 1.3;
             }
 
-            header, nav, footer, .print-intro, .filter-bar, .quiz-settings, .flashcard-controls {
+            /* Reset dark mode attributes for print */
+            [data-theme="dark"],
+            [data-theme="dark"] * {
+                background: transparent !important;
+                color: #000 !important;
+            }
+
+            header, nav, footer, .print-intro, .filter-bar, .quiz-settings, .flashcard-controls,
+            .background-layers, .fog-layer, .vine-left, .vine-right, .theme-toggle {
                 display: none !important;
             }
 
@@ -1906,13 +1929,28 @@
                 display: block !important;
             }
 
+            /* Show print-only elements when printing */
+            .print-only {
+                display: block !important;
+            }
+
+            .print-only.print-cards-grid {
+                display: grid !important;
+            }
+
+            /* Hide card grids that aren't selected for printing */
+            [data-print-hide="true"] {
+                display: none !important;
+            }
+
             .print-category-title {
                 font-size: 10pt;
                 font-weight: bold;
-                border-bottom: 1px solid #000;
+                border-bottom: 1px solid #000 !important;
                 margin: 8pt 0 4pt 0;
                 padding-bottom: 2pt;
                 page-break-after: avoid;
+                color: #000 !important;
             }
 
             .print-category-title:first-of-type {
@@ -1926,40 +1964,21 @@
             }
 
             .print-card {
-                border: 0.5pt solid #999;
+                border: 0.5pt solid #aaa !important;
                 page-break-inside: avoid;
                 break-inside: avoid;
-                background: white !important;
-                box-shadow: none;
                 border-radius: 0;
             }
 
             .print-card-header {
-                background: none !important;
-                color: black !important;
                 padding: 3pt 5pt;
-                border-bottom: 0.5pt solid #999;
-            }
-
-            .print-card.red .print-card-header,
-            .print-card.white .print-card-header,
-            .print-card.rose .print-card-header,
-            .print-card.orange .print-card-header,
-            .print-card.cheese .print-card-header,
-            .print-card.charcuterie .print-card-header,
-            .print-card.other-food .print-card-header,
-            .print-card.beer.ale .print-card-header,
-            .print-card.beer.lager .print-card-header,
-            .print-card.beer.ipa .print-card-header,
-            .print-card.beer.other .print-card-header {
-                background: none !important;
-                color: black !important;
+                border-bottom: 0.5pt solid #aaa !important;
             }
 
             .print-position {
                 font-size: 9pt;
                 font-weight: bold;
-                opacity: 0.6;
+                color: #555 !important;
                 margin-bottom: 1pt;
             }
 
@@ -1971,7 +1990,7 @@
 
             .print-card .subtitle {
                 font-size: 6pt;
-                color: #333;
+                color: #444 !important;
             }
 
             .print-card-body {
@@ -1990,7 +2009,6 @@
                 font-size: 6pt;
                 font-weight: bold;
                 text-transform: uppercase;
-                color: #000;
                 margin-bottom: 0;
                 display: inline;
             }
@@ -2001,7 +2019,6 @@
 
             .print-value {
                 font-size: 7pt;
-                color: #000;
                 display: inline;
                 line-height: 1.2;
             }
@@ -2009,18 +2026,17 @@
             .pairing-item {
                 margin-bottom: 1pt;
                 padding-left: 0;
-                border-left: none;
+                border-left: none !important;
                 font-size: 6pt;
             }
 
             .pairing-name {
                 font-weight: bold;
-                color: #000;
             }
 
             .pairing-reason {
                 font-size: 6pt;
-                color: #333;
+                color: #444 !important;
                 font-style: normal;
             }
 
@@ -3334,6 +3350,59 @@
 
         [data-theme="dark"] .quiz-option label { color: #e8e4dc; }
 
+        /* Dark mode - Quiz flashcard */
+        [data-theme="dark"] .flashcard {
+            background: #1a1025;
+            border-color: rgba(196, 168, 117, 0.3);
+        }
+
+        [data-theme="dark"] .flashcard-question {
+            color: #c4a875;
+        }
+
+        [data-theme="dark"] .flashcard-wine-name {
+            color: #e8e4dc;
+        }
+
+        [data-theme="dark"] .flashcard-wine-name small,
+        [data-theme="dark"] .flashcard-pronunciation {
+            color: rgba(232, 228, 220, 0.7);
+        }
+
+        [data-theme="dark"] .flashcard-answer {
+            color: #e8e4dc;
+        }
+
+        [data-theme="dark"] .flashcard-hint {
+            color: rgba(196, 168, 117, 0.6);
+        }
+
+        [data-theme="dark"] .flashcard-option {
+            background: rgba(26, 16, 37, 0.6);
+            border-color: rgba(196, 168, 117, 0.2);
+            color: #e8e4dc;
+        }
+
+        [data-theme="dark"] .flashcard-option:hover {
+            background: rgba(74, 14, 26, 0.4);
+            border-color: rgba(196, 168, 117, 0.4);
+        }
+
+        [data-theme="dark"] .flashcard-option.correct {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.2);
+        }
+
+        [data-theme="dark"] .flashcard-option.incorrect {
+            border-color: #dc3545;
+            background: rgba(220, 53, 69, 0.2);
+        }
+
+        [data-theme="dark"] .flashcard-option.correct-answer {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.25);
+        }
+
         /* Dark mode - Footer */
         [data-theme="dark"] footer {
             background: linear-gradient(180deg, transparent, rgba(10, 10, 15, 0.95));
@@ -4554,34 +4623,29 @@
         <section id="printcards">
             <div class="print-intro">
                 <h2>Printable Study Cards</h2>
-                <p>Print these cards to study away from your computer. Each card includes key information about grape, region, tasting notes, and winemaker.</p>
-                <button class="print-btn" onclick="window.print()">Print All Cards</button>
+                <p>Print study cards to review away from your computer. Choose which set to print below.</p>
+                <div class="print-btn-group">
+                    <button class="print-btn" onclick="printCards('all')">Print All Cards</button>
+                    <button class="print-btn" onclick="printCards('drinks')">Print Drinks Only</button>
+                    <button class="print-btn" onclick="printCards('food')">Print Food Only</button>
+                </div>
             </div>
 
-            <h3 class="print-category-title">Wine Cards</h3>
-            <div class="print-cards-grid" id="printWineGrid">
-                <!-- Wine print cards inserted by JavaScript -->
-            </div>
+            <!-- Card grids are hidden on screen, only shown when printing -->
+            <h3 class="print-category-title print-only" data-print-group="drinks">Wine Cards</h3>
+            <div class="print-cards-grid print-only" id="printWineGrid" data-print-group="drinks"></div>
 
-            <h3 class="print-category-title">Beer Cards</h3>
-            <div class="print-cards-grid" id="printBeerGrid">
-                <!-- Beer print cards inserted by JavaScript -->
-            </div>
+            <h3 class="print-category-title print-only" data-print-group="drinks">Beer Cards</h3>
+            <div class="print-cards-grid print-only" id="printBeerGrid" data-print-group="drinks"></div>
 
-            <h3 class="print-category-title">Cheese Cards</h3>
-            <div class="print-cards-grid" id="printCheeseGrid">
-                <!-- Cheese print cards inserted by JavaScript -->
-            </div>
+            <h3 class="print-category-title print-only" data-print-group="food">Cheese Cards</h3>
+            <div class="print-cards-grid print-only" id="printCheeseGrid" data-print-group="food"></div>
 
-            <h3 class="print-category-title">Charcuterie Cards</h3>
-            <div class="print-cards-grid" id="printCharcuterieGrid">
-                <!-- Charcuterie print cards inserted by JavaScript -->
-            </div>
+            <h3 class="print-category-title print-only" data-print-group="food">Charcuterie Cards</h3>
+            <div class="print-cards-grid print-only" id="printCharcuterieGrid" data-print-group="food"></div>
 
-            <h3 class="print-category-title">Flatbreads, Tapas & More</h3>
-            <div class="print-cards-grid" id="printOtherFoodGrid">
-                <!-- Other food print cards inserted by JavaScript -->
-            </div>
+            <h3 class="print-category-title print-only" data-print-group="food">Flatbreads, Tapas & More</h3>
+            <div class="print-cards-grid print-only" id="printOtherFoodGrid" data-print-group="food"></div>
         </section>
 
         <!-- FAQ Section -->
@@ -5688,6 +5752,21 @@
                     </div>
                 </div>
             `).join('');
+        }
+
+        // Print Cards - selective printing
+        function printCards(type) {
+            const items = document.querySelectorAll('#printcards [data-print-group]');
+            items.forEach(el => {
+                if (type === 'all') {
+                    el.removeAttribute('data-print-hide');
+                } else if (el.getAttribute('data-print-group') === type) {
+                    el.removeAttribute('data-print-hide');
+                } else {
+                    el.setAttribute('data-print-hide', 'true');
+                }
+            });
+            window.print();
         }
 
         // Render Print Cards
