@@ -3233,6 +3233,38 @@
             color: var(--bone);
         }
 
+        .checklist-checkbox {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .checklist-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #4a1a28;
+            cursor: pointer;
+        }
+
+        .checklist-checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--bone);
+            border-bottom: 1px solid #f0ebe5;
+        }
+
+        .checklist-checkbox-row input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #4a1a28;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
         @media (max-width: 480px) {
             .checklist-table td:not(:first-child) {
                 width: 80px;
@@ -3256,6 +3288,180 @@
             .checklist-counter .counter-value {
                 min-width: 20px;
                 font-size: 0.85rem;
+            }
+
+            .checklist-checkbox input[type="checkbox"] {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        /* ==================== TIMERS SECTION ==================== */
+        .timers-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .timers-container h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            text-align: center;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .timers-container .section-subtitle {
+            text-align: center;
+            color: var(--mist);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .timer-category {
+            margin-bottom: 2rem;
+        }
+
+        .timer-category-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid #e8e0d8;
+            padding-bottom: 0.4rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .timer-category-title {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .timer-add-btn {
+            font-family: 'Cinzel', serif;
+            background: #4a1a28;
+            color: #ffffff;
+            border: none;
+            padding: 0.4rem 1rem;
+            font-size: 0.7rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            touch-action: manipulation;
+        }
+
+        .timer-add-btn:hover {
+            background: #6b2d3e;
+        }
+
+        .timer-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .timer-card {
+            background: #f8f5f0;
+            border: 1px solid #e8e0d8;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .timer-card-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            color: var(--pale-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            min-width: 80px;
+        }
+
+        .timer-card-display {
+            font-family: 'Courier New', monospace;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--bone);
+            min-width: 90px;
+            text-align: center;
+        }
+
+        .timer-card-display.timer-alarm {
+            color: #c0392b;
+            animation: timerBlink 0.5s infinite;
+        }
+
+        @keyframes timerBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .timer-card-controls {
+            display: flex;
+            gap: 0.4rem;
+            flex-shrink: 0;
+        }
+
+        .timer-card-controls button {
+            width: 36px;
+            height: 36px;
+            border: 1px solid #4a1a28;
+            background: #4a1a28;
+            color: #ffffff;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+
+        .timer-card-controls button:hover {
+            background: #6b2d3e;
+        }
+
+        .timer-card-controls button.timer-remove {
+            background: #8B3A42;
+            border-color: #8B3A42;
+        }
+
+        .timer-card-controls button.timer-remove:hover {
+            background: #a04450;
+        }
+
+        .timer-empty {
+            color: var(--mist);
+            font-style: italic;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        @media (max-width: 480px) {
+            .timer-card {
+                padding: 0.75rem;
+            }
+
+            .timer-card-label {
+                font-size: 0.7rem;
+                min-width: 60px;
+            }
+
+            .timer-card-display {
+                font-size: 1.5rem;
+                min-width: 80px;
+            }
+
+            .timer-card-controls button {
+                width: 32px;
+                height: 32px;
+                font-size: 0.8rem;
             }
         }
 
@@ -3907,6 +4113,25 @@
         [data-theme="dark"] .checklist-counter button { background: #c4a875; color: #0a0a0f; border-color: #c4a875; }
         [data-theme="dark"] .checklist-counter button:hover { background: #d4c4a8; }
         [data-theme="dark"] .checklist-counter .counter-value { color: #e8e4dc; }
+        [data-theme="dark"] .checklist-checkbox input[type="checkbox"] { accent-color: #c4a875; }
+        [data-theme="dark"] .checklist-checkbox-row { color: #e8e4dc; border-bottom-color: #1a1025; }
+        [data-theme="dark"] .checklist-checkbox-row input[type="checkbox"] { accent-color: #c4a875; }
+
+        /* Dark mode - Timers */
+        [data-theme="dark"] .timers-container h2 { color: #c4a875; }
+        [data-theme="dark"] .timers-container .section-subtitle { color: #b8b4ac; }
+        [data-theme="dark"] .timer-category-header { border-bottom-color: #2a1a25; }
+        [data-theme="dark"] .timer-category-title { color: #c4a875; }
+        [data-theme="dark"] .timer-add-btn { background: #c4a875; color: #0a0a0f; }
+        [data-theme="dark"] .timer-add-btn:hover { background: #d4c4a8; }
+        [data-theme="dark"] .timer-card { background: #1a1025; border-color: #2a1a25; }
+        [data-theme="dark"] .timer-card-label { color: #c4a875; }
+        [data-theme="dark"] .timer-card-display { color: #e8e4dc; }
+        [data-theme="dark"] .timer-card-controls button { background: #c4a875; color: #0a0a0f; border-color: #c4a875; }
+        [data-theme="dark"] .timer-card-controls button:hover { background: #d4c4a8; }
+        [data-theme="dark"] .timer-card-controls button.timer-remove { background: #6b1c2e; border-color: #6b1c2e; color: #e8e4dc; }
+        [data-theme="dark"] .timer-card-controls button.timer-remove:hover { background: #8B3A42; }
+        [data-theme="dark"] .timer-empty { color: #b8b4ac; }
 
     </style>
 </head>
@@ -3968,6 +4193,7 @@
         <button onclick="showSection('faq', this)">Wine FAQ</button>
         <button onclick="showSection('pronunciations', this)">Pronunciations</button>
         <button onclick="showSection('checklist', this)">Opening Checklist</button>
+        <button onclick="showSection('timers', this)">Timers</button>
     </nav>
 
     <main>
@@ -4974,6 +5200,47 @@
                 </div>
                 <div id="checklistContent">
                     <!-- Checklist groups inserted by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Timers Section -->
+        <section id="timers">
+            <div class="timers-container">
+                <h2>Kitchen Timers</h2>
+                <p class="section-subtitle">Baguette countdowns, ticket times, and flatbread tracking</p>
+
+                <!-- Baguette Timers -->
+                <div class="timer-category">
+                    <div class="timer-category-header">
+                        <span class="timer-category-title">Baguettes (10 min)</span>
+                        <button class="timer-add-btn" onclick="addBaguetteTimer()">+ Add</button>
+                    </div>
+                    <div class="timer-cards" id="baguetteTimers">
+                        <p class="timer-empty">Tap "+ Add" to start a baguette timer</p>
+                    </div>
+                </div>
+
+                <!-- Ticket Timers -->
+                <div class="timer-category">
+                    <div class="timer-category-header">
+                        <span class="timer-category-title">Tickets</span>
+                        <button class="timer-add-btn" onclick="addTicketTimer()">+ Add</button>
+                    </div>
+                    <div class="timer-cards" id="ticketTimers">
+                        <p class="timer-empty">Tap "+ Add" to start a ticket timer</p>
+                    </div>
+                </div>
+
+                <!-- Flatbread Timers -->
+                <div class="timer-category">
+                    <div class="timer-category-header">
+                        <span class="timer-category-title">Flatbreads</span>
+                        <button class="timer-add-btn" onclick="addFlatbreadTimer()">+ Add</button>
+                    </div>
+                    <div class="timer-cards" id="flatbreadTimers">
+                        <p class="timer-empty">Tap "+ Add" to start a flatbread timer</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -7408,47 +7675,66 @@
         function renderChecklist() {
             const container = document.getElementById('checklistContent');
 
-            // Build checklist groups from all data + supplies
-            const checklistGroups = [
+            // Counter groups: wines, beers, san pellegrino
+            const counterGroups = [
                 {
                     title: 'Wines (Enomatic)',
-                    items: wines.map(w => w.name + ' ' + w.vintage)
+                    items: wines.map(w => w.name + ' ' + w.vintage),
+                    groupKey: 'wines'
                 },
                 {
                     title: 'Beers & Cider',
-                    items: beers.map(b => b.name)
+                    items: beers.map(b => b.name),
+                    groupKey: 'beers'
                 },
                 {
+                    title: 'San Pellegrino',
+                    items: ['Small Bottles of San Pellegrino'],
+                    groupKey: 'pellegrino'
+                }
+            ];
+
+            // Checkbox groups: stocked + backup
+            const checkboxGroups = [
+                {
                     title: 'Cheeses',
-                    items: cheeses.map(c => c.name)
+                    items: cheeses.map(c => c.name),
+                    groupKey: 'cheeses'
                 },
                 {
                     title: 'Charcuterie',
-                    items: charcuterie.map(c => c.name)
+                    items: charcuterie.map(c => c.name),
+                    groupKey: 'charcuterie'
                 },
                 {
                     title: 'Flatbread Toppings',
-                    items: ['Smoked Chili Cheddar (flatbread)', 'Gruyère (flatbread)', 'Black Truffle Goat (flatbread)', 'Chorizo', 'Prosciutto', 'Mushrooms', 'Olives', 'Sun Dried Tomatoes', 'Arugula', 'Fig Jam']
+                    items: ['Smoked Chili Cheddar (flatbread)', 'Gruyère (flatbread)', 'Black Truffle Goat (flatbread)', 'Chorizo', 'Prosciutto', 'Mushrooms', 'Olives', 'Sun Dried Tomatoes', 'Arugula', 'Fig Jam'],
+                    groupKey: 'flatbread'
                 },
                 {
                     title: 'Tapas & Dips',
-                    items: tapas.map(t => t.name)
+                    items: tapas.map(t => t.name),
+                    groupKey: 'tapas'
                 },
                 {
                     title: 'Pates & Spreads',
-                    items: pates.map(p => p.name)
+                    items: pates.map(p => p.name),
+                    groupKey: 'pates'
                 },
                 {
                     title: 'Desserts',
-                    items: desserts.map(d => d.name)
+                    items: desserts.map(d => d.name),
+                    groupKey: 'desserts'
                 },
                 {
                     title: 'Kitchen & Prep Supplies',
-                    items: ['Baguettes', 'Dijon Mustard', 'Paprika', 'Fig Jam', 'Honey', 'Walnuts', 'Dried Cranberries', 'Olives', 'Mushrooms', 'Apples', 'Gluten Free Crackers', 'Small Bottles of San Pellegrino']
+                    items: ['Baguettes', 'Dijon Mustard', 'Paprika', 'Fig Jam', 'Honey', 'Walnuts', 'Dried Cranberries', 'Olives', 'Mushrooms', 'Apples', 'Gluten Free Crackers'],
+                    groupKey: 'kitchen'
                 },
                 {
                     title: 'Service Supplies',
-                    items: ['Gloves', 'Toilet Paper', 'Paper Towels', 'Wine Bags', 'Blue Tape (date labels)', 'Sharpie Pens']
+                    items: ['Gloves', 'Toilet Paper', 'Paper Towels', 'Wine Bags', 'Blue Tape (date labels)', 'Sharpie Pens'],
+                    groupKey: 'service'
                 }
             ];
 
@@ -7457,7 +7743,8 @@
 
             const firstAidChecked = saved['firstaid'] ? 'checked' : '';
 
-            container.innerHTML = checklistGroups.map((group, gi) => `
+            // Render counter groups (wines, beers, san pellegrino)
+            let html = counterGroups.map(group => `
                 <div class="checklist-group">
                     <h3 class="checklist-group-title">${group.title}</h3>
                     <table class="checklist-table">
@@ -7469,13 +7756,13 @@
                         </thead>
                         <tbody>
                             ${group.items.map((item, ii) => {
-                                const key = gi + '-' + ii;
+                                const key = group.groupKey + '-' + ii;
                                 const count = saved[key] || 0;
                                 return `<tr>
                                     <td>${item}</td>
                                     <td>
                                         <div class="checklist-counter">
-                                            <button onclick="updateChecklistCount('${key}', -1)">−</button>
+                                            <button onclick="updateChecklistCount('${key}', -1)">&#8722;</button>
                                             <span class="counter-value" id="count-${key}">${count}</span>
                                             <button onclick="updateChecklistCount('${key}', 1)">+</button>
                                         </div>
@@ -7485,15 +7772,59 @@
                         </tbody>
                     </table>
                 </div>
-            `).join('') + `
+            `).join('');
+
+            // Render checkbox groups (stocked + backup)
+            html += checkboxGroups.map(group => `
+                <div class="checklist-group">
+                    <h3 class="checklist-group-title">${group.title}</h3>
+                    <table class="checklist-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Stocked</th>
+                                <th>Backup</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${group.items.map((item, ii) => {
+                                const stockedKey = group.groupKey + '-s-' + ii;
+                                const backupKey = group.groupKey + '-b-' + ii;
+                                const stockedChecked = saved[stockedKey] ? 'checked' : '';
+                                const backupChecked = saved[backupKey] ? 'checked' : '';
+                                return `<tr>
+                                    <td>${item}</td>
+                                    <td><div class="checklist-checkbox"><input type="checkbox" ${stockedChecked} onchange="toggleChecklistCheck('${stockedKey}', this.checked)"></div></td>
+                                    <td><div class="checklist-checkbox"><input type="checkbox" ${backupChecked} onchange="toggleChecklistCheck('${backupKey}', this.checked)"></div></td>
+                                </tr>`;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `).join('');
+
+            // Safety group - first aid kit with stocked only
+            html += `
                 <div class="checklist-group">
                     <h3 class="checklist-group-title">Safety</h3>
-                    <label class="checklist-checkbox-row" style="display:flex;align-items:center;gap:10px;padding:10px 0;cursor:pointer;color:#e8e4dc;font-size:1rem;">
-                        <input type="checkbox" id="firstaid-check" ${firstAidChecked} onchange="toggleFirstAid(this.checked)" style="width:20px;height:20px;accent-color:#c4a875;cursor:pointer;">
-                        First Aid Kit is Stocked
-                    </label>
+                    <table class="checklist-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Stocked</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>First Aid Kit</td>
+                                <td><div class="checklist-checkbox"><input type="checkbox" ${firstAidChecked} onchange="toggleFirstAid(this.checked)"></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             `;
+
+            container.innerHTML = html;
         }
 
         function updateChecklistCount(key, delta) {
@@ -7509,18 +7840,30 @@
             document.getElementById('count-' + key).textContent = newVal;
         }
 
+        function toggleChecklistCheck(key, checked) {
+            const saved = JSON.parse(localStorage.getItem('ardoa-checklist') || '{}');
+            if (checked) {
+                saved[key] = true;
+            } else {
+                delete saved[key];
+            }
+            localStorage.setItem('ardoa-checklist', JSON.stringify(saved));
+        }
+
         function printChecklist() {
-            // Build the same checklist groups as renderChecklist
-            const checklistGroups = [
+            const counterGroups = [
                 { title: 'Wines (Enomatic)', items: wines.map(w => w.name + ' ' + w.vintage) },
                 { title: 'Beers & Cider', items: beers.map(b => b.name) },
+                { title: 'San Pellegrino', items: ['Small Bottles of San Pellegrino'] }
+            ];
+            const checkboxGroups = [
                 { title: 'Cheeses', items: cheeses.map(c => c.name) },
                 { title: 'Charcuterie', items: charcuterie.map(c => c.name) },
                 { title: 'Flatbread Toppings', items: ['Smoked Chili Cheddar (flatbread)', 'Gruyère (flatbread)', 'Black Truffle Goat (flatbread)', 'Chorizo', 'Prosciutto', 'Mushrooms', 'Olives', 'Sun Dried Tomatoes', 'Arugula', 'Fig Jam'] },
                 { title: 'Tapas & Dips', items: tapas.map(t => t.name) },
                 { title: 'Pates & Spreads', items: pates.map(p => p.name) },
                 { title: 'Desserts', items: desserts.map(d => d.name) },
-                { title: 'Kitchen & Prep Supplies', items: ['Baguettes', 'Dijon Mustard', 'Paprika', 'Fig Jam', 'Honey', 'Walnuts', 'Dried Cranberries', 'Olives', 'Mushrooms', 'Apples', 'Gluten Free Crackers', 'Small Bottles of San Pellegrino'] },
+                { title: 'Kitchen & Prep Supplies', items: ['Baguettes', 'Dijon Mustard', 'Paprika', 'Fig Jam', 'Honey', 'Walnuts', 'Dried Cranberries', 'Olives', 'Mushrooms', 'Apples', 'Gluten Free Crackers'] },
                 { title: 'Service Supplies', items: ['Gloves', 'Toilet Paper', 'Paper Towels', 'Wine Bags', 'Blue Tape (date labels)', 'Sharpie Pens'] }
             ];
 
@@ -7534,29 +7877,46 @@ h1{font-size:14px;text-align:center;margin-bottom:4px;border-bottom:1px solid #0
 .group{break-inside:avoid;margin-bottom:6px}
 .group h2{font-size:11px;background:#000;color:#fff;padding:1px 4px;margin-bottom:1px}
 .group table{width:100%;border-collapse:collapse}
+.group th{font-size:9px;text-align:center;border-bottom:1px solid #ccc;padding:1px 3px}
+.group th:first-child{text-align:left}
 .group td{padding:1px 3px;border-bottom:1px solid #ccc;font-size:10px}
-.group td:last-child{width:40px;text-align:center;border-left:1px solid #ccc}
+.group td:not(:first-child){width:40px;text-align:center;border-left:1px solid #ccc}
 .cb{width:12px;height:12px;border:1px solid #000;display:inline-block}
 .safety{break-inside:avoid;margin-bottom:6px}
 .safety h2{font-size:11px;background:#000;color:#fff;padding:1px 4px;margin-bottom:1px}
-.safety label{display:flex;align-items:center;gap:6px;padding:2px 3px;font-size:10px}
-.safety .cb{vertical-align:middle}
+.safety table{width:100%;border-collapse:collapse}
+.safety th{font-size:9px;text-align:center;border-bottom:1px solid #ccc;padding:1px 3px}
+.safety th:first-child{text-align:left}
+.safety td{padding:1px 3px;border-bottom:1px solid #ccc;font-size:10px}
+.safety td:not(:first-child){width:40px;text-align:center;border-left:1px solid #ccc}
 @media print{body{padding:4px}@page{margin:0.3in;size:letter}}
 </style></head><body>
 <h1>Ardoa Opening Checklist</h1>
 <div class="date-line">Date: ____________</div>
 <div class="groups">`;
 
-            checklistGroups.forEach(group => {
-                html += '<div class="group"><h2>' + group.title + '</h2><table>';
+            // Counter groups - single count column
+            counterGroups.forEach(group => {
+                html += '<div class="group"><h2>' + group.title + '</h2><table><tr><th>Item</th><th>Count</th></tr>';
                 group.items.forEach(item => {
-                    html += '<tr><td>' + item + '</td><td><span class="cb"></span></td></tr>';
+                    html += '<tr><td>' + item + '</td><td></td></tr>';
                 });
                 html += '</table></div>';
             });
 
+            // Checkbox groups - stocked + backup columns
+            checkboxGroups.forEach(group => {
+                html += '<div class="group"><h2>' + group.title + '</h2><table><tr><th>Item</th><th>Stocked</th><th>Backup</th></tr>';
+                group.items.forEach(item => {
+                    html += '<tr><td>' + item + '</td><td><span class="cb"></span></td><td><span class="cb"></span></td></tr>';
+                });
+                html += '</table></div>';
+            });
+
+            // Safety - stocked only
             html += `<div class="safety"><h2>Safety</h2>
-<label><span class="cb"></span> First Aid Kit is Stocked</label></div>`;
+<table><tr><th>Item</th><th>Stocked</th></tr>
+<tr><td>First Aid Kit</td><td><span class="cb"></span></td></tr></table></div>`;
 
             html += '</div></body></html>';
 
@@ -7580,6 +7940,302 @@ h1{font-size:14px;text-align:center;margin-bottom:4px;border-bottom:1px solid #0
         function resetChecklist() {
             localStorage.removeItem('ardoa-checklist');
             renderChecklist();
+        }
+
+        // ==================== KITCHEN TIMERS ====================
+        const timerState = {
+            baguettes: [],
+            tickets: [],
+            flatbreads: [],
+            nextTicketNum: 1,
+            audioCtx: null
+        };
+
+        function getAudioCtx() {
+            if (!timerState.audioCtx) {
+                timerState.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return timerState.audioCtx;
+        }
+
+        function playAlarm(timerId) {
+            try {
+                const ctx = getAudioCtx();
+                // Play a repeating beep pattern
+                function beep(startTime) {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.frequency.value = 880;
+                    osc.type = 'square';
+                    gain.gain.value = 0.3;
+                    osc.start(startTime);
+                    osc.stop(startTime + 0.15);
+                }
+                const now = ctx.currentTime;
+                for (let i = 0; i < 6; i++) {
+                    beep(now + i * 0.25);
+                }
+            } catch (e) {
+                // Audio not available
+            }
+        }
+
+        function formatTime(totalSeconds) {
+            const mins = Math.floor(Math.abs(totalSeconds) / 60);
+            const secs = Math.abs(totalSeconds) % 60;
+            return String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+        }
+
+        // Baguette timers - 10 min countdown
+        function addBaguetteTimer() {
+            const id = 'bag-' + Date.now();
+            timerState.baguettes.push({
+                id: id,
+                remaining: 600, // 10 minutes in seconds
+                running: true,
+                alarming: false,
+                intervalId: null
+            });
+            renderBaguetteTimers();
+            startBaguetteTimer(id);
+        }
+
+        function startBaguetteTimer(id) {
+            const timer = timerState.baguettes.find(t => t.id === id);
+            if (!timer || timer.intervalId) return;
+            timer.running = true;
+            timer.intervalId = setInterval(function() {
+                timer.remaining--;
+                if (timer.remaining <= 0) {
+                    timer.remaining = 0;
+                    timer.running = false;
+                    timer.alarming = true;
+                    clearInterval(timer.intervalId);
+                    timer.intervalId = null;
+                    playAlarm(id);
+                }
+                updateBaguetteDisplay(id);
+            }, 1000);
+        }
+
+        function pauseBaguetteTimer(id) {
+            const timer = timerState.baguettes.find(t => t.id === id);
+            if (!timer) return;
+            if (timer.alarming) {
+                timer.alarming = false;
+                updateBaguetteDisplay(id);
+                return;
+            }
+            if (timer.running) {
+                timer.running = false;
+                clearInterval(timer.intervalId);
+                timer.intervalId = null;
+            } else if (timer.remaining > 0) {
+                timer.running = true;
+                startBaguetteTimer(id);
+            }
+            updateBaguetteDisplay(id);
+        }
+
+        function resetBaguetteTimer(id) {
+            const timer = timerState.baguettes.find(t => t.id === id);
+            if (!timer) return;
+            clearInterval(timer.intervalId);
+            timer.intervalId = null;
+            timer.remaining = 600;
+            timer.running = false;
+            timer.alarming = false;
+            updateBaguetteDisplay(id);
+        }
+
+        function removeBaguetteTimer(id) {
+            const timer = timerState.baguettes.find(t => t.id === id);
+            if (timer && timer.intervalId) clearInterval(timer.intervalId);
+            timerState.baguettes = timerState.baguettes.filter(t => t.id !== id);
+            renderBaguetteTimers();
+        }
+
+        function updateBaguetteDisplay(id) {
+            const timer = timerState.baguettes.find(t => t.id === id);
+            if (!timer) return;
+            const display = document.getElementById('display-' + id);
+            if (display) {
+                display.textContent = formatTime(timer.remaining);
+                if (timer.alarming) {
+                    display.classList.add('timer-alarm');
+                } else {
+                    display.classList.remove('timer-alarm');
+                }
+            }
+            const pauseBtn = document.getElementById('pause-' + id);
+            if (pauseBtn) {
+                pauseBtn.textContent = timer.alarming ? 'OK' : (timer.running ? '||' : '\u25B6');
+            }
+        }
+
+        function renderBaguetteTimers() {
+            const container = document.getElementById('baguetteTimers');
+            if (timerState.baguettes.length === 0) {
+                container.innerHTML = '<p class="timer-empty">Tap "+ Add" to start a baguette timer</p>';
+                return;
+            }
+            container.innerHTML = timerState.baguettes.map((timer, i) => `
+                <div class="timer-card" id="card-${timer.id}">
+                    <span class="timer-card-label">Bag ${i + 1}</span>
+                    <span class="timer-card-display ${timer.alarming ? 'timer-alarm' : ''}" id="display-${timer.id}">${formatTime(timer.remaining)}</span>
+                    <div class="timer-card-controls">
+                        <button id="pause-${timer.id}" onclick="pauseBaguetteTimer('${timer.id}')">${timer.alarming ? 'OK' : (timer.running ? '||' : '\u25B6')}</button>
+                        <button onclick="resetBaguetteTimer('${timer.id}')">\u21BB</button>
+                        <button class="timer-remove" onclick="removeBaguetteTimer('${timer.id}')">\u2715</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Ticket timers - counting up stopwatch
+        function addTicketTimer() {
+            const id = 'tkt-' + Date.now();
+            const num = timerState.nextTicketNum++;
+            timerState.tickets.push({
+                id: id,
+                number: num,
+                elapsed: 0,
+                running: true,
+                intervalId: null
+            });
+            renderTicketTimers();
+            startTicketTimer(id);
+        }
+
+        function startTicketTimer(id) {
+            const timer = timerState.tickets.find(t => t.id === id);
+            if (!timer || timer.intervalId) return;
+            timer.running = true;
+            timer.intervalId = setInterval(function() {
+                timer.elapsed++;
+                updateTicketDisplay(id);
+            }, 1000);
+        }
+
+        function pauseTicketTimer(id) {
+            const timer = timerState.tickets.find(t => t.id === id);
+            if (!timer) return;
+            if (timer.running) {
+                timer.running = false;
+                clearInterval(timer.intervalId);
+                timer.intervalId = null;
+            } else {
+                timer.running = true;
+                startTicketTimer(id);
+            }
+            updateTicketDisplay(id);
+        }
+
+        function removeTicketTimer(id) {
+            const timer = timerState.tickets.find(t => t.id === id);
+            if (timer && timer.intervalId) clearInterval(timer.intervalId);
+            timerState.tickets = timerState.tickets.filter(t => t.id !== id);
+            renderTicketTimers();
+        }
+
+        function updateTicketDisplay(id) {
+            const timer = timerState.tickets.find(t => t.id === id);
+            if (!timer) return;
+            const display = document.getElementById('display-' + id);
+            if (display) display.textContent = formatTime(timer.elapsed);
+            const pauseBtn = document.getElementById('pause-' + id);
+            if (pauseBtn) pauseBtn.textContent = timer.running ? '||' : '\u25B6';
+        }
+
+        function renderTicketTimers() {
+            const container = document.getElementById('ticketTimers');
+            if (timerState.tickets.length === 0) {
+                container.innerHTML = '<p class="timer-empty">Tap "+ Add" to start a ticket timer</p>';
+                return;
+            }
+            container.innerHTML = timerState.tickets.map(timer => `
+                <div class="timer-card" id="card-${timer.id}">
+                    <span class="timer-card-label">#${timer.number}</span>
+                    <span class="timer-card-display" id="display-${timer.id}">${formatTime(timer.elapsed)}</span>
+                    <div class="timer-card-controls">
+                        <button id="pause-${timer.id}" onclick="pauseTicketTimer('${timer.id}')">${timer.running ? '||' : '\u25B6'}</button>
+                        <button class="timer-remove" onclick="removeTicketTimer('${timer.id}')">\u2715</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Flatbread timers - counting up
+        function addFlatbreadTimer() {
+            const id = 'fb-' + Date.now();
+            timerState.flatbreads.push({
+                id: id,
+                elapsed: 0,
+                running: true,
+                intervalId: null
+            });
+            renderFlatbreadTimers();
+            startFlatbreadTimer(id);
+        }
+
+        function startFlatbreadTimer(id) {
+            const timer = timerState.flatbreads.find(t => t.id === id);
+            if (!timer || timer.intervalId) return;
+            timer.running = true;
+            timer.intervalId = setInterval(function() {
+                timer.elapsed++;
+                updateFlatbreadDisplay(id);
+            }, 1000);
+        }
+
+        function pauseFlatbreadTimer(id) {
+            const timer = timerState.flatbreads.find(t => t.id === id);
+            if (!timer) return;
+            if (timer.running) {
+                timer.running = false;
+                clearInterval(timer.intervalId);
+                timer.intervalId = null;
+            } else {
+                timer.running = true;
+                startFlatbreadTimer(id);
+            }
+            updateFlatbreadDisplay(id);
+        }
+
+        function removeFlatbreadTimer(id) {
+            const timer = timerState.flatbreads.find(t => t.id === id);
+            if (timer && timer.intervalId) clearInterval(timer.intervalId);
+            timerState.flatbreads = timerState.flatbreads.filter(t => t.id !== id);
+            renderFlatbreadTimers();
+        }
+
+        function updateFlatbreadDisplay(id) {
+            const timer = timerState.flatbreads.find(t => t.id === id);
+            if (!timer) return;
+            const display = document.getElementById('display-' + id);
+            if (display) display.textContent = formatTime(timer.elapsed);
+            const pauseBtn = document.getElementById('pause-' + id);
+            if (pauseBtn) pauseBtn.textContent = timer.running ? '||' : '\u25B6';
+        }
+
+        function renderFlatbreadTimers() {
+            const container = document.getElementById('flatbreadTimers');
+            if (timerState.flatbreads.length === 0) {
+                container.innerHTML = '<p class="timer-empty">Tap "+ Add" to start a flatbread timer</p>';
+                return;
+            }
+            container.innerHTML = timerState.flatbreads.map((timer, i) => `
+                <div class="timer-card" id="card-${timer.id}">
+                    <span class="timer-card-label">FB ${i + 1}</span>
+                    <span class="timer-card-display" id="display-${timer.id}">${formatTime(timer.elapsed)}</span>
+                    <div class="timer-card-controls">
+                        <button id="pause-${timer.id}" onclick="pauseFlatbreadTimer('${timer.id}')">${timer.running ? '||' : '\u25B6'}</button>
+                        <button class="timer-remove" onclick="removeFlatbreadTimer('${timer.id}')">\u2715</button>
+                    </div>
+                </div>
+            `).join('');
         }
 
         function initTheme() {
