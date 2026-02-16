@@ -4527,7 +4527,7 @@
                 <button class="filter-btn red" onclick="filterWines('red', this)">Red</button>
                 <button class="filter-btn white" onclick="filterWines('white', this)">White</button>
                 <button class="filter-btn rose" onclick="filterWines('rose', this)">Rosé</button>
-                <button class="filter-btn orange" onclick="filterWines('orange', this)">Orange</button>
+                <!-- <button class="filter-btn orange" onclick="filterWines('orange', this)">Orange</button> -->
                 <button class="filter-btn sparkling" onclick="filterWines('sparkling', this)">Sparkling</button>
             </div>
 
@@ -5820,7 +5820,7 @@
                     { item: "Black Truffle Goat", why: "THE classic pairing - Loire Sauvignon Blanc and goat cheese are legendary together" },
                     { item: "Petit Basque", why: "Sheep cheese's mild nuttiness complements the wine's mineral precision" },
                     { item: "Hummus", why: "Clean, refreshing wine cuts through the tahini richness" },
-                    { item: "The Veg flatbread", why: "Herbal, citrus-driven wine loves fresh vegetable and arugula flavors" },
+                    { item: "The Veg flatbread", why: "Herbal, citrus-driven wine loves fresh vegetable flavors" },
                     { item: "Bresaola", why: "Lean beef doesn't overpower the wine; acidity brightens the delicate meat" }
                 ],
                 alcohol: "13%",
@@ -5845,7 +5845,7 @@
                     { item: "Hummus", why: "Light, refreshing Provence rosé is the quintessential Mediterranean aperitif pairing" },
                     { item: "Petit Basque", why: "Mild sheep's milk cheese pairs naturally with the wine's nectarine and floral notes" },
                     { item: "Antipasto Vegetable Blend", why: "Mediterranean vegetables echo the wine's Provençal character and fresh acidity" },
-                    { item: "The Veg flatbread", why: "Fresh vegetable and arugula flavors complement this light, mineral-driven rosé" }
+                    { item: "The Veg flatbread", why: "Fresh vegetable flavors complement this light, mineral-driven rosé" }
                 ],
                 alcohol: "13%",
                 serving: "Well chilled (46-50°F / 8-10°C)",
@@ -6467,7 +6467,7 @@
                 origin: "Italy",
                 type: "Italian Lean Cured Beef",
                 pronunciation: "breh-ZOW-lah",
-                description: "Air-dried, salted beef from Lombardy. Deep ruby red, lean, and delicate with a subtle, slightly sweet flavor. Often served with olive oil, lemon, and arugula.",
+                description: "Air-dried, salted beef from Lombardy. Deep ruby red, lean, and delicate with a subtle, slightly sweet flavor. Often served with olive oil and lemon.",
                 pairings: "Orsa Cabernet Sauvignon, Pouilly-Fumé Dezat, Marola Albariño, Pinot Grigio"
             },
             {
@@ -6531,8 +6531,8 @@
             {
                 name: "The Veg",
                 price: "$14",
-                type: "Gruyère, Sun Dried Tomatoes, Olives, Arugula",
-                description: "Nutty Gruyère with sweet sun-dried tomatoes, briny olives, and fresh arugula. Vegetarian but never boring. Mediterranean-inspired and utterly delicious.",
+                type: "Gruyère, Sun Dried Tomatoes, Olives",
+                description: "Nutty Gruyère with sweet sun-dried tomatoes and briny olives. Vegetarian but never boring. Mediterranean-inspired and utterly delicious.",
                 pairings: "Jean Aubron Folle Blanche, Pouilly-Fumé Dezat, Rosé"
             }
         ];
@@ -7671,7 +7671,7 @@
             },
             {
                 question: "What's your go-to pairing for the flatbreads?",
-                answer: "For <strong>The Basque</strong> (prosciutto, fig): the <strong>Beaujolais</strong>—its fruit echoes the fig, acidity cuts through prosciutto. For <strong>The Mighty Spicy</strong>: <strong>Cabernet Sauvignon</strong> stands up to bold flavors. For <strong>The Veg</strong>: <strong>Pouilly-Fumé</strong> complements the fresh arugula and vegetables beautifully.",
+                answer: "For <strong>The Basque</strong> (prosciutto, fig): the <strong>Beaujolais</strong>—its fruit echoes the fig, acidity cuts through prosciutto. For <strong>The Mighty Spicy</strong>: <strong>Cabernet Sauvignon</strong> stands up to bold flavors. For <strong>The Veg</strong>: <strong>Pouilly-Fumé</strong> complements the fresh vegetables beautifully.",
                 category: "food",
                 icon: "🫓"
             },
@@ -8053,7 +8053,7 @@
                 },
                 {
                     title: 'Flatbread Toppings',
-                    items: ['Smoked Chili Cheddar (flatbread)', 'Gruyère (flatbread)', 'Black Truffle Goat (flatbread)', 'Chorizo', 'Prosciutto', 'Mushrooms', 'Olives', 'Sun Dried Tomatoes', 'Arugula', 'Fig Jam'],
+                    items: ['Flatbread', 'Smoked Chili Cheddar (flatbread)', 'Gruyère (flatbread)', 'Black Truffle Goat (flatbread)', 'Chorizo', 'Prosciutto', 'Mushrooms', 'Olives', 'Sun Dried Tomatoes', 'Fig Jam'],
                     groupKey: 'flatbread'
                 },
                 {
@@ -8204,7 +8204,7 @@
             const checkboxGroups = [
                 { title: 'Cheeses', items: cheeses.map(c => c.name) },
                 { title: 'Charcuterie', items: charcuterie.map(c => c.name) },
-                { title: 'Flatbread Toppings', items: ['Smoked Chili Cheddar (flatbread)', 'Gruyère (flatbread)', 'Black Truffle Goat (flatbread)', 'Chorizo', 'Prosciutto', 'Mushrooms', 'Olives', 'Sun Dried Tomatoes', 'Arugula', 'Fig Jam'] },
+                { title: 'Flatbread Toppings', items: ['Flatbread', 'Smoked Chili Cheddar (flatbread)', 'Gruyère (flatbread)', 'Black Truffle Goat (flatbread)', 'Chorizo', 'Prosciutto', 'Mushrooms', 'Olives', 'Sun Dried Tomatoes', 'Fig Jam'] },
                 { title: 'Tapas & Dips', items: tapas.map(t => t.name) },
                 { title: 'Pates & Spreads', items: pates.map(p => p.name) },
                 { title: 'Desserts', items: desserts.map(d => d.name) },
