@@ -3741,6 +3741,130 @@
             background: #d8d0c8;
         }
 
+        .timeclock-btn-manual {
+            background: transparent;
+            color: var(--mist);
+            border: 1px solid #e8e0d8 !important;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.7rem;
+        }
+
+        .timeclock-btn-manual:hover {
+            background: #f0ebe5;
+            color: var(--pale-gold);
+            border-color: var(--pale-gold) !important;
+        }
+
+        .timeclock-manual-form {
+            display: none;
+            max-width: 400px;
+            margin: 0 auto 2rem;
+            padding: 1.2rem;
+            border: 1px solid #e8e0d8;
+            background: #1a1025;
+        }
+
+        .timeclock-manual-form.visible {
+            display: block;
+        }
+
+        .timeclock-manual-form h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .timeclock-manual-row {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+            align-items: center;
+        }
+
+        .timeclock-manual-row label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--mist);
+            min-width: 50px;
+        }
+
+        .timeclock-manual-row input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #e8e0d8;
+            background: #0a0a0f;
+            color: var(--bone);
+            font-family: 'Crimson Text', serif;
+            font-size: 0.95rem;
+        }
+
+        .timeclock-manual-buttons {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .timeclock-manual-buttons button {
+            font-family: 'Cinzel', serif;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.7rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            touch-action: manipulation;
+        }
+
+        .timeclock-manual-submit {
+            background: #2d7a3a;
+            color: #ffffff;
+        }
+
+        .timeclock-manual-submit:hover {
+            background: #3a9a4a;
+        }
+
+        .timeclock-manual-cancel {
+            background: #e8e0d8;
+            color: var(--bone);
+        }
+
+        .timeclock-manual-cancel:hover {
+            background: #d8d0c8;
+        }
+
+        .timeclock-manual-error {
+            color: #8a2b2b;
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .timeclock-entry-delete {
+            background: none;
+            border: none;
+            color: var(--mist);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.2rem 0.4rem;
+            line-height: 1;
+            opacity: 0.5;
+            touch-action: manipulation;
+        }
+
+        .timeclock-entry-delete:hover {
+            color: #8a2b2b;
+            opacity: 1;
+        }
+
         @media (max-width: 480px) {
             .timeclock-actions button {
                 padding: 0.7rem 1.5rem;
@@ -3750,6 +3874,16 @@
             .timeclock-entry {
                 font-size: 0.85rem;
                 padding: 0.35rem 0.3rem;
+            }
+
+            .timeclock-manual-row {
+                flex-direction: column;
+                gap: 0.3rem;
+                align-items: stretch;
+            }
+
+            .timeclock-manual-row label {
+                min-width: unset;
             }
         }
 
@@ -4493,11 +4627,11 @@
     </header>
 
     <nav>
-        <button class="active" onclick="showSection('timeclock', this)">Time Clock</button>
+        <button class="active" onclick="showSection('techsheets', this)">Wine List</button>
+        <button onclick="showSection('quickref', this)">Quick Reference</button>
+        <button onclick="showSection('timeclock', this)">Time Clock</button>
         <button onclick="showSection('checklist', this)">Opening Checklist</button>
         <button onclick="showSection('timers', this)">Timers</button>
-        <button onclick="showSection('quickref', this)">Quick Reference</button>
-        <button onclick="showSection('techsheets', this)">Wine List</button>
         <button onclick="showSection('beerlist', this)">Beer List</button>
         <button onclick="showSection('food', this)">Food Menu</button>
         <button onclick="showSection('flashcards', this)">Wine Quiz</button>
@@ -4521,7 +4655,7 @@
             </div>
         </noscript>
         <!-- Tech Sheets Section -->
-        <section id="techsheets">
+        <section id="techsheets" class="active">
             <div class="filter-bar">
                 <button class="filter-btn active" onclick="filterWines('all', this)">All Wines</button>
                 <button class="filter-btn red" onclick="filterWines('red', this)">Red</button>
@@ -5504,7 +5638,7 @@
         </section>
 
         <!-- Time Clock Section -->
-        <section id="timeclock" class="active">
+        <section id="timeclock">
             <div class="timeclock-container">
                 <h2>Time Clock</h2>
                 <p class="section-subtitle">Clock in and out to track your hours</p>
@@ -5517,7 +5651,29 @@
                 <div class="timeclock-actions">
                     <button class="timeclock-btn-in" id="timeclockInBtn" onclick="timeclockIn()">Clock In</button>
                     <button class="timeclock-btn-out" id="timeclockOutBtn" onclick="timeclockOut()" disabled>Clock Out</button>
+                    <button class="timeclock-btn-manual" onclick="timeclockToggleManualForm()">Add Manual Entry</button>
                     <button class="timeclock-btn-clear" onclick="timeclockConfirmClear()">Clear All Logs</button>
+                </div>
+
+                <div class="timeclock-manual-form" id="timeclockManualForm">
+                    <h3>Add Manual Entry</h3>
+                    <div class="timeclock-manual-row">
+                        <label for="timeclockManualDate">Date</label>
+                        <input type="date" id="timeclockManualDate">
+                    </div>
+                    <div class="timeclock-manual-row">
+                        <label for="timeclockManualIn">In</label>
+                        <input type="time" id="timeclockManualIn">
+                    </div>
+                    <div class="timeclock-manual-row">
+                        <label for="timeclockManualOut">Out</label>
+                        <input type="time" id="timeclockManualOut">
+                    </div>
+                    <div class="timeclock-manual-error" id="timeclockManualError"></div>
+                    <div class="timeclock-manual-buttons">
+                        <button class="timeclock-manual-submit" onclick="timeclockAddManual()">Save</button>
+                        <button class="timeclock-manual-cancel" onclick="timeclockToggleManualForm()">Cancel</button>
+                    </div>
                 </div>
 
                 <div id="timeclockLogs">
@@ -8618,6 +8774,87 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
             renderTimeclock();
         }
 
+        function timeclockToggleManualForm() {
+            var form = document.getElementById('timeclockManualForm');
+            var errorEl = document.getElementById('timeclockManualError');
+            if (form.classList.contains('visible')) {
+                form.classList.remove('visible');
+            } else {
+                // Default date to today
+                var today = new Date();
+                var yyyy = today.getFullYear();
+                var mm = (today.getMonth() + 1 < 10 ? '0' : '') + (today.getMonth() + 1);
+                var dd = (today.getDate() < 10 ? '0' : '') + today.getDate();
+                document.getElementById('timeclockManualDate').value = yyyy + '-' + mm + '-' + dd;
+                document.getElementById('timeclockManualIn').value = '';
+                document.getElementById('timeclockManualOut').value = '';
+                errorEl.style.display = 'none';
+                form.classList.add('visible');
+            }
+        }
+
+        function timeclockAddManual() {
+            var dateVal = document.getElementById('timeclockManualDate').value;
+            var inVal = document.getElementById('timeclockManualIn').value;
+            var outVal = document.getElementById('timeclockManualOut').value;
+            var errorEl = document.getElementById('timeclockManualError');
+
+            if (!dateVal || !inVal || !outVal) {
+                errorEl.textContent = 'Please fill in all fields.';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            var clockIn = new Date(dateVal + 'T' + inVal).getTime();
+            var clockOut = new Date(dateVal + 'T' + outVal).getTime();
+
+            if (isNaN(clockIn) || isNaN(clockOut)) {
+                errorEl.textContent = 'Invalid date or time.';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            if (clockOut <= clockIn) {
+                errorEl.textContent = 'Clock out must be after clock in.';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            var data = getTimeclockData();
+            data.logs.push({ clockIn: clockIn, clockOut: clockOut });
+            saveTimeclockData(data);
+
+            document.getElementById('timeclockManualForm').classList.remove('visible');
+            renderTimeclock();
+        }
+
+        function timeclockDeleteEntry(clockInTs) {
+            var overlay = document.createElement('div');
+            overlay.className = 'timeclock-confirm-overlay';
+            overlay.id = 'timeclockConfirmOverlay';
+            overlay.innerHTML = '<div class="timeclock-confirm-dialog">' +
+                '<h3>Delete Entry?</h3>' +
+                '<p>Remove this time entry? This cannot be undone.</p>' +
+                '<div class="timeclock-confirm-buttons">' +
+                '<button class="timeclock-confirm-yes" onclick="timeclockDoDelete(' + clockInTs + ')">Yes, Delete</button>' +
+                '<button class="timeclock-confirm-no" onclick="timeclockDismissConfirm()">Cancel</button>' +
+                '</div></div>';
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) timeclockDismissConfirm();
+            });
+            document.body.appendChild(overlay);
+        }
+
+        function timeclockDoDelete(clockInTs) {
+            timeclockDismissConfirm();
+            var data = getTimeclockData();
+            data.logs = data.logs.filter(function(entry) {
+                return entry.clockIn !== clockInTs;
+            });
+            saveTimeclockData(data);
+            renderTimeclock();
+        }
+
         function timeclockConfirmClear() {
             const overlay = document.createElement('div');
             overlay.className = 'timeclock-confirm-overlay';
@@ -8746,6 +8983,7 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
                     html += '</div>';
                     if (entry.clockOut) {
                         html += '<span class="timeclock-entry-duration">' + formatTimeclockDuration(entry.clockOut - entry.clockIn) + '</span>';
+                        html += '<button class="timeclock-entry-delete" onclick="timeclockDeleteEntry(' + entry.clockIn + ')" title="Delete entry">&times;</button>';
                     } else {
                         html += '<span class="timeclock-entry-active">Working...</span>';
                     }
