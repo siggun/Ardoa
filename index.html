@@ -13,39 +13,39 @@
         }
 
         :root {
-            /* Gothic Color Palette */
-            --midnight: #0a0a0f;
-            --deep-purple: #1a1025;
-            --wine-blood: #4a0e1a;
-            --aged-burgundy: #6b1c2e;
-            --antique-gold: #8b7355;
-            --pale-gold: #c4a875;
-            --bone: #e8e4dc;
-            --mist: #b8b4ac;
-            --fog: rgba(184, 180, 172, 0.1);
-            --shadow: rgba(0, 0, 0, 0.7);
+            /* Ardoa Light Theme - matching ardoawinebar.com */
+            --midnight: #ffffff;
+            --deep-purple: #f8f5f0;
+            --wine-blood: #4a1a28;
+            --aged-burgundy: #6b2d3e;
+            --antique-gold: #9a8068;
+            --pale-gold: #4a1a28;
+            --bone: #2c2c2c;
+            --mist: #666666;
+            --fog: rgba(0, 0, 0, 0.03);
+            --shadow: rgba(0, 0, 0, 0.08);
 
             /* Legacy mappings for compatibility */
             --burgundy: var(--aged-burgundy);
             --burgundy-dark: var(--wine-blood);
             --burgundy-light: #8B3A42;
-            --gold: var(--pale-gold);
+            --gold: #c4a875;
             --gold-light: #d4c4a8;
-            --cream: var(--bone);
-            --charcoal: var(--midnight);
+            --cream: #f8f5f0;
+            --charcoal: #2c2c2c;
         }
 
         body {
             font-family: 'Crimson Text', Georgia, serif;
-            background: var(--midnight);
-            color: var(--bone);
+            background: #ffffff;
+            color: #2c2c2c;
             line-height: 1.7;
             min-height: 100%;
             margin: 0;
             padding: 0;
         }
 
-        /* Background layer - real DOM element for iOS Safari compatibility */
+        /* Background layer - clean white with subtle warm gradient */
         .background-layer {
             position: fixed;
             top: 0;
@@ -54,24 +54,12 @@
             bottom: 0;
             z-index: 0;
             pointer-events: none;
-            background: linear-gradient(180deg,
-                var(--deep-purple) 0%,
-                var(--wine-blood) 40%,
-                var(--midnight) 100%);
+            background: linear-gradient(180deg, #ffffff 0%, #f8f5f0 100%);
         }
 
-        /* Fog layer - real DOM element, animated noise texture */
+        /* Fog layer - hidden for light theme */
         .fog-layer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 200%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 800 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.15'/%3E%3C/svg%3E");
-            opacity: 0.4;
-            animation: fogDrift 60s linear infinite;
+            display: none;
         }
 
         @keyframes fogDrift {
@@ -79,17 +67,9 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* Vines overlay - decorative vine SVGs along edges */
+        /* Vines overlay - hidden for light theme */
         .vines-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,20 Q10,25 5,40 T10,60 Q15,75 5,90' stroke='%234a0e1a' stroke-width='0.3' fill='none' opacity='0.3'/%3E%3Cpath d='M100,30 Q90,35 95,50 T90,70 Q85,85 95,95' stroke='%234a0e1a' stroke-width='0.3' fill='none' opacity='0.3'/%3E%3Ccircle cx='8' cy='45' r='1.5' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='6' cy='48' r='1.2' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='10' cy='47' r='1' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='92' cy='55' r='1.5' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='94' cy='58' r='1.2' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='90' cy='57' r='1' fill='%234a0e1a' opacity='0.4'/%3E%3C/svg%3E");
-            background-size: 100% 100%;
+            display: none;
         }
 
         /* Content layer - sits above background layers */
@@ -100,13 +80,14 @@
 
         /* Header with Logo */
         header {
-            background: transparent;
-            color: var(--bone);
+            background: #ffffff;
+            color: #2c2c2c;
             padding: 2rem;
             text-align: center;
             position: relative;
             z-index: 1;
             overflow: visible;
+            border-bottom: 1px solid #e8e0d8;
         }
 
         .header-content {
@@ -123,7 +104,7 @@
             max-width: 60vw;
             height: auto;
             margin: 0 auto 1rem;
-            filter: drop-shadow(0 0 20px rgba(196, 168, 117, 0.3));
+            filter: none;
         }
 
         header h1 {
@@ -133,11 +114,8 @@
             letter-spacing: 16px;
             margin-bottom: 0.5rem;
             text-transform: uppercase;
-            color: var(--pale-gold);
-            text-shadow:
-                0 0 30px rgba(196, 168, 117, 0.5),
-                0 0 60px rgba(74, 14, 26, 0.8),
-                2px 2px 4px rgba(0,0,0,0.8);
+            color: #2c2c2c;
+            text-shadow: none;
             position: relative;
             user-select: none;
             -webkit-user-select: none;
@@ -147,18 +125,18 @@
         header p {
             font-family: 'Crimson Text', serif;
             font-size: 1.1rem;
-            color: var(--mist);
+            color: #666666;
             font-style: italic;
             letter-spacing: 4px;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+            text-shadow: none;
             user-select: none;
             -webkit-user-select: none;
             cursor: default;
         }
 
-        /* Navigation - fully opaque background (backdrop-filter conflicts with sticky on iOS Safari) */
+        /* Navigation - clean white with subtle border */
         nav {
-            background: linear-gradient(180deg, rgb(10, 10, 15), rgb(26, 16, 37));
+            background: #ffffff;
             padding: 1rem;
             position: sticky;
             top: 0;
@@ -167,19 +145,20 @@
             justify-content: center;
             gap: 0.75rem;
             flex-wrap: wrap;
-            border-bottom: 1px solid rgba(196, 168, 117, 0.2);
-            border-top: 1px solid rgba(196, 168, 117, 0.2);
+            border-bottom: 1px solid #e8e0d8;
+            border-top: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
 
         nav button {
             font-family: 'Cinzel', serif;
             background: transparent;
-            border: 1px solid var(--antique-gold);
-            color: var(--pale-gold);
+            border: 1px solid #d0c8c0;
+            color: #2c2c2c;
             padding: 0.6rem 1.2rem;
             font-size: 0.8rem;
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 2px;
             white-space: nowrap;
@@ -195,7 +174,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(196, 168, 117, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(74, 26, 40, 0.05), transparent);
             transition: left 0.4s ease;
         }
 
@@ -204,10 +183,10 @@
         }
 
         nav button:hover, nav button.active {
-            background: rgba(196, 168, 117, 0.15);
-            color: var(--bone);
-            border-color: var(--pale-gold);
-            box-shadow: 0 0 15px rgba(196, 168, 117, 0.3), inset 0 0 15px rgba(196, 168, 117, 0.1);
+            background: #4a1a28;
+            color: #ffffff;
+            border-color: #4a1a28;
+            box-shadow: none;
         }
 
         /* Main Content */
@@ -227,14 +206,14 @@
             display: block;
         }
 
-        /* Gothic Section Headers */
+        /* Section Headers - Light Theme */
         .food-section-title, h2 {
             font-family: 'Cinzel', serif;
-            color: var(--pale-gold);
-            text-shadow: 0 0 20px rgba(196, 168, 117, 0.3);
+            color: #4a1a28;
+            text-shadow: none;
         }
 
-        /* Filter Buttons - Gothic Style */
+        /* Filter Buttons - Light Theme */
         .filter-bar {
             display: flex;
             justify-content: center;
@@ -246,12 +225,12 @@
         .filter-btn {
             font-family: 'Cinzel', serif;
             background: transparent;
-            border: 1px solid var(--antique-gold);
-            color: var(--pale-gold);
+            border: 1px solid #d0c8c0;
+            color: #2c2c2c;
             padding: 0.5rem 1.5rem;
             min-height: 44px;
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             border-radius: 0;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -260,31 +239,31 @@
         }
 
         .filter-btn:hover, .filter-btn.active {
-            background: rgba(196, 168, 117, 0.2);
-            color: var(--bone);
-            box-shadow: 0 0 15px rgba(196, 168, 117, 0.3);
+            background: #4a1a28;
+            color: #ffffff;
+            box-shadow: none;
         }
 
-        .filter-btn.red { border-color: #6b1c2e; }
-        .filter-btn.red.active, .filter-btn.red:hover { background: rgba(107, 28, 46, 0.4); border-color: #8b2a40; }
+        .filter-btn.red { border-color: #8b2a40; }
+        .filter-btn.red.active, .filter-btn.red:hover { background: #6b1c2e; border-color: #6b1c2e; color: #fff; }
         .filter-btn.white { border-color: #c4a875; }
-        .filter-btn.white.active, .filter-btn.white:hover { background: rgba(196, 168, 117, 0.3); }
-        .filter-btn.rose { border-color: #9a6b7a; }
-        .filter-btn.rose.active, .filter-btn.rose:hover { background: rgba(154, 107, 122, 0.3); }
-        .filter-btn.orange { border-color: #8b5a2b; }
-        .filter-btn.orange.active, .filter-btn.orange:hover { background: rgba(139, 90, 43, 0.4); }
+        .filter-btn.white.active, .filter-btn.white:hover { background: #b8922b; border-color: #b8922b; color: #fff; }
+        .filter-btn.rose { border-color: #c49aaa; }
+        .filter-btn.rose.active, .filter-btn.rose:hover { background: #9a6b7a; border-color: #9a6b7a; color: #fff; }
+        .filter-btn.orange { border-color: #c08040; }
+        .filter-btn.orange.active, .filter-btn.orange:hover { background: #8b5a2b; border-color: #8b5a2b; color: #fff; }
         .filter-btn.sparkling { border-color: #c4a875; }
-        .filter-btn.sparkling.active, .filter-btn.sparkling:hover { background: rgba(196, 168, 117, 0.4); }
+        .filter-btn.sparkling.active, .filter-btn.sparkling:hover { background: #b8922b; border-color: #b8922b; color: #fff; }
 
         /* Beer Filter Buttons */
-        .filter-btn.ale { border-color: #8b4513; }
-        .filter-btn.ale.active, .filter-btn.ale:hover { background: rgba(139, 69, 19, 0.4); border-color: #a0522d; }
+        .filter-btn.ale { border-color: #a0522d; }
+        .filter-btn.ale.active, .filter-btn.ale:hover { background: #8b4513; border-color: #8b4513; color: #fff; }
         .filter-btn.lager { border-color: #daa520; }
-        .filter-btn.lager.active, .filter-btn.lager:hover { background: rgba(218, 165, 32, 0.3); border-color: #f0c040; }
+        .filter-btn.lager.active, .filter-btn.lager:hover { background: #b8860b; border-color: #b8860b; color: #fff; }
         .filter-btn.ipa { border-color: #228b22; }
-        .filter-btn.ipa.active, .filter-btn.ipa:hover { background: rgba(34, 139, 34, 0.3); border-color: #32cd32; }
+        .filter-btn.ipa.active, .filter-btn.ipa:hover { background: #228b22; border-color: #228b22; color: #fff; }
         .filter-btn.other { border-color: #708090; }
-        .filter-btn.other.active, .filter-btn.other:hover { background: rgba(112, 128, 144, 0.3); border-color: #a0a0a0; }
+        .filter-btn.other.active, .filter-btn.other:hover { background: #708090; border-color: #708090; color: #fff; }
 
         /* Wine Cards Grid */
         .wine-grid {
@@ -299,50 +278,46 @@
             }
         }
 
-        /* Gothic Wine Cards */
+        /* Wine Cards - Light Theme */
         .wine-card {
-            background: linear-gradient(145deg, #1a1025, #0b0b10);
-            border: 1px solid rgba(196, 168, 117, 0.2);
+            background: #ffffff;
+            border: 1px solid #e0d8d0;
             border-radius: 0;
-            box-shadow:
-                0 4px 20px rgba(0,0,0,0.5),
-                inset 0 1px 0 rgba(196, 168, 117, 0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             overflow: hidden;
-            transition: box-shadow 0.4s ease, border-color 0.4s ease;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
         }
 
         .wine-card:hover {
-            box-shadow:
-                0 15px 40px rgba(0,0,0,0.6),
-                0 0 30px rgba(74, 14, 26, 0.3);
-            border-color: rgba(196, 168, 117, 0.4);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            border-color: #c0b8b0;
         }
 
         .wine-card-header {
             padding: 1.5rem;
-            color: var(--bone);
+            color: #ffffff;
             position: relative;
         }
 
         .wine-card.red .wine-card-header {
-            background: linear-gradient(135deg, #551c2e, #3e0e1a);
-            border-bottom: 1px solid #462a30;
+            background: linear-gradient(135deg, #6b1c2e, #4a1a28);
+            border-bottom: 1px solid #5a2030;
         }
         .wine-card.white .wine-card-header {
-            background: linear-gradient(135deg, #5a4a37, #443b28);
-            border-bottom: 1px solid #5e4e3a;
+            background: linear-gradient(135deg, #b8922b, #9a7a1e);
+            border-bottom: 1px solid #a88828;
         }
         .wine-card.rose .wine-card-header {
-            background: linear-gradient(135deg, #5e4350, #3e2a32);
-            border-bottom: 1px solid #5a4050;
+            background: linear-gradient(135deg, #b0788a, #9a6070);
+            border-bottom: 1px solid #a07080;
         }
         .wine-card.orange .wine-card-header {
-            background: linear-gradient(135deg, #573b1e, #362316);
-            border-bottom: 1px solid #55401e;
+            background: linear-gradient(135deg, #b87030, #9a5820);
+            border-bottom: 1px solid #a86428;
         }
         .wine-card.sparkling .wine-card-header {
-            background: linear-gradient(135deg, #7a6440, #564a38);
-            border-bottom: 1px solid #6e6040;
+            background: linear-gradient(135deg, #c4a875, #a89060);
+            border-bottom: 1px solid #b89868;
         }
 
         .wine-card h3 {
@@ -355,13 +330,13 @@
 
         .wine-card .vintage {
             font-size: 0.9rem;
-            opacity: 0.8;
+            opacity: 0.9;
             font-style: italic;
         }
 
         .wine-card-body {
             padding: 1.5rem;
-            background: #05050a;
+            background: #ffffff;
         }
 
         .wine-detail {
@@ -385,20 +360,20 @@
 
         .pronunciation {
             font-style: italic;
-            color: var(--mist);
+            color: #666666;
             font-size: 0.9rem;
             margin-top: 0.25rem;
             padding: 0.5rem 0.75rem;
-            background: #1a0a10;
+            background: #f8f5f0;
             border-radius: 0;
-            border-left: 2px solid var(--pale-gold);
+            border-left: 2px solid #4a1a28;
         }
 
         .wine-card .producer {
             font-size: 0.85rem;
-            opacity: 0.8;
+            opacity: 1;
             margin-top: 0.25rem;
-            color: var(--mist);
+            color: rgba(255, 255, 255, 0.85);
         }
 
         .blend-detail {
@@ -431,8 +406,8 @@
             gap: 0.5rem;
             margin-top: 0.5rem;
             padding: 0.75rem;
-            background: #0d0813;
-            border: 1px solid rgba(196, 168, 117, 0.1);
+            background: #f8f5f0;
+            border: 1px solid #e8e0d8;
         }
 
         .tech-spec {
@@ -458,46 +433,42 @@
             }
         }
 
-        /* Gothic Beer Cards */
+        /* Beer Cards - Light Theme */
         .beer-card {
-            background: linear-gradient(145deg, #1a1025, #0b0b10);
-            border: 1px solid rgba(196, 168, 117, 0.2);
+            background: #ffffff;
+            border: 1px solid #e0d8d0;
             border-radius: 0;
-            box-shadow:
-                0 4px 20px rgba(0,0,0,0.5),
-                inset 0 1px 0 rgba(196, 168, 117, 0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             overflow: hidden;
-            transition: box-shadow 0.4s ease, border-color 0.4s ease;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
         }
 
         .beer-card:hover {
-            box-shadow:
-                0 15px 40px rgba(0,0,0,0.6),
-                0 0 30px rgba(139, 69, 19, 0.3);
-            border-color: rgba(196, 168, 117, 0.4);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            border-color: #c0b8b0;
         }
 
         .beer-card-header {
             padding: 1.5rem;
-            color: var(--bone);
+            color: #ffffff;
             position: relative;
         }
 
         .beer-card.ale .beer-card-header {
-            background: linear-gradient(135deg, #572c10, #3a220a);
-            border-bottom: 1px solid #50291d;
+            background: linear-gradient(135deg, #8b4513, #6b3010);
+            border-bottom: 1px solid #7a3a12;
         }
         .beer-card.lager .beer-card-header {
-            background: linear-gradient(135deg, #8a6818, #5c440c);
-            border-bottom: 1px solid #6e5020;
+            background: linear-gradient(135deg, #b8860b, #9a7008);
+            border-bottom: 1px solid #a87a0a;
         }
         .beer-card.ipa .beer-card-header {
-            background: linear-gradient(135deg, #1a5718, #123214);
-            border-bottom: 1px solid #1e6618;
+            background: linear-gradient(135deg, #2d7a2d, #1a5a1a);
+            border-bottom: 1px solid #246a24;
         }
         .beer-card.other .beer-card-header {
-            background: linear-gradient(135deg, #3a4248, #2a2e34);
-            border-bottom: 1px solid #484e54;
+            background: linear-gradient(135deg, #5a6068, #484e54);
+            border-bottom: 1px solid #505860;
         }
 
         .beer-card h3 {
@@ -510,20 +481,20 @@
 
         .beer-card .brewery {
             font-size: 0.85rem;
-            opacity: 0.8;
+            opacity: 1;
             margin-top: 0.25rem;
-            color: var(--mist);
+            color: rgba(255, 255, 255, 0.85);
         }
 
         .beer-card .style-abv {
             font-size: 0.9rem;
-            opacity: 0.8;
+            opacity: 0.9;
             font-style: italic;
         }
 
         .beer-card-body {
             padding: 1.5rem;
-            background: #05050a;
+            background: #ffffff;
         }
 
         .beer-detail {
@@ -551,8 +522,8 @@
             gap: 0.5rem;
             margin-top: 0.5rem;
             padding: 0.75rem;
-            background: #0d0813;
-            border: 1px solid rgba(196, 168, 117, 0.1);
+            background: #f8f5f0;
+            border: 1px solid #e8e0d8;
         }
 
         .beer-spec {
@@ -565,7 +536,7 @@
             font-weight: 600;
         }
 
-        /* Flashcard Section - Gothic */
+        /* Flashcard Section - Light Theme */
         .flashcard-container {
             max-width: 700px;
             margin: 0 auto;
@@ -573,8 +544,8 @@
         }
 
         .score-display {
-            background: linear-gradient(135deg, rgba(26, 16, 37, 0.9), rgba(10, 10, 15, 0.95));
-            color: var(--pale-gold);
+            background: #f8f5f0;
+            color: #4a1a28;
             padding: 1rem 2rem;
             border-radius: 0;
             margin-bottom: 2rem;
@@ -582,7 +553,7 @@
             justify-content: space-around;
             flex-wrap: wrap;
             gap: 1rem;
-            border: 1px solid rgba(196, 168, 117, 0.2);
+            border: 1px solid #e0d8d0;
         }
 
         .score-item {
@@ -780,6 +751,23 @@
             background: #1a1a1a;
         }
 
+        .btn-continue {
+            background: #4a1a28;
+            color: white;
+            font-size: 1.1rem;
+            padding: 1rem 2.5rem;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .btn-continue:hover {
+            background: #6b2d3e;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .quiz-settings {
             background: white;
             padding: 2rem;
@@ -804,24 +792,24 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            color: var(--bone);
+            color: #2c2c2c;
             font-family: 'Crimson Text', serif;
             font-size: 1rem;
             padding: 0.5rem 1rem;
-            background: rgba(26, 16, 37, 0.6);
-            border: 1px solid rgba(196, 168, 117, 0.2);
+            background: #f8f5f0;
+            border: 1px solid #e0d8d0;
             border-radius: 4px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .quiz-option:hover {
-            background: rgba(74, 14, 26, 0.5);
-            border-color: rgba(196, 168, 117, 0.4);
+            background: #f0ebe4;
+            border-color: #4a1a28;
         }
 
         .quiz-option label {
-            color: var(--bone);
+            color: #2c2c2c;
             cursor: pointer;
         }
 
@@ -831,7 +819,7 @@
             accent-color: var(--burgundy);
         }
 
-        /* Quick Reference Table - Gothic */
+        /* Quick Reference Table - Light Theme */
         .quick-ref {
             overflow-x: auto;
         }
@@ -839,22 +827,22 @@
         .quick-ref table {
             width: 100%;
             border-collapse: collapse;
-            background: linear-gradient(145deg, rgba(26, 16, 37, 0.8), rgba(10, 10, 15, 0.9));
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-            border: 1px solid rgba(196, 168, 117, 0.15);
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid #e0d8d0;
         }
 
         .quick-ref th, .quick-ref td {
             padding: 1rem;
             text-align: left;
-            border-bottom: 1px solid rgba(196, 168, 117, 0.1);
-            color: var(--bone);
+            border-bottom: 1px solid #e8e0d8;
+            color: #2c2c2c;
         }
 
         .quick-ref th {
             font-family: 'Cinzel', serif;
-            background: linear-gradient(135deg, rgba(74, 14, 26, 0.7), rgba(107, 28, 46, 0.6));
-            color: var(--pale-gold);
+            background: #4a1a28;
+            color: #ffffff;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -862,7 +850,7 @@
         }
 
         .quick-ref tr:hover {
-            background: rgba(196, 168, 117, 0.08);
+            background: #f8f5f0;
         }
 
         .type-badge {
@@ -875,26 +863,26 @@
             text-transform: uppercase;
         }
 
-        .type-badge.red { background: rgba(107, 28, 46, 0.8); color: var(--bone); }
-        .type-badge.white { background: rgba(139, 115, 85, 0.8); color: var(--bone); }
-        .type-badge.rose { background: rgba(154, 107, 122, 0.8); color: var(--bone); }
-        .type-badge.orange { background: rgba(139, 90, 43, 0.8); color: var(--bone); }
-        .type-badge.ale { background: rgba(139, 69, 19, 0.8); color: var(--bone); }
-        .type-badge.lager { background: rgba(218, 165, 32, 0.8); color: var(--midnight); }
-        .type-badge.ipa { background: rgba(34, 139, 34, 0.8); color: var(--bone); }
-        .type-badge.other { background: rgba(112, 128, 144, 0.8); color: var(--bone); }
+        .type-badge.red { background: #6b1c2e; color: #ffffff; }
+        .type-badge.white { background: #b8922b; color: #ffffff; }
+        .type-badge.rose { background: #b0788a; color: #ffffff; }
+        .type-badge.orange { background: #b87030; color: #ffffff; }
+        .type-badge.ale { background: #8b4513; color: #ffffff; }
+        .type-badge.lager { background: #b8860b; color: #ffffff; }
+        .type-badge.ipa { background: #2d7a2d; color: #ffffff; }
+        .type-badge.other { background: #708090; color: #ffffff; }
 
-        /* Food Menu Section - Gothic */
+        /* Food Menu Section - Light Theme */
         .food-section-title {
             font-family: 'Cinzel', serif;
             text-align: center;
-            color: var(--pale-gold);
+            color: #4a1a28;
             font-size: 1.8rem;
             margin: 2.5rem 0 1.5rem 0;
             font-weight: 400;
             letter-spacing: 4px;
             text-transform: uppercase;
-            text-shadow: 0 0 20px rgba(196, 168, 117, 0.3);
+            text-shadow: none;
         }
 
         .food-section-title:first-of-type {
@@ -909,30 +897,30 @@
         }
 
         .food-card {
-            background: linear-gradient(145deg, #1a1025, #0b0b10);
-            border: 1px solid rgba(196, 168, 117, 0.15);
+            background: #ffffff;
+            border: 1px solid #e0d8d0;
             border-radius: 0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             overflow: hidden;
-            transition: box-shadow 0.4s ease, border-color 0.4s ease;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
         }
 
         .food-card:hover {
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border-color: rgba(196, 168, 117, 0.3);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            border-color: #c0b8b0;
         }
 
         .food-card-header {
             padding: 1rem 1.25rem;
-            color: var(--bone);
+            color: #ffffff;
         }
 
-        .food-card.cheese .food-card-header { background: linear-gradient(135deg, #4a3e2c, #302818); }
-        .food-card.charcuterie .food-card-header { background: linear-gradient(135deg, #401220, #2a0c14); }
-        .food-card.flatbread .food-card-header { background: linear-gradient(135deg, #563a1e, #362010); }
-        .food-card.tapas .food-card-header { background: linear-gradient(135deg, #1e2c16, #161e0e); }
-        .food-card.pate .food-card-header { background: linear-gradient(135deg, #3a2e18, #241a0e); }
-        .food-card.dessert .food-card-header { background: linear-gradient(135deg, #4a1a32, #2e0e1e); }
+        .food-card.cheese .food-card-header { background: linear-gradient(135deg, #c4a050, #a88830); }
+        .food-card.charcuterie .food-card-header { background: linear-gradient(135deg, #6b1c2e, #4a1a28); }
+        .food-card.flatbread .food-card-header { background: linear-gradient(135deg, #a07040, #805828); }
+        .food-card.tapas .food-card-header { background: linear-gradient(135deg, #4a7a3a, #386028); }
+        .food-card.pate .food-card-header { background: linear-gradient(135deg, #8a7040, #6a5828); }
+        .food-card.dessert .food-card-header { background: linear-gradient(135deg, #9a5070, #7a3858); }
 
         .food-card h3 {
             font-size: 1.1rem;
@@ -971,10 +959,10 @@
         }
 
         .food-card .wine-pairings {
-            background: #1a0a10;
+            background: #f8f5f0;
             padding: 0.75rem;
             border-radius: 5px;
-            border-left: 3px solid var(--pale-gold);
+            border-left: 3px solid #4a1a28;
         }
 
         .food-card .wine-pairings-label {
@@ -997,14 +985,14 @@
             font-size: 0.85rem;
         }
 
-        /* Footer - Gothic */
+        /* Footer - Light Theme */
         footer {
-            background: linear-gradient(180deg, transparent, rgba(10, 10, 15, 0.95));
-            color: var(--mist);
+            background: #f8f5f0;
+            color: #666666;
             text-align: center;
             padding: 3rem 2rem;
             margin-top: 3rem;
-            border-top: 1px solid rgba(196, 168, 117, 0.2);
+            border-top: 1px solid #e0d8d0;
             position: relative;
         }
 
@@ -1016,7 +1004,7 @@
             transform: translateX(-50%);
             width: 200px;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--pale-gold), transparent);
+            background: linear-gradient(90deg, transparent, #4a1a28, transparent);
         }
 
         footer p {
@@ -2678,22 +2666,22 @@
 
         /* ==================== FAQ SECTION STYLES ==================== */
 
-        /* FAQ Title */
+        /* FAQ Title - Light Theme */
         .faq-title {
             font-family: 'Cinzel', serif;
             font-size: 2rem;
-            color: var(--pale-gold);
+            color: #4a1a28;
             text-align: center;
             margin-bottom: 1.5rem;
             text-transform: uppercase;
             letter-spacing: 4px;
-            text-shadow: 0 0 20px rgba(196, 168, 117, 0.3);
+            text-shadow: none;
         }
 
         .faq-subtitle {
             font-family: 'Crimson Text', serif;
             font-size: 1.1rem;
-            color: var(--mist);
+            color: #666666;
             text-align: center;
             margin-bottom: 2rem;
             font-style: italic;
@@ -2711,12 +2699,12 @@
         .faq-filter-btn {
             font-family: 'Cinzel', serif;
             background: transparent;
-            border: 1px solid var(--antique-gold);
-            color: var(--pale-gold);
+            border: 1px solid #d0c8c0;
+            color: #2c2c2c;
             padding: 0.5rem 1rem;
             min-height: 44px;
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-size: 0.75rem;
@@ -2724,9 +2712,9 @@
         }
 
         .faq-filter-btn:hover, .faq-filter-btn.active {
-            background: rgba(196, 168, 117, 0.2);
-            color: var(--bone);
-            box-shadow: 0 0 15px rgba(196, 168, 117, 0.3);
+            background: #4a1a28;
+            color: #ffffff;
+            box-shadow: none;
         }
 
         /* FAQ Grid */
@@ -2742,12 +2730,12 @@
             }
         }
 
-        /* FAQ Card */
+        /* FAQ Card - Light Theme */
         .faq-card {
-            background: linear-gradient(145deg, rgba(26, 16, 37, 0.9), rgba(10, 10, 15, 0.95));
-            border: 1px solid rgba(196, 168, 117, 0.2);
+            background: #ffffff;
+            border: 1px solid #e0d8d0;
             overflow: hidden;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
             touch-action: manipulation;
@@ -2759,28 +2747,26 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--pale-gold), transparent);
-            opacity: 0.5;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4a1a28, transparent);
+            opacity: 0.3;
         }
 
         .faq-card:hover {
             transform: translateY(-4px);
-            box-shadow:
-                0 10px 30px rgba(0, 0, 0, 0.5),
-                0 0 20px rgba(74, 14, 26, 0.3);
-            border-color: rgba(196, 168, 117, 0.4);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border-color: #c0b8b0;
         }
 
         .faq-card.expanded {
-            border-color: var(--pale-gold);
-            box-shadow: 0 0 25px rgba(196, 168, 117, 0.3);
+            border-color: #4a1a28;
+            box-shadow: 0 4px 16px rgba(74, 26, 40, 0.15);
         }
 
         /* FAQ Question */
         .faq-question {
             padding: 1.25rem 1.5rem;
-            background: linear-gradient(135deg, rgba(74, 14, 26, 0.6), rgba(26, 16, 37, 0.8));
+            background: #f8f5f0;
             display: flex;
             align-items: center;
             gap: 1rem;
@@ -2788,7 +2774,7 @@
         }
 
         .faq-card:hover .faq-question {
-            background: linear-gradient(135deg, rgba(74, 14, 26, 0.8), rgba(26, 16, 37, 0.9));
+            background: #f0ebe4;
         }
 
         .faq-icon {
@@ -2797,8 +2783,8 @@
             min-width: 48px;
             flex-shrink: 0;
             border-radius: 50%;
-            background: rgba(196, 168, 117, 0.2);
-            border: 1px solid var(--pale-gold);
+            background: #ffffff;
+            border: 1px solid #4a1a28;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2807,20 +2793,21 @@
         }
 
         .faq-card:hover .faq-icon {
-            background: rgba(196, 168, 117, 0.3);
+            background: #4a1a28;
+            color: #ffffff;
             transform: scale(1.1);
         }
 
         .faq-question-text {
             font-family: 'Crimson Text', serif;
             font-size: 1.05rem;
-            color: var(--bone);
+            color: #2c2c2c;
             flex: 1;
             line-height: 1.4;
         }
 
         .faq-expand-icon {
-            color: var(--pale-gold);
+            color: #4a1a28;
             font-size: 1.5rem;
             transition: transform 0.3s ease;
         }
@@ -2834,7 +2821,7 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease, padding 0.4s ease;
-            background: rgba(10, 10, 15, 0.5);
+            background: #ffffff;
         }
 
         .faq-card.expanded .faq-answer {
@@ -2858,11 +2845,11 @@
         }
 
         .faq-answer-content strong {
-            color: var(--pale-gold);
+            color: #4a1a28;
         }
 
         .faq-answer-content em {
-            color: var(--bone);
+            color: #2c2c2c;
         }
 
         /* Category Badge */
@@ -2873,9 +2860,9 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             padding: 0.2rem 0.5rem;
-            background: rgba(196, 168, 117, 0.2);
-            border: 1px solid rgba(196, 168, 117, 0.3);
-            color: var(--pale-gold);
+            background: #f8f5f0;
+            border: 1px solid #d0c8c0;
+            color: #4a1a28;
             margin-top: 0.75rem;
         }
 
@@ -2883,14 +2870,14 @@
         .faq-tip {
             margin-top: 1rem;
             padding: 0.75rem 1rem;
-            background: rgba(74, 14, 26, 0.3);
-            border-left: 3px solid var(--pale-gold);
+            background: #f8f5f0;
+            border-left: 3px solid #4a1a28;
             font-style: italic;
         }
 
         .faq-tip::before {
             content: '✦ Tip: ';
-            color: var(--pale-gold);
+            color: #4a1a28;
             font-weight: 600;
             font-style: normal;
         }
@@ -3001,6 +2988,559 @@
             }
         }
 
+        /* ==================== THEME TOGGLE BUTTON ==================== */
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10;
+            background: transparent;
+            border: 1px solid #d0c8c0;
+            color: #2c2c2c;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+        }
+
+        .theme-toggle:hover {
+            background: #4a1a28;
+            color: #ffffff;
+            border-color: #4a1a28;
+        }
+
+        /* ==================== DARK MODE OVERRIDES ==================== */
+        [data-theme="dark"] {
+            --midnight: #0a0a0f;
+            --deep-purple: #1a1025;
+            --wine-blood: #4a0e1a;
+            --aged-burgundy: #6b1c2e;
+            --antique-gold: #8b7355;
+            --pale-gold: #c4a875;
+            --bone: #e8e4dc;
+            --mist: #b8b4ac;
+            --fog: rgba(184, 180, 172, 0.1);
+            --shadow: rgba(0, 0, 0, 0.7);
+            --burgundy: var(--aged-burgundy);
+            --burgundy-dark: var(--wine-blood);
+            --burgundy-light: #8B3A42;
+            --gold: #c4a875;
+            --gold-light: #d4c4a8;
+            --cream: #1a1025;
+            --charcoal: #e8e4dc;
+        }
+
+        [data-theme="dark"] body {
+            background: #0a0a0f;
+            color: #e8e4dc;
+        }
+
+        /* Dark mode - Background layers */
+        [data-theme="dark"] .background-layer {
+            background: linear-gradient(180deg, #1a1025 0%, #4a0e1a 40%, #0a0a0f 100%);
+        }
+
+        [data-theme="dark"] .fog-layer {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 800 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.15'/%3E%3C/svg%3E");
+            opacity: 0.4;
+            animation: fogDrift 60s linear infinite;
+        }
+
+        [data-theme="dark"] .vines-overlay {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,20 Q10,25 5,40 T10,60 Q15,75 5,90' stroke='%234a0e1a' stroke-width='0.3' fill='none' opacity='0.3'/%3E%3Cpath d='M100,30 Q90,35 95,50 T90,70 Q85,85 95,95' stroke='%234a0e1a' stroke-width='0.3' fill='none' opacity='0.3'/%3E%3Ccircle cx='8' cy='45' r='1.5' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='6' cy='48' r='1.2' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='10' cy='47' r='1' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='92' cy='55' r='1.5' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='94' cy='58' r='1.2' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='90' cy='57' r='1' fill='%234a0e1a' opacity='0.4'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+        }
+
+        /* Dark mode - Header */
+        [data-theme="dark"] header {
+            background: transparent;
+            color: #e8e4dc;
+            border-bottom: 1px solid rgba(196, 168, 117, 0.2);
+        }
+
+        [data-theme="dark"] header h1 {
+            color: #c4a875;
+            text-shadow:
+                0 0 30px rgba(196, 168, 117, 0.5),
+                0 0 60px rgba(74, 14, 26, 0.8),
+                2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        [data-theme="dark"] header p {
+            color: #b8b4ac;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+        }
+
+        [data-theme="dark"] .gothic-logo {
+            filter: drop-shadow(0 0 20px rgba(196, 168, 117, 0.3));
+        }
+
+        [data-theme="dark"] .gothic-logo circle,
+        [data-theme="dark"] .gothic-logo ellipse,
+        [data-theme="dark"] .gothic-logo path {
+            fill: #c4a875;
+            stroke: #c4a875;
+        }
+
+        /* Dark mode - Theme toggle */
+        [data-theme="dark"] .theme-toggle {
+            border-color: rgba(196, 168, 117, 0.3);
+            color: #c4a875;
+        }
+
+        [data-theme="dark"] .theme-toggle:hover {
+            background: rgba(196, 168, 117, 0.15);
+            border-color: #c4a875;
+            color: #e8e4dc;
+        }
+
+        /* Dark mode - Navigation */
+        [data-theme="dark"] nav {
+            background: linear-gradient(180deg, rgb(10, 10, 15), rgb(26, 16, 37));
+            border-bottom: 1px solid rgba(196, 168, 117, 0.2);
+            border-top: 1px solid rgba(196, 168, 117, 0.2);
+            box-shadow: none;
+        }
+
+        [data-theme="dark"] nav button {
+            border: 1px solid #8b7355;
+            color: #c4a875;
+        }
+
+        [data-theme="dark"] nav button::before {
+            background: linear-gradient(90deg, transparent, rgba(196, 168, 117, 0.2), transparent);
+        }
+
+        [data-theme="dark"] nav button:hover,
+        [data-theme="dark"] nav button.active {
+            background: rgba(196, 168, 117, 0.15);
+            color: #e8e4dc;
+            border-color: #c4a875;
+            box-shadow: 0 0 15px rgba(196, 168, 117, 0.3), inset 0 0 15px rgba(196, 168, 117, 0.1);
+        }
+
+        /* Dark mode - Section headers */
+        [data-theme="dark"] .food-section-title,
+        [data-theme="dark"] h2 {
+            color: #c4a875;
+            text-shadow: 0 0 20px rgba(196, 168, 117, 0.3);
+        }
+
+        /* Dark mode - Filter buttons */
+        [data-theme="dark"] .filter-btn {
+            border-color: #8b7355;
+            color: #c4a875;
+        }
+
+        [data-theme="dark"] .filter-btn:hover,
+        [data-theme="dark"] .filter-btn.active {
+            background: rgba(196, 168, 117, 0.2);
+            color: #e8e4dc;
+            box-shadow: 0 0 15px rgba(196, 168, 117, 0.3);
+        }
+
+        [data-theme="dark"] .filter-btn.red { border-color: #6b1c2e; }
+        [data-theme="dark"] .filter-btn.red.active,
+        [data-theme="dark"] .filter-btn.red:hover { background: rgba(107, 28, 46, 0.4); border-color: #8b2a40; color: #e8e4dc; }
+        [data-theme="dark"] .filter-btn.white { border-color: #c4a875; }
+        [data-theme="dark"] .filter-btn.white.active,
+        [data-theme="dark"] .filter-btn.white:hover { background: rgba(196, 168, 117, 0.3); color: #e8e4dc; }
+        [data-theme="dark"] .filter-btn.rose { border-color: #9a6b7a; }
+        [data-theme="dark"] .filter-btn.rose.active,
+        [data-theme="dark"] .filter-btn.rose:hover { background: rgba(154, 107, 122, 0.3); color: #e8e4dc; }
+        [data-theme="dark"] .filter-btn.orange { border-color: #8b5a2b; }
+        [data-theme="dark"] .filter-btn.orange.active,
+        [data-theme="dark"] .filter-btn.orange:hover { background: rgba(139, 90, 43, 0.4); color: #e8e4dc; }
+        [data-theme="dark"] .filter-btn.sparkling { border-color: #c4a875; }
+        [data-theme="dark"] .filter-btn.sparkling.active,
+        [data-theme="dark"] .filter-btn.sparkling:hover { background: rgba(196, 168, 117, 0.4); color: #e8e4dc; }
+        [data-theme="dark"] .filter-btn.ale { border-color: #8b4513; }
+        [data-theme="dark"] .filter-btn.ale.active,
+        [data-theme="dark"] .filter-btn.ale:hover { background: rgba(139, 69, 19, 0.4); border-color: #a0522d; color: #e8e4dc; }
+        [data-theme="dark"] .filter-btn.lager { border-color: #daa520; }
+        [data-theme="dark"] .filter-btn.lager.active,
+        [data-theme="dark"] .filter-btn.lager:hover { background: rgba(218, 165, 32, 0.3); border-color: #f0c040; color: #e8e4dc; }
+        [data-theme="dark"] .filter-btn.ipa { border-color: #228b22; }
+        [data-theme="dark"] .filter-btn.ipa.active,
+        [data-theme="dark"] .filter-btn.ipa:hover { background: rgba(34, 139, 34, 0.3); border-color: #32cd32; color: #e8e4dc; }
+        [data-theme="dark"] .filter-btn.other { border-color: #708090; }
+        [data-theme="dark"] .filter-btn.other.active,
+        [data-theme="dark"] .filter-btn.other:hover { background: rgba(112, 128, 144, 0.3); border-color: #a0a0a0; color: #e8e4dc; }
+
+        /* Dark mode - Wine cards */
+        [data-theme="dark"] .wine-card {
+            background: linear-gradient(145deg, #1a1025, #0b0b10);
+            border: 1px solid rgba(196, 168, 117, 0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(196, 168, 117, 0.1);
+        }
+
+        [data-theme="dark"] .wine-card:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 30px rgba(74, 14, 26, 0.3);
+            border-color: rgba(196, 168, 117, 0.4);
+        }
+
+        [data-theme="dark"] .wine-card.red .wine-card-header { background: linear-gradient(135deg, #551c2e, #3e0e1a); border-bottom-color: #462a30; }
+        [data-theme="dark"] .wine-card.white .wine-card-header { background: linear-gradient(135deg, #5a4a37, #443b28); border-bottom-color: #5e4e3a; }
+        [data-theme="dark"] .wine-card.rose .wine-card-header { background: linear-gradient(135deg, #5e4350, #3e2a32); border-bottom-color: #5a4050; }
+        [data-theme="dark"] .wine-card.orange .wine-card-header { background: linear-gradient(135deg, #573b1e, #362316); border-bottom-color: #55401e; }
+        [data-theme="dark"] .wine-card.sparkling .wine-card-header { background: linear-gradient(135deg, #7a6440, #564a38); border-bottom-color: #6e6040; }
+
+        [data-theme="dark"] .wine-card-body { background: #05050a; }
+        [data-theme="dark"] .wine-card .producer { color: rgba(255, 255, 255, 0.75); }
+        [data-theme="dark"] .wine-detail-label { color: #c4a875; }
+        [data-theme="dark"] .wine-detail-value { color: #e8e4dc; }
+        [data-theme="dark"] .pronunciation { background: #1a0a10; border-left-color: #c4a875; color: #b8b4ac; }
+        [data-theme="dark"] .tech-specs { background: #0d0813; border-color: rgba(196, 168, 117, 0.1); }
+        [data-theme="dark"] .tech-spec { color: #e8e4dc; }
+        [data-theme="dark"] .tech-spec-label { color: #c4a875; }
+        [data-theme="dark"] .blend-detail { color: #b8b4ac; }
+
+        /* Dark mode - Beer cards */
+        [data-theme="dark"] .beer-card {
+            background: linear-gradient(145deg, #1a1025, #0b0b10);
+            border: 1px solid rgba(196, 168, 117, 0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(196, 168, 117, 0.1);
+        }
+
+        [data-theme="dark"] .beer-card:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 30px rgba(139, 69, 19, 0.3);
+            border-color: rgba(196, 168, 117, 0.4);
+        }
+
+        [data-theme="dark"] .beer-card.ale .beer-card-header { background: linear-gradient(135deg, #572c10, #3a220a); border-bottom-color: #50291d; }
+        [data-theme="dark"] .beer-card.lager .beer-card-header { background: linear-gradient(135deg, #8a6818, #5c440c); border-bottom-color: #6e5020; }
+        [data-theme="dark"] .beer-card.ipa .beer-card-header { background: linear-gradient(135deg, #1a5718, #123214); border-bottom-color: #1e6618; }
+        [data-theme="dark"] .beer-card.other .beer-card-header { background: linear-gradient(135deg, #3a4248, #2a2e34); border-bottom-color: #484e54; }
+
+        [data-theme="dark"] .beer-card-body { background: #05050a; }
+        [data-theme="dark"] .beer-card .brewery { color: rgba(255, 255, 255, 0.75); }
+        [data-theme="dark"] .beer-detail-label { color: #c4a875; }
+        [data-theme="dark"] .beer-detail-value { color: #e8e4dc; }
+        [data-theme="dark"] .beer-specs { background: #0d0813; border-color: rgba(196, 168, 117, 0.1); }
+        [data-theme="dark"] .beer-spec { color: #e8e4dc; }
+        [data-theme="dark"] .beer-spec-label { color: #c4a875; }
+
+        /* Dark mode - Food cards */
+        [data-theme="dark"] .food-card {
+            background: linear-gradient(145deg, #1a1025, #0b0b10);
+            border: 1px solid rgba(196, 168, 117, 0.15);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        [data-theme="dark"] .food-card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-color: rgba(196, 168, 117, 0.3);
+        }
+
+        [data-theme="dark"] .food-card-header { color: #e8e4dc; }
+        [data-theme="dark"] .food-card.cheese .food-card-header { background: linear-gradient(135deg, #4a3e2c, #302818); }
+        [data-theme="dark"] .food-card.charcuterie .food-card-header { background: linear-gradient(135deg, #401220, #2a0c14); }
+        [data-theme="dark"] .food-card.flatbread .food-card-header { background: linear-gradient(135deg, #563a1e, #362010); }
+        [data-theme="dark"] .food-card.tapas .food-card-header { background: linear-gradient(135deg, #1e2c16, #161e0e); }
+        [data-theme="dark"] .food-card.pate .food-card-header { background: linear-gradient(135deg, #3a2e18, #241a0e); }
+        [data-theme="dark"] .food-card.dessert .food-card-header { background: linear-gradient(135deg, #4a1a32, #2e0e1e); }
+        [data-theme="dark"] .food-card .food-type { color: #c4a875; }
+        [data-theme="dark"] .food-card .food-description { color: #e8e4dc; }
+        [data-theme="dark"] .food-card .wine-pairings { background: #1a0a10; border-left-color: #c4a875; }
+        [data-theme="dark"] .food-card .wine-pairings-label { color: #c4a875; }
+        [data-theme="dark"] .food-card .wine-pairings-list { color: #e8e4dc; }
+
+        /* Dark mode - Quick ref tables */
+        [data-theme="dark"] .quick-ref table {
+            background: linear-gradient(145deg, rgba(26, 16, 37, 0.8), rgba(10, 10, 15, 0.9));
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            border-color: rgba(196, 168, 117, 0.15);
+        }
+
+        [data-theme="dark"] .quick-ref th,
+        [data-theme="dark"] .quick-ref td {
+            border-bottom-color: rgba(196, 168, 117, 0.1);
+            color: #e8e4dc;
+        }
+
+        [data-theme="dark"] .quick-ref th {
+            background: linear-gradient(135deg, rgba(74, 14, 26, 0.7), rgba(107, 28, 46, 0.6));
+            color: #c4a875;
+        }
+
+        [data-theme="dark"] .quick-ref tr:hover { background: rgba(196, 168, 117, 0.08); }
+
+        [data-theme="dark"] .type-badge.red { background: rgba(107, 28, 46, 0.8); }
+        [data-theme="dark"] .type-badge.white { background: rgba(139, 115, 85, 0.8); }
+        [data-theme="dark"] .type-badge.rose { background: rgba(154, 107, 122, 0.8); }
+        [data-theme="dark"] .type-badge.orange { background: rgba(139, 90, 43, 0.8); }
+        [data-theme="dark"] .type-badge.lager { background: rgba(218, 165, 32, 0.8); color: #0a0a0f; }
+
+        /* Dark mode - Score display */
+        [data-theme="dark"] .score-display {
+            background: linear-gradient(135deg, rgba(26, 16, 37, 0.9), rgba(10, 10, 15, 0.95));
+            color: #c4a875;
+            border-color: rgba(196, 168, 117, 0.2);
+        }
+
+        /* Dark mode - Quiz options */
+        [data-theme="dark"] .quiz-option {
+            color: #e8e4dc;
+            background: rgba(26, 16, 37, 0.6);
+            border-color: rgba(196, 168, 117, 0.2);
+        }
+
+        [data-theme="dark"] .quiz-option:hover {
+            background: rgba(74, 14, 26, 0.5);
+            border-color: rgba(196, 168, 117, 0.4);
+        }
+
+        [data-theme="dark"] .quiz-option label { color: #e8e4dc; }
+
+        /* Dark mode - Footer */
+        [data-theme="dark"] footer {
+            background: linear-gradient(180deg, transparent, rgba(10, 10, 15, 0.95));
+            color: #b8b4ac;
+            border-top-color: rgba(196, 168, 117, 0.2);
+        }
+
+        [data-theme="dark"] footer::before {
+            background: linear-gradient(90deg, transparent, #c4a875, transparent);
+        }
+
+        /* Dark mode - FAQ section */
+        [data-theme="dark"] .faq-title {
+            color: #c4a875;
+            text-shadow: 0 0 20px rgba(196, 168, 117, 0.3);
+        }
+
+        [data-theme="dark"] .faq-subtitle { color: #b8b4ac; }
+
+        [data-theme="dark"] .faq-filter-btn {
+            border-color: #8b7355;
+            color: #c4a875;
+        }
+
+        [data-theme="dark"] .faq-filter-btn:hover,
+        [data-theme="dark"] .faq-filter-btn.active {
+            background: rgba(196, 168, 117, 0.2);
+            color: #e8e4dc;
+            box-shadow: 0 0 15px rgba(196, 168, 117, 0.3);
+        }
+
+        [data-theme="dark"] .faq-card {
+            background: linear-gradient(145deg, rgba(26, 16, 37, 0.9), rgba(10, 10, 15, 0.95));
+            border-color: rgba(196, 168, 117, 0.2);
+        }
+
+        [data-theme="dark"] .faq-card::before {
+            background: linear-gradient(90deg, transparent, #c4a875, transparent);
+        }
+
+        [data-theme="dark"] .faq-card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(74, 14, 26, 0.3);
+            border-color: rgba(196, 168, 117, 0.4);
+        }
+
+        [data-theme="dark"] .faq-card.expanded {
+            border-color: #c4a875;
+            box-shadow: 0 0 25px rgba(196, 168, 117, 0.3);
+        }
+
+        [data-theme="dark"] .faq-question {
+            background: linear-gradient(135deg, rgba(74, 14, 26, 0.6), rgba(26, 16, 37, 0.8));
+        }
+
+        [data-theme="dark"] .faq-card:hover .faq-question {
+            background: linear-gradient(135deg, rgba(74, 14, 26, 0.8), rgba(26, 16, 37, 0.9));
+        }
+
+        [data-theme="dark"] .faq-icon {
+            background: rgba(196, 168, 117, 0.2);
+            border-color: #c4a875;
+            color: #e8e4dc;
+        }
+
+        [data-theme="dark"] .faq-card:hover .faq-icon {
+            background: rgba(196, 168, 117, 0.3);
+            color: #e8e4dc;
+        }
+
+        [data-theme="dark"] .faq-question-text { color: #e8e4dc; }
+        [data-theme="dark"] .faq-expand-icon { color: #c4a875; }
+        [data-theme="dark"] .faq-answer { background: rgba(10, 10, 15, 0.5); }
+        [data-theme="dark"] .faq-answer-content { color: #b8b4ac; }
+        [data-theme="dark"] .faq-answer-content strong { color: #c4a875; }
+        [data-theme="dark"] .faq-answer-content em { color: #e8e4dc; }
+
+        [data-theme="dark"] .faq-category-badge {
+            background: rgba(196, 168, 117, 0.2);
+            border-color: rgba(196, 168, 117, 0.3);
+            color: #c4a875;
+        }
+
+        [data-theme="dark"] .faq-tip {
+            background: rgba(74, 14, 26, 0.3);
+            border-left-color: #c4a875;
+        }
+
+        [data-theme="dark"] .faq-tip::before { color: #c4a875; }
+
+        /* Dark mode - Wine pairing cards in pairing section */
+        [data-theme="dark"] .wine-card .pairing-item { border-left-color: #c4a875; }
+        [data-theme="dark"] .wine-card .pairing-food { color: #c4a875; }
+        [data-theme="dark"] .wine-card .pairing-why { color: #b8b4ac; }
+
+        /* Dark mode - Continue button */
+        [data-theme="dark"] .btn-continue {
+            background: #c4a875;
+            color: #0a0a0f;
+        }
+
+        [data-theme="dark"] .btn-continue:hover {
+            background: #d4c4a8;
+        }
+
+        /* Dark mode - Enomatic hero */
+        [data-theme="dark"] .enomatic-hero {
+            background: linear-gradient(135deg, #6b1c2e 0%, #4a0e1a 100%);
+        }
+
+        /* Dark mode - Region card header */
+        [data-theme="dark"] .region-card-header {
+            background: linear-gradient(135deg, #6b1c2e 0%, #4a0e1a 100%);
+        }
+
+        /* Dark mode - Flashcard front */
+        [data-theme="dark"] .flashcard-front {
+            background: linear-gradient(135deg, #6b1c2e, #4a0e1a);
+        }
+
+        /* Dark mode - Model header */
+        [data-theme="dark"] .model-header {
+            background: linear-gradient(135deg, #6b1c2e 0%, #4a0e1a 100%);
+        }
+
+        /* Dark mode - Quiz settings, regions intro, print intro, enomatic intro, etc. (white panels) */
+        [data-theme="dark"] .quiz-settings,
+        [data-theme="dark"] .regions-intro,
+        [data-theme="dark"] .print-intro,
+        [data-theme="dark"] .enomatic-intro,
+        [data-theme="dark"] .enomatic-resources,
+        [data-theme="dark"] .benefit-card,
+        [data-theme="dark"] .model-card,
+        [data-theme="dark"] .region-card,
+        [data-theme="dark"] .print-card,
+        [data-theme="dark"] .flashcard-back {
+            background: #1a1025;
+            color: #e8e4dc;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        [data-theme="dark"] .quiz-settings h3,
+        [data-theme="dark"] .regions-intro h2,
+        [data-theme="dark"] .print-intro h2,
+        [data-theme="dark"] .enomatic-intro h3,
+        [data-theme="dark"] .enomatic-benefits h3,
+        [data-theme="dark"] .enomatic-models h3,
+        [data-theme="dark"] .enomatic-resources h3,
+        [data-theme="dark"] .benefit-card h4,
+        [data-theme="dark"] .resource-category h4,
+        [data-theme="dark"] .region-wines-title,
+        [data-theme="dark"] .print-label,
+        [data-theme="dark"] .country-title,
+        [data-theme="dark"] .print-category-title,
+        [data-theme="dark"] .flashcard-back .flashcard-label {
+            color: #c4a875;
+        }
+
+        [data-theme="dark"] .regions-intro p,
+        [data-theme="dark"] .print-intro p,
+        [data-theme="dark"] .enomatic-intro p,
+        [data-theme="dark"] .benefit-card p,
+        [data-theme="dark"] .model-description,
+        [data-theme="dark"] .model-features li,
+        [data-theme="dark"] .region-description,
+        [data-theme="dark"] .models-intro,
+        [data-theme="dark"] .enomatic-resources > p,
+        [data-theme="dark"] .print-value,
+        [data-theme="dark"] .flashcard-back .flashcard-value {
+            color: #e8e4dc;
+        }
+
+        [data-theme="dark"] .region-wines { background: #0d0813; }
+        [data-theme="dark"] .region-wines-list { color: #b8b4ac; }
+        [data-theme="dark"] .region-fact-label { color: #8b7355; }
+        [data-theme="dark"] .region-fact-value { color: #e8e4dc; }
+        [data-theme="dark"] .country-title { border-bottom-color: #c4a875; }
+        [data-theme="dark"] .print-category-title { border-bottom-color: #c4a875; }
+        [data-theme="dark"] .model-specs { border-top-color: rgba(196, 168, 117, 0.2); }
+        [data-theme="dark"] .model-specs span { background: #0d0813; color: #e8e4dc; }
+        [data-theme="dark"] .resource-category h4 { border-bottom-color: #c4a875; }
+        [data-theme="dark"] .resource-links a { color: #c4a875; }
+        [data-theme="dark"] .resource-links a:hover { color: #e8e4dc; }
+        [data-theme="dark"] .resource-links a::before { color: #c4a875; }
+        [data-theme="dark"] .model-features li::before { color: #c4a875; }
+
+        /* Dark mode - Flashcard controls */
+        [data-theme="dark"] .flashcard-controls button {
+            background: #6b1c2e;
+        }
+
+        [data-theme="dark"] .flashcard-controls button:hover {
+            background: #4a0e1a;
+        }
+
+        [data-theme="dark"] .flashcard-controls button.active {
+            background: #c4a875;
+            color: #0a0a0f;
+        }
+
+        /* Dark mode - Flashcard nav */
+        [data-theme="dark"] .flashcard-nav button {
+            background: #6b1c2e;
+        }
+
+        [data-theme="dark"] .flashcard-nav button:hover {
+            background: #4a0e1a;
+        }
+
+        [data-theme="dark"] .flashcard-counter { color: #e8e4dc; }
+
+        [data-theme="dark"] .flashcard-shuffle button {
+            background: #c4a875;
+            color: #0a0a0f;
+        }
+
+        /* Dark mode - Disable fog/vines on mobile */
+        @media (max-width: 768px) {
+            [data-theme="dark"] .fog-layer {
+                animation: none;
+                width: 100%;
+            }
+
+            [data-theme="dark"] .vines-overlay {
+                display: none;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -3013,177 +3553,35 @@
     <div class="content-layer">
 
     <header>
+        <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+            <span class="theme-toggle-icon" id="themeIcon">&#9790;</span>
+        </button>
         <div class="header-content">
-            <!-- Gothic Logo: Haunting Dark Tree with White Crow -->
-            <svg class="gothic-logo" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
-                <!-- Background Glow -->
-                <defs>
-                    <radialGradient id="moonGlow" cx="50%" cy="30%" r="60%">
-                        <stop offset="0%" style="stop-color:#2a2035;stop-opacity:0.8"/>
-                        <stop offset="100%" style="stop-color:transparent;stop-opacity:0"/>
-                    </radialGradient>
-                    <filter id="glow">
-                        <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                        <feMerge>
-                            <feMergeNode in="coloredBlur"/>
-                            <feMergeNode in="SourceGraphic"/>
-                        </feMerge>
-                    </filter>
-                </defs>
-
-                <!-- Moon/Mist Background -->
-                <ellipse cx="140" cy="60" rx="80" ry="60" fill="url(#moonGlow)"/>
-
-                <!-- Dark Tree Trunk -->
-                <path d="M140,195 L140,120 Q138,100 130,85 L125,70
-                         M140,120 Q142,105 150,90 L155,75
-                         M140,140 Q130,135 115,130
-                         M140,140 Q150,138 165,135"
-                      stroke="#1a1520" stroke-width="8" fill="none" stroke-linecap="round"/>
-
-                <!-- Tree Branches - Gnarled and Gothic -->
-                <path d="M125,70 Q115,55 100,45 Q85,38 70,40
-                         M125,70 Q120,50 110,35 Q100,25 95,20
-                         M155,75 Q165,60 180,50 Q195,45 210,48
-                         M155,75 Q160,55 175,40 Q185,30 195,25
-                         M115,130 Q95,125 75,130 Q60,135 50,145
-                         M165,135 Q185,130 205,135 Q220,140 230,150"
-                      stroke="#1a1520" stroke-width="4" fill="none" stroke-linecap="round"/>
-
-                <!-- Additional Upper Branches -->
-                <path d="M125,70 Q130,55 125,40 Q120,28 110,18
-                         M125,70 Q108,62 92,58 Q78,55 65,60
-                         M155,75 Q150,58 155,42 Q160,28 172,18
-                         M155,75 Q172,68 188,65 Q202,62 218,68"
-                      stroke="#1a1520" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-
-                <!-- Mid-level Branches -->
-                <path d="M130,95 Q115,88 98,92 Q82,96 68,105
-                         M150,95 Q165,88 182,92 Q198,96 212,105
-                         M135,110 Q118,105 100,110 Q85,116 72,128
-                         M145,110 Q162,105 180,110 Q195,116 208,128"
-                      stroke="#1a1520" stroke-width="3" fill="none" stroke-linecap="round"/>
-
-                <!-- Smaller Twigs -->
-                <path d="M70,40 Q60,35 55,30 M70,40 Q65,50 58,55
-                         M95,20 Q90,12 82,8 M95,20 Q102,15 108,10
-                         M210,48 Q220,42 228,38 M210,48 Q215,58 222,62
-                         M195,25 Q200,18 208,15 M195,25 Q188,20 182,15
-                         M50,145 Q40,150 35,158 M50,145 Q45,138 38,135
-                         M230,150 Q240,155 248,162 M230,150 Q235,142 242,138"
-                      stroke="#1a1520" stroke-width="2" fill="none" stroke-linecap="round"/>
-
-                <!-- More Fine Twigs -->
-                <path d="M110,18 Q105,10 98,5 M110,18 Q118,12 125,8
-                         M65,60 Q55,58 48,62 M65,60 Q60,68 52,75
-                         M172,18 Q178,10 185,5 M172,18 Q165,12 158,8
-                         M218,68 Q228,65 238,70 M218,68 Q222,78 230,85
-                         M68,105 Q58,102 50,108 M68,105 Q62,115 55,122
-                         M212,105 Q222,102 230,108 M212,105 Q218,115 225,122
-                         M72,128 Q62,132 55,140 M72,128 Q68,138 60,148
-                         M208,128 Q218,132 225,140 M208,128 Q212,138 220,148"
-                      stroke="#1a1520" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-
-                <!-- Tiny Twig Details -->
-                <path d="M55,30 Q48,25 42,28 M58,55 Q52,60 48,68
-                         M82,8 Q75,2 68,5 M108,10 Q115,4 122,6
-                         M228,38 Q235,32 242,35 M222,62 Q228,68 235,72
-                         M208,15 Q215,8 222,10 M182,15 Q175,8 168,10
-                         M35,158 Q28,165 22,168 M38,135 Q30,130 24,132
-                         M248,162 Q255,168 260,172 M242,138 Q250,132 258,135
-                         M98,5 Q92,0 85,2 M125,8 Q132,2 140,4
-                         M185,5 Q192,0 200,2 M158,8 Q150,2 142,4"
-                      stroke="#1a1520" stroke-width="1" fill="none" stroke-linecap="round"/>
-
-                <!-- Tree Leaves - Scattered Throughout -->
-                <!-- Upper Left Leaf Clusters -->
-                <ellipse cx="52" cy="28" rx="8" ry="5" fill="#1a1520" transform="rotate(-20 52 28)"/>
-                <ellipse cx="42" cy="35" rx="7" ry="4" fill="#251a25" transform="rotate(-35 42 35)"/>
-                <ellipse cx="68" cy="8" rx="9" ry="5" fill="#1a1520" transform="rotate(15 68 8)"/>
-                <ellipse cx="85" cy="5" rx="8" ry="4" fill="#201520" transform="rotate(-10 85 5)"/>
-                <ellipse cx="98" cy="12" rx="7" ry="4" fill="#251a25" transform="rotate(25 98 12)"/>
-                <ellipse cx="110" cy="5" rx="8" ry="5" fill="#1a1520" transform="rotate(-5 110 5)"/>
-                <ellipse cx="125" cy="10" rx="7" ry="4" fill="#201520" transform="rotate(20 125 10)"/>
-                <ellipse cx="140" cy="5" rx="9" ry="5" fill="#1a1520" transform="rotate(0 140 5)"/>
-
-                <!-- Upper Right Leaf Clusters -->
-                <ellipse cx="158" cy="8" rx="8" ry="5" fill="#251a25" transform="rotate(-15 158 8)"/>
-                <ellipse cx="175" cy="12" rx="7" ry="4" fill="#1a1520" transform="rotate(30 175 12)"/>
-                <ellipse cx="188" cy="5" rx="8" ry="5" fill="#201520" transform="rotate(-25 188 5)"/>
-                <ellipse cx="200" cy="10" rx="9" ry="5" fill="#1a1520" transform="rotate(10 200 10)"/>
-                <ellipse cx="215" cy="18" rx="7" ry="4" fill="#251a25" transform="rotate(-20 215 18)"/>
-                <ellipse cx="228" cy="35" rx="8" ry="5" fill="#1a1520" transform="rotate(25 228 35)"/>
-                <ellipse cx="238" cy="42" rx="7" ry="4" fill="#201520" transform="rotate(-30 238 42)"/>
-                <ellipse cx="242" cy="30" rx="6" ry="4" fill="#251a25" transform="rotate(15 242 30)"/>
-
-                <!-- Mid-Left Leaves -->
-                <ellipse cx="48" cy="55" rx="8" ry="5" fill="#1a1520" transform="rotate(-25 48 55)"/>
-                <ellipse cx="55" cy="68" rx="7" ry="4" fill="#251a25" transform="rotate(20 55 68)"/>
-                <ellipse cx="62" cy="58" rx="6" ry="4" fill="#201520" transform="rotate(-10 62 58)"/>
-                <ellipse cx="50" cy="105" rx="8" ry="5" fill="#1a1520" transform="rotate(35 50 105)"/>
-                <ellipse cx="58" cy="115" rx="7" ry="4" fill="#251a25" transform="rotate(-15 58 115)"/>
-                <ellipse cx="55" cy="125" rx="8" ry="5" fill="#1a1520" transform="rotate(25 55 125)"/>
-                <ellipse cx="62" cy="135" rx="6" ry="4" fill="#201520" transform="rotate(-20 62 135)"/>
-                <ellipse cx="48" cy="140" rx="7" ry="4" fill="#251a25" transform="rotate(30 48 140)"/>
-
-                <!-- Mid-Right Leaves -->
-                <ellipse cx="225" cy="62" rx="8" ry="5" fill="#1a1520" transform="rotate(25 225 62)"/>
-                <ellipse cx="232" cy="75" rx="7" ry="4" fill="#251a25" transform="rotate(-20 232 75)"/>
-                <ellipse cx="218" cy="85" rx="6" ry="4" fill="#201520" transform="rotate(10 218 85)"/>
-                <ellipse cx="225" cy="105" rx="8" ry="5" fill="#1a1520" transform="rotate(-35 225 105)"/>
-                <ellipse cx="215" cy="118" rx="7" ry="4" fill="#251a25" transform="rotate(15 215 118)"/>
-                <ellipse cx="222" cy="130" rx="8" ry="5" fill="#1a1520" transform="rotate(-25 222 130)"/>
-                <ellipse cx="232" cy="142" rx="6" ry="4" fill="#201520" transform="rotate(20 232 142)"/>
-                <ellipse cx="245" cy="155" rx="7" ry="4" fill="#251a25" transform="rotate(-30 245 155)"/>
-
-                <!-- Lower Leaves -->
-                <ellipse cx="35" cy="155" rx="7" ry="4" fill="#1a1520" transform="rotate(-15 35 155)"/>
-                <ellipse cx="28" cy="165" rx="6" ry="4" fill="#251a25" transform="rotate(25 28 165)"/>
-                <ellipse cx="252" cy="165" rx="7" ry="4" fill="#1a1520" transform="rotate(15 252 165)"/>
-                <ellipse cx="258" cy="155" rx="6" ry="4" fill="#201520" transform="rotate(-25 258 155)"/>
-
-                <!-- Center Crown Leaves -->
-                <ellipse cx="92" cy="55" rx="7" ry="4" fill="#1a1520" transform="rotate(-30 92 55)"/>
-                <ellipse cx="78" cy="52" rx="6" ry="4" fill="#251a25" transform="rotate(20 78 52)"/>
-                <ellipse cx="188" cy="58" rx="7" ry="4" fill="#1a1520" transform="rotate(30 188 58)"/>
-                <ellipse cx="202" cy="55" rx="6" ry="4" fill="#201520" transform="rotate(-20 202 55)"/>
-                <ellipse cx="100" cy="90" rx="7" ry="4" fill="#251a25" transform="rotate(15 100 90)"/>
-                <ellipse cx="180" cy="90" rx="7" ry="4" fill="#1a1520" transform="rotate(-15 180 90)"/>
-                <ellipse cx="85" cy="108" rx="6" ry="4" fill="#201520" transform="rotate(-25 85 108)"/>
-                <ellipse cx="195" cy="108" rx="6" ry="4" fill="#251a25" transform="rotate(25 195 108)"/>
-
-                <!-- White Crow Perched on Right Branch -->
-                <g filter="url(#glow)">
-                    <!-- Crow Body -->
-                    <ellipse cx="195" cy="42" rx="12" ry="8" fill="#e8e4dc"/>
-                    <!-- Crow Head -->
-                    <circle cx="207" cy="36" r="7" fill="#e8e4dc"/>
-                    <!-- Beak -->
-                    <path d="M213,36 L220,42 L213,40 Z" fill="#1a1520"/>
-                    <!-- Eye -->
-                    <circle cx="210" cy="35" r="2" fill="#1a1520"/>
-                    <circle cx="210.5" cy="34.5" r="0.5" fill="#4a0e1a"/>
-                    <!-- Wing -->
-                    <path d="M185,40 Q190,48 200,50 Q195,45 188,38 Z" fill="#d4d0c8"/>
-                    <!-- Tail Feathers -->
-                    <path d="M183,42 L170,48 M183,44 L172,52 M183,46 L175,55" stroke="#e8e4dc" stroke-width="2" stroke-linecap="round"/>
-                    <!-- Crow Feet on Branch -->
-                    <path d="M192,50 L190,56 M194,50 L196,56 M196,50 L200,55" stroke="#1a1520" stroke-width="1.5" stroke-linecap="round"/>
-                </g>
-
-                <!-- Old Wine Cask at Base -->
-                <ellipse cx="140" cy="192" rx="35" ry="8" fill="#1a1520"/>
-                <path d="M105,180 Q100,185 105,192 L175,192 Q180,185 175,180 Z" fill="#2d1f2d" stroke="#3d2a3d" stroke-width="1"/>
-                <ellipse cx="140" cy="180" rx="35" ry="7" fill="#3d2a3d" stroke="#4a3a4a" stroke-width="0.5"/>
-                <!-- Cask Bands -->
-                <path d="M108,183 Q140,186 172,183" stroke="#5a4a5a" stroke-width="1.5" fill="none"/>
-                <path d="M106,188 Q140,191 174,188" stroke="#5a4a5a" stroke-width="1.5" fill="none"/>
-                <!-- Cask Bung -->
-                <circle cx="140" cy="180" r="3" fill="#4a3a4a"/>
+            <!-- Decorative Grape Cluster Logo -->
+            <svg class="gothic-logo" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+                <!-- Grape Cluster -->
+                <circle cx="50" cy="52" r="7" fill="#4a1a28" opacity="0.7"/>
+                <circle cx="63" cy="48" r="7" fill="#4a1a28" opacity="0.7"/>
+                <circle cx="76" cy="52" r="7" fill="#4a1a28" opacity="0.7"/>
+                <circle cx="44" cy="40" r="6.5" fill="#4a1a28" opacity="0.6"/>
+                <circle cx="56" cy="37" r="6.5" fill="#4a1a28" opacity="0.6"/>
+                <circle cx="69" cy="37" r="6.5" fill="#4a1a28" opacity="0.6"/>
+                <circle cx="82" cy="40" r="6.5" fill="#4a1a28" opacity="0.6"/>
+                <circle cx="50" cy="27" r="6" fill="#4a1a28" opacity="0.5"/>
+                <circle cx="63" cy="25" r="6" fill="#4a1a28" opacity="0.5"/>
+                <circle cx="76" cy="27" r="6" fill="#4a1a28" opacity="0.5"/>
+                <circle cx="57" cy="15" r="5" fill="#4a1a28" opacity="0.4"/>
+                <circle cx="69" cy="15" r="5" fill="#4a1a28" opacity="0.4"/>
+                <circle cx="63" cy="7" r="4" fill="#4a1a28" opacity="0.3"/>
+                <!-- Stem -->
+                <path d="M63,3 Q58,-5 50,-8" stroke="#4a1a28" stroke-width="1.5" fill="none" opacity="0.5"/>
+                <!-- Leaves -->
+                <ellipse cx="48" cy="-6" rx="8" ry="4" fill="#4a1a28" opacity="0.3" transform="rotate(25 48 -6)"/>
+                <ellipse cx="55" cy="-10" rx="7" ry="3.5" fill="#4a1a28" opacity="0.25" transform="rotate(-15 55 -10)"/>
             </svg>
 
             <h1>Ardoa</h1>
-            <p>Wine Bar & Tasting Room</p>
+            <p>French Wine Bar & Shop</p>
         </div>
     </header>
 
@@ -3191,6 +3589,7 @@
         <button class="active" onclick="showSection('techsheets', this)">Wine List</button>
         <button onclick="showSection('beerlist', this)">Beer List</button>
         <button onclick="showSection('food', this)">Food Menu</button>
+        <button onclick="showSection('foodpairings', this)">Food Pairings</button>
         <button onclick="showSection('flashcards', this)">Wine Quiz</button>
         <button onclick="showSection('onlineflashcards', this)">Online Flashcards</button>
         <button onclick="showSection('quickref', this)">Quick Reference</button>
@@ -3202,11 +3601,11 @@
 
     <main>
         <noscript>
-            <div style="background: linear-gradient(145deg, #1a1025, #0b0b10); border: 1px solid #8b7355; padding: 2rem; margin: 1rem; text-align: center;">
-                <h2 style="color: #c4a875; font-family: serif; margin-bottom: 1rem;">JavaScript Required</h2>
-                <p style="color: #e8e4dc; font-family: serif; font-size: 1.1rem; line-height: 1.6;">
+            <div style="background: #f8f5f0; border: 1px solid #e0d8d0; padding: 2rem; margin: 1rem; text-align: center;">
+                <h2 style="color: #4a1a28; font-family: serif; margin-bottom: 1rem;">JavaScript Required</h2>
+                <p style="color: #2c2c2c; font-family: serif; font-size: 1.1rem; line-height: 1.6;">
                     This study guide needs JavaScript to display content.<br><br>
-                    <strong style="color: #c4a875;">On iPhone:</strong> Tap the share icon (square with arrow) and choose <strong style="color: #c4a875;">"Open in Safari"</strong> to view the full site.
+                    <strong style="color: #4a1a28;">On iPhone:</strong> Tap the share icon (square with arrow) and choose <strong style="color: #4a1a28;">"Open in Safari"</strong> to view the full site.
                 </p>
             </div>
         </noscript>
@@ -3274,6 +3673,17 @@
             </div>
         </section>
 
+        <!-- Food Pairings Section -->
+        <section id="foodpairings">
+            <div class="section-header">
+                <h2 class="section-title">Wine & Food Pairings</h2>
+                <p class="section-subtitle">What to recommend with each wine — and why it works</p>
+            </div>
+            <div id="foodPairingsGrid" class="wine-grid">
+                <!-- Food pairing cards inserted by JavaScript -->
+            </div>
+        </section>
+
         <!-- Flashcards Section -->
         <section id="flashcards">
             <div class="flashcard-container">
@@ -3331,6 +3741,7 @@
                     <button class="flashcard-btn btn-incorrect" onclick="markAnswer(false)">Missed It</button>
                     <button class="flashcard-btn btn-next" onclick="nextQuizCard()">Skip</button>
                     <button class="flashcard-btn btn-reset" onclick="resetQuiz()">Reset Quiz</button>
+                    <button class="flashcard-btn btn-continue" id="btnContinue" onclick="continueAfterAnswer()" style="display:none;">Next Question</button>
                 </div>
             </div>
         </section>
@@ -4218,7 +4629,7 @@
         <section id="printcards">
             <div class="print-intro">
                 <h2>Printable Study Cards</h2>
-                <p>Print these cards to study away from your computer. Each card includes all key information with food pairing explanations.</p>
+                <p>Print these cards to study away from your computer. Each card includes key information about grape, region, tasting notes, and winemaker.</p>
                 <button class="print-btn" onclick="window.print()">Print All Cards</button>
             </div>
 
@@ -4328,27 +4739,26 @@
             },
             // Position 3
             {
-                name: "Château de Trignon Côtes du Rhône",
-                vintage: "2022",
+                name: "Red Tail Ridge Pinot Noir RTR Estate Vineyard",
+                vintage: "2019",
                 type: "red",
-                grape: "Grenache 60%, Syrah 30%, Mourvèdre 10%",
-                grapeDetail: "Classic GSM (Grenache-Syrah-Mourvèdre) Southern Rhône blend",
-                region: "Côtes du Rhône",
-                country: "France",
-                pronunciation: "sha-TOH duh tree-NYOHN coat doo ROHN",
-                winemaker: "Famille Quiot - 5th generation winemakers in the Southern Rhône since 1748, making them one of the region's oldest wine families. Château de Trignon sits in the heart of the Côtes du Rhône near Sablet, with 60 hectares of vines across multiple appellations. The family practices organic viticulture and uses a mix of concrete tanks and large oak foudres to preserve the wine's fresh fruit character while adding subtle complexity. Their motto: respect the land, express the terroir.",
-                tasting: "Ripe dark fruits (blackberry, plum), spice (white pepper, clove), garrigue herbs (thyme, lavender, rosemary), medium body with soft tannins and a warm, lingering finish.",
-                food: "Chorizo, Salchichon De Bellota, Ewephoria, Mimolette, Tapenade",
+                grape: "100% Pinot Noir",
+                grapeDetail: "Cool-climate Pinot Noir from the Finger Lakes—elegant, Burgundian in style, from a LEED Gold-certified estate run by a UC Davis grape geneticist.",
+                region: "Finger Lakes",
+                country: "USA",
+                winemaker: "Nancy Irelan & Mike Schnelle — Nancy holds a PhD in grape genetics from UC Davis (studied under Dr. Carole Meredith, who discovered Cabernet Sauvignon's parentage). She spent 12 years at E&J Gallo rising to VP of Viticulture & Enology R&D before leaving to start Red Tail Ridge on Seneca Lake's western shore. James Beard Award semifinalist. Mike manages the 35-acre estate vineyard with sustainable practices. Their winery was the first LEED Gold-certified in New York State, powered by geothermal energy.",
+                tasting: "Red cherry, raspberry, and rhubarb on the nose. Deep plum and cassis framed by rose petal and spice on the palate. Violet and anise mid-palate with vanilla and smoke on the finish. Light to medium body, silky tannins, bright Finger Lakes acidity. Burgundian elegance.",
+                food: "Prosciutto di Parma, Pâté de Campagne, Petit Basque, Black Truffle Goat, The Basque flatbread",
                 foodPairings: [
-                    { item: "Chorizo", why: "Spanish paprika spice mirrors the wine's peppery, herbal notes - a Mediterranean match" },
-                    { item: "Salchichon De Bellota", why: "The nutty, rich Ibérico pork complements the wine's dark fruit and garrigue complexity" },
-                    { item: "Ewephoria", why: "Aged sheep Gouda's butterscotch sweetness balances the wine's spicy, herbal character" },
-                    { item: "Mimolette", why: "Nutty, caramel notes in the cheese echo the wine's warm, lingering finish" },
-                    { item: "Tapenade", why: "Briny olives and capers match the wine's Mediterranean herb profile perfectly" }
+                    { item: "Prosciutto di Parma", why: "Delicate cherry and raspberry fruit mirrors the ham's sweetness; silky tannins complement its buttery fat" },
+                    { item: "Pâté de Campagne", why: "Earthy rustic pâté echoes the wine's violet and smoke notes; bright acidity cuts through the richness" },
+                    { item: "Petit Basque", why: "Mild sheep's milk cheese won't overpower this elegant Pinot; nutty flavors complement the wine's spice" },
+                    { item: "Black Truffle Goat", why: "Truffle's earthy umami pairs beautifully with the wine's plum and anise complexity" },
+                    { item: "The Basque flatbread", why: "Prosciutto and fig jam on the flatbread echo the wine's fruit-forward, savory character" }
                 ],
-                alcohol: "14%",
-                serving: "Room temperature (60-65°F / 16-18°C)",
-                notes: "GSM (Grenache-Syrah-Mourvèdre) is the signature blend of the Southern Rhône. 'Garrigue' refers to the wild Mediterranean scrubland—thyme, lavender, rosemary, and juniper grow wild among the vines and infuse the wines with their aromatic character. The Mistral wind (cold, dry, blowing down the Rhône Valley) is crucial here: it dries the grapes, preventing disease and concentrating flavors. Côtes du Rhône is France's second-largest AOC after Bordeaux."
+                alcohol: "13%",
+                serving: "Slightly chilled (55-60°F / 13-16°C)",
+                notes: "Pinot Noir is called the 'Heartbreak Grape' because it's notoriously difficult to grow—thin-skinned, susceptible to disease, and demanding of specific climate conditions. The Finger Lakes succeeds because Seneca Lake (the deepest of the eleven Finger Lakes at 618 feet) acts as a thermal regulator: its massive water volume absorbs summer heat and releases it in autumn, extending the growing season and protecting vines from early frost. Nancy Irelan's mentor Dr. Carole Meredith made history by using DNA profiling to discover that Cabernet Sauvignon is a cross of Cabernet Franc and Sauvignon Blanc. The 2019 vintage was rated 92 points by Wine Enthusiast."
             },
             // Position 4
             {
@@ -4445,27 +4855,27 @@
             },
             // Position 8
             {
-                name: "Beaujolais Villages Marine Decome Mary Taylor",
-                vintage: "2023",
+                name: "Cims de Porrera Vi de Vila Priorat",
+                vintage: "2020",
                 type: "red",
-                grape: "100% Gamay",
-                grapeDetail: "Gamay Noir à Jus Blanc - the signature grape of Beaujolais, known for bright fruit and low tannins",
-                region: "Beaujolais Villages",
-                country: "France",
-                pronunciation: "boh-zhoh-LAY vee-LAHZH mah-REEN deh-KOHM",
-                winemaker: "Marine Decome - A rising star among young French winemakers, crafting pure, expressive Gamay in Beaujolais. Her wines are imported by Mary Taylor Wines, a company dedicated to discovering authentic, terroir-driven French wines from small, often female-led producers. Marine farms organically and uses carbonic maceration (whole-cluster fermentation), the traditional Beaujolais technique that creates those signature juicy, aromatic wines. Her approach is minimal intervention: native yeasts, no fining or filtration.",
-                tasting: "Fresh red fruits (cherry, raspberry, strawberry), light-bodied with silky texture, floral notes (violet), and a hint of minerality. Juicy and refreshing.",
-                food: "Prosciutto di Parma, Black Pepper Salami, Saint Angel, Petit Basque, The Basque flatbread",
+                grape: "Carinyena (Carignan) 60%, Garnatxa Negra (Grenache) 40%",
+                grapeDetail: "The two native grapes of Priorat, grown on old vines (10-60+ years) across 22 separate vineyard plots in the village of Porrera.",
+                region: "Priorat DOQ",
+                country: "Spain",
+                pronunciation: "SEEMS deh poh-REH-rah VEE deh VEE-lah pree-oh-RAHT",
+                winemaker: "Cims de Porrera — Founded in 1996 by Josep Lluís Pérez (one of Priorat's five original pioneers who revived the region in the 1980s, also of Mas Martinet) and Lluís Llach (legendary Catalan singer-songwriter whose protest song 'L'Estaca' became an anthem of resistance against Franco). Now run by second-generation cousins Adrià and Marc Pérez. The winery partners with 18 cooperative growers to rescue ancient vines on extreme 40-60% gradient slate slopes. Hand-harvest only. Native yeast fermentation.",
+                tasting: "Intense cherry-red color. Ripe red fruits, wild berries, and violets on the nose. Full-bodied with bramble, plum, black pepper, and balsamic nuances. Velvety tannins, fresh acidity, and distinctive llicorella slate minerality. Long, persistent finish.",
+                food: "Chorizo, Salchichón De Bellota, Ewephoria, Soppressata Salame w/ Burgundy, The Mighty Spicy flatbread",
                 foodPairings: [
-                    { item: "Prosciutto di Parma", why: "The wine's fresh acidity cuts through the ham's salt and fat, cherry notes complement the meat's sweetness" },
-                    { item: "Black Pepper Salami", why: "Light body won't overpower the salami; bright fruit balances the pepper spice" },
-                    { item: "Saint Angel", why: "Rich triple-crème needs a light, fruity wine to cleanse the palate between bites" },
-                    { item: "Petit Basque", why: "Mild sheep's milk cheese pairs perfectly with the wine's delicate floral and fruit notes" },
-                    { item: "The Basque flatbread", why: "Fig jam sweetness and prosciutto echo the wine's fruit-forward, savory balance" }
+                    { item: "Chorizo", why: "Spanish paprika and garlic in chorizo is a natural regional pairing with this bold Priorat" },
+                    { item: "Salchichón De Bellota", why: "Rich Ibérico acorn-fed pork complements the wine's dark fruit depth and peppery spice" },
+                    { item: "Ewephoria", why: "Aged sheep Gouda's butterscotch and caramel notes balance the wine's powerful minerality" },
+                    { item: "Soppressata Salame w/ Burgundy", why: "Wine-infused salami echoes the wine's dark fruit and balsamic complexity" },
+                    { item: "The Mighty Spicy flatbread", why: "Bold spicy flavors stand up to this full-bodied, high-alcohol Priorat" }
                 ],
-                alcohol: "12.5%",
-                serving: "Slightly chilled (55-60°F / 13-15°C)",
-                notes: "Beaujolais Villages is a step up from basic Beaujolais, coming from 38 designated villages with superior terroir—granite and schist soils that give wines more structure and minerality. The region uses 'carbonic maceration': whole grape clusters ferment in a carbon dioxide atmosphere, extracting color and flavor without harsh tannins. This creates Gamay's signature juicy, fruity style. Serve Beaujolais slightly chilled—it's the perfect 'red wine for white wine lovers.'"
+                alcohol: "15%",
+                serving: "Slightly cool (54-59°F / 12-15°C)",
+                notes: "DOQ Priorat is one of only two Spanish wine regions with the highest DOCa/DOQ classification (alongside Rioja). The region was nearly abandoned until five pioneers—René Barbier, Álvaro Palacios, Josep Lluís Pérez, Daphne Glorian, and Carles Pastrana—arrived in the late 1980s and revived it. The secret is 'llicorella'—a unique soil of broken black slate and quartz that forces vine roots deep for water, producing tiny yields of incredibly concentrated fruit. 'Vi de Vila' means 'Wine of the Village' in Catalan, a classification system inspired by Burgundy that maps wines to specific village terroirs. Porrera is one of Priorat's 12 villages."
             },
             // Position 9
             {
@@ -4516,26 +4926,27 @@
             },
             // Position 11
             {
-                name: "Gorghi Tondi Rosa dei Venti Nerello Mascalese",
-                vintage: "2023",
+                name: "Folly by Mascaronne Rosé Côtes de Provence",
+                vintage: "2024",
                 type: "rose",
-                grape: "100% Nerello Mascalese",
-                grapeDetail: "Nerello Mascalese is usually a red grape from Mt. Etna. This rosé expression showcases its aromatic, delicate side.",
-                region: "Sicily",
-                country: "Italy",
-                winemaker: "Gorghi Tondi - A certified organic estate in western Sicily near Marsala, founded by the Ferreri family. 'Rosa dei Venti' means 'Compass Rose'—a poetic name reflecting the Mediterranean winds (Scirocco, Maestrale) that constantly sweep across their coastal vineyards, naturally protecting against disease and concentrating flavors. The winery focuses on indigenous Sicilian varieties, believing they best express the island's unique terroir. All wines are certified organic.",
-                tasting: "White peach, citrus, almond, delicate floral notes. Light to medium body with fresh acidity and subtle minerality. Unique and aromatic.",
+                grape: "Grenache 40%, Cinsault 35%, Mourvèdre 15%, Syrah 10%",
+                grapeDetail: "Classic Provence rosé blend of four traditional grape varieties, direct-pressed for the characteristically pale, delicate Provençal style.",
+                region: "Côtes de Provence",
+                country: "France",
+                pronunciation: "mas-kah-RONN KOHT duh pro-VAHNSS",
+                winemaker: "Château La Mascaronne — Owned by Michel Reybier (who also owns Cos d'Estournel, a Second Growth Bordeaux). NBA legend Tony Parker partnered as winemaker-ambassador in 2022 and co-created the Folly cuvée. Technical Director Nathalie Longefay oversees organic viticulture and winemaking. The estate was previously owned by American Tom Bove, who also formerly owned Château Miraval (later sold to Brad Pitt & Angelina Jolie for $60 million). Certified organic since 2016. Grapes hand-harvested at dawn and sorted twice before pressing.",
+                tasting: "Pale pink with silvery highlights. Honeyed nectarine, white flowers, and pear on the nose. Apricot, fresh citrus, and mineral backbone on the palate. Light and refreshing with a clean, lingering finish.",
                 food: "Prosciutto di Parma, Hummus, Petit Basque, Antipasto Vegetable Blend, The Veg flatbread",
                 foodPairings: [
-                    { item: "Prosciutto di Parma", why: "Delicate, aromatic wine complements the ham's sweetness without overpowering" },
-                    { item: "Hummus", why: "Light, refreshing wine perfect for casual Mediterranean snacking" },
-                    { item: "Petit Basque", why: "Mild sheep cheese pairs with the wine's almond and floral notes" },
-                    { item: "Antipasto Vegetable Blend", why: "Italian wine with Italian antipasto - natural pairing" },
-                    { item: "The Veg flatbread", why: "Aromatic wine complements fresh vegetables and Mediterranean flavors" }
+                    { item: "Prosciutto di Parma", why: "Delicate pink fruit and minerality complement the ham's sweetness; fresh acidity cuts through the salt" },
+                    { item: "Hummus", why: "Light, refreshing Provence rosé is the quintessential Mediterranean aperitif pairing" },
+                    { item: "Petit Basque", why: "Mild sheep's milk cheese pairs naturally with the wine's nectarine and floral notes" },
+                    { item: "Antipasto Vegetable Blend", why: "Mediterranean vegetables echo the wine's Provençal character and fresh acidity" },
+                    { item: "The Veg flatbread", why: "Fresh vegetable and arugula flavors complement this light, mineral-driven rosé" }
                 ],
-                alcohol: "12.5%",
-                serving: "Well chilled (45-50°F / 7-10°C)",
-                notes: "Nerello Mascalese is usually famous for red Etna Rosso wines from the volcanic slopes of Mt. Etna, where it's often compared to Nebbiolo or Pinot Noir. This rosé expression is unusual and exciting—it showcases the grape's delicate, aromatic side rather than its tannic structure. Sicily is Italy's largest island and one of its most exciting wine regions, with indigenous grapes found nowhere else. The name means 'little black grape from Mascali,' a town on Etna's slopes."
+                alcohol: "13%",
+                serving: "Well chilled (46-50°F / 8-10°C)",
+                notes: "Provence is the birthplace of French rosé and the world's most prestigious rosé-producing region. Most Provence rosés are made by 'direct pressing'—whole grapes are gently pressed and the clear juice fermented like a white wine, producing that signature pale color and delicate flavor (unlike maceration rosés, which soak with the skins). Château La Mascaronne sits at 300 meters altitude in a natural amphitheater of terraced vineyards called 'restanques.' The terroir is chalk and clay over fissured limestone—former owner Tom Bove said: 'I bought here for the rock. To make wine on rock you have to do incredible work, but if you do, you get fabulous results.' The name 'Folly' evokes playful spontaneity. Tony Parker (4x NBA champion with the San Antonio Spurs) brought the brand international visibility."
             },
             // Position 12
             {
@@ -4546,6 +4957,7 @@
                 grapeDetail: "Santa Barbara County Chardonnay benefits from cool Pacific fog, creating a balanced style between rich Napa and lean Burgundy.",
                 region: "Santa Barbara County, California",
                 country: "USA",
+                pronunciation: "press-KEEL",
                 winemaker: "Presqu'ile Winery - An acclaimed estate winery in California's Santa Maria Valley, founded by the Murphy family in 2007. The name is French for 'almost an island' (peninsula), reflecting the family's French heritage. They farm 73 acres of certified sustainable vineyards on a unique east-west running valley that funnels cool Pacific fog directly over the vines. Their focus is Burgundian varieties (Chardonnay, Pinot Noir) made with minimal intervention: native yeast fermentation, whole-cluster pressing, and judicious French oak aging.",
                 tasting: "Green apple, citrus, white peach, subtle oak (vanilla, toast), hints of butter and minerality. Medium body with balanced acidity and a creamy texture.",
                 food: "Saint Angel, Gruyere, Prosciutto di Parma, Honey Bee Gouda, Duck Rillettes",
@@ -4592,6 +5004,7 @@
                 grapeDetail: "Albariño is Spain's premier white grape, from the rainy, green region of Galicia. Known for bright acidity and stone fruit.",
                 region: "Rías Baixas, Galicia",
                 country: "Spain",
+                pronunciation: "REE-ahs BY-shus",
                 winemaker: "Bodegas Marola - A small, artisan producer in the Val do Salnés subzone of Rías Baixas, considered the birthplace and heartland of Albariño. The winery farms old vines on decomposed granite soils just kilometers from the Atlantic Ocean, where the maritime influence creates morning fog and constant sea breezes. Traditionally, Albariño vines here are trained on pergolas (parrales) to lift grapes above the damp ground and prevent rot. The wines are fermented in stainless steel to preserve their bright, fresh character.",
                 tasting: "White peach, apricot, citrus (lemon, grapefruit), saline minerality. Medium body with vibrant acidity and a refreshing, slightly briny finish.",
                 food: "Hummus, Tapenade, Prosciutto di Parma, Petit Basque, Antipasto Vegetable Blend",
@@ -4639,6 +5052,7 @@
                 grapeDetail: "Scheurebe is a German crossing of Riesling and an unknown grape. Named after its creator Georg Scheu, it's aromatic with exotic fruit character.",
                 region: "Rheinhessen (Selztal)",
                 country: "Germany",
+                pronunciation: "BROW-neh-vel OON-zer TAG-lish SHOY-ray-buh",
                 winemaker: "Weingut Braunewell - A family estate in the Selztal (Selz Valley) of Rheinhessen, Germany's largest and sunniest wine region. Run by the Braunewell family for generations, they specialize in aromatic white varieties. 'Unser Täglich' means 'Our Daily'—a philosophy that great wine should be affordable for everyday enjoyment. The vineyards sit on diverse soils including limestone and loess, and the winery practices sustainable viticulture with minimal intervention in the cellar to preserve aromatic freshness.",
                 tasting: "Grapefruit, passionfruit, elderflower, tropical notes, hint of fresh herbs. Medium body with vibrant acidity and an aromatic, refreshing finish.",
                 food: "Pimento Cheese Dip, Hummus, Maple Bourbon Goat, Exotic Bomba, Spicy Asian dishes",
@@ -5390,17 +5804,6 @@
                             <div class="print-value">${wine.alcohol} | ${wine.serving}</div>
                         </div>
                         <div class="print-field">
-                            <div class="print-label">Food Pairings</div>
-                            <div class="print-value">
-                                ${wine.foodPairings ? wine.foodPairings.map(p => `
-                                    <div class="pairing-item">
-                                        <span class="pairing-name">${p.item}:</span>
-                                        <span class="pairing-reason">${p.why}</span>
-                                    </div>
-                                `).join('') : wine.food}
-                            </div>
-                        </div>
-                        <div class="print-field">
                             <div class="print-label">Key Facts</div>
                             <div class="print-value">${wine.notes}</div>
                         </div>
@@ -5626,20 +6029,32 @@
                             <div class="wine-detail-value">${wine.tasting}</div>
                         </div>
                         <div class="wine-detail">
-                            <div class="wine-detail-label">Food Pairings</div>
-                            <div class="wine-detail-value">
-                                ${wine.foodPairings ? wine.foodPairings.map(p => `
-                                    <div class="pairing-item">
-                                        <span class="pairing-food">${p.item}:</span>
-                                        <span class="pairing-why">${p.why}</span>
-                                    </div>
-                                `).join('') : wine.food}
-                            </div>
-                        </div>
-                        <div class="wine-detail">
                             <div class="wine-detail-label">Key Facts</div>
                             <div class="wine-detail-value">${wine.notes}</div>
                         </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render Food Pairings Section
+        function renderFoodPairings() {
+            const grid = document.getElementById('foodPairingsGrid');
+            const winesWithPairings = wines.filter(w => w.foodPairings && w.foodPairings.length > 0);
+
+            grid.innerHTML = winesWithPairings.map(wine => `
+                <div class="wine-card ${wine.type}" data-type="${wine.type}">
+                    <div class="wine-card-header">
+                        <h3>${wine.name}</h3>
+                        <div class="vintage">${wine.vintage}</div>
+                    </div>
+                    <div class="wine-card-body">
+                        ${wine.foodPairings.map(p => `
+                            <div class="pairing-item">
+                                <span class="pairing-food">${p.item}:</span>
+                                <span class="pairing-why">${p.why}</span>
+                            </div>
+                        `).join('')}
                     </div>
                 </div>
             `).join('');
@@ -5919,6 +6334,7 @@
             const hintEl = document.getElementById('flashcardHint');
 
             flashcard.classList.remove('revealed');
+            document.getElementById('btnContinue').style.display = 'none';
             document.getElementById('flashcardQuestion').textContent = currentCard.question;
             document.getElementById('flashcardWine').textContent = currentCard.wine;
 
@@ -5940,6 +6356,9 @@
             updateScore();
         }
 
+        // Track whether last multiple-choice answer was correct (for continue button)
+        let lastMCAnswerCorrect = false;
+
         function selectOption(element, encodedOption) {
             const option = decodeURIComponent(encodedOption);
             const allOptions = document.querySelectorAll('.flashcard-option');
@@ -5956,8 +6375,8 @@
 
             if (isCorrect) {
                 element.classList.add('correct');
-                document.getElementById('flashcardHint').textContent = 'Correct!';
-                setTimeout(() => markAnswer(true), 1000);
+                document.getElementById('flashcardHint').textContent = 'Correct! Press Next Question to continue.';
+                lastMCAnswerCorrect = true;
             } else {
                 element.classList.add('incorrect');
                 // Highlight the correct answer
@@ -5967,9 +6386,17 @@
                         opt.classList.add('correct-answer');
                     }
                 });
-                document.getElementById('flashcardHint').textContent = 'Incorrect - the correct answer is highlighted';
-                setTimeout(() => markAnswer(false), 2500);
+                document.getElementById('flashcardHint').textContent = 'Incorrect — read the correct answer, then press Next Question.';
+                lastMCAnswerCorrect = false;
             }
+
+            // Show the "Next Question" button instead of auto-advancing
+            document.getElementById('btnContinue').style.display = 'inline-block';
+        }
+
+        function continueAfterAnswer() {
+            document.getElementById('btnContinue').style.display = 'none';
+            markAnswer(lastMCAnswerCorrect);
         }
 
         function handleFlashcardClick(event) {
@@ -6543,9 +6970,34 @@
         }
 
         // Initialize all content when page loads
+        // Theme toggle - light/dark mode
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                html.removeAttribute('data-theme');
+                localStorage.setItem('ardoa-theme', 'light');
+                document.getElementById('themeIcon').innerHTML = '&#9790;'; // moon
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('ardoa-theme', 'dark');
+                document.getElementById('themeIcon').innerHTML = '&#9788;'; // sun
+            }
+        }
+
+        function initTheme() {
+            const saved = localStorage.getItem('ardoa-theme');
+            if (saved === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.getElementById('themeIcon').innerHTML = '&#9788;'; // sun
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             try {
+                initTheme();
                 renderWineCards();
+                renderFoodPairings();
                 renderBeerCards();
                 renderFoodCards();
                 renderQuickRef();
