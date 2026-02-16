@@ -3191,6 +3191,7 @@
         <button class="active" onclick="showSection('techsheets', this)">Wine List</button>
         <button onclick="showSection('beerlist', this)">Beer List</button>
         <button onclick="showSection('food', this)">Food Menu</button>
+        <button onclick="showSection('foodpairings', this)">Food Pairings</button>
         <button onclick="showSection('flashcards', this)">Wine Quiz</button>
         <button onclick="showSection('onlineflashcards', this)">Online Flashcards</button>
         <button onclick="showSection('quickref', this)">Quick Reference</button>
@@ -3271,6 +3272,17 @@
             <h2 class="food-section-title">Desserts</h2>
             <div class="food-grid" id="dessertGrid">
                 <!-- Dessert cards inserted by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Food Pairings Section -->
+        <section id="foodpairings">
+            <div class="section-header">
+                <h2 class="section-title">Wine & Food Pairings</h2>
+                <p class="section-subtitle">What to recommend with each wine — and why it works</p>
+            </div>
+            <div id="foodPairingsGrid" class="wine-grid">
+                <!-- Food pairing cards inserted by JavaScript -->
             </div>
         </section>
 
@@ -4218,7 +4230,7 @@
         <section id="printcards">
             <div class="print-intro">
                 <h2>Printable Study Cards</h2>
-                <p>Print these cards to study away from your computer. Each card includes all key information with food pairing explanations.</p>
+                <p>Print these cards to study away from your computer. Each card includes key information about grape, region, tasting notes, and winemaker.</p>
                 <button class="print-btn" onclick="window.print()">Print All Cards</button>
             </div>
 
@@ -4335,7 +4347,6 @@
                 grapeDetail: "Cool-climate Pinot Noir from the Finger Lakes—elegant, Burgundian in style, from a LEED Gold-certified estate run by a UC Davis grape geneticist.",
                 region: "Finger Lakes",
                 country: "USA",
-                pronunciation: "RED tayl rij PEE-noh NWAHR",
                 winemaker: "Nancy Irelan & Mike Schnelle — Nancy holds a PhD in grape genetics from UC Davis (studied under Dr. Carole Meredith, who discovered Cabernet Sauvignon's parentage). She spent 12 years at E&J Gallo rising to VP of Viticulture & Enology R&D before leaving to start Red Tail Ridge on Seneca Lake's western shore. James Beard Award semifinalist. Mike manages the 35-acre estate vineyard with sustainable practices. Their winery was the first LEED Gold-certified in New York State, powered by geothermal energy.",
                 tasting: "Red cherry, raspberry, and rhubarb on the nose. Deep plum and cassis framed by rose petal and spice on the palate. Violet and anise mid-palate with vanilla and smoke on the finish. Light to medium body, silky tannins, bright Finger Lakes acidity. Burgundian elegance.",
                 food: "Prosciutto di Parma, Pâté de Campagne, Petit Basque, Black Truffle Goat, The Basque flatbread",
@@ -4523,7 +4534,7 @@
                 grapeDetail: "Classic Provence rosé blend of four traditional grape varieties, direct-pressed for the characteristically pale, delicate Provençal style.",
                 region: "Côtes de Provence",
                 country: "France",
-                pronunciation: "FOL-ee by mas-kah-RONN KOHT duh pro-VAHNSS",
+                pronunciation: "mas-kah-RONN KOHT duh pro-VAHNSS",
                 winemaker: "Château La Mascaronne — Owned by Michel Reybier (who also owns Cos d'Estournel, a Second Growth Bordeaux). NBA legend Tony Parker partnered as winemaker-ambassador in 2022 and co-created the Folly cuvée. Technical Director Nathalie Longefay oversees organic viticulture and winemaking. The estate was previously owned by American Tom Bove, who also formerly owned Château Miraval (later sold to Brad Pitt & Angelina Jolie for $60 million). Certified organic since 2016. Grapes hand-harvested at dawn and sorted twice before pressing.",
                 tasting: "Pale pink with silvery highlights. Honeyed nectarine, white flowers, and pear on the nose. Apricot, fresh citrus, and mineral backbone on the palate. Light and refreshing with a clean, lingering finish.",
                 food: "Prosciutto di Parma, Hummus, Petit Basque, Antipasto Vegetable Blend, The Veg flatbread",
@@ -4547,6 +4558,7 @@
                 grapeDetail: "Santa Barbara County Chardonnay benefits from cool Pacific fog, creating a balanced style between rich Napa and lean Burgundy.",
                 region: "Santa Barbara County, California",
                 country: "USA",
+                pronunciation: "press-KEEL",
                 winemaker: "Presqu'ile Winery - An acclaimed estate winery in California's Santa Maria Valley, founded by the Murphy family in 2007. The name is French for 'almost an island' (peninsula), reflecting the family's French heritage. They farm 73 acres of certified sustainable vineyards on a unique east-west running valley that funnels cool Pacific fog directly over the vines. Their focus is Burgundian varieties (Chardonnay, Pinot Noir) made with minimal intervention: native yeast fermentation, whole-cluster pressing, and judicious French oak aging.",
                 tasting: "Green apple, citrus, white peach, subtle oak (vanilla, toast), hints of butter and minerality. Medium body with balanced acidity and a creamy texture.",
                 food: "Saint Angel, Gruyere, Prosciutto di Parma, Honey Bee Gouda, Duck Rillettes",
@@ -4593,6 +4605,7 @@
                 grapeDetail: "Albariño is Spain's premier white grape, from the rainy, green region of Galicia. Known for bright acidity and stone fruit.",
                 region: "Rías Baixas, Galicia",
                 country: "Spain",
+                pronunciation: "REE-ahs BY-shus",
                 winemaker: "Bodegas Marola - A small, artisan producer in the Val do Salnés subzone of Rías Baixas, considered the birthplace and heartland of Albariño. The winery farms old vines on decomposed granite soils just kilometers from the Atlantic Ocean, where the maritime influence creates morning fog and constant sea breezes. Traditionally, Albariño vines here are trained on pergolas (parrales) to lift grapes above the damp ground and prevent rot. The wines are fermented in stainless steel to preserve their bright, fresh character.",
                 tasting: "White peach, apricot, citrus (lemon, grapefruit), saline minerality. Medium body with vibrant acidity and a refreshing, slightly briny finish.",
                 food: "Hummus, Tapenade, Prosciutto di Parma, Petit Basque, Antipasto Vegetable Blend",
@@ -4640,6 +4653,7 @@
                 grapeDetail: "Scheurebe is a German crossing of Riesling and an unknown grape. Named after its creator Georg Scheu, it's aromatic with exotic fruit character.",
                 region: "Rheinhessen (Selztal)",
                 country: "Germany",
+                pronunciation: "BROW-neh-vel OON-zer TAG-lish SHOY-ray-buh",
                 winemaker: "Weingut Braunewell - A family estate in the Selztal (Selz Valley) of Rheinhessen, Germany's largest and sunniest wine region. Run by the Braunewell family for generations, they specialize in aromatic white varieties. 'Unser Täglich' means 'Our Daily'—a philosophy that great wine should be affordable for everyday enjoyment. The vineyards sit on diverse soils including limestone and loess, and the winery practices sustainable viticulture with minimal intervention in the cellar to preserve aromatic freshness.",
                 tasting: "Grapefruit, passionfruit, elderflower, tropical notes, hint of fresh herbs. Medium body with vibrant acidity and an aromatic, refreshing finish.",
                 food: "Pimento Cheese Dip, Hummus, Maple Bourbon Goat, Exotic Bomba, Spicy Asian dishes",
@@ -5391,17 +5405,6 @@
                             <div class="print-value">${wine.alcohol} | ${wine.serving}</div>
                         </div>
                         <div class="print-field">
-                            <div class="print-label">Food Pairings</div>
-                            <div class="print-value">
-                                ${wine.foodPairings ? wine.foodPairings.map(p => `
-                                    <div class="pairing-item">
-                                        <span class="pairing-name">${p.item}:</span>
-                                        <span class="pairing-reason">${p.why}</span>
-                                    </div>
-                                `).join('') : wine.food}
-                            </div>
-                        </div>
-                        <div class="print-field">
                             <div class="print-label">Key Facts</div>
                             <div class="print-value">${wine.notes}</div>
                         </div>
@@ -5627,20 +5630,32 @@
                             <div class="wine-detail-value">${wine.tasting}</div>
                         </div>
                         <div class="wine-detail">
-                            <div class="wine-detail-label">Food Pairings</div>
-                            <div class="wine-detail-value">
-                                ${wine.foodPairings ? wine.foodPairings.map(p => `
-                                    <div class="pairing-item">
-                                        <span class="pairing-food">${p.item}:</span>
-                                        <span class="pairing-why">${p.why}</span>
-                                    </div>
-                                `).join('') : wine.food}
-                            </div>
-                        </div>
-                        <div class="wine-detail">
                             <div class="wine-detail-label">Key Facts</div>
                             <div class="wine-detail-value">${wine.notes}</div>
                         </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render Food Pairings Section
+        function renderFoodPairings() {
+            const grid = document.getElementById('foodPairingsGrid');
+            const winesWithPairings = wines.filter(w => w.foodPairings && w.foodPairings.length > 0);
+
+            grid.innerHTML = winesWithPairings.map(wine => `
+                <div class="wine-card ${wine.type}" data-type="${wine.type}">
+                    <div class="wine-card-header">
+                        <h3>${wine.name}</h3>
+                        <div class="vintage">${wine.vintage}</div>
+                    </div>
+                    <div class="wine-card-body">
+                        ${wine.foodPairings.map(p => `
+                            <div class="pairing-item">
+                                <span class="pairing-food">${p.item}:</span>
+                                <span class="pairing-why">${p.why}</span>
+                            </div>
+                        `).join('')}
                     </div>
                 </div>
             `).join('');
@@ -6547,6 +6562,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             try {
                 renderWineCards();
+                renderFoodPairings();
                 renderBeerCards();
                 renderFoodCards();
                 renderQuickRef();
