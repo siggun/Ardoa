@@ -3478,6 +3478,281 @@
             }
         }
 
+        /* ==================== TIME CLOCK SECTION ==================== */
+        .timeclock-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .timeclock-container h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            text-align: center;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeclock-container .section-subtitle {
+            text-align: center;
+            color: var(--mist);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeclock-status {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeclock-status-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--mist);
+            margin-bottom: 0.3rem;
+        }
+
+        .timeclock-status-value {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--bone);
+        }
+
+        .timeclock-status-value.clocked-in {
+            color: #2d7a3a;
+        }
+
+        .timeclock-status-value.clocked-out {
+            color: var(--mist);
+        }
+
+        .timeclock-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .timeclock-actions button {
+            font-family: 'Cinzel', serif;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+        }
+
+        .timeclock-btn-in {
+            background: #2d7a3a;
+            color: #ffffff;
+        }
+
+        .timeclock-btn-in:hover {
+            background: #3a9a4a;
+        }
+
+        .timeclock-btn-out {
+            background: #8a2b2b;
+            color: #ffffff;
+        }
+
+        .timeclock-btn-out:hover {
+            background: #a33a3a;
+        }
+
+        .timeclock-btn-clear {
+            background: transparent;
+            color: var(--mist);
+            border: 1px solid #e8e0d8 !important;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.7rem;
+        }
+
+        .timeclock-btn-clear:hover {
+            background: #f0ebe5;
+            color: #8a2b2b;
+            border-color: #8a2b2b !important;
+        }
+
+        .timeclock-week-header {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #e8e0d8;
+            padding-bottom: 0.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .timeclock-week-total {
+            font-size: 0.85rem;
+            color: var(--mist);
+            letter-spacing: 1px;
+        }
+
+        .timeclock-day {
+            margin-bottom: 1rem;
+        }
+
+        .timeclock-day-header {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--mist);
+            padding: 0.3rem 0;
+            border-bottom: 1px solid #f0ebe5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .timeclock-day-total {
+            color: var(--bone);
+            font-weight: 600;
+        }
+
+        .timeclock-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.4rem 0.5rem;
+            border-bottom: 1px solid #f8f5f0;
+            font-size: 0.9rem;
+            color: var(--bone);
+        }
+
+        .timeclock-entry-times {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .timeclock-entry-in {
+            color: #2d7a3a;
+        }
+
+        .timeclock-entry-out {
+            color: #8a2b2b;
+        }
+
+        .timeclock-entry-duration {
+            color: var(--mist);
+            font-size: 0.85rem;
+        }
+
+        .timeclock-entry-active {
+            color: #2d7a3a;
+            font-style: italic;
+            font-size: 0.85rem;
+        }
+
+        .timeclock-empty {
+            color: var(--mist);
+            font-style: italic;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .timeclock-confirm-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .timeclock-confirm-dialog {
+            background: #ffffff;
+            padding: 2rem;
+            max-width: 360px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid #e8e0d8;
+        }
+
+        .timeclock-confirm-dialog h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        .timeclock-confirm-dialog p {
+            color: var(--bone);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .timeclock-confirm-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .timeclock-confirm-buttons button {
+            font-family: 'Cinzel', serif;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            touch-action: manipulation;
+        }
+
+        .timeclock-confirm-yes {
+            background: #8a2b2b;
+            color: #ffffff;
+        }
+
+        .timeclock-confirm-yes:hover {
+            background: #a33a3a;
+        }
+
+        .timeclock-confirm-no {
+            background: #e8e0d8;
+            color: var(--bone);
+        }
+
+        .timeclock-confirm-no:hover {
+            background: #d8d0c8;
+        }
+
+        @media (max-width: 480px) {
+            .timeclock-actions button {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.75rem;
+            }
+
+            .timeclock-entry {
+                font-size: 0.85rem;
+                padding: 0.35rem 0.3rem;
+            }
+        }
+
         /* ==================== THEME TOGGLE BUTTON ==================== */
         .theme-toggle {
             position: absolute;
@@ -4146,6 +4421,31 @@
         [data-theme="dark"] .timer-card-controls button.timer-remove:hover { background: #8B3A42; }
         [data-theme="dark"] .timer-empty { color: #b8b4ac; }
 
+        /* Dark mode - Time Clock */
+        [data-theme="dark"] .timeclock-container h2 { color: #c4a875; }
+        [data-theme="dark"] .timeclock-container .section-subtitle { color: #b8b4ac; }
+        [data-theme="dark"] .timeclock-status-label { color: #b8b4ac; }
+        [data-theme="dark"] .timeclock-status-value { color: #e8e4dc; }
+        [data-theme="dark"] .timeclock-status-value.clocked-in { color: #5cb85c; }
+        [data-theme="dark"] .timeclock-status-value.clocked-out { color: #b8b4ac; }
+        [data-theme="dark"] .timeclock-btn-clear { color: #b8b4ac; border-color: #2a1a25 !important; }
+        [data-theme="dark"] .timeclock-btn-clear:hover { background: #1a1025; color: #c4a875; border-color: #c4a875 !important; }
+        [data-theme="dark"] .timeclock-week-header { color: #c4a875; border-bottom-color: #2a1a25; }
+        [data-theme="dark"] .timeclock-week-total { color: #b8b4ac; }
+        [data-theme="dark"] .timeclock-day-header { color: #b8b4ac; border-bottom-color: #2a1a25; }
+        [data-theme="dark"] .timeclock-day-total { color: #e8e4dc; }
+        [data-theme="dark"] .timeclock-entry { color: #e8e4dc; border-bottom-color: #1a1025; }
+        [data-theme="dark"] .timeclock-entry-in { color: #5cb85c; }
+        [data-theme="dark"] .timeclock-entry-out { color: #c4575a; }
+        [data-theme="dark"] .timeclock-entry-duration { color: #b8b4ac; }
+        [data-theme="dark"] .timeclock-entry-active { color: #5cb85c; }
+        [data-theme="dark"] .timeclock-empty { color: #b8b4ac; }
+        [data-theme="dark"] .timeclock-confirm-dialog { background: #1a1025; border-color: #2a1a25; }
+        [data-theme="dark"] .timeclock-confirm-dialog h3 { color: #c4a875; }
+        [data-theme="dark"] .timeclock-confirm-dialog p { color: #e8e4dc; }
+        [data-theme="dark"] .timeclock-confirm-no { background: #2a1a25; color: #e8e4dc; }
+        [data-theme="dark"] .timeclock-confirm-no:hover { background: #3a2a35; }
+
     </style>
 </head>
 <body>
@@ -4193,20 +4493,21 @@
     </header>
 
     <nav>
-        <button class="active" onclick="showSection('techsheets', this)">Wine List</button>
+        <button class="active" onclick="showSection('timeclock', this)">Time Clock</button>
+        <button onclick="showSection('checklist', this)">Opening Checklist</button>
+        <button onclick="showSection('timers', this)">Timers</button>
+        <button onclick="showSection('quickref', this)">Quick Reference</button>
+        <button onclick="showSection('techsheets', this)">Wine List</button>
         <button onclick="showSection('beerlist', this)">Beer List</button>
         <button onclick="showSection('food', this)">Food Menu</button>
-        <button onclick="showSection('foodpairings', this)">Food Pairings</button>
         <button onclick="showSection('flashcards', this)">Wine Quiz</button>
         <button onclick="showSection('onlineflashcards', this)">Online Flashcards</button>
-        <button onclick="showSection('quickref', this)">Quick Reference</button>
         <button onclick="showSection('wineregions', this)">Wine Regions</button>
         <button onclick="showSection('enomatic', this)">Enomatic System</button>
         <button onclick="showSection('printcards', this)">Print Cards</button>
         <button onclick="showSection('faq', this)">Wine FAQ</button>
         <button onclick="showSection('pronunciations', this)">Pronunciations</button>
-        <button onclick="showSection('checklist', this)">Opening Checklist</button>
-        <button onclick="showSection('timers', this)">Timers</button>
+        <button onclick="showSection('foodpairings', this)">Food Pairings</button>
     </nav>
 
     <main>
@@ -4220,7 +4521,7 @@
             </div>
         </noscript>
         <!-- Tech Sheets Section -->
-        <section id="techsheets" class="active">
+        <section id="techsheets">
             <div class="filter-bar">
                 <button class="filter-btn active" onclick="filterWines('all', this)">All Wines</button>
                 <button class="filter-btn red" onclick="filterWines('red', this)">Red</button>
@@ -5198,6 +5499,29 @@
                 <p class="section-subtitle">How to say it like you mean it</p>
                 <div id="pronunciationContent">
                     <!-- Pronunciation groups inserted by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Time Clock Section -->
+        <section id="timeclock" class="active">
+            <div class="timeclock-container">
+                <h2>Time Clock</h2>
+                <p class="section-subtitle">Clock in and out to track your hours</p>
+
+                <div class="timeclock-status">
+                    <div class="timeclock-status-label">Status</div>
+                    <div class="timeclock-status-value clocked-out" id="timeclockStatus">Clocked Out</div>
+                </div>
+
+                <div class="timeclock-actions">
+                    <button class="timeclock-btn-in" id="timeclockInBtn" onclick="timeclockIn()">Clock In</button>
+                    <button class="timeclock-btn-out" id="timeclockOutBtn" onclick="timeclockOut()" disabled>Clock Out</button>
+                    <button class="timeclock-btn-clear" onclick="timeclockConfirmClear()">Clear All Logs</button>
+                </div>
+
+                <div id="timeclockLogs">
+                    <!-- Time logs rendered by JavaScript -->
                 </div>
             </div>
         </section>
@@ -8251,6 +8575,181 @@ h1{font-size:14px;text-align:center;margin-bottom:4px;border-bottom:1px solid #0
             `).join('');
         }
 
+        // ==================== TIME CLOCK ====================
+        const TIMECLOCK_KEY = 'ardoa-timeclock';
+
+        function getTimeclockData() {
+            try {
+                const data = JSON.parse(localStorage.getItem(TIMECLOCK_KEY));
+                if (data && data.logs) return data;
+            } catch (e) {}
+            return { logs: [], activeShift: null };
+        }
+
+        function saveTimeclockData(data) {
+            localStorage.setItem(TIMECLOCK_KEY, JSON.stringify(data));
+        }
+
+        function timeclockIn() {
+            const data = getTimeclockData();
+            if (data.activeShift) return; // already clocked in
+            data.activeShift = { clockIn: Date.now() };
+            saveTimeclockData(data);
+            renderTimeclock();
+        }
+
+        function timeclockOut() {
+            const data = getTimeclockData();
+            if (!data.activeShift) return; // not clocked in
+            data.logs.push({
+                clockIn: data.activeShift.clockIn,
+                clockOut: Date.now()
+            });
+            data.activeShift = null;
+            saveTimeclockData(data);
+            renderTimeclock();
+        }
+
+        function timeclockConfirmClear() {
+            const overlay = document.createElement('div');
+            overlay.className = 'timeclock-confirm-overlay';
+            overlay.innerHTML = '<div class="timeclock-confirm-dialog">' +
+                '<h3>Clear All Logs?</h3>' +
+                '<p>This will permanently delete all your time entries for the week. This cannot be undone.</p>' +
+                '<div class="timeclock-confirm-buttons">' +
+                '<button class="timeclock-confirm-yes" onclick="timeclockClearLogs()">Yes, Clear All</button>' +
+                '<button class="timeclock-confirm-no" onclick="timeclockDismissConfirm()">Cancel</button>' +
+                '</div></div>';
+            overlay.id = 'timeclockConfirmOverlay';
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) timeclockDismissConfirm();
+            });
+            document.body.appendChild(overlay);
+        }
+
+        function timeclockDismissConfirm() {
+            var overlay = document.getElementById('timeclockConfirmOverlay');
+            if (overlay) overlay.remove();
+        }
+
+        function timeclockClearLogs() {
+            timeclockDismissConfirm();
+            saveTimeclockData({ logs: [], activeShift: null });
+            renderTimeclock();
+        }
+
+        function formatTimeclockTime(ts) {
+            var d = new Date(ts);
+            var h = d.getHours();
+            var m = d.getMinutes();
+            var ampm = h >= 12 ? 'PM' : 'AM';
+            h = h % 12;
+            if (h === 0) h = 12;
+            return h + ':' + (m < 10 ? '0' : '') + m + ' ' + ampm;
+        }
+
+        function formatTimeclockDuration(ms) {
+            var totalMin = Math.floor(ms / 60000);
+            var h = Math.floor(totalMin / 60);
+            var m = totalMin % 60;
+            if (h > 0) return h + 'h ' + m + 'm';
+            return m + 'm';
+        }
+
+        function getTimeclockDayKey(ts) {
+            var d = new Date(ts);
+            return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+        }
+
+        function getTimeclockDayLabel(ts) {
+            var d = new Date(ts);
+            var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            return days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate();
+        }
+
+        function renderTimeclock() {
+            var data = getTimeclockData();
+            var statusEl = document.getElementById('timeclockStatus');
+            var inBtn = document.getElementById('timeclockInBtn');
+            var outBtn = document.getElementById('timeclockOutBtn');
+            var logsEl = document.getElementById('timeclockLogs');
+
+            if (!statusEl || !logsEl) return;
+
+            // Update status
+            if (data.activeShift) {
+                statusEl.textContent = 'Clocked In since ' + formatTimeclockTime(data.activeShift.clockIn);
+                statusEl.className = 'timeclock-status-value clocked-in';
+                inBtn.disabled = true;
+                outBtn.disabled = false;
+            } else {
+                statusEl.textContent = 'Clocked Out';
+                statusEl.className = 'timeclock-status-value clocked-out';
+                inBtn.disabled = false;
+                outBtn.disabled = true;
+            }
+
+            // Build all entries (completed + active)
+            var allEntries = data.logs.slice();
+            if (data.activeShift) {
+                allEntries.push({ clockIn: data.activeShift.clockIn, clockOut: null });
+            }
+
+            if (allEntries.length === 0) {
+                logsEl.innerHTML = '<p class="timeclock-empty">No time entries yet. Tap "Clock In" to start tracking.</p>';
+                forceRepaint(logsEl);
+                return;
+            }
+
+            // Group by day
+            var dayGroups = {};
+            var dayOrder = [];
+            allEntries.forEach(function(entry) {
+                var key = getTimeclockDayKey(entry.clockIn);
+                if (!dayGroups[key]) {
+                    dayGroups[key] = { entries: [], label: getTimeclockDayLabel(entry.clockIn), totalMs: 0 };
+                    dayOrder.push(key);
+                }
+                dayGroups[key].entries.push(entry);
+                if (entry.clockOut) {
+                    dayGroups[key].totalMs += (entry.clockOut - entry.clockIn);
+                }
+            });
+
+            // Calculate week total
+            var weekTotalMs = 0;
+            dayOrder.forEach(function(key) { weekTotalMs += dayGroups[key].totalMs; });
+
+            var html = '<div class="timeclock-week-header"><span>This Week</span><span class="timeclock-week-total">Total: ' + formatTimeclockDuration(weekTotalMs) + '</span></div>';
+
+            // Render most recent day first
+            dayOrder.reverse().forEach(function(key) {
+                var group = dayGroups[key];
+                html += '<div class="timeclock-day">';
+                html += '<div class="timeclock-day-header"><span>' + group.label + '</span><span class="timeclock-day-total">' + formatTimeclockDuration(group.totalMs) + '</span></div>';
+                group.entries.forEach(function(entry) {
+                    html += '<div class="timeclock-entry"><div class="timeclock-entry-times">';
+                    html += '<span class="timeclock-entry-in">' + formatTimeclockTime(entry.clockIn) + '</span>';
+                    if (entry.clockOut) {
+                        html += '<span> — </span>';
+                        html += '<span class="timeclock-entry-out">' + formatTimeclockTime(entry.clockOut) + '</span>';
+                    }
+                    html += '</div>';
+                    if (entry.clockOut) {
+                        html += '<span class="timeclock-entry-duration">' + formatTimeclockDuration(entry.clockOut - entry.clockIn) + '</span>';
+                    } else {
+                        html += '<span class="timeclock-entry-active">Working...</span>';
+                    }
+                    html += '</div>';
+                });
+                html += '</div>';
+            });
+
+            logsEl.innerHTML = html;
+            forceRepaint(logsEl);
+        }
+
         function initTheme() {
             const saved = localStorage.getItem('ardoa-theme');
             if (saved === 'dark') {
@@ -8273,6 +8772,7 @@ h1{font-size:14px;text-align:center;margin-bottom:4px;border-bottom:1px solid #0
                 renderFAQCards();
                 renderPronunciationGuide();
                 renderChecklist();
+                renderTimeclock();
 
                 // Force iOS Safari to paint dynamically inserted card content.
                 // Without this, innerHTML content may remain invisible because
