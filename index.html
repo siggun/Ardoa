@@ -6517,8 +6517,8 @@
             {
                 name: "The Basque",
                 price: "$15",
-                type: "Fig Jam, Black Truffle Goat, Prosciutto, Arugula",
-                description: "Sweet fig jam meets earthy truffle goat cheese, topped with silky prosciutto and peppery arugula. A perfect balance of sweet, savory, and earthy. Our most popular flatbread.",
+                type: "Fig Jam, Black Truffle Goat, Prosciutto",
+                description: "Sweet fig jam meets earthy truffle goat cheese, topped with silky prosciutto. A perfect balance of sweet, savory, and earthy. Our most popular flatbread.",
                 pairings: "Gorghi Tondi Frappato, Montepulciano d'Abruzzo, Ercole Barbera"
             },
             {
@@ -6574,6 +6574,13 @@
                 type: "Small Bowl, Topped with Walnuts, Dried Cranberries & Honey",
                 description: "Light, airy whipped goat cheese served in a small bowl and topped with crunchy walnuts, sweet-tart dried cranberries, and a drizzle of honey. Creamy, sweet, tangy, and texturally delightful.",
                 pairings: "Braunewell Scheurebe, Presqu'ile Chardonnay, Rosé - aromatic whites complement the honey and tangy goat cheese"
+            },
+            {
+                name: "Compound Butter Duo",
+                price: "$12",
+                type: "Italian Herb & Maple Cinnamon, with Baguette",
+                description: "Two house-made compound butters—savory Italian Herb and sweet Maple Cinnamon—served with warm baguette. A delightful way to start your visit.",
+                pairings: "Presqu'ile Chardonnay, Braunewell Scheurebe, Rosé"
             }
         ];
 
@@ -6679,15 +6686,16 @@
         function printCards(type) {
             const items = document.querySelectorAll('#printcards [data-print-group]');
             items.forEach(el => {
-                if (type === 'all') {
+                if (type === 'all' || el.getAttribute('data-print-group') === type) {
                     el.removeAttribute('data-print-hide');
-                } else if (el.getAttribute('data-print-group') === type) {
-                    el.removeAttribute('data-print-hide');
+                    el.style.removeProperty('display');
                 } else {
                     el.setAttribute('data-print-hide', 'true');
+                    el.style.setProperty('display', 'none', 'important');
                 }
             });
-            window.print();
+            // Small delay ensures styles are applied before print dialog opens
+            setTimeout(function() { window.print(); }, 100);
         }
 
         // Render Print Cards
@@ -8207,26 +8215,26 @@
             let html = `<!DOCTYPE html><html><head><title>Ardoa Opening Checklist</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#000;padding:8px}
-h1{font-size:14px;text-align:center;margin-bottom:4px;border-bottom:1px solid #000;padding-bottom:2px}
-.date-line{text-align:center;font-size:10px;margin-bottom:6px}
-.groups{columns:2;column-gap:12px}
-.group{break-inside:avoid;margin-bottom:6px}
-.group h2{font-size:11px;background:#000;color:#fff;padding:1px 4px;margin-bottom:1px}
+body{font-family:Arial,Helvetica,sans-serif;font-size:8px;color:#000;padding:4px}
+h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #000;padding-bottom:1px}
+.date-line{text-align:center;font-size:8px;margin-bottom:3px}
+.groups{columns:2;column-gap:8px}
+.group{break-inside:avoid;margin-bottom:3px}
+.group h2{font-size:8px;background:#000;color:#fff;padding:1px 3px;margin-bottom:0}
 .group table{width:100%;border-collapse:collapse}
-.group th{font-size:9px;text-align:center;border-bottom:1px solid #ccc;padding:1px 3px}
+.group th{font-size:7px;text-align:center;border-bottom:1px solid #ccc;padding:0 2px}
 .group th:first-child{text-align:left}
-.group td{padding:1px 3px;border-bottom:1px solid #ccc;font-size:10px}
-.group td:not(:first-child){width:40px;text-align:center;border-left:1px solid #ccc}
-.cb{width:12px;height:12px;border:1px solid #000;display:inline-block}
-.safety{break-inside:avoid;margin-bottom:6px}
-.safety h2{font-size:11px;background:#000;color:#fff;padding:1px 4px;margin-bottom:1px}
+.group td{padding:0 2px;border-bottom:1px solid #eee;font-size:8px;line-height:1.4}
+.group td:not(:first-child){width:34px;text-align:center;border-left:1px solid #ccc}
+.cb{width:10px;height:10px;border:1px solid #000;display:inline-block}
+.safety{break-inside:avoid;margin-bottom:3px}
+.safety h2{font-size:8px;background:#000;color:#fff;padding:1px 3px;margin-bottom:0}
 .safety table{width:100%;border-collapse:collapse}
-.safety th{font-size:9px;text-align:center;border-bottom:1px solid #ccc;padding:1px 3px}
+.safety th{font-size:7px;text-align:center;border-bottom:1px solid #ccc;padding:0 2px}
 .safety th:first-child{text-align:left}
-.safety td{padding:1px 3px;border-bottom:1px solid #ccc;font-size:10px}
-.safety td:not(:first-child){width:40px;text-align:center;border-left:1px solid #ccc}
-@media print{body{padding:4px}@page{margin:0.3in;size:letter}}
+.safety td{padding:0 2px;border-bottom:1px solid #eee;font-size:8px;line-height:1.4}
+.safety td:not(:first-child){width:34px;text-align:center;border-left:1px solid #ccc}
+@media print{body{padding:2px}@page{margin:0.2in;size:letter}}
 </style></head><body>
 <h1>Ardoa Opening Checklist</h1>
 <div class="date-line">Date: ____________</div>
