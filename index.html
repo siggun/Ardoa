@@ -330,7 +330,7 @@
 
         .wine-card .vintage {
             font-size: 0.9rem;
-            opacity: 0.8;
+            opacity: 0.9;
             font-style: italic;
         }
 
@@ -371,9 +371,9 @@
 
         .wine-card .producer {
             font-size: 0.85rem;
-            opacity: 0.8;
+            opacity: 1;
             margin-top: 0.25rem;
-            color: var(--mist);
+            color: rgba(255, 255, 255, 0.85);
         }
 
         .blend-detail {
@@ -481,14 +481,14 @@
 
         .beer-card .brewery {
             font-size: 0.85rem;
-            opacity: 0.8;
+            opacity: 1;
             margin-top: 0.25rem;
-            color: var(--mist);
+            color: rgba(255, 255, 255, 0.85);
         }
 
         .beer-card .style-abv {
             font-size: 0.9rem;
-            opacity: 0.8;
+            opacity: 0.9;
             font-style: italic;
         }
 
@@ -749,6 +749,23 @@
 
         .btn-reset:hover {
             background: #1a1a1a;
+        }
+
+        .btn-continue {
+            background: #4a1a28;
+            color: white;
+            font-size: 1.1rem;
+            padding: 1rem 2.5rem;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .btn-continue:hover {
+            background: #6b2d3e;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .quiz-settings {
@@ -2971,6 +2988,559 @@
             }
         }
 
+        /* ==================== THEME TOGGLE BUTTON ==================== */
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10;
+            background: transparent;
+            border: 1px solid #d0c8c0;
+            color: #2c2c2c;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+        }
+
+        .theme-toggle:hover {
+            background: #4a1a28;
+            color: #ffffff;
+            border-color: #4a1a28;
+        }
+
+        /* ==================== DARK MODE OVERRIDES ==================== */
+        [data-theme="dark"] {
+            --midnight: #0a0a0f;
+            --deep-purple: #1a1025;
+            --wine-blood: #4a0e1a;
+            --aged-burgundy: #6b1c2e;
+            --antique-gold: #8b7355;
+            --pale-gold: #c4a875;
+            --bone: #e8e4dc;
+            --mist: #b8b4ac;
+            --fog: rgba(184, 180, 172, 0.1);
+            --shadow: rgba(0, 0, 0, 0.7);
+            --burgundy: var(--aged-burgundy);
+            --burgundy-dark: var(--wine-blood);
+            --burgundy-light: #8B3A42;
+            --gold: #c4a875;
+            --gold-light: #d4c4a8;
+            --cream: #1a1025;
+            --charcoal: #e8e4dc;
+        }
+
+        [data-theme="dark"] body {
+            background: #0a0a0f;
+            color: #e8e4dc;
+        }
+
+        /* Dark mode - Background layers */
+        [data-theme="dark"] .background-layer {
+            background: linear-gradient(180deg, #1a1025 0%, #4a0e1a 40%, #0a0a0f 100%);
+        }
+
+        [data-theme="dark"] .fog-layer {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 800 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.15'/%3E%3C/svg%3E");
+            opacity: 0.4;
+            animation: fogDrift 60s linear infinite;
+        }
+
+        [data-theme="dark"] .vines-overlay {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,20 Q10,25 5,40 T10,60 Q15,75 5,90' stroke='%234a0e1a' stroke-width='0.3' fill='none' opacity='0.3'/%3E%3Cpath d='M100,30 Q90,35 95,50 T90,70 Q85,85 95,95' stroke='%234a0e1a' stroke-width='0.3' fill='none' opacity='0.3'/%3E%3Ccircle cx='8' cy='45' r='1.5' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='6' cy='48' r='1.2' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='10' cy='47' r='1' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='92' cy='55' r='1.5' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='94' cy='58' r='1.2' fill='%234a0e1a' opacity='0.4'/%3E%3Ccircle cx='90' cy='57' r='1' fill='%234a0e1a' opacity='0.4'/%3E%3C/svg%3E");
+            background-size: 100% 100%;
+        }
+
+        /* Dark mode - Header */
+        [data-theme="dark"] header {
+            background: transparent;
+            color: #e8e4dc;
+            border-bottom: 1px solid rgba(196, 168, 117, 0.2);
+        }
+
+        [data-theme="dark"] header h1 {
+            color: #c4a875;
+            text-shadow:
+                0 0 30px rgba(196, 168, 117, 0.5),
+                0 0 60px rgba(74, 14, 26, 0.8),
+                2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        [data-theme="dark"] header p {
+            color: #b8b4ac;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+        }
+
+        [data-theme="dark"] .gothic-logo {
+            filter: drop-shadow(0 0 20px rgba(196, 168, 117, 0.3));
+        }
+
+        [data-theme="dark"] .gothic-logo circle,
+        [data-theme="dark"] .gothic-logo ellipse,
+        [data-theme="dark"] .gothic-logo path {
+            fill: #c4a875;
+            stroke: #c4a875;
+        }
+
+        /* Dark mode - Theme toggle */
+        [data-theme="dark"] .theme-toggle {
+            border-color: rgba(196, 168, 117, 0.3);
+            color: #c4a875;
+        }
+
+        [data-theme="dark"] .theme-toggle:hover {
+            background: rgba(196, 168, 117, 0.15);
+            border-color: #c4a875;
+            color: #e8e4dc;
+        }
+
+        /* Dark mode - Navigation */
+        [data-theme="dark"] nav {
+            background: linear-gradient(180deg, rgb(10, 10, 15), rgb(26, 16, 37));
+            border-bottom: 1px solid rgba(196, 168, 117, 0.2);
+            border-top: 1px solid rgba(196, 168, 117, 0.2);
+            box-shadow: none;
+        }
+
+        [data-theme="dark"] nav button {
+            border: 1px solid #8b7355;
+            color: #c4a875;
+        }
+
+        [data-theme="dark"] nav button::before {
+            background: linear-gradient(90deg, transparent, rgba(196, 168, 117, 0.2), transparent);
+        }
+
+        [data-theme="dark"] nav button:hover,
+        [data-theme="dark"] nav button.active {
+            background: rgba(196, 168, 117, 0.15);
+            color: #e8e4dc;
+            border-color: #c4a875;
+            box-shadow: 0 0 15px rgba(196, 168, 117, 0.3), inset 0 0 15px rgba(196, 168, 117, 0.1);
+        }
+
+        /* Dark mode - Section headers */
+        [data-theme="dark"] .food-section-title,
+        [data-theme="dark"] h2 {
+            color: #c4a875;
+            text-shadow: 0 0 20px rgba(196, 168, 117, 0.3);
+        }
+
+        /* Dark mode - Filter buttons */
+        [data-theme="dark"] .filter-btn {
+            border-color: #8b7355;
+            color: #c4a875;
+        }
+
+        [data-theme="dark"] .filter-btn:hover,
+        [data-theme="dark"] .filter-btn.active {
+            background: rgba(196, 168, 117, 0.2);
+            color: #e8e4dc;
+            box-shadow: 0 0 15px rgba(196, 168, 117, 0.3);
+        }
+
+        [data-theme="dark"] .filter-btn.red { border-color: #6b1c2e; }
+        [data-theme="dark"] .filter-btn.red.active,
+        [data-theme="dark"] .filter-btn.red:hover { background: rgba(107, 28, 46, 0.4); border-color: #8b2a40; color: #e8e4dc; }
+        [data-theme="dark"] .filter-btn.white { border-color: #c4a875; }
+        [data-theme="dark"] .filter-btn.white.active,
+        [data-theme="dark"] .filter-btn.white:hover { background: rgba(196, 168, 117, 0.3); color: #e8e4dc; }
+        [data-theme="dark"] .filter-btn.rose { border-color: #9a6b7a; }
+        [data-theme="dark"] .filter-btn.rose.active,
+        [data-theme="dark"] .filter-btn.rose:hover { background: rgba(154, 107, 122, 0.3); color: #e8e4dc; }
+        [data-theme="dark"] .filter-btn.orange { border-color: #8b5a2b; }
+        [data-theme="dark"] .filter-btn.orange.active,
+        [data-theme="dark"] .filter-btn.orange:hover { background: rgba(139, 90, 43, 0.4); color: #e8e4dc; }
+        [data-theme="dark"] .filter-btn.sparkling { border-color: #c4a875; }
+        [data-theme="dark"] .filter-btn.sparkling.active,
+        [data-theme="dark"] .filter-btn.sparkling:hover { background: rgba(196, 168, 117, 0.4); color: #e8e4dc; }
+        [data-theme="dark"] .filter-btn.ale { border-color: #8b4513; }
+        [data-theme="dark"] .filter-btn.ale.active,
+        [data-theme="dark"] .filter-btn.ale:hover { background: rgba(139, 69, 19, 0.4); border-color: #a0522d; color: #e8e4dc; }
+        [data-theme="dark"] .filter-btn.lager { border-color: #daa520; }
+        [data-theme="dark"] .filter-btn.lager.active,
+        [data-theme="dark"] .filter-btn.lager:hover { background: rgba(218, 165, 32, 0.3); border-color: #f0c040; color: #e8e4dc; }
+        [data-theme="dark"] .filter-btn.ipa { border-color: #228b22; }
+        [data-theme="dark"] .filter-btn.ipa.active,
+        [data-theme="dark"] .filter-btn.ipa:hover { background: rgba(34, 139, 34, 0.3); border-color: #32cd32; color: #e8e4dc; }
+        [data-theme="dark"] .filter-btn.other { border-color: #708090; }
+        [data-theme="dark"] .filter-btn.other.active,
+        [data-theme="dark"] .filter-btn.other:hover { background: rgba(112, 128, 144, 0.3); border-color: #a0a0a0; color: #e8e4dc; }
+
+        /* Dark mode - Wine cards */
+        [data-theme="dark"] .wine-card {
+            background: linear-gradient(145deg, #1a1025, #0b0b10);
+            border: 1px solid rgba(196, 168, 117, 0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(196, 168, 117, 0.1);
+        }
+
+        [data-theme="dark"] .wine-card:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 30px rgba(74, 14, 26, 0.3);
+            border-color: rgba(196, 168, 117, 0.4);
+        }
+
+        [data-theme="dark"] .wine-card.red .wine-card-header { background: linear-gradient(135deg, #551c2e, #3e0e1a); border-bottom-color: #462a30; }
+        [data-theme="dark"] .wine-card.white .wine-card-header { background: linear-gradient(135deg, #5a4a37, #443b28); border-bottom-color: #5e4e3a; }
+        [data-theme="dark"] .wine-card.rose .wine-card-header { background: linear-gradient(135deg, #5e4350, #3e2a32); border-bottom-color: #5a4050; }
+        [data-theme="dark"] .wine-card.orange .wine-card-header { background: linear-gradient(135deg, #573b1e, #362316); border-bottom-color: #55401e; }
+        [data-theme="dark"] .wine-card.sparkling .wine-card-header { background: linear-gradient(135deg, #7a6440, #564a38); border-bottom-color: #6e6040; }
+
+        [data-theme="dark"] .wine-card-body { background: #05050a; }
+        [data-theme="dark"] .wine-card .producer { color: rgba(255, 255, 255, 0.75); }
+        [data-theme="dark"] .wine-detail-label { color: #c4a875; }
+        [data-theme="dark"] .wine-detail-value { color: #e8e4dc; }
+        [data-theme="dark"] .pronunciation { background: #1a0a10; border-left-color: #c4a875; color: #b8b4ac; }
+        [data-theme="dark"] .tech-specs { background: #0d0813; border-color: rgba(196, 168, 117, 0.1); }
+        [data-theme="dark"] .tech-spec { color: #e8e4dc; }
+        [data-theme="dark"] .tech-spec-label { color: #c4a875; }
+        [data-theme="dark"] .blend-detail { color: #b8b4ac; }
+
+        /* Dark mode - Beer cards */
+        [data-theme="dark"] .beer-card {
+            background: linear-gradient(145deg, #1a1025, #0b0b10);
+            border: 1px solid rgba(196, 168, 117, 0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(196, 168, 117, 0.1);
+        }
+
+        [data-theme="dark"] .beer-card:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 30px rgba(139, 69, 19, 0.3);
+            border-color: rgba(196, 168, 117, 0.4);
+        }
+
+        [data-theme="dark"] .beer-card.ale .beer-card-header { background: linear-gradient(135deg, #572c10, #3a220a); border-bottom-color: #50291d; }
+        [data-theme="dark"] .beer-card.lager .beer-card-header { background: linear-gradient(135deg, #8a6818, #5c440c); border-bottom-color: #6e5020; }
+        [data-theme="dark"] .beer-card.ipa .beer-card-header { background: linear-gradient(135deg, #1a5718, #123214); border-bottom-color: #1e6618; }
+        [data-theme="dark"] .beer-card.other .beer-card-header { background: linear-gradient(135deg, #3a4248, #2a2e34); border-bottom-color: #484e54; }
+
+        [data-theme="dark"] .beer-card-body { background: #05050a; }
+        [data-theme="dark"] .beer-card .brewery { color: rgba(255, 255, 255, 0.75); }
+        [data-theme="dark"] .beer-detail-label { color: #c4a875; }
+        [data-theme="dark"] .beer-detail-value { color: #e8e4dc; }
+        [data-theme="dark"] .beer-specs { background: #0d0813; border-color: rgba(196, 168, 117, 0.1); }
+        [data-theme="dark"] .beer-spec { color: #e8e4dc; }
+        [data-theme="dark"] .beer-spec-label { color: #c4a875; }
+
+        /* Dark mode - Food cards */
+        [data-theme="dark"] .food-card {
+            background: linear-gradient(145deg, #1a1025, #0b0b10);
+            border: 1px solid rgba(196, 168, 117, 0.15);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        [data-theme="dark"] .food-card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-color: rgba(196, 168, 117, 0.3);
+        }
+
+        [data-theme="dark"] .food-card-header { color: #e8e4dc; }
+        [data-theme="dark"] .food-card.cheese .food-card-header { background: linear-gradient(135deg, #4a3e2c, #302818); }
+        [data-theme="dark"] .food-card.charcuterie .food-card-header { background: linear-gradient(135deg, #401220, #2a0c14); }
+        [data-theme="dark"] .food-card.flatbread .food-card-header { background: linear-gradient(135deg, #563a1e, #362010); }
+        [data-theme="dark"] .food-card.tapas .food-card-header { background: linear-gradient(135deg, #1e2c16, #161e0e); }
+        [data-theme="dark"] .food-card.pate .food-card-header { background: linear-gradient(135deg, #3a2e18, #241a0e); }
+        [data-theme="dark"] .food-card.dessert .food-card-header { background: linear-gradient(135deg, #4a1a32, #2e0e1e); }
+        [data-theme="dark"] .food-card .food-type { color: #c4a875; }
+        [data-theme="dark"] .food-card .food-description { color: #e8e4dc; }
+        [data-theme="dark"] .food-card .wine-pairings { background: #1a0a10; border-left-color: #c4a875; }
+        [data-theme="dark"] .food-card .wine-pairings-label { color: #c4a875; }
+        [data-theme="dark"] .food-card .wine-pairings-list { color: #e8e4dc; }
+
+        /* Dark mode - Quick ref tables */
+        [data-theme="dark"] .quick-ref table {
+            background: linear-gradient(145deg, rgba(26, 16, 37, 0.8), rgba(10, 10, 15, 0.9));
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            border-color: rgba(196, 168, 117, 0.15);
+        }
+
+        [data-theme="dark"] .quick-ref th,
+        [data-theme="dark"] .quick-ref td {
+            border-bottom-color: rgba(196, 168, 117, 0.1);
+            color: #e8e4dc;
+        }
+
+        [data-theme="dark"] .quick-ref th {
+            background: linear-gradient(135deg, rgba(74, 14, 26, 0.7), rgba(107, 28, 46, 0.6));
+            color: #c4a875;
+        }
+
+        [data-theme="dark"] .quick-ref tr:hover { background: rgba(196, 168, 117, 0.08); }
+
+        [data-theme="dark"] .type-badge.red { background: rgba(107, 28, 46, 0.8); }
+        [data-theme="dark"] .type-badge.white { background: rgba(139, 115, 85, 0.8); }
+        [data-theme="dark"] .type-badge.rose { background: rgba(154, 107, 122, 0.8); }
+        [data-theme="dark"] .type-badge.orange { background: rgba(139, 90, 43, 0.8); }
+        [data-theme="dark"] .type-badge.lager { background: rgba(218, 165, 32, 0.8); color: #0a0a0f; }
+
+        /* Dark mode - Score display */
+        [data-theme="dark"] .score-display {
+            background: linear-gradient(135deg, rgba(26, 16, 37, 0.9), rgba(10, 10, 15, 0.95));
+            color: #c4a875;
+            border-color: rgba(196, 168, 117, 0.2);
+        }
+
+        /* Dark mode - Quiz options */
+        [data-theme="dark"] .quiz-option {
+            color: #e8e4dc;
+            background: rgba(26, 16, 37, 0.6);
+            border-color: rgba(196, 168, 117, 0.2);
+        }
+
+        [data-theme="dark"] .quiz-option:hover {
+            background: rgba(74, 14, 26, 0.5);
+            border-color: rgba(196, 168, 117, 0.4);
+        }
+
+        [data-theme="dark"] .quiz-option label { color: #e8e4dc; }
+
+        /* Dark mode - Footer */
+        [data-theme="dark"] footer {
+            background: linear-gradient(180deg, transparent, rgba(10, 10, 15, 0.95));
+            color: #b8b4ac;
+            border-top-color: rgba(196, 168, 117, 0.2);
+        }
+
+        [data-theme="dark"] footer::before {
+            background: linear-gradient(90deg, transparent, #c4a875, transparent);
+        }
+
+        /* Dark mode - FAQ section */
+        [data-theme="dark"] .faq-title {
+            color: #c4a875;
+            text-shadow: 0 0 20px rgba(196, 168, 117, 0.3);
+        }
+
+        [data-theme="dark"] .faq-subtitle { color: #b8b4ac; }
+
+        [data-theme="dark"] .faq-filter-btn {
+            border-color: #8b7355;
+            color: #c4a875;
+        }
+
+        [data-theme="dark"] .faq-filter-btn:hover,
+        [data-theme="dark"] .faq-filter-btn.active {
+            background: rgba(196, 168, 117, 0.2);
+            color: #e8e4dc;
+            box-shadow: 0 0 15px rgba(196, 168, 117, 0.3);
+        }
+
+        [data-theme="dark"] .faq-card {
+            background: linear-gradient(145deg, rgba(26, 16, 37, 0.9), rgba(10, 10, 15, 0.95));
+            border-color: rgba(196, 168, 117, 0.2);
+        }
+
+        [data-theme="dark"] .faq-card::before {
+            background: linear-gradient(90deg, transparent, #c4a875, transparent);
+        }
+
+        [data-theme="dark"] .faq-card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(74, 14, 26, 0.3);
+            border-color: rgba(196, 168, 117, 0.4);
+        }
+
+        [data-theme="dark"] .faq-card.expanded {
+            border-color: #c4a875;
+            box-shadow: 0 0 25px rgba(196, 168, 117, 0.3);
+        }
+
+        [data-theme="dark"] .faq-question {
+            background: linear-gradient(135deg, rgba(74, 14, 26, 0.6), rgba(26, 16, 37, 0.8));
+        }
+
+        [data-theme="dark"] .faq-card:hover .faq-question {
+            background: linear-gradient(135deg, rgba(74, 14, 26, 0.8), rgba(26, 16, 37, 0.9));
+        }
+
+        [data-theme="dark"] .faq-icon {
+            background: rgba(196, 168, 117, 0.2);
+            border-color: #c4a875;
+            color: #e8e4dc;
+        }
+
+        [data-theme="dark"] .faq-card:hover .faq-icon {
+            background: rgba(196, 168, 117, 0.3);
+            color: #e8e4dc;
+        }
+
+        [data-theme="dark"] .faq-question-text { color: #e8e4dc; }
+        [data-theme="dark"] .faq-expand-icon { color: #c4a875; }
+        [data-theme="dark"] .faq-answer { background: rgba(10, 10, 15, 0.5); }
+        [data-theme="dark"] .faq-answer-content { color: #b8b4ac; }
+        [data-theme="dark"] .faq-answer-content strong { color: #c4a875; }
+        [data-theme="dark"] .faq-answer-content em { color: #e8e4dc; }
+
+        [data-theme="dark"] .faq-category-badge {
+            background: rgba(196, 168, 117, 0.2);
+            border-color: rgba(196, 168, 117, 0.3);
+            color: #c4a875;
+        }
+
+        [data-theme="dark"] .faq-tip {
+            background: rgba(74, 14, 26, 0.3);
+            border-left-color: #c4a875;
+        }
+
+        [data-theme="dark"] .faq-tip::before { color: #c4a875; }
+
+        /* Dark mode - Wine pairing cards in pairing section */
+        [data-theme="dark"] .wine-card .pairing-item { border-left-color: #c4a875; }
+        [data-theme="dark"] .wine-card .pairing-food { color: #c4a875; }
+        [data-theme="dark"] .wine-card .pairing-why { color: #b8b4ac; }
+
+        /* Dark mode - Continue button */
+        [data-theme="dark"] .btn-continue {
+            background: #c4a875;
+            color: #0a0a0f;
+        }
+
+        [data-theme="dark"] .btn-continue:hover {
+            background: #d4c4a8;
+        }
+
+        /* Dark mode - Enomatic hero */
+        [data-theme="dark"] .enomatic-hero {
+            background: linear-gradient(135deg, #6b1c2e 0%, #4a0e1a 100%);
+        }
+
+        /* Dark mode - Region card header */
+        [data-theme="dark"] .region-card-header {
+            background: linear-gradient(135deg, #6b1c2e 0%, #4a0e1a 100%);
+        }
+
+        /* Dark mode - Flashcard front */
+        [data-theme="dark"] .flashcard-front {
+            background: linear-gradient(135deg, #6b1c2e, #4a0e1a);
+        }
+
+        /* Dark mode - Model header */
+        [data-theme="dark"] .model-header {
+            background: linear-gradient(135deg, #6b1c2e 0%, #4a0e1a 100%);
+        }
+
+        /* Dark mode - Quiz settings, regions intro, print intro, enomatic intro, etc. (white panels) */
+        [data-theme="dark"] .quiz-settings,
+        [data-theme="dark"] .regions-intro,
+        [data-theme="dark"] .print-intro,
+        [data-theme="dark"] .enomatic-intro,
+        [data-theme="dark"] .enomatic-resources,
+        [data-theme="dark"] .benefit-card,
+        [data-theme="dark"] .model-card,
+        [data-theme="dark"] .region-card,
+        [data-theme="dark"] .print-card,
+        [data-theme="dark"] .flashcard-back {
+            background: #1a1025;
+            color: #e8e4dc;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        [data-theme="dark"] .quiz-settings h3,
+        [data-theme="dark"] .regions-intro h2,
+        [data-theme="dark"] .print-intro h2,
+        [data-theme="dark"] .enomatic-intro h3,
+        [data-theme="dark"] .enomatic-benefits h3,
+        [data-theme="dark"] .enomatic-models h3,
+        [data-theme="dark"] .enomatic-resources h3,
+        [data-theme="dark"] .benefit-card h4,
+        [data-theme="dark"] .resource-category h4,
+        [data-theme="dark"] .region-wines-title,
+        [data-theme="dark"] .print-label,
+        [data-theme="dark"] .country-title,
+        [data-theme="dark"] .print-category-title,
+        [data-theme="dark"] .flashcard-back .flashcard-label {
+            color: #c4a875;
+        }
+
+        [data-theme="dark"] .regions-intro p,
+        [data-theme="dark"] .print-intro p,
+        [data-theme="dark"] .enomatic-intro p,
+        [data-theme="dark"] .benefit-card p,
+        [data-theme="dark"] .model-description,
+        [data-theme="dark"] .model-features li,
+        [data-theme="dark"] .region-description,
+        [data-theme="dark"] .models-intro,
+        [data-theme="dark"] .enomatic-resources > p,
+        [data-theme="dark"] .print-value,
+        [data-theme="dark"] .flashcard-back .flashcard-value {
+            color: #e8e4dc;
+        }
+
+        [data-theme="dark"] .region-wines { background: #0d0813; }
+        [data-theme="dark"] .region-wines-list { color: #b8b4ac; }
+        [data-theme="dark"] .region-fact-label { color: #8b7355; }
+        [data-theme="dark"] .region-fact-value { color: #e8e4dc; }
+        [data-theme="dark"] .country-title { border-bottom-color: #c4a875; }
+        [data-theme="dark"] .print-category-title { border-bottom-color: #c4a875; }
+        [data-theme="dark"] .model-specs { border-top-color: rgba(196, 168, 117, 0.2); }
+        [data-theme="dark"] .model-specs span { background: #0d0813; color: #e8e4dc; }
+        [data-theme="dark"] .resource-category h4 { border-bottom-color: #c4a875; }
+        [data-theme="dark"] .resource-links a { color: #c4a875; }
+        [data-theme="dark"] .resource-links a:hover { color: #e8e4dc; }
+        [data-theme="dark"] .resource-links a::before { color: #c4a875; }
+        [data-theme="dark"] .model-features li::before { color: #c4a875; }
+
+        /* Dark mode - Flashcard controls */
+        [data-theme="dark"] .flashcard-controls button {
+            background: #6b1c2e;
+        }
+
+        [data-theme="dark"] .flashcard-controls button:hover {
+            background: #4a0e1a;
+        }
+
+        [data-theme="dark"] .flashcard-controls button.active {
+            background: #c4a875;
+            color: #0a0a0f;
+        }
+
+        /* Dark mode - Flashcard nav */
+        [data-theme="dark"] .flashcard-nav button {
+            background: #6b1c2e;
+        }
+
+        [data-theme="dark"] .flashcard-nav button:hover {
+            background: #4a0e1a;
+        }
+
+        [data-theme="dark"] .flashcard-counter { color: #e8e4dc; }
+
+        [data-theme="dark"] .flashcard-shuffle button {
+            background: #c4a875;
+            color: #0a0a0f;
+        }
+
+        /* Dark mode - Disable fog/vines on mobile */
+        @media (max-width: 768px) {
+            [data-theme="dark"] .fog-layer {
+                animation: none;
+                width: 100%;
+            }
+
+            [data-theme="dark"] .vines-overlay {
+                display: none;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -2983,6 +3553,9 @@
     <div class="content-layer">
 
     <header>
+        <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+            <span class="theme-toggle-icon" id="themeIcon">&#9790;</span>
+        </button>
         <div class="header-content">
             <!-- Decorative Grape Cluster Logo -->
             <svg class="gothic-logo" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
@@ -3168,6 +3741,7 @@
                     <button class="flashcard-btn btn-incorrect" onclick="markAnswer(false)">Missed It</button>
                     <button class="flashcard-btn btn-next" onclick="nextQuizCard()">Skip</button>
                     <button class="flashcard-btn btn-reset" onclick="resetQuiz()">Reset Quiz</button>
+                    <button class="flashcard-btn btn-continue" id="btnContinue" onclick="continueAfterAnswer()" style="display:none;">Next Question</button>
                 </div>
             </div>
         </section>
@@ -5760,6 +6334,7 @@
             const hintEl = document.getElementById('flashcardHint');
 
             flashcard.classList.remove('revealed');
+            document.getElementById('btnContinue').style.display = 'none';
             document.getElementById('flashcardQuestion').textContent = currentCard.question;
             document.getElementById('flashcardWine').textContent = currentCard.wine;
 
@@ -5781,6 +6356,9 @@
             updateScore();
         }
 
+        // Track whether last multiple-choice answer was correct (for continue button)
+        let lastMCAnswerCorrect = false;
+
         function selectOption(element, encodedOption) {
             const option = decodeURIComponent(encodedOption);
             const allOptions = document.querySelectorAll('.flashcard-option');
@@ -5797,8 +6375,8 @@
 
             if (isCorrect) {
                 element.classList.add('correct');
-                document.getElementById('flashcardHint').textContent = 'Correct!';
-                setTimeout(() => markAnswer(true), 1000);
+                document.getElementById('flashcardHint').textContent = 'Correct! Press Next Question to continue.';
+                lastMCAnswerCorrect = true;
             } else {
                 element.classList.add('incorrect');
                 // Highlight the correct answer
@@ -5808,9 +6386,17 @@
                         opt.classList.add('correct-answer');
                     }
                 });
-                document.getElementById('flashcardHint').textContent = 'Incorrect - the correct answer is highlighted';
-                setTimeout(() => markAnswer(false), 2500);
+                document.getElementById('flashcardHint').textContent = 'Incorrect — read the correct answer, then press Next Question.';
+                lastMCAnswerCorrect = false;
             }
+
+            // Show the "Next Question" button instead of auto-advancing
+            document.getElementById('btnContinue').style.display = 'inline-block';
+        }
+
+        function continueAfterAnswer() {
+            document.getElementById('btnContinue').style.display = 'none';
+            markAnswer(lastMCAnswerCorrect);
         }
 
         function handleFlashcardClick(event) {
@@ -6384,8 +6970,32 @@
         }
 
         // Initialize all content when page loads
+        // Theme toggle - light/dark mode
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                html.removeAttribute('data-theme');
+                localStorage.setItem('ardoa-theme', 'light');
+                document.getElementById('themeIcon').innerHTML = '&#9790;'; // moon
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('ardoa-theme', 'dark');
+                document.getElementById('themeIcon').innerHTML = '&#9788;'; // sun
+            }
+        }
+
+        function initTheme() {
+            const saved = localStorage.getItem('ardoa-theme');
+            if (saved === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.getElementById('themeIcon').innerHTML = '&#9788;'; // sun
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             try {
+                initTheme();
                 renderWineCards();
                 renderFoodPairings();
                 renderBeerCards();
