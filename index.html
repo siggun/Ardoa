@@ -581,12 +581,13 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
             position: relative;
         }
 
         .flashcard:hover {
-            transform: scale(1.02);
+            box-shadow: 0 0 0 2px var(--burgundy-light), 0 2px 12px rgba(0, 0, 0, 0.08);
+            border-color: var(--burgundy-light);
         }
 
         .flashcard-question {
@@ -1809,6 +1810,13 @@
         .print-card.beer.ipa .print-card-header { background: linear-gradient(135deg, #228B22, #196619); }
         .print-card.beer.other .print-card-header { background: linear-gradient(135deg, #708090, #505860); }
 
+        .print-position {
+            font-size: 1.4rem;
+            font-weight: bold;
+            opacity: 0.7;
+            margin-bottom: 0.15rem;
+        }
+
         .print-card h3 {
             font-size: 1.1rem;
             margin-bottom: 0.25rem;
@@ -1946,6 +1954,13 @@
             .print-card.beer.other .print-card-header {
                 background: none !important;
                 color: black !important;
+            }
+
+            .print-position {
+                font-size: 9pt;
+                font-weight: bold;
+                opacity: 0.6;
+                margin-bottom: 1pt;
             }
 
             .print-card h3 {
@@ -2240,8 +2255,8 @@
         .enomatic-hero {
             text-align: center;
             padding: 3rem 2rem;
-            background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-dark) 100%);
-            color: white;
+            background: linear-gradient(135deg, #3a0a18 0%, #1a0008 100%);
+            color: #ffffff;
             border-radius: 15px;
             margin-bottom: 2rem;
         }
@@ -2250,12 +2265,15 @@
             font-size: 2.2rem;
             margin-bottom: 0.5rem;
             letter-spacing: 1px;
+            color: #ffffff;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         .enomatic-tagline {
             font-size: 1.1rem;
-            opacity: 0.9;
+            opacity: 1;
             font-style: italic;
+            color: rgba(255, 255, 255, 0.95);
         }
 
         .enomatic-intro {
@@ -5349,7 +5367,6 @@
                 origin: "France",
                 type: "Goat, Soft and Ripened",
                 description: "A luxurious French goat cheese infused with earthy black truffle. Creamy, tangy, and aromatic with an unmistakable truffle flavor that lingers on the palate.",
-                pronunciation: "truh-FULL",
                 pairings: "Domaine Les Pins Bourgueil, Terrebonne Pinot Noir, Jean Aubron Folle Blanche, Sancerre"
             },
             {
@@ -5455,7 +5472,6 @@
                 price: "$9",
                 origin: "Italy",
                 type: "Peppercorn and Red Wine, Pork",
-                pronunciation: "feh-LEE-noh",
                 description: "A classic Italian salami from Parma, seasoned with peppercorns and red wine. Delicate, mildly sweet with a silky texture. Named after the town of Felino near Parma.",
                 pairings: "Chianti, Montepulciano d'Abruzzo, Ercole Barbera - classic Italian pairings"
             },
@@ -5490,7 +5506,6 @@
                 price: "$9",
                 origin: "Italy",
                 type: "Cured Spicy Pork, Paprika",
-                pronunciation: "KOH-pah",
                 description: "Dry-cured pork shoulder (capocollo) with hot paprika. Marbled with fat, spicy, and deeply savory. The heat is present but not overwhelming. A spice-lover's delight.",
                 pairings: "Old Vines Zinfandel, Escudo Rojo Carmenère - bold wines for spicy meat"
             },
@@ -5499,7 +5514,6 @@
                 price: "$9",
                 origin: "Italy",
                 type: "Italian Dried Salami infused with Burgundy wine",
-                pronunciation: "soh-preh-SAH-tah",
                 description: "Traditional Italian soppressata infused with Burgundy wine. Coarse-ground, well-marbled, with wine adding fruity depth. The wine tenderizes and flavors the meat beautifully.",
                 pairings: "Cuvée 58, Buzet, Château Roc Meynard - Bordeaux-style wines complement the Burgundy"
             },
@@ -5508,7 +5522,6 @@
                 price: "$9",
                 origin: "Spain",
                 type: "Spanish Dried Salami, Paprika",
-                pronunciation: "choh-REE-thoh (Spanish) / choh-REE-zoh",
                 description: "Spanish dry-cured sausage with smoked paprika (pimentón). Deep red color, smoky, slightly spicy. The signature taste of Spain. Not to be confused with Mexican fresh chorizo.",
                 pairings: "Côtes du Rhône, 3SAPAS Malbec, Mas Janeil C2, Toro Tempranillo, Carmenère, Orange Lurton"
             },
@@ -5681,9 +5694,10 @@
         function renderPrintCards() {
             // Render Wine Print Cards
             const wineGrid = document.getElementById('printWineGrid');
-            wineGrid.innerHTML = wines.map(wine => `
+            wineGrid.innerHTML = wines.map((wine, idx) => `
                 <div class="print-card ${wine.type}">
                     <div class="print-card-header">
+                        <div class="print-position">${idx + 1}</div>
                         <h3>${wine.name}</h3>
                         <div class="subtitle">${wine.vintage} | ${wine.type.charAt(0).toUpperCase() + wine.type.slice(1)}</div>
                     </div>
@@ -6165,7 +6179,7 @@
                     questions.push({
                         wine: wineDisplay,
                         question: "What region is this wine from?",
-                        answer: wine.region + getPronunciationLine(wine),
+                        answer: wine.region + ', ' + wine.country + getPronunciationLine(wine),
                         type: 'text'
                     });
                 }
