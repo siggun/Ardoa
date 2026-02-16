@@ -105,6 +105,7 @@
             height: auto;
             margin: 0 auto 1rem;
             filter: none;
+            transform: translateX(-15px);
         }
 
         header h1 {
@@ -1049,6 +1050,10 @@
                 letter-spacing: 4px;
             }
 
+            .gothic-logo {
+                transform: translateX(-4px);
+            }
+
             header {
                 padding: 1.5rem 1rem;
             }
@@ -1206,6 +1211,10 @@
             header h1 {
                 font-size: 1.5rem;
                 letter-spacing: 3px;
+            }
+
+            .gothic-logo {
+                transform: translateX(-3px);
             }
 
             header {
@@ -1492,6 +1501,10 @@
             header h1 {
                 font-size: 1.3rem;
                 letter-spacing: 2px;
+            }
+
+            .gothic-logo {
+                transform: translateX(-2px);
             }
 
             nav button {
@@ -3465,6 +3478,415 @@
             }
         }
 
+        /* ==================== TIME CLOCK SECTION ==================== */
+        .timeclock-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .timeclock-container h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            text-align: center;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeclock-container .section-subtitle {
+            text-align: center;
+            color: var(--mist);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeclock-status {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeclock-status-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--mist);
+            margin-bottom: 0.3rem;
+        }
+
+        .timeclock-status-value {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--bone);
+        }
+
+        .timeclock-status-value.clocked-in {
+            color: #2d7a3a;
+        }
+
+        .timeclock-status-value.clocked-out {
+            color: var(--mist);
+        }
+
+        .timeclock-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .timeclock-actions button {
+            font-family: 'Cinzel', serif;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+        }
+
+        .timeclock-btn-in {
+            background: #2d7a3a;
+            color: #ffffff;
+        }
+
+        .timeclock-btn-in:hover {
+            background: #3a9a4a;
+        }
+
+        .timeclock-btn-out {
+            background: #8a2b2b;
+            color: #ffffff;
+        }
+
+        .timeclock-btn-out:hover {
+            background: #a33a3a;
+        }
+
+        .timeclock-btn-clear {
+            background: transparent;
+            color: var(--mist);
+            border: 1px solid #e8e0d8 !important;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.7rem;
+        }
+
+        .timeclock-btn-clear:hover {
+            background: #f0ebe5;
+            color: #8a2b2b;
+            border-color: #8a2b2b !important;
+        }
+
+        .timeclock-week-header {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #e8e0d8;
+            padding-bottom: 0.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .timeclock-week-total {
+            font-size: 0.85rem;
+            color: var(--mist);
+            letter-spacing: 1px;
+        }
+
+        .timeclock-day {
+            margin-bottom: 1rem;
+        }
+
+        .timeclock-day-header {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--mist);
+            padding: 0.3rem 0;
+            border-bottom: 1px solid #f0ebe5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .timeclock-day-total {
+            color: var(--bone);
+            font-weight: 600;
+        }
+
+        .timeclock-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.4rem 0.5rem;
+            border-bottom: 1px solid #f8f5f0;
+            font-size: 0.9rem;
+            color: var(--bone);
+        }
+
+        .timeclock-entry-times {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .timeclock-entry-in {
+            color: #2d7a3a;
+        }
+
+        .timeclock-entry-out {
+            color: #8a2b2b;
+        }
+
+        .timeclock-entry-duration {
+            color: var(--mist);
+            font-size: 0.85rem;
+        }
+
+        .timeclock-entry-active {
+            color: #2d7a3a;
+            font-style: italic;
+            font-size: 0.85rem;
+        }
+
+        .timeclock-empty {
+            color: var(--mist);
+            font-style: italic;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .timeclock-confirm-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .timeclock-confirm-dialog {
+            background: #ffffff;
+            padding: 2rem;
+            max-width: 360px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid #e8e0d8;
+        }
+
+        .timeclock-confirm-dialog h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        .timeclock-confirm-dialog p {
+            color: var(--bone);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .timeclock-confirm-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .timeclock-confirm-buttons button {
+            font-family: 'Cinzel', serif;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            touch-action: manipulation;
+        }
+
+        .timeclock-confirm-yes {
+            background: #8a2b2b;
+            color: #ffffff;
+        }
+
+        .timeclock-confirm-yes:hover {
+            background: #a33a3a;
+        }
+
+        .timeclock-confirm-no {
+            background: #e8e0d8;
+            color: var(--bone);
+        }
+
+        .timeclock-confirm-no:hover {
+            background: #d8d0c8;
+        }
+
+        .timeclock-btn-manual {
+            background: transparent;
+            color: var(--mist);
+            border: 1px solid #e8e0d8 !important;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.7rem;
+        }
+
+        .timeclock-btn-manual:hover {
+            background: #f0ebe5;
+            color: var(--pale-gold);
+            border-color: var(--pale-gold) !important;
+        }
+
+        .timeclock-manual-form {
+            display: none;
+            max-width: 400px;
+            margin: 0 auto 2rem;
+            padding: 1.2rem;
+            border: 1px solid #e8e0d8;
+            background: #ffffff;
+        }
+
+        .timeclock-manual-form.visible {
+            display: block;
+        }
+
+        .timeclock-manual-form h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .timeclock-manual-row {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+            align-items: center;
+        }
+
+        .timeclock-manual-row label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--mist);
+            min-width: 50px;
+        }
+
+        .timeclock-manual-row input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #e8e0d8;
+            background: #f8f5f0;
+            color: var(--bone);
+            font-family: 'Crimson Text', serif;
+            font-size: 0.95rem;
+        }
+
+        .timeclock-manual-buttons {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .timeclock-manual-buttons button {
+            font-family: 'Cinzel', serif;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.7rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            touch-action: manipulation;
+        }
+
+        .timeclock-manual-submit {
+            background: #2d7a3a;
+            color: #ffffff;
+        }
+
+        .timeclock-manual-submit:hover {
+            background: #3a9a4a;
+        }
+
+        .timeclock-manual-cancel {
+            background: #e8e0d8;
+            color: var(--bone);
+        }
+
+        .timeclock-manual-cancel:hover {
+            background: #d8d0c8;
+        }
+
+        .timeclock-manual-error {
+            color: #8a2b2b;
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .timeclock-entry-delete {
+            background: none;
+            border: none;
+            color: var(--mist);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.2rem 0.4rem;
+            line-height: 1;
+            opacity: 0.5;
+            touch-action: manipulation;
+        }
+
+        .timeclock-entry-delete:hover {
+            color: #8a2b2b;
+            opacity: 1;
+        }
+
+        @media (max-width: 480px) {
+            .timeclock-actions button {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.75rem;
+            }
+
+            .timeclock-entry {
+                font-size: 0.85rem;
+                padding: 0.35rem 0.3rem;
+            }
+
+            .timeclock-manual-row {
+                flex-direction: column;
+                gap: 0.3rem;
+                align-items: stretch;
+            }
+
+            .timeclock-manual-row label {
+                min-width: unset;
+            }
+        }
+
         /* ==================== THEME TOGGLE BUTTON ==================== */
         .theme-toggle {
             position: absolute;
@@ -4133,6 +4555,35 @@
         [data-theme="dark"] .timer-card-controls button.timer-remove:hover { background: #8B3A42; }
         [data-theme="dark"] .timer-empty { color: #b8b4ac; }
 
+        /* Dark mode - Time Clock */
+        [data-theme="dark"] .timeclock-container h2 { color: #c4a875; }
+        [data-theme="dark"] .timeclock-container .section-subtitle { color: #b8b4ac; }
+        [data-theme="dark"] .timeclock-status-label { color: #b8b4ac; }
+        [data-theme="dark"] .timeclock-status-value { color: #e8e4dc; }
+        [data-theme="dark"] .timeclock-status-value.clocked-in { color: #5cb85c; }
+        [data-theme="dark"] .timeclock-status-value.clocked-out { color: #b8b4ac; }
+        [data-theme="dark"] .timeclock-btn-clear { color: #b8b4ac; border-color: #2a1a25 !important; }
+        [data-theme="dark"] .timeclock-btn-clear:hover { background: #1a1025; color: #c4a875; border-color: #c4a875 !important; }
+        [data-theme="dark"] .timeclock-week-header { color: #c4a875; border-bottom-color: #2a1a25; }
+        [data-theme="dark"] .timeclock-week-total { color: #b8b4ac; }
+        [data-theme="dark"] .timeclock-day-header { color: #b8b4ac; border-bottom-color: #2a1a25; }
+        [data-theme="dark"] .timeclock-day-total { color: #e8e4dc; }
+        [data-theme="dark"] .timeclock-entry { color: #e8e4dc; border-bottom-color: #1a1025; }
+        [data-theme="dark"] .timeclock-entry-in { color: #5cb85c; }
+        [data-theme="dark"] .timeclock-entry-out { color: #c4575a; }
+        [data-theme="dark"] .timeclock-entry-duration { color: #b8b4ac; }
+        [data-theme="dark"] .timeclock-entry-active { color: #5cb85c; }
+        [data-theme="dark"] .timeclock-empty { color: #b8b4ac; }
+        [data-theme="dark"] .timeclock-confirm-dialog { background: #1a1025; border-color: #2a1a25; }
+        [data-theme="dark"] .timeclock-confirm-dialog h3 { color: #c4a875; }
+        [data-theme="dark"] .timeclock-confirm-dialog p { color: #e8e4dc; }
+        [data-theme="dark"] .timeclock-confirm-no { background: #2a1a25; color: #e8e4dc; }
+        [data-theme="dark"] .timeclock-confirm-no:hover { background: #3a2a35; }
+        [data-theme="dark"] .timeclock-manual-form { background: #1a1025; border-color: #2a1a25; }
+        [data-theme="dark"] .timeclock-manual-row input { background: #0a0a0f; border-color: #2a1a25; }
+        [data-theme="dark"] .timeclock-manual-cancel { background: #2a1a25; color: #e8e4dc; }
+        [data-theme="dark"] .timeclock-manual-cancel:hover { background: #3a2a35; }
+
     </style>
 </head>
 <body>
@@ -4181,19 +4632,20 @@
 
     <nav>
         <button class="active" onclick="showSection('techsheets', this)">Wine List</button>
+        <button onclick="showSection('quickref', this)">Quick Reference</button>
+        <button onclick="showSection('timeclock', this)">Time Clock</button>
+        <button onclick="showSection('checklist', this)">Opening Checklist</button>
+        <button onclick="showSection('timers', this)">Timers</button>
         <button onclick="showSection('beerlist', this)">Beer List</button>
         <button onclick="showSection('food', this)">Food Menu</button>
-        <button onclick="showSection('foodpairings', this)">Food Pairings</button>
         <button onclick="showSection('flashcards', this)">Wine Quiz</button>
         <button onclick="showSection('onlineflashcards', this)">Online Flashcards</button>
-        <button onclick="showSection('quickref', this)">Quick Reference</button>
         <button onclick="showSection('wineregions', this)">Wine Regions</button>
         <button onclick="showSection('enomatic', this)">Enomatic System</button>
         <button onclick="showSection('printcards', this)">Print Cards</button>
         <button onclick="showSection('faq', this)">Wine FAQ</button>
         <button onclick="showSection('pronunciations', this)">Pronunciations</button>
-        <button onclick="showSection('checklist', this)">Opening Checklist</button>
-        <button onclick="showSection('timers', this)">Timers</button>
+        <button onclick="showSection('foodpairings', this)">Food Pairings</button>
     </nav>
 
     <main>
@@ -4213,7 +4665,7 @@
                 <button class="filter-btn red" onclick="filterWines('red', this)">Red</button>
                 <button class="filter-btn white" onclick="filterWines('white', this)">White</button>
                 <button class="filter-btn rose" onclick="filterWines('rose', this)">Rosé</button>
-                <button class="filter-btn orange" onclick="filterWines('orange', this)">Orange</button>
+                <!-- <button class="filter-btn orange" onclick="filterWines('orange', this)">Orange</button> -->
                 <button class="filter-btn sparkling" onclick="filterWines('sparkling', this)">Sparkling</button>
             </div>
 
@@ -5189,6 +5641,51 @@
             </div>
         </section>
 
+        <!-- Time Clock Section -->
+        <section id="timeclock">
+            <div class="timeclock-container">
+                <h2>Time Clock</h2>
+                <p class="section-subtitle">Clock in and out to track your hours</p>
+
+                <div class="timeclock-status">
+                    <div class="timeclock-status-label">Status</div>
+                    <div class="timeclock-status-value clocked-out" id="timeclockStatus">Clocked Out</div>
+                </div>
+
+                <div class="timeclock-actions">
+                    <button class="timeclock-btn-in" id="timeclockInBtn" onclick="timeclockIn()">Clock In</button>
+                    <button class="timeclock-btn-out" id="timeclockOutBtn" onclick="timeclockOut()" disabled>Clock Out</button>
+                    <button class="timeclock-btn-manual" onclick="timeclockToggleManualForm()">Add Manual Entry</button>
+                    <button class="timeclock-btn-clear" onclick="timeclockConfirmClear()">Clear All Logs</button>
+                </div>
+
+                <div class="timeclock-manual-form" id="timeclockManualForm">
+                    <h3>Add Manual Entry</h3>
+                    <div class="timeclock-manual-row">
+                        <label for="timeclockManualDate">Date</label>
+                        <input type="date" id="timeclockManualDate">
+                    </div>
+                    <div class="timeclock-manual-row">
+                        <label for="timeclockManualIn">In</label>
+                        <input type="time" id="timeclockManualIn">
+                    </div>
+                    <div class="timeclock-manual-row">
+                        <label for="timeclockManualOut">Out</label>
+                        <input type="time" id="timeclockManualOut">
+                    </div>
+                    <div class="timeclock-manual-error" id="timeclockManualError"></div>
+                    <div class="timeclock-manual-buttons">
+                        <button class="timeclock-manual-submit" onclick="timeclockAddManual()">Save</button>
+                        <button class="timeclock-manual-cancel" onclick="timeclockToggleManualForm()">Cancel</button>
+                    </div>
+                </div>
+
+                <div id="timeclockLogs">
+                    <!-- Time logs rendered by JavaScript -->
+                </div>
+            </div>
+        </section>
+
         <!-- Opening Checklist Section -->
         <section id="checklist">
             <div class="checklist-container">
@@ -5402,7 +5899,7 @@
                 grapeDetail: "Locally called 'Breton' - Cabernet Franc is THE grape of the Loire reds",
                 region: "Bourgueil, Loire Valley",
                 country: "France",
-                pronunciation: "doh-MEHN lay PAN lay roh-SHET boor-GUH-yuh",
+                pronunciation: "lay PAN lay roh-SHET boor-GUH-yuh",
                 winemaker: "Domaine Les Pins - A small family estate in the heart of Bourgueil, run with passion and attention to terroir expression. 'Les Rochettes' is their prized single-vineyard parcel on rocky, well-drained soils that stress the vines and concentrate flavors. The family practices lutte raisonnée (sustainable farming), avoiding pesticides whenever possible and hand-harvesting all grapes. Fermentation uses natural yeasts, and the wine sees minimal oak to preserve the pure Cabernet Franc character.",
                 tasting: "Red bell pepper, raspberry, graphite, violet notes. Medium body with fresh acidity, earthy undertones, and characteristic pencil-lead minerality from the tuffeau limestone.",
                 food: "Duck Rillettes, Pâté de Campagne, Black Truffle Goat, Petit Basque, Black Pepper Salami",
@@ -5483,7 +5980,7 @@
                     { item: "Black Truffle Goat", why: "THE classic pairing - Loire Sauvignon Blanc and goat cheese are legendary together" },
                     { item: "Petit Basque", why: "Sheep cheese's mild nuttiness complements the wine's mineral precision" },
                     { item: "Hummus", why: "Clean, refreshing wine cuts through the tahini richness" },
-                    { item: "The Veg flatbread", why: "Herbal, citrus-driven wine loves fresh vegetable and arugula flavors" },
+                    { item: "The Veg flatbread", why: "Herbal, citrus-driven wine loves fresh vegetable flavors" },
                     { item: "Bresaola", why: "Lean beef doesn't overpower the wine; acidity brightens the delicate meat" }
                 ],
                 alcohol: "13%",
@@ -5508,7 +6005,7 @@
                     { item: "Hummus", why: "Light, refreshing Provence rosé is the quintessential Mediterranean aperitif pairing" },
                     { item: "Petit Basque", why: "Mild sheep's milk cheese pairs naturally with the wine's nectarine and floral notes" },
                     { item: "Antipasto Vegetable Blend", why: "Mediterranean vegetables echo the wine's Provençal character and fresh acidity" },
-                    { item: "The Veg flatbread", why: "Fresh vegetable and arugula flavors complement this light, mineral-driven rosé" }
+                    { item: "The Veg flatbread", why: "Fresh vegetable flavors complement this light, mineral-driven rosé" }
                 ],
                 alcohol: "13%",
                 serving: "Well chilled (46-50°F / 8-10°C)",
@@ -5803,7 +6300,7 @@
                 grapeDetail: "Plan de Dieu is a named village within Côtes du Rhône Villages, known for powerful, concentrated wines from the 'Plain of God.'",
                 region: "Côtes du Rhône Villages Plan de Dieu",
                 country: "France",
-                pronunciation: "doh-MEHN vair-kee-AIR plahn duh DYUH",
+                pronunciation: "vair-kee-AIR plahn duh DYUH",
                 winemaker: "Domaine Verquière - A family estate in the Rhône Valley since 1960, now run by third-generation winemaker Louis Bernard. Located in the village of Sablet, they own prime parcels in the prestigious Plan de Dieu appellation. The estate practices sustainable viticulture on the plateau's famous galets roulés (large round stones) that store heat during the day and radiate it back at night. Fermentation uses traditional cement tanks and large oak foudres, with the goal of expressing pure terroir rather than winemaker intervention.",
                 tasting: "Dark fruits (blackberry, black cherry), garrigue herbs (thyme, rosemary), black pepper, hints of licorice. Full-bodied with ripe tannins and a long, spicy finish.",
                 food: "Chorizo, Salchichon De Bellota, Ewephoria, Mimolette, Tapenade",
@@ -6130,7 +6627,7 @@
                 origin: "Italy",
                 type: "Italian Lean Cured Beef",
                 pronunciation: "breh-ZOW-lah",
-                description: "Air-dried, salted beef from Lombardy. Deep ruby red, lean, and delicate with a subtle, slightly sweet flavor. Often served with olive oil, lemon, and arugula.",
+                description: "Air-dried, salted beef from Lombardy. Deep ruby red, lean, and delicate with a subtle, slightly sweet flavor. Often served with olive oil and lemon.",
                 pairings: "Orsa Cabernet Sauvignon, Pouilly-Fumé Dezat, Marola Albariño, Pinot Grigio"
             },
             {
@@ -6180,8 +6677,8 @@
             {
                 name: "The Basque",
                 price: "$15",
-                type: "Fig Jam, Black Truffle Goat, Prosciutto, Arugula",
-                description: "Sweet fig jam meets earthy truffle goat cheese, topped with silky prosciutto and peppery arugula. A perfect balance of sweet, savory, and earthy. Our most popular flatbread.",
+                type: "Fig Jam, Black Truffle Goat, Prosciutto",
+                description: "Sweet fig jam meets earthy truffle goat cheese, topped with silky prosciutto. A perfect balance of sweet, savory, and earthy. Our most popular flatbread.",
                 pairings: "Gorghi Tondi Frappato, Montepulciano d'Abruzzo, Ercole Barbera"
             },
             {
@@ -6194,8 +6691,8 @@
             {
                 name: "The Veg",
                 price: "$14",
-                type: "Gruyère, Sun Dried Tomatoes, Olives, Arugula",
-                description: "Nutty Gruyère with sweet sun-dried tomatoes, briny olives, and fresh arugula. Vegetarian but never boring. Mediterranean-inspired and utterly delicious.",
+                type: "Gruyère, Sun Dried Tomatoes, Olives",
+                description: "Nutty Gruyère with sweet sun-dried tomatoes and briny olives. Vegetarian but never boring. Mediterranean-inspired and utterly delicious.",
                 pairings: "Jean Aubron Folle Blanche, Pouilly-Fumé Dezat, Rosé"
             }
         ];
@@ -6237,6 +6734,13 @@
                 type: "Small Bowl, Topped with Walnuts, Dried Cranberries & Honey",
                 description: "Light, airy whipped goat cheese served in a small bowl and topped with crunchy walnuts, sweet-tart dried cranberries, and a drizzle of honey. Creamy, sweet, tangy, and texturally delightful.",
                 pairings: "Braunewell Scheurebe, Presqu'ile Chardonnay, Rosé - aromatic whites complement the honey and tangy goat cheese"
+            },
+            {
+                name: "Compound Butter Duo",
+                price: "$12",
+                type: "Italian Herb & Maple Cinnamon, with Baguette",
+                description: "Two house-made compound butters—savory Italian Herb and sweet Maple Cinnamon—served with warm baguette. A delightful way to start your visit.",
+                pairings: "Presqu'ile Chardonnay, Braunewell Scheurebe, Rosé"
             }
         ];
 
@@ -6342,15 +6846,16 @@
         function printCards(type) {
             const items = document.querySelectorAll('#printcards [data-print-group]');
             items.forEach(el => {
-                if (type === 'all') {
+                if (type === 'all' || el.getAttribute('data-print-group') === type) {
                     el.removeAttribute('data-print-hide');
-                } else if (el.getAttribute('data-print-group') === type) {
-                    el.removeAttribute('data-print-hide');
+                    el.style.removeProperty('display');
                 } else {
                     el.setAttribute('data-print-hide', 'true');
+                    el.style.setProperty('display', 'none', 'important');
                 }
             });
-            window.print();
+            // Small delay ensures styles are applied before print dialog opens
+            setTimeout(function() { window.print(); }, 100);
         }
 
         // Render Print Cards
@@ -7326,7 +7831,7 @@
             },
             {
                 question: "What's your go-to pairing for the flatbreads?",
-                answer: "For <strong>The Basque</strong> (prosciutto, fig): the <strong>Beaujolais</strong>—its fruit echoes the fig, acidity cuts through prosciutto. For <strong>The Mighty Spicy</strong>: <strong>Cabernet Sauvignon</strong> stands up to bold flavors. For <strong>The Veg</strong>: <strong>Pouilly-Fumé</strong> complements the fresh arugula and vegetables beautifully.",
+                answer: "For <strong>The Basque</strong> (prosciutto, fig): the <strong>Beaujolais</strong>—its fruit echoes the fig, acidity cuts through prosciutto. For <strong>The Mighty Spicy</strong>: <strong>Cabernet Sauvignon</strong> stands up to bold flavors. For <strong>The Veg</strong>: <strong>Pouilly-Fumé</strong> complements the fresh vegetables beautifully.",
                 category: "food",
                 icon: "🫓"
             },
@@ -7708,7 +8213,7 @@
                 },
                 {
                     title: 'Flatbread Toppings',
-                    items: ['Smoked Chili Cheddar (flatbread)', 'Gruyère (flatbread)', 'Black Truffle Goat (flatbread)', 'Chorizo', 'Prosciutto', 'Mushrooms', 'Olives', 'Sun Dried Tomatoes', 'Arugula', 'Fig Jam'],
+                    items: ['Flatbread', 'Smoked Chili Cheddar (flatbread)', 'Gruyère (flatbread)', 'Black Truffle Goat (flatbread)', 'Chorizo', 'Prosciutto', 'Mushrooms', 'Olives', 'Sun Dried Tomatoes', 'Fig Jam'],
                     groupKey: 'flatbread'
                 },
                 {
@@ -7859,7 +8364,7 @@
             const checkboxGroups = [
                 { title: 'Cheeses', items: cheeses.map(c => c.name) },
                 { title: 'Charcuterie', items: charcuterie.map(c => c.name) },
-                { title: 'Flatbread Toppings', items: ['Smoked Chili Cheddar (flatbread)', 'Gruyère (flatbread)', 'Black Truffle Goat (flatbread)', 'Chorizo', 'Prosciutto', 'Mushrooms', 'Olives', 'Sun Dried Tomatoes', 'Arugula', 'Fig Jam'] },
+                { title: 'Flatbread Toppings', items: ['Flatbread', 'Smoked Chili Cheddar (flatbread)', 'Gruyère (flatbread)', 'Black Truffle Goat (flatbread)', 'Chorizo', 'Prosciutto', 'Mushrooms', 'Olives', 'Sun Dried Tomatoes', 'Fig Jam'] },
                 { title: 'Tapas & Dips', items: tapas.map(t => t.name) },
                 { title: 'Pates & Spreads', items: pates.map(p => p.name) },
                 { title: 'Desserts', items: desserts.map(d => d.name) },
@@ -7870,26 +8375,26 @@
             let html = `<!DOCTYPE html><html><head><title>Ardoa Opening Checklist</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#000;padding:8px}
-h1{font-size:14px;text-align:center;margin-bottom:4px;border-bottom:1px solid #000;padding-bottom:2px}
-.date-line{text-align:center;font-size:10px;margin-bottom:6px}
-.groups{columns:2;column-gap:12px}
-.group{break-inside:avoid;margin-bottom:6px}
-.group h2{font-size:11px;background:#000;color:#fff;padding:1px 4px;margin-bottom:1px}
+body{font-family:Arial,Helvetica,sans-serif;font-size:8px;color:#000;padding:4px}
+h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #000;padding-bottom:1px}
+.date-line{text-align:center;font-size:8px;margin-bottom:3px}
+.groups{columns:2;column-gap:8px}
+.group{break-inside:avoid;margin-bottom:3px}
+.group h2{font-size:8px;background:#000;color:#fff;padding:1px 3px;margin-bottom:0}
 .group table{width:100%;border-collapse:collapse}
-.group th{font-size:9px;text-align:center;border-bottom:1px solid #ccc;padding:1px 3px}
+.group th{font-size:7px;text-align:center;border-bottom:1px solid #ccc;padding:0 2px}
 .group th:first-child{text-align:left}
-.group td{padding:1px 3px;border-bottom:1px solid #ccc;font-size:10px}
-.group td:not(:first-child){width:40px;text-align:center;border-left:1px solid #ccc}
-.cb{width:12px;height:12px;border:1px solid #000;display:inline-block}
-.safety{break-inside:avoid;margin-bottom:6px}
-.safety h2{font-size:11px;background:#000;color:#fff;padding:1px 4px;margin-bottom:1px}
+.group td{padding:0 2px;border-bottom:1px solid #eee;font-size:8px;line-height:1.4}
+.group td:not(:first-child){width:34px;text-align:center;border-left:1px solid #ccc}
+.cb{width:10px;height:10px;border:1px solid #000;display:inline-block}
+.safety{break-inside:avoid;margin-bottom:3px}
+.safety h2{font-size:8px;background:#000;color:#fff;padding:1px 3px;margin-bottom:0}
 .safety table{width:100%;border-collapse:collapse}
-.safety th{font-size:9px;text-align:center;border-bottom:1px solid #ccc;padding:1px 3px}
+.safety th{font-size:7px;text-align:center;border-bottom:1px solid #ccc;padding:0 2px}
 .safety th:first-child{text-align:left}
-.safety td{padding:1px 3px;border-bottom:1px solid #ccc;font-size:10px}
-.safety td:not(:first-child){width:40px;text-align:center;border-left:1px solid #ccc}
-@media print{body{padding:4px}@page{margin:0.3in;size:letter}}
+.safety td{padding:0 2px;border-bottom:1px solid #eee;font-size:8px;line-height:1.4}
+.safety td:not(:first-child){width:34px;text-align:center;border-left:1px solid #ccc}
+@media print{body{padding:2px}@page{margin:0.2in;size:letter}}
 </style></head><body>
 <h1>Ardoa Opening Checklist</h1>
 <div class="date-line">Date: ____________</div>
@@ -8238,6 +8743,263 @@ h1{font-size:14px;text-align:center;margin-bottom:4px;border-bottom:1px solid #0
             `).join('');
         }
 
+        // ==================== TIME CLOCK ====================
+        const TIMECLOCK_KEY = 'ardoa-timeclock';
+
+        function getTimeclockData() {
+            try {
+                const data = JSON.parse(localStorage.getItem(TIMECLOCK_KEY));
+                if (data && data.logs) return data;
+            } catch (e) {}
+            return { logs: [], activeShift: null };
+        }
+
+        function saveTimeclockData(data) {
+            localStorage.setItem(TIMECLOCK_KEY, JSON.stringify(data));
+        }
+
+        function timeclockIn() {
+            const data = getTimeclockData();
+            if (data.activeShift) return; // already clocked in
+            data.activeShift = { clockIn: Date.now() };
+            saveTimeclockData(data);
+            renderTimeclock();
+        }
+
+        function timeclockOut() {
+            const data = getTimeclockData();
+            if (!data.activeShift) return; // not clocked in
+            data.logs.push({
+                clockIn: data.activeShift.clockIn,
+                clockOut: Date.now()
+            });
+            data.activeShift = null;
+            saveTimeclockData(data);
+            renderTimeclock();
+        }
+
+        function timeclockToggleManualForm() {
+            var form = document.getElementById('timeclockManualForm');
+            var errorEl = document.getElementById('timeclockManualError');
+            if (form.classList.contains('visible')) {
+                form.classList.remove('visible');
+            } else {
+                // Default date to today
+                var today = new Date();
+                var yyyy = today.getFullYear();
+                var mm = (today.getMonth() + 1 < 10 ? '0' : '') + (today.getMonth() + 1);
+                var dd = (today.getDate() < 10 ? '0' : '') + today.getDate();
+                document.getElementById('timeclockManualDate').value = yyyy + '-' + mm + '-' + dd;
+                document.getElementById('timeclockManualIn').value = '';
+                document.getElementById('timeclockManualOut').value = '';
+                errorEl.style.display = 'none';
+                form.classList.add('visible');
+            }
+        }
+
+        function timeclockAddManual() {
+            var dateVal = document.getElementById('timeclockManualDate').value;
+            var inVal = document.getElementById('timeclockManualIn').value;
+            var outVal = document.getElementById('timeclockManualOut').value;
+            var errorEl = document.getElementById('timeclockManualError');
+
+            if (!dateVal || !inVal || !outVal) {
+                errorEl.textContent = 'Please fill in all fields.';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            var clockIn = new Date(dateVal + 'T' + inVal).getTime();
+            var clockOut = new Date(dateVal + 'T' + outVal).getTime();
+
+            if (isNaN(clockIn) || isNaN(clockOut)) {
+                errorEl.textContent = 'Invalid date or time.';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            if (clockOut <= clockIn) {
+                errorEl.textContent = 'Clock out must be after clock in.';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            var data = getTimeclockData();
+            data.logs.push({ clockIn: clockIn, clockOut: clockOut });
+            saveTimeclockData(data);
+
+            document.getElementById('timeclockManualForm').classList.remove('visible');
+            renderTimeclock();
+        }
+
+        function timeclockDeleteEntry(clockInTs) {
+            var overlay = document.createElement('div');
+            overlay.className = 'timeclock-confirm-overlay';
+            overlay.id = 'timeclockConfirmOverlay';
+            overlay.innerHTML = '<div class="timeclock-confirm-dialog">' +
+                '<h3>Delete Entry?</h3>' +
+                '<p>Remove this time entry? This cannot be undone.</p>' +
+                '<div class="timeclock-confirm-buttons">' +
+                '<button class="timeclock-confirm-yes" onclick="timeclockDoDelete(' + clockInTs + ')">Yes, Delete</button>' +
+                '<button class="timeclock-confirm-no" onclick="timeclockDismissConfirm()">Cancel</button>' +
+                '</div></div>';
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) timeclockDismissConfirm();
+            });
+            document.body.appendChild(overlay);
+        }
+
+        function timeclockDoDelete(clockInTs) {
+            timeclockDismissConfirm();
+            var data = getTimeclockData();
+            data.logs = data.logs.filter(function(entry) {
+                return entry.clockIn !== clockInTs;
+            });
+            saveTimeclockData(data);
+            renderTimeclock();
+        }
+
+        function timeclockConfirmClear() {
+            const overlay = document.createElement('div');
+            overlay.className = 'timeclock-confirm-overlay';
+            overlay.innerHTML = '<div class="timeclock-confirm-dialog">' +
+                '<h3>Clear All Logs?</h3>' +
+                '<p>This will permanently delete all your time entries for the week. This cannot be undone.</p>' +
+                '<div class="timeclock-confirm-buttons">' +
+                '<button class="timeclock-confirm-yes" onclick="timeclockClearLogs()">Yes, Clear All</button>' +
+                '<button class="timeclock-confirm-no" onclick="timeclockDismissConfirm()">Cancel</button>' +
+                '</div></div>';
+            overlay.id = 'timeclockConfirmOverlay';
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) timeclockDismissConfirm();
+            });
+            document.body.appendChild(overlay);
+        }
+
+        function timeclockDismissConfirm() {
+            var overlay = document.getElementById('timeclockConfirmOverlay');
+            if (overlay) overlay.remove();
+        }
+
+        function timeclockClearLogs() {
+            timeclockDismissConfirm();
+            saveTimeclockData({ logs: [], activeShift: null });
+            renderTimeclock();
+        }
+
+        function formatTimeclockTime(ts) {
+            var d = new Date(ts);
+            var h = d.getHours();
+            var m = d.getMinutes();
+            var ampm = h >= 12 ? 'PM' : 'AM';
+            h = h % 12;
+            if (h === 0) h = 12;
+            return h + ':' + (m < 10 ? '0' : '') + m + ' ' + ampm;
+        }
+
+        function formatTimeclockDuration(ms) {
+            var totalMin = Math.floor(ms / 60000);
+            var h = Math.floor(totalMin / 60);
+            var m = totalMin % 60;
+            if (h > 0) return h + 'h ' + m + 'm';
+            return m + 'm';
+        }
+
+        function getTimeclockDayKey(ts) {
+            var d = new Date(ts);
+            return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+        }
+
+        function getTimeclockDayLabel(ts) {
+            var d = new Date(ts);
+            var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            return days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate();
+        }
+
+        function renderTimeclock() {
+            var data = getTimeclockData();
+            var statusEl = document.getElementById('timeclockStatus');
+            var inBtn = document.getElementById('timeclockInBtn');
+            var outBtn = document.getElementById('timeclockOutBtn');
+            var logsEl = document.getElementById('timeclockLogs');
+
+            if (!statusEl || !logsEl) return;
+
+            // Update status
+            if (data.activeShift) {
+                statusEl.textContent = 'Clocked In since ' + formatTimeclockTime(data.activeShift.clockIn);
+                statusEl.className = 'timeclock-status-value clocked-in';
+                inBtn.disabled = true;
+                outBtn.disabled = false;
+            } else {
+                statusEl.textContent = 'Clocked Out';
+                statusEl.className = 'timeclock-status-value clocked-out';
+                inBtn.disabled = false;
+                outBtn.disabled = true;
+            }
+
+            // Build all entries (completed + active)
+            var allEntries = data.logs.slice();
+            if (data.activeShift) {
+                allEntries.push({ clockIn: data.activeShift.clockIn, clockOut: null });
+            }
+
+            if (allEntries.length === 0) {
+                logsEl.innerHTML = '<p class="timeclock-empty">No time entries yet. Tap "Clock In" to start tracking.</p>';
+                forceRepaint(logsEl);
+                return;
+            }
+
+            // Group by day
+            var dayGroups = {};
+            var dayOrder = [];
+            allEntries.forEach(function(entry) {
+                var key = getTimeclockDayKey(entry.clockIn);
+                if (!dayGroups[key]) {
+                    dayGroups[key] = { entries: [], label: getTimeclockDayLabel(entry.clockIn), totalMs: 0 };
+                    dayOrder.push(key);
+                }
+                dayGroups[key].entries.push(entry);
+                if (entry.clockOut) {
+                    dayGroups[key].totalMs += (entry.clockOut - entry.clockIn);
+                }
+            });
+
+            // Calculate week total
+            var weekTotalMs = 0;
+            dayOrder.forEach(function(key) { weekTotalMs += dayGroups[key].totalMs; });
+
+            var html = '<div class="timeclock-week-header"><span>This Week</span><span class="timeclock-week-total">Total: ' + formatTimeclockDuration(weekTotalMs) + '</span></div>';
+
+            // Render most recent day first
+            dayOrder.reverse().forEach(function(key) {
+                var group = dayGroups[key];
+                html += '<div class="timeclock-day">';
+                html += '<div class="timeclock-day-header"><span>' + group.label + '</span><span class="timeclock-day-total">' + formatTimeclockDuration(group.totalMs) + '</span></div>';
+                group.entries.forEach(function(entry) {
+                    html += '<div class="timeclock-entry"><div class="timeclock-entry-times">';
+                    html += '<span class="timeclock-entry-in">' + formatTimeclockTime(entry.clockIn) + '</span>';
+                    if (entry.clockOut) {
+                        html += '<span> — </span>';
+                        html += '<span class="timeclock-entry-out">' + formatTimeclockTime(entry.clockOut) + '</span>';
+                    }
+                    html += '</div>';
+                    if (entry.clockOut) {
+                        html += '<span class="timeclock-entry-duration">' + formatTimeclockDuration(entry.clockOut - entry.clockIn) + '</span>';
+                        html += '<button class="timeclock-entry-delete" onclick="timeclockDeleteEntry(' + entry.clockIn + ')" title="Delete entry">&times;</button>';
+                    } else {
+                        html += '<span class="timeclock-entry-active">Working...</span>';
+                    }
+                    html += '</div>';
+                });
+                html += '</div>';
+            });
+
+            logsEl.innerHTML = html;
+            forceRepaint(logsEl);
+        }
+
         function initTheme() {
             const saved = localStorage.getItem('ardoa-theme');
             if (saved === 'dark') {
@@ -8260,6 +9022,7 @@ h1{font-size:14px;text-align:center;margin-bottom:4px;border-bottom:1px solid #0
                 renderFAQCards();
                 renderPronunciationGuide();
                 renderChecklist();
+                renderTimeclock();
 
                 // Force iOS Safari to paint dynamically inserted card content.
                 // Without this, innerHTML content may remain invisible because
