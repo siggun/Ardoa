@@ -3865,7 +3865,7 @@
                     <button onclick="nextOnlineCard()">&#8594;</button>
                 </div>
                 <div class="flashcard-shuffle">
-                    <button onclick="shuffleCards()">Shuffle Cards</button>
+                    <button id="shuffleBtn" onclick="shuffleCards()">Shuffle Cards</button>
                 </div>
             </div>
         </section>
@@ -4487,101 +4487,6 @@
                         <div class="benefit-icon">🌍</div>
                         <h4>Made in Italy</h4>
                         <p>Enomatic systems are designed and manufactured in Italy, combining elegant aesthetics with precision engineering. Distributed in over 70 countries, they're the industry standard for wine preservation.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="enomatic-models">
-                <h3>Unica Series - Current Generation</h3>
-                <p class="models-intro">The Unica series represents Enomatic's latest generation of wine dispensing systems, featuring smart modularity, high performance, and integrated connectivity.</p>
-
-                <div class="models-grid">
-                    <div class="model-card">
-                        <div class="model-header">
-                            <h4>Unica Standard Models</h4>
-                            <span class="model-badge">Core Line</span>
-                        </div>
-                        <div class="model-body">
-                            <p class="model-description">The primary Unica dispensers for wine bars, restaurants, and tasting rooms. Available in multiple configurations.</p>
-                            <ul class="model-features">
-                                <li><strong>Unica 4:</strong> 4-bottle capacity with single-zone refrigeration</li>
-                                <li><strong>Unica 8:</strong> 8-bottle capacity with dual-zone refrigeration</li>
-                                <li><strong>Unica 12:</strong> 12-bottle modular configuration</li>
-                                <li><strong>Unica 16:</strong> 16-bottle modular configuration</li>
-                                <li><strong>Unica 20:</strong> 20-bottle modular configuration</li>
-                                <li><strong>Unica 24:</strong> 24-bottle modular configuration</li>
-                            </ul>
-                            <div class="model-specs">
-                                <span>3 programmable pour volumes</span>
-                                <span>Dual temperature zones</span>
-                                <span>10" touch screen</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="model-card">
-                        <div class="model-header">
-                            <h4>Unica Start Series</h4>
-                            <span class="model-badge">Ready-to-Use</span>
-                        </div>
-                        <div class="model-body">
-                            <p class="model-description">Pre-configured systems designed for immediate deployment behind the bar with elegant furniture housing.</p>
-                            <ul class="model-features">
-                                <li><strong>Unica Start 4:</strong> 4-bottle ready-to-use system</li>
-                                <li><strong>Unica Start 8:</strong> 8-bottle ready-to-use system</li>
-                                <li>Integrated furniture cabinet included</li>
-                                <li>No installation required—plug and pour</li>
-                                <li>Front-facing display for customer interaction</li>
-                            </ul>
-                            <div class="model-specs">
-                                <span>Self-contained unit</span>
-                                <span>Behind-bar ready</span>
-                                <span>Premium finish</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="model-card">
-                        <div class="model-header">
-                            <h4>Unica Specialty Models</h4>
-                            <span class="model-badge">Specialty</span>
-                        </div>
-                        <div class="model-body">
-                            <p class="model-description">Purpose-built variants for specific wine types and service styles.</p>
-                            <ul class="model-features">
-                                <li><strong>Unica Bubbles 4:</strong> 4-bottle sparkling wine dispenser—preserves carbonation</li>
-                                <li><strong>Unica Bubbles 8:</strong> 8-bottle sparkling wine dispenser</li>
-                                <li><strong>Unica Bag 4:</strong> 4-position bag-in-box dispenser</li>
-                                <li><strong>Unica Bag 8:</strong> 8-position bag-in-box dispenser</li>
-                            </ul>
-                            <div class="model-specs">
-                                <span>CO2 preservation system</span>
-                                <span>Extended freshness</span>
-                                <span>RFID compatible</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="model-card">
-                        <div class="model-header">
-                            <h4>EnoOne PLUS</h4>
-                            <span class="model-badge">Compact Modular</span>
-                        </div>
-                        <div class="model-body">
-                            <p class="model-description">Ultra-compact 2-bottle modular units that can be combined for flexible configurations.</p>
-                            <ul class="model-features">
-                                <li><strong>EnoOne PLUS:</strong> 2-bottle capacity per unit</li>
-                                <li>Combine multiple units seamlessly</li>
-                                <li>Thermo-electric cooling (no drain required)</li>
-                                <li>Available in black or white finish</li>
-                                <li>Backlit touch controls</li>
-                            </ul>
-                            <div class="model-specs">
-                                <span>23.5" × 10.6" × 13.8"</span>
-                                <span>28 lbs per unit</span>
-                                <span>Plug & play</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -6450,6 +6355,8 @@
         let onlineFlashcardDeck = 'wine';
         let onlineCardIndex = 0;
         let onlineCards = [];
+        let onlineCardsOriginal = [];
+        let isShuffled = false;
 
         function initOnlineFlashcards() {
             buildOnlineCardDeck();
@@ -6499,6 +6406,16 @@
                 }));
             }
             onlineCardIndex = 0;
+            onlineCardsOriginal = onlineCards.map(c => ({...c}));
+            isShuffled = false;
+            updateShuffleButton();
+        }
+
+        function updateShuffleButton() {
+            const btn = document.getElementById('shuffleBtn');
+            if (btn) {
+                btn.textContent = isShuffled ? 'Reset Order' : 'Shuffle Cards';
+            }
         }
 
         function showOnlineCard() {
@@ -6557,12 +6474,20 @@
         }
 
         function shuffleCards() {
-            // Fisher-Yates shuffle
-            for (let i = onlineCards.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [onlineCards[i], onlineCards[j]] = [onlineCards[j], onlineCards[i]];
+            if (isShuffled) {
+                // Reset to original order
+                onlineCards = onlineCardsOriginal.map(c => ({...c}));
+                isShuffled = false;
+            } else {
+                // Fisher-Yates shuffle
+                for (let i = onlineCards.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [onlineCards[i], onlineCards[j]] = [onlineCards[j], onlineCards[i]];
+                }
+                isShuffled = true;
             }
             onlineCardIndex = 0;
+            updateShuffleButton();
             showOnlineCard();
         }
 
