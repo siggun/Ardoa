@@ -3196,19 +3196,46 @@
 
         .checklist-table td:not(:first-child) {
             text-align: center;
-            width: 80px;
+            width: 100px;
         }
 
-        .checklist-table input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
+        .checklist-counter {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .checklist-counter button {
+            width: 28px;
+            height: 28px;
+            border: 1px solid #4a1a28;
+            background: #4a1a28;
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: bold;
             cursor: pointer;
-            accent-color: #4a1a28;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+            line-height: 1;
+        }
+
+        .checklist-counter button:hover {
+            background: #6b2d3e;
+        }
+
+        .checklist-counter .counter-value {
+            min-width: 24px;
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: var(--bone);
         }
 
         @media (max-width: 480px) {
             .checklist-table td:not(:first-child) {
-                width: 55px;
+                width: 80px;
             }
 
             .checklist-table th {
@@ -3220,9 +3247,15 @@
                 padding: 0.35rem 0.3rem;
             }
 
-            .checklist-table input[type="checkbox"] {
-                width: 18px;
-                height: 18px;
+            .checklist-counter button {
+                width: 24px;
+                height: 24px;
+                font-size: 0.85rem;
+            }
+
+            .checklist-counter .counter-value {
+                min-width: 20px;
+                font-size: 0.85rem;
             }
         }
 
@@ -3871,7 +3904,9 @@
         [data-theme="dark"] .checklist-table td { color: #e8e4dc; border-bottom-color: #1a1025; }
         [data-theme="dark"] .checklist-actions button { background: #c4a875; color: #0a0a0f; }
         [data-theme="dark"] .checklist-actions button:hover { background: #d4c4a8; }
-        [data-theme="dark"] .checklist-table input[type="checkbox"] { accent-color: #c4a875; }
+        [data-theme="dark"] .checklist-counter button { background: #c4a875; color: #0a0a0f; border-color: #c4a875; }
+        [data-theme="dark"] .checklist-counter button:hover { background: #d4c4a8; }
+        [data-theme="dark"] .checklist-counter .counter-value { color: #e8e4dc; }
 
     </style>
 </head>
@@ -4036,7 +4071,7 @@
                             <input type="checkbox" id="q-country" checked> Country
                         </label>
                         <label class="quiz-option">
-                            <input type="checkbox" id="q-tasting" checked> Tasting Notes
+                            <input type="checkbox" id="q-tasting"> Tasting Notes
                         </label>
                         <label class="quiz-option">
                             <input type="checkbox" id="q-food"> Food Pairing
@@ -5147,6 +5182,7 @@
                 grapeDetail: "Italian Pinot Grigio is typically fermented in steel for freshness. Same grape as French Pinot Gris but made in a lighter style.",
                 region: "Delle Venezie DOC, Veneto",
                 country: "Italy",
+                pronunciation: "fah-MEE-lyah boh-ROHN",
                 winemaker: "Famiglia Boron - A family-owned winery in northeastern Italy's Veneto region, dedicated to producing authentic, terroir-driven Pinot Grigio. The Boron family has been making wine for generations, combining traditional methods with modern techniques. Their vineyards benefit from the unique microclimate where cool Alpine air meets the Adriatic warmth, creating ideal conditions for crisp, aromatic whites. Stainless steel fermentation preserves the grape's fresh, vibrant character.",
                 tasting: "Crisp green apple, pear, citrus zest, white flowers, and a hint of minerality. Light-bodied with bright acidity and a clean, refreshing finish.",
                 food: "Prosciutto di Parma, Bresaola, Saint Angel, Hummus, Antipasto Vegetable Blend",
@@ -5194,7 +5230,7 @@
                 grapeDetail: "Classic Provence rosé blend of four traditional grape varieties, direct-pressed for the characteristically pale, delicate Provençal style.",
                 region: "Côtes de Provence",
                 country: "France",
-                pronunciation: "mas-kah-RONN KOHT duh pro-VAHNSS",
+
                 winemaker: "Château La Mascaronne — Owned by Michel Reybier (who also owns Cos d'Estournel, a Second Growth Bordeaux). NBA legend Tony Parker partnered as winemaker-ambassador in 2022 and co-created the Folly cuvée. Technical Director Nathalie Longefay oversees organic viticulture and winemaking. The estate was previously owned by American Tom Bove, who also formerly owned Château Miraval (later sold to Brad Pitt & Angelina Jolie for $60 million). Certified organic since 2016. Grapes hand-harvested at dawn and sorted twice before pressing.",
                 tasting: "Pale pink with silvery highlights. Honeyed nectarine, white flowers, and pear on the nose. Apricot, fresh citrus, and mineral backbone on the palate. Light and refreshing with a clean, lingering finish.",
                 food: "Prosciutto di Parma, Hummus, Petit Basque, Antipasto Vegetable Blend, The Veg flatbread",
@@ -5565,7 +5601,7 @@
                 grapeDetail: "Glera is the grape variety used in Prosecco - light, fruity, and refreshing",
                 region: "Veneto",
                 country: "Italy",
-                pronunciation: "tee-AH-mo pro-SEK-ko",
+
                 winemaker: "Tiamo Wines - An organic Italian producer focused on sustainable, environmentally-friendly winemaking. Tiamo means 'I love you' in Italian, reflecting their love for the land and commitment to producing quality wines without harmful chemicals.",
                 tasting: "Fresh green apple, white peach, pear, delicate floral notes. Light-bodied with soft, frothy bubbles and a crisp, dry finish.",
                 food: "Prosciutto, Bruschetta, Light Appetizers, Brunch dishes",
@@ -5587,7 +5623,7 @@
                 grapeDetail: "The signature grape of Italy's most popular sparkling wine",
                 region: "Veneto/Friuli Venezia Giulia",
                 country: "Italy",
-                pronunciation: "pro-SEK-ko",
+
                 winemaker: "Traditional Italian producer from the Prosecco DOC region, which spans the Veneto and Friuli Venezia Giulia regions of northeastern Italy. The DOC designation ensures quality standards and regional authenticity.",
                 tasting: "Crisp green apple, pear, white flowers, citrus, hint of almond. Light and refreshing with fine, persistent bubbles and bright acidity.",
                 food: "Cheese boards, Seafood, Light Pasta, Celebrations",
@@ -5718,7 +5754,7 @@
                 price: "$9",
                 origin: "France",
                 type: "Cow, Soft, Triple Crème",
-                pronunciation: "san ahn-ZHEL",
+
                 description: "An indulgent triple-crème cheese (75% butterfat) from Burgundy. Incredibly rich, buttery, and cloud-like with a bloomy rind. Melts on the tongue like butter.",
                 pairings: "Gorghi Tondi Frappato, Krasno Pinot Noir, Presqu'ile Chardonnay, Famiglia Boron Pinot Grigio"
             },
@@ -5727,7 +5763,7 @@
                 price: "$9",
                 origin: "Netherlands",
                 type: "Sheep, Firm, Aged Gouda",
-                pronunciation: "yoo-FOR-ee-ah",
+
                 description: "A sheep's milk Gouda aged 9+ months. Sweet, nutty, with butterscotch and caramel notes. Crunchy protein crystals add texture. The name is a play on 'euphoria.'",
                 pairings: "Domaine Verquière Plan de Dieu, Les Cousins L'Inconscient, Palmeri Navalta, Encomienda de Cervera Horten, Cims de Porrera Priorat"
             },
@@ -5744,7 +5780,7 @@
                 price: "$9",
                 origin: "France",
                 type: "Cow, Firm, Sharp, Aged",
-                pronunciation: "mee-moh-LET",
+
                 description: "A French cheese with a distinctive bright orange interior (from annatto). Aged versions develop nutty, butterscotch flavors and a slightly crumbly texture. Similar to aged Gouda.",
                 pairings: "Domaine Verquière Plan de Dieu, Les Cousins L'Inconscient, Palmeri Navalta, Château Roc Meynard, Cims de Porrera Priorat"
             },
@@ -5753,7 +5789,7 @@
                 price: "$9",
                 origin: "France",
                 type: "Cow, Semi-Firm, Tangy Blue",
-                pronunciation: "bluh doh-VAIRN-yuh",
+                pronunciation: "doh-VAIRN-yuh",
                 description: "A classic French blue from the volcanic Auvergne region. Creamy with bold, tangy blue veins. Less intense than Roquefort, more approachable. Spicy and piquant.",
                 pairings: "Orsa Cabernet Sauvignon, Les Cousins L'Inconscient - bold wines for bold cheese"
             },
@@ -5770,7 +5806,7 @@
                 price: "$9",
                 origin: "France",
                 type: "Sheep, Semi-Firm, Mild",
-                pronunciation: "peh-TEE BASK",
+
                 description: "A mild, approachable sheep's milk cheese from the French Pyrenees. Nutty, slightly sweet with a smooth, buttery texture. Great for those new to sheep's milk cheese.",
                 pairings: "Gorghi Tondi Frappato, Domaine Les Pins Bourgueil, Jean Aubron Folle Blanche, Pouilly-Fumé Dezat, Marola Albariño"
             },
@@ -5900,7 +5936,7 @@
                 name: "Tapenade",
                 price: "$9",
                 type: "Olive Dip",
-                pronunciation: "TAH-pen-ahd",
+
                 description: "Classic Provençal olive spread made from black olives, capers, anchovies, and olive oil. Briny, savory, and intensely Mediterranean. Perfect with crusty bread.",
                 pairings: "Domaine Verquière Plan de Dieu, Garnatxa Meretat, Rosé, Marola Albariño"
             },
@@ -5922,7 +5958,7 @@
                 name: "Antipasto Vegetable Blend",
                 price: "$6",
                 type: "Assortment of Pickled Vegetables",
-                pronunciation: "ahn-tee-PAH-stoh",
+
                 description: "Italian-style pickled vegetables including artichokes, peppers, and more. Tangy, crunchy, and bright. A refreshing palate cleanser between rich bites.",
                 pairings: "Chianti Classico, Montepulciano d'Abruzzo, Marola Albariño, Pinot Grigio"
             },
@@ -5970,7 +6006,7 @@
                 name: "Lemoncello Tartufo",
                 price: "$8",
                 type: "Lemon Ice Cream with Lemon Confit",
-                pronunciation: "leh-mon-CHEL-oh tar-TOO-foh",
+
                 description: "Italian frozen dessert with creamy lemon ice cream, candied lemon confit, and a boozy limoncello kick. Bright, refreshing, and the perfect palate cleanser.",
                 pairings: "Braunewell Scheurebe - aromatic fruit pairs beautifully with citrus"
             },
@@ -5985,7 +6021,7 @@
                 name: "Exotic Bomba",
                 price: "$12",
                 type: "Mango, Passion Fruit & Raspberry Sorbetta, coated in White Chocolate",
-                pronunciation: "BOM-bah",
+
                 description: "A tropical explosion! Three layers of exotic fruit sorbetto encased in white chocolate. Bright, fruity, refreshing, and visually stunning.",
                 pairings: "Braunewell Scheurebe - aromatic Scheurebe loves tropical fruit"
             }
@@ -7344,17 +7380,12 @@
                 { word: 'Sommelier', phonetic: 'soh-mel-YAY' },
                 { word: 'Terroir', phonetic: 'teh-RWAHR' },
                 { word: 'Cuvée', phonetic: 'koo-VAY' },
-                { word: 'Appellation', phonetic: 'ah-peh-lah-SYOHN' },
-                { word: 'Tannin', phonetic: 'TAN-in' },
-                { word: 'Brut', phonetic: 'BROOT' },
-                { word: 'Demi-sec', phonetic: 'deh-mee-SEK' },
-                { word: 'Blanc de Blancs', phonetic: 'blahnk duh BLAHNK' },
                 { word: 'Crémant', phonetic: 'kray-MAHN' },
                 { word: 'Mise en bouteille', phonetic: 'meez ahn boo-TAY' },
                 { word: 'Côtes du Rhône', phonetic: 'koht doo ROHN' },
                 { word: 'Château', phonetic: 'shah-TOH' },
-                { word: 'Domaine', phonetic: 'doh-MEHN' },
-                { word: 'Enomatic', phonetic: 'ee-noh-MAT-ik' }
+                { word: 'Delle Venezie', phonetic: 'DEL-leh veh-NEH-tsee-eh' },
+                { word: 'Rheinhessen Selztal', phonetic: 'RINE-hess-en ZELTS-tahl' }
             ];
             groups.push({ title: 'Common Wine Terms', items: wineTerms });
 
@@ -7429,19 +7460,22 @@
                         <thead>
                             <tr>
                                 <th>Item</th>
-                                <th>Stocked</th>
-                                <th>Backup</th>
+                                <th>Count</th>
                             </tr>
                         </thead>
                         <tbody>
                             ${group.items.map((item, ii) => {
                                 const key = gi + '-' + ii;
-                                const stocked = saved[key + '-s'] ? 'checked' : '';
-                                const backup = saved[key + '-b'] ? 'checked' : '';
+                                const count = saved[key] || 0;
                                 return `<tr>
                                     <td>${item}</td>
-                                    <td><input type="checkbox" ${stocked} onchange="saveChecklist('${key}-s', this.checked)"></td>
-                                    <td><input type="checkbox" ${backup} onchange="saveChecklist('${key}-b', this.checked)"></td>
+                                    <td>
+                                        <div class="checklist-counter">
+                                            <button onclick="updateChecklistCount('${key}', -1)">−</button>
+                                            <span class="counter-value" id="count-${key}">${count}</span>
+                                            <button onclick="updateChecklistCount('${key}', 1)">+</button>
+                                        </div>
+                                    </td>
                                 </tr>`;
                             }).join('')}
                         </tbody>
@@ -7450,14 +7484,17 @@
             `).join('');
         }
 
-        function saveChecklist(key, value) {
+        function updateChecklistCount(key, delta) {
             const saved = JSON.parse(localStorage.getItem('ardoa-checklist') || '{}');
-            if (value) {
-                saved[key] = true;
-            } else {
+            const current = saved[key] || 0;
+            const newVal = Math.max(0, current + delta);
+            if (newVal === 0) {
                 delete saved[key];
+            } else {
+                saved[key] = newVal;
             }
             localStorage.setItem('ardoa-checklist', JSON.stringify(saved));
+            document.getElementById('count-' + key).textContent = newVal;
         }
 
         function resetChecklist() {
