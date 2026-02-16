@@ -4970,6 +4970,7 @@
                 <p class="section-subtitle">Verify everything is stocked and ready for service</p>
                 <div class="checklist-actions">
                     <button onclick="resetChecklist()">Reset All</button>
+                    <button onclick="printChecklist()">Print Checklist</button>
                 </div>
                 <div id="checklistContent">
                     <!-- Checklist groups inserted by JavaScript -->
@@ -5183,6 +5184,7 @@
                 region: "Delle Venezie DOC, Veneto",
                 country: "Italy",
                 pronunciation: "fah-MEE-lyah boh-ROHN",
+                pronunciationGuideOnly: true,
                 winemaker: "Famiglia Boron - A family-owned winery in northeastern Italy's Veneto region, dedicated to producing authentic, terroir-driven Pinot Grigio. The Boron family has been making wine for generations, combining traditional methods with modern techniques. Their vineyards benefit from the unique microclimate where cool Alpine air meets the Adriatic warmth, creating ideal conditions for crisp, aromatic whites. Stainless steel fermentation preserves the grape's fresh, vibrant character.",
                 tasting: "Crisp green apple, pear, citrus zest, white flowers, and a hint of minerality. Light-bodied with bright acidity and a clean, refreshing finish.",
                 food: "Prosciutto di Parma, Bresaola, Saint Angel, Hummus, Antipasto Vegetable Blend",
@@ -6096,7 +6098,7 @@
                         <div class="subtitle">${wine.vintage} | ${wine.type.charAt(0).toUpperCase() + wine.type.slice(1)}</div>
                     </div>
                     <div class="print-card-body">
-                        ${wine.pronunciation ? `
+                        ${wine.pronunciation && !wine.pronunciationGuideOnly ? `
                         <div class="print-field">
                             <div class="print-label">Pronunciation</div>
                             <div class="print-value">${wine.pronunciation}</div>
@@ -6313,7 +6315,7 @@
                         <div class="producer">${getProducerName(wine.winemaker)}</div>
                     </div>
                     <div class="wine-card-body">
-                        ${wine.pronunciation ? `
+                        ${wine.pronunciation && !wine.pronunciationGuideOnly ? `
                         <div class="wine-detail">
                             <div class="wine-detail-label">Pronunciation</div>
                             <div class="pronunciation">${wine.pronunciation}</div>
@@ -6542,7 +6544,7 @@
 
         // Get pronunciation line for answer
         function getPronunciationLine(wine) {
-            if (wine.pronunciation) {
+            if (wine.pronunciation && !wine.pronunciationGuideOnly) {
                 return `\n\nPronunciation: ${wine.pronunciation}`;
             }
             return '';
@@ -6790,7 +6792,7 @@
                         { label: 'Grape(s)', value: wine.grape },
                         { label: 'Region', value: wine.region },
                         { label: 'Country', value: wine.country },
-                        ...(wine.pronunciation ? [{ label: 'Pronunciation', value: wine.pronunciation }] : [])
+                        ...(wine.pronunciation && !wine.pronunciationGuideOnly ? [{ label: 'Pronunciation', value: wine.pronunciation }] : [])
                     ]
                 }));
             } else if (onlineFlashcardDeck === 'cheese') {
@@ -7442,16 +7444,18 @@
                 },
                 {
                     title: 'Kitchen & Prep Supplies',
-                    items: ['Baguettes', 'Dijon Mustard', 'Paprika', 'Fig Jam', 'Honey', 'Walnuts', 'Dried Cranberries', 'Olives', 'Mushrooms']
+                    items: ['Baguettes', 'Dijon Mustard', 'Paprika', 'Fig Jam', 'Honey', 'Walnuts', 'Dried Cranberries', 'Olives', 'Mushrooms', 'Apples', 'Gluten Free Crackers', 'Small Bottles of San Pellegrino']
                 },
                 {
                     title: 'Service Supplies',
-                    items: ['Gloves', 'Toilet Paper', 'Paper Towels', 'Wine Bags']
+                    items: ['Gloves', 'Toilet Paper', 'Paper Towels', 'Wine Bags', 'Blue Tape (date labels)', 'Sharpie Pens']
                 }
             ];
 
             // Load saved state from localStorage
             const saved = JSON.parse(localStorage.getItem('ardoa-checklist') || '{}');
+
+            const firstAidChecked = saved['firstaid'] ? 'checked' : '';
 
             container.innerHTML = checklistGroups.map((group, gi) => `
                 <div class="checklist-group">
@@ -7481,7 +7485,15 @@
                         </tbody>
                     </table>
                 </div>
-            `).join('');
+            `).join('') + `
+                <div class="checklist-group">
+                    <h3 class="checklist-group-title">Safety</h3>
+                    <label class="checklist-checkbox-row" style="display:flex;align-items:center;gap:10px;padding:10px 0;cursor:pointer;color:#e8e4dc;font-size:1rem;">
+                        <input type="checkbox" id="firstaid-check" ${firstAidChecked} onchange="toggleFirstAid(this.checked)" style="width:20px;height:20px;accent-color:#c4a875;cursor:pointer;">
+                        First Aid Kit is Stocked
+                    </label>
+                </div>
+            `;
         }
 
         function updateChecklistCount(key, delta) {
@@ -7495,6 +7507,74 @@
             }
             localStorage.setItem('ardoa-checklist', JSON.stringify(saved));
             document.getElementById('count-' + key).textContent = newVal;
+        }
+
+        function printChecklist() {
+            // Build the same checklist groups as renderChecklist
+            const checklistGroups = [
+                { title: 'Wines (Enomatic)', items: wines.map(w => w.name + ' ' + w.vintage) },
+                { title: 'Beers & Cider', items: beers.map(b => b.name) },
+                { title: 'Cheeses', items: cheeses.map(c => c.name) },
+                { title: 'Charcuterie', items: charcuterie.map(c => c.name) },
+                { title: 'Flatbread Toppings', items: ['Smoked Chili Cheddar (flatbread)', 'Gruyère (flatbread)', 'Black Truffle Goat (flatbread)', 'Chorizo', 'Prosciutto', 'Mushrooms', 'Olives', 'Sun Dried Tomatoes', 'Arugula', 'Fig Jam'] },
+                { title: 'Tapas & Dips', items: tapas.map(t => t.name) },
+                { title: 'Pates & Spreads', items: pates.map(p => p.name) },
+                { title: 'Desserts', items: desserts.map(d => d.name) },
+                { title: 'Kitchen & Prep Supplies', items: ['Baguettes', 'Dijon Mustard', 'Paprika', 'Fig Jam', 'Honey', 'Walnuts', 'Dried Cranberries', 'Olives', 'Mushrooms', 'Apples', 'Gluten Free Crackers', 'Small Bottles of San Pellegrino'] },
+                { title: 'Service Supplies', items: ['Gloves', 'Toilet Paper', 'Paper Towels', 'Wine Bags', 'Blue Tape (date labels)', 'Sharpie Pens'] }
+            ];
+
+            let html = `<!DOCTYPE html><html><head><title>Ardoa Opening Checklist</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#000;padding:8px}
+h1{font-size:14px;text-align:center;margin-bottom:4px;border-bottom:1px solid #000;padding-bottom:2px}
+.date-line{text-align:center;font-size:10px;margin-bottom:6px}
+.groups{columns:2;column-gap:12px}
+.group{break-inside:avoid;margin-bottom:6px}
+.group h2{font-size:11px;background:#000;color:#fff;padding:1px 4px;margin-bottom:1px}
+.group table{width:100%;border-collapse:collapse}
+.group td{padding:1px 3px;border-bottom:1px solid #ccc;font-size:10px}
+.group td:last-child{width:40px;text-align:center;border-left:1px solid #ccc}
+.cb{width:12px;height:12px;border:1px solid #000;display:inline-block}
+.safety{break-inside:avoid;margin-bottom:6px}
+.safety h2{font-size:11px;background:#000;color:#fff;padding:1px 4px;margin-bottom:1px}
+.safety label{display:flex;align-items:center;gap:6px;padding:2px 3px;font-size:10px}
+.safety .cb{vertical-align:middle}
+@media print{body{padding:4px}@page{margin:0.3in;size:letter}}
+</style></head><body>
+<h1>Ardoa Opening Checklist</h1>
+<div class="date-line">Date: ____________</div>
+<div class="groups">`;
+
+            checklistGroups.forEach(group => {
+                html += '<div class="group"><h2>' + group.title + '</h2><table>';
+                group.items.forEach(item => {
+                    html += '<tr><td>' + item + '</td><td><span class="cb"></span></td></tr>';
+                });
+                html += '</table></div>';
+            });
+
+            html += `<div class="safety"><h2>Safety</h2>
+<label><span class="cb"></span> First Aid Kit is Stocked</label></div>`;
+
+            html += '</div></body></html>';
+
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(html);
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+        }
+
+        function toggleFirstAid(checked) {
+            const saved = JSON.parse(localStorage.getItem('ardoa-checklist') || '{}');
+            if (checked) {
+                saved['firstaid'] = true;
+            } else {
+                delete saved['firstaid'];
+            }
+            localStorage.setItem('ardoa-checklist', JSON.stringify(saved));
         }
 
         function resetChecklist() {
