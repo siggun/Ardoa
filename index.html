@@ -1138,21 +1138,23 @@
             /* Make tables horizontally scrollable with visual indicator */
             .quick-ref {
                 position: relative;
-                margin: 1.5rem -1rem 0;
+                margin: 0 -1rem;
                 padding: 0 1rem;
             }
 
-            .quick-ref::after {
+            .quick-ref::before {
                 content: '→ scroll';
-                position: absolute;
-                right: 1rem;
-                top: -1.4rem;
+                display: block;
+                text-align: right;
                 background: var(--gold);
                 color: var(--charcoal);
                 padding: 0.25rem 0.5rem;
                 font-size: 0.7rem;
                 border-radius: 3px;
                 opacity: 0.8;
+                width: fit-content;
+                margin-left: auto;
+                margin-bottom: 0.4rem;
             }
 
             .quick-ref table {
@@ -1355,7 +1357,7 @@
                 font-size: 0.7rem;
             }
 
-            .quick-ref::after {
+            .quick-ref::before {
                 content: '⟶ swipe';
                 font-size: 0.65rem;
                 padding: 0.25rem 0.5rem;
@@ -1548,7 +1550,7 @@
                 line-height: 1.15;
             }
 
-            .quick-ref::after {
+            .quick-ref::before {
                 content: '⟶';
                 font-size: 0.75rem;
                 padding: 0.2rem 0.5rem;
