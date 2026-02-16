@@ -1939,7 +1939,7 @@
             }
 
             /* Hide card grids that aren't selected for printing */
-            [data-print-hide="true"] {
+            #printcards [data-print-hide="true"] {
                 display: none !important;
             }
 
@@ -2146,6 +2146,11 @@
 
         .flashcard-front.wine-orange {
             background: linear-gradient(135deg, #CC7722, #A66000);
+        }
+
+        .flashcard-front.wine-sparkling {
+            background: linear-gradient(135deg, #8FBCCC, #6E9DB2);
+            color: var(--charcoal);
         }
 
         .flashcard-front.cheese {
@@ -3024,6 +3029,442 @@
             }
         }
 
+        /* ==================== PRONUNCIATION GUIDE ==================== */
+        .pronunciation-guide {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .pronunciation-guide h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            text-align: center;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .pronunciation-guide .section-subtitle {
+            text-align: center;
+            color: var(--mist);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .pron-group {
+            margin-bottom: 2rem;
+        }
+
+        .pron-group-title {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #e8e0d8;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .pron-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.5rem 0.75rem;
+            border-bottom: 1px solid #f0ebe5;
+        }
+
+        .pron-item:last-child {
+            border-bottom: none;
+        }
+
+        .pron-word {
+            font-weight: 600;
+            color: var(--bone);
+            font-size: 1rem;
+        }
+
+        .pron-phonetic {
+            font-style: italic;
+            color: #888;
+            font-size: 0.95rem;
+            text-align: right;
+        }
+
+        @media (max-width: 480px) {
+            .pron-item {
+                flex-direction: column;
+                gap: 0.15rem;
+            }
+
+            .pron-phonetic {
+                text-align: left;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ==================== INVENTORY CHECKLIST ==================== */
+        .checklist-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .checklist-container h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            text-align: center;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .checklist-container .section-subtitle {
+            text-align: center;
+            color: var(--mist);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .checklist-actions {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .checklist-actions button {
+            font-family: 'Cinzel', serif;
+            background: #4a1a28;
+            color: #ffffff;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+        }
+
+        .checklist-actions button:hover {
+            background: #6b2d3e;
+        }
+
+        .checklist-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .checklist-group-title {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #e8e0d8;
+            padding-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .checklist-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .checklist-table th {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--mist);
+            padding: 0.4rem 0.5rem;
+            text-align: center;
+            border-bottom: 1px solid #e8e0d8;
+        }
+
+        .checklist-table th:first-child {
+            text-align: left;
+        }
+
+        .checklist-table td {
+            padding: 0.4rem 0.5rem;
+            border-bottom: 1px solid #f0ebe5;
+            font-size: 0.95rem;
+            color: var(--bone);
+        }
+
+        .checklist-table td:not(:first-child) {
+            text-align: center;
+            width: 100px;
+        }
+
+        .checklist-counter {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .checklist-counter button {
+            width: 28px;
+            height: 28px;
+            border: 1px solid #4a1a28;
+            background: #4a1a28;
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+            line-height: 1;
+        }
+
+        .checklist-counter button:hover {
+            background: #6b2d3e;
+        }
+
+        .checklist-counter .counter-value {
+            min-width: 24px;
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: var(--bone);
+        }
+
+        .checklist-checkbox {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .checklist-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #4a1a28;
+            cursor: pointer;
+        }
+
+        .checklist-checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--bone);
+            border-bottom: 1px solid #f0ebe5;
+        }
+
+        .checklist-checkbox-row input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #4a1a28;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 480px) {
+            .checklist-table td:not(:first-child) {
+                width: 80px;
+            }
+
+            .checklist-table th {
+                font-size: 0.6rem;
+            }
+
+            .checklist-table td {
+                font-size: 0.85rem;
+                padding: 0.35rem 0.3rem;
+            }
+
+            .checklist-counter button {
+                width: 24px;
+                height: 24px;
+                font-size: 0.85rem;
+            }
+
+            .checklist-counter .counter-value {
+                min-width: 20px;
+                font-size: 0.85rem;
+            }
+
+            .checklist-checkbox input[type="checkbox"] {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        /* ==================== TIMERS SECTION ==================== */
+        .timers-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .timers-container h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            text-align: center;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .timers-container .section-subtitle {
+            text-align: center;
+            color: var(--mist);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .timer-category {
+            margin-bottom: 2rem;
+        }
+
+        .timer-category-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid #e8e0d8;
+            padding-bottom: 0.4rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .timer-category-title {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .timer-add-btn {
+            font-family: 'Cinzel', serif;
+            background: #4a1a28;
+            color: #ffffff;
+            border: none;
+            padding: 0.4rem 1rem;
+            font-size: 0.7rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            touch-action: manipulation;
+        }
+
+        .timer-add-btn:hover {
+            background: #6b2d3e;
+        }
+
+        .timer-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .timer-card {
+            background: #f8f5f0;
+            border: 1px solid #e8e0d8;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .timer-card-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            color: var(--pale-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            min-width: 80px;
+        }
+
+        .timer-card-display {
+            font-family: 'Courier New', monospace;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--bone);
+            min-width: 90px;
+            text-align: center;
+        }
+
+        .timer-card-display.timer-alarm {
+            color: #c0392b;
+            animation: timerBlink 0.5s infinite;
+        }
+
+        @keyframes timerBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .timer-card-controls {
+            display: flex;
+            gap: 0.4rem;
+            flex-shrink: 0;
+        }
+
+        .timer-card-controls button {
+            width: 36px;
+            height: 36px;
+            border: 1px solid #4a1a28;
+            background: #4a1a28;
+            color: #ffffff;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+
+        .timer-card-controls button:hover {
+            background: #6b2d3e;
+        }
+
+        .timer-card-controls button.timer-remove {
+            background: #8B3A42;
+            border-color: #8B3A42;
+        }
+
+        .timer-card-controls button.timer-remove:hover {
+            background: #a04450;
+        }
+
+        .timer-empty {
+            color: var(--mist);
+            font-style: italic;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        @media (max-width: 480px) {
+            .timer-card {
+                padding: 0.75rem;
+            }
+
+            .timer-card-label {
+                font-size: 0.7rem;
+                min-width: 60px;
+            }
+
+            .timer-card-display {
+                font-size: 1.5rem;
+                min-width: 80px;
+            }
+
+            .timer-card-controls button {
+                width: 32px;
+                height: 32px;
+                font-size: 0.8rem;
+            }
+        }
+
         /* ==================== THEME TOGGLE BUTTON ==================== */
         .theme-toggle {
             position: absolute;
@@ -3522,6 +3963,29 @@
             background: linear-gradient(135deg, #6b1c2e, #4a0e1a);
         }
 
+        [data-theme="dark"] .flashcard-front.wine-white {
+            background: linear-gradient(135deg, #DAA520, #B8860B);
+        }
+
+        [data-theme="dark"] .flashcard-front.wine-rose {
+            background: linear-gradient(135deg, #E8B4B8, #D4919A);
+            color: #1a1025;
+        }
+
+        [data-theme="dark"] .flashcard-front.wine-orange {
+            background: linear-gradient(135deg, #CC7722, #A66000);
+        }
+
+        [data-theme="dark"] .flashcard-front.wine-sparkling {
+            background: linear-gradient(135deg, #8FBCCC, #6E9DB2);
+            color: #1a1025;
+        }
+
+        [data-theme="dark"] .flashcard-front.cheese {
+            background: linear-gradient(135deg, #F4D03F, #C9A227);
+            color: #1a1025;
+        }
+
         /* Dark mode - Model header */
         [data-theme="dark"] .model-header {
             background: linear-gradient(135deg, #6b1c2e 0%, #4a0e1a 100%);
@@ -3630,6 +4094,45 @@
             }
         }
 
+        /* Dark mode - Pronunciation Guide */
+        [data-theme="dark"] .pron-group-title { color: #c4a875; border-bottom-color: #2a1a25; }
+        [data-theme="dark"] .pron-item { border-bottom-color: #1a1025; }
+        [data-theme="dark"] .pron-word { color: #e8e4dc; }
+        [data-theme="dark"] .pron-phonetic { color: #b8b4ac; }
+        [data-theme="dark"] .pronunciation-guide h2 { color: #c4a875; }
+        [data-theme="dark"] .pronunciation-guide .section-subtitle { color: #b8b4ac; }
+
+        /* Dark mode - Inventory Checklist */
+        [data-theme="dark"] .checklist-container h2 { color: #c4a875; }
+        [data-theme="dark"] .checklist-container .section-subtitle { color: #b8b4ac; }
+        [data-theme="dark"] .checklist-group-title { color: #c4a875; border-bottom-color: #2a1a25; }
+        [data-theme="dark"] .checklist-table th { color: #b8b4ac; border-bottom-color: #2a1a25; }
+        [data-theme="dark"] .checklist-table td { color: #e8e4dc; border-bottom-color: #1a1025; }
+        [data-theme="dark"] .checklist-actions button { background: #c4a875; color: #0a0a0f; }
+        [data-theme="dark"] .checklist-actions button:hover { background: #d4c4a8; }
+        [data-theme="dark"] .checklist-counter button { background: #c4a875; color: #0a0a0f; border-color: #c4a875; }
+        [data-theme="dark"] .checklist-counter button:hover { background: #d4c4a8; }
+        [data-theme="dark"] .checklist-counter .counter-value { color: #e8e4dc; }
+        [data-theme="dark"] .checklist-checkbox input[type="checkbox"] { accent-color: #c4a875; }
+        [data-theme="dark"] .checklist-checkbox-row { color: #e8e4dc; border-bottom-color: #1a1025; }
+        [data-theme="dark"] .checklist-checkbox-row input[type="checkbox"] { accent-color: #c4a875; }
+
+        /* Dark mode - Timers */
+        [data-theme="dark"] .timers-container h2 { color: #c4a875; }
+        [data-theme="dark"] .timers-container .section-subtitle { color: #b8b4ac; }
+        [data-theme="dark"] .timer-category-header { border-bottom-color: #2a1a25; }
+        [data-theme="dark"] .timer-category-title { color: #c4a875; }
+        [data-theme="dark"] .timer-add-btn { background: #c4a875; color: #0a0a0f; }
+        [data-theme="dark"] .timer-add-btn:hover { background: #d4c4a8; }
+        [data-theme="dark"] .timer-card { background: #1a1025; border-color: #2a1a25; }
+        [data-theme="dark"] .timer-card-label { color: #c4a875; }
+        [data-theme="dark"] .timer-card-display { color: #e8e4dc; }
+        [data-theme="dark"] .timer-card-controls button { background: #c4a875; color: #0a0a0f; border-color: #c4a875; }
+        [data-theme="dark"] .timer-card-controls button:hover { background: #d4c4a8; }
+        [data-theme="dark"] .timer-card-controls button.timer-remove { background: #6b1c2e; border-color: #6b1c2e; color: #e8e4dc; }
+        [data-theme="dark"] .timer-card-controls button.timer-remove:hover { background: #8B3A42; }
+        [data-theme="dark"] .timer-empty { color: #b8b4ac; }
+
     </style>
 </head>
 <body>
@@ -3648,6 +4151,7 @@
         <div class="header-content">
             <!-- Decorative Grape Cluster Logo -->
             <svg class="gothic-logo" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+                <g transform="translate(-3, 0)">
                 <!-- Grape Cluster -->
                 <circle cx="50" cy="52" r="7" fill="#4a1a28" opacity="0.7"/>
                 <circle cx="63" cy="48" r="7" fill="#4a1a28" opacity="0.7"/>
@@ -3667,6 +4171,7 @@
                 <!-- Leaves -->
                 <ellipse cx="48" cy="-6" rx="8" ry="4" fill="#4a1a28" opacity="0.3" transform="rotate(25 48 -6)"/>
                 <ellipse cx="55" cy="-10" rx="7" ry="3.5" fill="#4a1a28" opacity="0.25" transform="rotate(-15 55 -10)"/>
+                </g>
             </svg>
 
             <h1>Ardoa</h1>
@@ -3686,6 +4191,9 @@
         <button onclick="showSection('enomatic', this)">Enomatic System</button>
         <button onclick="showSection('printcards', this)">Print Cards</button>
         <button onclick="showSection('faq', this)">Wine FAQ</button>
+        <button onclick="showSection('pronunciations', this)">Pronunciations</button>
+        <button onclick="showSection('checklist', this)">Opening Checklist</button>
+        <button onclick="showSection('timers', this)">Timers</button>
     </nav>
 
     <main>
@@ -3789,7 +4297,7 @@
                             <input type="checkbox" id="q-country" checked> Country
                         </label>
                         <label class="quiz-option">
-                            <input type="checkbox" id="q-tasting" checked> Tasting Notes
+                            <input type="checkbox" id="q-tasting"> Tasting Notes
                         </label>
                         <label class="quiz-option">
                             <input type="checkbox" id="q-food"> Food Pairing
@@ -4626,8 +5134,8 @@
                 <p>Print study cards to review away from your computer. Choose which set to print below.</p>
                 <div class="print-btn-group">
                     <button class="print-btn" onclick="printCards('all')">Print All Cards</button>
-                    <button class="print-btn" onclick="printCards('drinks')">Print Drinks Only</button>
-                    <button class="print-btn" onclick="printCards('food')">Print Food Only</button>
+                    <button class="print-btn" onclick="printCards('drinks')">Print Drinks Cards</button>
+                    <button class="print-btn" onclick="printCards('food')">Print Food Cards</button>
                 </div>
             </div>
 
@@ -4667,6 +5175,73 @@
             <!-- FAQ Cards Grid -->
             <div class="faq-grid" id="faqGrid">
                 <!-- FAQ cards will be inserted here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Pronunciation Guide Section -->
+        <section id="pronunciations">
+            <div class="pronunciation-guide">
+                <h2>Pronunciation Guide</h2>
+                <p class="section-subtitle">How to say it like you mean it</p>
+                <div id="pronunciationContent">
+                    <!-- Pronunciation groups inserted by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Opening Checklist Section -->
+        <section id="checklist">
+            <div class="checklist-container">
+                <h2>Opening Checklist</h2>
+                <p class="section-subtitle">Verify everything is stocked and ready for service</p>
+                <div class="checklist-actions">
+                    <button onclick="resetChecklist()">Reset All</button>
+                    <button onclick="printChecklist()">Print Checklist</button>
+                </div>
+                <div id="checklistContent">
+                    <!-- Checklist groups inserted by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Timers Section -->
+        <section id="timers">
+            <div class="timers-container">
+                <h2>Kitchen Timers</h2>
+                <p class="section-subtitle">Baguette countdowns, ticket times, and flatbread tracking</p>
+
+                <!-- Baguette Timers -->
+                <div class="timer-category">
+                    <div class="timer-category-header">
+                        <span class="timer-category-title">Baguettes (10 min)</span>
+                        <button class="timer-add-btn" onclick="addBaguetteTimer()">+ Add</button>
+                    </div>
+                    <div class="timer-cards" id="baguetteTimers">
+                        <p class="timer-empty">Tap "+ Add" to start a baguette timer</p>
+                    </div>
+                </div>
+
+                <!-- Ticket Timers -->
+                <div class="timer-category">
+                    <div class="timer-category-header">
+                        <span class="timer-category-title">Tickets</span>
+                        <button class="timer-add-btn" onclick="addTicketTimer()">+ Add</button>
+                    </div>
+                    <div class="timer-cards" id="ticketTimers">
+                        <p class="timer-empty">Tap "+ Add" to start a ticket timer</p>
+                    </div>
+                </div>
+
+                <!-- Flatbread Timers -->
+                <div class="timer-category">
+                    <div class="timer-category-header">
+                        <span class="timer-category-title">Flatbreads</span>
+                        <button class="timer-add-btn" onclick="addFlatbreadTimer()">+ Add</button>
+                    </div>
+                    <div class="timer-cards" id="flatbreadTimers">
+                        <p class="timer-empty">Tap "+ Add" to start a flatbread timer</p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -4875,6 +5450,8 @@
                 grapeDetail: "Italian Pinot Grigio is typically fermented in steel for freshness. Same grape as French Pinot Gris but made in a lighter style.",
                 region: "Delle Venezie DOC, Veneto",
                 country: "Italy",
+                pronunciation: "fah-MEE-lyah boh-ROHN",
+                pronunciationGuideOnly: true,
                 winemaker: "Famiglia Boron - A family-owned winery in northeastern Italy's Veneto region, dedicated to producing authentic, terroir-driven Pinot Grigio. The Boron family has been making wine for generations, combining traditional methods with modern techniques. Their vineyards benefit from the unique microclimate where cool Alpine air meets the Adriatic warmth, creating ideal conditions for crisp, aromatic whites. Stainless steel fermentation preserves the grape's fresh, vibrant character.",
                 tasting: "Crisp green apple, pear, citrus zest, white flowers, and a hint of minerality. Light-bodied with bright acidity and a clean, refreshing finish.",
                 food: "Prosciutto di Parma, Bresaola, Saint Angel, Hummus, Antipasto Vegetable Blend",
@@ -4922,7 +5499,7 @@
                 grapeDetail: "Classic Provence rosé blend of four traditional grape varieties, direct-pressed for the characteristically pale, delicate Provençal style.",
                 region: "Côtes de Provence",
                 country: "France",
-                pronunciation: "mas-kah-RONN KOHT duh pro-VAHNSS",
+
                 winemaker: "Château La Mascaronne — Owned by Michel Reybier (who also owns Cos d'Estournel, a Second Growth Bordeaux). NBA legend Tony Parker partnered as winemaker-ambassador in 2022 and co-created the Folly cuvée. Technical Director Nathalie Longefay oversees organic viticulture and winemaking. The estate was previously owned by American Tom Bove, who also formerly owned Château Miraval (later sold to Brad Pitt & Angelina Jolie for $60 million). Certified organic since 2016. Grapes hand-harvested at dawn and sorted twice before pressing.",
                 tasting: "Pale pink with silvery highlights. Honeyed nectarine, white flowers, and pear on the nose. Apricot, fresh citrus, and mineral backbone on the palate. Light and refreshing with a clean, lingering finish.",
                 food: "Prosciutto di Parma, Hummus, Petit Basque, Antipasto Vegetable Blend, The Veg flatbread",
@@ -5293,7 +5870,7 @@
                 grapeDetail: "Glera is the grape variety used in Prosecco - light, fruity, and refreshing",
                 region: "Veneto",
                 country: "Italy",
-                pronunciation: "tee-AH-mo pro-SEK-ko",
+
                 winemaker: "Tiamo Wines - An organic Italian producer focused on sustainable, environmentally-friendly winemaking. Tiamo means 'I love you' in Italian, reflecting their love for the land and commitment to producing quality wines without harmful chemicals.",
                 tasting: "Fresh green apple, white peach, pear, delicate floral notes. Light-bodied with soft, frothy bubbles and a crisp, dry finish.",
                 food: "Prosciutto, Bruschetta, Light Appetizers, Brunch dishes",
@@ -5315,7 +5892,7 @@
                 grapeDetail: "The signature grape of Italy's most popular sparkling wine",
                 region: "Veneto/Friuli Venezia Giulia",
                 country: "Italy",
-                pronunciation: "pro-SEK-ko",
+
                 winemaker: "Traditional Italian producer from the Prosecco DOC region, which spans the Veneto and Friuli Venezia Giulia regions of northeastern Italy. The DOC designation ensures quality standards and regional authenticity.",
                 tasting: "Crisp green apple, pear, white flowers, citrus, hint of almond. Light and refreshing with fine, persistent bubbles and bright acidity.",
                 food: "Cheese boards, Seafood, Light Pasta, Celebrations",
@@ -5446,7 +6023,7 @@
                 price: "$9",
                 origin: "France",
                 type: "Cow, Soft, Triple Crème",
-                pronunciation: "san ahn-ZHEL",
+
                 description: "An indulgent triple-crème cheese (75% butterfat) from Burgundy. Incredibly rich, buttery, and cloud-like with a bloomy rind. Melts on the tongue like butter.",
                 pairings: "Gorghi Tondi Frappato, Krasno Pinot Noir, Presqu'ile Chardonnay, Famiglia Boron Pinot Grigio"
             },
@@ -5455,7 +6032,7 @@
                 price: "$9",
                 origin: "Netherlands",
                 type: "Sheep, Firm, Aged Gouda",
-                pronunciation: "yoo-FOR-ee-ah",
+
                 description: "A sheep's milk Gouda aged 9+ months. Sweet, nutty, with butterscotch and caramel notes. Crunchy protein crystals add texture. The name is a play on 'euphoria.'",
                 pairings: "Domaine Verquière Plan de Dieu, Les Cousins L'Inconscient, Palmeri Navalta, Encomienda de Cervera Horten, Cims de Porrera Priorat"
             },
@@ -5465,14 +6042,14 @@
                 origin: "Vermont, USA",
                 type: "Cow, Firm, Habanero",
                 description: "Sharp Vermont cheddar with smoky undertones and a habanero kick. The heat builds gradually while the smoke adds depth. Bold and memorable.",
-                pairings: "Orsa Cabernet Sauvignon, The Mighty Spicy flatbread - for those who like heat!"
+                pairings: "Orsa Cabernet Sauvignon, Les Cousins L'Inconscient - bold wines to match the bold heat!"
             },
             {
                 name: "Mimolette",
                 price: "$9",
                 origin: "France",
                 type: "Cow, Firm, Sharp, Aged",
-                pronunciation: "mee-moh-LET",
+
                 description: "A French cheese with a distinctive bright orange interior (from annatto). Aged versions develop nutty, butterscotch flavors and a slightly crumbly texture. Similar to aged Gouda.",
                 pairings: "Domaine Verquière Plan de Dieu, Les Cousins L'Inconscient, Palmeri Navalta, Château Roc Meynard, Cims de Porrera Priorat"
             },
@@ -5481,7 +6058,7 @@
                 price: "$9",
                 origin: "France",
                 type: "Cow, Semi-Firm, Tangy Blue",
-                pronunciation: "bluh doh-VAIRN-yuh",
+                pronunciation: "doh-VAIRN-yuh",
                 description: "A classic French blue from the volcanic Auvergne region. Creamy with bold, tangy blue veins. Less intense than Roquefort, more approachable. Spicy and piquant.",
                 pairings: "Orsa Cabernet Sauvignon, Les Cousins L'Inconscient - bold wines for bold cheese"
             },
@@ -5498,7 +6075,7 @@
                 price: "$9",
                 origin: "France",
                 type: "Sheep, Semi-Firm, Mild",
-                pronunciation: "peh-TEE BASK",
+
                 description: "A mild, approachable sheep's milk cheese from the French Pyrenees. Nutty, slightly sweet with a smooth, buttery texture. Great for those new to sheep's milk cheese.",
                 pairings: "Gorghi Tondi Frappato, Domaine Les Pins Bourgueil, Jean Aubron Folle Blanche, Pouilly-Fumé Dezat, Marola Albariño"
             },
@@ -5628,7 +6205,7 @@
                 name: "Tapenade",
                 price: "$9",
                 type: "Olive Dip",
-                pronunciation: "TAH-pen-ahd",
+
                 description: "Classic Provençal olive spread made from black olives, capers, anchovies, and olive oil. Briny, savory, and intensely Mediterranean. Perfect with crusty bread.",
                 pairings: "Domaine Verquière Plan de Dieu, Garnatxa Meretat, Rosé, Marola Albariño"
             },
@@ -5650,9 +6227,16 @@
                 name: "Antipasto Vegetable Blend",
                 price: "$6",
                 type: "Assortment of Pickled Vegetables",
-                pronunciation: "ahn-tee-PAH-stoh",
+
                 description: "Italian-style pickled vegetables including artichokes, peppers, and more. Tangy, crunchy, and bright. A refreshing palate cleanser between rich bites.",
                 pairings: "Chianti Classico, Montepulciano d'Abruzzo, Marola Albariño, Pinot Grigio"
+            },
+            {
+                name: "Whipped Honey Goat Cheese",
+                price: "TBD",
+                type: "Small Bowl, Topped with Walnuts, Dried Cranberries & Honey",
+                description: "Light, airy whipped goat cheese served in a small bowl and topped with crunchy walnuts, sweet-tart dried cranberries, and a drizzle of honey. Creamy, sweet, tangy, and texturally delightful.",
+                pairings: "Braunewell Scheurebe, Presqu'ile Chardonnay, Rosé - aromatic whites complement the honey and tangy goat cheese"
             }
         ];
 
@@ -5691,7 +6275,7 @@
                 name: "Lemoncello Tartufo",
                 price: "$8",
                 type: "Lemon Ice Cream with Lemon Confit",
-                pronunciation: "leh-mon-CHEL-oh tar-TOO-foh",
+
                 description: "Italian frozen dessert with creamy lemon ice cream, candied lemon confit, and a boozy limoncello kick. Bright, refreshing, and the perfect palate cleanser.",
                 pairings: "Braunewell Scheurebe - aromatic fruit pairs beautifully with citrus"
             },
@@ -5706,7 +6290,7 @@
                 name: "Exotic Bomba",
                 price: "$12",
                 type: "Mango, Passion Fruit & Raspberry Sorbetta, coated in White Chocolate",
-                pronunciation: "BOM-bah",
+
                 description: "A tropical explosion! Three layers of exotic fruit sorbetto encased in white chocolate. Bright, fruity, refreshing, and visually stunning.",
                 pairings: "Braunewell Scheurebe - aromatic Scheurebe loves tropical fruit"
             }
@@ -5781,7 +6365,7 @@
                         <div class="subtitle">${wine.vintage} | ${wine.type.charAt(0).toUpperCase() + wine.type.slice(1)}</div>
                     </div>
                     <div class="print-card-body">
-                        ${wine.pronunciation ? `
+                        ${wine.pronunciation && !wine.pronunciationGuideOnly ? `
                         <div class="print-field">
                             <div class="print-label">Pronunciation</div>
                             <div class="print-value">${wine.pronunciation}</div>
@@ -5998,7 +6582,7 @@
                         <div class="producer">${getProducerName(wine.winemaker)}</div>
                     </div>
                     <div class="wine-card-body">
-                        ${wine.pronunciation ? `
+                        ${wine.pronunciation && !wine.pronunciationGuideOnly ? `
                         <div class="wine-detail">
                             <div class="wine-detail-label">Pronunciation</div>
                             <div class="pronunciation">${wine.pronunciation}</div>
@@ -6201,7 +6785,8 @@
                 'Pinot Noir', 'Pinot Grigio', 'Pinot Gris', 'Tempranillo', 'Barbera',
                 'Carmenère', 'Carmenere', 'Riesling', 'Chardonnay', 'Picpoul',
                 'Sauvignon Blanc', 'Sauvignon', 'Grenache', 'Syrah', 'Merlot',
-                'Gamay', 'Sangiovese', 'Nebbiolo', 'Mourvèdre', 'Mourvedre'
+                'Gamay', 'Sangiovese', 'Nebbiolo', 'Mourvèdre', 'Mourvedre',
+                'Albariño', 'Albarino', 'Frappato', 'Folle Blanche', 'Scheurebe'
             ];
 
             let cleanName = wineName;
@@ -6226,7 +6811,7 @@
 
         // Get pronunciation line for answer
         function getPronunciationLine(wine) {
-            if (wine.pronunciation) {
+            if (wine.pronunciation && !wine.pronunciationGuideOnly) {
                 return `\n\nPronunciation: ${wine.pronunciation}`;
             }
             return '';
@@ -6240,7 +6825,10 @@
             const qTasting = document.getElementById('q-tasting').checked;
             const qFood = document.getElementById('q-food').checked;
 
-            wines.forEach(wine => {
+            // Only quiz on wines currently on the list (exclude sparkling wines not in Enomatic)
+            const quizWines = wines.filter(w => w.type !== 'sparkling');
+
+            quizWines.forEach(wine => {
                 const wineDisplay = `${wine.name} ${wine.vintage}`;
 
                 if (qGrape) {
@@ -6272,7 +6860,7 @@
                 }
                 if (qTasting) {
                     // Generate multiple choice tasting notes question
-                    const otherWines = wines.filter(w => w.name !== wine.name);
+                    const otherWines = quizWines.filter(w => w.name !== wine.name);
                     const wrongAnswers = shuffleArray(otherWines).slice(0, 3).map(w => w.tasting);
                     const allAnswers = shuffleArray([wine.tasting, ...wrongAnswers]);
 
@@ -6471,7 +7059,7 @@
                         { label: 'Grape(s)', value: wine.grape },
                         { label: 'Region', value: wine.region },
                         { label: 'Country', value: wine.country },
-                        ...(wine.pronunciation ? [{ label: 'Pronunciation', value: wine.pronunciation }] : [])
+                        ...(wine.pronunciation && !wine.pronunciationGuideOnly ? [{ label: 'Pronunciation', value: wine.pronunciation }] : [])
                     ]
                 }));
             } else if (onlineFlashcardDeck === 'cheese') {
@@ -6534,6 +7122,7 @@
                 if (card.wineType === 'white') front.classList.add('wine-white');
                 else if (card.wineType === 'rose') front.classList.add('wine-rose');
                 else if (card.wineType === 'orange') front.classList.add('wine-orange');
+                else if (card.wineType === 'sparkling') front.classList.add('wine-sparkling');
             } else {
                 front.classList.add('cheese');
             }
@@ -6660,10 +7249,10 @@
                 icon: "🇮🇹"
             },
             {
-                question: "Which red pairs best with steak?",
-                answer: "The <strong>Chilean Cabernet Sauvignon</strong> is your classic steak wine—blackcurrant, structure, smooth tannins that complement beef beautifully. The <strong>Côtes du Rhône</strong> also works wonderfully if you want something with more spice and earthiness. Both have the body to stand up to a rich cut of meat.",
+                question: "Which red pairs best with our charcuterie board?",
+                answer: "The <strong>Côtes du Rhône</strong> is a charcuterie dream—its peppery, earthy character complements cured meats beautifully. The <strong>Montepulciano d'Abruzzo</strong> also works brilliantly with its plummy richness against salty salumi. For lighter charcuterie like prosciutto, try the <strong>Barbera</strong>—its bright acidity cuts through the fat perfectly.",
                 category: "red",
-                icon: "🥩"
+                icon: "🍷"
             },
             {
                 question: "I'm looking for a red that's good chilled—do you have one?",
@@ -7005,6 +7594,650 @@
             }
         }
 
+        // Render Pronunciation Guide
+        function renderPronunciationGuide() {
+            const container = document.getElementById('pronunciationContent');
+
+            // Collect pronunciations from all data sources
+            const groups = [
+                {
+                    title: 'Wines & Regions',
+                    items: wines.filter(w => w.pronunciation).map(w => ({
+                        word: w.name + ' ' + w.vintage,
+                        phonetic: w.pronunciation
+                    }))
+                },
+                {
+                    title: 'Cheeses',
+                    items: cheeses.filter(c => c.pronunciation).map(c => ({
+                        word: c.name,
+                        phonetic: c.pronunciation
+                    }))
+                },
+                {
+                    title: 'Charcuterie',
+                    items: charcuterie.filter(c => c.pronunciation).map(c => ({
+                        word: c.name,
+                        phonetic: c.pronunciation
+                    }))
+                },
+                {
+                    title: 'Tapas & Dips',
+                    items: tapas.filter(t => t.pronunciation).map(t => ({
+                        word: t.name,
+                        phonetic: t.pronunciation
+                    }))
+                },
+                {
+                    title: 'Pates & Spreads',
+                    items: pates.filter(p => p.pronunciation).map(p => ({
+                        word: p.name,
+                        phonetic: p.pronunciation
+                    }))
+                },
+                {
+                    title: 'Desserts',
+                    items: desserts.filter(d => d.pronunciation).map(d => ({
+                        word: d.name,
+                        phonetic: d.pronunciation
+                    }))
+                }
+            ];
+
+            // Also add common wine terms
+            const wineTerms = [
+                { word: 'Sommelier', phonetic: 'soh-mel-YAY' },
+                { word: 'Terroir', phonetic: 'teh-RWAHR' },
+                { word: 'Cuvée', phonetic: 'koo-VAY' },
+                { word: 'Crémant', phonetic: 'kray-MAHN' },
+                { word: 'Mise en bouteille', phonetic: 'meez ahn boo-TAY' },
+                { word: 'Côtes du Rhône', phonetic: 'koht doo ROHN' },
+                { word: 'Château', phonetic: 'shah-TOH' },
+                { word: 'Delle Venezie', phonetic: 'DEL-leh veh-NEH-tsee-eh' },
+                { word: 'Rheinhessen Selztal', phonetic: 'RINE-hess-en ZELTS-tahl' }
+            ];
+            groups.push({ title: 'Common Wine Terms', items: wineTerms });
+
+            container.innerHTML = groups.filter(g => g.items.length > 0).map(group => `
+                <div class="pron-group">
+                    <h3 class="pron-group-title">${group.title}</h3>
+                    ${group.items.map(item => `
+                        <div class="pron-item">
+                            <span class="pron-word">${item.word}</span>
+                            <span class="pron-phonetic">${item.phonetic}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `).join('');
+        }
+
+        // Render Opening Checklist
+        function renderChecklist() {
+            const container = document.getElementById('checklistContent');
+
+            // Counter groups: wines, beers, san pellegrino
+            const counterGroups = [
+                {
+                    title: 'Wines (Enomatic)',
+                    items: wines.map(w => w.name + ' ' + w.vintage),
+                    groupKey: 'wines'
+                },
+                {
+                    title: 'Beers & Cider',
+                    items: beers.map(b => b.name),
+                    groupKey: 'beers'
+                },
+                {
+                    title: 'San Pellegrino',
+                    items: ['Small Bottles of San Pellegrino'],
+                    groupKey: 'pellegrino'
+                }
+            ];
+
+            // Checkbox groups: stocked + backup
+            const checkboxGroups = [
+                {
+                    title: 'Cheeses',
+                    items: cheeses.map(c => c.name),
+                    groupKey: 'cheeses'
+                },
+                {
+                    title: 'Charcuterie',
+                    items: charcuterie.map(c => c.name),
+                    groupKey: 'charcuterie'
+                },
+                {
+                    title: 'Flatbread Toppings',
+                    items: ['Smoked Chili Cheddar (flatbread)', 'Gruyère (flatbread)', 'Black Truffle Goat (flatbread)', 'Chorizo', 'Prosciutto', 'Mushrooms', 'Olives', 'Sun Dried Tomatoes', 'Arugula', 'Fig Jam'],
+                    groupKey: 'flatbread'
+                },
+                {
+                    title: 'Tapas & Dips',
+                    items: tapas.map(t => t.name),
+                    groupKey: 'tapas'
+                },
+                {
+                    title: 'Pates & Spreads',
+                    items: pates.map(p => p.name),
+                    groupKey: 'pates'
+                },
+                {
+                    title: 'Desserts',
+                    items: desserts.map(d => d.name),
+                    groupKey: 'desserts'
+                },
+                {
+                    title: 'Kitchen & Prep Supplies',
+                    items: ['Baguettes', 'Dijon Mustard', 'Paprika', 'Fig Jam', 'Honey', 'Walnuts', 'Dried Cranberries', 'Olives', 'Mushrooms', 'Apples', 'Gluten Free Crackers'],
+                    groupKey: 'kitchen'
+                },
+                {
+                    title: 'Service Supplies',
+                    items: ['Gloves', 'Toilet Paper', 'Paper Towels', 'Wine Bags', 'Blue Tape (date labels)', 'Sharpie Pens'],
+                    groupKey: 'service'
+                }
+            ];
+
+            // Load saved state from localStorage
+            const saved = JSON.parse(localStorage.getItem('ardoa-checklist') || '{}');
+
+            const firstAidChecked = saved['firstaid'] ? 'checked' : '';
+
+            // Render counter groups (wines, beers, san pellegrino)
+            let html = counterGroups.map(group => `
+                <div class="checklist-group">
+                    <h3 class="checklist-group-title">${group.title}</h3>
+                    <table class="checklist-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${group.items.map((item, ii) => {
+                                const key = group.groupKey + '-' + ii;
+                                const count = saved[key] || 0;
+                                return `<tr>
+                                    <td>${item}</td>
+                                    <td>
+                                        <div class="checklist-counter">
+                                            <button onclick="updateChecklistCount('${key}', -1)">&#8722;</button>
+                                            <span class="counter-value" id="count-${key}">${count}</span>
+                                            <button onclick="updateChecklistCount('${key}', 1)">+</button>
+                                        </div>
+                                    </td>
+                                </tr>`;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `).join('');
+
+            // Render checkbox groups (stocked + backup)
+            html += checkboxGroups.map(group => `
+                <div class="checklist-group">
+                    <h3 class="checklist-group-title">${group.title}</h3>
+                    <table class="checklist-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Stocked</th>
+                                <th>Backup</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${group.items.map((item, ii) => {
+                                const stockedKey = group.groupKey + '-s-' + ii;
+                                const backupKey = group.groupKey + '-b-' + ii;
+                                const stockedChecked = saved[stockedKey] ? 'checked' : '';
+                                const backupChecked = saved[backupKey] ? 'checked' : '';
+                                return `<tr>
+                                    <td>${item}</td>
+                                    <td><div class="checklist-checkbox"><input type="checkbox" ${stockedChecked} onchange="toggleChecklistCheck('${stockedKey}', this.checked)"></div></td>
+                                    <td><div class="checklist-checkbox"><input type="checkbox" ${backupChecked} onchange="toggleChecklistCheck('${backupKey}', this.checked)"></div></td>
+                                </tr>`;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `).join('');
+
+            // Safety group - first aid kit with stocked only
+            html += `
+                <div class="checklist-group">
+                    <h3 class="checklist-group-title">Safety</h3>
+                    <table class="checklist-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Stocked</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>First Aid Kit</td>
+                                <td><div class="checklist-checkbox"><input type="checkbox" ${firstAidChecked} onchange="toggleFirstAid(this.checked)"></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function updateChecklistCount(key, delta) {
+            const saved = JSON.parse(localStorage.getItem('ardoa-checklist') || '{}');
+            const current = saved[key] || 0;
+            const newVal = Math.max(0, current + delta);
+            if (newVal === 0) {
+                delete saved[key];
+            } else {
+                saved[key] = newVal;
+            }
+            localStorage.setItem('ardoa-checklist', JSON.stringify(saved));
+            document.getElementById('count-' + key).textContent = newVal;
+        }
+
+        function toggleChecklistCheck(key, checked) {
+            const saved = JSON.parse(localStorage.getItem('ardoa-checklist') || '{}');
+            if (checked) {
+                saved[key] = true;
+            } else {
+                delete saved[key];
+            }
+            localStorage.setItem('ardoa-checklist', JSON.stringify(saved));
+        }
+
+        function printChecklist() {
+            const counterGroups = [
+                { title: 'Wines (Enomatic)', items: wines.map(w => w.name + ' ' + w.vintage) },
+                { title: 'Beers & Cider', items: beers.map(b => b.name) },
+                { title: 'San Pellegrino', items: ['Small Bottles of San Pellegrino'] }
+            ];
+            const checkboxGroups = [
+                { title: 'Cheeses', items: cheeses.map(c => c.name) },
+                { title: 'Charcuterie', items: charcuterie.map(c => c.name) },
+                { title: 'Flatbread Toppings', items: ['Smoked Chili Cheddar (flatbread)', 'Gruyère (flatbread)', 'Black Truffle Goat (flatbread)', 'Chorizo', 'Prosciutto', 'Mushrooms', 'Olives', 'Sun Dried Tomatoes', 'Arugula', 'Fig Jam'] },
+                { title: 'Tapas & Dips', items: tapas.map(t => t.name) },
+                { title: 'Pates & Spreads', items: pates.map(p => p.name) },
+                { title: 'Desserts', items: desserts.map(d => d.name) },
+                { title: 'Kitchen & Prep Supplies', items: ['Baguettes', 'Dijon Mustard', 'Paprika', 'Fig Jam', 'Honey', 'Walnuts', 'Dried Cranberries', 'Olives', 'Mushrooms', 'Apples', 'Gluten Free Crackers'] },
+                { title: 'Service Supplies', items: ['Gloves', 'Toilet Paper', 'Paper Towels', 'Wine Bags', 'Blue Tape (date labels)', 'Sharpie Pens'] }
+            ];
+
+            let html = `<!DOCTYPE html><html><head><title>Ardoa Opening Checklist</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#000;padding:8px}
+h1{font-size:14px;text-align:center;margin-bottom:4px;border-bottom:1px solid #000;padding-bottom:2px}
+.date-line{text-align:center;font-size:10px;margin-bottom:6px}
+.groups{columns:2;column-gap:12px}
+.group{break-inside:avoid;margin-bottom:6px}
+.group h2{font-size:11px;background:#000;color:#fff;padding:1px 4px;margin-bottom:1px}
+.group table{width:100%;border-collapse:collapse}
+.group th{font-size:9px;text-align:center;border-bottom:1px solid #ccc;padding:1px 3px}
+.group th:first-child{text-align:left}
+.group td{padding:1px 3px;border-bottom:1px solid #ccc;font-size:10px}
+.group td:not(:first-child){width:40px;text-align:center;border-left:1px solid #ccc}
+.cb{width:12px;height:12px;border:1px solid #000;display:inline-block}
+.safety{break-inside:avoid;margin-bottom:6px}
+.safety h2{font-size:11px;background:#000;color:#fff;padding:1px 4px;margin-bottom:1px}
+.safety table{width:100%;border-collapse:collapse}
+.safety th{font-size:9px;text-align:center;border-bottom:1px solid #ccc;padding:1px 3px}
+.safety th:first-child{text-align:left}
+.safety td{padding:1px 3px;border-bottom:1px solid #ccc;font-size:10px}
+.safety td:not(:first-child){width:40px;text-align:center;border-left:1px solid #ccc}
+@media print{body{padding:4px}@page{margin:0.3in;size:letter}}
+</style></head><body>
+<h1>Ardoa Opening Checklist</h1>
+<div class="date-line">Date: ____________</div>
+<div class="groups">`;
+
+            // Counter groups - single count column
+            counterGroups.forEach(group => {
+                html += '<div class="group"><h2>' + group.title + '</h2><table><tr><th>Item</th><th>Count</th></tr>';
+                group.items.forEach(item => {
+                    html += '<tr><td>' + item + '</td><td></td></tr>';
+                });
+                html += '</table></div>';
+            });
+
+            // Checkbox groups - stocked + backup columns
+            checkboxGroups.forEach(group => {
+                html += '<div class="group"><h2>' + group.title + '</h2><table><tr><th>Item</th><th>Stocked</th><th>Backup</th></tr>';
+                group.items.forEach(item => {
+                    html += '<tr><td>' + item + '</td><td><span class="cb"></span></td><td><span class="cb"></span></td></tr>';
+                });
+                html += '</table></div>';
+            });
+
+            // Safety - stocked only
+            html += `<div class="safety"><h2>Safety</h2>
+<table><tr><th>Item</th><th>Stocked</th></tr>
+<tr><td>First Aid Kit</td><td><span class="cb"></span></td></tr></table></div>`;
+
+            html += '</div></body></html>';
+
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(html);
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+        }
+
+        function toggleFirstAid(checked) {
+            const saved = JSON.parse(localStorage.getItem('ardoa-checklist') || '{}');
+            if (checked) {
+                saved['firstaid'] = true;
+            } else {
+                delete saved['firstaid'];
+            }
+            localStorage.setItem('ardoa-checklist', JSON.stringify(saved));
+        }
+
+        function resetChecklist() {
+            localStorage.removeItem('ardoa-checklist');
+            renderChecklist();
+        }
+
+        // ==================== KITCHEN TIMERS ====================
+        const timerState = {
+            baguettes: [],
+            tickets: [],
+            flatbreads: [],
+            nextTicketNum: 1,
+            audioCtx: null
+        };
+
+        function getAudioCtx() {
+            if (!timerState.audioCtx) {
+                timerState.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return timerState.audioCtx;
+        }
+
+        function playAlarm(timerId) {
+            try {
+                const ctx = getAudioCtx();
+                // Play a repeating beep pattern
+                function beep(startTime) {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.frequency.value = 880;
+                    osc.type = 'square';
+                    gain.gain.value = 0.3;
+                    osc.start(startTime);
+                    osc.stop(startTime + 0.15);
+                }
+                const now = ctx.currentTime;
+                for (let i = 0; i < 6; i++) {
+                    beep(now + i * 0.25);
+                }
+            } catch (e) {
+                // Audio not available
+            }
+        }
+
+        function formatTime(totalSeconds) {
+            const mins = Math.floor(Math.abs(totalSeconds) / 60);
+            const secs = Math.abs(totalSeconds) % 60;
+            return String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+        }
+
+        // Baguette timers - 10 min countdown
+        function addBaguetteTimer() {
+            const id = 'bag-' + Date.now();
+            timerState.baguettes.push({
+                id: id,
+                remaining: 600, // 10 minutes in seconds
+                running: true,
+                alarming: false,
+                intervalId: null
+            });
+            renderBaguetteTimers();
+            startBaguetteTimer(id);
+        }
+
+        function startBaguetteTimer(id) {
+            const timer = timerState.baguettes.find(t => t.id === id);
+            if (!timer || timer.intervalId) return;
+            timer.running = true;
+            timer.intervalId = setInterval(function() {
+                timer.remaining--;
+                if (timer.remaining <= 0) {
+                    timer.remaining = 0;
+                    timer.running = false;
+                    timer.alarming = true;
+                    clearInterval(timer.intervalId);
+                    timer.intervalId = null;
+                    playAlarm(id);
+                }
+                updateBaguetteDisplay(id);
+            }, 1000);
+        }
+
+        function pauseBaguetteTimer(id) {
+            const timer = timerState.baguettes.find(t => t.id === id);
+            if (!timer) return;
+            if (timer.alarming) {
+                timer.alarming = false;
+                updateBaguetteDisplay(id);
+                return;
+            }
+            if (timer.running) {
+                timer.running = false;
+                clearInterval(timer.intervalId);
+                timer.intervalId = null;
+            } else if (timer.remaining > 0) {
+                timer.running = true;
+                startBaguetteTimer(id);
+            }
+            updateBaguetteDisplay(id);
+        }
+
+        function resetBaguetteTimer(id) {
+            const timer = timerState.baguettes.find(t => t.id === id);
+            if (!timer) return;
+            clearInterval(timer.intervalId);
+            timer.intervalId = null;
+            timer.remaining = 600;
+            timer.running = false;
+            timer.alarming = false;
+            updateBaguetteDisplay(id);
+        }
+
+        function removeBaguetteTimer(id) {
+            const timer = timerState.baguettes.find(t => t.id === id);
+            if (timer && timer.intervalId) clearInterval(timer.intervalId);
+            timerState.baguettes = timerState.baguettes.filter(t => t.id !== id);
+            renderBaguetteTimers();
+        }
+
+        function updateBaguetteDisplay(id) {
+            const timer = timerState.baguettes.find(t => t.id === id);
+            if (!timer) return;
+            const display = document.getElementById('display-' + id);
+            if (display) {
+                display.textContent = formatTime(timer.remaining);
+                if (timer.alarming) {
+                    display.classList.add('timer-alarm');
+                } else {
+                    display.classList.remove('timer-alarm');
+                }
+            }
+            const pauseBtn = document.getElementById('pause-' + id);
+            if (pauseBtn) {
+                pauseBtn.textContent = timer.alarming ? 'OK' : (timer.running ? '||' : '\u25B6');
+            }
+        }
+
+        function renderBaguetteTimers() {
+            const container = document.getElementById('baguetteTimers');
+            if (timerState.baguettes.length === 0) {
+                container.innerHTML = '<p class="timer-empty">Tap "+ Add" to start a baguette timer</p>';
+                return;
+            }
+            container.innerHTML = timerState.baguettes.map((timer, i) => `
+                <div class="timer-card" id="card-${timer.id}">
+                    <span class="timer-card-label">Bag ${i + 1}</span>
+                    <span class="timer-card-display ${timer.alarming ? 'timer-alarm' : ''}" id="display-${timer.id}">${formatTime(timer.remaining)}</span>
+                    <div class="timer-card-controls">
+                        <button id="pause-${timer.id}" onclick="pauseBaguetteTimer('${timer.id}')">${timer.alarming ? 'OK' : (timer.running ? '||' : '\u25B6')}</button>
+                        <button onclick="resetBaguetteTimer('${timer.id}')">\u21BB</button>
+                        <button class="timer-remove" onclick="removeBaguetteTimer('${timer.id}')">\u2715</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Ticket timers - counting up stopwatch
+        function addTicketTimer() {
+            const id = 'tkt-' + Date.now();
+            const num = timerState.nextTicketNum++;
+            timerState.tickets.push({
+                id: id,
+                number: num,
+                elapsed: 0,
+                running: true,
+                intervalId: null
+            });
+            renderTicketTimers();
+            startTicketTimer(id);
+        }
+
+        function startTicketTimer(id) {
+            const timer = timerState.tickets.find(t => t.id === id);
+            if (!timer || timer.intervalId) return;
+            timer.running = true;
+            timer.intervalId = setInterval(function() {
+                timer.elapsed++;
+                updateTicketDisplay(id);
+            }, 1000);
+        }
+
+        function pauseTicketTimer(id) {
+            const timer = timerState.tickets.find(t => t.id === id);
+            if (!timer) return;
+            if (timer.running) {
+                timer.running = false;
+                clearInterval(timer.intervalId);
+                timer.intervalId = null;
+            } else {
+                timer.running = true;
+                startTicketTimer(id);
+            }
+            updateTicketDisplay(id);
+        }
+
+        function removeTicketTimer(id) {
+            const timer = timerState.tickets.find(t => t.id === id);
+            if (timer && timer.intervalId) clearInterval(timer.intervalId);
+            timerState.tickets = timerState.tickets.filter(t => t.id !== id);
+            renderTicketTimers();
+        }
+
+        function updateTicketDisplay(id) {
+            const timer = timerState.tickets.find(t => t.id === id);
+            if (!timer) return;
+            const display = document.getElementById('display-' + id);
+            if (display) display.textContent = formatTime(timer.elapsed);
+            const pauseBtn = document.getElementById('pause-' + id);
+            if (pauseBtn) pauseBtn.textContent = timer.running ? '||' : '\u25B6';
+        }
+
+        function renderTicketTimers() {
+            const container = document.getElementById('ticketTimers');
+            if (timerState.tickets.length === 0) {
+                container.innerHTML = '<p class="timer-empty">Tap "+ Add" to start a ticket timer</p>';
+                return;
+            }
+            container.innerHTML = timerState.tickets.map(timer => `
+                <div class="timer-card" id="card-${timer.id}">
+                    <span class="timer-card-label">#${timer.number}</span>
+                    <span class="timer-card-display" id="display-${timer.id}">${formatTime(timer.elapsed)}</span>
+                    <div class="timer-card-controls">
+                        <button id="pause-${timer.id}" onclick="pauseTicketTimer('${timer.id}')">${timer.running ? '||' : '\u25B6'}</button>
+                        <button class="timer-remove" onclick="removeTicketTimer('${timer.id}')">\u2715</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Flatbread timers - counting up
+        function addFlatbreadTimer() {
+            const id = 'fb-' + Date.now();
+            timerState.flatbreads.push({
+                id: id,
+                elapsed: 0,
+                running: true,
+                intervalId: null
+            });
+            renderFlatbreadTimers();
+            startFlatbreadTimer(id);
+        }
+
+        function startFlatbreadTimer(id) {
+            const timer = timerState.flatbreads.find(t => t.id === id);
+            if (!timer || timer.intervalId) return;
+            timer.running = true;
+            timer.intervalId = setInterval(function() {
+                timer.elapsed++;
+                updateFlatbreadDisplay(id);
+            }, 1000);
+        }
+
+        function pauseFlatbreadTimer(id) {
+            const timer = timerState.flatbreads.find(t => t.id === id);
+            if (!timer) return;
+            if (timer.running) {
+                timer.running = false;
+                clearInterval(timer.intervalId);
+                timer.intervalId = null;
+            } else {
+                timer.running = true;
+                startFlatbreadTimer(id);
+            }
+            updateFlatbreadDisplay(id);
+        }
+
+        function removeFlatbreadTimer(id) {
+            const timer = timerState.flatbreads.find(t => t.id === id);
+            if (timer && timer.intervalId) clearInterval(timer.intervalId);
+            timerState.flatbreads = timerState.flatbreads.filter(t => t.id !== id);
+            renderFlatbreadTimers();
+        }
+
+        function updateFlatbreadDisplay(id) {
+            const timer = timerState.flatbreads.find(t => t.id === id);
+            if (!timer) return;
+            const display = document.getElementById('display-' + id);
+            if (display) display.textContent = formatTime(timer.elapsed);
+            const pauseBtn = document.getElementById('pause-' + id);
+            if (pauseBtn) pauseBtn.textContent = timer.running ? '||' : '\u25B6';
+        }
+
+        function renderFlatbreadTimers() {
+            const container = document.getElementById('flatbreadTimers');
+            if (timerState.flatbreads.length === 0) {
+                container.innerHTML = '<p class="timer-empty">Tap "+ Add" to start a flatbread timer</p>';
+                return;
+            }
+            container.innerHTML = timerState.flatbreads.map((timer, i) => `
+                <div class="timer-card" id="card-${timer.id}">
+                    <span class="timer-card-label">FB ${i + 1}</span>
+                    <span class="timer-card-display" id="display-${timer.id}">${formatTime(timer.elapsed)}</span>
+                    <div class="timer-card-controls">
+                        <button id="pause-${timer.id}" onclick="pauseFlatbreadTimer('${timer.id}')">${timer.running ? '||' : '\u25B6'}</button>
+                        <button class="timer-remove" onclick="removeFlatbreadTimer('${timer.id}')">\u2715</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
         function initTheme() {
             const saved = localStorage.getItem('ardoa-theme');
             if (saved === 'dark') {
@@ -7025,6 +8258,8 @@
                 initializeFlashcards();
                 initOnlineFlashcards();
                 renderFAQCards();
+                renderPronunciationGuide();
+                renderChecklist();
 
                 // Force iOS Safari to paint dynamically inserted card content.
                 // Without this, innerHTML content may remain invisible because
