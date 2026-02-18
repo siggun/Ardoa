@@ -151,7 +151,7 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
 
-        nav button {
+        nav a {
             font-family: 'Cinzel', serif;
             background: transparent;
             border: 1px solid #d0c8c0;
@@ -166,9 +166,11 @@
             position: relative;
             overflow: hidden;
             touch-action: manipulation;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        nav button::before {
+        nav a::before {
             content: '';
             position: absolute;
             top: 0;
@@ -179,11 +181,11 @@
             transition: left 0.4s ease;
         }
 
-        nav button:hover::before {
+        nav a:hover::before {
             left: 100%;
         }
 
-        nav button:hover, nav button.active {
+        nav a:hover, nav a.active {
             background: #4a1a28;
             color: #ffffff;
             border-color: #4a1a28;
@@ -708,6 +710,22 @@
             transition: all 0.3s ease;
         }
 
+        .btn-prev {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-prev:hover:not(:disabled) {
+            background: #545b62;
+        }
+
+        .btn-prev:disabled {
+            background: #ccc;
+            color: #888;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
         .btn-reveal {
             background: var(--burgundy);
             color: white;
@@ -1072,7 +1090,7 @@
                 display: none;
             }
 
-            nav button {
+            nav a {
                 padding: 0.5rem 1rem;
                 font-size: 0.75rem;
                 letter-spacing: 0.5px;
@@ -1240,7 +1258,7 @@
                 display: none;
             }
 
-            nav button {
+            nav a {
                 padding: 0.5rem 0.8rem;
                 font-size: 0.7rem;
                 letter-spacing: 0;
@@ -1507,7 +1525,7 @@
                 transform: translateX(-2px);
             }
 
-            nav button {
+            nav a {
                 padding: 0.45rem 0.6rem;
                 font-size: 0.65rem;
                 min-height: 40px;
@@ -2715,6 +2733,175 @@
 
             .enomatic-cta p {
                 font-size: 0.85rem;
+            }
+        }
+
+        /* ==================== WINE VARIETALS SECTION STYLES ==================== */
+
+        .varietals-intro {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .varietals-intro h2 {
+            color: var(--burgundy);
+            margin-bottom: 0.5rem;
+        }
+
+        .varietals-intro p {
+            color: #666;
+        }
+
+        .varietals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .varietal-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .varietal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .varietal-card-header {
+            padding: 1rem 1.25rem;
+            color: white;
+        }
+
+        .varietal-card-header.red-grape {
+            background: linear-gradient(135deg, #8B0000, #4A0000);
+        }
+
+        .varietal-card-header.white-grape {
+            background: linear-gradient(135deg, #DAA520, #B8860B);
+        }
+
+        .varietal-card-header h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .varietal-card-header .varietal-origin {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .varietal-card-body {
+            padding: 1.25rem;
+        }
+
+        .varietal-description {
+            color: var(--charcoal);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .varietal-facts {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .varietal-fact {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .varietal-fact-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #888;
+        }
+
+        .varietal-fact-value {
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+
+        .varietal-wines {
+            background: var(--cream);
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .varietal-wines-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--burgundy);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .varietal-wines-list {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .varietal-filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .varietal-filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            background: white;
+            color: #555;
+            cursor: pointer;
+            font-family: 'Crimson Text', serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .varietal-filter-btn:hover {
+            border-color: var(--burgundy);
+            color: var(--burgundy);
+        }
+
+        .varietal-filter-btn.active {
+            background: var(--burgundy);
+            color: white;
+            border-color: var(--burgundy);
+        }
+
+        @media (max-width: 480px) {
+            .varietals-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .varietal-card-header h3 {
+                font-size: 1rem;
+            }
+
+            .varietal-card-header .varietal-origin {
+                font-size: 0.8rem;
+            }
+
+            .varietal-card-body {
+                padding: 1rem;
             }
         }
 
@@ -4023,17 +4210,17 @@
             box-shadow: none;
         }
 
-        [data-theme="dark"] nav button {
+        [data-theme="dark"] nav a {
             border: 1px solid #8b7355;
             color: #c4a875;
         }
 
-        [data-theme="dark"] nav button::before {
+        [data-theme="dark"] nav a::before {
             background: linear-gradient(90deg, transparent, rgba(196, 168, 117, 0.2), transparent);
         }
 
-        [data-theme="dark"] nav button:hover,
-        [data-theme="dark"] nav button.active {
+        [data-theme="dark"] nav a:hover,
+        [data-theme="dark"] nav a.active {
             background: rgba(196, 168, 117, 0.15);
             color: #e8e4dc;
             border-color: #c4a875;
@@ -4360,6 +4547,21 @@
         [data-theme="dark"] .wine-card .pairing-food { color: #c4a875; }
         [data-theme="dark"] .wine-card .pairing-why { color: #b8b4ac; }
 
+        /* Dark mode - Previous button */
+        [data-theme="dark"] .btn-prev {
+            background: #555;
+            color: #e8e4dc;
+        }
+
+        [data-theme="dark"] .btn-prev:hover:not(:disabled) {
+            background: #666;
+        }
+
+        [data-theme="dark"] .btn-prev:disabled {
+            background: #333;
+            color: #666;
+        }
+
         /* Dark mode - Continue button */
         [data-theme="dark"] .btn-continue {
             background: #c4a875;
@@ -4631,21 +4833,22 @@
     </header>
 
     <nav>
-        <button class="active" onclick="showSection('techsheets', this)">Wine List</button>
-        <button onclick="showSection('quickref', this)">Quick Reference</button>
-        <button onclick="showSection('timeclock', this)">Time Clock</button>
-        <button onclick="showSection('checklist', this)">Opening Checklist</button>
-        <button onclick="showSection('timers', this)">Timers</button>
-        <button onclick="showSection('beerlist', this)">Beer List</button>
-        <button onclick="showSection('food', this)">Food Menu</button>
-        <button onclick="showSection('flashcards', this)">Wine Quiz</button>
-        <button onclick="showSection('onlineflashcards', this)">Online Flashcards</button>
-        <button onclick="showSection('wineregions', this)">Wine Regions</button>
-        <button onclick="showSection('enomatic', this)">Enomatic System</button>
-        <button onclick="showSection('printcards', this)">Print Cards</button>
-        <button onclick="showSection('faq', this)">Wine FAQ</button>
-        <button onclick="showSection('pronunciations', this)">Pronunciations</button>
-        <button onclick="showSection('foodpairings', this)">Food Pairings</button>
+        <a href="#techsheets" class="active" onclick="navigateToSection('techsheets', this, event)">Wine List</a>
+        <a href="#quickref" onclick="navigateToSection('quickref', this, event)">Quick Reference</a>
+        <a href="#timeclock" onclick="navigateToSection('timeclock', this, event)">Time Clock</a>
+        <a href="#checklist" onclick="navigateToSection('checklist', this, event)">Opening Checklist</a>
+        <a href="#timers" onclick="navigateToSection('timers', this, event)">Timers</a>
+        <a href="#beerlist" onclick="navigateToSection('beerlist', this, event)">Beer List</a>
+        <a href="#food" onclick="navigateToSection('food', this, event)">Food Menu</a>
+        <a href="#flashcards" onclick="navigateToSection('flashcards', this, event)">Wine Quiz</a>
+        <a href="#onlineflashcards" onclick="navigateToSection('onlineflashcards', this, event)">Online Flashcards</a>
+        <a href="#wineregions" onclick="navigateToSection('wineregions', this, event)">Wine Regions</a>
+        <a href="#enomatic" onclick="navigateToSection('enomatic', this, event)">Enomatic System</a>
+        <a href="#printcards" onclick="navigateToSection('printcards', this, event)">Print Cards</a>
+        <a href="#faq" onclick="navigateToSection('faq', this, event)">Wine FAQ</a>
+        <a href="#pronunciations" onclick="navigateToSection('pronunciations', this, event)">Pronunciations</a>
+        <a href="#foodpairings" onclick="navigateToSection('foodpairings', this, event)">Food Pairings</a>
+        <a href="#varietals" onclick="navigateToSection('varietals', this, event)">Wine Varietals</a>
     </nav>
 
     <main>
@@ -4785,6 +4988,7 @@
                 </div>
 
                 <div class="flashcard-controls">
+                    <button class="flashcard-btn btn-prev" id="btnPrev" onclick="prevQuizCard()" disabled>Previous</button>
                     <button class="flashcard-btn btn-reveal" onclick="revealAnswer()">Reveal Answer</button>
                     <button class="flashcard-btn btn-correct" onclick="markAnswer(true)">Got It!</button>
                     <button class="flashcard-btn btn-incorrect" onclick="markAnswer(false)">Missed It</button>
@@ -5739,6 +5943,24 @@
                         <p class="timer-empty">Tap "+ Add" to start a flatbread timer</p>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Wine Varietals Section -->
+        <section id="varietals">
+            <div class="varietals-intro">
+                <h2>Wine Varietals</h2>
+                <p>Get to know the grape varieties behind Ardoa's wine list - their origins, characteristics, and which of our wines showcase them</p>
+            </div>
+
+            <div class="varietal-filter-bar">
+                <button class="varietal-filter-btn active" onclick="filterVarietals('all', this)">All Grapes</button>
+                <button class="varietal-filter-btn" onclick="filterVarietals('red', this)">Red Grapes</button>
+                <button class="varietal-filter-btn" onclick="filterVarietals('white', this)">White Grapes</button>
+            </div>
+
+            <div class="varietals-grid" id="varietalsGrid">
+                <!-- Varietal cards will be inserted here by JavaScript -->
             </div>
         </section>
     </main>
@@ -6805,6 +7027,9 @@
         let currentCard = null;
         let correctCount = 0;
         let incorrectCount = 0;
+        let questionHistory = [];
+        let historyIndex = -1;
+        let isViewingHistory = false;
 
         // Note: Page initialization is done in the DOMContentLoaded listener at the end of the file
 
@@ -7051,14 +7276,27 @@
                 s.classList.remove('active');
                 s.style.display = ''; // clear inline override, CSS default (none) takes over
             });
-            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-            const section = document.getElementById(sectionId);
+            document.querySelectorAll('nav a').forEach(b => b.classList.remove('active'));
+            var section = document.getElementById(sectionId);
+            if (!section) return;
             section.classList.add('active');
             section.style.display = 'block'; // explicit for iOS Safari on file:// URLs
-            btn.classList.add('active');
+            if (btn) {
+                btn.classList.add('active');
+            } else {
+                var navLink = document.querySelector('nav a[href="#' + sectionId + '"]');
+                if (navLink) navLink.classList.add('active');
+            }
             // Force repaint for iOS Safari - toggle display to flush compositor
             forceRepaint(section);
             window.scrollTo(0, 0);
+        }
+
+        // Hash-based navigation wrapper for same-tab clicks
+        function navigateToSection(sectionId, element, event) {
+            if (event) event.preventDefault();
+            window.location.hash = sectionId;
+            showSection(sectionId, element);
         }
 
         // Render Wine Cards
@@ -7403,11 +7641,26 @@
             flashcardQueue = generateQuestions();
             correctCount = 0;
             incorrectCount = 0;
+            questionHistory = [];
+            historyIndex = -1;
+            isViewingHistory = false;
             updateScore();
             nextQuizCard();
+            updatePrevButton();
         }
 
         function nextQuizCard() {
+            // If browsing history and going forward, advance through history
+            if (isViewingHistory && historyIndex < questionHistory.length - 1) {
+                historyIndex++;
+                showHistoryCard();
+                return;
+            }
+
+            // Exiting history mode -- return to live questions
+            isViewingHistory = false;
+            historyIndex = -1;
+
             if (flashcardQueue.length === 0) {
                 flashcardQueue = generateQuestions();
                 if (flashcardQueue.length === 0) {
@@ -7416,15 +7669,21 @@
                     document.getElementById('flashcardAnswer').textContent = "";
                     document.getElementById('flashcardOptions').innerHTML = "";
                     document.getElementById('flashcardOptions').classList.remove('active');
+                    updatePrevButton();
                     return;
                 }
             }
 
+            // Push the previous card to history
+            if (currentCard && (questionHistory.length === 0 || questionHistory[questionHistory.length - 1] !== currentCard)) {
+                questionHistory.push(currentCard);
+            }
+
             currentCard = flashcardQueue.shift();
-            const flashcard = document.getElementById('flashcard');
-            const optionsContainer = document.getElementById('flashcardOptions');
-            const answerEl = document.getElementById('flashcardAnswer');
-            const hintEl = document.getElementById('flashcardHint');
+            var flashcard = document.getElementById('flashcard');
+            var optionsContainer = document.getElementById('flashcardOptions');
+            var answerEl = document.getElementById('flashcardAnswer');
+            var hintEl = document.getElementById('flashcardHint');
 
             flashcard.classList.remove('revealed');
             document.getElementById('btnContinue').style.display = 'none';
@@ -7434,9 +7693,9 @@
             if (currentCard.type === 'multiple-choice') {
                 // Multiple choice question
                 optionsContainer.classList.add('active');
-                optionsContainer.innerHTML = currentCard.options.map((option, idx) => `
-                    <div class="flashcard-option" data-idx="${idx}" onclick="selectOption(this, '${encodeURIComponent(option)}')">${option}</div>
-                `).join('');
+                optionsContainer.innerHTML = currentCard.options.map(function(option, idx) {
+                    return '<div class="flashcard-option" data-idx="' + idx + '" onclick="selectOption(this, \'' + encodeURIComponent(option) + '\')">' + option + '</div>';
+                }).join('');
                 answerEl.textContent = '';
                 hintEl.textContent = 'Select the correct answer above';
             } else {
@@ -7446,7 +7705,9 @@
                 answerEl.textContent = currentCard.answer;
                 hintEl.textContent = 'Click to reveal answer';
             }
+            enableScoringButtons(true);
             updateScore();
+            updatePrevButton();
         }
 
         // Track whether last multiple-choice answer was correct (for continue button)
@@ -7506,6 +7767,9 @@
         }
 
         function markAnswer(correct) {
+            // Don't allow scoring when viewing history
+            if (isViewingHistory) return;
+
             if (correct) {
                 correctCount++;
             } else {
@@ -7513,6 +7777,9 @@
                 // Add back to queue for review
                 flashcardQueue.push(currentCard);
             }
+            // Record the answer result on the current card for history display
+            currentCard.wasAnswered = true;
+            currentCard.wasCorrect = correct;
             updateScore();
             nextQuizCard();
         }
@@ -7528,7 +7795,96 @@
         }
 
         function resetQuiz() {
+            questionHistory = [];
+            historyIndex = -1;
+            isViewingHistory = false;
+            enableScoringButtons(true);
             initializeFlashcards();
+        }
+
+        function prevQuizCard() {
+            if (questionHistory.length === 0) return;
+
+            // If not in history mode, save current card and enter history mode
+            if (!isViewingHistory) {
+                if (currentCard && (questionHistory.length === 0 || questionHistory[questionHistory.length - 1] !== currentCard)) {
+                    questionHistory.push(currentCard);
+                }
+                historyIndex = questionHistory.length - 2;
+                if (historyIndex < 0) historyIndex = 0;
+                isViewingHistory = true;
+            } else {
+                historyIndex = Math.max(0, historyIndex - 1);
+            }
+
+            showHistoryCard();
+        }
+
+        function showHistoryCard() {
+            var card = questionHistory[historyIndex];
+            if (!card) return;
+
+            var flashcard = document.getElementById('flashcard');
+            var optionsContainer = document.getElementById('flashcardOptions');
+            var answerEl = document.getElementById('flashcardAnswer');
+            var hintEl = document.getElementById('flashcardHint');
+
+            // Show the card with answer revealed
+            flashcard.classList.add('revealed');
+            document.getElementById('btnContinue').style.display = 'none';
+            document.getElementById('flashcardQuestion').textContent = card.question;
+            document.getElementById('flashcardWine').textContent = card.wine;
+
+            if (card.type === 'multiple-choice') {
+                optionsContainer.classList.add('active');
+                optionsContainer.innerHTML = card.options.map(function(option) {
+                    var classes = 'flashcard-option';
+                    if (option === card.answer) {
+                        classes += ' correct-answer';
+                    }
+                    return '<div class="' + classes + '" style="cursor:default;">' + option + '</div>';
+                }).join('');
+                answerEl.textContent = '';
+            } else {
+                optionsContainer.classList.remove('active');
+                optionsContainer.innerHTML = '';
+                answerEl.textContent = card.answer;
+            }
+
+            // Show result indicator
+            if (card.wasAnswered) {
+                hintEl.textContent = card.wasCorrect
+                    ? 'You got this correct (reviewing previous questions)'
+                    : 'You missed this one (reviewing previous questions)';
+            } else {
+                hintEl.textContent = 'Skipped (reviewing previous questions)';
+            }
+
+            // Disable scoring buttons when viewing history
+            enableScoringButtons(false);
+            updatePrevButton();
+        }
+
+        function updatePrevButton() {
+            var prevBtn = document.getElementById('btnPrev');
+            if (!prevBtn) return;
+
+            if (questionHistory.length === 0) {
+                prevBtn.disabled = true;
+            } else if (isViewingHistory && historyIndex <= 0) {
+                prevBtn.disabled = true;
+            } else {
+                prevBtn.disabled = false;
+            }
+        }
+
+        function enableScoringButtons(enabled) {
+            var btns = document.querySelectorAll('.btn-correct, .btn-incorrect, .btn-reveal');
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].disabled = !enabled;
+                btns[i].style.opacity = enabled ? '1' : '0.4';
+                btns[i].style.cursor = enabled ? 'pointer' : 'not-allowed';
+            }
         }
 
         // Re-initialize flashcards when settings change
@@ -7705,19 +8061,19 @@
             },
             {
                 question: "I usually drink beer—what wine would I like?",
-                answer: "Start with something refreshing and not too complex. Our <strong>Beaujolais Villages</strong> (Gamay grape) is like the craft beer lover's red wine—fruity, light, low tannins, best served slightly chilled. For white, the <strong>Pinot Grigio</strong> is crisp and easy like a pilsner. Both are approachable without being overwhelming.",
+                answer: "Start with something refreshing and not too complex. Our <strong>Gorghi Tondi Frappato</strong> from Sicily is like the craft beer lover's red wine—fruity, light, low tannins, best served slightly chilled. For white, the <strong>Pinot Grigio</strong> is crisp and easy like a pilsner. Both are approachable without being overwhelming.",
                 category: "beginner",
                 icon: "🍺"
             },
             {
                 question: "What's a good wine for someone who doesn't usually drink wine?",
-                answer: "I'd suggest our <strong>Gorghi Tondi Rosé</strong>—it's light, refreshing, with peach and citrus notes. Not too dry, not too sweet, served cold. It's often the gateway wine for new wine drinkers. If you prefer something slightly sweet, the rosé's delicate fruit makes it very approachable.",
+                answer: "I'd suggest our <strong>Folly by Mascaronne Rosé</strong> from Côtes de Provence—it's light, refreshing, with nectarine and citrus notes. Not too dry, not too sweet, served cold. It's often the gateway wine for new wine drinkers. If you prefer something slightly sweet, the rosé's delicate fruit makes it very approachable.",
                 category: "beginner",
                 icon: "🌸"
             },
             {
                 question: "Which wine has the least alcohol?",
-                answer: "Our lowest alcohol wines are the <strong>Pinot Grigio</strong> at 12%, the <strong>Beaujolais Villages</strong> at 12.5%, and the <strong>Bourgueil Cabernet Franc</strong> at 12.5%. These lighter wines tend to be more refreshing and easier to enjoy over a longer evening without feeling heavy.",
+                answer: "Our lowest alcohol wines are the <strong>Pinot Grigio</strong> at 12%, the <strong>Gorghi Tondi Frappato</strong> at 12.5%, and the <strong>Bourgueil Cabernet Franc</strong> at 12.5%. These lighter wines tend to be more refreshing and easier to enjoy over a longer evening without feeling heavy.",
                 category: "beginner",
                 icon: "📊"
             },
@@ -7731,7 +8087,7 @@
             // Red Wine Specific Questions
             {
                 question: "What's your smoothest red?",
-                answer: "The <strong>Bordeaux Supérieur from Château Roc Meynard</strong> is very smooth—Merlot-dominant with soft, approachable tannins. It's velvety with red fruits and gentle oak. If you want even lighter, the <strong>Beaujolais Villages</strong> is silky with almost no tannin grip at all.",
+                answer: "The <strong>Bordeaux Supérieur from Château Roc Meynard</strong> is very smooth—Merlot-dominant with soft, approachable tannins. It's velvety with red fruits and gentle oak. If you want even lighter, the <strong>Gorghi Tondi Frappato</strong> is silky with almost no tannin grip at all.",
                 category: "red",
                 icon: "🍷"
             },
@@ -7743,31 +8099,31 @@
             },
             {
                 question: "Do you have any Pinot Noir?",
-                answer: "We don't have a Pinot Noir specifically, but if you love that style—light-bodied, elegant, aromatic—try our <strong>Mencía from Ribeira Sacra</strong>. Mencía is often called 'Spain's answer to Pinot Noir' with fresh red berries, violets, and beautiful minerality. Or the <strong>Beaujolais Villages</strong> (Gamay) for something similarly light and fruity.",
+                answer: "Yes, we have two! Our <strong>Red Tail Ridge Pinot Noir</strong> from New York's Finger Lakes is elegant and Burgundian in style with bright cherry and earthy notes. Our <strong>Krasno Pinot Noir</strong> from Slovenia's Goriška Brda region shows Old World restraint with silky tannins. Both are light-bodied and aromatic—perfect if you love that classic Pinot style.",
                 category: "red",
                 icon: "🍇"
             },
             {
                 question: "What's the difference between your Italian reds?",
-                answer: "We have two: <strong>Barbera</strong> (from Piedmont) is bright and tangy with cherry flavors and high acidity—great food wine. <strong>Montepulciano d'Abruzzo</strong> is darker, richer, with plum and herbs—more full-bodied. Barbera is like the energetic younger sibling; Montepulciano is the mellow, easygoing one.",
+                answer: "We have four Italian reds! <strong>Barbera</strong> (from Piedmont) is bright and tangy with cherry flavors and high acidity—great food wine. <strong>Montepulciano d'Abruzzo</strong> is darker, richer, with plum and herbs—more full-bodied. <strong>Chianti Classico</strong> (Sangiovese from Tuscany) is structured with cherry and earthy notes. And <strong>Gorghi Tondi Frappato</strong> (from Sicily) is light and aromatic—perfect chilled. Each represents a different Italian wine style!",
                 category: "red",
                 icon: "🇮🇹"
             },
             {
                 question: "Which red pairs best with our charcuterie board?",
-                answer: "The <strong>Côtes du Rhône</strong> is a charcuterie dream—its peppery, earthy character complements cured meats beautifully. The <strong>Montepulciano d'Abruzzo</strong> also works brilliantly with its plummy richness against salty salumi. For lighter charcuterie like prosciutto, try the <strong>Barbera</strong>—its bright acidity cuts through the fat perfectly.",
+                answer: "The <strong>Domaine Verquière Plan de Dieu</strong> is a charcuterie dream—its peppery, earthy character complements cured meats beautifully. The <strong>Montepulciano d'Abruzzo</strong> also works brilliantly with its plummy richness against salty salumi. For lighter charcuterie like prosciutto, try the <strong>Barbera</strong>—its bright acidity cuts through the fat perfectly.",
                 category: "red",
                 icon: "🍷"
             },
             {
                 question: "I'm looking for a red that's good chilled—do you have one?",
-                answer: "Absolutely! The <strong>Beaujolais Villages</strong>, <strong>Barbera</strong>, and <strong>Mencía</strong> are all fantastic slightly chilled (55-60°F). Lower tannins and higher acidity make them refreshing cold. It's actually a French tradition to chill light reds in summer!",
+                answer: "Absolutely! The <strong>Gorghi Tondi Frappato</strong>, <strong>Barbera</strong>, and <strong>Mencía</strong> are all fantastic slightly chilled (55-60°F). Lower tannins and higher acidity make them refreshing cold. It's actually a French and Italian tradition to chill light reds in summer!",
                 category: "red",
                 icon: "❄️"
             },
             {
                 question: "What's a good red for someone who usually drinks white?",
-                answer: "Start with our <strong>Beaujolais Villages</strong>—it's light, fruity, low in tannins, and served slightly chilled. Many people call Gamay 'a red for white wine lovers.' The <strong>Mencía</strong> is another great bridge wine with its fresh, aromatic character.",
+                answer: "Start with our <strong>Gorghi Tondi Frappato</strong>—it's light, fruity, low in tannins, and served slightly chilled. Many people call Frappato 'a red for white wine lovers.' The <strong>Mencía</strong> is another great bridge wine with its fresh, aromatic character.",
                 category: "red",
                 icon: "🌉"
             },
@@ -7807,19 +8163,19 @@
             // Food Pairing Questions
             {
                 question: "I'm getting the cheese board—what wine goes best?",
-                answer: "Depends on the cheese! For soft cheeses like <strong>Saint Angel</strong> (triple-crème), try the <strong>Presqu'ile Chardonnay</strong>—butter meets butter. For aged cheeses like <strong>Gruyere</strong> or <strong>Ewephoria</strong>, the <strong>Côtes du Rhône</strong> or <strong>Cabernet Sauvignon</strong> work beautifully. For goat cheese, the <strong>Pouilly-Fumé</strong> is a legendary pairing!",
+                answer: "Depends on the cheese! For soft cheeses like <strong>Saint Angel</strong> (triple-crème), try the <strong>Presqu'ile Chardonnay</strong>—butter meets butter. For aged cheeses like <strong>Gruyere</strong> or <strong>Ewephoria</strong>, the <strong>Plan de Dieu</strong> or <strong>Cabernet Sauvignon</strong> work beautifully. For goat cheese, the <strong>Pouilly-Fumé</strong> is a legendary pairing!",
                 category: "food",
                 icon: "🧀"
             },
             {
                 question: "What pairs well with your charcuterie?",
-                answer: "Our Italian reds—<strong>Barbera</strong> and <strong>Montepulciano</strong>—are fantastic with prosciutto and salami. The <strong>Bordeaux</strong> loves duck rillettes. For lighter cured meats, the <strong>Mencía</strong> or <strong>Beaujolais</strong> won't overpower them. The high acidity in all these wines cuts through the fat beautifully.",
+                answer: "Our Italian reds—<strong>Barbera</strong> and <strong>Montepulciano</strong>—are fantastic with prosciutto and salami. The <strong>Bordeaux</strong> loves duck rillettes. For lighter cured meats, the <strong>Mencía</strong> or <strong>Frappato</strong> won't overpower them. The high acidity in all these wines cuts through the fat beautifully.",
                 category: "food",
                 icon: "🥓"
             },
             {
                 question: "What wine goes with spicy food?",
-                answer: "Off-dry wines with lower alcohol work best with spice, but since our wines are dry, go for the <strong>Rosé</strong> (served very cold) or the <strong>Pinot Grigio</strong>. For reds, the <strong>Beaujolais</strong> chilled is refreshing enough to handle some heat. Avoid high-alcohol, tannic reds—they'll make spice feel hotter!",
+                answer: "Off-dry wines with lower alcohol work best with spice, but since our wines are dry, go for the <strong>Rosé</strong> (served very cold) or the <strong>Pinot Grigio</strong>. For reds, the <strong>Frappato</strong> chilled is refreshing enough to handle some heat. Avoid high-alcohol, tannic reds—they'll make spice feel hotter!",
                 category: "food",
                 icon: "🌶️"
             },
@@ -7831,7 +8187,7 @@
             },
             {
                 question: "What's your go-to pairing for the flatbreads?",
-                answer: "For <strong>The Basque</strong> (prosciutto, fig): the <strong>Beaujolais</strong>—its fruit echoes the fig, acidity cuts through prosciutto. For <strong>The Mighty Spicy</strong>: <strong>Cabernet Sauvignon</strong> stands up to bold flavors. For <strong>The Veg</strong>: <strong>Pouilly-Fumé</strong> complements the fresh vegetables beautifully.",
+                answer: "For <strong>The Basque</strong> (prosciutto, fig): the <strong>Frappato</strong>—its fruit echoes the fig, acidity cuts through prosciutto. For <strong>The Mighty Spicy</strong>: <strong>Cabernet Sauvignon</strong> stands up to bold flavors. For <strong>The Veg</strong>: <strong>Pouilly-Fumé</strong> complements the fresh vegetables beautifully.",
                 category: "food",
                 icon: "🫓"
             },
@@ -7895,13 +8251,13 @@
             },
             {
                 question: "Why do some wines have higher alcohol?",
-                answer: "More sugar in grapes = more alcohol after fermentation. Warmer climates produce riper, sweeter grapes, resulting in higher alcohol wines (13-15%+). Cooler climates make lighter wines (11-13%). Our Southern Rhône at 14% comes from sunny Southern France; our Bourgueil at 12.5% is from the cooler Loire Valley.",
+                answer: "More sugar in grapes = more alcohol after fermentation. Warmer climates produce riper, sweeter grapes, resulting in higher alcohol wines (13-15%+). Cooler climates make lighter wines (11-13%). Our <strong>Plan de Dieu</strong> at 14.5% comes from sunny Southern France; our <strong>Bourgueil</strong> at 12.5% is from the cooler Loire Valley.",
                 category: "beginner",
                 icon: "🌡️"
             },
             {
                 question: "What are tannins?",
-                answer: "Tannins are compounds from grape skins, seeds, and sometimes oak that create that <strong>drying, astringent sensation</strong> in your mouth—like over-steeped tea. Red wines have more tannins because they ferment with their skins. Tannins add structure and aging potential. Our <strong>Cabernet Sauvignon</strong> has notable tannins; the <strong>Beaujolais</strong> has almost none.",
+                answer: "Tannins are compounds from grape skins, seeds, and sometimes oak that create that <strong>drying, astringent sensation</strong> in your mouth—like over-steeped tea. Red wines have more tannins because they ferment with their skins. Tannins add structure and aging potential. Our <strong>Cabernet Sauvignon</strong> has notable tannins; the <strong>Frappato</strong> has almost none.",
                 category: "beginner",
                 icon: "🫖"
             },
@@ -7919,19 +8275,19 @@
             },
             {
                 question: "What temperature should wine be served?",
-                answer: "General rules: <strong>Whites and rosé: 45-55°F</strong> (refrigerator cold to cool). <strong>Light reds: 55-60°F</strong> (slight chill—Beaujolais, Barbera). <strong>Full reds: 60-65°F</strong> (cellar temperature, not room temp!). Serving wine too warm makes alcohol feel hot; too cold mutes flavors. Our Enomatic maintains perfect temperatures automatically!",
+                answer: "General rules: <strong>Whites and rosé: 45-55°F</strong> (refrigerator cold to cool). <strong>Light reds: 55-60°F</strong> (slight chill—Frappato, Barbera). <strong>Full reds: 60-65°F</strong> (cellar temperature, not room temp!). Serving wine too warm makes alcohol feel hot; too cold mutes flavors. Our Enomatic maintains perfect temperatures automatically!",
                 category: "service",
                 icon: "🌡️"
             },
             {
                 question: "Should I let red wine breathe?",
-                answer: "Some benefit from it! Young, tannic reds (like our <strong>Cabernet Sauvignon</strong>) can soften with 15-30 minutes of air. Light reds (<strong>Beaujolais</strong>, <strong>Barbera</strong>) are meant to be fresh—no decanting needed. Our Enomatic wines are already exposed to a bit of air when poured, so they're ready to enjoy!",
+                answer: "Some benefit from it! Young, tannic reds (like our <strong>Cabernet Sauvignon</strong>) can soften with 15-30 minutes of air. Light reds (<strong>Frappato</strong>, <strong>Barbera</strong>) are meant to be fresh—no decanting needed. Our Enomatic wines are already exposed to a bit of air when poured, so they're ready to enjoy!",
                 category: "service",
                 icon: "💨"
             },
             {
                 question: "What does GSM stand for?",
-                answer: "<strong>Grenache-Syrah-Mourvèdre</strong>—the classic Southern Rhône blend. Our <strong>Côtes du Rhône</strong> is a GSM (60% Grenache, 30% Syrah, 10% Mourvèdre). Grenache brings fruit and alcohol, Syrah adds color and spice, Mourvèdre contributes structure and earthiness. Together, they're greater than the sum of their parts!",
+                answer: "<strong>Grenache-Syrah-Mourvèdre</strong>—the classic Southern Rhône blend. Our <strong>Domaine Verquière Plan de Dieu</strong> is a GSM (70% Grenache, 20% Syrah, 10% Mourvèdre). Grenache brings fruit and alcohol, Syrah adds color and spice, Mourvèdre contributes structure and earthiness. Together, they're greater than the sum of their parts!",
                 category: "red",
                 icon: "🔤"
             },
@@ -7968,8 +8324,8 @@
                 icon: "💨"
             },
             {
-                question: "Why is Beaujolais served chilled?",
-                answer: "The <strong>Gamay</strong> grape produces wines with low tannins and high fruit. Chilling (55-60°F) enhances their refreshing character. It's actually traditional in France! The light body and bright acidity make Beaujolais perfect slightly cold—think of it as a red that drinks like a white. Try it and you'll understand!",
+                question: "Why is Frappato served chilled?",
+                answer: "The <strong>Frappato</strong> grape produces wines with low tannins and high fruit. Chilling (55-60°F) enhances its refreshing character. It's actually traditional in Sicily and Southern Italy! The light body and bright acidity make Frappato perfect slightly cold—think of it as a red that drinks like a white. Try it and you'll understand!",
                 category: "red",
                 icon: "🧊"
             },
@@ -7980,8 +8336,8 @@
                 icon: "👨‍👦"
             },
             {
-                question: "Why do you have two rosés?",
-                answer: "We actually have one rosé currently—the <strong>Gorghi Tondi</strong> from Sicily made from Nerello Mascalese, an unusual volcanic grape usually used for red wines. Its rosé expression is unique and aromatic with white peach and almond notes. We rotate our selection, so different rosés may appear seasonally!",
+                question: "Tell me about your rosé.",
+                answer: "We have one rosé—the <strong>Folly by Mascaronne Rosé</strong> from Côtes de Provence, France. It's a classic Provence blend of Grenache, Cinsault, Mourvèdre, and Syrah, direct-pressed for that signature pale pink color. Notes of honeyed nectarine, white flowers, and fresh citrus with a mineral backbone. Fun fact: NBA legend Tony Parker co-created this cuvée! Perfect as an aperitif or with light food.",
                 category: "white",
                 icon: "🌹"
             },
@@ -7993,7 +8349,7 @@
             },
             {
                 question: "Do you have anything from Spain?",
-                answer: "Yes! Our <strong>Mencía from Ribeira Sacra</strong>—elegant, mineral, with fresh red berries. It's from Galicia in northwestern Spain, one of the country's most exciting regions. The steep terraced vineyards and slate soils create wines unlike anything else from Spain. It's like discovering a hidden gem!",
+                answer: "We have seven Spanish wines! Red wines include <strong>Mencía from Ribeira Sacra</strong> (elegant, mineral), <strong>Cims de Porrera Priorat</strong> (powerful old-vine Carinyena/Garnatxa), <strong>Garnatxa Meretat from Penedès</strong> (fruity organic Garnacha), <strong>Les Cousins L'Inconscient from Montsant</strong> (bold blend), <strong>Encomienda de Cervera Horten</strong> (classic Tempranillo), and <strong>Palmeri Navalta from Calatayud</strong> (old-vine Garnacha). For white, we have <strong>Marola Albariño from Rías Baixas</strong>—crisp and briny. Spain is one of our best-represented countries!",
                 category: "red",
                 icon: "🇪🇸"
             },
@@ -8007,19 +8363,19 @@
             },
             {
                 question: "What's good for a first date?",
-                answer: "Something approachable and easy to discuss! The <strong>Rosé</strong> is universally loved and safe. The <strong>Côtes du Rhône</strong> is interesting enough to spark conversation (talk about the GSM blend!). Avoid anything too challenging or polarizing. And definitely use the 1oz tastes to sample together—it's interactive and fun!",
+                answer: "Something approachable and easy to discuss! The <strong>Rosé</strong> is universally loved and safe. The <strong>Plan de Dieu</strong> is interesting enough to spark conversation (talk about the GSM blend!). Avoid anything too challenging or polarizing. And definitely use the 1oz tastes to sample together—it's interactive and fun!",
                 category: "service",
                 icon: "💕"
             },
             {
                 question: "I'm here with friends who all want different things—what can we share?",
-                answer: "The Enomatic system is perfect for groups! Everyone can sample different wines at their own pace. For sharing by the glass: <strong>Rosé</strong> and <strong>Côtes du Rhône</strong> are crowd-pleasers that most people enjoy. Get a cheese board to share—it pairs with almost everything on our menu!",
+                answer: "The Enomatic system is perfect for groups! Everyone can sample different wines at their own pace. For sharing by the glass: <strong>Rosé</strong> and <strong>Plan de Dieu</strong> are crowd-pleasers that most people enjoy. Get a cheese board to share—it pairs with almost everything on our menu!",
                 category: "service",
                 icon: "👯"
             },
             {
                 question: "What would you recommend for a rainy afternoon?",
-                answer: "Cozy weather calls for something warming! The <strong>Côtes du Rhône</strong> with its spice and dark fruit is perfect. Or the <strong>Bordeaux Supérieur</strong>—mellow, soft, contemplative. Pair with our duck rillettes or a rich cheese like Ewephoria. Sometimes weather sets the perfect mood for certain wines!",
+                answer: "Cozy weather calls for something warming! The <strong>Plan de Dieu</strong> with its spice and dark fruit is perfect. Or the <strong>Bordeaux Supérieur</strong>—mellow, soft, contemplative. Pair with our duck rillettes or a rich cheese like Ewephoria. Sometimes weather sets the perfect mood for certain wines!",
                 category: "service",
                 icon: "🌧️"
             },
@@ -8174,6 +8530,118 @@
                     `).join('')}
                 </div>
             `).join('');
+        }
+
+        // Wine Varietals Data - extracted from wine list
+        function getVarietalsData() {
+            var varietalMap = {};
+
+            // Known grape info for descriptions and origins
+            var grapeInfo = {
+                'Barbera': { origin: 'Piedmont, Italy', color: 'red', description: 'Piedmont\'s workhorse grape with high acidity and low tannins. Once dismissed as a "peasant grape," Barbera has risen to prominence thanks to modern winemaking. Its naturally bright acidity and soft tannins make it incredibly food-friendly - perfect for rich, fatty cuisine.', aka: '' },
+                'Merlot': { origin: 'Bordeaux, France', color: 'red', description: 'One of the world\'s most planted red grapes, Merlot produces soft, plummy wines with approachable tannins. The name comes from the French word for blackbird ("merle"), possibly because the birds love eating the ripe berries. It\'s the dominant grape on Bordeaux\'s Right Bank.', aka: '' },
+                'Cabernet Franc': { origin: 'Bordeaux, France', color: 'red', description: 'A parent grape of Cabernet Sauvignon, Cabernet Franc is lighter and more aromatic with signature notes of bell pepper, raspberry, and violet. In the Loire Valley, where it\'s called "Breton," it produces some of its most elegant expressions. Thrives in cooler climates.', aka: 'Breton (Loire Valley)' },
+                'Pinot Noir': { origin: 'Burgundy, France', color: 'red', description: 'The "Heartbreak Grape" - notoriously difficult to grow but capable of producing the world\'s most sought-after wines. Thin-skinned and susceptible to disease, it demands specific climates and careful handling. At its best, it delivers haunting aromatics of cherry, earth, and spice with silky texture.', aka: 'Spätburgunder (Germany), Pinot Nero (Italy)' },
+                'Montepulciano': { origin: 'Abruzzo, Italy', color: 'red', description: 'NOT to be confused with Vino Nobile di Montepulciano (which uses Sangiovese from Tuscany). This is the Montepulciano GRAPE from Abruzzo. Dark-skinned with soft tannins and natural food-friendliness, it produces one of Italy\'s best-value reds.', aka: '' },
+                'Mencía': { origin: 'Galicia & Bierzo, Spain', color: 'red', description: 'Spain\'s answer to Pinot Noir - elegant, aromatic, with bright acidity and mineral complexity. Native to northwestern Spain, it thrives on the steep terraced hillsides of regions like Ribeira Sacra, where "heroic viticulture" requires harvesting with cables and harnesses.', aka: 'Jaén (Portugal)' },
+                'Cabernet Sauvignon': { origin: 'Bordeaux, France', color: 'red', description: 'The world\'s most planted wine grape and the king of full-bodied reds. A natural cross of Cabernet Franc and Sauvignon Blanc (discovered by DNA profiling in 1996). Known for blackcurrant, cedar, and firm tannins that allow decades of aging. Thrives in warm climates worldwide.', aka: '' },
+                'Carignan': { origin: 'Aragón, Spain', color: 'red', description: 'An ancient Mediterranean grape that produces dark, tannic wines with intense fruit when yields are kept low. Old-vine Carignan (called Carinyena in Catalan, Mazuelo in Rioja) is prized in regions like Priorat for its concentration and complexity. Once used mainly for bulk wine, now a star of quality blends.', aka: 'Carinyena (Catalan), Mazuelo (Rioja), Carignan (France)' },
+                'Grenache': { origin: 'Aragón, Spain', color: 'red', description: 'Spain\'s most planted red grape, producing wines with ripe red fruit, white pepper, and herbal garrigue notes. Originated in Aragón and spread across the Mediterranean. Old vines produce small yields of incredibly concentrated wine. Also essential in Southern Rhône blends (GSM).', aka: 'Garnacha (Spanish), Garnatxa (Catalan), Cannonau (Sardinia)' },
+                'Frappato': { origin: 'Sicily, Italy', color: 'red', description: 'A light, aromatic Sicilian treasure often compared to Beaujolais or Loire reds. Produces delicate wines bursting with fresh cherry, wild strawberry, and rose petals. Half of the blend in DOCG Cerasuolo di Vittoria, but shines on its own as a perfect chillable red.', aka: '' },
+                'Tempranillo': { origin: 'Spain', color: 'red', description: 'Spain\'s noble grape and the backbone of Rioja and Ribera del Duero. The name comes from "temprano" (early) because it ripens earlier than other Spanish varieties. Produces wines with cherry fruit, leather, vanilla, and excellent aging potential. Incredibly versatile across different regions.', aka: 'Tinto Fino, Tinta del País, Cencibel, Tinta de Toro' },
+                'Sangiovese': { origin: 'Tuscany, Italy', color: 'red', description: 'Italy\'s most planted red grape, meaning "blood of Jove" (Jupiter). The soul of Chianti, Brunello di Montalcino, and Vino Nobile. Known for bright cherry fruit, dried herbs, and firm acidity that makes it one of the world\'s most food-friendly reds. Thrives on Tuscany\'s sun-drenched hillsides.', aka: 'Brunello, Prugnolo Gentile, Morellino' },
+                'Syrah': { origin: 'Northern Rhône, France', color: 'red', description: 'A powerful, dark-skinned grape producing inky wines with blackberry, black pepper, and smoked meat. Star of the Northern Rhône (Hermitage, Côte-Rôtie) and essential in Southern Rhône blends. Also thrives as Shiraz in Australia, where it takes on a richer, more fruit-forward character.', aka: 'Shiraz (Australia)' },
+                'Mourvèdre': { origin: 'Spain', color: 'red', description: 'A late-ripening grape that needs warmth and sunshine to reach full maturity. Adds structure, tannin, and earthy complexity to Southern Rhône and Provence blends. Produces deeply colored wines with dark fruit, leather, and game notes. Essential "M" in the classic GSM blend.', aka: 'Monastrell (Spain), Mataro (Australia)' },
+                'Pinot Grigio': { origin: 'Burgundy, France', color: 'white', description: 'A mutation of Pinot Noir with pinkish-gray skin (grigio means "gray" in Italian). In Italy, it\'s typically made in a light, crisp, neutral style with stainless steel fermentation. In Alsace (as Pinot Gris), it\'s richer and more aromatic. One of the world\'s most popular white wines.', aka: 'Pinot Gris (France), Grauburgunder (Germany)' },
+                'Sauvignon Blanc': { origin: 'Loire Valley, France', color: 'white', description: 'An aromatic grape known for citrus, gooseberry, and herbaceous notes. A parent of Cabernet Sauvignon (crossed with Cabernet Franc). Loire Valley expressions are bone-dry with laser acidity and flinty minerality, while New Zealand styles are more tropical and pungent. Classic pairing with goat cheese.', aka: 'Fumé Blanc (California)' },
+                'Chardonnay': { origin: 'Burgundy, France', color: 'white', description: 'The world\'s most popular white grape and incredibly versatile. Styles range from lean and mineral (Chablis) to rich and buttery (oaked Napa). A "blank canvas" that reflects terroir and winemaking choices more than almost any other grape. The "buttery" character comes from malolactic fermentation.', aka: '' },
+                'Albariño': { origin: 'Galicia, Spain', color: 'white', description: 'Spain\'s premier white grape from the rainy, green region of Galicia. Thick-skinned to resist the damp Atlantic climate, producing aromatic wines with stone fruit, citrus, and signature saline minerality. Galicians say it was born to be paired with seafood. Vines are traditionally trained on pergolas.', aka: 'Alvarinho (Portugal)' },
+                'Folle Blanche': { origin: 'Loire Valley, France', color: 'white', description: '"Crazy white" - named for its vigorous, wild-growing vines. Before phylloxera, it was France\'s most planted white grape and the primary grape for Cognac. Now rare but prized for razor-sharp acidity and mineral character. Its calling card is electric, mouthwatering freshness.', aka: 'Gros Plant (Pays Nantais)' },
+                'Scheurebe': { origin: 'Rheinhessen, Germany', color: 'white', description: 'Created in 1916 by Georg Scheu by crossing Riesling with an unknown grape. For decades considered "Riesling\'s weird cousin," it\'s now having a major renaissance. Intensely aromatic with pink grapefruit, passionfruit, and elderflower - more tropical than Riesling. Lower alcohol makes it perfect with spicy foods.', aka: '' },
+                'Cinsault': { origin: 'Southern France', color: 'red', description: 'A light-skinned, heat-loving grape widely used in Provence rosé blends and Southern Rhône reds. Produces delicate, aromatic wines with fresh red fruit. Also a parent of Pinotage (crossed with Pinot Noir in South Africa). Valued for its elegant contribution to rosé wines.', aka: 'Cinsaut' },
+                'Glera': { origin: 'Veneto, Italy', color: 'white', description: 'The signature grape of Prosecco, producing light, fruity, and refreshing sparkling wines. Made using the Charmat method (tank fermentation) for lighter, frothier bubbles than Champagne. The grape was previously called "Prosecco" itself until regulations changed in 2009 to protect the regional name.', aka: 'formerly Prosecco' },
+                'Chenin Blanc': { origin: 'Loire Valley, France', color: 'white', description: 'One of the most versatile white grapes, capable of producing everything from bone-dry to lusciously sweet wines and sparkling. Known for honeyed stone fruit, lanolin, and vibrant acidity. Particularly important in South Africa (called Steen) and the Loire Valley (Vouvray, Savennières).', aka: 'Steen (South Africa)' },
+                'Colombard': { origin: 'Southwest France', color: 'white', description: 'Originally grown for brandy production (Cognac and Armagnac), Colombard is now valued for its crisp, aromatic wines. High natural acidity makes it ideal for sparkling wines and fresh, easy-drinking whites. Widely planted in California and South Africa as well.', aka: 'French Colombard' }
+            };
+
+            wines.forEach(function(wine) {
+                // Parse the grape field to extract individual varieties
+                var grapeStr = wine.grape;
+                // Match patterns like "100% Barbera", "70% Merlot", "Grenache, Carignan, Cabernet Sauvignon blend"
+                var parts = grapeStr.split(/,\s*/);
+                parts.forEach(function(part) {
+                    var cleaned = part.replace(/\d+%\s*/, '').replace(/\s*blend\s*/i, '').trim();
+                    // Normalize grape names
+                    if (cleaned === 'Garnacha (Grenache)' || cleaned === 'Garnatxa Negra (Grenache)' || cleaned === 'Garnacha') cleaned = 'Grenache';
+                    if (cleaned === 'Carinyena (Carignan)') cleaned = 'Carignan';
+                    if (cleaned === 'Pinot Grigio') cleaned = 'Pinot Grigio';
+                    if (cleaned === 'Mourvèdre') cleaned = 'Mourvèdre';
+                    if (!cleaned) return;
+
+                    if (!varietalMap[cleaned]) {
+                        varietalMap[cleaned] = {
+                            name: cleaned,
+                            wines: [],
+                            info: grapeInfo[cleaned] || { origin: '', color: 'red', description: '', aka: '' }
+                        };
+                    }
+                    varietalMap[cleaned].wines.push(wine.name + ' ' + wine.vintage);
+                });
+            });
+
+            // Convert to sorted array
+            var result = Object.values(varietalMap);
+            result.sort(function(a, b) { return a.name.localeCompare(b.name); });
+            return result;
+        }
+
+        function renderVarietals() {
+            var grid = document.getElementById('varietalsGrid');
+            var varietals = getVarietalsData();
+
+            grid.innerHTML = varietals.map(function(v) {
+                var colorClass = v.info.color === 'white' ? 'white-grape' : 'red-grape';
+                var akaHtml = v.info.aka ? '<div class="varietal-fact"><span class="varietal-fact-label">Also Known As</span><span class="varietal-fact-value">' + v.info.aka + '</span></div>' : '';
+                return '<div class="varietal-card" data-color="' + v.info.color + '">' +
+                    '<div class="varietal-card-header ' + colorClass + '">' +
+                        '<h3>' + v.name + '</h3>' +
+                        '<div class="varietal-origin">' + v.info.origin + '</div>' +
+                    '</div>' +
+                    '<div class="varietal-card-body">' +
+                        '<div class="varietal-description">' + v.info.description + '</div>' +
+                        '<div class="varietal-facts">' +
+                            '<div class="varietal-fact">' +
+                                '<span class="varietal-fact-label">Grape Color</span>' +
+                                '<span class="varietal-fact-value">' + (v.info.color === 'white' ? 'White' : 'Red') + '</span>' +
+                            '</div>' +
+                            '<div class="varietal-fact">' +
+                                '<span class="varietal-fact-label">On Our List</span>' +
+                                '<span class="varietal-fact-value">' + v.wines.length + (v.wines.length === 1 ? ' wine' : ' wines') + '</span>' +
+                            '</div>' +
+                            akaHtml +
+                        '</div>' +
+                        '<div class="varietal-wines">' +
+                            '<div class="varietal-wines-title">Our Wines Featuring This Grape</div>' +
+                            '<div class="varietal-wines-list">' + v.wines.join('<br>') + '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+
+            forceRepaint(grid);
+        }
+
+        function filterVarietals(type, btn) {
+            document.querySelectorAll('.varietal-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+
+            document.querySelectorAll('.varietal-card').forEach(function(card) {
+                if (type === 'all' || card.dataset.color === type) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
 
         // Render Opening Checklist
@@ -9021,6 +9489,7 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
                 initOnlineFlashcards();
                 renderFAQCards();
                 renderPronunciationGuide();
+                renderVarietals();
                 renderChecklist();
                 renderTimeclock();
 
@@ -9031,6 +9500,23 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
                 if (active) {
                     forceRepaint(active);
                 }
+
+                // Hash-based routing: navigate to section from URL hash
+                function handleHashNavigation() {
+                    var hash = window.location.hash.replace('#', '');
+                    if (hash) {
+                        var targetSection = document.getElementById(hash);
+                        if (targetSection && targetSection.tagName === 'SECTION') {
+                            showSection(hash);
+                        }
+                    }
+                }
+
+                // Handle initial hash on page load
+                handleHashNavigation();
+
+                // Handle hash changes (back/forward browser navigation)
+                window.addEventListener('hashchange', handleHashNavigation);
             } catch (e) {
                 console.error('Initialization error:', e);
             }
