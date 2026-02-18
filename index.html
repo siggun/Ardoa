@@ -2736,6 +2736,175 @@
             }
         }
 
+        /* ==================== WINE VARIETALS SECTION STYLES ==================== */
+
+        .varietals-intro {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .varietals-intro h2 {
+            color: var(--burgundy);
+            margin-bottom: 0.5rem;
+        }
+
+        .varietals-intro p {
+            color: #666;
+        }
+
+        .varietals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .varietal-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .varietal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .varietal-card-header {
+            padding: 1rem 1.25rem;
+            color: white;
+        }
+
+        .varietal-card-header.red-grape {
+            background: linear-gradient(135deg, #8B0000, #4A0000);
+        }
+
+        .varietal-card-header.white-grape {
+            background: linear-gradient(135deg, #DAA520, #B8860B);
+        }
+
+        .varietal-card-header h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .varietal-card-header .varietal-origin {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .varietal-card-body {
+            padding: 1.25rem;
+        }
+
+        .varietal-description {
+            color: var(--charcoal);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .varietal-facts {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .varietal-fact {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .varietal-fact-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #888;
+        }
+
+        .varietal-fact-value {
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+
+        .varietal-wines {
+            background: var(--cream);
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .varietal-wines-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--burgundy);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .varietal-wines-list {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .varietal-filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .varietal-filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            background: white;
+            color: #555;
+            cursor: pointer;
+            font-family: 'Crimson Text', serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .varietal-filter-btn:hover {
+            border-color: var(--burgundy);
+            color: var(--burgundy);
+        }
+
+        .varietal-filter-btn.active {
+            background: var(--burgundy);
+            color: white;
+            border-color: var(--burgundy);
+        }
+
+        @media (max-width: 480px) {
+            .varietals-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .varietal-card-header h3 {
+                font-size: 1rem;
+            }
+
+            .varietal-card-header .varietal-origin {
+                font-size: 0.8rem;
+            }
+
+            .varietal-card-body {
+                padding: 1rem;
+            }
+        }
+
         /* ==================== FAQ SECTION STYLES ==================== */
 
         /* FAQ Title - Light Theme */
@@ -4679,6 +4848,7 @@
         <a href="#faq" onclick="navigateToSection('faq', this, event)">Wine FAQ</a>
         <a href="#pronunciations" onclick="navigateToSection('pronunciations', this, event)">Pronunciations</a>
         <a href="#foodpairings" onclick="navigateToSection('foodpairings', this, event)">Food Pairings</a>
+        <a href="#varietals" onclick="navigateToSection('varietals', this, event)">Wine Varietals</a>
     </nav>
 
     <main>
@@ -5773,6 +5943,24 @@
                         <p class="timer-empty">Tap "+ Add" to start a flatbread timer</p>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Wine Varietals Section -->
+        <section id="varietals">
+            <div class="varietals-intro">
+                <h2>Wine Varietals</h2>
+                <p>Get to know the grape varieties behind Ardoa's wine list - their origins, characteristics, and which of our wines showcase them</p>
+            </div>
+
+            <div class="varietal-filter-bar">
+                <button class="varietal-filter-btn active" onclick="filterVarietals('all', this)">All Grapes</button>
+                <button class="varietal-filter-btn" onclick="filterVarietals('red', this)">Red Grapes</button>
+                <button class="varietal-filter-btn" onclick="filterVarietals('white', this)">White Grapes</button>
+            </div>
+
+            <div class="varietals-grid" id="varietalsGrid">
+                <!-- Varietal cards will be inserted here by JavaScript -->
             </div>
         </section>
     </main>
@@ -8344,6 +8532,118 @@
             `).join('');
         }
 
+        // Wine Varietals Data - extracted from wine list
+        function getVarietalsData() {
+            var varietalMap = {};
+
+            // Known grape info for descriptions and origins
+            var grapeInfo = {
+                'Barbera': { origin: 'Piedmont, Italy', color: 'red', description: 'Piedmont\'s workhorse grape with high acidity and low tannins. Once dismissed as a "peasant grape," Barbera has risen to prominence thanks to modern winemaking. Its naturally bright acidity and soft tannins make it incredibly food-friendly - perfect for rich, fatty cuisine.', aka: '' },
+                'Merlot': { origin: 'Bordeaux, France', color: 'red', description: 'One of the world\'s most planted red grapes, Merlot produces soft, plummy wines with approachable tannins. The name comes from the French word for blackbird ("merle"), possibly because the birds love eating the ripe berries. It\'s the dominant grape on Bordeaux\'s Right Bank.', aka: '' },
+                'Cabernet Franc': { origin: 'Bordeaux, France', color: 'red', description: 'A parent grape of Cabernet Sauvignon, Cabernet Franc is lighter and more aromatic with signature notes of bell pepper, raspberry, and violet. In the Loire Valley, where it\'s called "Breton," it produces some of its most elegant expressions. Thrives in cooler climates.', aka: 'Breton (Loire Valley)' },
+                'Pinot Noir': { origin: 'Burgundy, France', color: 'red', description: 'The "Heartbreak Grape" - notoriously difficult to grow but capable of producing the world\'s most sought-after wines. Thin-skinned and susceptible to disease, it demands specific climates and careful handling. At its best, it delivers haunting aromatics of cherry, earth, and spice with silky texture.', aka: 'Spätburgunder (Germany), Pinot Nero (Italy)' },
+                'Montepulciano': { origin: 'Abruzzo, Italy', color: 'red', description: 'NOT to be confused with Vino Nobile di Montepulciano (which uses Sangiovese from Tuscany). This is the Montepulciano GRAPE from Abruzzo. Dark-skinned with soft tannins and natural food-friendliness, it produces one of Italy\'s best-value reds.', aka: '' },
+                'Mencía': { origin: 'Galicia & Bierzo, Spain', color: 'red', description: 'Spain\'s answer to Pinot Noir - elegant, aromatic, with bright acidity and mineral complexity. Native to northwestern Spain, it thrives on the steep terraced hillsides of regions like Ribeira Sacra, where "heroic viticulture" requires harvesting with cables and harnesses.', aka: 'Jaén (Portugal)' },
+                'Cabernet Sauvignon': { origin: 'Bordeaux, France', color: 'red', description: 'The world\'s most planted wine grape and the king of full-bodied reds. A natural cross of Cabernet Franc and Sauvignon Blanc (discovered by DNA profiling in 1996). Known for blackcurrant, cedar, and firm tannins that allow decades of aging. Thrives in warm climates worldwide.', aka: '' },
+                'Carignan': { origin: 'Aragón, Spain', color: 'red', description: 'An ancient Mediterranean grape that produces dark, tannic wines with intense fruit when yields are kept low. Old-vine Carignan (called Carinyena in Catalan, Mazuelo in Rioja) is prized in regions like Priorat for its concentration and complexity. Once used mainly for bulk wine, now a star of quality blends.', aka: 'Carinyena (Catalan), Mazuelo (Rioja), Carignan (France)' },
+                'Grenache': { origin: 'Aragón, Spain', color: 'red', description: 'Spain\'s most planted red grape, producing wines with ripe red fruit, white pepper, and herbal garrigue notes. Originated in Aragón and spread across the Mediterranean. Old vines produce small yields of incredibly concentrated wine. Also essential in Southern Rhône blends (GSM).', aka: 'Garnacha (Spanish), Garnatxa (Catalan), Cannonau (Sardinia)' },
+                'Frappato': { origin: 'Sicily, Italy', color: 'red', description: 'A light, aromatic Sicilian treasure often compared to Beaujolais or Loire reds. Produces delicate wines bursting with fresh cherry, wild strawberry, and rose petals. Half of the blend in DOCG Cerasuolo di Vittoria, but shines on its own as a perfect chillable red.', aka: '' },
+                'Tempranillo': { origin: 'Spain', color: 'red', description: 'Spain\'s noble grape and the backbone of Rioja and Ribera del Duero. The name comes from "temprano" (early) because it ripens earlier than other Spanish varieties. Produces wines with cherry fruit, leather, vanilla, and excellent aging potential. Incredibly versatile across different regions.', aka: 'Tinto Fino, Tinta del País, Cencibel, Tinta de Toro' },
+                'Sangiovese': { origin: 'Tuscany, Italy', color: 'red', description: 'Italy\'s most planted red grape, meaning "blood of Jove" (Jupiter). The soul of Chianti, Brunello di Montalcino, and Vino Nobile. Known for bright cherry fruit, dried herbs, and firm acidity that makes it one of the world\'s most food-friendly reds. Thrives on Tuscany\'s sun-drenched hillsides.', aka: 'Brunello, Prugnolo Gentile, Morellino' },
+                'Syrah': { origin: 'Northern Rhône, France', color: 'red', description: 'A powerful, dark-skinned grape producing inky wines with blackberry, black pepper, and smoked meat. Star of the Northern Rhône (Hermitage, Côte-Rôtie) and essential in Southern Rhône blends. Also thrives as Shiraz in Australia, where it takes on a richer, more fruit-forward character.', aka: 'Shiraz (Australia)' },
+                'Mourvèdre': { origin: 'Spain', color: 'red', description: 'A late-ripening grape that needs warmth and sunshine to reach full maturity. Adds structure, tannin, and earthy complexity to Southern Rhône and Provence blends. Produces deeply colored wines with dark fruit, leather, and game notes. Essential "M" in the classic GSM blend.', aka: 'Monastrell (Spain), Mataro (Australia)' },
+                'Pinot Grigio': { origin: 'Burgundy, France', color: 'white', description: 'A mutation of Pinot Noir with pinkish-gray skin (grigio means "gray" in Italian). In Italy, it\'s typically made in a light, crisp, neutral style with stainless steel fermentation. In Alsace (as Pinot Gris), it\'s richer and more aromatic. One of the world\'s most popular white wines.', aka: 'Pinot Gris (France), Grauburgunder (Germany)' },
+                'Sauvignon Blanc': { origin: 'Loire Valley, France', color: 'white', description: 'An aromatic grape known for citrus, gooseberry, and herbaceous notes. A parent of Cabernet Sauvignon (crossed with Cabernet Franc). Loire Valley expressions are bone-dry with laser acidity and flinty minerality, while New Zealand styles are more tropical and pungent. Classic pairing with goat cheese.', aka: 'Fumé Blanc (California)' },
+                'Chardonnay': { origin: 'Burgundy, France', color: 'white', description: 'The world\'s most popular white grape and incredibly versatile. Styles range from lean and mineral (Chablis) to rich and buttery (oaked Napa). A "blank canvas" that reflects terroir and winemaking choices more than almost any other grape. The "buttery" character comes from malolactic fermentation.', aka: '' },
+                'Albariño': { origin: 'Galicia, Spain', color: 'white', description: 'Spain\'s premier white grape from the rainy, green region of Galicia. Thick-skinned to resist the damp Atlantic climate, producing aromatic wines with stone fruit, citrus, and signature saline minerality. Galicians say it was born to be paired with seafood. Vines are traditionally trained on pergolas.', aka: 'Alvarinho (Portugal)' },
+                'Folle Blanche': { origin: 'Loire Valley, France', color: 'white', description: '"Crazy white" - named for its vigorous, wild-growing vines. Before phylloxera, it was France\'s most planted white grape and the primary grape for Cognac. Now rare but prized for razor-sharp acidity and mineral character. Its calling card is electric, mouthwatering freshness.', aka: 'Gros Plant (Pays Nantais)' },
+                'Scheurebe': { origin: 'Rheinhessen, Germany', color: 'white', description: 'Created in 1916 by Georg Scheu by crossing Riesling with an unknown grape. For decades considered "Riesling\'s weird cousin," it\'s now having a major renaissance. Intensely aromatic with pink grapefruit, passionfruit, and elderflower - more tropical than Riesling. Lower alcohol makes it perfect with spicy foods.', aka: '' },
+                'Cinsault': { origin: 'Southern France', color: 'red', description: 'A light-skinned, heat-loving grape widely used in Provence rosé blends and Southern Rhône reds. Produces delicate, aromatic wines with fresh red fruit. Also a parent of Pinotage (crossed with Pinot Noir in South Africa). Valued for its elegant contribution to rosé wines.', aka: 'Cinsaut' },
+                'Glera': { origin: 'Veneto, Italy', color: 'white', description: 'The signature grape of Prosecco, producing light, fruity, and refreshing sparkling wines. Made using the Charmat method (tank fermentation) for lighter, frothier bubbles than Champagne. The grape was previously called "Prosecco" itself until regulations changed in 2009 to protect the regional name.', aka: 'formerly Prosecco' },
+                'Chenin Blanc': { origin: 'Loire Valley, France', color: 'white', description: 'One of the most versatile white grapes, capable of producing everything from bone-dry to lusciously sweet wines and sparkling. Known for honeyed stone fruit, lanolin, and vibrant acidity. Particularly important in South Africa (called Steen) and the Loire Valley (Vouvray, Savennières).', aka: 'Steen (South Africa)' },
+                'Colombard': { origin: 'Southwest France', color: 'white', description: 'Originally grown for brandy production (Cognac and Armagnac), Colombard is now valued for its crisp, aromatic wines. High natural acidity makes it ideal for sparkling wines and fresh, easy-drinking whites. Widely planted in California and South Africa as well.', aka: 'French Colombard' }
+            };
+
+            wines.forEach(function(wine) {
+                // Parse the grape field to extract individual varieties
+                var grapeStr = wine.grape;
+                // Match patterns like "100% Barbera", "70% Merlot", "Grenache, Carignan, Cabernet Sauvignon blend"
+                var parts = grapeStr.split(/,\s*/);
+                parts.forEach(function(part) {
+                    var cleaned = part.replace(/\d+%\s*/, '').replace(/\s*blend\s*/i, '').trim();
+                    // Normalize grape names
+                    if (cleaned === 'Garnacha (Grenache)' || cleaned === 'Garnatxa Negra (Grenache)' || cleaned === 'Garnacha') cleaned = 'Grenache';
+                    if (cleaned === 'Carinyena (Carignan)') cleaned = 'Carignan';
+                    if (cleaned === 'Pinot Grigio') cleaned = 'Pinot Grigio';
+                    if (cleaned === 'Mourvèdre') cleaned = 'Mourvèdre';
+                    if (!cleaned) return;
+
+                    if (!varietalMap[cleaned]) {
+                        varietalMap[cleaned] = {
+                            name: cleaned,
+                            wines: [],
+                            info: grapeInfo[cleaned] || { origin: '', color: 'red', description: '', aka: '' }
+                        };
+                    }
+                    varietalMap[cleaned].wines.push(wine.name + ' ' + wine.vintage);
+                });
+            });
+
+            // Convert to sorted array
+            var result = Object.values(varietalMap);
+            result.sort(function(a, b) { return a.name.localeCompare(b.name); });
+            return result;
+        }
+
+        function renderVarietals() {
+            var grid = document.getElementById('varietalsGrid');
+            var varietals = getVarietalsData();
+
+            grid.innerHTML = varietals.map(function(v) {
+                var colorClass = v.info.color === 'white' ? 'white-grape' : 'red-grape';
+                var akaHtml = v.info.aka ? '<div class="varietal-fact"><span class="varietal-fact-label">Also Known As</span><span class="varietal-fact-value">' + v.info.aka + '</span></div>' : '';
+                return '<div class="varietal-card" data-color="' + v.info.color + '">' +
+                    '<div class="varietal-card-header ' + colorClass + '">' +
+                        '<h3>' + v.name + '</h3>' +
+                        '<div class="varietal-origin">' + v.info.origin + '</div>' +
+                    '</div>' +
+                    '<div class="varietal-card-body">' +
+                        '<div class="varietal-description">' + v.info.description + '</div>' +
+                        '<div class="varietal-facts">' +
+                            '<div class="varietal-fact">' +
+                                '<span class="varietal-fact-label">Grape Color</span>' +
+                                '<span class="varietal-fact-value">' + (v.info.color === 'white' ? 'White' : 'Red') + '</span>' +
+                            '</div>' +
+                            '<div class="varietal-fact">' +
+                                '<span class="varietal-fact-label">On Our List</span>' +
+                                '<span class="varietal-fact-value">' + v.wines.length + (v.wines.length === 1 ? ' wine' : ' wines') + '</span>' +
+                            '</div>' +
+                            akaHtml +
+                        '</div>' +
+                        '<div class="varietal-wines">' +
+                            '<div class="varietal-wines-title">Our Wines Featuring This Grape</div>' +
+                            '<div class="varietal-wines-list">' + v.wines.join('<br>') + '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+
+            forceRepaint(grid);
+        }
+
+        function filterVarietals(type, btn) {
+            document.querySelectorAll('.varietal-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+
+            document.querySelectorAll('.varietal-card').forEach(function(card) {
+                if (type === 'all' || card.dataset.color === type) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
         // Render Opening Checklist
         function renderChecklist() {
             const container = document.getElementById('checklistContent');
@@ -9189,6 +9489,7 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
                 initOnlineFlashcards();
                 renderFAQCards();
                 renderPronunciationGuide();
+                renderVarietals();
                 renderChecklist();
                 renderTimeclock();
 
