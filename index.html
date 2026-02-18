@@ -1265,6 +1265,9 @@
                 border-width: 1.5px;
                 min-height: 44px;
                 flex-shrink: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             main {
@@ -1381,13 +1384,17 @@
 
             /* Quick reference */
             .quick-ref th, .quick-ref td {
-                padding: 0.4rem 0.5rem;
-                font-size: 0.7rem;
+                padding: 0.35rem 0.45rem;
+                font-size: 0.6rem;
+            }
+
+            .quick-ref td {
+                white-space: normal;
             }
 
             .quick-ref::before {
                 content: '⟶ swipe';
-                font-size: 0.65rem;
+                font-size: 0.6rem;
                 padding: 0.25rem 0.5rem;
             }
 
@@ -1529,6 +1536,9 @@
                 padding: 0.45rem 0.6rem;
                 font-size: 0.65rem;
                 min-height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             .wine-card h3, .food-card h3 {
@@ -1584,13 +1594,13 @@
 
             .quick-ref::before {
                 content: '⟶';
-                font-size: 0.75rem;
-                padding: 0.2rem 0.5rem;
+                font-size: 0.55rem;
+                padding: 0.2rem 0.4rem;
             }
 
             .quick-ref th, .quick-ref td {
-                padding: 0.3rem 0.4rem;
-                font-size: 0.65rem;
+                padding: 0.25rem 0.35rem;
+                font-size: 0.55rem;
             }
 
             /* Print cards 360px */
@@ -4835,7 +4845,6 @@
     <nav>
         <a href="#techsheets" class="active" onclick="navigateToSection('techsheets', this, event)">Wine List</a>
         <a href="#quickref" onclick="navigateToSection('quickref', this, event)">Quick Reference</a>
-        <a href="#timeclock" onclick="navigateToSection('timeclock', this, event)">Time Clock</a>
         <a href="#checklist" onclick="navigateToSection('checklist', this, event)">Opening Checklist</a>
         <a href="#timers" onclick="navigateToSection('timers', this, event)">Timers</a>
         <a href="#beerlist" onclick="navigateToSection('beerlist', this, event)">Beer List</a>
@@ -4849,6 +4858,7 @@
         <a href="#pronunciations" onclick="navigateToSection('pronunciations', this, event)">Pronunciations</a>
         <a href="#foodpairings" onclick="navigateToSection('foodpairings', this, event)">Food Pairings</a>
         <a href="#varietals" onclick="navigateToSection('varietals', this, event)">Wine Varietals</a>
+        <a href="#timeclock" onclick="navigateToSection('timeclock', this, event)">Time Clock</a>
     </nav>
 
     <main>
@@ -7345,6 +7355,10 @@
                             <div class="blend-detail">${wine.grapeDetail}</div>
                         </div>
                         <div class="wine-detail">
+                            <div class="wine-detail-label">Tasting Notes</div>
+                            <div class="wine-detail-value">${wine.tasting}</div>
+                        </div>
+                        <div class="wine-detail">
                             <div class="wine-detail-label">Region</div>
                             <div class="wine-detail-value">${wine.region}, ${wine.country}</div>
                         </div>
@@ -7358,10 +7372,6 @@
                                 <div class="tech-spec"><span class="tech-spec-label">Alcohol:</span> ${wine.alcohol}</div>
                                 <div class="tech-spec"><span class="tech-spec-label">Serving:</span> ${wine.serving}</div>
                             </div>
-                        </div>
-                        <div class="wine-detail">
-                            <div class="wine-detail-label">Tasting Notes</div>
-                            <div class="wine-detail-value">${wine.tasting}</div>
                         </div>
                         <div class="wine-detail">
                             <div class="wine-detail-label">Key Facts</div>
