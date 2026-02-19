@@ -771,6 +771,24 @@
             background: #1a1a1a;
         }
 
+        .btn-submit {
+            background: var(--burgundy);
+            color: white;
+            font-size: 1.1rem;
+            padding: 1rem 2.5rem;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background: var(--burgundy-dark);
+        }
+
+        .btn-submit:disabled {
+            background: #ccc;
+            color: #888;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
         .btn-continue {
             background: #4a1a28;
             color: white;
@@ -4989,22 +5007,17 @@
                     </div>
                 </div>
 
-                <div class="flashcard" id="flashcard" onclick="handleFlashcardClick(event)">
+                <div class="flashcard" id="flashcard">
                     <div class="flashcard-question" id="flashcardQuestion">Loading...</div>
                     <div class="flashcard-wine-name" id="flashcardWine"></div>
                     <div class="flashcard-options" id="flashcardOptions"></div>
-                    <div class="flashcard-answer" id="flashcardAnswer"></div>
-                    <div class="flashcard-hint" id="flashcardHint">Click to reveal answer</div>
+                    <div class="flashcard-hint" id="flashcardHint">Select an answer, then press Submit</div>
                 </div>
 
                 <div class="flashcard-controls">
-                    <button class="flashcard-btn btn-prev" id="btnPrev" onclick="prevQuizCard()" disabled>Previous</button>
-                    <button class="flashcard-btn btn-reveal" onclick="revealAnswer()">Reveal Answer</button>
-                    <button class="flashcard-btn btn-correct" onclick="markAnswer(true)">Got It!</button>
-                    <button class="flashcard-btn btn-incorrect" onclick="markAnswer(false)">Missed It</button>
-                    <button class="flashcard-btn btn-next" onclick="nextQuizCard()">Skip</button>
-                    <button class="flashcard-btn btn-reset" onclick="resetQuiz()">Reset Quiz</button>
+                    <button class="flashcard-btn btn-submit" id="btnSubmit" onclick="submitAnswer()" disabled>Submit Answer</button>
                     <button class="flashcard-btn btn-continue" id="btnContinue" onclick="continueAfterAnswer()" style="display:none;">Next Question</button>
+                    <button class="flashcard-btn btn-reset" onclick="resetQuiz()">Reset Quiz</button>
                 </div>
             </div>
         </section>
@@ -7045,9 +7058,7 @@
         let currentCard = null;
         let correctCount = 0;
         let incorrectCount = 0;
-        let questionHistory = [];
-        let historyIndex = -1;
-        let isViewingHistory = false;
+        let selectedAnswer = null;
 
         // Note: Page initialization is done in the DOMContentLoaded listener at the end of the file
 
@@ -7591,54 +7602,67 @@
 
             quizWines.forEach(wine => {
                 const wineDisplay = `${wine.name} ${wine.vintage}`;
+                const otherWines = quizWines.filter(w => w.name !== wine.name);
 
                 if (qGrape) {
-                    // Remove grape name from wine name to avoid revealing the answer
                     const cleanWineName = removeGrapeFromName(wine.name);
                     const cleanWineDisplay = `${cleanWineName} ${wine.vintage}`;
+                    const wrongAnswers = shuffleArray(otherWines).slice(0, 4).map(w => w.grape);
+                    const options = shuffleArray([wine.grape, ...wrongAnswers]);
                     questions.push({
                         wine: cleanWineDisplay,
                         question: "What grape(s) is this wine made from?",
-                        answer: wine.grape + getPronunciationLine(wine),
-                        type: 'text'
+                        answer: wine.grape,
+                        type: 'multiple-choice',
+                        options: options
                     });
                 }
                 if (qRegion) {
+                    const correctAnswer = wine.region + ', ' + wine.country;
+                    const wrongAnswers = shuffleArray(otherWines).slice(0, 4).map(w => w.region + ', ' + w.country);
+                    const options = shuffleArray([correctAnswer, ...wrongAnswers]);
                     questions.push({
                         wine: wineDisplay,
                         question: "What region is this wine from?",
-                        answer: wine.region + ', ' + wine.country + getPronunciationLine(wine),
-                        type: 'text'
+                        answer: correctAnswer,
+                        type: 'multiple-choice',
+                        options: options
                     });
                 }
                 if (qCountry) {
+                    const allCountries = [...new Set(quizWines.map(w => w.country))];
+                    const wrongCountries = shuffleArray(allCountries.filter(c => c !== wine.country)).slice(0, 4);
+                    const options = shuffleArray([wine.country, ...wrongCountries]);
                     questions.push({
                         wine: wineDisplay,
                         question: "What country is this wine from?",
-                        answer: wine.country + getPronunciationLine(wine),
-                        type: 'text'
+                        answer: wine.country,
+                        type: 'multiple-choice',
+                        options: options
                     });
                 }
                 if (qTasting) {
-                    // Generate multiple choice tasting notes question
-                    const otherWines = quizWines.filter(w => w.name !== wine.name);
-                    const wrongAnswers = shuffleArray(otherWines).slice(0, 3).map(w => w.tasting);
-                    const allAnswers = shuffleArray([wine.tasting, ...wrongAnswers]);
-
+                    const wrongAnswers = shuffleArray(otherWines).slice(0, 4).map(w => w.tasting);
+                    const options = shuffleArray([wine.tasting, ...wrongAnswers]);
                     questions.push({
                         wine: wineDisplay,
                         question: "Which tasting notes describe this wine?",
                         answer: wine.tasting,
                         type: 'multiple-choice',
-                        options: allAnswers
+                        options: options
                     });
                 }
                 if (qFood) {
+                    const correctAnswer = formatFoodPairingsWithReasons(wine);
+                    const winesWithFood = otherWines.filter(w => w.foodPairings && w.foodPairings.length > 0);
+                    const wrongAnswers = shuffleArray(winesWithFood).slice(0, 4).map(w => formatFoodPairingsWithReasons(w));
+                    const options = shuffleArray([correctAnswer, ...wrongAnswers]);
                     questions.push({
                         wine: wineDisplay,
-                        question: "What foods pair well with this wine and why?",
-                        answer: formatFoodPairingsWithReasons(wine) + getPronunciationLine(wine),
-                        type: 'text'
+                        question: "What foods pair well with this wine?",
+                        answer: correctAnswer,
+                        type: 'multiple-choice',
+                        options: options
                     });
                 }
             });
@@ -7659,146 +7683,89 @@
             flashcardQueue = generateQuestions();
             correctCount = 0;
             incorrectCount = 0;
-            questionHistory = [];
-            historyIndex = -1;
-            isViewingHistory = false;
+            selectedAnswer = null;
             updateScore();
             nextQuizCard();
-            updatePrevButton();
         }
 
         function nextQuizCard() {
-            // If browsing history and going forward, advance through history
-            if (isViewingHistory && historyIndex < questionHistory.length - 1) {
-                historyIndex++;
-                showHistoryCard();
-                return;
-            }
-
-            // Exiting history mode -- return to live questions
-            isViewingHistory = false;
-            historyIndex = -1;
-
             if (flashcardQueue.length === 0) {
                 flashcardQueue = generateQuestions();
                 if (flashcardQueue.length === 0) {
                     document.getElementById('flashcardQuestion').textContent = "No questions selected!";
                     document.getElementById('flashcardWine').textContent = "Please select at least one question type above.";
-                    document.getElementById('flashcardAnswer').textContent = "";
                     document.getElementById('flashcardOptions').innerHTML = "";
                     document.getElementById('flashcardOptions').classList.remove('active');
-                    updatePrevButton();
+                    document.getElementById('flashcardHint').textContent = '';
                     return;
                 }
             }
 
-            // Push the previous card to history
-            if (currentCard && (questionHistory.length === 0 || questionHistory[questionHistory.length - 1] !== currentCard)) {
-                questionHistory.push(currentCard);
-            }
-
             currentCard = flashcardQueue.shift();
-            var flashcard = document.getElementById('flashcard');
-            var optionsContainer = document.getElementById('flashcardOptions');
-            var answerEl = document.getElementById('flashcardAnswer');
-            var hintEl = document.getElementById('flashcardHint');
+            selectedAnswer = null;
 
-            flashcard.classList.remove('revealed');
-            document.getElementById('btnContinue').style.display = 'none';
+            var optionsContainer = document.getElementById('flashcardOptions');
             document.getElementById('flashcardQuestion').textContent = currentCard.question;
             document.getElementById('flashcardWine').textContent = currentCard.wine;
+            document.getElementById('flashcardHint').textContent = 'Select an answer, then press Submit';
+            document.getElementById('btnSubmit').disabled = true;
+            document.getElementById('btnSubmit').style.display = 'inline-block';
+            document.getElementById('btnContinue').style.display = 'none';
 
-            if (currentCard.type === 'multiple-choice') {
-                // Multiple choice question
-                optionsContainer.classList.add('active');
-                optionsContainer.innerHTML = currentCard.options.map(function(option, idx) {
-                    return '<div class="flashcard-option" data-idx="' + idx + '" onclick="selectOption(this, \'' + encodeURIComponent(option) + '\')">' + option + '</div>';
-                }).join('');
-                answerEl.textContent = '';
-                hintEl.textContent = 'Select the correct answer above';
-            } else {
-                // Text answer question
-                optionsContainer.classList.remove('active');
-                optionsContainer.innerHTML = '';
-                answerEl.textContent = currentCard.answer;
-                hintEl.textContent = 'Click to reveal answer';
-            }
-            enableScoringButtons(true);
+            optionsContainer.classList.add('active');
+            optionsContainer.innerHTML = currentCard.options.map(function(option, idx) {
+                return '<div class="flashcard-option" data-idx="' + idx + '" onclick="selectOption(this, \'' + encodeURIComponent(option) + '\')">' + option + '</div>';
+            }).join('');
+
             updateScore();
-            updatePrevButton();
         }
 
-        // Track whether last multiple-choice answer was correct (for continue button)
-        let lastMCAnswerCorrect = false;
-
         function selectOption(element, encodedOption) {
-            const option = decodeURIComponent(encodedOption);
+            selectedAnswer = decodeURIComponent(encodedOption);
             const allOptions = document.querySelectorAll('.flashcard-option');
-            const isCorrect = option === currentCard.answer;
+            allOptions.forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            document.getElementById('btnSubmit').disabled = false;
+        }
 
-            // Disable further clicks
+        function submitAnswer() {
+            if (!selectedAnswer) return;
+
+            const isCorrect = selectedAnswer === currentCard.answer;
+            const allOptions = document.querySelectorAll('.flashcard-option');
+
+            // Lock options
             allOptions.forEach(opt => {
                 opt.onclick = null;
                 opt.style.cursor = 'default';
             });
 
-            // Mark selected option
-            element.classList.add('selected');
+            // Reveal correct and incorrect
+            allOptions.forEach(opt => {
+                if (opt.textContent === currentCard.answer) {
+                    opt.classList.add('correct-answer');
+                }
+                if (opt.classList.contains('selected') && !isCorrect) {
+                    opt.classList.add('incorrect');
+                }
+            });
 
             if (isCorrect) {
-                element.classList.add('correct');
-                document.getElementById('flashcardHint').textContent = 'Correct! Press Next Question to continue.';
-                lastMCAnswerCorrect = true;
+                correctCount++;
+                document.getElementById('flashcardHint').textContent = 'Correct!';
             } else {
-                element.classList.add('incorrect');
-                // Highlight the correct answer
-                allOptions.forEach(opt => {
-                    const optText = opt.textContent;
-                    if (optText === currentCard.answer) {
-                        opt.classList.add('correct-answer');
-                    }
-                });
-                document.getElementById('flashcardHint').textContent = 'Incorrect — read the correct answer, then press Next Question.';
-                lastMCAnswerCorrect = false;
+                incorrectCount++;
+                flashcardQueue.push(currentCard);
+                document.getElementById('flashcardHint').textContent = 'Incorrect — the correct answer is highlighted in green.';
             }
 
-            // Show the "Next Question" button instead of auto-advancing
+            selectedAnswer = null;
+            document.getElementById('btnSubmit').style.display = 'none';
             document.getElementById('btnContinue').style.display = 'inline-block';
+            updateScore();
         }
 
         function continueAfterAnswer() {
-            document.getElementById('btnContinue').style.display = 'none';
-            markAnswer(lastMCAnswerCorrect);
-        }
-
-        function handleFlashcardClick(event) {
-            // Only trigger reveal for text questions, not multiple choice
-            if (currentCard && currentCard.type !== 'multiple-choice') {
-                revealAnswer();
-            }
-        }
-
-        function revealAnswer() {
-            if (currentCard && currentCard.type !== 'multiple-choice') {
-                document.getElementById('flashcard').classList.add('revealed');
-            }
-        }
-
-        function markAnswer(correct) {
-            // Don't allow scoring when viewing history
-            if (isViewingHistory) return;
-
-            if (correct) {
-                correctCount++;
-            } else {
-                incorrectCount++;
-                // Add back to queue for review
-                flashcardQueue.push(currentCard);
-            }
-            // Record the answer result on the current card for history display
-            currentCard.wasAnswered = true;
-            currentCard.wasCorrect = correct;
-            updateScore();
             nextQuizCard();
         }
 
@@ -7813,96 +7780,8 @@
         }
 
         function resetQuiz() {
-            questionHistory = [];
-            historyIndex = -1;
-            isViewingHistory = false;
-            enableScoringButtons(true);
+            selectedAnswer = null;
             initializeFlashcards();
-        }
-
-        function prevQuizCard() {
-            if (questionHistory.length === 0) return;
-
-            // If not in history mode, save current card and enter history mode
-            if (!isViewingHistory) {
-                if (currentCard && (questionHistory.length === 0 || questionHistory[questionHistory.length - 1] !== currentCard)) {
-                    questionHistory.push(currentCard);
-                }
-                historyIndex = questionHistory.length - 2;
-                if (historyIndex < 0) historyIndex = 0;
-                isViewingHistory = true;
-            } else {
-                historyIndex = Math.max(0, historyIndex - 1);
-            }
-
-            showHistoryCard();
-        }
-
-        function showHistoryCard() {
-            var card = questionHistory[historyIndex];
-            if (!card) return;
-
-            var flashcard = document.getElementById('flashcard');
-            var optionsContainer = document.getElementById('flashcardOptions');
-            var answerEl = document.getElementById('flashcardAnswer');
-            var hintEl = document.getElementById('flashcardHint');
-
-            // Show the card with answer revealed
-            flashcard.classList.add('revealed');
-            document.getElementById('btnContinue').style.display = 'none';
-            document.getElementById('flashcardQuestion').textContent = card.question;
-            document.getElementById('flashcardWine').textContent = card.wine;
-
-            if (card.type === 'multiple-choice') {
-                optionsContainer.classList.add('active');
-                optionsContainer.innerHTML = card.options.map(function(option) {
-                    var classes = 'flashcard-option';
-                    if (option === card.answer) {
-                        classes += ' correct-answer';
-                    }
-                    return '<div class="' + classes + '" style="cursor:default;">' + option + '</div>';
-                }).join('');
-                answerEl.textContent = '';
-            } else {
-                optionsContainer.classList.remove('active');
-                optionsContainer.innerHTML = '';
-                answerEl.textContent = card.answer;
-            }
-
-            // Show result indicator
-            if (card.wasAnswered) {
-                hintEl.textContent = card.wasCorrect
-                    ? 'You got this correct (reviewing previous questions)'
-                    : 'You missed this one (reviewing previous questions)';
-            } else {
-                hintEl.textContent = 'Skipped (reviewing previous questions)';
-            }
-
-            // Disable scoring buttons when viewing history
-            enableScoringButtons(false);
-            updatePrevButton();
-        }
-
-        function updatePrevButton() {
-            var prevBtn = document.getElementById('btnPrev');
-            if (!prevBtn) return;
-
-            if (questionHistory.length === 0) {
-                prevBtn.disabled = true;
-            } else if (isViewingHistory && historyIndex <= 0) {
-                prevBtn.disabled = true;
-            } else {
-                prevBtn.disabled = false;
-            }
-        }
-
-        function enableScoringButtons(enabled) {
-            var btns = document.querySelectorAll('.btn-correct, .btn-incorrect, .btn-reveal');
-            for (var i = 0; i < btns.length; i++) {
-                btns[i].disabled = !enabled;
-                btns[i].style.opacity = enabled ? '1' : '0.4';
-                btns[i].style.cursor = enabled ? 'pointer' : 'not-allowed';
-            }
         }
 
         // Re-initialize flashcards when settings change
