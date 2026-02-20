@@ -7688,7 +7688,9 @@
                 if (qGrape) {
                     const cleanWineName = removeGrapeFromName(wine.name);
                     const cleanWineDisplay = `${cleanWineName} ${wine.vintage}`;
-                    const wrongAnswers = shuffleArray(otherWines).slice(0, 4).map(w => w.grape);
+                    const wrongAnswers = shuffleArray(
+                        [...new Set(otherWines.map(w => w.grape))].filter(g => g !== wine.grape)
+                    ).slice(0, 4);
                     const options = shuffleArray([wine.grape, ...wrongAnswers]);
                     questions.push({
                         wine: cleanWineDisplay,
@@ -7721,7 +7723,17 @@
                         const wrongDisplay = w.region + ', ' + w.country;
                         return !correctDisplay.includes(wrongDisplay) && !wrongDisplay.includes(correctDisplay);
                     });
-                    const allOptionData = shuffleArray([correctOptionData, ...shuffleArray(eligibleOtherWines).slice(0, 4).map(buildRegionOption)]);
+                    const seenValues = new Set([correctOptionData.value]);
+                    const uniqueWrongOptions = [];
+                    for (const w of shuffleArray(eligibleOtherWines)) {
+                        const opt = buildRegionOption(w);
+                        if (!seenValues.has(opt.value)) {
+                            seenValues.add(opt.value);
+                            uniqueWrongOptions.push(opt);
+                            if (uniqueWrongOptions.length === 4) break;
+                        }
+                    }
+                    const allOptionData = shuffleArray([correctOptionData, ...uniqueWrongOptions]);
                     const options = allOptionData.map(o => o.value);
                     const displayOptions = allOptionData.map(o => o.display);
                     // If the wine name reveals the region/appellation, hide those words until answered
@@ -7770,7 +7782,9 @@
                     });
                 }
                 if (qTasting) {
-                    const wrongAnswers = shuffleArray(otherWines).slice(0, 4).map(w => w.tasting);
+                    const wrongAnswers = shuffleArray(
+                        [...new Set(otherWines.map(w => w.tasting))].filter(t => t !== wine.tasting)
+                    ).slice(0, 4);
                     const options = shuffleArray([wine.tasting, ...wrongAnswers]);
                     questions.push({
                         wine: wineDisplay,
