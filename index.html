@@ -928,6 +928,7 @@
         /* Quick Reference Table - Light Theme */
         .quick-ref {
             overflow-x: auto;
+            margin-bottom: 1.5rem;
         }
 
         .quick-ref table {
@@ -4963,42 +4964,30 @@
                 <button class="filter-btn other" onclick="filterBeers('other', this)">Other</button>
             </div>
 
-            <div class="beer-grid" id="beerGrid">
-                <!-- Beer cards will be inserted here by JavaScript -->
+            <div id="beerGrid">
+                <!-- Beer table will be inserted here by JavaScript -->
             </div>
         </section>
 
         <!-- Food Menu Section -->
         <section id="food">
             <h2 class="food-section-title">Cheese Selection</h2>
-            <div class="food-grid" id="cheeseGrid">
-                <!-- Cheese cards inserted by JavaScript -->
-            </div>
+            <div id="cheeseGrid"></div>
 
             <h2 class="food-section-title">Charcuterie</h2>
-            <div class="food-grid" id="charcuterieGrid">
-                <!-- Charcuterie cards inserted by JavaScript -->
-            </div>
+            <div id="charcuterieGrid"></div>
 
             <h2 class="food-section-title">Flatbreads</h2>
-            <div class="food-grid" id="flatbreadGrid">
-                <!-- Flatbread cards inserted by JavaScript -->
-            </div>
+            <div id="flatbreadGrid"></div>
 
             <h2 class="food-section-title">Tapas & Dips</h2>
-            <div class="food-grid" id="tapasGrid">
-                <!-- Tapas cards inserted by JavaScript -->
-            </div>
+            <div id="tapasGrid"></div>
 
             <h2 class="food-section-title">Pate & Spreads</h2>
-            <div class="food-grid" id="pateGrid">
-                <!-- Pate cards inserted by JavaScript -->
-            </div>
+            <div id="pateGrid"></div>
 
             <h2 class="food-section-title">Desserts</h2>
-            <div class="food-grid" id="dessertGrid">
-                <!-- Dessert cards inserted by JavaScript -->
-            </div>
+            <div id="dessertGrid"></div>
         </section>
 
         <!-- Food Pairings Section -->
@@ -7144,26 +7133,26 @@
 
         function renderFoodCategory(gridId, items, category) {
             const grid = document.getElementById(gridId);
-            grid.innerHTML = items.map(item => `
-                <div class="food-card ${category}">
-                    <div class="food-card-header">
-                        <h3>${item.name}</h3>
-                        <div class="food-price">${item.price}</div>
-                        ${item.origin ? `<div class="food-origin">${item.origin}</div>` : ''}
-                    </div>
-                    <div class="food-card-body">
-                        <div class="food-type">${item.type}</div>
-                        ${item.pronunciation ? `<div class="food-pronunciation">"${item.pronunciation}"</div>` : ''}
-                        <div class="food-description">${item.description}</div>
-                        ${item.pairings ? `
-                        <div class="wine-pairings">
-                            <div class="wine-pairings-label">Wine Pairings</div>
-                            <div class="wine-pairings-list">${item.pairings}</div>
-                        </div>
-                        ` : ''}
-                    </div>
-                </div>
-            `).join('');
+            const hasOrigin = items.some(i => i.origin);
+            grid.innerHTML = '<div class="quick-ref"><table>' +
+                '<thead><tr>' +
+                '<th>Item</th>' +
+                '<th>Price</th>' +
+                '<th>Type</th>' +
+                (hasOrigin ? '<th>Origin</th>' : '') +
+                '<th>Description</th>' +
+                '</tr></thead>' +
+                '<tbody>' +
+                items.map(item => `
+                    <tr class="${category}">
+                        <td><strong>${item.name}</strong>${item.pronunciation ? `<br><small style="color:#888;">"${item.pronunciation}"</small>` : ''}</td>
+                        <td>${item.price}</td>
+                        <td>${item.type}</td>
+                        ${hasOrigin ? `<td>${item.origin || '—'}</td>` : ''}
+                        <td>${item.description}</td>
+                    </tr>
+                `).join('') +
+                '</tbody></table></div>';
         }
 
         // Print Cards - selective printing
@@ -7495,37 +7484,25 @@
         // Render Beer Cards
         function renderBeerCards() {
             const grid = document.getElementById('beerGrid');
-
-            grid.innerHTML = beers.map(beer => `
-                <div class="beer-card ${beer.type}" data-type="${beer.type}">
-                    <div class="beer-card-header">
-                        <h3>${beer.name}</h3>
-                        <div class="style-abv">${beer.style} | ${beer.abv}</div>
-                        <div class="brewery">${beer.brewery}</div>
-                    </div>
-                    <div class="beer-card-body">
-                        <div class="beer-detail">
-                            <div class="beer-detail-label">Location</div>
-                            <div class="beer-detail-value">${beer.location}</div>
-                        </div>
-                        <div class="beer-detail">
-                            <div class="beer-detail-label">Technical Details</div>
-                            <div class="beer-specs">
-                                <div class="beer-spec"><span class="beer-spec-label">ABV:</span> ${beer.abv}</div>
-                                <div class="beer-spec"><span class="beer-spec-label">Body:</span> ${beer.body}</div>
-                            </div>
-                        </div>
-                        <div class="beer-detail">
-                            <div class="beer-detail-label">Tasting Notes</div>
-                            <div class="beer-detail-value">${beer.tasting}</div>
-                        </div>
-                        <div class="beer-detail">
-                            <div class="beer-detail-label">About</div>
-                            <div class="beer-detail-value">${beer.notes}</div>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
+            grid.innerHTML = '<div class="quick-ref"><table>' +
+                '<thead><tr>' +
+                '<th>Beer</th>' +
+                '<th>Style</th>' +
+                '<th>ABV / Body</th>' +
+                '<th>Tasting Notes</th>' +
+                '<th>About</th>' +
+                '</tr></thead>' +
+                '<tbody>' +
+                beers.map(beer => `
+                    <tr data-type="${beer.type}">
+                        <td><strong>${beer.name}</strong><br><small style="color:#888;">${beer.brewery} — ${beer.location}</small></td>
+                        <td><span class="type-badge ${beer.type}">${beer.style}</span></td>
+                        <td>${beer.abv}<br><small style="color:#888;">${beer.body}</small></td>
+                        <td>${beer.tasting}</td>
+                        <td>${beer.notes}</td>
+                    </tr>
+                `).join('') +
+                '</tbody></table></div>';
         }
 
         // Filter Beers
@@ -7533,12 +7510,8 @@
             document.querySelectorAll('#beerlist .filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            document.querySelectorAll('.beer-card').forEach(card => {
-                if (type === 'all' || card.dataset.type === type) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
+            document.querySelectorAll('#beerGrid tr[data-type]').forEach(row => {
+                row.style.display = (type === 'all' || row.dataset.type === type) ? '' : 'none';
             });
         }
 
