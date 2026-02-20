@@ -7715,11 +7715,21 @@
                     const wrongAnswers = shuffleArray(eligibleOtherWines).slice(0, 4).map(w => w.region + ', ' + w.country + ' — ' + w.appellation);
                     const options = shuffleArray([correctAnswer, ...wrongAnswers]);
                     const displayOptions = options.map(opt => opt.split(' — ')[0]);
-                    // If the wine name contains the region name, hide that part until answered
+                    // If the wine name reveals the region/appellation, hide those words until answered
                     const regionPrefix = wine.region.split(',')[0].trim();
-                    const wineNameGivesRegion = wine.name.includes(regionPrefix);
-                    const displayWine = wineNameGivesRegion
-                        ? wine.name.replace(regionPrefix, '').replace(/^\s*[-–—\s]+/, '').trim() + ' ' + wine.vintage
+                    const appellationBase = wine.appellation.replace(/\s+(DOCG|DOC|AOC|AOP|DO|PDO|QbA|AVA|DOP|IGT)\b.*$/i, '').trim();
+                    // Strip longer phrases first to avoid partial replacements leaving fragments (e.g. "d'")
+                    const giveawayPhrases = [...new Set([appellationBase, regionPrefix])].filter(Boolean);
+                    giveawayPhrases.sort((a, b) => b.length - a.length);
+                    let displayWineName = wine.name;
+                    giveawayPhrases.forEach(phrase => {
+                        if (displayWineName.includes(phrase)) {
+                            displayWineName = displayWineName.replace(phrase, '').trim();
+                        }
+                    });
+                    displayWineName = displayWineName.replace(/[''\-\s]+$/, '').replace(/\s+/g, ' ').trim();
+                    const displayWine = (displayWineName && displayWineName !== wine.name)
+                        ? displayWineName + ' ' + wine.vintage
                         : null;
                     questions.push({
                         wine: wineDisplay,
@@ -7805,14 +7815,14 @@
             optionsContainer.classList.add('active');
             optionsContainer.innerHTML = currentCard.options.map(function(option, idx) {
                 const displayText = currentCard.displayOptions ? currentCard.displayOptions[idx] : option;
-                return '<div class="flashcard-option" data-idx="' + idx + '" data-full="' + encodeURIComponent(option) + '" onclick="selectOption(this, \'' + encodeURIComponent(option) + '\')">' + displayText + '</div>';
+                return '<div class="flashcard-option" data-idx="' + idx + '" data-full="' + encodeURIComponent(option) + '" onclick="selectOption(this)">' + displayText + '</div>';
             }).join('');
 
             updateScore();
         }
 
-        function selectOption(element, encodedOption) {
-            selectedAnswer = decodeURIComponent(encodedOption);
+        function selectOption(element) {
+            selectedAnswer = decodeURIComponent(element.dataset.full || '');
             const allOptions = document.querySelectorAll('.flashcard-option');
             allOptions.forEach(opt => opt.classList.remove('selected'));
             element.classList.add('selected');
@@ -8515,7 +8525,8 @@
                 { word: 'Côtes du Rhône', phonetic: 'koht doo ROHN' },
                 { word: 'Château', phonetic: 'shah-TOH' },
                 { word: 'Delle Venezie', phonetic: 'DEL-leh veh-NEH-tsee-eh' },
-                { word: 'Rheinhessen Selztal', phonetic: 'RINE-hess-en ZELTS-tahl' }
+                { word: 'Rheinhessen Selztal', phonetic: 'RINE-hess-en ZELTS-tahl' },
+                { word: 'Goriška Brda', phonetic: 'gor-ISH-kah BREE-dah' }
             ];
             groups.push({ title: 'Common Wine Terms', items: wineTerms });
 
