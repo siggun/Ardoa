@@ -925,6 +925,22 @@
             accent-color: var(--burgundy);
         }
 
+        /* Responsive table/card toggle for beer list and food menu */
+        .list-table-view { display: block; }
+        .list-card-view { display: none; }
+
+        @media (max-width: 768px) {
+            .list-table-view { display: none; }
+            .list-card-view {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 1rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .list-card-view { grid-template-columns: 1fr; }
+        }
+
         /* Quick Reference Table - Light Theme */
         .quick-ref {
             overflow-x: auto;
@@ -7134,7 +7150,7 @@
         function renderFoodCategory(gridId, items, category) {
             const grid = document.getElementById(gridId);
             const hasOrigin = items.some(i => i.origin);
-            grid.innerHTML = '<div class="quick-ref"><table>' +
+            const tableHTML = '<div class="list-table-view"><div class="quick-ref"><table>' +
                 '<thead><tr>' +
                 '<th>Item</th>' +
                 '<th>Price</th>' +
@@ -7152,7 +7168,24 @@
                         <td>${item.description}</td>
                     </tr>
                 `).join('') +
-                '</tbody></table></div>';
+                '</tbody></table></div></div>';
+            const cardsHTML = '<div class="list-card-view">' +
+                items.map(item => `
+                    <div class="food-card ${category}">
+                        <div class="food-card-header">
+                            <h3>${item.name}</h3>
+                            <div class="food-price">${item.price}</div>
+                            ${item.origin ? `<div class="food-origin">${item.origin}</div>` : ''}
+                        </div>
+                        <div class="food-card-body">
+                            <div class="food-type">${item.type}</div>
+                            <div class="food-description">${item.description}</div>
+                        </div>
+                    </div>
+                `).join('') +
+                '</div>';
+            grid.innerHTML = tableHTML + cardsHTML;
+            forceRepaint(grid);
         }
 
         // Print Cards - selective printing
@@ -7484,7 +7517,7 @@
         // Render Beer Cards
         function renderBeerCards() {
             const grid = document.getElementById('beerGrid');
-            grid.innerHTML = '<div class="quick-ref"><table>' +
+            const tableHTML = '<div class="list-table-view"><div class="quick-ref"><table>' +
                 '<thead><tr>' +
                 '<th>Beer</th>' +
                 '<th>Style</th>' +
@@ -7502,7 +7535,34 @@
                         <td>${beer.notes}</td>
                     </tr>
                 `).join('') +
-                '</tbody></table></div>';
+                '</tbody></table></div></div>';
+            const cardsHTML = '<div class="list-card-view">' +
+                beers.map(beer => `
+                    <div class="beer-card ${beer.type}" data-type="${beer.type}">
+                        <div class="beer-card-header">
+                            <h3>${beer.name}</h3>
+                            <div class="brewery">${beer.brewery} — ${beer.location}</div>
+                            <div class="style-abv">${beer.style}</div>
+                        </div>
+                        <div class="beer-card-body">
+                            <div class="beer-detail">
+                                <div class="beer-detail-label">Tasting Notes</div>
+                                <div class="beer-detail-value">${beer.tasting}</div>
+                            </div>
+                            <div class="beer-detail">
+                                <div class="beer-detail-label">About</div>
+                                <div class="beer-detail-value">${beer.notes}</div>
+                            </div>
+                            <div class="beer-specs">
+                                <div class="beer-spec"><span class="beer-spec-label">ABV</span> ${beer.abv}</div>
+                                <div class="beer-spec"><span class="beer-spec-label">Body</span> ${beer.body}</div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('') +
+                '</div>';
+            grid.innerHTML = tableHTML + cardsHTML;
+            forceRepaint(grid);
         }
 
         // Filter Beers
@@ -7512,6 +7572,9 @@
 
             document.querySelectorAll('#beerGrid tr[data-type]').forEach(row => {
                 row.style.display = (type === 'all' || row.dataset.type === type) ? '' : 'none';
+            });
+            document.querySelectorAll('#beerGrid .beer-card[data-type]').forEach(card => {
+                card.style.display = (type === 'all' || card.dataset.type === type) ? '' : 'none';
             });
         }
 
