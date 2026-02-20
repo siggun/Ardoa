@@ -673,8 +673,9 @@
         }
 
         .flashcard-option.selected {
-            border-color: var(--burgundy);
-            background: rgba(114, 47, 55, 0.1);
+            border-color: #c4a875;
+            background: rgba(196, 168, 117, 0.15);
+            box-shadow: 0 0 0 2px rgba(196, 168, 117, 0.3);
         }
 
         .flashcard-option.correct {
@@ -4466,6 +4467,12 @@
             border-color: rgba(196, 168, 117, 0.4);
         }
 
+        [data-theme="dark"] .flashcard-option.selected {
+            border-color: #c4a875;
+            background: rgba(196, 168, 117, 0.12);
+            box-shadow: 0 0 0 2px rgba(196, 168, 117, 0.25);
+        }
+
         [data-theme="dark"] .flashcard-option.correct {
             border-color: #28a745;
             background: rgba(40, 167, 69, 0.2);
@@ -6005,6 +6012,7 @@
                 grape: "100% Barbera",
                 grapeDetail: "Barbera is Piedmont's workhorse grape - high acidity, low tannins, makes it incredibly food-friendly",
                 region: "Monferrato, Piedmont",
+                appellation: "Barbera del Monferrato DOC",
                 country: "Italy",
                 winemaker: "Ercole Wines - Named after Ercole (Hercules), referencing the strength and character of Piedmontese wines. This project focuses on bringing authentic Piedmontese varieties to a wider audience, working with local growers who practice sustainable viticulture in the rolling hills of Monferrato. The winery emphasizes minimal intervention and respecting traditional winemaking methods passed down through generations.",
                 tasting: "Bright cherry (morello), raspberry, dried herbs, hints of almond and black pepper. Medium body with high acidity, low tannins, and a refreshing, tangy finish.",
@@ -6028,6 +6036,7 @@
                 grape: "70% Merlot, 30% Cabernet Franc",
                 grapeDetail: "Right Bank Bordeaux style with Merlot dominant. Cabernet Franc adds structure and herbal complexity.",
                 region: "Bordeaux Supérieur",
+                appellation: "Bordeaux Supérieur AOC",
                 country: "France",
                 winemaker: "Château Roc Meynard - A historic family estate in the Bordeaux Supérieur appellation, located in the commune of Saint-Seurin-de-Bourg on the Right Bank. The property has been family-owned for five generations, practicing sustainable viticulture on prized clay-limestone soils that provide excellent drainage. The château ages its wines in a combination of French oak barrels and concrete tanks to preserve fruit purity while adding subtle complexity.",
                 tasting: "Red fruits (raspberry, red currant), plum, subtle earthy notes (wet stone), gentle oak, hints of herbs and cedar. Medium body with soft, approachable tannins.",
@@ -6051,6 +6060,7 @@
                 grape: "100% Pinot Noir",
                 grapeDetail: "Cool-climate Pinot Noir from the Finger Lakes—elegant, Burgundian in style, from a LEED Gold-certified estate run by a UC Davis grape geneticist.",
                 region: "Finger Lakes",
+                appellation: "Seneca Lake AVA",
                 country: "USA",
                 winemaker: "Nancy Irelan & Mike Schnelle — Nancy holds a PhD in grape genetics from UC Davis (studied under Dr. Carole Meredith, who discovered Cabernet Sauvignon's parentage). She spent 12 years at E&J Gallo rising to VP of Viticulture & Enology R&D before leaving to start Red Tail Ridge on Seneca Lake's western shore. James Beard Award semifinalist. Mike manages the 35-acre estate vineyard with sustainable practices. Their winery was the first LEED Gold-certified in New York State, powered by geothermal energy.",
                 tasting: "Red cherry, raspberry, and rhubarb on the nose. Deep plum and cassis framed by rose petal and spice on the palate. Violet and anise mid-palate with vanilla and smoke on the finish. Light to medium body, silky tannins, bright Finger Lakes acidity. Burgundian elegance.",
@@ -6074,6 +6084,7 @@
                 grape: "100% Montepulciano",
                 grapeDetail: "NOT to be confused with Vino Nobile di Montepulciano (which uses Sangiovese from Tuscany). This is the Montepulciano GRAPE from Abruzzo.",
                 region: "Abruzzo",
+                appellation: "Montepulciano d'Abruzzo DOC",
                 country: "Italy",
                 winemaker: "Colle Corviano - Part of the Fantini Group (Farnese Vini), one of Abruzzo's most awarded and respected wine producers. Founded in 1994, the Fantini Group has become a benchmark for quality Abruzzo wines, working with over 500 local growers across the region. Their philosophy combines modern winemaking technology with respect for traditional Abruzzese varieties. The vineyards benefit from both Adriatic Sea breezes and the protective Apennine Mountains.",
                 tasting: "Dark cherry, plum, dried herbs (oregano, thyme), earthy notes, hint of black pepper. Medium to full body with moderate tannins and good acidity.",
@@ -6097,6 +6108,7 @@
                 grape: "100% Mencía",
                 grapeDetail: "Mencía is Spain's answer to Pinot Noir - elegant, aromatic, with bright acidity. Native to Galicia and Bierzo.",
                 region: "Ribeira Sacra",
+                appellation: "Ribeira Sacra DO",
                 country: "Spain",
                 winemaker: "Bodegas Massimo - A small, passionate producer farming some of Europe's most dramatic vineyards in Ribeira Sacra. The steep terraced hillsides along the Sil River canyon (slopes up to 60°!) require all work to be done by hand—no tractors can navigate these ancient stone terraces. Many vines are over 80 years old, their roots digging deep into the slate and granite soils. The winery practices sustainable viticulture and focuses exclusively on indigenous Galician varieties.",
                 tasting: "Fresh red berries (raspberry, redcurrant), violets, slate minerality, hints of herbs and wet stone. Medium body with vibrant acidity and fine tannins.",
@@ -6120,6 +6132,7 @@
                 grape: "100% Cabernet Sauvignon",
                 grapeDetail: "Cabernet Sauvignon is the world's most planted wine grape - known for structure, aging potential, and blackcurrant flavors.",
                 region: "Central Valley",
+                appellation: "Central Valley D.O.",
                 country: "Chile",
                 winemaker: "Viña Orsa - A Chilean producer in the fertile Central Valley, crafting approachable, fruit-forward wines at excellent value. Chile's wine industry boomed in the 1990s as international winemakers discovered its ideal climate and phylloxera-free vines. The Central Valley's hot days and cool nights (thanks to Andes mountain breezes and Pacific Ocean fog) allow grapes to develop rich flavors while retaining balancing acidity. Orsa focuses on clean, modern winemaking to highlight pure fruit expression.",
                 tasting: "Blackcurrant, dark cherry, hints of bell pepper and eucalyptus. Medium to full body with smooth tannins and a clean finish.",
@@ -6143,6 +6156,7 @@
                 grape: "100% Cabernet Franc",
                 grapeDetail: "Locally called 'Breton' - Cabernet Franc is THE grape of the Loire reds",
                 region: "Bourgueil, Loire Valley",
+                appellation: "Bourgueil AOC",
                 country: "France",
                 pronunciation: "lay PAN lay roh-SHET boor-GUH-yuh",
                 winemaker: "Domaine Les Pins - A small family estate in the heart of Bourgueil, run with passion and attention to terroir expression. 'Les Rochettes' is their prized single-vineyard parcel on rocky, well-drained soils that stress the vines and concentrate flavors. The family practices lutte raisonnée (sustainable farming), avoiding pesticides whenever possible and hand-harvesting all grapes. Fermentation uses natural yeasts, and the wine sees minimal oak to preserve the pure Cabernet Franc character.",
@@ -6167,6 +6181,7 @@
                 grape: "Carinyena (Carignan) 60%, Garnatxa Negra (Grenache) 40%",
                 grapeDetail: "The two native grapes of Priorat, grown on old vines (10-60+ years) across 22 separate vineyard plots in the village of Porrera.",
                 region: "Priorat DOQ",
+                appellation: "DOQ Priorat / Vi de Vila Porrera",
                 country: "Spain",
                 pronunciation: "SEEMS deh poh-REH-rah VEE deh VEE-lah pree-oh-RAHT",
                 winemaker: "Cims de Porrera — Founded in 1996 by Josep Lluís Pérez (one of Priorat's five original pioneers who revived the region in the 1980s, also of Mas Martinet) and Lluís Llach (legendary Catalan singer-songwriter whose protest song 'L'Estaca' became an anthem of resistance against Franco). Now run by second-generation cousins Adrià and Marc Pérez. The winery partners with 18 cooperative growers to rescue ancient vines on extreme 40-60% gradient slate slopes. Hand-harvest only. Native yeast fermentation.",
@@ -6191,6 +6206,7 @@
                 grape: "100% Pinot Grigio",
                 grapeDetail: "Italian Pinot Grigio is typically fermented in steel for freshness. Same grape as French Pinot Gris but made in a lighter style.",
                 region: "Delle Venezie DOC, Veneto",
+                appellation: "Delle Venezie DOC",
                 country: "Italy",
                 pronunciation: "fah-MEE-lyah boh-ROHN",
                 pronunciationGuideOnly: true,
@@ -6216,6 +6232,7 @@
                 grape: "100% Sauvignon Blanc",
                 grapeDetail: "Pouilly-Fumé is always 100% Sauvignon Blanc - the 'Fumé' refers to the smoky/flinty character from silex soils, not oak.",
                 region: "Pouilly-Fumé, Loire Valley",
+                appellation: "Pouilly-Fumé AOC",
                 country: "France",
                 pronunciation: "poo-YEE foo-MAY deh-ZAH",
                 winemaker: "Domaine Dezat - A multi-generational family estate in Pouilly-sur-Loire, with roots going back several centuries. The Dezat family owns prime vineyard parcels on the famous silex (flint) soils that give Pouilly-Fumé its distinctive smoky minerality. They practice sustainable viticulture, hand-harvest their grapes, and ferment in temperature-controlled stainless steel to preserve the wine's crystalline purity. The family motto: let the terroir speak through the wine.",
@@ -6240,6 +6257,7 @@
                 grape: "Grenache 40%, Cinsault 35%, Mourvèdre 15%, Syrah 10%",
                 grapeDetail: "Classic Provence rosé blend of four traditional grape varieties, direct-pressed for the characteristically pale, delicate Provençal style.",
                 region: "Côtes de Provence",
+                appellation: "Côtes de Provence AOC",
                 country: "France",
 
                 winemaker: "Château La Mascaronne — Owned by Michel Reybier (who also owns Cos d'Estournel, a Second Growth Bordeaux). NBA legend Tony Parker partnered as winemaker-ambassador in 2022 and co-created the Folly cuvée. Technical Director Nathalie Longefay oversees organic viticulture and winemaking. The estate was previously owned by American Tom Bove, who also formerly owned Château Miraval (later sold to Brad Pitt & Angelina Jolie for $60 million). Certified organic since 2016. Grapes hand-harvested at dawn and sorted twice before pressing.",
@@ -6264,6 +6282,7 @@
                 grape: "100% Chardonnay",
                 grapeDetail: "Santa Barbara County Chardonnay benefits from cool Pacific fog, creating a balanced style between rich Napa and lean Burgundy.",
                 region: "Santa Barbara County, California",
+                appellation: "Santa Maria Valley AVA",
                 country: "USA",
                 pronunciation: "press-KEEL",
                 winemaker: "Presqu'ile Winery - An acclaimed estate winery in California's Santa Maria Valley, founded by the Murphy family in 2007. The name is French for 'almost an island' (peninsula), reflecting the family's French heritage. They farm 73 acres of certified sustainable vineyards on a unique east-west running valley that funnels cool Pacific fog directly over the vines. Their focus is Burgundian varieties (Chardonnay, Pinot Noir) made with minimal intervention: native yeast fermentation, whole-cluster pressing, and judicious French oak aging.",
@@ -6288,6 +6307,7 @@
                 grape: "100% Chardonnay",
                 grapeDetail: "Chardonnay is the world's most popular white grape - versatile and expressive of terroir. This unoaked style showcases the grape's pure fruit character.",
                 region: "California",
+                appellation: "California AVA",
                 country: "USA",
                 winemaker: "My Story Wines - A California winery focused on crafting approachable, food-friendly wines that tell a story with every sip. Their philosophy emphasizes clean winemaking and letting the fruit speak for itself. The Chardonnay is fermented in stainless steel to preserve bright acidity and fresh fruit flavors, avoiding the heavy oak influence common in many California Chardonnays. The result is a crisp, refreshing wine perfect for everyday enjoyment.",
                 tasting: "Crisp green apple, ripe pear, citrus (lemon, grapefruit), subtle tropical notes (pineapple), and a hint of minerality. Medium-bodied with balanced acidity and a clean, refreshing finish.",
@@ -6311,6 +6331,7 @@
                 grape: "100% Albariño",
                 grapeDetail: "Albariño is Spain's premier white grape, from the rainy, green region of Galicia. Known for bright acidity and stone fruit.",
                 region: "Rías Baixas, Galicia",
+                appellation: "Rías Baixas DO / Val do Salnés",
                 country: "Spain",
                 pronunciation: "REE-ahs BY-shus",
                 winemaker: "Bodegas Marola - A small, artisan producer in the Val do Salnés subzone of Rías Baixas, considered the birthplace and heartland of Albariño. The winery farms old vines on decomposed granite soils just kilometers from the Atlantic Ocean, where the maritime influence creates morning fog and constant sea breezes. Traditionally, Albariño vines here are trained on pergolas (parrales) to lift grapes above the damp ground and prevent rot. The wines are fermented in stainless steel to preserve their bright, fresh character.",
@@ -6335,6 +6356,7 @@
                 grape: "100% Folle Blanche",
                 grapeDetail: "Folle Blanche is an ancient French grape, once dominant in Cognac before phylloxera. Now thrives in the Loire, producing crisp, high-acid wines.",
                 region: "Loire Valley",
+                appellation: "Gros Plant du Pays Nantais AOP",
                 country: "France",
                 pronunciation: "zhahn oh-BROHN fohl BLAHNSH",
                 winemaker: "Jean Aubron - A small-production Loire Valley estate dedicated to reviving the Folle Blanche grape. This ancient variety was once France's most planted white grape before phylloxera devastated vineyards in the 1800s. Today it's rare but prized for its bracing acidity and mineral character. The estate practices organic viticulture on chalky clay soils, fermenting in stainless steel to preserve the grape's pure, refreshing character.",
@@ -6359,6 +6381,7 @@
                 grape: "100% Scheurebe",
                 grapeDetail: "Scheurebe is a German crossing of Riesling and an unknown grape. Named after its creator Georg Scheu, it's aromatic with exotic fruit character.",
                 region: "Rheinhessen (Selztal)",
+                appellation: "Rheinhessen QbA",
                 country: "Germany",
                 pronunciation: "BROW-neh-vel OON-zer TAG-lish SHOY-ray-buh",
                 winemaker: "Weingut Braunewell - A family estate in the Selztal (Selz Valley) of Rheinhessen, Germany's largest and sunniest wine region. Run by the Braunewell family for generations, they specialize in aromatic white varieties. 'Unser Täglich' means 'Our Daily'—a philosophy that great wine should be affordable for everyday enjoyment. The vineyards sit on diverse soils including limestone and loess, and the winery practices sustainable viticulture with minimal intervention in the cellar to preserve aromatic freshness.",
@@ -6383,6 +6406,7 @@
                 grape: "100% Pinot Noir",
                 grapeDetail: "Pinot Noir is thin-skinned, resulting in lighter color but intense aromatics. Slovenia has a long winemaking tradition.",
                 region: "Goriška Brda",
+                appellation: "Goriška Brda PDO",
                 country: "Slovenia",
                 winemaker: "Krasno Wines - A quality-focused producer in Slovenia's premier wine region, Goriška Brda. The name 'Krasno' means 'beautiful' in Slovenian—fitting for this stunning hillside region that shares the same slopes as Italy's famous Collio. Slovenia has an ancient winemaking tradition dating back to Roman times, though it remained obscure during the communist era. Now free and thriving, Slovenian wines are gaining international acclaim. Krasno crafts elegant, European-style wines that emphasize finesse over power.",
                 tasting: "Red cherry, strawberry, earthy notes, hints of spice and dried herbs. Light to medium body with silky tannins and fresh acidity.",
@@ -6406,6 +6430,7 @@
                 grape: "100% Garnacha (Grenache)",
                 grapeDetail: "Garnatxa is the Catalan name for Grenache/Garnacha - Spain's most planted red grape, known for red fruit and spice.",
                 region: "Penedès (Font-Rubí)",
+                appellation: "Penedès DO",
                 country: "Spain",
                 winemaker: "Mont-Rubí S.A. - A family estate in L'Avella, Font-Rubí, in the heart of Catalonia's Penedès region. The winery has been certified organic since 2002, working with old Garnacha vines that produce small, concentrated berries. 'Meretat' means 'deserved' or 'earned' in Catalan—reflecting the hard work of organic farming. The high-altitude vineyards (400-600m) experience dramatic day-night temperature swings that preserve acidity while building ripe fruit character. Mont-Rubí is part of the new wave of quality-focused Catalan producers.",
                 tasting: "Ripe red berries (raspberry, strawberry), Mediterranean herbs, hints of white pepper and garrigue. Medium body with soft tannins and a warm finish.",
@@ -6429,6 +6454,7 @@
                 grape: "100% Frappato",
                 grapeDetail: "Frappato is a light, aromatic Sicilian grape - often blended in Cerasuolo di Vittoria but delicious on its own.",
                 region: "Sicily",
+                appellation: "Sicilia DOC",
                 country: "Italy",
                 winemaker: "Gorghi Tondi - An organic estate in western Sicily. 'Dume' means 'two' in Sicilian dialect, honoring the two founding families who established the estate. Located near the ancient town of Marsala, the vineyards benefit from constant sea breezes that keep vines healthy without chemicals. Gorghi Tondi is passionate about reviving Sicily's indigenous grape varieties, believing they best express the island's sun-drenched Mediterranean character. All wines are certified organic.",
                 tasting: "Fresh red cherry, wild strawberry, rose petals, hints of herbs and Mediterranean scrub. Light body with bright acidity and silky texture.",
@@ -6452,6 +6478,7 @@
                 grape: "Grenache, Carignan, Cabernet Sauvignon blend",
                 grapeDetail: "A bold Priorat-style blend from the rising Montsant region, combining power with Mediterranean character.",
                 region: "Montsant",
+                appellation: "Montsant DO",
                 country: "Spain",
                 winemaker: "Marc and Adrià Pérez - Two brothers who created Les Cousins as a passion project with their cousin Gerard while working at their family's main estate, Celler Mas Alta. L'Inconscient ('The Unconscious') represents their philosophy: wines made from intuition and heart, not calculation or market trends. They farm old-vine Grenache and Carignan on the steep slate slopes of Montsant, hand-harvesting everything and using traditional cement and clay amphora fermentation. The wines are bold, authentic, and unapologetically powerful.",
                 tasting: "Dark fruits (blackberry, plum), Mediterranean herbs, licorice, mineral notes from slate soils. Full-bodied with firm tannins and a long, spicy finish.",
@@ -6475,6 +6502,7 @@
                 grape: "100% Tempranillo",
                 grapeDetail: "Tempranillo is Spain's noble grape - the backbone of Rioja and Ribera del Duero, known for cherry fruit and aging potential.",
                 region: "Castilla-La Mancha",
+                appellation: "Castilla-La Mancha DO",
                 country: "Spain",
                 winemaker: "Encomienda de Cervera - A historic estate in Castilla-La Mancha, taking its name from an ancient 'encomienda' (medieval land grant from the Spanish crown). The estate dates back centuries and now produces modern, accessible wines from Spain's vast central plateau. 'Horten' refers to their prized garden vineyard parcels, where old-vine Tempranillo grows on chalky, limestone-rich soils. The extreme continental climate (scorching summers, cold winters) stresses vines naturally, concentrating flavors without irrigation.",
                 tasting: "Red cherry, plum, leather, hints of vanilla and tobacco. Medium to full body with moderate tannins and a smooth finish.",
@@ -6498,6 +6526,7 @@
                 grape: "95% Sangiovese, 5% Merlot",
                 grapeDetail: "Chianti Classico requires minimum 80% Sangiovese. The Classico zone is the original, historic heart of Chianti.",
                 region: "Chianti Classico, Tuscany",
+                appellation: "Chianti Classico DOCG",
                 country: "Italy",
                 winemaker: "Rocca di Castagnoli - A historic estate in Gaiole in Chianti, one of Chianti Classico's most prestigious sub-zones. The name means 'Fortress of the Chestnut Trees,' referencing the ancient castle and chestnut forests on the property. The estate dates back to the 10th century and spans 180 hectares at high elevation (400-500m), where cool nights preserve acidity and extend the growing season. They practice sustainable viticulture and use traditional large Slavonian oak barrels (botti) for aging, giving wines elegance rather than new-oak heaviness.",
                 tasting: "Red cherry, dried herbs (oregano, thyme), leather, earthy notes with hints of tobacco. Medium body with firm acidity and well-integrated tannins.",
@@ -6521,6 +6550,7 @@
                 grape: "100% Garnacha (Grenache)",
                 grapeDetail: "Old vine Garnacha from high-altitude Spanish vineyards, showing concentration and complexity.",
                 region: "Calatayud",
+                appellation: "Calatayud DO",
                 country: "Spain",
                 winemaker: "Bodegas Palmeri - A small, quality-driven producer in the mountainous Calatayud region of Aragón. They specialize in old-vine Garnacha, many plants over 50 years old, grown at extreme elevations (800-1000m) on slate and limestone soils. 'Navalta' comes from the Aragonese dialect. The harsh continental climate (scorching days, freezing nights) naturally limits yields and concentrates flavors. Despite Calatayud's ancient winemaking history (dating to Roman times), it only became a DO in 1989 and remains relatively undiscovered.",
                 tasting: "Ripe red and dark fruits (cherry, blackberry), spice, dried herbs, mineral notes. Full body with velvety tannins and a long, warm finish.",
@@ -6544,6 +6574,7 @@
                 grape: "Grenache 70%, Syrah 20%, Mourvèdre 10%",
                 grapeDetail: "Plan de Dieu is a named village within Côtes du Rhône Villages, known for powerful, concentrated wines from the 'Plain of God.'",
                 region: "Côtes du Rhône Villages Plan de Dieu",
+                appellation: "Côtes du Rhône Villages AOC",
                 country: "France",
                 pronunciation: "vair-kee-AIR plahn duh DYUH",
                 winemaker: "Domaine Verquière - A family estate in the Rhône Valley since 1960, now run by third-generation winemaker Louis Bernard. Located in the village of Sablet, they own prime parcels in the prestigious Plan de Dieu appellation. The estate practices sustainable viticulture on the plateau's famous galets roulés (large round stones) that store heat during the day and radiate it back at night. Fermentation uses traditional cement tanks and large oak foudres, with the goal of expressing pure terroir rather than winemaker intervention.",
@@ -6568,6 +6599,7 @@
                 grape: "100% Chardonnay",
                 grapeDetail: "Blanc de Blancs means 'white from whites' - made exclusively from white grapes (Chardonnay)",
                 region: "Jura",
+                appellation: "Crémant du Jura AOC",
                 country: "France",
                 pronunciation: "frahn-SWAH mon-TAHN blahn duh BLAHN",
                 winemaker: "François Montand - A family-owned producer in the Jura region of Eastern France, known for producing high-quality sparkling wines using traditional methods. The Jura sits in the foothills of the Alps, with unique terroir and a winemaking tradition dating back centuries.",
@@ -6590,6 +6622,7 @@
                 grape: "Chenin Blanc, Colombard",
                 grapeDetail: "Mexican sparkling wine blending Chenin Blanc's honeyed notes with Colombard's bright acidity",
                 region: "Valle de Guadalupe, Baja California",
+                appellation: "Valle de Guadalupe DO",
                 country: "Mexico",
                 winemaker: "L.A. Cetto - Mexico's largest and most acclaimed winery, founded in 1928 by Italian immigrant Angelo Cetto in the Valle de Guadalupe. Now run by the third generation, the winery has put Mexican wines on the international map, winning numerous awards for their quality and value.",
                 tasting: "Fresh pear, green apple, tropical hints, citrus zest. Light-bodied with lively bubbles, crisp acidity, and a clean refreshing finish.",
@@ -6611,6 +6644,7 @@
                 grape: "100% Glera",
                 grapeDetail: "Glera is the grape variety used in Prosecco - light, fruity, and refreshing",
                 region: "Veneto",
+                appellation: "Prosecco DOC",
                 country: "Italy",
 
                 winemaker: "Tiamo Wines - An organic Italian producer focused on sustainable, environmentally-friendly winemaking. Tiamo means 'I love you' in Italian, reflecting their love for the land and commitment to producing quality wines without harmful chemicals.",
@@ -6633,6 +6667,7 @@
                 grape: "100% Glera",
                 grapeDetail: "The signature grape of Italy's most popular sparkling wine",
                 region: "Veneto/Friuli Venezia Giulia",
+                appellation: "Prosecco DOC",
                 country: "Italy",
 
                 winemaker: "Traditional Italian producer from the Prosecco DOC region, which spans the Veneto and Friuli Venezia Giulia regions of northeastern Italy. The DOC designation ensures quality standards and regional authenticity.",
@@ -7137,6 +7172,7 @@
                         <div class="print-field">
                             <div class="print-label">Region / Country</div>
                             <div class="print-value">${wine.region}, ${wine.country}</div>
+                            <div class="print-value" style="font-size:0.85em;color:#666;">${wine.appellation}</div>
                         </div>
                         <div class="print-field">
                             <div class="print-label">Tasting Notes</div>
@@ -7372,6 +7408,7 @@
                         <div class="wine-detail">
                             <div class="wine-detail-label">Region</div>
                             <div class="wine-detail-value">${wine.region}, ${wine.country}</div>
+                            <div class="blend-detail">${wine.appellation}</div>
                         </div>
                         <div class="wine-detail">
                             <div class="wine-detail-label">Winemaker / Producer</div>
@@ -7489,7 +7526,7 @@
                     <td><strong>${wine.name}</strong> ${wine.vintage}</td>
                     <td><span class="type-badge ${wine.type}">${wine.type.charAt(0).toUpperCase() + wine.type.slice(1)}</span></td>
                     <td>${wine.grape}</td>
-                    <td>${wine.region}</td>
+                    <td>${wine.region}<br><small style="color:#888;">${wine.appellation}</small></td>
                     <td>${wine.country}</td>
                 </tr>
             `).join('');
@@ -7618,8 +7655,8 @@
                     });
                 }
                 if (qRegion) {
-                    const correctAnswer = wine.region + ', ' + wine.country;
-                    const wrongAnswers = shuffleArray(otherWines).slice(0, 4).map(w => w.region + ', ' + w.country);
+                    const correctAnswer = wine.region + ', ' + wine.country + ' — ' + wine.appellation;
+                    const wrongAnswers = shuffleArray(otherWines).slice(0, 4).map(w => w.region + ', ' + w.country + ' — ' + w.appellation);
                     const options = shuffleArray([correctAnswer, ...wrongAnswers]);
                     questions.push({
                         wine: wineDisplay,
@@ -7816,6 +7853,7 @@
                         { label: 'Type', value: wine.type.charAt(0).toUpperCase() + wine.type.slice(1) },
                         { label: 'Grape(s)', value: wine.grape },
                         { label: 'Region', value: wine.region },
+                        { label: 'Appellation', value: wine.appellation },
                         { label: 'Country', value: wine.country },
                         ...(wine.pronunciation && !wine.pronunciationGuideOnly ? [{ label: 'Pronunciation', value: wine.pronunciation }] : [])
                     ]
