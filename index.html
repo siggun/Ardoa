@@ -7730,10 +7730,14 @@
                     const options = allOptionData.map(o => o.value);
                     const displayOptions = allOptionData.map(o => o.display);
                     // If the wine name reveals the region/appellation, hide those words until answered
+                    const appellationSuffixRx = /\s+(DOCG|DOQ|DOC|AOC|AOP|DO|PDO|QbA|AVA|DOP|IGT)\b.*$/i;
                     const regionPrefix = wine.region.split(',')[0].trim();
-                    const appellationBase = wine.appellation.replace(/\s+(DOCG|DOC|AOC|AOP|DO|PDO|QbA|AVA|DOP|IGT)\b.*$/i, '').trim();
+                    // Also strip the appellation-type suffix from the region prefix itself
+                    // (e.g. "Priorat DOQ" → "Priorat") so bare region words in wine names are caught
+                    const bareRegion = regionPrefix.replace(appellationSuffixRx, '').trim();
+                    const appellationBase = wine.appellation.replace(appellationSuffixRx, '').trim();
                     // Strip longer phrases first to avoid partial replacements leaving fragments (e.g. "d'")
-                    const giveawayPhrases = [...new Set([appellationBase, regionPrefix])].filter(Boolean);
+                    const giveawayPhrases = [...new Set([appellationBase, regionPrefix, bareRegion])].filter(Boolean);
                     giveawayPhrases.sort((a, b) => b.length - a.length);
                     let displayWineName = wine.name;
                     giveawayPhrases.forEach(phrase => {
