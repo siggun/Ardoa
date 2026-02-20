@@ -2299,13 +2299,10 @@
             bottom: 0.5rem;
             font-size: 0.75rem;
             opacity: 0.6;
-            background: inherit;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
         }
 
         .flashcard-back .flashcard-hint {
-            background: white;
+            color: #666;
         }
 
         .flashcard-back .flashcard-info {
@@ -4502,7 +4499,8 @@
         }
 
         [data-theme="dark"] .flashcard-hint {
-            color: rgba(196, 168, 117, 0.6);
+            color: rgba(196, 168, 117, 0.85);
+            opacity: 1;
         }
 
         [data-theme="dark"] .flashcard-option {
@@ -5847,10 +5845,6 @@
                 </div>
             </div>
 
-            <div class="enomatic-cta">
-                <h3>Experience It at Ardoa</h3>
-                <p>Visit Ardoa Wine Bar to experience our Enomatic wine dispensing system firsthand. Explore 24 wines by the taste or glass, served at perfect temperature, and preserved to perfection.</p>
-            </div>
         </section>
 
         <!-- Printable Cards Section -->
@@ -6094,7 +6088,7 @@
             },
             // Position 3
             {
-                name: "Red Tail Ridge Pinot Noir RTR Estate Vineyard",
+                name: "Red Tail Ridge RTR Estate Vineyard",
                 vintage: "2019",
                 type: "red",
                 grape: "100% Pinot Noir",
@@ -7701,7 +7695,8 @@
                         question: "What grape(s) is this wine made from?",
                         answer: wine.grape,
                         type: 'multiple-choice',
-                        options: options
+                        options: options,
+                        pronunciation: wine.pronunciation || null
                     });
                 }
                 if (qRegion) {
@@ -7757,7 +7752,8 @@
                         type: 'multiple-choice',
                         options: options,
                         displayOptions: displayOptions,
-                        questionSubtype: 'region'
+                        questionSubtype: 'region',
+                        pronunciation: wine.pronunciation || null
                     });
                 }
                 if (qCountry) {
@@ -7769,7 +7765,8 @@
                         question: "What country is this wine from?",
                         answer: wine.country,
                         type: 'multiple-choice',
-                        options: options
+                        options: options,
+                        pronunciation: wine.pronunciation || null
                     });
                 }
                 if (qTasting) {
@@ -7780,7 +7777,8 @@
                         question: "Which tasting notes describe this wine?",
                         answer: wine.tasting,
                         type: 'multiple-choice',
-                        options: options
+                        options: options,
+                        pronunciation: wine.pronunciation || null
                     });
                 }
             });
@@ -7888,6 +7886,10 @@
                 incorrectCount++;
                 flashcardQueue.push(currentCard);
                 document.getElementById('flashcardHint').textContent = 'Incorrect — the correct answer is highlighted in green.';
+            }
+            if (currentCard.pronunciation) {
+                const hintEl = document.getElementById('flashcardHint');
+                hintEl.textContent += '  •  How to say it: ' + currentCard.pronunciation;
             }
 
             selectedAnswer = null;
