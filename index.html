@@ -6472,6 +6472,7 @@
                 region: "Penedès (Font-Rubí)",
                 appellation: "Penedès DO",
                 country: "Spain",
+                pronunciation: "gar-NACH-ah meh-reh-TAHT mon-roo-BEE",
                 winemaker: "Mont-Rubí S.A. - A family estate in L'Avella, Font-Rubí, in the heart of Catalonia's Penedès region. The winery has been certified organic since 2002, working with old Garnacha vines that produce small, concentrated berries. 'Meretat' means 'deserved' or 'earned' in Catalan—reflecting the hard work of organic farming. The high-altitude vineyards (400-600m) experience dramatic day-night temperature swings that preserve acidity while building ripe fruit character. Mont-Rubí is part of the new wave of quality-focused Catalan producers.",
                 tasting: "Ripe red berries (raspberry, strawberry), Mediterranean herbs, hints of white pepper and garrigue. Medium body with soft tannins and a warm finish.",
                 food: "Chorizo, Salchichon De Bellota, Ewephoria, Tapenade, Manchego",
@@ -6520,6 +6521,8 @@
                 region: "Montsant",
                 appellation: "Montsant DO",
                 country: "Spain",
+                pronunciation: "lay koo-ZAN laN-kohn-SYAHN",
+                pronunciationGuideOnly: true,
                 winemaker: "Marc and Adrià Pérez - Two brothers who created Les Cousins as a passion project with their cousin Gerard while working at their family's main estate, Celler Mas Alta. L'Inconscient ('The Unconscious') represents their philosophy: wines made from intuition and heart, not calculation or market trends. They farm old-vine Grenache and Carignan on the steep slate slopes of Montsant, hand-harvesting everything and using traditional cement and clay amphora fermentation. The wines are bold, authentic, and unapologetically powerful.",
                 tasting: "Dark fruits (blackberry, plum), Mediterranean herbs, licorice, mineral notes from slate soils. Full-bodied with firm tannins and a long, spicy finish.",
                 food: "Chorizo, Salchichon De Bellota, Ewephoria, Mimolette, The Mighty Spicy flatbread",
@@ -7702,15 +7705,55 @@
                     });
                 }
                 if (qRegion) {
-                    const correctAnswer = wine.region + ', ' + wine.country + ' — ' + wine.appellation;
-                    const wrongAnswers = shuffleArray(otherWines).slice(0, 4).map(w => w.region + ', ' + w.country + ' — ' + w.appellation);
-                    const options = shuffleArray([correctAnswer, ...wrongAnswers]);
+                    const correctDisplay = wine.region + ', ' + wine.country;
+                    // Build option data: { value: full answer (for comparison), display: pre-answer button text }
+                    // - If appellation is already contained in the region display string, don't append it
+                    //   (e.g. "Delle Venezie DOC, Veneto, Italy" already has "Delle Venezie DOC" — avoids duplication)
+                    // - If appellation starts the region display, hide it in the button until answered
+                    //   (e.g. show "Veneto, Italy" instead of "Delle Venezie DOC, Veneto, Italy" before revealing)
+                    const buildRegionOption = (w) => {
+                        const d = w.region + ', ' + w.country;
+                        const preDisplay = d.startsWith(w.appellation)
+                            ? d.slice(w.appellation.length).replace(/^[\s,]+/, '')
+                            : d;
+                        const fullAnswer = d.includes(w.appellation) ? d : d + ' — ' + w.appellation;
+                        return { value: fullAnswer, display: preDisplay };
+                    };
+                    const correctOptionData = buildRegionOption(wine);
+                    // Exclude wrong answers whose display text is a sub/superstring of the correct display
+                    // (e.g. "Loire Valley, France" inside "Pouilly-Fumé, Loire Valley, France")
+                    const eligibleOtherWines = otherWines.filter(w => {
+                        const wrongDisplay = w.region + ', ' + w.country;
+                        return !correctDisplay.includes(wrongDisplay) && !wrongDisplay.includes(correctDisplay);
+                    });
+                    const allOptionData = shuffleArray([correctOptionData, ...shuffleArray(eligibleOtherWines).slice(0, 4).map(buildRegionOption)]);
+                    const options = allOptionData.map(o => o.value);
+                    const displayOptions = allOptionData.map(o => o.display);
+                    // If the wine name reveals the region/appellation, hide those words until answered
+                    const regionPrefix = wine.region.split(',')[0].trim();
+                    const appellationBase = wine.appellation.replace(/\s+(DOCG|DOC|AOC|AOP|DO|PDO|QbA|AVA|DOP|IGT)\b.*$/i, '').trim();
+                    // Strip longer phrases first to avoid partial replacements leaving fragments (e.g. "d'")
+                    const giveawayPhrases = [...new Set([appellationBase, regionPrefix])].filter(Boolean);
+                    giveawayPhrases.sort((a, b) => b.length - a.length);
+                    let displayWineName = wine.name;
+                    giveawayPhrases.forEach(phrase => {
+                        if (displayWineName.includes(phrase)) {
+                            displayWineName = displayWineName.replace(phrase, '').trim();
+                        }
+                    });
+                    displayWineName = displayWineName.replace(/[''\-\s]+$/, '').replace(/\s+/g, ' ').trim();
+                    const displayWine = (displayWineName && displayWineName !== wine.name)
+                        ? displayWineName + ' ' + wine.vintage
+                        : null;
                     questions.push({
                         wine: wineDisplay,
+                        displayWine: displayWine || undefined,
                         question: "What region is this wine from?",
-                        answer: correctAnswer,
+                        answer: correctOptionData.value,
                         type: 'multiple-choice',
-                        options: options
+                        options: options,
+                        displayOptions: displayOptions,
+                        questionSubtype: 'region'
                     });
                 }
                 if (qCountry) {
@@ -7777,7 +7820,7 @@
 
             var optionsContainer = document.getElementById('flashcardOptions');
             document.getElementById('flashcardQuestion').textContent = currentCard.question;
-            document.getElementById('flashcardWine').textContent = currentCard.wine;
+            document.getElementById('flashcardWine').textContent = currentCard.displayWine || currentCard.wine;
             document.getElementById('flashcardHint').textContent = 'Select an answer, then press Submit';
             document.getElementById('btnSubmit').disabled = true;
             document.getElementById('btnSubmit').style.display = 'inline-block';
@@ -7785,14 +7828,15 @@
 
             optionsContainer.classList.add('active');
             optionsContainer.innerHTML = currentCard.options.map(function(option, idx) {
-                return '<div class="flashcard-option" data-idx="' + idx + '" onclick="selectOption(this, \'' + encodeURIComponent(option) + '\')">' + option + '</div>';
+                const displayText = currentCard.displayOptions ? currentCard.displayOptions[idx] : option;
+                return '<div class="flashcard-option" data-idx="' + idx + '" data-full="' + encodeURIComponent(option) + '" onclick="selectOption(this)">' + displayText + '</div>';
             }).join('');
 
             updateScore();
         }
 
-        function selectOption(element, encodedOption) {
-            selectedAnswer = decodeURIComponent(encodedOption);
+        function selectOption(element) {
+            selectedAnswer = decodeURIComponent(element.dataset.full || '');
             const allOptions = document.querySelectorAll('.flashcard-option');
             allOptions.forEach(opt => opt.classList.remove('selected'));
             element.classList.add('selected');
@@ -7811,9 +7855,21 @@
                 opt.style.cursor = 'default';
             });
 
+            // Reveal appellation text before coloring (region questions only)
+            if (currentCard.questionSubtype === 'region') {
+                allOptions.forEach(opt => {
+                    const full = decodeURIComponent(opt.dataset.full || '');
+                    if (full) opt.textContent = full;
+                });
+                if (currentCard.displayWine) {
+                    document.getElementById('flashcardWine').textContent = currentCard.wine;
+                }
+            }
+
             // Reveal correct and incorrect
             allOptions.forEach(opt => {
-                if (opt.textContent === currentCard.answer) {
+                const optValue = decodeURIComponent(opt.dataset.full || opt.textContent);
+                if (optValue === currentCard.answer) {
                     opt.classList.add('correct-answer');
                 }
                 if (opt.classList.contains('selected') && !isCorrect) {
@@ -8483,7 +8539,8 @@
                 { word: 'Côtes du Rhône', phonetic: 'koht doo ROHN' },
                 { word: 'Château', phonetic: 'shah-TOH' },
                 { word: 'Delle Venezie', phonetic: 'DEL-leh veh-NEH-tsee-eh' },
-                { word: 'Rheinhessen Selztal', phonetic: 'RINE-hess-en ZELTS-tahl' }
+                { word: 'Rheinhessen Selztal', phonetic: 'RINE-hess-en ZELTS-tahl' },
+                { word: 'Goriška Brda', phonetic: 'gor-ISH-kah BREE-dah' }
             ];
             groups.push({ title: 'Common Wine Terms', items: wineTerms });
 
