@@ -7705,12 +7705,15 @@
                     const correctAnswer = wine.region + ', ' + wine.country + ' — ' + wine.appellation;
                     const wrongAnswers = shuffleArray(otherWines).slice(0, 4).map(w => w.region + ', ' + w.country + ' — ' + w.appellation);
                     const options = shuffleArray([correctAnswer, ...wrongAnswers]);
+                    const displayOptions = options.map(opt => opt.split(' — ')[0]);
                     questions.push({
                         wine: wineDisplay,
                         question: "What region is this wine from?",
                         answer: correctAnswer,
                         type: 'multiple-choice',
-                        options: options
+                        options: options,
+                        displayOptions: displayOptions,
+                        questionSubtype: 'region'
                     });
                 }
                 if (qCountry) {
@@ -7785,7 +7788,8 @@
 
             optionsContainer.classList.add('active');
             optionsContainer.innerHTML = currentCard.options.map(function(option, idx) {
-                return '<div class="flashcard-option" data-idx="' + idx + '" onclick="selectOption(this, \'' + encodeURIComponent(option) + '\')">' + option + '</div>';
+                const displayText = currentCard.displayOptions ? currentCard.displayOptions[idx] : option;
+                return '<div class="flashcard-option" data-idx="' + idx + '" data-full="' + encodeURIComponent(option) + '" onclick="selectOption(this, \'' + encodeURIComponent(option) + '\')">' + displayText + '</div>';
             }).join('');
 
             updateScore();
@@ -7811,9 +7815,18 @@
                 opt.style.cursor = 'default';
             });
 
+            // Reveal appellation text before coloring (region questions only)
+            if (currentCard.questionSubtype === 'region') {
+                allOptions.forEach(opt => {
+                    const full = decodeURIComponent(opt.dataset.full || '');
+                    if (full) opt.textContent = full;
+                });
+            }
+
             // Reveal correct and incorrect
             allOptions.forEach(opt => {
-                if (opt.textContent === currentCard.answer) {
+                const optValue = decodeURIComponent(opt.dataset.full || opt.textContent);
+                if (optValue === currentCard.answer) {
                     opt.classList.add('correct-answer');
                 }
                 if (opt.classList.contains('selected') && !isCorrect) {
