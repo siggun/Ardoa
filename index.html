@@ -403,6 +403,73 @@
             font-size: 0.9rem;
         }
 
+        /* Compact Food Pairing Cards (Food Pairings page) */
+        .pairing-compact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 0.65rem;
+        }
+
+        .pairing-compact-card {
+            background: #ffffff;
+            border-radius: 8px;
+            border-left: 4px solid #4a0e1a;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        .pairing-compact-card.white { border-left-color: #8b7355; }
+        .pairing-compact-card.rose { border-left-color: #c4a875; }
+        .pairing-compact-card.orange { border-left-color: #b87333; }
+
+        .pairing-compact-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.5rem 0.85rem;
+            background: #f8f5f0;
+            border-bottom: 1px solid #e8e0d8;
+        }
+
+        .pairing-wine-name {
+            font-family: 'Cinzel', serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #4a0e1a;
+            line-height: 1.3;
+        }
+
+        .pairing-vintage {
+            font-size: 0.68rem;
+            color: #888;
+            flex-shrink: 0;
+            margin-left: 0.5rem;
+        }
+
+        .pairing-compact-body {
+            padding: 0.35rem 0.85rem 0.4rem;
+        }
+
+        .pairing-compact-row {
+            font-size: 0.77rem;
+            padding: 0.18rem 0;
+            border-bottom: 1px solid #f0ebe3;
+            line-height: 1.4;
+        }
+
+        .pairing-compact-row:last-child {
+            border-bottom: none;
+        }
+
+        .pairing-compact-food {
+            font-weight: 600;
+            color: #2c2c2c;
+        }
+
+        .pairing-compact-why {
+            color: #666;
+        }
+
         .tech-specs {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -858,9 +925,26 @@
             accent-color: var(--burgundy);
         }
 
+        /* Responsive table/card toggle for beer list and food menu */
+        .list-table-view { display: block; }
+        .list-card-view { display: none; }
+
+        @media (max-width: 768px) {
+            .list-table-view { display: none; }
+            .list-card-view {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 1rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .list-card-view { grid-template-columns: 1fr; }
+        }
+
         /* Quick Reference Table - Light Theme */
         .quick-ref {
             overflow-x: auto;
+            margin-bottom: 1.5rem;
         }
 
         .quick-ref table {
@@ -1178,28 +1262,6 @@
                 align-items: flex-start;
             }
 
-            /* Make tables horizontally scrollable with visual indicator */
-            .quick-ref {
-                position: relative;
-                margin: 0 -1rem;
-                padding: 0 1rem;
-            }
-
-            .quick-ref::before {
-                content: '→ scroll';
-                display: block;
-                text-align: right;
-                background: var(--gold);
-                color: var(--charcoal);
-                padding: 0.25rem 0.5rem;
-                font-size: 0.7rem;
-                border-radius: 3px;
-                opacity: 0.8;
-                width: fit-content;
-                margin-left: auto;
-                margin-bottom: 0.4rem;
-            }
-
             .quick-ref table {
                 font-size: 0.85rem;
             }
@@ -1207,7 +1269,6 @@
             .quick-ref th, .quick-ref td {
                 padding: 0.5rem 0.75rem;
                 font-size: 0.8rem;
-                white-space: nowrap;
             }
 
             .food-section-title {
@@ -1411,12 +1472,6 @@
                 white-space: normal;
             }
 
-            .quick-ref::before {
-                content: '⟶ swipe';
-                font-size: 0.6rem;
-                padding: 0.25rem 0.5rem;
-            }
-
             /* Wine regions */
             .regions-intro h2 {
                 font-size: 1.3rem;
@@ -1609,12 +1664,6 @@
             .flashcard-back .flashcard-value {
                 font-size: 0.7rem;
                 line-height: 1.15;
-            }
-
-            .quick-ref::before {
-                content: '⟶';
-                font-size: 0.55rem;
-                padding: 0.2rem 0.4rem;
             }
 
             .quick-ref th, .quick-ref td {
@@ -4582,6 +4631,15 @@
         [data-theme="dark"] .wine-card .pairing-food { color: #c4a875; }
         [data-theme="dark"] .wine-card .pairing-why { color: #b8b4ac; }
 
+        /* Dark mode - Compact food pairing cards */
+        [data-theme="dark"] .pairing-compact-card { background: #1a1025; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+        [data-theme="dark"] .pairing-compact-header { background: #0d0813; border-bottom-color: rgba(196,168,117,0.15); }
+        [data-theme="dark"] .pairing-wine-name { color: #c4a875; }
+        [data-theme="dark"] .pairing-vintage { color: #888; }
+        [data-theme="dark"] .pairing-compact-row { border-bottom-color: rgba(196,168,117,0.08); }
+        [data-theme="dark"] .pairing-compact-food { color: #e8e4dc; }
+        [data-theme="dark"] .pairing-compact-why { color: #b8b4ac; }
+
         /* Dark mode - Previous button */
         [data-theme="dark"] .btn-prev {
             background: #555;
@@ -4922,42 +4980,30 @@
                 <button class="filter-btn other" onclick="filterBeers('other', this)">Other</button>
             </div>
 
-            <div class="beer-grid" id="beerGrid">
-                <!-- Beer cards will be inserted here by JavaScript -->
+            <div id="beerGrid">
+                <!-- Beer table will be inserted here by JavaScript -->
             </div>
         </section>
 
         <!-- Food Menu Section -->
         <section id="food">
             <h2 class="food-section-title">Cheese Selection</h2>
-            <div class="food-grid" id="cheeseGrid">
-                <!-- Cheese cards inserted by JavaScript -->
-            </div>
+            <div id="cheeseGrid"></div>
 
             <h2 class="food-section-title">Charcuterie</h2>
-            <div class="food-grid" id="charcuterieGrid">
-                <!-- Charcuterie cards inserted by JavaScript -->
-            </div>
+            <div id="charcuterieGrid"></div>
 
             <h2 class="food-section-title">Flatbreads</h2>
-            <div class="food-grid" id="flatbreadGrid">
-                <!-- Flatbread cards inserted by JavaScript -->
-            </div>
+            <div id="flatbreadGrid"></div>
 
             <h2 class="food-section-title">Tapas & Dips</h2>
-            <div class="food-grid" id="tapasGrid">
-                <!-- Tapas cards inserted by JavaScript -->
-            </div>
+            <div id="tapasGrid"></div>
 
             <h2 class="food-section-title">Pate & Spreads</h2>
-            <div class="food-grid" id="pateGrid">
-                <!-- Pate cards inserted by JavaScript -->
-            </div>
+            <div id="pateGrid"></div>
 
             <h2 class="food-section-title">Desserts</h2>
-            <div class="food-grid" id="dessertGrid">
-                <!-- Dessert cards inserted by JavaScript -->
-            </div>
+            <div id="dessertGrid"></div>
         </section>
 
         <!-- Food Pairings Section -->
@@ -4966,7 +5012,7 @@
                 <h2 class="section-title">Wine & Food Pairings</h2>
                 <p class="section-subtitle">What to recommend with each wine — and why it works</p>
             </div>
-            <div id="foodPairingsGrid" class="wine-grid">
+            <div id="foodPairingsGrid">
                 <!-- Food pairing cards inserted by JavaScript -->
             </div>
         </section>
@@ -4988,9 +5034,6 @@
                         </label>
                         <label class="quiz-option">
                             <input type="checkbox" id="q-tasting"> Tasting Notes
-                        </label>
-                        <label class="quiz-option">
-                            <input type="checkbox" id="q-food"> Food Pairing
                         </label>
                     </div>
                 </div>
@@ -5076,7 +5119,6 @@
                             <th>Price</th>
                             <th>Type</th>
                             <th>Origin</th>
-                            <th>Wine Pairings</th>
                         </tr>
                     </thead>
                     <tbody id="cheeseRefBody">
@@ -5094,7 +5136,6 @@
                             <th>Price</th>
                             <th>Type</th>
                             <th>Origin</th>
-                            <th>Wine Pairings</th>
                         </tr>
                     </thead>
                     <tbody id="charcuterieRefBody">
@@ -5112,7 +5153,6 @@
                             <th>Price</th>
                             <th>Category</th>
                             <th>Type</th>
-                            <th>Wine Pairings</th>
                         </tr>
                     </thead>
                     <tbody id="otherFoodRefBody">
@@ -7109,26 +7149,43 @@
 
         function renderFoodCategory(gridId, items, category) {
             const grid = document.getElementById(gridId);
-            grid.innerHTML = items.map(item => `
-                <div class="food-card ${category}">
-                    <div class="food-card-header">
-                        <h3>${item.name}</h3>
-                        <div class="food-price">${item.price}</div>
-                        ${item.origin ? `<div class="food-origin">${item.origin}</div>` : ''}
-                    </div>
-                    <div class="food-card-body">
-                        <div class="food-type">${item.type}</div>
-                        ${item.pronunciation ? `<div class="food-pronunciation">"${item.pronunciation}"</div>` : ''}
-                        <div class="food-description">${item.description}</div>
-                        ${item.pairings ? `
-                        <div class="wine-pairings">
-                            <div class="wine-pairings-label">Wine Pairings</div>
-                            <div class="wine-pairings-list">${item.pairings}</div>
+            const hasOrigin = items.some(i => i.origin);
+            const tableHTML = '<div class="list-table-view"><div class="quick-ref"><table>' +
+                '<thead><tr>' +
+                '<th>Item</th>' +
+                '<th>Price</th>' +
+                '<th>Type</th>' +
+                (hasOrigin ? '<th>Origin</th>' : '') +
+                '<th>Description</th>' +
+                '</tr></thead>' +
+                '<tbody>' +
+                items.map(item => `
+                    <tr class="${category}">
+                        <td><strong>${item.name}</strong>${item.pronunciation ? `<br><small style="color:#888;">"${item.pronunciation}"</small>` : ''}</td>
+                        <td>${item.price}</td>
+                        <td>${item.type}</td>
+                        ${hasOrigin ? `<td>${item.origin || '—'}</td>` : ''}
+                        <td>${item.description}</td>
+                    </tr>
+                `).join('') +
+                '</tbody></table></div></div>';
+            const cardsHTML = '<div class="list-card-view">' +
+                items.map(item => `
+                    <div class="food-card ${category}">
+                        <div class="food-card-header">
+                            <h3>${item.name}</h3>
+                            <div class="food-price">${item.price}</div>
+                            ${item.origin ? `<div class="food-origin">${item.origin}</div>` : ''}
                         </div>
-                        ` : ''}
+                        <div class="food-card-body">
+                            <div class="food-type">${item.type}</div>
+                            <div class="food-description">${item.description}</div>
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `).join('') +
+                '</div>';
+            grid.innerHTML = tableHTML + cardsHTML;
+            forceRepaint(grid);
         }
 
         // Print Cards - selective printing
@@ -7246,10 +7303,6 @@
                             <div class="print-label">Description</div>
                             <div class="print-value">${cheese.description}</div>
                         </div>
-                        <div class="print-field">
-                            <div class="print-label">Wine Pairings</div>
-                            <div class="print-value">${cheese.pairings}</div>
-                        </div>
                     </div>
                 </div>
             `).join('');
@@ -7276,10 +7329,6 @@
                         <div class="print-field">
                             <div class="print-label">Description</div>
                             <div class="print-value">${item.description}</div>
-                        </div>
-                        <div class="print-field">
-                            <div class="print-label">Wine Pairings</div>
-                            <div class="print-value">${item.pairings}</div>
                         </div>
                     </div>
                 </div>
@@ -7314,10 +7363,6 @@
                         <div class="print-field">
                             <div class="print-label">Description</div>
                             <div class="print-value">${item.description}</div>
-                        </div>
-                        <div class="print-field">
-                            <div class="print-label">Wine Pairings</div>
-                            <div class="print-value">${item.pairings}</div>
                         </div>
                     </div>
                 </div>
@@ -7435,22 +7480,24 @@
             const grid = document.getElementById('foodPairingsGrid');
             const winesWithPairings = wines.filter(w => w.foodPairings && w.foodPairings.length > 0);
 
-            grid.innerHTML = winesWithPairings.map(wine => `
-                <div class="wine-card ${wine.type}" data-type="${wine.type}">
-                    <div class="wine-card-header">
-                        <h3>${wine.name}</h3>
-                        <div class="vintage">${wine.vintage}</div>
+            grid.innerHTML = '<div class="pairing-compact-grid">' + winesWithPairings.map(wine => `
+                <div class="pairing-compact-card ${wine.type}">
+                    <div class="pairing-compact-header">
+                        <span class="pairing-wine-name">${wine.name}</span>
+                        <span class="pairing-vintage">${wine.vintage}</span>
                     </div>
-                    <div class="wine-card-body">
+                    <div class="pairing-compact-body">
                         ${wine.foodPairings.map(p => `
-                            <div class="pairing-item">
-                                <span class="pairing-food">${p.item}:</span>
-                                <span class="pairing-why">${p.why}</span>
+                            <div class="pairing-compact-row">
+                                <span class="pairing-compact-food">${p.item}</span>
+                                <span class="pairing-compact-why"> — ${p.why}</span>
                             </div>
                         `).join('')}
                     </div>
                 </div>
-            `).join('');
+            `).join('') + '</div>';
+
+            forceRepaint(grid);
         }
 
         // Filter Wines
@@ -7470,37 +7517,52 @@
         // Render Beer Cards
         function renderBeerCards() {
             const grid = document.getElementById('beerGrid');
-
-            grid.innerHTML = beers.map(beer => `
-                <div class="beer-card ${beer.type}" data-type="${beer.type}">
-                    <div class="beer-card-header">
-                        <h3>${beer.name}</h3>
-                        <div class="style-abv">${beer.style} | ${beer.abv}</div>
-                        <div class="brewery">${beer.brewery}</div>
-                    </div>
-                    <div class="beer-card-body">
-                        <div class="beer-detail">
-                            <div class="beer-detail-label">Location</div>
-                            <div class="beer-detail-value">${beer.location}</div>
+            const tableHTML = '<div class="list-table-view"><div class="quick-ref"><table>' +
+                '<thead><tr>' +
+                '<th>Beer</th>' +
+                '<th>Style</th>' +
+                '<th>ABV / Body</th>' +
+                '<th>Tasting Notes</th>' +
+                '<th>About</th>' +
+                '</tr></thead>' +
+                '<tbody>' +
+                beers.map(beer => `
+                    <tr data-type="${beer.type}">
+                        <td><strong>${beer.name}</strong><br><small style="color:#888;">${beer.brewery} — ${beer.location}</small></td>
+                        <td><span class="type-badge ${beer.type}">${beer.style}</span></td>
+                        <td>${beer.abv}<br><small style="color:#888;">${beer.body}</small></td>
+                        <td>${beer.tasting}</td>
+                        <td>${beer.notes}</td>
+                    </tr>
+                `).join('') +
+                '</tbody></table></div></div>';
+            const cardsHTML = '<div class="list-card-view">' +
+                beers.map(beer => `
+                    <div class="beer-card ${beer.type}" data-type="${beer.type}">
+                        <div class="beer-card-header">
+                            <h3>${beer.name}</h3>
+                            <div class="brewery">${beer.brewery} — ${beer.location}</div>
+                            <div class="style-abv">${beer.style}</div>
                         </div>
-                        <div class="beer-detail">
-                            <div class="beer-detail-label">Technical Details</div>
+                        <div class="beer-card-body">
+                            <div class="beer-detail">
+                                <div class="beer-detail-label">Tasting Notes</div>
+                                <div class="beer-detail-value">${beer.tasting}</div>
+                            </div>
+                            <div class="beer-detail">
+                                <div class="beer-detail-label">About</div>
+                                <div class="beer-detail-value">${beer.notes}</div>
+                            </div>
                             <div class="beer-specs">
-                                <div class="beer-spec"><span class="beer-spec-label">ABV:</span> ${beer.abv}</div>
-                                <div class="beer-spec"><span class="beer-spec-label">Body:</span> ${beer.body}</div>
+                                <div class="beer-spec"><span class="beer-spec-label">ABV</span> ${beer.abv}</div>
+                                <div class="beer-spec"><span class="beer-spec-label">Body</span> ${beer.body}</div>
                             </div>
                         </div>
-                        <div class="beer-detail">
-                            <div class="beer-detail-label">Tasting Notes</div>
-                            <div class="beer-detail-value">${beer.tasting}</div>
-                        </div>
-                        <div class="beer-detail">
-                            <div class="beer-detail-label">About</div>
-                            <div class="beer-detail-value">${beer.notes}</div>
-                        </div>
                     </div>
-                </div>
-            `).join('');
+                `).join('') +
+                '</div>';
+            grid.innerHTML = tableHTML + cardsHTML;
+            forceRepaint(grid);
         }
 
         // Filter Beers
@@ -7508,12 +7570,11 @@
             document.querySelectorAll('#beerlist .filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            document.querySelectorAll('.beer-card').forEach(card => {
-                if (type === 'all' || card.dataset.type === type) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
+            document.querySelectorAll('#beerGrid tr[data-type]').forEach(row => {
+                row.style.display = (type === 'all' || row.dataset.type === type) ? '' : 'none';
+            });
+            document.querySelectorAll('#beerGrid .beer-card[data-type]').forEach(card => {
+                card.style.display = (type === 'all' || card.dataset.type === type) ? '' : 'none';
             });
         }
 
@@ -7551,7 +7612,6 @@
                     <td>${cheese.price}</td>
                     <td>${cheese.type}</td>
                     <td>${cheese.origin}</td>
-                    <td>${cheese.pairings}</td>
                 </tr>
             `).join('');
 
@@ -7563,7 +7623,6 @@
                     <td>${item.price}</td>
                     <td>${item.type}</td>
                     <td>${item.origin}</td>
-                    <td>${item.pairings}</td>
                 </tr>
             `).join('');
 
@@ -7582,7 +7641,6 @@
                     <td>${item.price}</td>
                     <td>${item.category}</td>
                     <td>${item.type}</td>
-                    <td>${item.pairings || '-'}</td>
                 </tr>
             `).join('');
         }
@@ -7608,16 +7666,6 @@
             return cleanName.replace(/\s+/g, ' ').trim();
         }
 
-        // Format food pairings with reasons
-        function formatFoodPairingsWithReasons(wine) {
-            if (wine.foodPairings && wine.foodPairings.length > 0) {
-                return wine.foodPairings.map(p =>
-                    `${p.item} - ${p.why}`
-                ).join('\n\n');
-            }
-            return wine.food;
-        }
-
         // Get pronunciation line for answer
         function getPronunciationLine(wine) {
             if (wine.pronunciation && !wine.pronunciationGuideOnly) {
@@ -7632,7 +7680,6 @@
             const qRegion = document.getElementById('q-region').checked;
             const qCountry = document.getElementById('q-country').checked;
             const qTasting = document.getElementById('q-tasting').checked;
-            const qFood = document.getElementById('q-food').checked;
 
             // Only quiz on wines currently on the list (exclude sparkling wines not in Enomatic)
             const quizWines = wines.filter(w => w.type !== 'sparkling');
@@ -7685,19 +7732,6 @@
                         wine: wineDisplay,
                         question: "Which tasting notes describe this wine?",
                         answer: wine.tasting,
-                        type: 'multiple-choice',
-                        options: options
-                    });
-                }
-                if (qFood) {
-                    const correctAnswer = formatFoodPairingsWithReasons(wine);
-                    const winesWithFood = otherWines.filter(w => w.foodPairings && w.foodPairings.length > 0);
-                    const wrongAnswers = shuffleArray(winesWithFood).slice(0, 4).map(w => formatFoodPairingsWithReasons(w));
-                    const options = shuffleArray([correctAnswer, ...wrongAnswers]);
-                    questions.push({
-                        wine: wineDisplay,
-                        question: "What foods pair well with this wine?",
-                        answer: correctAnswer,
                         type: 'multiple-choice',
                         options: options
                     });
@@ -7865,8 +7899,7 @@
                     frontSubtitle: cheese.price,
                     backData: [
                         { label: 'Type', value: cheese.type },
-                        { label: 'Origin', value: cheese.origin },
-                        { label: 'Pairings', value: cheese.pairings || 'Various wines' }
+                        { label: 'Origin', value: cheese.origin }
                     ]
                 }));
             } else if (onlineFlashcardDeck === 'beer') {
