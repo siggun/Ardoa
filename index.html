@@ -6472,6 +6472,7 @@
                 region: "Penedès (Font-Rubí)",
                 appellation: "Penedès DO",
                 country: "Spain",
+                pronunciation: "gar-NACH-ah meh-reh-TAHT mon-roo-BEE",
                 winemaker: "Mont-Rubí S.A. - A family estate in L'Avella, Font-Rubí, in the heart of Catalonia's Penedès region. The winery has been certified organic since 2002, working with old Garnacha vines that produce small, concentrated berries. 'Meretat' means 'deserved' or 'earned' in Catalan—reflecting the hard work of organic farming. The high-altitude vineyards (400-600m) experience dramatic day-night temperature swings that preserve acidity while building ripe fruit character. Mont-Rubí is part of the new wave of quality-focused Catalan producers.",
                 tasting: "Ripe red berries (raspberry, strawberry), Mediterranean herbs, hints of white pepper and garrigue. Medium body with soft tannins and a warm finish.",
                 food: "Chorizo, Salchichon De Bellota, Ewephoria, Tapenade, Manchego",
@@ -7705,16 +7706,29 @@
                 }
                 if (qRegion) {
                     const correctDisplay = wine.region + ', ' + wine.country;
-                    const correctAnswer = correctDisplay + ' — ' + wine.appellation;
+                    // Build option data: { value: full answer (for comparison), display: pre-answer button text }
+                    // - If appellation is already contained in the region display string, don't append it
+                    //   (e.g. "Delle Venezie DOC, Veneto, Italy" already has "Delle Venezie DOC" — avoids duplication)
+                    // - If appellation starts the region display, hide it in the button until answered
+                    //   (e.g. show "Veneto, Italy" instead of "Delle Venezie DOC, Veneto, Italy" before revealing)
+                    const buildRegionOption = (w) => {
+                        const d = w.region + ', ' + w.country;
+                        const preDisplay = d.startsWith(w.appellation)
+                            ? d.slice(w.appellation.length).replace(/^[\s,]+/, '')
+                            : d;
+                        const fullAnswer = d.includes(w.appellation) ? d : d + ' — ' + w.appellation;
+                        return { value: fullAnswer, display: preDisplay };
+                    };
+                    const correctOptionData = buildRegionOption(wine);
                     // Exclude wrong answers whose display text is a sub/superstring of the correct display
                     // (e.g. "Loire Valley, France" inside "Pouilly-Fumé, Loire Valley, France")
                     const eligibleOtherWines = otherWines.filter(w => {
                         const wrongDisplay = w.region + ', ' + w.country;
                         return !correctDisplay.includes(wrongDisplay) && !wrongDisplay.includes(correctDisplay);
                     });
-                    const wrongAnswers = shuffleArray(eligibleOtherWines).slice(0, 4).map(w => w.region + ', ' + w.country + ' — ' + w.appellation);
-                    const options = shuffleArray([correctAnswer, ...wrongAnswers]);
-                    const displayOptions = options.map(opt => opt.split(' — ')[0]);
+                    const allOptionData = shuffleArray([correctOptionData, ...shuffleArray(eligibleOtherWines).slice(0, 4).map(buildRegionOption)]);
+                    const options = allOptionData.map(o => o.value);
+                    const displayOptions = allOptionData.map(o => o.display);
                     // If the wine name reveals the region/appellation, hide those words until answered
                     const regionPrefix = wine.region.split(',')[0].trim();
                     const appellationBase = wine.appellation.replace(/\s+(DOCG|DOC|AOC|AOP|DO|PDO|QbA|AVA|DOP|IGT)\b.*$/i, '').trim();
@@ -7735,7 +7749,7 @@
                         wine: wineDisplay,
                         displayWine: displayWine || undefined,
                         question: "What region is this wine from?",
-                        answer: correctAnswer,
+                        answer: correctOptionData.value,
                         type: 'multiple-choice',
                         options: options,
                         displayOptions: displayOptions,
