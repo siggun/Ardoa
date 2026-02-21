@@ -911,6 +911,432 @@
       .side-decor { display: none; }
       .corner-bracket { width: 24px; height: 24px; }
     }
+
+    /* =============================================
+       STAGE 2 — WORLD MAP SCREEN
+    ============================================= */
+    #screen-map {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .map-header {
+      position: relative;
+      z-index: 20;
+      width: 100%;
+      text-align: center;
+      padding: 16px 20px 8px;
+      flex-shrink: 0;
+    }
+
+    .map-header-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(10px, 2vw, 16px);
+      color: var(--cyan);
+      text-shadow: 0 0 10px var(--cyan), 0 0 25px var(--cyan);
+      letter-spacing: 0.2em;
+    }
+
+    .map-header-sub {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(8px, 1.3vw, 11px);
+      color: var(--magenta);
+      letter-spacing: 0.3em;
+      margin-top: 4px;
+      opacity: 0.8;
+    }
+
+    .map-header-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), var(--magenta), transparent);
+      margin-top: 10px;
+      box-shadow: 0 0 8px var(--cyan);
+    }
+
+    /* Player stats bar */
+    .map-player-bar {
+      position: relative;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 6px 20px;
+      width: 100%;
+      flex-shrink: 0;
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(6px, 1.1vw, 9px);
+    }
+
+    .map-stat {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold);
+    }
+
+    .map-stat-label { color: var(--grey); font-size: 0.85em; }
+    .map-stat-value { color: var(--gold); text-shadow: 0 0 6px var(--gold); }
+
+    .map-stat-sep {
+      color: var(--grey);
+      opacity: 0.4;
+    }
+
+    .map-codex-btn {
+      margin-left: auto;
+      background: transparent;
+      border: 1px solid var(--purple);
+      color: var(--purple);
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(5px, 0.9vw, 8px);
+      padding: 6px 12px;
+      cursor: pointer;
+      text-shadow: 0 0 6px var(--purple);
+      box-shadow: 0 0 8px rgba(184,41,227,0.3);
+      transition: all 0.2s;
+      letter-spacing: 0.1em;
+    }
+
+    .map-codex-btn:hover {
+      background: rgba(184,41,227,0.15);
+      box-shadow: 0 0 16px rgba(184,41,227,0.6);
+    }
+
+    /* Main map grid */
+    .map-grid {
+      position: relative;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding: 8px 20px 12px;
+      width: 100%;
+      max-width: 900px;
+      flex: 1;
+      align-content: center;
+    }
+
+    /* Region card */
+    .region-card {
+      position: relative;
+      border: 2px solid transparent;
+      background: rgba(10, 10, 20, 0.85);
+      padding: 16px 12px 14px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      min-height: 130px;
+      overflow: hidden;
+    }
+
+    .region-card.unlocked {
+      border-color: var(--cyan-dim);
+      box-shadow: 0 0 10px rgba(0,240,255,0.1), inset 0 0 20px rgba(0,240,255,0.03);
+    }
+
+    .region-card.unlocked:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 0 20px rgba(0,240,255,0.4), 0 0 40px rgba(0,240,255,0.15), inset 0 0 20px rgba(0,240,255,0.08);
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    .region-card.locked {
+      border-color: rgba(74,74,106,0.3);
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .region-card.completed {
+      border-color: var(--gold-dim);
+      box-shadow: 0 0 10px rgba(255,215,0,0.15), inset 0 0 20px rgba(255,215,0,0.04);
+    }
+
+    .region-card.completed:hover {
+      border-color: var(--gold);
+      box-shadow: 0 0 20px rgba(255,215,0,0.4), inset 0 0 20px rgba(255,215,0,0.08);
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    /* Animated scan line inside each card */
+    .region-card::before {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      right: 0;
+      height: 60%;
+      background: linear-gradient(180deg, transparent, rgba(0,240,255,0.04), transparent);
+      animation: cardScan 4s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes cardScan {
+      0%   { top: -60%; }
+      100% { top: 130%; }
+    }
+
+    .region-card.locked::before { display: none; }
+
+    /* Region icon */
+    .region-icon {
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1;
+      filter: drop-shadow(0 0 8px currentColor);
+    }
+
+    .region-card.locked .region-icon { filter: grayscale(1) opacity(0.4); }
+
+    /* Region name */
+    .region-name {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(6px, 1.1vw, 9px);
+      color: var(--cyan);
+      text-align: center;
+      letter-spacing: 0.05em;
+      line-height: 1.5;
+      text-shadow: 0 0 8px var(--cyan);
+    }
+
+    .region-card.locked .region-name { color: var(--grey); text-shadow: none; }
+    .region-card.completed .region-name { color: var(--gold); text-shadow: 0 0 8px var(--gold); }
+
+    /* Boss name */
+    .region-boss {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(7px, 1vw, 10px);
+      color: var(--magenta);
+      text-align: center;
+      letter-spacing: 0.1em;
+      opacity: 0.9;
+    }
+
+    .region-card.locked .region-boss { color: var(--grey); opacity: 0.5; }
+
+    /* Difficulty skulls */
+    .region-difficulty {
+      font-size: clamp(10px, 1.5vw, 14px);
+      letter-spacing: 2px;
+      opacity: 0.8;
+    }
+
+    /* Stars (completion) */
+    .region-stars {
+      font-size: clamp(10px, 1.5vw, 14px);
+      letter-spacing: 1px;
+      height: 16px;
+    }
+
+    /* Lock icon */
+    .region-lock {
+      font-size: clamp(20px, 3vw, 30px);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.3;
+    }
+
+    /* OMEGA card — spans full width */
+    .region-card.omega {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      min-height: 80px;
+      gap: 20px;
+      padding: 14px 24px;
+      border-color: var(--magenta-dim);
+    }
+
+    .region-card.omega.unlocked {
+      border-color: var(--magenta);
+      box-shadow: 0 0 20px rgba(255,0,170,0.3), inset 0 0 30px rgba(255,0,170,0.05);
+      animation: omegaPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes omegaPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(255,0,170,0.3), inset 0 0 30px rgba(255,0,170,0.05); }
+      50%       { box-shadow: 0 0 40px rgba(255,0,170,0.6), inset 0 0 40px rgba(255,0,170,0.1); }
+    }
+
+    .region-card.omega .region-name { color: var(--magenta); text-shadow: 0 0 10px var(--magenta); font-size: clamp(7px, 1.3vw, 11px); }
+    .region-card.omega .region-boss { color: var(--white); font-size: clamp(8px, 1.1vw, 12px); }
+    .region-card.omega .region-difficulty { font-size: clamp(12px, 2vw, 18px); }
+
+    .omega-text-block {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      text-align: left;
+    }
+
+    /* Map footer */
+    .map-footer {
+      position: relative;
+      z-index: 20;
+      text-align: center;
+      padding: 6px 20px 10px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(5px, 0.9vw, 8px);
+      color: var(--grey);
+      flex-shrink: 0;
+    }
+
+    .map-footer span {
+      color: var(--green);
+      text-shadow: 0 0 6px var(--green);
+    }
+
+    /* Back to title link */
+    .map-back-btn {
+      background: transparent;
+      border: none;
+      color: var(--grey);
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(5px, 0.9vw, 7px);
+      cursor: pointer;
+      letter-spacing: 0.1em;
+      margin-top: 4px;
+      display: inline-block;
+      transition: color 0.2s;
+    }
+
+    .map-back-btn:hover { color: var(--cyan); text-shadow: 0 0 6px var(--cyan); }
+
+    /* Boss intro overlay */
+    .boss-intro-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(4px);
+    }
+
+    .boss-intro-overlay.show { display: flex; }
+
+    .boss-intro-region {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(8px, 1.5vw, 13px);
+      color: var(--cyan);
+      letter-spacing: 0.3em;
+      text-shadow: 0 0 12px var(--cyan);
+      margin-bottom: 20px;
+    }
+
+    .boss-intro-icon {
+      font-size: clamp(60px, 10vw, 100px);
+      line-height: 1;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 0 20px var(--magenta));
+      animation: bossEntrance 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    }
+
+    @keyframes bossEntrance {
+      from { transform: scale(0) rotate(-10deg); opacity: 0; }
+      to   { transform: scale(1) rotate(0deg);   opacity: 1; }
+    }
+
+    .boss-intro-name {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: clamp(20px, 4vw, 40px);
+      color: var(--magenta);
+      text-shadow: 0 0 20px var(--magenta), 0 0 40px var(--magenta);
+      letter-spacing: 0.08em;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .boss-intro-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(7px, 1.2vw, 11px);
+      color: var(--gold);
+      text-shadow: 0 0 8px var(--gold);
+      margin-bottom: 24px;
+      letter-spacing: 0.15em;
+    }
+
+    .boss-intro-stats {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 28px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(8px, 1.2vw, 11px);
+    }
+
+    .boss-stat {
+      text-align: center;
+    }
+
+    .boss-stat-label {
+      color: var(--grey);
+      font-size: 0.8em;
+      letter-spacing: 0.2em;
+      margin-bottom: 4px;
+    }
+
+    .boss-stat-value {
+      color: var(--cyan);
+      text-shadow: 0 0 8px var(--cyan);
+      font-weight: 700;
+    }
+
+    .boss-intro-btn {
+      background: transparent;
+      border: 2px solid var(--cyan);
+      color: var(--cyan);
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(8px, 1.4vw, 12px);
+      padding: 14px 32px;
+      cursor: pointer;
+      letter-spacing: 0.15em;
+      text-shadow: 0 0 8px var(--cyan);
+      box-shadow: 0 0 20px rgba(0,240,255,0.3);
+      transition: all 0.2s;
+      animation: btnPulse 1.5s ease-in-out infinite;
+    }
+
+    .boss-intro-btn:hover {
+      background: rgba(0,240,255,0.15);
+      box-shadow: 0 0 40px rgba(0,240,255,0.6);
+    }
+
+    @keyframes btnPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(0,240,255,0.3); }
+      50%       { box-shadow: 0 0 35px rgba(0,240,255,0.6); }
+    }
+
+    .boss-intro-cancel {
+      margin-top: 14px;
+      background: none;
+      border: none;
+      color: var(--grey);
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(5px, 0.9vw, 8px);
+      cursor: pointer;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+
+    .boss-intro-cancel:hover { color: var(--magenta); }
+
+    @media (max-width: 600px) {
+      .map-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 6px 12px 10px; }
+      .region-card.omega { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 400px) {
+      .map-grid { grid-template-columns: 1fr 1fr; gap: 6px; padding: 4px 8px 8px; }
+      .region-card { min-height: 110px; padding: 12px 8px; }
+    }
   </style>
 </head>
 <body>
@@ -1081,11 +1507,68 @@
       <div class="grid-plane"></div>
       <div class="horizon-glow"></div>
     </div>
-    <div class="placeholder-screen">
-      <div class="placeholder-title">ENEMY MAP</div>
-      <div class="placeholder-sub">STAGE 2 — COMING SOON</div>
-      <button class="back-btn" onclick="showScreen('title')">← BACK TO TITLE</button>
+
+    <!-- MAP HEADER -->
+    <div class="map-header">
+      <div class="map-header-title">⚔ SELECT YOUR BATTLE ZONE ⚔</div>
+      <div class="map-header-sub">CHOOSE A REGION — DEFEAT THE ANDROID WINE KAREN</div>
+      <div class="map-header-line"></div>
     </div>
+
+    <!-- PLAYER STATS BAR -->
+    <div class="map-player-bar">
+      <div class="map-stat">
+        <span class="map-stat-label">LVL</span>
+        <span class="map-stat-value" id="map-player-level">1</span>
+      </div>
+      <div class="map-stat-sep">|</div>
+      <div class="map-stat">
+        <span class="map-stat-label">XP</span>
+        <span class="map-stat-value" id="map-player-xp">0</span>
+      </div>
+      <div class="map-stat-sep">|</div>
+      <div class="map-stat">
+        <span class="map-stat-label">WINS</span>
+        <span class="map-stat-value" id="map-player-wins">0</span>
+      </div>
+      <button class="map-codex-btn" onclick="showScreen('codex')">📖 CODEX</button>
+    </div>
+
+    <!-- REGION CARDS -->
+    <div class="map-grid" id="mapGrid">
+      <!-- Rendered by JS -->
+    </div>
+
+    <!-- MAP FOOTER -->
+    <div class="map-footer">
+      <span id="map-regions-cleared">0</span> / 6 REGIONS CLEARED
+      <br>
+      <button class="map-back-btn" onclick="showScreen('title')">◄ TITLE SCREEN</button>
+    </div>
+  </div>
+
+  <!-- BOSS INTRO OVERLAY -->
+  <div class="boss-intro-overlay" id="bossIntroOverlay">
+    <div class="boss-intro-region" id="introRegionName">SECTOR ITALIA</div>
+    <div class="boss-intro-icon" id="introBossIcon">🤖</div>
+    <div class="boss-intro-name" id="introBossName">MECHA-MARGARET</div>
+    <div class="boss-intro-title" id="introBossTitle">ANDROID WINE SOMMELIER · TIER I</div>
+    <div class="boss-intro-stats">
+      <div class="boss-stat">
+        <div class="boss-stat-label">THREAT</div>
+        <div class="boss-stat-value" id="introDifficulty">☠</div>
+      </div>
+      <div class="boss-stat">
+        <div class="boss-stat-label">HP</div>
+        <div class="boss-stat-value" id="introBossHP">300</div>
+      </div>
+      <div class="boss-stat">
+        <div class="boss-stat-label">QUESTIONS</div>
+        <div class="boss-stat-value" id="introQCount">8</div>
+      </div>
+    </div>
+    <button class="boss-intro-btn" id="introFightBtn" onclick="startBattle()">⚔ FIGHT!</button>
+    <button class="boss-intro-cancel" onclick="closeBossIntro()">◄ BACK TO MAP</button>
   </div>
 
   <!-- ================================================
@@ -1187,6 +1670,258 @@
 
     // Enable input after a brief delay so accidental clicks don't skip title
     setTimeout(() => { inputEnabled = true; }, 1200);
+
+    /* =============================================
+       GAME STATE + SAVE SYSTEM
+    ============================================= */
+    const SAVE_KEY = 'wineTimeGameSave';
+
+    const defaultSave = {
+      playerLevel: 1,
+      playerXP: 0,
+      battlesWon: 0,
+      totalCorrect: 0,
+      totalWrong: 0,
+      regions: {
+        italia:   { unlocked: true,  stars: 0 },
+        france:   { unlocked: false, stars: 0 },
+        espana:   { unlocked: false, stars: 0 },
+        americas: { unlocked: false, stars: 0 },
+        europa:   { unlocked: false, stars: 0 },
+        omega:    { unlocked: false, stars: 0 }
+      },
+      codexEntries: [],
+      achievements: [],
+      settings: { muted: false }
+    };
+
+    function loadSave() {
+      try {
+        const raw = localStorage.getItem(SAVE_KEY);
+        if (!raw) return JSON.parse(JSON.stringify(defaultSave));
+        const saved = JSON.parse(raw);
+        // Merge with defaults to handle new keys
+        return Object.assign(JSON.parse(JSON.stringify(defaultSave)), saved);
+      } catch(e) { return JSON.parse(JSON.stringify(defaultSave)); }
+    }
+
+    function saveSave(state) {
+      try { localStorage.setItem(SAVE_KEY, JSON.stringify(state)); } catch(e) {}
+    }
+
+    let gameState = loadSave();
+
+    /* =============================================
+       REGION DATA
+    ============================================= */
+    const REGIONS = [
+      {
+        id: 'italia',
+        name: 'SECTOR ITALIA',
+        shortName: 'ITALIA',
+        icon: '🇮🇹',
+        boss: 'MECHA-MARGARET',
+        bossTitle: 'Android Pasta Matriarch · Tier I',
+        bossIcon: '🤖',
+        difficulty: 1,
+        bossHP: 300,
+        questions: 8,
+        countries: ['Italy'],
+        color: 'var(--cyan)',
+        description: 'Boot-shaped battlefield. Red wine territory.'
+      },
+      {
+        id: 'france',
+        name: 'SECTOR FRANCE',
+        shortName: 'FRANCE',
+        icon: '🇫🇷',
+        boss: 'CYBER-CAROL',
+        bossTitle: 'Beret-Wearing Battle Droid · Tier II',
+        bossIcon: '🦾',
+        difficulty: 2,
+        bossHP: 400,
+        questions: 9,
+        countries: ['France'],
+        color: 'var(--magenta)',
+        description: 'Bordeaux circuits & Burgundy processors.'
+      },
+      {
+        id: 'espana',
+        name: 'SECTOR ESPANA',
+        shortName: 'ESPANA',
+        icon: '🇪🇸',
+        boss: 'ROBO-RUTH',
+        bossTitle: 'Flamenco Fury Android · Tier III',
+        bossIcon: '🦿',
+        difficulty: 2,
+        bossHP: 420,
+        questions: 10,
+        countries: ['Spain'],
+        color: 'var(--gold)',
+        description: 'Iberian silicon & neon saffron.'
+      },
+      {
+        id: 'americas',
+        name: 'SECTOR AMERICAS',
+        shortName: 'AMERICAS',
+        icon: '🌎',
+        boss: 'TECHNO-TERRI',
+        bossTitle: 'Corporate Wine Mom Unit · Tier IV',
+        bossIcon: '🤖',
+        difficulty: 3,
+        bossHP: 500,
+        questions: 10,
+        countries: ['USA', 'Chile'],
+        color: 'var(--green)',
+        description: 'New world voltage. Premium disruption.'
+      },
+      {
+        id: 'europa',
+        name: 'SECTOR EUROPA',
+        shortName: 'EUROPA',
+        icon: '🌍',
+        boss: 'VOLTAGE-VERA',
+        bossTitle: 'Germanic Precision Android · Tier V',
+        bossIcon: '⚡',
+        difficulty: 4,
+        bossHP: 600,
+        questions: 12,
+        countries: ['Germany', 'Slovenia'],
+        color: 'var(--purple)',
+        description: 'Precision engineering. Riesling subroutines.'
+      },
+      {
+        id: 'omega',
+        name: '⚠ SECTOR OMEGA ⚠',
+        shortName: 'OMEGA',
+        icon: '💀',
+        boss: 'OMEGA-PATRICIA',
+        bossTitle: 'Supreme Android Wine Overlord · FINAL BOSS',
+        bossIcon: '☠',
+        difficulty: 5,
+        bossHP: 999,
+        questions: 15,
+        countries: ['Italy','France','Spain','USA','Chile','Germany','Slovenia'],
+        color: 'var(--magenta)',
+        description: 'All regions. All knowledge. One battle.'
+      }
+    ];
+
+    let currentRegion = null;
+
+    /* =============================================
+       MAP RENDERING
+    ============================================= */
+    function renderMap() {
+      // Update stats bar
+      document.getElementById('map-player-level').textContent = gameState.playerLevel;
+      document.getElementById('map-player-xp').textContent = gameState.playerXP;
+      document.getElementById('map-player-wins').textContent = gameState.battlesWon;
+
+      // Count cleared regions
+      const cleared = Object.values(gameState.regions).filter(r => r.stars > 0).length;
+      document.getElementById('map-regions-cleared').textContent = cleared;
+
+      // Render region cards
+      const grid = document.getElementById('mapGrid');
+      const nonOmega = REGIONS.slice(0, 5);
+      const omega = REGIONS[5];
+
+      grid.innerHTML = nonOmega.map(region => {
+        const rState = gameState.regions[region.id];
+        const isUnlocked = rState.unlocked;
+        const isCompleted = rState.stars > 0;
+        const stars = '★'.repeat(rState.stars) + '☆'.repeat(3 - rState.stars);
+        const skulls = '☠'.repeat(region.difficulty) + '·'.repeat(5 - region.difficulty);
+
+        let cardClass = 'region-card';
+        if (!isUnlocked) cardClass += ' locked';
+        else if (isCompleted) cardClass += ' completed unlocked';
+        else cardClass += ' unlocked';
+
+        return `
+          <div class="${cardClass}" onclick="selectRegion('${region.id}')">
+            ${!isUnlocked ? '<div class="region-lock">🔒</div>' : ''}
+            <div class="region-icon">${isUnlocked ? region.icon : '❓'}</div>
+            <div class="region-name">${region.shortName}</div>
+            ${isUnlocked ? `<div class="region-boss">${region.boss}</div>` : '<div class="region-boss">???</div>'}
+            <div class="region-difficulty">${skulls}</div>
+            ${isCompleted ? `<div class="region-stars">${stars}</div>` : ''}
+          </div>`;
+      }).join('');
+
+      // Omega card (full width)
+      const omegaState = gameState.regions.omega;
+      const omegaUnlocked = omegaState.unlocked;
+      const omegaCompleted = omegaState.stars > 0;
+      let omegaClass = 'region-card omega';
+      if (!omegaUnlocked) omegaClass += ' locked';
+      else if (omegaCompleted) omegaClass += ' completed unlocked';
+      else omegaClass += ' unlocked';
+
+      grid.innerHTML += `
+        <div class="${omegaClass}" onclick="selectRegion('omega')">
+          ${!omegaUnlocked ? '<div class="region-lock" style="font-size:32px">🔒</div>' : ''}
+          <div class="region-icon" style="font-size:clamp(40px,6vw,56px)">${omegaUnlocked ? omega.icon : '🔒'}</div>
+          <div class="omega-text-block">
+            <div class="region-name">${omega.shortName}</div>
+            ${omegaUnlocked
+              ? `<div class="region-boss">${omega.boss}</div>`
+              : '<div class="region-boss" style="color:var(--grey)">DEFEAT ALL SECTORS TO UNLOCK</div>'}
+            <div class="region-difficulty">${'☠'.repeat(omega.difficulty)}</div>
+          </div>
+        </div>`;
+    }
+
+    function selectRegion(regionId) {
+      const rState = gameState.regions[regionId];
+      if (!rState || !rState.unlocked) {
+        // Show locked flash
+        const card = document.querySelector(`[onclick="selectRegion('${regionId}')"]`);
+        if (card) {
+          card.style.borderColor = 'var(--magenta)';
+          card.style.boxShadow = '0 0 20px rgba(255,0,170,0.5)';
+          setTimeout(() => { card.style.borderColor = ''; card.style.boxShadow = ''; }, 500);
+        }
+        return;
+      }
+
+      const region = REGIONS.find(r => r.id === regionId);
+      if (!region) return;
+      currentRegion = region;
+
+      // Show boss intro overlay
+      document.getElementById('introRegionName').textContent = region.name;
+      document.getElementById('introBossIcon').textContent = region.bossIcon;
+      document.getElementById('introBossName').textContent = region.boss;
+      document.getElementById('introBossTitle').textContent = region.bossTitle;
+      document.getElementById('introDifficulty').textContent = '☠'.repeat(region.difficulty);
+      document.getElementById('introBossHP').textContent = region.bossHP;
+      document.getElementById('introQCount').textContent = region.questions;
+
+      const overlay = document.getElementById('bossIntroOverlay');
+      overlay.classList.add('show');
+    }
+
+    function closeBossIntro() {
+      document.getElementById('bossIntroOverlay').classList.remove('show');
+      currentRegion = null;
+    }
+
+    function startBattle() {
+      if (!currentRegion) return;
+      document.getElementById('bossIntroOverlay').classList.remove('show');
+      showScreen('battle');
+      // Stage 3 will hook here
+      if (typeof initBattle === 'function') initBattle(currentRegion);
+    }
+
+    // Render map when showing map screen
+    const _origShowScreen = showScreen;
+    showScreen = function(id) {
+      _origShowScreen(id);
+      if (id === 'map') renderMap();
+    };
 
     /* =============================================
        PARTICLE SYSTEM (CANVAS)
