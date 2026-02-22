@@ -1235,8 +1235,21 @@
       font-size: clamp(60px, 10vw, 100px);
       line-height: 1;
       margin-bottom: 16px;
-      filter: drop-shadow(0 0 20px var(--magenta));
       animation: bossEntrance 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      /* Scale down the CSS boss art for the intro overlay */
+      transform-origin: bottom center;
+    }
+
+    /* Boss art scaled in intro */
+    .boss-intro-icon .boss-art {
+      transform: scale(0.82);
+      transform-origin: bottom center;
+    }
+    .boss-intro-icon .boss-art.omega-scale {
+      transform: scale(0.68);
     }
 
     @keyframes bossEntrance {
@@ -2030,6 +2043,149 @@
     @media (max-width: 480px) {
       .codex-grid { grid-template-columns: 1fr 1fr; padding: 4px 10px 10px; gap: 6px; }
     }
+
+    /* =============================================
+       STAGE 7 — BOSS CSS PIXEL ART
+    ============================================= */
+
+    /* Boss sprite container — animation shared with player bob */
+    #bossSprite {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform-origin: bottom center;
+    }
+
+    /* Each boss outer wrapper */
+    .boss-art {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Generic boss head */
+    .boss-head {
+      position: relative;
+      background: var(--boss-bg, #0a0a18);
+      border: 2px solid var(--boss-c, #00f0ff);
+      border-radius: 6px;
+      margin: 0 auto;
+    }
+
+    /* Boss visor — full-width style */
+    .boss-visor {
+      position: absolute;
+      left: 3px;
+      right: 3px;
+      height: 12px;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--boss-c, #00f0ff), #fff 50%, var(--boss-c, #00f0ff));
+      opacity: 0.9;
+    }
+
+    /* Boss body */
+    .boss-body {
+      position: relative;
+      background: var(--boss-bg, #0a0a18);
+      border: 1.5px solid var(--boss-cd, #007a85);
+      border-radius: 3px 3px 6px 6px;
+      margin: 0 auto;
+    }
+
+    /* Boss arm - generic */
+    .boss-arm {
+      position: absolute;
+      background: var(--boss-bg, #0a0a18);
+      border: 1.5px solid var(--boss-cd, #007a85);
+      border-radius: 3px;
+    }
+
+    /* Boss leg wrapper */
+    .boss-legs {
+      display: flex;
+      gap: 4px;
+    }
+
+    .boss-leg-upper {
+      background: var(--boss-bg, #0a0a18);
+      border: 1.5px solid var(--boss-cd, #007a85);
+      border-top: none;
+      border-radius: 0 0 3px 3px;
+    }
+
+    .boss-boot {
+      border-radius: 2px 6px 6px 2px;
+      background: var(--boss-bg, #0a0a18);
+    }
+
+    /* OMEGA boss — larger scale */
+    .boss-art.omega-scale {
+      transform: scale(1.2);
+      transform-origin: bottom center;
+    }
+
+    /* Omega triple-eye glow */
+    @keyframes omegaEye {
+      0%, 100% { box-shadow: 0 0 8px #ff4040, 0 0 18px rgba(255,64,64,0.7); opacity: 0.8; }
+      33%       { box-shadow: 0 0 8px #ff00aa, 0 0 18px rgba(255,0,170,0.7); opacity: 1; }
+      66%       { box-shadow: 0 0 8px #00f0ff, 0 0 18px rgba(0,240,255,0.7); opacity: 0.9; }
+    }
+    .omega-eye { animation: omegaEye 1.6s ease-in-out infinite; }
+
+    /* Vera lightning pulse */
+    @keyframes veraLightning {
+      0%, 100% { opacity: 0.7; transform: scaleY(1); }
+      50%       { opacity: 1;   transform: scaleY(1.08); }
+    }
+    .vera-bolt { animation: veraLightning 0.9s ease-in-out infinite; }
+
+    /* Ruth rose spin */
+    @keyframes ruthRose {
+      0%, 100% { transform: rotate(-8deg); }
+      50%       { transform: rotate(8deg); }
+    }
+    .ruth-rose { animation: ruthRose 2.2s ease-in-out infinite; }
+
+    /* =============================================
+       STAGE 7 — MOBILE POLISH
+    ============================================= */
+
+    /* Better battle arena on small screens */
+    @media (max-width: 480px) {
+      .battle-screen { padding: 6px 8px 6px; gap: 4px; }
+      .battle-arena { min-height: 90px; max-height: 105px; }
+      .fighter { min-width: 0; }
+      .battle-question-panel { padding: 6px 10px 4px; }
+      .question-text { font-size: clamp(9px, 2.8vw, 12px); min-height: 38px; padding: 4px 8px; }
+      .answer-grid { gap: 4px; padding: 2px 8px 4px; }
+      .answer-btn { padding: 7px 8px; font-size: clamp(7px, 2vw, 10px); }
+      .answer-key { width: 18px; height: 18px; font-size: 8px; }
+      .battle-powerups { gap: 5px; padding: 4px 8px; }
+      .powerup-btn { padding: 5px 8px; font-size: clamp(6px, 1.5vw, 8px); }
+      .hp-bar-row { padding: 6px 10px 2px; }
+    }
+
+    @media (max-width: 360px) {
+      .battle-arena { max-height: 88px; }
+      .question-text { font-size: 9px; }
+      .answer-btn { padding: 6px 6px; }
+      .battle-powerups { flex-wrap: wrap; }
+      .powerup-btn { flex: 1 1 30%; font-size: 6px; padding: 4px 6px; }
+      /* Shrink boss on tiny screens */
+      #bossSprite .boss-art { transform: scale(0.75); transform-origin: bottom center; }
+      #bossSprite .boss-art.omega-scale { transform: scale(0.9); }
+    }
+
+    /* Landscape mobile — battle needs more horizontal space */
+    @media (max-height: 420px) and (orientation: landscape) {
+      .battle-arena { max-height: 80px; }
+      .battle-screen { gap: 2px; }
+      .hp-bar-row { padding: 4px 12px 0; }
+      .question-text { min-height: 30px; font-size: 9px; }
+      .answer-grid { grid-template-columns: 1fr 1fr; gap: 3px; }
+      #bossSprite .boss-art { transform: scale(0.7); transform-origin: bottom center; }
+    }
   </style>
 </head>
 <body>
@@ -2325,7 +2481,7 @@
       </div>
 
       <div class="fighter enemy" id="fighterEnemy">
-        <div id="bossSprite" style="font-size:clamp(60px,9vh,90px);line-height:1;filter:drop-shadow(0 0 12px var(--magenta));animation:charBob 2.2s ease-in-out infinite;">🤖</div>
+        <div id="bossSprite" style="animation:charBob 2.4s ease-in-out infinite;transform-origin:bottom center;"></div>
         <div class="fighter-platform"></div>
         <div class="fighter-label" id="bossLabel">BOSS</div>
       </div>
@@ -2703,7 +2859,7 @@
 
       // Show boss intro overlay
       document.getElementById('introRegionName').textContent = region.name;
-      document.getElementById('introBossIcon').textContent = region.bossIcon;
+      document.getElementById('introBossIcon').innerHTML = getBossHTML(region.id);
       document.getElementById('introBossName').textContent = region.boss;
       document.getElementById('introBossTitle').textContent = region.bossTitle;
       document.getElementById('introDifficulty').textContent = '☠'.repeat(region.difficulty);
@@ -3957,6 +4113,289 @@
     ];
 
     /* =============================================
+       STAGE 7 — BOSS CSS PIXEL ART GENERATOR
+    ============================================= */
+
+    function getBossHTML(regionId) {
+      /* Per-boss color palette: [primary, dim, body-bg, glow-rgba] */
+      const pal = {
+        italia:   { c:'#00f0ff', cd:'#007a85', bg:'#061620', glow:'rgba(0,240,255,0.55)' },
+        france:   { c:'#ff00aa', cd:'#880059', bg:'#160616', glow:'rgba(255,0,170,0.55)' },
+        espana:   { c:'#ffd700', cd:'#806c00', bg:'#161000', glow:'rgba(255,215,0,0.55)'  },
+        americas: { c:'#39ff14', cd:'#1d8509', bg:'#021600', glow:'rgba(57,255,20,0.55)'  },
+        europa:   { c:'#b829e3', cd:'#5c1475', bg:'#0e0018', glow:'rgba(184,41,227,0.55)' },
+        omega:    { c:'#ff4040', cd:'#990000', bg:'#100008', glow:'rgba(255,64,64,0.55)'  }
+      };
+      const p = pal[regionId] || pal.omega;
+      const sh = `0 0 10px ${p.c}, 0 0 24px ${p.glow}`;
+      const shd = `0 0 6px ${p.cd}`;
+
+      /* Shared HTML fragment builders */
+      const arm = (side, top, rot) => {
+        const pos = side === 'l' ? `left:-15px;top:${top}px` : `right:-15px;top:${top}px`;
+        const tr  = rot ? `;transform:rotate(${rot}deg);transform-origin:bottom center` : '';
+        return `<div style="position:absolute;${pos};width:13px;height:40px;background:${p.bg};border:1.5px solid ${p.cd};border-radius:3px${tr}"></div>`;
+      };
+      const legPair = (w, h, bootH) => `
+        <div style="display:flex;gap:4px">
+          <div><div style="width:${w}px;height:${h}px;background:${p.bg};border:1.5px solid ${p.cd};border-top:none;border-radius:0 0 3px 3px"></div>
+               <div style="width:${w+4}px;height:${bootH}px;background:${p.bg};border:1.5px solid ${p.c};border-radius:2px 6px 6px 2px;box-shadow:0 0 5px ${p.glow}"></div></div>
+          <div><div style="width:${w}px;height:${h}px;background:${p.bg};border:1.5px solid ${p.cd};border-top:none;border-radius:0 0 3px 3px"></div>
+               <div style="width:${w+4}px;height:${bootH}px;background:${p.bg};border:1.5px solid ${p.c};border-radius:2px 6px 6px 2px;box-shadow:0 0 5px ${p.glow}"></div></div>
+        </div>`;
+      const wrap = (inner, extraClass) =>
+        `<div class="boss-art${extraClass?' '+extraClass:''}" style="filter:drop-shadow(0 0 12px ${p.c});--boss-c:${p.c};--boss-cd:${p.cd};--boss-bg:${p.bg}">${inner}</div>`;
+
+      /* ---- MECHA-MARGARET (Italia) — wide, 3 antennae, apron ---- */
+      if (regionId === 'italia') {
+        return wrap(`
+          <!-- triple antennae -->
+          <div style="display:flex;justify-content:space-around;width:48px;margin-bottom:2px">
+            <div style="width:4px;height:18px;background:${p.c};border-radius:3px 3px 0 0;box-shadow:${sh}"></div>
+            <div style="width:5px;height:22px;background:${p.c};border-radius:3px 3px 0 0;box-shadow:${sh}"></div>
+            <div style="width:4px;height:18px;background:${p.c};border-radius:3px 3px 0 0;box-shadow:${sh}"></div>
+          </div>
+          <!-- head - wide and squat -->
+          <div style="position:relative;width:56px;height:44px;background:${p.bg};border:2px solid ${p.c};border-radius:8px;box-shadow:${sh}">
+            <div style="position:absolute;top:10px;left:3px;right:3px;height:14px;background:linear-gradient(90deg,${p.c},#fff 50%,${p.c});border-radius:3px;opacity:0.88;box-shadow:0 0 14px ${p.c}"></div>
+            <div style="position:absolute;bottom:5px;left:10px;right:10px;height:3px;background:${p.cd};border-radius:2px;box-shadow:${shd}"></div>
+          </div>
+          <!-- collar -->
+          <div style="width:64px;height:8px;background:${p.bg};border:1px solid ${p.cd};border-bottom:none;border-radius:4px 4px 0 0"></div>
+          <!-- body - wide with apron -->
+          <div style="position:relative;width:74px;height:60px;background:${p.bg};border:1.5px solid ${p.cd};border-radius:2px 2px 6px 6px">
+            ${arm('l',4,0)}${arm('r',4,0)}
+            <!-- apron panel -->
+            <div style="position:absolute;top:8px;left:14px;right:14px;bottom:6px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);border-radius:2px"></div>
+            <!-- apron tie knot -->
+            <div style="position:absolute;top:6px;left:50%;transform:translateX(-50%);width:12px;height:12px;background:${p.c};border-radius:50%;box-shadow:${sh}"></div>
+            <!-- chest circuit lines -->
+            <div style="position:absolute;bottom:14px;left:8px;right:8px;height:1px;background:${p.cd};opacity:0.5"></div>
+            <div style="position:absolute;bottom:20px;left:8px;right:8px;height:1px;background:${p.cd};opacity:0.3"></div>
+          </div>
+          ${legPair(22,26,8)}
+        `);
+      }
+
+      /* ---- CYBER-CAROL (France) — beret, monocle, slim elegant ---- */
+      if (regionId === 'france') {
+        return wrap(`
+          <!-- beret -->
+          <div style="position:relative;width:60px;height:22px;background:${p.c};border-radius:50% 50% 20% 20%;margin-bottom:-4px;box-shadow:${sh}">
+            <div style="position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:30px;height:6px;background:${p.bg};border:1px solid ${p.c};border-radius:1px"></div>
+          </div>
+          <!-- head - slim -->
+          <div style="position:relative;width:40px;height:46px;background:${p.bg};border:2px solid ${p.c};border-radius:5px 5px 10px 10px;box-shadow:${sh}">
+            <!-- monocle -->
+            <div style="position:absolute;top:9px;left:4px;width:16px;height:16px;border:2.5px solid ${p.c};border-radius:50%;box-shadow:${sh}">
+              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:7px;height:7px;background:${p.c};border-radius:50%;opacity:0.9"></div>
+            </div>
+            <!-- monocle chain -->
+            <div style="position:absolute;top:18px;left:18px;width:1px;height:10px;background:${p.cd};opacity:0.7"></div>
+            <!-- other eye smaller -->
+            <div style="position:absolute;top:13px;right:6px;width:9px;height:9px;border:1.5px solid ${p.c};border-radius:50%;box-shadow:0 0 5px ${p.c}"></div>
+            <!-- thin upper-lip line -->
+            <div style="position:absolute;bottom:10px;left:8px;right:8px;height:2px;background:${p.c};border-radius:1px;box-shadow:0 0 4px ${p.c}"></div>
+          </div>
+          <!-- V-neck collar -->
+          <div style="width:46px;height:10px;background:${p.bg};border-left:1px solid ${p.cd};border-right:1px solid ${p.cd};clip-path:polygon(28% 0,72% 0,100% 100%,0 100%)"></div>
+          <!-- slim body -->
+          <div style="position:relative;width:56px;height:68px;background:${p.bg};border:1.5px solid ${p.cd};border-radius:3px 3px 5px 5px">
+            <!-- raised left arm (holding cigarette holder) -->
+            <div style="position:absolute;top:-12px;left:-13px;width:11px;height:50px;background:${p.bg};border:1.5px solid ${p.cd};border-radius:4px;transform:rotate(22deg);transform-origin:bottom center"></div>
+            <!-- cigarette holder -->
+            <div style="position:absolute;top:-22px;left:-20px;width:18px;height:3px;background:${p.c};border-radius:2px;box-shadow:${sh};transform:rotate(-68deg);transform-origin:right center"></div>
+            ${arm('r',6,0)}
+            <!-- medal -->
+            <div style="position:absolute;top:10px;left:50%;transform:translateX(-50%);width:12px;height:12px;background:${p.cd};border:2px solid ${p.c};border-radius:50%;box-shadow:${sh}"></div>
+            <!-- decorative stripe panel -->
+            <div style="position:absolute;bottom:8px;left:8px;right:8px;height:16px;background:repeating-linear-gradient(90deg,${p.cd}22 0px,${p.cd}22 4px,transparent 4px,transparent 8px);border-radius:2px;border:1px solid ${p.cd}44"></div>
+          </div>
+          <!-- slim legs with heel-like boots -->
+          <div style="display:flex;gap:8px">
+            <div><div style="width:16px;height:28px;background:${p.bg};border:1.5px solid ${p.cd};border-top:none"></div>
+                 <div style="width:14px;height:14px;background:${p.bg};border:1.5px solid ${p.c};border-radius:0 0 8px 8px;box-shadow:0 0 5px ${p.glow};margin-left:5px"></div></div>
+            <div><div style="width:16px;height:28px;background:${p.bg};border:1.5px solid ${p.cd};border-top:none"></div>
+                 <div style="width:14px;height:14px;background:${p.bg};border:1.5px solid ${p.c};border-radius:0 0 8px 8px;box-shadow:0 0 5px ${p.glow};margin-left:5px"></div></div>
+          </div>
+        `);
+      }
+
+      /* ---- ROBO-RUTH (Espana) — flamenco shoulders, rose, wide stance ---- */
+      if (regionId === 'espana') {
+        return wrap(`
+          <!-- head with rose -->
+          <div style="position:relative;width:44px;height:44px;background:${p.bg};border:2px solid ${p.c};border-radius:50% 50% 40% 40%;box-shadow:${sh}">
+            <!-- eyes -->
+            <div style="position:absolute;top:14px;left:6px;width:10px;height:10px;background:${p.c};border-radius:50%;box-shadow:${sh}"></div>
+            <div style="position:absolute;top:14px;right:6px;width:10px;height:10px;background:${p.c};border-radius:50%;box-shadow:${sh}"></div>
+            <!-- rose on head -->
+            <div class="ruth-rose" style="position:absolute;top:-10px;right:-4px;width:16px;height:16px;background:radial-gradient(circle,${p.c} 30%,${p.cd} 100%);border-radius:50%;box-shadow:${sh}"></div>
+            <!-- smile -->
+            <div style="position:absolute;bottom:8px;left:10px;right:10px;height:3px;background:${p.c};border-radius:0 0 4px 4px;box-shadow:0 0 5px ${p.c}"></div>
+          </div>
+          <!-- dramatic ruffled collar -->
+          <div style="position:relative;width:80px;height:14px;margin:0 auto">
+            <div style="position:absolute;left:0;top:0;width:28px;height:14px;background:${p.c};clip-path:polygon(0 0,100% 0,70% 100%,0 100%);opacity:0.7;box-shadow:${sh}"></div>
+            <div style="position:absolute;left:26px;top:0;width:28px;height:14px;background:${p.bg};border:1.5px solid ${p.c}"></div>
+            <div style="position:absolute;right:0;top:0;width:28px;height:14px;background:${p.c};clip-path:polygon(0 0,100% 0,100% 100%,30% 100%);opacity:0.7;box-shadow:${sh}"></div>
+          </div>
+          <!-- body wide -->
+          <div style="position:relative;width:68px;height:58px;background:${p.bg};border:1.5px solid ${p.cd};border-radius:4px 4px 10px 10px">
+            <!-- wide flamenco arms spread outward -->
+            <div style="position:absolute;top:-4px;left:-28px;width:26px;height:12px;background:${p.c};border-radius:8px 3px 3px 8px;opacity:0.75;box-shadow:${sh}"></div>
+            <div style="position:absolute;top:-4px;right:-28px;width:26px;height:12px;background:${p.c};border-radius:3px 8px 8px 3px;opacity:0.75;box-shadow:${sh}"></div>
+            ${arm('l',10,0)}${arm('r',10,0)}
+            <!-- chest rose -->
+            <div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);width:14px;height:14px;background:radial-gradient(circle,${p.c} 30%,${p.cd} 100%);border-radius:50%;box-shadow:${sh}"></div>
+            <!-- ruffled skirt lines -->
+            <div style="position:absolute;bottom:4px;left:4px;right:4px;height:20px;background:repeating-linear-gradient(180deg,${p.cd}40 0px,${p.cd}40 3px,transparent 3px,transparent 6px);border-radius:0 0 8px 8px"></div>
+          </div>
+          ${legPair(20,22,8)}
+        `);
+      }
+
+      /* ---- TECHNO-TERRI (Americas) — corporate, shoulder pads, tie ---- */
+      if (regionId === 'americas') {
+        return wrap(`
+          <!-- corporate head - rectangular -->
+          <div style="position:relative;width:46px;height:44px;background:${p.bg};border:2px solid ${p.c};border-radius:4px;box-shadow:${sh}">
+            <!-- LED eyes -->
+            <div style="position:absolute;top:12px;left:7px;width:10px;height:8px;background:${p.c};border-radius:2px;box-shadow:${sh}"></div>
+            <div style="position:absolute;top:12px;right:7px;width:10px;height:8px;background:${p.c};border-radius:2px;box-shadow:${sh}"></div>
+            <!-- data readout on forehead -->
+            <div style="position:absolute;top:4px;left:6px;right:6px;height:4px;background:${p.cd};border-radius:1px;opacity:0.6"></div>
+            <!-- chin vent -->
+            <div style="position:absolute;bottom:4px;left:8px;right:8px;height:6px;background:repeating-linear-gradient(90deg,${p.cd} 0px,${p.cd} 3px,transparent 3px,transparent 6px);opacity:0.7"></div>
+          </div>
+          <!-- collar -->
+          <div style="width:54px;height:8px;background:${p.bg};border:1px solid ${p.cd};border-bottom:none;border-radius:3px 3px 0 0"></div>
+          <!-- wide corporate body with shoulder pads -->
+          <div style="position:relative;width:80px;height:62px;background:${p.bg};border:1.5px solid ${p.cd};border-radius:3px 3px 5px 5px">
+            <!-- shoulder pads -->
+            <div style="position:absolute;top:-6px;left:-4px;width:20px;height:14px;background:${p.bg};border:2px solid ${p.c};border-radius:4px 4px 0 0;box-shadow:${sh}"></div>
+            <div style="position:absolute;top:-6px;right:-4px;width:20px;height:14px;background:${p.bg};border:2px solid ${p.c};border-radius:4px 4px 0 0;box-shadow:${sh}"></div>
+            ${arm('l',10,0)}
+            <!-- briefcase arm on right -->
+            <div style="position:absolute;top:6px;right:-18px;width:13px;height:36px;background:${p.bg};border:1.5px solid ${p.cd};border-radius:3px"></div>
+            <div style="position:absolute;top:42px;right:-20px;width:16px;height:14px;background:${p.bg};border:2px solid ${p.c};border-radius:2px;box-shadow:${sh}">
+              <div style="position:absolute;top:-3px;left:50%;transform:translateX(-50%);width:8px;height:3px;background:${p.cd};border-radius:2px 2px 0 0"></div>
+            </div>
+            <!-- necktie -->
+            <div style="position:absolute;top:4px;left:50%;transform:translateX(-50%);width:10px;height:34px;background:${p.c};clip-path:polygon(25% 0,75% 0,90% 70%,50% 100%,10% 70%);box-shadow:${sh};opacity:0.9"></div>
+            <!-- shirt buttons -->
+            <div style="position:absolute;top:38px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:${p.cd};border-radius:50%"></div>
+          </div>
+          ${legPair(24,24,8)}
+        `);
+      }
+
+      /* ---- VOLTAGE-VERA (Europa) — tall, lightning crown, coil arms ---- */
+      if (regionId === 'europa') {
+        return wrap(`
+          <!-- lightning bolt crown -->
+          <div style="display:flex;justify-content:center;gap:3px;margin-bottom:3px">
+            <div class="vera-bolt" style="width:6px;height:20px;background:${p.c};clip-path:polygon(30% 0,90% 0,60% 50%,100% 50%,10% 100%,40% 50%,0% 50%);box-shadow:${sh}"></div>
+            <div class="vera-bolt" style="width:8px;height:26px;background:${p.c};clip-path:polygon(30% 0,90% 0,60% 50%,100% 50%,10% 100%,40% 50%,0% 50%);box-shadow:${sh};animation-delay:0.3s"></div>
+            <div class="vera-bolt" style="width:6px;height:20px;background:${p.c};clip-path:polygon(30% 0,90% 0,60% 50%,100% 50%,10% 100%,40% 50%,0% 50%);box-shadow:${sh};animation-delay:0.6s"></div>
+          </div>
+          <!-- head - tall and angular -->
+          <div style="position:relative;width:40px;height:50px;background:${p.bg};border:2px solid ${p.c};border-radius:4px 4px 2px 2px;box-shadow:${sh}">
+            <!-- angular eyes -->
+            <div style="position:absolute;top:14px;left:4px;right:4px;display:flex;justify-content:space-between">
+              <div style="width:12px;height:8px;background:${p.c};clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%);box-shadow:${sh}"></div>
+              <div style="width:12px;height:8px;background:${p.c};clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%);box-shadow:${sh}"></div>
+            </div>
+            <!-- precision grid face lines -->
+            <div style="position:absolute;bottom:8px;left:4px;right:4px;height:1px;background:${p.cd};opacity:0.6"></div>
+            <div style="position:absolute;bottom:14px;left:4px;right:4px;height:1px;background:${p.cd};opacity:0.4"></div>
+          </div>
+          <!-- slim precise collar -->
+          <div style="width:44px;height:6px;background:${p.bg};border:1px solid ${p.c};border-bottom:none"></div>
+          <!-- tall slim body -->
+          <div style="position:relative;width:50px;height:72px;background:${p.bg};border:1.5px solid ${p.cd};border-radius:2px 2px 4px 4px">
+            <!-- Tesla coil left arm -->
+            <div style="position:absolute;top:0px;left:-16px;width:12px;height:42px;background:${p.bg};border:1.5px solid ${p.cd};border-radius:2px">
+              <div style="position:absolute;top:4px;left:50%;transform:translateX(-50%);width:10px;height:2px;background:${p.c};box-shadow:${sh}"></div>
+              <div style="position:absolute;top:10px;left:50%;transform:translateX(-50%);width:10px;height:2px;background:${p.c};box-shadow:${sh}"></div>
+              <div style="position:absolute;top:16px;left:50%;transform:translateX(-50%);width:10px;height:2px;background:${p.c};box-shadow:${sh}"></div>
+            </div>
+            <!-- coil right arm -->
+            <div style="position:absolute;top:0px;right:-16px;width:12px;height:42px;background:${p.bg};border:1.5px solid ${p.cd};border-radius:2px">
+              <div style="position:absolute;top:4px;left:50%;transform:translateX(-50%);width:10px;height:2px;background:${p.c};box-shadow:${sh}"></div>
+              <div style="position:absolute;top:10px;left:50%;transform:translateX(-50%);width:10px;height:2px;background:${p.c};box-shadow:${sh}"></div>
+              <div style="position:absolute;top:16px;left:50%;transform:translateX(-50%);width:10px;height:2px;background:${p.c};box-shadow:${sh}"></div>
+            </div>
+            <!-- chest energy core -->
+            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:16px;height:16px;background:${p.cd};border:2px solid ${p.c};border-radius:50%;box-shadow:${sh}">
+              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:6px;height:6px;background:${p.c};border-radius:50%"></div>
+            </div>
+            <!-- angular armor lines -->
+            <div style="position:absolute;top:10px;left:4px;right:4px;height:1px;background:${p.cd}88"></div>
+            <div style="position:absolute;bottom:10px;left:4px;right:4px;height:1px;background:${p.cd}88"></div>
+          </div>
+          <!-- tall slim legs -->
+          <div style="display:flex;gap:6px">
+            <div><div style="width:16px;height:34px;background:${p.bg};border:1.5px solid ${p.cd};border-top:none;border-radius:0 0 2px 2px"></div>
+                 <div style="width:20px;height:7px;background:${p.bg};border:1.5px solid ${p.c};border-radius:2px;box-shadow:0 0 5px ${p.glow}"></div></div>
+            <div><div style="width:16px;height:34px;background:${p.bg};border:1.5px solid ${p.cd};border-top:none;border-radius:0 0 2px 2px"></div>
+                 <div style="width:20px;height:7px;background:${p.bg};border:1.5px solid ${p.c};border-radius:2px;box-shadow:0 0 5px ${p.glow}"></div></div>
+          </div>
+        `);
+      }
+
+      /* ---- OMEGA-PATRICIA (Omega) — triple horns, 3 eyes, massive, multicolor ---- */
+      if (regionId === 'omega') {
+        return wrap(`
+          <!-- triple horns crown -->
+          <div style="display:flex;justify-content:center;gap:2px;margin-bottom:2px">
+            <div style="width:8px;height:22px;background:linear-gradient(180deg,#ff4040,#990000);clip-path:polygon(50% 0,100% 100%,0 100%);box-shadow:0 0 10px #ff4040"></div>
+            <div style="width:12px;height:30px;background:linear-gradient(180deg,#ff00aa,#880059);clip-path:polygon(50% 0,100% 100%,0 100%);box-shadow:0 0 12px #ff00aa;margin-top:-8px"></div>
+            <div style="width:8px;height:22px;background:linear-gradient(180deg,#b829e3,#5c1475);clip-path:polygon(50% 0,100% 100%,0 100%);box-shadow:0 0 10px #b829e3"></div>
+          </div>
+          <!-- head - large and imposing -->
+          <div style="position:relative;width:62px;height:52px;background:${p.bg};border:2.5px solid ${p.c};border-radius:6px;box-shadow:${sh},0 0 40px ${p.glow}">
+            <!-- three eyes -->
+            <div style="position:absolute;top:12px;left:8px;width:12px;height:12px;background:#ff4040;border-radius:50%;box-shadow:0 0 10px #ff4040" class="omega-eye"></div>
+            <div style="position:absolute;top:10px;left:50%;transform:translateX(-50%);width:16px;height:16px;background:#ff00aa;border-radius:50%;box-shadow:0 0 14px #ff00aa" class="omega-eye" style="animation-delay:0.53s"></div>
+            <div style="position:absolute;top:12px;right:8px;width:12px;height:12px;background:#b829e3;border-radius:50%;box-shadow:0 0 10px #b829e3" class="omega-eye" style="animation-delay:1.07s"></div>
+            <!-- scowl mouth -->
+            <div style="position:absolute;bottom:8px;left:10px;right:10px;height:5px;background:${p.c};border-radius:2px 2px 0 0;clip-path:polygon(0 0,100% 0,85% 100%,15% 100%);box-shadow:${sh}"></div>
+          </div>
+          <!-- thick armored collar -->
+          <div style="width:72px;height:12px;background:linear-gradient(180deg,#220010,#100008);border:2px solid ${p.c};border-bottom:none;border-radius:4px 4px 0 0;box-shadow:${sh}"></div>
+          <!-- massive armored body -->
+          <div style="position:relative;width:88px;height:70px;background:${p.bg};border:2px solid ${p.cd};border-radius:3px 3px 8px 8px">
+            <!-- armor shoulder left -->
+            <div style="position:absolute;top:-4px;left:-8px;width:22px;height:18px;background:linear-gradient(135deg,#ff4040,#990000);border-radius:6px 2px 2px 6px;box-shadow:0 0 10px #ff4040;border:1px solid #ff404088"></div>
+            <!-- armor shoulder right -->
+            <div style="position:absolute;top:-4px;right:-8px;width:22px;height:18px;background:linear-gradient(225deg,#b829e3,#5c1475);border-radius:2px 6px 6px 2px;box-shadow:0 0 10px #b829e3;border:1px solid #b829e388"></div>
+            <!-- left arm - massive -->
+            <div style="position:absolute;top:10px;left:-20px;width:16px;height:44px;background:${p.bg};border:2px solid #ff4040;border-radius:3px;box-shadow:0 0 8px #ff4040"></div>
+            <!-- right arm - massive -->
+            <div style="position:absolute;top:10px;right:-20px;width:16px;height:44px;background:${p.bg};border:2px solid #b829e3;border-radius:3px;box-shadow:0 0 8px #b829e3"></div>
+            <!-- chest energy core multi-color -->
+            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:22px;height:22px;background:radial-gradient(circle,#ff00aa 0%,#ff4040 50%,#b829e3 100%);border-radius:50%;box-shadow:0 0 16px #ff00aa,0 0 30px rgba(255,0,170,0.5)"></div>
+            <!-- armor plates -->
+            <div style="position:absolute;top:8px;left:6px;width:28px;height:12px;background:${p.cd}44;border:1px solid ${p.cd};border-radius:2px"></div>
+            <div style="position:absolute;top:8px;right:6px;width:28px;height:12px;background:${p.cd}44;border:1px solid ${p.cd};border-radius:2px"></div>
+            <div style="position:absolute;bottom:8px;left:6px;right:6px;height:10px;background:${p.cd}33;border:1px solid ${p.cd}66;border-radius:2px"></div>
+          </div>
+          <!-- massive legs -->
+          <div style="display:flex;gap:6px">
+            <div><div style="width:28px;height:28px;background:${p.bg};border:2px solid ${p.cd};border-top:none;border-radius:0 0 4px 4px;box-shadow:0 0 6px ${p.glow}"></div>
+                 <div style="width:34px;height:10px;background:${p.bg};border:2px solid ${p.c};border-radius:2px 8px 8px 2px;box-shadow:${sh}"></div></div>
+            <div><div style="width:28px;height:28px;background:${p.bg};border:2px solid ${p.cd};border-top:none;border-radius:0 0 4px 4px;box-shadow:0 0 6px ${p.glow}"></div>
+                 <div style="width:34px;height:10px;background:${p.bg};border:2px solid ${p.c};border-radius:2px 8px 8px 2px;box-shadow:${sh}"></div></div>
+          </div>
+        `, 'omega-scale');
+      }
+
+      /* Fallback */
+      return `<div style="font-size:80px;line-height:1;filter:drop-shadow(0 0 12px ${p.c})">🤖</div>`;
+    }
+
+    /* =============================================
        UTILITY FUNCTIONS
     ============================================= */
 
@@ -4078,7 +4517,7 @@
 
       document.getElementById('bossHPName').textContent = region.boss;
       document.getElementById('bossLabel').textContent = region.boss;
-      document.getElementById('bossSprite').textContent = region.bossIcon;
+      document.getElementById('bossSprite').innerHTML = getBossHTML(region.id);
       document.getElementById('battleRegionTag').textContent = region.shortName;
       document.getElementById('playerHPMax').textContent = playerMaxHP;
       document.getElementById('playerHPVal').textContent = playerMaxHP;
@@ -4664,7 +5103,7 @@
     ============================================= */
     console.log('%c WINE TIME ', 'background:#00f0ff;color:#0a0a12;font-size:20px;font-weight:bold;font-family:monospace;padding:6px 16px;');
     console.log('%c Battle for Sommelier Supremacy ', 'background:#ff00aa;color:#fff;font-size:12px;font-family:monospace;padding:3px 12px;');
-    console.log('%c Stage 5+6 — Audio Engine + Wine Codex ', 'color:#ffd700;font-size:11px;font-family:monospace;');
+    console.log('%c Stage 7 — Boss CSS Pixel Art + Mobile Polish ', 'color:#ffd700;font-size:11px;font-family:monospace;');
 
   </script>
 </body>
