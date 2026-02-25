@@ -4926,11 +4926,11 @@
     <nav>
         <a href="#techsheets" class="active" onclick="navigateToSection('techsheets', this, event)">Wine List</a>
         <a href="#quickref" onclick="navigateToSection('quickref', this, event)">Quick Reference</a>
+        <a href="#flashcards" onclick="navigateToSection('flashcards', this, event)">Wine Quiz</a>
         <a href="#checklist" onclick="navigateToSection('checklist', this, event)">Opening Checklist</a>
         <a href="#timers" onclick="navigateToSection('timers', this, event)">Timers</a>
         <a href="#beerlist" onclick="navigateToSection('beerlist', this, event)">Beer List</a>
         <a href="#food" onclick="navigateToSection('food', this, event)">Food Menu</a>
-        <a href="#flashcards" onclick="navigateToSection('flashcards', this, event)">Wine Quiz</a>
         <a href="#onlineflashcards" onclick="navigateToSection('onlineflashcards', this, event)">Online Flashcards</a>
         <a href="#wineregions" onclick="navigateToSection('wineregions', this, event)">Wine Regions</a>
         <a href="#enomatic" onclick="navigateToSection('enomatic', this, event)">Enomatic System</a>
@@ -6328,7 +6328,7 @@
                 region: "Penedès (Font-Rubí)",
                 appellation: "Penedès DO",
                 country: "Spain",
-                pronunciation: "gar-NACH-ah meh-reh-TAHT mon-roo-BEE",
+                pronunciation: "gar-NACH-ah meh-reh-TAHT mon-roo-BEE · Penedès: peh-neh-DES · Font-Rubí: fon-roo-BEE",
                 winemaker: "Mont-Rubí S.A. - A family estate in L'Avella, Font-Rubí, in the heart of Catalonia's Penedès region. The winery has been certified organic since 2002, working with old Garnacha vines that produce small, concentrated berries. 'Meretat' means 'deserved' or 'earned' in Catalan—reflecting the hard work of organic farming. The high-altitude vineyards (400-600m) experience dramatic day-night temperature swings that preserve acidity while building ripe fruit character. Mont-Rubí is part of the new wave of quality-focused Catalan producers.",
                 tasting: "Ripe red berries (raspberry, strawberry), Mediterranean herbs, hints of white pepper and garrigue. Medium body with soft tannins and a warm finish.",
                 food: "Chorizo, Salchichon De Bellota, Ewephoria, Tapenade, Manchego",
@@ -7934,8 +7934,8 @@
                 document.getElementById('flashcardHint').textContent = 'Incorrect — the correct answer is highlighted in green.';
             }
             if (currentCard.pronunciation) {
-                const hintEl = document.getElementById('flashcardHint');
-                hintEl.textContent += '  •  How to say it: ' + currentCard.pronunciation;
+                const wineEl = document.getElementById('flashcardWine');
+                wineEl.innerHTML = currentCard.wine + '<span class="flashcard-pronunciation">' + currentCard.pronunciation + '</span>';
             }
 
             selectedAnswer = null;
