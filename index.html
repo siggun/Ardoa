@@ -4877,6 +4877,106 @@
         [data-theme="dark"] .timeclock-manual-cancel { background: #2a1a25; color: #e8e4dc; }
         [data-theme="dark"] .timeclock-manual-cancel:hover { background: #3a2a35; }
 
+        /* === TYPEMASTER — Easter Egg Typing Challenge === */
+        #typemaster { display: none; }
+        #typemaster.active { display: block; }
+        .typemaster-wrap { max-width: 780px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+        .typemaster-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.5rem; gap: 1rem; }
+        .typemaster-title { font-family: 'Cinzel', serif; color: #4a1a28; font-size: 1.7rem; margin: 0 0 0.3rem; }
+        .typemaster-subtitle { color: #555; font-size: 0.88rem; margin: 0; }
+        .typemaster-close-btn { background: #4a1a28; color: #f8f5f0; border: 1px solid #6b2d3e; padding: 0.45rem 1rem; cursor: pointer; font-size: 0.85rem; border-radius: 3px; white-space: nowrap; flex-shrink: 0; }
+        .typemaster-close-btn:hover { background: #6b2d3e; }
+
+        .typemaster-chars-panel { background: #f8f5f0; border: 1px solid #d8cfc8; padding: 0.85rem 1rem; margin-bottom: 1.25rem; border-radius: 4px; }
+        .typemaster-chars-toggle { cursor: pointer; color: #4a1a28; font-family: 'Cinzel', serif; font-size: 0.88rem; display: flex; align-items: center; gap: 0.5rem; user-select: none; letter-spacing: 0.04em; }
+        .typemaster-chars-toggle:hover { color: #6b2d3e; }
+        .typemaster-chars-content { margin-top: 0.85rem; display: none; }
+        .typemaster-chars-content.open { display: block; }
+        .typemaster-chars-tabs { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; }
+        .typemaster-chars-tab { padding: 0.3rem 0.85rem; background: #fff; color: #4a1a28; border: 1px solid #c8c0b8; cursor: pointer; font-size: 0.8rem; border-radius: 3px; }
+        .typemaster-chars-tab.tm-tab-active { background: #4a1a28; color: #f8f5f0; border-color: #4a1a28; }
+        .typemaster-chars-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+        .typemaster-chars-table th { color: #4a1a28; text-align: left; padding: 0.3rem 0.6rem; border-bottom: 1px solid #d8cfc8; font-weight: 600; font-size: 0.78rem; }
+        .typemaster-chars-table td { color: #2c2c2c; padding: 0.28rem 0.6rem; border-bottom: 1px solid #ede8e2; }
+        .typemaster-chars-table td:first-child { font-size: 1.15rem; width: 2.2rem; color: #4a1a28; font-weight: bold; }
+        .typemaster-chars-note { color: #666; font-size: 0.76rem; margin: 0.5rem 0 0; line-height: 1.5; }
+
+        .typemaster-controls { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.1rem; gap: 1rem; }
+        .typemaster-nav-btn { background: #4a1a28; color: #f8f5f0; border: 1px solid #6b2d3e; padding: 0.5rem 1.25rem; cursor: pointer; font-size: 0.88rem; border-radius: 3px; }
+        .typemaster-nav-btn:hover:not([disabled]) { background: #6b2d3e; }
+        .typemaster-nav-btn[disabled] { opacity: 0.35; cursor: default; }
+        .typemaster-progress-info { text-align: center; color: #2c2c2c; font-size: 0.9rem; line-height: 1.5; }
+        .typemaster-progress-info strong { color: #4a1a28; }
+        .typemaster-mastered-count { color: #2a7a1e; font-size: 0.82rem; }
+
+        .typemaster-card { background: #fff; border: 1px solid #d8cfc8; border-radius: 4px; padding: 1.5rem; }
+        .tm-category { font-family: 'Cinzel', serif; color: #4a1a28; font-size: 0.95rem; margin-bottom: 1.25rem; letter-spacing: 0.06em; border-bottom: 1px solid #d8cfc8; padding-bottom: 0.6rem; }
+        .tm-fields { display: flex; flex-direction: column; gap: 0.9rem; }
+        .tm-field { display: flex; flex-direction: column; gap: 0.2rem; }
+        .tm-label { color: #6b2d3e; font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.09em; font-weight: 600; }
+        .tm-input-row { display: flex; align-items: center; gap: 0.5rem; }
+        .tm-input { background: #fff; border: 1px solid #c8c0b8; color: #2c2c2c; padding: 0.5rem 0.7rem; font-size: 0.95rem; flex: 1; border-radius: 3px; font-family: 'Crimson Text', Georgia, serif; }
+        .tm-input:focus { outline: none; border-color: #4a1a28; }
+        .tm-input.tm-correct { border-color: #2a7a1e; background: #f2faf0; }
+        .tm-input.tm-incorrect { border-color: #aa3030; background: #faf0f0; }
+        .tm-feedback { font-size: 1.1rem; min-width: 1.5rem; text-align: center; flex-shrink: 0; }
+        .tm-fb-correct { color: #2a7a1e; }
+        .tm-fb-incorrect { color: #cc3333; }
+        .tm-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
+        .tm-btn-check { background: #4a1a28; color: #f8f5f0; border: 1px solid #6b2d3e; padding: 0.55rem 1.5rem; cursor: pointer; font-size: 0.88rem; border-radius: 3px; font-family: 'Cinzel', serif; letter-spacing: 0.04em; }
+        .tm-btn-check:hover { background: #6b2d3e; }
+        .tm-btn-reveal { background: #f8f5f0; color: #888; border: 1px solid #c8c0b8; padding: 0.55rem 1.25rem; cursor: pointer; font-size: 0.88rem; border-radius: 3px; }
+        .tm-btn-reveal:hover { color: #4a1a28; border-color: #4a1a28; }
+        .tm-btn-clear { background: #f8f5f0; color: #888; border: 1px solid #c8c0b8; padding: 0.55rem 1.25rem; cursor: pointer; font-size: 0.88rem; border-radius: 3px; }
+        .tm-btn-clear:hover { color: #4a1a28; border-color: #4a1a28; }
+        .tm-mastered-banner { background: #f0faf0; border: 1px solid #2a7a1e; color: #2a7a1e; text-align: center; padding: 0.7rem; margin-top: 1rem; border-radius: 3px; font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 0.05em; }
+        .tm-hint { color: #999; font-size: 0.76rem; margin-top: 0.85rem; font-style: italic; }
+
+        /* TYPEMASTER — Dark mode overrides */
+        [data-theme="dark"] .typemaster-title { color: #c4a875; }
+        [data-theme="dark"] .typemaster-subtitle { color: #b8b4ac; }
+        [data-theme="dark"] .typemaster-close-btn { background: #4a0e1a; color: #c4a875; border-color: #6b1c2e; }
+        [data-theme="dark"] .typemaster-close-btn:hover { background: #6b1c2e; }
+        [data-theme="dark"] .typemaster-chars-panel { background: #1a1025; border-color: #4a0e1a; }
+        [data-theme="dark"] .typemaster-chars-toggle { color: #c4a875; }
+        [data-theme="dark"] .typemaster-chars-toggle:hover { color: #e8e4dc; }
+        [data-theme="dark"] .typemaster-chars-tab { background: #0a0a0f; color: #c4a875; border-color: #4a0e1a; }
+        [data-theme="dark"] .typemaster-chars-tab.tm-tab-active { background: #4a0e1a; color: #e8e4dc; border-color: #4a0e1a; }
+        [data-theme="dark"] .typemaster-chars-table th { color: #c4a875; border-bottom-color: #4a0e1a; }
+        [data-theme="dark"] .typemaster-chars-table td { color: #e8e4dc; border-bottom-color: #1e1030; }
+        [data-theme="dark"] .typemaster-chars-table td:first-child { color: #c4a875; }
+        [data-theme="dark"] .typemaster-chars-note { color: #c4a875; opacity: 0.8; }
+        [data-theme="dark"] .typemaster-nav-btn { background: #4a0e1a; color: #c4a875; border-color: #6b1c2e; }
+        [data-theme="dark"] .typemaster-nav-btn:hover:not([disabled]) { background: #6b1c2e; }
+        [data-theme="dark"] .typemaster-progress-info { color: #e8e4dc; }
+        [data-theme="dark"] .typemaster-progress-info strong { color: #c4a875; }
+        [data-theme="dark"] .typemaster-mastered-count { color: #5aac44; }
+        [data-theme="dark"] .typemaster-card { background: #1a1025; border-color: #4a0e1a; }
+        [data-theme="dark"] .tm-category { color: #c4a875; border-bottom-color: #4a0e1a; }
+        [data-theme="dark"] .tm-label { color: #c4a875; }
+        [data-theme="dark"] .tm-input { background: #0a0a0f; border-color: #3a2040; color: #e8e4dc; }
+        [data-theme="dark"] .tm-input:focus { border-color: #c4a875; }
+        [data-theme="dark"] .tm-input.tm-correct { border-color: #3a8a2e; background: #0a140a; }
+        [data-theme="dark"] .tm-input.tm-incorrect { border-color: #8a2e2e; background: #140a0a; }
+        [data-theme="dark"] .tm-fb-correct { color: #5aac44; }
+        [data-theme="dark"] .tm-fb-incorrect { color: #e05555; }
+        [data-theme="dark"] .tm-btn-check { background: #4a0e1a; color: #c4a875; border-color: #6b1c2e; }
+        [data-theme="dark"] .tm-btn-check:hover { background: #6b1c2e; }
+        [data-theme="dark"] .tm-btn-reveal { background: #0d0a15; color: #666; border-color: #2a1a35; }
+        [data-theme="dark"] .tm-btn-reveal:hover { color: #c4a875; border-color: #4a0e1a; }
+        [data-theme="dark"] .tm-btn-clear { background: #0d0a15; color: #666; border-color: #2a1a35; }
+        [data-theme="dark"] .tm-btn-clear:hover { color: #c4a875; border-color: #4a0e1a; }
+        [data-theme="dark"] .tm-mastered-banner { background: #0f2a0a; border-color: #3a8a2e; color: #5aac44; }
+        [data-theme="dark"] .tm-hint { color: #555; }
+
+        @media (max-width: 480px) {
+            .typemaster-title { font-size: 1.3rem; }
+            .typemaster-controls { flex-wrap: wrap; justify-content: center; }
+            .typemaster-nav-btn { padding: 0.45rem 0.85rem; }
+            .tm-category { font-size: 0.85rem; }
+            .tm-input { font-size: 0.88rem; }
+        }
+
     </style>
 </head>
 <body>
@@ -4918,7 +5018,7 @@
                 </g>
             </svg>
 
-            <h1>Ardoa</h1>
+            <h1 id="ardoaTitle">Ardoa</h1>
             <p>French Wine Bar & Shop</p>
         </div>
     </header>
@@ -5261,7 +5361,7 @@
                         </div>
                         <div class="region-card-body">
                             <div class="region-description">
-                                France's longest river creates diverse wine regions. Anjou produces elegant Cabernet Franc reds with fresh acidity and red fruit. Pouilly-Fumé makes world-class Sauvignon Blanc with flinty minerality. The Loire also produces unique whites like Folle Blanche. The cool climate preserves acidity and creates wines with fresh, vibrant character.
+                                France's longest river creates diverse wine regions. Anjou (ahn-ZHOO) produces elegant Cabernet Franc reds with fresh acidity and red fruit. Pouilly-Fumé makes world-class Sauvignon Blanc with flinty minerality. The Loire also produces unique whites like Folle Blanche. The cool climate preserves acidity and creates wines with fresh, vibrant character.
                             </div>
                             <div class="region-facts">
                                 <div class="region-fact">
@@ -5449,7 +5549,7 @@
                         </div>
                         <div class="region-card-body">
                             <div class="region-description">
-                                Italy's largest island is a treasure trove of indigenous grapes. Frappato produces light, aromatic reds perfect for chilling. Nerello Mascalese, usually for Etna reds, can be pressed immediately to make unique aromatic whites. Volcanic soils, sea breezes, and ancient varieties create wines unlike anywhere else.
+                                Italy's largest island is a treasure trove of indigenous grapes. Frappato produces light, aromatic reds perfect for chilling. Nerello Mascalese (neh-REL-oh mas-kah-LEH-zeh), usually for Etna reds, can be pressed immediately to make unique aromatic whites. Volcanic soils, sea breezes, and ancient varieties create wines unlike anywhere else.
                             </div>
                             <div class="region-facts">
                                 <div class="region-fact">
@@ -5458,7 +5558,7 @@
                                 </div>
                                 <div class="region-fact">
                                     <span class="region-fact-label">Key Grapes</span>
-                                    <span class="region-fact-value">Frappato, Nerello</span>
+                                    <span class="region-fact-value">Frappato, Nerello Mascalese</span>
                                 </div>
                             </div>
                             <div class="region-wines">
@@ -6058,6 +6158,82 @@
                 <!-- Varietal cards will be inserted here by JavaScript -->
             </div>
         </section>
+
+        <!-- ===== TYPEMASTER — Easter Egg Section (no nav link — click "Ardoa" title 5×) ===== -->
+        <section id="typemaster">
+            <div class="typemaster-wrap">
+
+                <div class="typemaster-top">
+                    <div>
+                        <h2 class="typemaster-title">Wine Mastery Challenge</h2>
+                        <p class="typemaster-subtitle">Type every field exactly — accents required, case doesn't matter</p>
+                    </div>
+                    <button class="typemaster-close-btn" onclick="showSection('techsheets')">✕ Exit</button>
+                </div>
+
+                <!-- Special Characters Reference -->
+                <div class="typemaster-chars-panel">
+                    <div class="typemaster-chars-toggle" onclick="tmToggleChars()">
+                        <span id="tmCharsArrow">▶</span> Special Characters Guide
+                    </div>
+                    <div class="typemaster-chars-content" id="tmCharsContent">
+                        <div class="typemaster-chars-tabs">
+                            <button class="typemaster-chars-tab tm-tab-active" id="tmTabMac" onclick="tmShowCharTab('mac')">Mac</button>
+                            <button class="typemaster-chars-tab" id="tmTabPc" onclick="tmShowCharTab('pc')">Windows / PC</button>
+                        </div>
+                        <div id="tmCharsMac">
+                            <table class="typemaster-chars-table">
+                                <tr><th>Char</th><th>Key Sequence</th><th>Where it appears</th></tr>
+                                <tr><td>é</td><td>⌥E → E</td><td>Pouilly-Fumé, Supérieur, Crémant, Salnés</td></tr>
+                                <tr><td>è</td><td>⌥` → E</td><td>Verquière, Penedès, Mourvèdre</td></tr>
+                                <tr><td>â</td><td>⌥I → A</td><td>Château</td></tr>
+                                <tr><td>ô</td><td>⌥I → O</td><td>Côtes, Rhône, François</td></tr>
+                                <tr><td>ç</td><td>⌥C</td><td>François</td></tr>
+                                <tr><td>ä</td><td>⌥U → A</td><td>Täglich (Braunewell)</td></tr>
+                                <tr><td>ñ</td><td>⌥N → N</td><td>Albariño</td></tr>
+                                <tr><td>í</td><td>⌥E → I</td><td>Mont-Rubí, Rías Baixas</td></tr>
+                                <tr><td>á</td><td>⌥E → A</td><td>Rías Baixas, Salnés</td></tr>
+                            </table>
+                            <p class="typemaster-chars-note">⌥ = Option key. Hold Option, tap the first key, release, then tap the second key.</p>
+                            <p class="typemaster-chars-note">Shortcut: On modern Macs you can hold any vowel key and a popup appears — click the number for the accented version.</p>
+                        </div>
+                        <div id="tmCharsPc" style="display:none">
+                            <table class="typemaster-chars-table">
+                                <tr><th>Char</th><th>Alt Code (Numpad)</th><th>Where it appears</th></tr>
+                                <tr><td>é</td><td>Alt + 0233</td><td>Pouilly-Fumé, Supérieur, Crémant, Salnés</td></tr>
+                                <tr><td>è</td><td>Alt + 0232</td><td>Verquière, Penedès, Mourvèdre</td></tr>
+                                <tr><td>â</td><td>Alt + 0226</td><td>Château</td></tr>
+                                <tr><td>ô</td><td>Alt + 0244</td><td>Côtes, Rhône, François</td></tr>
+                                <tr><td>ç</td><td>Alt + 0231</td><td>François</td></tr>
+                                <tr><td>ä</td><td>Alt + 0228</td><td>Täglich (Braunewell)</td></tr>
+                                <tr><td>ñ</td><td>Alt + 0241</td><td>Albariño</td></tr>
+                                <tr><td>í</td><td>Alt + 0237</td><td>Mont-Rubí, Rías Baixas</td></tr>
+                                <tr><td>á</td><td>Alt + 0225</td><td>Rías Baixas, Salnés</td></tr>
+                            </table>
+                            <p class="typemaster-chars-note">Hold Alt and type the number on the NUMERIC KEYPAD (not the top row). Num Lock must be ON.</p>
+                            <p class="typemaster-chars-note">Alternative: Open Windows Character Map (search "charmap" in Start) or copy-paste from this table.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation controls -->
+                <div class="typemaster-controls">
+                    <button class="typemaster-nav-btn" id="tmPrevBtn" onclick="tmNavigate(-1)">← Prev</button>
+                    <div class="typemaster-progress-info">
+                        <div>Item <strong id="tmCurrent">—</strong> of <strong id="tmTotal">—</strong></div>
+                        <div class="typemaster-mastered-count">★ Mastered: <span id="tmMastered">0</span></div>
+                    </div>
+                    <button class="typemaster-nav-btn" id="tmNextBtn" onclick="tmNavigate(1)">Next →</button>
+                </div>
+
+                <!-- Challenge card (filled by JS) -->
+                <div class="typemaster-card" id="tmCard">
+                    <div class="tm-category">Click "Ardoa" in the header 5 times to begin</div>
+                </div>
+
+            </div>
+        </section>
+
     </main>
 
     <footer>
@@ -6226,11 +6402,11 @@
                 vintage: "2023",
                 type: "rose",
                 grape: "100% Nerello Mascalese",
-                grapeDetail: "Nerello Mascalese is Sicily's most elegant red grape, best known for Etna Rosso. As a rosé, it yields a delicate pale pink wine with floral aromatics and saline minerality.",
+                grapeDetail: "Nerello Mascalese (neh-REL-oh mas-kah-LEH-zeh) is Sicily's most elegant red grape, best known for Etna Rosso. As a rosé, it yields a delicate pale pink wine with floral aromatics and saline minerality.",
                 region: "Sicily",
                 appellation: "Sicilia DOC",
                 country: "Italy",
-                pronunciation: "GOR-gee TON-dee ROH-zah DAY VEN-tee",
+                pronunciation: "GOR-gee TON-dee ROH-zah DAY VEN-tee · Nerello Mascalese: neh-REL-oh mas-kah-LEH-zeh",
                 winemaker: "Gorghi Tondi - An organic estate in western Sicily near Marsala. 'Rosa Dei Venti' means 'Rose of the Winds'—a nod to the constant Mediterranean sea breezes that cool the vineyards and keep vines healthy without chemicals. Gorghi Tondi is passionate about reviving Sicily's indigenous grape varieties, believing they best express the island's sun-drenched Mediterranean character. Certified organic, all grapes are hand-harvested and direct-pressed to achieve the delicate pale color and fresh aromatics.",
                 tasting: "Pale coral pink. Wild strawberry, white peach, citrus blossom, and saline sea spray on the nose. Light-bodied with vibrant acidity and a clean, mineral finish.",
                 food: "Prosciutto di Parma, Petit Basque, Hummus, Antipasto Vegetable Blend, The Veg flatbread",
@@ -6421,11 +6597,11 @@
                 vintage: "2023",
                 type: "red",
                 grape: "100% Cabernet Franc",
-                grapeDetail: "Anjou Cabernet Franc is the Loire's signature red grape—lighter, more aromatic, with red fruit and herbal notes. Called 'Breton' locally.",
+                grapeDetail: "Anjou (ahn-ZHOO) Cabernet Franc is the Loire's signature red grape—lighter, more aromatic, with red fruit and herbal notes. Called 'Breton' locally.",
                 region: "Anjou, Loire Valley",
                 appellation: "Anjou Rouge AOC",
                 country: "France",
-                pronunciation: "doh-MEN duh lah puh-TEET ROSH",
+                pronunciation: "doh-MEN duh lah puh-TEET ROSH · Anjou: ahn-ZHOO",
                 winemaker: "Domaine de la Petite Roche - A small family estate in Anjou producing traditional Loire Cabernet Franc with minimal intervention. Sustainable viticulture on schist and sandstone soils, native yeast fermentation, and careful extraction preserve the grape's inherent freshness and aromatic character. Anjou produces a softer, more approachable style of Loire Cabernet Franc—earlier drinking than Bourgueil or Chinon, with more forward fruit and gentle structure.",
                 tasting: "Red currant, fresh raspberry, violet, herbal notes (green leaf, red pepper), and subtle earthy undertones. Medium body with fresh acidity, light tannins, and a vibrant, food-friendly finish.",
                 food: "Duck Rillettes, Pâté de Campagne, Petit Basque, Black Truffle Goat, Prosciutto di Parma",
@@ -6641,7 +6817,7 @@
                 vintage: "2020",
                 type: "red",
                 grape: "Carinyena (Carignan) 60%, Garnatxa Negra (Grenache) 40%",
-                grapeDetail: "The two native grapes of Priorat, grown on old vines (10-60+ years) across 22 separate vineyard plots in the village of Porrera.",
+                grapeDetail: "Carinyena (kah-rin-YEH-nah) — the Catalan name for Carignan — and Garnatxa Negra (Grenache) are the two native grapes of Priorat, grown on old vines (10-60+ years) across 22 separate vineyard plots in the village of Porrera.",
                 region: "Priorat DOQ",
                 appellation: "DOQ Priorat / Vi de Vila Porrera",
                 country: "Spain",
@@ -8622,7 +8798,7 @@
                 'Montepulciano': { origin: 'Abruzzo, Italy', color: 'red', description: 'NOT to be confused with Vino Nobile di Montepulciano (which uses Sangiovese from Tuscany). This is the Montepulciano GRAPE from Abruzzo. Dark-skinned with soft tannins and natural food-friendliness, it produces one of Italy\'s best-value reds.', aka: '' },
                 'Mencía': { origin: 'Galicia & Bierzo, Spain', color: 'red', description: 'Spain\'s answer to Pinot Noir - elegant, aromatic, with bright acidity and mineral complexity. Native to northwestern Spain, it thrives on the steep terraced hillsides of regions like Ribeira Sacra, where "heroic viticulture" requires harvesting with cables and harnesses.', aka: 'Jaén (Portugal)' },
                 'Cabernet Sauvignon': { origin: 'Bordeaux, France', color: 'red', description: 'The world\'s most planted wine grape and the king of full-bodied reds. A natural cross of Cabernet Franc and Sauvignon Blanc (discovered by DNA profiling in 1996). Known for blackcurrant, cedar, and firm tannins that allow decades of aging. Thrives in warm climates worldwide.', aka: '' },
-                'Carignan': { origin: 'Aragón, Spain', color: 'red', description: 'An ancient Mediterranean grape that produces dark, tannic wines with intense fruit when yields are kept low. Old-vine Carignan (called Carinyena in Catalan, Mazuelo in Rioja) is prized in regions like Priorat for its concentration and complexity. Once used mainly for bulk wine, now a star of quality blends.', aka: 'Carinyena (Catalan), Mazuelo (Rioja), Carignan (France)' },
+                'Carignan': { origin: 'Aragón, Spain', color: 'red', description: 'An ancient Mediterranean grape that produces dark, tannic wines with intense fruit when yields are kept low. Old-vine Carignan (called Carinyena — kah-rin-YEH-nah — in Catalan, Mazuelo in Rioja) is prized in regions like Priorat for its concentration and complexity. Once used mainly for bulk wine, now a star of quality blends.', aka: 'Carinyena (kah-rin-YEH-nah / Catalan), Mazuelo (Rioja), Carignan (France)' },
                 'Grenache': { origin: 'Aragón, Spain', color: 'red', description: 'Spain\'s most planted red grape, producing wines with ripe red fruit, white pepper, and herbal garrigue notes. Originated in Aragón and spread across the Mediterranean. Old vines produce small yields of incredibly concentrated wine. Also essential in Southern Rhône blends (GSM).', aka: 'Garnacha (Spanish), Garnatxa (Catalan), Cannonau (Sardinia)' },
                 'Frappato': { origin: 'Sicily, Italy', color: 'red', description: 'A light, aromatic Sicilian treasure often compared to Beaujolais or Loire reds. Produces delicate wines bursting with fresh cherry, wild strawberry, and rose petals. Half of the blend in DOCG Cerasuolo di Vittoria, but shines on its own as a perfect chillable red.', aka: '' },
                 'Tempranillo': { origin: 'Spain', color: 'red', description: 'Spain\'s noble grape and the backbone of Rioja and Ribera del Duero. The name comes from "temprano" (early) because it ripens earlier than other Spanish varieties. Produces wines with cherry fruit, leather, vanilla, and excellent aging potential. Incredibly versatile across different regions.', aka: 'Tinto Fino, Tinta del País, Cencibel, Tinta de Toro' },
@@ -9553,6 +9729,185 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
             }
         }
 
+        // ============================================================
+        // TYPEMASTER — Easter Egg Wine Mastery Typing Challenge
+        // Reveal: click the "Ardoa" header title 5 times within 3 s
+        // ============================================================
+        var tmItems = null;
+        var tmIndex = 0;
+        var tmMastered = {};
+
+        function tmBuildItems() {
+            var items = [];
+            wines.filter(function(w) { return w.type !== 'sparkling'; }).forEach(function(w, i) {
+                items.push({ type: 'wine', pos: i + 1, data: w });
+            });
+            wines.filter(function(w) { return w.type === 'sparkling'; }).forEach(function(w, i) {
+                items.push({ type: 'sparkling', pos: i + 1, data: w });
+            });
+            beers.forEach(function(b, i) {
+                items.push({ type: 'beer', pos: i + 1, data: b });
+            });
+            return items;
+        }
+
+        function tmInit() {
+            if (!tmItems) tmItems = tmBuildItems();
+            tmIndex = 0;
+            tmRenderCurrent();
+        }
+
+        function tmFields(item) {
+            if (item.type === 'beer') {
+                return [
+                    { key: 'name',     label: 'Name',     value: item.data.name },
+                    { key: 'brewery',  label: 'Brewery',  value: item.data.brewery },
+                    { key: 'location', label: 'Location', value: item.data.location },
+                    { key: 'style',    label: 'Style',    value: item.data.style }
+                ];
+            }
+            return [
+                { key: 'name',        label: 'Name',        value: item.data.name },
+                { key: 'vintage',     label: 'Vintage',     value: item.data.vintage },
+                { key: 'grape',       label: 'Grape(s)',    value: item.data.grape },
+                { key: 'region',      label: 'Region',      value: item.data.region },
+                { key: 'appellation', label: 'Appellation', value: item.data.appellation },
+                { key: 'country',     label: 'Country',     value: item.data.country }
+            ];
+        }
+
+        function tmRenderCurrent() {
+            if (!tmItems || !tmItems.length) return;
+            var item = tmItems[tmIndex];
+            var card = document.getElementById('tmCard');
+            var isMastered = !!tmMastered[tmIndex];
+
+            var typeLabel = item.type === 'wine'      ? 'Enomatic Wine — Position ' + item.pos :
+                            item.type === 'sparkling' ? 'Sparkling Wine — ' + item.pos :
+                                                        'Beer — ' + item.pos;
+            var fields = tmFields(item);
+
+            var fieldsHTML = fields.map(function(f) {
+                return '<div class="tm-field">' +
+                    '<div class="tm-label">' + f.label + '</div>' +
+                    '<div class="tm-input-row">' +
+                    '<input type="text" class="tm-input" id="tmInput-' + f.key + '" ' +
+                        'autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ' +
+                        'placeholder="Type here…">' +
+                    '<span class="tm-feedback" id="tmFb-' + f.key + '"></span>' +
+                    '</div></div>';
+            }).join('');
+
+            card.innerHTML =
+                '<div class="tm-category">' + typeLabel + '</div>' +
+                '<div class="tm-fields">' + fieldsHTML + '</div>' +
+                '<div class="tm-actions">' +
+                    '<button class="tm-btn-check" onclick="tmCheck()">Check Answers</button>' +
+                    '<button class="tm-btn-reveal" onclick="tmReveal()">Reveal All</button>' +
+                    '<button class="tm-btn-clear" onclick="tmClearAll()">Clear All</button>' +
+                '</div>' +
+                '<p class="tm-hint">Accents must match exactly (é ≠ e, ô ≠ o, ä ≠ a, ñ ≠ n). Case is ignored.</p>' +
+                (isMastered ? '<div class="tm-mastered-banner">★ Mastered!</div>' : '');
+
+            card.dataset.fields = JSON.stringify(fields);
+
+            document.getElementById('tmCurrent').textContent = tmIndex + 1;
+            document.getElementById('tmTotal').textContent = tmItems.length;
+            document.getElementById('tmMastered').textContent = Object.keys(tmMastered).length;
+            document.getElementById('tmPrevBtn').disabled = tmIndex === 0;
+            document.getElementById('tmNextBtn').disabled = tmIndex === tmItems.length - 1;
+            forceRepaint(card);
+        }
+
+        function tmNavigate(dir) {
+            var next = tmIndex + dir;
+            if (next < 0 || next >= (tmItems ? tmItems.length : 0)) return;
+            tmIndex = next;
+            tmRenderCurrent();
+        }
+
+        function tmCheck() {
+            var card = document.getElementById('tmCard');
+            var fields = JSON.parse(card.dataset.fields || '[]');
+            var allCorrect = true;
+            fields.forEach(function(f) {
+                var input = document.getElementById('tmInput-' + f.key);
+                var fb    = document.getElementById('tmFb-' + f.key);
+                if (!input || !fb) return;
+                var correct = input.value.trim().toLowerCase() === f.value.trim().toLowerCase();
+                input.classList.toggle('tm-correct',   correct);
+                input.classList.toggle('tm-incorrect', !correct);
+                fb.textContent = correct ? '✓' : '✗';
+                fb.className = 'tm-feedback ' + (correct ? 'tm-fb-correct' : 'tm-fb-incorrect');
+                if (!correct) allCorrect = false;
+            });
+            if (allCorrect) {
+                tmMastered[tmIndex] = true;
+                document.getElementById('tmMastered').textContent = Object.keys(tmMastered).length;
+                var banner = card.querySelector('.tm-mastered-banner');
+                if (!banner) {
+                    banner = document.createElement('div');
+                    banner.className = 'tm-mastered-banner';
+                    banner.textContent = '★ Mastered!';
+                    card.appendChild(banner);
+                }
+            }
+        }
+
+        function tmReveal() {
+            var card = document.getElementById('tmCard');
+            var fields = JSON.parse(card.dataset.fields || '[]');
+            fields.forEach(function(f) {
+                var input = document.getElementById('tmInput-' + f.key);
+                if (input) input.value = f.value;
+            });
+            tmCheck();
+        }
+
+        function tmClearAll() {
+            var card = document.getElementById('tmCard');
+            var fields = JSON.parse(card.dataset.fields || '[]');
+            fields.forEach(function(f) {
+                var input = document.getElementById('tmInput-' + f.key);
+                var fb    = document.getElementById('tmFb-' + f.key);
+                if (input) {
+                    input.value = '';
+                    input.classList.remove('tm-correct', 'tm-incorrect');
+                }
+                if (fb) {
+                    fb.textContent = '';
+                    fb.className = 'tm-feedback';
+                }
+            });
+        }
+
+        function tmToggleChars() {
+            var content = document.getElementById('tmCharsContent');
+            var arrow   = document.getElementById('tmCharsArrow');
+            if (!content || !arrow) return;
+            var isOpen = content.classList.toggle('open');
+            arrow.textContent = isOpen ? '▼' : '▶';
+        }
+
+        function tmShowCharTab(tab) {
+            var macDiv = document.getElementById('tmCharsMac');
+            var pcDiv  = document.getElementById('tmCharsPc');
+            var macBtn = document.getElementById('tmTabMac');
+            var pcBtn  = document.getElementById('tmTabPc');
+            if (!macDiv || !pcDiv) return;
+            if (tab === 'mac') {
+                macDiv.style.display = 'block';
+                pcDiv.style.display  = 'none';
+                macBtn.classList.add('tm-tab-active');
+                pcBtn.classList.remove('tm-tab-active');
+            } else {
+                macDiv.style.display = 'none';
+                pcDiv.style.display  = 'block';
+                macBtn.classList.remove('tm-tab-active');
+                pcBtn.classList.add('tm-tab-active');
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             try {
                 initTheme();
@@ -9569,6 +9924,25 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
                 renderVarietals();
                 renderChecklist();
                 renderTimeclock();
+
+                // Easter egg: click the "Ardoa" title 5× within 3 s to reveal Typemaster
+                (function() {
+                    var clicks = 0, timer = null;
+                    var title = document.getElementById('ardoaTitle');
+                    if (!title) return;
+                    title.style.cursor = 'default';
+                    title.addEventListener('click', function() {
+                        clicks++;
+                        if (timer) clearTimeout(timer);
+                        timer = setTimeout(function() { clicks = 0; }, 3000);
+                        if (clicks >= 5) {
+                            clicks = 0;
+                            clearTimeout(timer);
+                            showSection('typemaster');
+                            tmInit();
+                        }
+                    });
+                })();
 
                 // Force iOS Safari to paint dynamically inserted card content.
                 // Without this, innerHTML content may remain invisible because
