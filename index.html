@@ -5314,7 +5314,7 @@
             --cp-r:    #ff0055;
             --cp-y:    #ffe000;
             --cp-t:    #c4d4ff;
-            --cp-t2:   #5060a0;
+            --cp-t2:   #8898c8;
             --cp-bd:   #0d2040;
             --cp-font: 'VT323', 'Courier New', monospace;
         }
@@ -5427,7 +5427,78 @@
             font-size: 0.88rem !important;
         }
 
-        /* QUICK DESCRIPTIONS */
+        /* WINE CARD INTERNALS */
+        html.cyberpunk .wine-card-header {
+            background: linear-gradient(135deg, var(--cp-bg2), var(--cp-bg3)) !important;
+            border-bottom: 1px solid var(--cp-bd) !important;
+        }
+        html.cyberpunk .wine-card.red .wine-card-header     { border-bottom-color: var(--cp-m) !important; }
+        html.cyberpunk .wine-card.white .wine-card-header   { border-bottom-color: var(--cp-c) !important; }
+        html.cyberpunk .wine-card.rose .wine-card-header    { border-bottom-color: var(--cp-r) !important; }
+        html.cyberpunk .wine-card.sparkling .wine-card-header { border-bottom-color: var(--cp-y) !important; }
+        html.cyberpunk .wine-card-body { background: var(--cp-bg3) !important; }
+        html.cyberpunk .wine-card h3 { color: var(--cp-c) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .wine-detail-label { color: var(--cp-c) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .wine-detail-value { color: var(--cp-t) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .pronunciation {
+            background: var(--cp-bg2) !important;
+            border-left-color: var(--cp-c) !important;
+            color: var(--cp-t2) !important;
+        }
+        html.cyberpunk .blend-detail { color: var(--cp-t2) !important; }
+        html.cyberpunk .wine-card .pairing-food { color: var(--cp-c) !important; }
+        html.cyberpunk .wine-card .pairing-why  { color: var(--cp-t2) !important; }
+        html.cyberpunk .wine-card .pairing-item { border-left-color: var(--cp-c) !important; }
+
+        /* BEER CARD INTERNALS */
+        html.cyberpunk .beer-card-header {
+            background: linear-gradient(135deg, var(--cp-bg2), var(--cp-bg3)) !important;
+        }
+        html.cyberpunk .beer-card.ale .beer-card-header   { border-bottom: 1px solid var(--cp-o) !important; }
+        html.cyberpunk .beer-card.lager .beer-card-header { border-bottom: 1px solid var(--cp-y) !important; }
+        html.cyberpunk .beer-card.ipa .beer-card-header   { border-bottom: 1px solid var(--cp-g) !important; }
+        html.cyberpunk .beer-card.other .beer-card-header { border-bottom: 1px solid var(--cp-bd) !important; }
+        html.cyberpunk .beer-card-body { background: var(--cp-bg3) !important; }
+        html.cyberpunk .beer-card h3 { color: var(--cp-c) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .beer-detail-label { color: var(--cp-c) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .beer-detail-value { color: var(--cp-t) !important; font-family: var(--cp-font) !important; }
+
+        /* WINE LIST + BEER LIST FILTER BUTTONS */
+        html.cyberpunk .filter-btn {
+            background: var(--cp-bg2) !important;
+            color: var(--cp-t2) !important;
+            border: 1px solid var(--cp-bd) !important;
+            font-family: var(--cp-font) !important;
+        }
+        html.cyberpunk .filter-btn:hover,
+        html.cyberpunk .filter-btn.active {
+            background: var(--cp-bg3) !important;
+            color: var(--cp-c) !important;
+            border-color: var(--cp-c) !important;
+            box-shadow: 0 0 8px rgba(0,245,255,0.2) !important;
+        }
+        html.cyberpunk .filter-btn.red.active,      html.cyberpunk .filter-btn.red:hover      { color: var(--cp-m) !important; border-color: var(--cp-m) !important; }
+        html.cyberpunk .filter-btn.rose.active,     html.cyberpunk .filter-btn.rose:hover     { color: var(--cp-r) !important; border-color: var(--cp-r) !important; }
+        html.cyberpunk .filter-btn.sparkling.active,html.cyberpunk .filter-btn.sparkling:hover { color: var(--cp-y) !important; border-color: var(--cp-y) !important; }
+        html.cyberpunk .filter-btn.ale.active,      html.cyberpunk .filter-btn.ale:hover      { color: var(--cp-o) !important; border-color: var(--cp-o) !important; }
+        html.cyberpunk .filter-btn.lager.active,    html.cyberpunk .filter-btn.lager:hover    { color: var(--cp-y) !important; border-color: var(--cp-y) !important; }
+        html.cyberpunk .filter-btn.ipa.active,      html.cyberpunk .filter-btn.ipa:hover      { color: var(--cp-g) !important; border-color: var(--cp-g) !important; }
+
+        /* FAQ CARD INTERNALS */
+        html.cyberpunk .faq-question { background: transparent !important; }
+        html.cyberpunk .faq-question-text { color: var(--cp-t) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .faq-answer { background: var(--cp-bg2) !important; }
+        html.cyberpunk .faq-answer-content { color: var(--cp-t) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .faq-answer-content strong { color: var(--cp-c) !important; }
+
+        /* FOOD PAIRING CARDS */
+        html.cyberpunk .pairing-compact-card { background: var(--cp-bg3) !important; border-left-color: var(--cp-c) !important; }
+        html.cyberpunk .pairing-compact-card.red  { border-left-color: var(--cp-m) !important; }
+        html.cyberpunk .pairing-compact-card.rose { border-left-color: var(--cp-r) !important; }
+        html.cyberpunk .pairing-compact-header { background: var(--cp-bg2) !important; border-bottom-color: var(--cp-bd) !important; }
+        html.cyberpunk .pairing-wine-name { color: var(--cp-c) !important; font-family: var(--cp-font) !important; }
+
+                /* QUICK DESCRIPTIONS */
         html.cyberpunk .qdesc-intro h2,
         html.cyberpunk .qdesc-intro p { color: var(--cp-t) !important; }
         html.cyberpunk .qdesc-card {
@@ -11819,7 +11890,6 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
             bftAudioStop();
             bftAudioHide();
             bftCyberpunkDroneStart();
-            localStorage.setItem('ardoa-cyberpunk','1');
             // Navigate to wine list
             var tm=document.getElementById('typemaster');
             if(tm){ tm.classList.remove('active'); tm.style.display=''; }
@@ -12107,13 +12177,7 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
 
         // ---- CYBERPUNK MODE PERSISTENCE ----
         function bftCheckCyberpunkRestore(){
-            if(localStorage.getItem('ardoa-cyberpunk')==='1'){
-                BFT.gameBeaten=true;
-                document.documentElement.classList.add('cyberpunk');
-                document.documentElement.removeAttribute('data-theme');
-                bftCyberpunkDroneStart();
-                setTimeout(function(){ bftCyberpunkEasterEggs(); },500);
-            }
+            localStorage.removeItem('ardoa-cyberpunk');
         }
 
         // ============================================================
