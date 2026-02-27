@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ardoa Wine Bar - Study Guide</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -5302,77 +5302,93 @@
         .bft-abtn:hover { border-color: #7af8ff; box-shadow: 0 0 8px rgba(122,248,255,0.35); }
 
         /* ---- CYBERPUNK SITE TRANSFORMATION ---- */
-        /* Applied to <html class="cyberpunk"> */
+        /* Applied to <html class="cyberpunk"> — unlocked via Brute Force Trainer */
         html.cyberpunk {
-            --cp-bg:  #02020e;
-            --cp-bg2: #05051a;
-            --cp-bg3: #08082a;
-            --cp-c:   #00f5ff;
-            --cp-m:   #ff00ff;
-            --cp-g:   #00ff41;
-            --cp-o:   #ff8800;
-            --cp-r:   #ff0055;
-            --cp-y:   #ffe000;
-            --cp-t:   #c4d4ff;
-            --cp-t2:  #6070a0;
-            --cp-bd:  #1a1a60;
+            --cp-bg:   #02020e;
+            --cp-bg2:  #05051a;
+            --cp-bg3:  #080820;
+            --cp-c:    #00f5ff;
+            --cp-m:    #ff00ff;
+            --cp-g:    #00ff41;
+            --cp-o:    #ff8800;
+            --cp-r:    #ff0055;
+            --cp-y:    #ffe000;
+            --cp-t:    #c4d4ff;
+            --cp-t2:   #5060a0;
+            --cp-bd:   #0d2040;
+            --cp-font: 'VT323', 'Courier New', monospace;
         }
         html.cyberpunk body {
             background: var(--cp-bg) !important;
             color: var(--cp-t) !important;
+            font-family: var(--cp-font) !important;
         }
         html.cyberpunk .background-layer,
         html.cyberpunk .fog-layer,
-        html.cyberpunk .vines-overlay {
-            opacity: 0 !important;
-        }
+        html.cyberpunk .vines-overlay { opacity: 0 !important; }
+
+        /* HEADER */
         html.cyberpunk header {
             background: var(--cp-bg2) !important;
-            border-bottom: 1px solid var(--cp-c) !important;
-            box-shadow: 0 0 30px rgba(0,245,255,0.12) !important;
+            border-bottom: 2px solid var(--cp-c) !important;
+            box-shadow: 0 0 30px rgba(0,245,255,0.18) !important;
         }
         html.cyberpunk #ardoaTitle {
-            font-family: 'Courier New', monospace !important;
+            font-family: var(--cp-font) !important;
             color: var(--cp-c) !important;
-            letter-spacing: 0.3em !important;
-            text-shadow: 0 0 12px var(--cp-c), 0 0 25px var(--cp-c) !important;
+            letter-spacing: 0.35em !important;
+            text-shadow: 0 0 10px var(--cp-c), 0 0 22px var(--cp-c), 0 0 45px rgba(0,245,255,0.4) !important;
         }
         html.cyberpunk .site-tagline {
             color: var(--cp-m) !important;
-            font-family: 'Courier New', monospace !important;
-            letter-spacing: 0.12em !important;
+            font-family: var(--cp-font) !important;
+            letter-spacing: 0.14em !important;
             text-shadow: 0 0 8px var(--cp-m) !important;
         }
-        html.cyberpunk .sticky-nav {
+
+        /* NAV — fixed selector: HTML uses <nav> and <a>, not .sticky-nav / .nav-link */
+        html.cyberpunk nav {
             background: var(--cp-bg2) !important;
-            border-bottom: 1px solid var(--cp-bd) !important;
-            box-shadow: none !important;
+            border-bottom: 1px solid var(--cp-c) !important;
+            box-shadow: 0 2px 24px rgba(0,245,255,0.2) !important;
         }
-        html.cyberpunk .nav-link {
+        html.cyberpunk nav a {
             color: var(--cp-t2) !important;
-            font-family: 'Courier New', monospace !important;
-            font-size: 0.75rem !important;
-            letter-spacing: 0.06em !important;
+            font-family: var(--cp-font) !important;
+            font-size: 1rem !important;
+            letter-spacing: 0.05em !important;
             text-transform: uppercase !important;
             border-bottom: 2px solid transparent !important;
+            transition: color 0.15s, text-shadow 0.15s !important;
         }
-        html.cyberpunk .nav-link:hover,
-        html.cyberpunk .nav-link.active {
+        html.cyberpunk nav a:hover,
+        html.cyberpunk nav a.active {
             color: var(--cp-c) !important;
             border-bottom-color: var(--cp-c) !important;
-            text-shadow: 0 0 7px var(--cp-c) !important;
+            text-shadow: 0 0 7px var(--cp-c), 0 0 16px rgba(0,245,255,0.5) !important;
+            background: rgba(0,245,255,0.05) !important;
         }
+
+        /* SECTIONS + HEADINGS */
         html.cyberpunk section { background: var(--cp-bg) !important; }
         html.cyberpunk h2 {
-            font-family: 'Courier New', monospace !important;
+            font-family: var(--cp-font) !important;
             color: var(--cp-c) !important;
-            text-shadow: 0 0 10px rgba(0,245,255,0.4) !important;
-            letter-spacing: 0.12em !important;
+            text-shadow: 0 0 10px rgba(0,245,255,0.5) !important;
+            letter-spacing: 0.15em !important;
         }
         html.cyberpunk h3 {
-            font-family: 'Courier New', monospace !important;
+            font-family: var(--cp-font) !important;
             color: var(--cp-m) !important;
+            letter-spacing: 0.08em !important;
         }
+        html.cyberpunk p, html.cyberpunk li,
+        html.cyberpunk td, html.cyberpunk th,
+        html.cyberpunk label, html.cyberpunk span {
+            font-family: var(--cp-font) !important;
+        }
+
+        /* WINE / BEER / FOOD / FAQ CARDS */
         html.cyberpunk .wine-card,
         html.cyberpunk .beer-card,
         html.cyberpunk .food-card,
@@ -5383,59 +5399,129 @@
         html.cyberpunk .wine-card:hover,
         html.cyberpunk .beer-card:hover {
             border-color: var(--cp-c) !important;
-            box-shadow: 0 0 14px rgba(0,245,255,0.18) !important;
+            box-shadow: 0 0 16px rgba(0,245,255,0.18) !important;
         }
         html.cyberpunk .wine-name,
         html.cyberpunk .beer-name {
             color: var(--cp-c) !important;
-            font-family: 'Courier New', monospace !important;
-            font-size: 0.92rem !important;
+            font-family: var(--cp-font) !important;
+            font-size: 1.05rem !important;
+            letter-spacing: 0.04em !important;
         }
         html.cyberpunk .wine-vintage,
         html.cyberpunk .beer-style {
             background: var(--cp-bg2) !important;
             color: var(--cp-m) !important;
             border: 1px solid var(--cp-m) !important;
-            font-family: 'Courier New', monospace !important;
+            font-family: var(--cp-font) !important;
         }
         html.cyberpunk .wine-position-num {
             color: var(--cp-g) !important;
-            font-family: 'Courier New', monospace !important;
+            font-family: var(--cp-font) !important;
         }
         html.cyberpunk .wine-grape,
         html.cyberpunk .wine-region,
         html.cyberpunk .wine-appellation {
             color: var(--cp-t2) !important;
-            font-family: 'Courier New', monospace !important;
-            font-size: 0.78rem !important;
+            font-family: var(--cp-font) !important;
+            font-size: 0.88rem !important;
         }
+
+        /* QUICK DESCRIPTIONS */
+        html.cyberpunk .qdesc-intro h2,
+        html.cyberpunk .qdesc-intro p { color: var(--cp-t) !important; }
+        html.cyberpunk .qdesc-card {
+            background: var(--cp-bg3) !important;
+            border: 1px solid var(--cp-bd) !important;
+        }
+        html.cyberpunk .qdesc-card:hover {
+            border-color: var(--cp-c) !important;
+            box-shadow: 0 0 12px rgba(0,245,255,0.15) !important;
+        }
+        html.cyberpunk .qdesc-name { color: var(--cp-c) !important; font-family: var(--cp-font) !important; letter-spacing: 0.04em !important; }
+        html.cyberpunk .qdesc-pos { color: var(--cp-g) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .qdesc-s1, html.cyberpunk .qdesc-s2 { color: var(--cp-t) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .qdesc-badge-white { background: var(--cp-bg2) !important; color: var(--cp-t2) !important; border-color: var(--cp-bd) !important; }
+        html.cyberpunk .qdesc-badge-red   { background: var(--cp-bg2) !important; color: var(--cp-m) !important;  border-color: var(--cp-m)  !important; }
+        html.cyberpunk .qdesc-badge-rose  { background: var(--cp-bg2) !important; color: var(--cp-r) !important;  border-color: var(--cp-r)  !important; }
+        html.cyberpunk .qdesc-badge-spark { background: var(--cp-bg2) !important; color: var(--cp-c) !important;  border-color: var(--cp-c)  !important; }
+        html.cyberpunk .qdesc-filter-btn {
+            background: var(--cp-bg2) !important; color: var(--cp-t2) !important;
+            border: 1px solid var(--cp-bd) !important; font-family: var(--cp-font) !important;
+        }
+        html.cyberpunk .qdesc-filter-btn.active,
+        html.cyberpunk .qdesc-filter-btn:hover {
+            background: var(--cp-bg3) !important; color: var(--cp-c) !important;
+            border-color: var(--cp-c) !important; box-shadow: 0 0 8px rgba(0,245,255,0.2) !important;
+        }
+
+        /* GUEST COMMENTS */
+        html.cyberpunk .gc-intro h2 { color: var(--cp-c) !important; }
+        html.cyberpunk .gc-intro p  { color: var(--cp-t2) !important; }
+        html.cyberpunk .gc-item {
+            background: var(--cp-bg3) !important;
+            border: 1px solid var(--cp-bd) !important;
+        }
+        html.cyberpunk .gc-header:hover { background: rgba(0,245,255,0.04) !important; }
+        html.cyberpunk .gc-item.gc-open .gc-header {
+            background: rgba(0,245,255,0.06) !important;
+            border-bottom-color: var(--cp-c) !important;
+        }
+        html.cyberpunk .gc-item-name { color: var(--cp-c) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .gc-arrow { color: var(--cp-t2) !important; }
+        html.cyberpunk .gc-comment {
+            background: var(--cp-bg2) !important;
+            border-left-color: var(--cp-c) !important;
+            color: var(--cp-t) !important;
+            font-family: var(--cp-font) !important;
+        }
+        html.cyberpunk .gc-comment-icon { color: var(--cp-c) !important; }
+        html.cyberpunk .gc-response {
+            background: var(--cp-bg) !important;
+            border-left-color: var(--cp-m) !important;
+            color: var(--cp-t2) !important;
+            font-family: var(--cp-font) !important;
+        }
+        html.cyberpunk .gc-response-icon { color: var(--cp-m) !important; }
+        html.cyberpunk .gc-type-header { color: var(--cp-t2) !important; font-family: var(--cp-font) !important; }
+
+        /* STAFF PICKS */
+        html.cyberpunk .rec-intro h2 { color: var(--cp-c) !important; }
+        html.cyberpunk .rec-intro p  { color: var(--cp-t2) !important; }
+        html.cyberpunk .rec-pick {
+            background: var(--cp-bg3) !important;
+            border: 1px solid var(--cp-bd) !important;
+        }
+        html.cyberpunk .rec-pick:hover { border-color: var(--cp-c) !important; box-shadow: 0 0 12px rgba(0,245,255,0.15) !important; }
+        html.cyberpunk .rec-cat-title { color: var(--cp-c) !important; font-family: var(--cp-font) !important; letter-spacing: 0.1em !important; }
+        html.cyberpunk .rec-pick-name { color: var(--cp-c) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .rec-rank { color: var(--cp-g) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .rec-origin { color: var(--cp-t2) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .rec-reason { color: var(--cp-t) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .rec-reason em { color: var(--cp-m) !important; }
+
+        /* FOOTER */
         html.cyberpunk footer {
             background: var(--cp-bg2) !important;
             border-top: 1px solid var(--cp-bd) !important;
             color: var(--cp-t2) !important;
+            font-family: var(--cp-font) !important;
         }
+
+        /* SCROLLBAR */
         html.cyberpunk ::-webkit-scrollbar { width: 5px; }
         html.cyberpunk ::-webkit-scrollbar-track { background: var(--cp-bg); }
         html.cyberpunk ::-webkit-scrollbar-thumb { background: var(--cp-bd); }
         html.cyberpunk ::-webkit-scrollbar-thumb:hover { background: var(--cp-c); }
+
+        /* HIDE THEME TOGGLE */
         html.cyberpunk .theme-toggle { display: none !important; }
-        /* CP banner */
-        #cp-banner {
-            display: none; position: fixed; top: 0; left: 0; right: 0;
-            padding: 0.35rem 1rem; text-align: center; z-index: 8999;
-            font-family: 'Courier New', monospace; font-size: 0.72rem;
-            font-weight: bold; letter-spacing: 0.08em; color: #000;
-            background: linear-gradient(90deg, #00f5ff, #ff00ff, #00ff41, #ff8800, #00f5ff);
-            background-size: 300% 100%;
-            animation: cp-banner-anim 4s linear infinite;
-        }
-        @keyframes cp-banner-anim { 0%{background-position:0% 0%} 100%{background-position:300% 0%} }
-        html.cyberpunk #cp-banner { display: block; }
+
         /* Matrix rain canvas */
         #cp-matrix {
             display: none; position: fixed; top: 0; left: 0;
             width: 100%; height: 100%;
-            pointer-events: none; z-index: 8998; opacity: 0.07;
+            pointer-events: none; z-index: 8998; opacity: 0.08;
         }
         html.cyberpunk #cp-matrix { display: block; }
 
@@ -12235,7 +12321,6 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
         });
     </script>
     <!-- Cyberpunk mode elements (hidden until cyberpunk unlocked) -->
-    <div id="cp-banner">// ARDOA_OS v2.0 — CYBERPUNK MODE ACTIVE — WINE DATABASE DECRYPTED — ALL SYSTEMS NOMINAL //</div>
     <canvas id="cp-matrix"></canvas>
 
     <!-- BFT Audio Controls (shown during game) -->
