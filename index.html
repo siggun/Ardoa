@@ -4877,104 +4877,756 @@
         [data-theme="dark"] .timeclock-manual-cancel { background: #2a1a25; color: #e8e4dc; }
         [data-theme="dark"] .timeclock-manual-cancel:hover { background: #3a2a35; }
 
-        /* === TYPEMASTER — Easter Egg Typing Challenge === */
-        #typemaster { display: none; }
+        /* === BRUTE FORCE TRAINER — Full Screen Game Overlay === */
+        #typemaster {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 9000;
+            overflow: hidden;
+            background: #000;
+        }
         #typemaster.active { display: block; }
-        .typemaster-wrap { max-width: 780px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
-        .typemaster-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.5rem; gap: 1rem; }
-        .typemaster-title { font-family: 'Cinzel', serif; color: #4a1a28; font-size: 1.7rem; margin: 0 0 0.3rem; }
-        .typemaster-subtitle { color: #555; font-size: 0.88rem; margin: 0; }
-        .typemaster-close-btn { background: #4a1a28; color: #f8f5f0; border: 1px solid #6b2d3e; padding: 0.45rem 1rem; cursor: pointer; font-size: 0.85rem; border-radius: 3px; white-space: nowrap; flex-shrink: 0; }
-        .typemaster-close-btn:hover { background: #6b2d3e; }
 
-        .typemaster-chars-panel { background: #f8f5f0; border: 1px solid #d8cfc8; padding: 0.85rem 1rem; margin-bottom: 1.25rem; border-radius: 4px; }
-        .typemaster-chars-toggle { cursor: pointer; color: #4a1a28; font-family: 'Cinzel', serif; font-size: 0.88rem; display: flex; align-items: center; gap: 0.5rem; user-select: none; letter-spacing: 0.04em; }
-        .typemaster-chars-toggle:hover { color: #6b2d3e; }
-        .typemaster-chars-content { margin-top: 0.85rem; display: none; }
-        .typemaster-chars-content.open { display: block; }
-        .typemaster-chars-tabs { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; }
-        .typemaster-chars-tab { padding: 0.3rem 0.85rem; background: #fff; color: #4a1a28; border: 1px solid #c8c0b8; cursor: pointer; font-size: 0.8rem; border-radius: 3px; }
-        .typemaster-chars-tab.tm-tab-active { background: #4a1a28; color: #f8f5f0; border-color: #4a1a28; }
-        .typemaster-chars-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
-        .typemaster-chars-table th { color: #4a1a28; text-align: left; padding: 0.3rem 0.6rem; border-bottom: 1px solid #d8cfc8; font-weight: 600; font-size: 0.78rem; }
-        .typemaster-chars-table td { color: #2c2c2c; padding: 0.28rem 0.6rem; border-bottom: 1px solid #ede8e2; }
-        .typemaster-chars-table td:first-child { font-size: 1.15rem; width: 2.2rem; color: #4a1a28; font-weight: bold; }
-        .typemaster-chars-note { color: #666; font-size: 0.76rem; margin: 0.5rem 0 0; line-height: 1.5; }
+        /* Shared BFT layer system */
+        .bft-layer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: none;
+            overflow-y: auto;
+        }
+        .bft-layer.bft-show { display: flex; }
 
-        .typemaster-controls { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.1rem; gap: 1rem; }
-        .typemaster-nav-btn { background: #4a1a28; color: #f8f5f0; border: 1px solid #6b2d3e; padding: 0.5rem 1.25rem; cursor: pointer; font-size: 0.88rem; border-radius: 3px; }
-        .typemaster-nav-btn:hover:not([disabled]) { background: #6b2d3e; }
-        .typemaster-nav-btn[disabled] { opacity: 0.35; cursor: default; }
-        .typemaster-progress-info { text-align: center; color: #2c2c2c; font-size: 0.9rem; line-height: 1.5; }
-        .typemaster-progress-info strong { color: #4a1a28; }
-        .typemaster-mastered-count { color: #2a7a1e; font-size: 0.82rem; }
+        /* ---- INTRO SCREEN ---- */
+        #bft-intro {
+            background: #000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        #bft-intro-canvas {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+        }
+        .bft-intro-title {
+            font-family: 'Courier New', 'Lucida Console', monospace;
+            font-size: clamp(2.5rem, 10vw, 7rem);
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            text-align: center;
+            position: relative; z-index: 2;
+            text-shadow: 0 0 20px #7af8ff, 0 0 50px #4a6fff, 0 0 100px #8a00ff;
+            opacity: 0;
+            transition: opacity 0.6s;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        .bft-intro-title.bft-vis { opacity: 1; }
+        .bft-intro-subtitle {
+            font-family: 'Courier New', monospace;
+            font-size: clamp(0.7rem, 2.5vw, 1.2rem);
+            color: #ff4dd2;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            text-align: center;
+            position: relative; z-index: 2;
+            margin-top: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.6s 0.4s;
+            text-shadow: 0 0 10px #ff4dd2;
+        }
+        .bft-intro-subtitle.bft-vis { opacity: 1; }
+        .bft-intro-press {
+            font-family: 'Courier New', monospace;
+            font-size: clamp(0.6rem, 2vw, 0.9rem);
+            color: #00f5c8;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-align: center;
+            position: relative; z-index: 2;
+            margin-top: 3rem;
+            display: none;
+            animation: bft-blink 1.1s step-end infinite;
+            text-shadow: 0 0 8px #00f5c8;
+        }
 
-        .typemaster-card { background: #fff; border: 1px solid #d8cfc8; border-radius: 4px; padding: 1.5rem; }
-        .tm-category { font-family: 'Cinzel', serif; color: #4a1a28; font-size: 0.95rem; margin-bottom: 1.25rem; letter-spacing: 0.06em; border-bottom: 1px solid #d8cfc8; padding-bottom: 0.6rem; }
-        .tm-fields { display: flex; flex-direction: column; gap: 0.9rem; }
-        .tm-field { display: flex; flex-direction: column; gap: 0.2rem; }
-        .tm-label { color: #6b2d3e; font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.09em; font-weight: 600; }
-        .tm-input-row { display: flex; align-items: center; gap: 0.5rem; }
-        .tm-input { background: #fff; border: 1px solid #c8c0b8; color: #2c2c2c; padding: 0.5rem 0.7rem; font-size: 0.95rem; flex: 1; border-radius: 3px; font-family: 'Crimson Text', Georgia, serif; }
-        .tm-input:focus { outline: none; border-color: #4a1a28; }
-        .tm-input.tm-correct { border-color: #2a7a1e; background: #f2faf0; }
-        .tm-input.tm-incorrect { border-color: #aa3030; background: #faf0f0; }
-        .tm-feedback { font-size: 1.1rem; min-width: 1.5rem; text-align: center; flex-shrink: 0; }
-        .tm-fb-correct { color: #2a7a1e; }
-        .tm-fb-incorrect { color: #cc3333; }
-        .tm-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
-        .tm-btn-check { background: #4a1a28; color: #f8f5f0; border: 1px solid #6b2d3e; padding: 0.55rem 1.5rem; cursor: pointer; font-size: 0.88rem; border-radius: 3px; font-family: 'Cinzel', serif; letter-spacing: 0.04em; }
-        .tm-btn-check:hover { background: #6b2d3e; }
-        .tm-btn-reveal { background: #f8f5f0; color: #888; border: 1px solid #c8c0b8; padding: 0.55rem 1.25rem; cursor: pointer; font-size: 0.88rem; border-radius: 3px; }
-        .tm-btn-reveal:hover { color: #4a1a28; border-color: #4a1a28; }
-        .tm-btn-clear { background: #f8f5f0; color: #888; border: 1px solid #c8c0b8; padding: 0.55rem 1.25rem; cursor: pointer; font-size: 0.88rem; border-radius: 3px; }
-        .tm-btn-clear:hover { color: #4a1a28; border-color: #4a1a28; }
-        .tm-mastered-banner { background: #f0faf0; border: 1px solid #2a7a1e; color: #2a7a1e; text-align: center; padding: 0.7rem; margin-top: 1rem; border-radius: 3px; font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 0.05em; }
-        .tm-hint { color: #999; font-size: 0.76rem; margin-top: 0.85rem; font-style: italic; }
+        /* ---- TITLE SCREEN ---- */
+        #bft-title {
+            background: radial-gradient(ellipse at 50% 40%, #120040 0%, #050012 60%, #000 100%);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .bft-scanlines {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.12) 2px, rgba(0,0,0,0.12) 4px);
+            pointer-events: none; z-index: 1;
+        }
+        .bft-title-logo {
+            font-family: 'Courier New', monospace;
+            font-size: clamp(4rem, 12vw, 9rem);
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            text-align: center;
+            line-height: 1;
+            position: relative; z-index: 2;
+            text-shadow: 0 0 10px #fff, 0 0 25px #7af8ff, 0 0 50px #4a6fff, 0 0 90px #8a00ff;
+            animation: bft-title-pulse 3.5s ease-in-out infinite;
+        }
+        @keyframes bft-title-pulse {
+            0%, 100% { text-shadow: 0 0 10px #fff, 0 0 25px #7af8ff, 0 0 50px #4a6fff, 0 0 90px #8a00ff; }
+            50% { text-shadow: 0 0 15px #fff, 0 0 35px #7af8ff, 0 0 70px #4a6fff, 0 0 120px #8a00ff, 0 0 180px #ff00ff; }
+        }
+        .bft-title-sub {
+            font-family: 'Courier New', monospace;
+            font-size: clamp(0.6rem, 2.2vw, 1.05rem);
+            color: #ff4dd2;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            text-align: center;
+            margin-top: 0.7rem;
+            position: relative; z-index: 2;
+            text-shadow: 0 0 8px #ff4dd2;
+        }
+        .bft-title-press {
+            font-family: 'Courier New', monospace;
+            font-size: clamp(0.6rem, 1.8vw, 0.92rem);
+            color: #00f5c8;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-top: 3.5rem;
+            position: relative; z-index: 2;
+            animation: bft-blink 1.1s step-end infinite;
+            text-shadow: 0 0 8px #00f5c8;
+        }
+        .bft-title-hint {
+            font-family: 'Courier New', monospace;
+            font-size: 0.62rem;
+            color: rgba(255,255,255,0.1);
+            position: absolute; bottom: 1.5rem; z-index: 2;
+            letter-spacing: 0.08em;
+        }
+        .bft-title-ring {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(88vw, 660px); height: min(65vh, 480px);
+            border: 1px solid rgba(74,111,255,0.4);
+            z-index: 1;
+            animation: bft-ring-spin 8s linear infinite;
+            pointer-events: none;
+        }
+        .bft-title-ring2 {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(84vw, 620px); height: min(60vh, 440px);
+            border: 1px solid rgba(255,77,210,0.25);
+            z-index: 1;
+            animation: bft-ring-spin 12s linear infinite reverse;
+            pointer-events: none;
+        }
+        @keyframes bft-ring-spin {
+            0% { border-color: rgba(74,111,255,0.4) rgba(255,77,210,0.2) rgba(122,248,255,0.4) rgba(74,111,255,0.2); }
+            50% { border-color: rgba(255,77,210,0.4) rgba(122,248,255,0.2) rgba(74,111,255,0.4) rgba(255,77,210,0.2); }
+            100% { border-color: rgba(74,111,255,0.4) rgba(255,77,210,0.2) rgba(122,248,255,0.4) rgba(74,111,255,0.2); }
+        }
+        @keyframes bft-blink { 50% { opacity: 0; } }
 
-        /* TYPEMASTER — Dark mode overrides */
-        [data-theme="dark"] .typemaster-title { color: #c4a875; }
-        [data-theme="dark"] .typemaster-subtitle { color: #b8b4ac; }
-        [data-theme="dark"] .typemaster-close-btn { background: #4a0e1a; color: #c4a875; border-color: #6b1c2e; }
-        [data-theme="dark"] .typemaster-close-btn:hover { background: #6b1c2e; }
-        [data-theme="dark"] .typemaster-chars-panel { background: #1a1025; border-color: #4a0e1a; }
-        [data-theme="dark"] .typemaster-chars-toggle { color: #c4a875; }
-        [data-theme="dark"] .typemaster-chars-toggle:hover { color: #e8e4dc; }
-        [data-theme="dark"] .typemaster-chars-tab { background: #0a0a0f; color: #c4a875; border-color: #4a0e1a; }
-        [data-theme="dark"] .typemaster-chars-tab.tm-tab-active { background: #4a0e1a; color: #e8e4dc; border-color: #4a0e1a; }
-        [data-theme="dark"] .typemaster-chars-table th { color: #c4a875; border-bottom-color: #4a0e1a; }
-        [data-theme="dark"] .typemaster-chars-table td { color: #e8e4dc; border-bottom-color: #1e1030; }
-        [data-theme="dark"] .typemaster-chars-table td:first-child { color: #c4a875; }
-        [data-theme="dark"] .typemaster-chars-note { color: #c4a875; opacity: 0.8; }
-        [data-theme="dark"] .typemaster-nav-btn { background: #4a0e1a; color: #c4a875; border-color: #6b1c2e; }
-        [data-theme="dark"] .typemaster-nav-btn:hover:not([disabled]) { background: #6b1c2e; }
-        [data-theme="dark"] .typemaster-progress-info { color: #e8e4dc; }
-        [data-theme="dark"] .typemaster-progress-info strong { color: #c4a875; }
-        [data-theme="dark"] .typemaster-mastered-count { color: #5aac44; }
-        [data-theme="dark"] .typemaster-card { background: #1a1025; border-color: #4a0e1a; }
-        [data-theme="dark"] .tm-category { color: #c4a875; border-bottom-color: #4a0e1a; }
-        [data-theme="dark"] .tm-label { color: #c4a875; }
-        [data-theme="dark"] .tm-input { background: #0a0a0f; border-color: #3a2040; color: #e8e4dc; }
-        [data-theme="dark"] .tm-input:focus { border-color: #c4a875; }
-        [data-theme="dark"] .tm-input.tm-correct { border-color: #3a8a2e; background: #0a140a; }
-        [data-theme="dark"] .tm-input.tm-incorrect { border-color: #8a2e2e; background: #140a0a; }
-        [data-theme="dark"] .tm-fb-correct { color: #5aac44; }
-        [data-theme="dark"] .tm-fb-incorrect { color: #e05555; }
-        [data-theme="dark"] .tm-btn-check { background: #4a0e1a; color: #c4a875; border-color: #6b1c2e; }
-        [data-theme="dark"] .tm-btn-check:hover { background: #6b1c2e; }
-        [data-theme="dark"] .tm-btn-reveal { background: #0d0a15; color: #666; border-color: #2a1a35; }
-        [data-theme="dark"] .tm-btn-reveal:hover { color: #c4a875; border-color: #4a0e1a; }
-        [data-theme="dark"] .tm-btn-clear { background: #0d0a15; color: #666; border-color: #2a1a35; }
-        [data-theme="dark"] .tm-btn-clear:hover { color: #c4a875; border-color: #4a0e1a; }
-        [data-theme="dark"] .tm-mastered-banner { background: #0f2a0a; border-color: #3a8a2e; color: #5aac44; }
-        [data-theme="dark"] .tm-hint { color: #555; }
+        /* ---- LEVEL SELECT ---- */
+        #bft-levelsel {
+            background: #060615;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 2.5rem 1.5rem 3rem;
+        }
+        .bft-ls-title {
+            font-family: 'Courier New', monospace;
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            color: #7af8ff;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.4rem;
+            text-align: center;
+            text-shadow: 0 0 10px #7af8ff;
+        }
+        .bft-ls-subtitle {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            color: #ff6bab;
+            letter-spacing: 0.08em;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .bft-ls-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.85rem;
+            width: 100%; max-width: 860px;
+        }
+        .bft-ls-card {
+            background: #0c0c28;
+            border: 1px solid #1e1e50;
+            padding: 1.25rem 1rem;
+            cursor: pointer;
+            transition: all 0.18s;
+            position: relative; overflow: hidden;
+            min-height: 110px;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .bft-ls-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, #4a6fff, #7af8ff);
+            opacity: 0; transition: opacity 0.18s;
+        }
+        .bft-ls-card:hover { border-color: #7af8ff; background: #10103a; box-shadow: 0 0 18px rgba(122,248,255,0.15); }
+        .bft-ls-card:hover::before { opacity: 1; }
+        .bft-ls-card.bft-beaten { border-color: #00c853; background: #041008; }
+        .bft-ls-card.bft-beaten::before { background: linear-gradient(90deg, #00c853, #00ff7f); opacity: 1; }
+        .bft-ls-card.bft-final {
+            border-color: #ff4dd2;
+            background: #130010;
+            grid-column: 1 / -1;
+            min-height: 85px;
+        }
+        .bft-ls-card.bft-final::before { background: linear-gradient(90deg, #ff4dd2, #7af8ff, #ff4dd2); opacity: 1; }
+        .bft-ls-num {
+            font-family: 'Courier New', monospace; font-size: 0.7rem;
+            color: #4a6fff; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.3rem;
+        }
+        .bft-ls-name {
+            font-family: 'Courier New', monospace; font-size: 0.95rem;
+            color: #d0deff; font-weight: bold; margin-bottom: 0.25rem;
+        }
+        .bft-ls-desc { font-size: 0.72rem; color: #4a5888; font-family: 'Courier New', monospace; }
+        .bft-ls-badge {
+            position: absolute; top: 0.6rem; right: 0.6rem;
+            background: #00c853; color: #000;
+            font-size: 0.65rem; font-family: 'Courier New', monospace; font-weight: bold;
+            padding: 0.15rem 0.45rem; letter-spacing: 0.08em;
+        }
+        .bft-ls-trap {
+            margin-top: 1.5rem;
+            font-family: 'Courier New', monospace; font-size: 0.73rem;
+            color: #ff4040; text-align: center;
+            border: 1px solid #aa1010; padding: 0.6rem 1.5rem;
+            max-width: 560px; letter-spacing: 0.05em;
+            animation: bft-blink 2.5s step-end infinite;
+        }
+
+        /* ---- PLAYING SCREEN ---- */
+        #bft-playing {
+            background: #050515;
+            flex-direction: column;
+        }
+        .bft-play-hdr {
+            background: #080820; border-bottom: 1px solid #1a1a50;
+            padding: 0.65rem 1.25rem;
+            display: flex; align-items: center; justify-content: space-between;
+            position: sticky; top: 0; z-index: 10; gap: 0.75rem; flex-shrink: 0;
+        }
+        .bft-play-badge {
+            font-family: 'Courier New', monospace; font-size: 0.72rem;
+            color: #7af8ff; letter-spacing: 0.18em; text-transform: uppercase;
+            text-shadow: 0 0 8px #7af8ff; white-space: nowrap;
+        }
+        .bft-pbar-wrap { flex: 1; height: 5px; background: #151535; overflow: hidden; max-width: 260px; }
+        .bft-pbar-fill {
+            height: 100%; background: linear-gradient(90deg, #4a6fff, #7af8ff);
+            transition: width 0.3s; box-shadow: 0 0 6px #7af8ff;
+        }
+        .bft-play-ctr {
+            font-family: 'Courier New', monospace; font-size: 0.75rem;
+            color: #505888; letter-spacing: 0.1em; white-space: nowrap;
+        }
+        .bft-play-body {
+            flex: 1; padding: 1.75rem 1.25rem;
+            max-width: 740px; margin: 0 auto; width: 100%; box-sizing: border-box;
+        }
+        .bft-card-title {
+            font-family: 'Courier New', monospace; font-size: 0.75rem;
+            color: #4a6fff; text-transform: uppercase; letter-spacing: 0.18em;
+            margin-bottom: 1.4rem; padding-bottom: 0.55rem; border-bottom: 1px solid #1a1a50;
+        }
+        .bft-fields { display: flex; flex-direction: column; gap: 0.9rem; }
+        .bft-field { display: flex; flex-direction: column; gap: 0.22rem; }
+        .bft-label {
+            font-family: 'Courier New', monospace; font-size: 0.68rem;
+            color: #4a6fff; text-transform: uppercase; letter-spacing: 0.12em;
+        }
+        .bft-irow { display: flex; align-items: center; gap: 0.5rem; }
+        .bft-input {
+            background: #090920; border: 1px solid #242458; color: #b0c4ff;
+            padding: 0.5rem 0.75rem; font-size: 0.92rem; flex: 1;
+            font-family: 'Courier New', monospace; outline: none;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        .bft-input:focus { border-color: #7af8ff; box-shadow: 0 0 7px rgba(122,248,255,0.25); }
+        .bft-input.bft-ok { border-color: #00e87a; background: #00120a; color: #00e87a; }
+        .bft-input.bft-ng { border-color: #ff2860; background: #160010; color: #ff5080; }
+        .bft-fb { font-size: 0.95rem; min-width: 1.4rem; text-align: center; flex-shrink: 0; }
+        .bft-fb-ok { color: #00e87a; }
+        .bft-fb-ng { color: #ff2860; }
+        .bft-acts { display: flex; gap: 0.65rem; margin-top: 1.75rem; flex-wrap: wrap; }
+        .bft-btn {
+            font-family: 'Courier New', monospace; font-size: 0.82rem;
+            padding: 0.55rem 1.3rem; border: 1px solid; cursor: pointer;
+            letter-spacing: 0.06em; text-transform: uppercase; transition: all 0.12s;
+        }
+        .bft-btn-check { background: #1a2aff; color: #d0e8ff; border-color: #7af8ff; box-shadow: 0 0 8px rgba(74,111,255,0.4); }
+        .bft-btn-check:hover { background: #2a3aff; box-shadow: 0 0 16px rgba(122,248,255,0.5); }
+        .bft-btn-reveal { background: transparent; color: #505880; border-color: #1e1e50; }
+        .bft-btn-reveal:hover { color: #b0c4ff; border-color: #4a6fff; }
+        .bft-btn-clear { background: transparent; color: #505880; border-color: #1e1e50; }
+        .bft-btn-clear:hover { color: #b0c4ff; border-color: #4a6fff; }
+        .bft-mastered-tag {
+            background: #001208; border: 1px solid #00e87a; color: #00e87a;
+            text-align: center; padding: 0.55rem; margin-top: 0.9rem;
+            font-family: 'Courier New', monospace; font-size: 0.82rem; letter-spacing: 0.1em;
+            box-shadow: 0 0 8px rgba(0,232,122,0.25);
+        }
+        .bft-hint {
+            font-size: 0.68rem; color: #303060; margin-top: 0.7rem;
+            font-family: 'Courier New', monospace; font-style: italic;
+        }
+        .bft-play-foot {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.85rem 1.25rem;
+            background: #080820; border-top: 1px solid #1a1a50;
+            position: sticky; bottom: 0; flex-shrink: 0;
+        }
+        .bft-nav-btn {
+            font-family: 'Courier New', monospace; font-size: 0.78rem;
+            padding: 0.5rem 1.1rem; background: #0c0c2a; color: #7af8ff;
+            border: 1px solid #3a4aaa; cursor: pointer; letter-spacing: 0.05em; text-transform: uppercase;
+        }
+        .bft-nav-btn:hover:not([disabled]) { background: #14143a; box-shadow: 0 0 7px rgba(74,111,255,0.3); }
+        .bft-nav-btn[disabled] { opacity: 0.25; cursor: default; }
+        .bft-submit-btn {
+            font-family: 'Courier New', monospace; font-size: 0.8rem;
+            padding: 0.5rem 1.6rem; background: #1a0020; color: #ff4dd2;
+            border: 1px solid #ff4dd2; cursor: pointer; letter-spacing: 0.08em; text-transform: uppercase;
+            box-shadow: 0 0 8px rgba(255,77,210,0.25);
+        }
+        .bft-submit-btn:hover { background: #2a0035; box-shadow: 0 0 18px rgba(255,77,210,0.45); }
+        .bft-submit-btn.bft-ready {
+            background: #ff4dd2; color: #000;
+            animation: bft-pulse-m 1.2s ease-in-out infinite;
+        }
+        @keyframes bft-pulse-m {
+            0%,100% { box-shadow: 0 0 10px rgba(255,77,210,0.5); }
+            50% { box-shadow: 0 0 28px rgba(255,77,210,0.9), 0 0 50px rgba(255,77,210,0.4); }
+        }
+
+        /* ---- LEVEL WIN ---- */
+        #bft-levelwin {
+            background: #030a1a;
+            flex-direction: column; align-items: center; justify-content: center; overflow: hidden;
+        }
+        .bft-lw-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        .bft-lw-inner { text-align: center; position: relative; z-index: 2; padding: 2rem; }
+        .bft-lw-title {
+            font-family: 'Courier New', monospace;
+            font-size: clamp(2rem, 7vw, 4.5rem);
+            color: #00e87a; text-transform: uppercase; letter-spacing: 0.15em;
+            text-shadow: 0 0 20px #00e87a, 0 0 50px #00e87a;
+            animation: bft-lw-burst 0.5s ease-out;
+        }
+        @keyframes bft-lw-burst { 0% { opacity: 0; transform: scale(1.6); } 100% { opacity: 1; transform: scale(1); } }
+        .bft-lw-sub {
+            font-family: 'Courier New', monospace; font-size: clamp(0.8rem, 2.2vw, 1.1rem);
+            color: #7af8ff; letter-spacing: 0.18em; margin-top: 1rem;
+            text-shadow: 0 0 8px #7af8ff;
+        }
+        .bft-lw-btn {
+            margin-top: 2.5rem; font-family: 'Courier New', monospace; font-size: 0.9rem;
+            padding: 0.75rem 2.5rem; background: #00e87a; color: #000;
+            border: none; cursor: pointer; letter-spacing: 0.1em; text-transform: uppercase; font-weight: bold;
+            animation: bft-pulse-g 2s ease-in-out infinite;
+        }
+        @keyframes bft-pulse-g { 0%,100% { box-shadow: 0 0 10px #00e87a; } 50% { box-shadow: 0 0 30px #00e87a, 0 0 60px #00ff7f; } }
+        .bft-lw-btn:hover { background: #7af8ff; }
+
+        /* ---- GAME WIN ---- */
+        #bft-gamewin {
+            background: #000;
+            flex-direction: column; align-items: center; justify-content: center; overflow: hidden;
+        }
+        .bft-gw-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        .bft-gw-inner {
+            position: relative; z-index: 2; text-align: center; padding: 2rem; max-width: 700px;
+        }
+        .bft-gw-title {
+            font-family: 'Courier New', monospace;
+            font-size: clamp(1.6rem, 5vw, 3.2rem);
+            text-transform: uppercase; letter-spacing: 0.18em;
+            color: #fff; line-height: 1.25;
+            text-shadow: 0 0 10px #fff, 0 0 25px #7af8ff, 0 0 50px #ff4dd2;
+            margin-bottom: 1.2rem;
+        }
+        .bft-gw-loading {
+            font-family: 'Courier New', monospace; font-size: 0.82rem;
+            color: #00f5c8; letter-spacing: 0.15em; margin-top: 2rem;
+            min-height: 1.4em;
+        }
+        .bft-gw-bar-wrap {
+            width: min(380px, 78vw); height: 7px;
+            background: #0d0d30; margin: 0.7rem auto 0;
+            border: 1px solid #3a4aaa; overflow: hidden;
+        }
+        .bft-gw-bar {
+            height: 100%; width: 0;
+            background: linear-gradient(90deg, #4a6fff, #7af8ff, #ff4dd2);
+            box-shadow: 0 0 8px #7af8ff; transition: width 0.12s linear;
+        }
+
+        /* ---- AUDIO CONTROLS ---- */
+        #bft-audio-ctrl {
+            position: fixed; bottom: 1rem; right: 1rem;
+            z-index: 9100; display: none; gap: 0.4rem;
+        }
+        #bft-audio-ctrl.bft-audio-on { display: flex; }
+        .bft-abtn {
+            width: 40px; height: 40px; background: rgba(8,8,30,0.9);
+            border: 1px solid #3a4aaa; color: #7af8ff; font-size: 1rem;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: all 0.12s;
+        }
+        .bft-abtn:hover { border-color: #7af8ff; box-shadow: 0 0 8px rgba(122,248,255,0.35); }
+
+        /* ---- CYBERPUNK SITE TRANSFORMATION ---- */
+        /* Applied to <html class="cyberpunk"> */
+        html.cyberpunk {
+            --cp-bg:  #02020e;
+            --cp-bg2: #05051a;
+            --cp-bg3: #08082a;
+            --cp-c:   #00f5ff;
+            --cp-m:   #ff00ff;
+            --cp-g:   #00ff41;
+            --cp-o:   #ff8800;
+            --cp-r:   #ff0055;
+            --cp-y:   #ffe000;
+            --cp-t:   #c4d4ff;
+            --cp-t2:  #6070a0;
+            --cp-bd:  #1a1a60;
+        }
+        html.cyberpunk body {
+            background: var(--cp-bg) !important;
+            color: var(--cp-t) !important;
+        }
+        html.cyberpunk .background-layer,
+        html.cyberpunk .fog-layer,
+        html.cyberpunk .vines-overlay {
+            opacity: 0 !important;
+        }
+        html.cyberpunk header {
+            background: var(--cp-bg2) !important;
+            border-bottom: 1px solid var(--cp-c) !important;
+            box-shadow: 0 0 30px rgba(0,245,255,0.12) !important;
+        }
+        html.cyberpunk #ardoaTitle {
+            font-family: 'Courier New', monospace !important;
+            color: var(--cp-c) !important;
+            letter-spacing: 0.3em !important;
+            text-shadow: 0 0 12px var(--cp-c), 0 0 25px var(--cp-c) !important;
+        }
+        html.cyberpunk .site-tagline {
+            color: var(--cp-m) !important;
+            font-family: 'Courier New', monospace !important;
+            letter-spacing: 0.12em !important;
+            text-shadow: 0 0 8px var(--cp-m) !important;
+        }
+        html.cyberpunk .sticky-nav {
+            background: var(--cp-bg2) !important;
+            border-bottom: 1px solid var(--cp-bd) !important;
+            box-shadow: none !important;
+        }
+        html.cyberpunk .nav-link {
+            color: var(--cp-t2) !important;
+            font-family: 'Courier New', monospace !important;
+            font-size: 0.75rem !important;
+            letter-spacing: 0.06em !important;
+            text-transform: uppercase !important;
+            border-bottom: 2px solid transparent !important;
+        }
+        html.cyberpunk .nav-link:hover,
+        html.cyberpunk .nav-link.active {
+            color: var(--cp-c) !important;
+            border-bottom-color: var(--cp-c) !important;
+            text-shadow: 0 0 7px var(--cp-c) !important;
+        }
+        html.cyberpunk section { background: var(--cp-bg) !important; }
+        html.cyberpunk h2 {
+            font-family: 'Courier New', monospace !important;
+            color: var(--cp-c) !important;
+            text-shadow: 0 0 10px rgba(0,245,255,0.4) !important;
+            letter-spacing: 0.12em !important;
+        }
+        html.cyberpunk h3 {
+            font-family: 'Courier New', monospace !important;
+            color: var(--cp-m) !important;
+        }
+        html.cyberpunk .wine-card,
+        html.cyberpunk .beer-card,
+        html.cyberpunk .food-card,
+        html.cyberpunk .faq-card {
+            background: var(--cp-bg3) !important;
+            border: 1px solid var(--cp-bd) !important;
+        }
+        html.cyberpunk .wine-card:hover,
+        html.cyberpunk .beer-card:hover {
+            border-color: var(--cp-c) !important;
+            box-shadow: 0 0 14px rgba(0,245,255,0.18) !important;
+        }
+        html.cyberpunk .wine-name,
+        html.cyberpunk .beer-name {
+            color: var(--cp-c) !important;
+            font-family: 'Courier New', monospace !important;
+            font-size: 0.92rem !important;
+        }
+        html.cyberpunk .wine-vintage,
+        html.cyberpunk .beer-style {
+            background: var(--cp-bg2) !important;
+            color: var(--cp-m) !important;
+            border: 1px solid var(--cp-m) !important;
+            font-family: 'Courier New', monospace !important;
+        }
+        html.cyberpunk .wine-position-num {
+            color: var(--cp-g) !important;
+            font-family: 'Courier New', monospace !important;
+        }
+        html.cyberpunk .wine-grape,
+        html.cyberpunk .wine-region,
+        html.cyberpunk .wine-appellation {
+            color: var(--cp-t2) !important;
+            font-family: 'Courier New', monospace !important;
+            font-size: 0.78rem !important;
+        }
+        html.cyberpunk footer {
+            background: var(--cp-bg2) !important;
+            border-top: 1px solid var(--cp-bd) !important;
+            color: var(--cp-t2) !important;
+        }
+        html.cyberpunk ::-webkit-scrollbar { width: 5px; }
+        html.cyberpunk ::-webkit-scrollbar-track { background: var(--cp-bg); }
+        html.cyberpunk ::-webkit-scrollbar-thumb { background: var(--cp-bd); }
+        html.cyberpunk ::-webkit-scrollbar-thumb:hover { background: var(--cp-c); }
+        html.cyberpunk .theme-toggle { display: none !important; }
+        /* CP banner */
+        #cp-banner {
+            display: none; position: fixed; top: 0; left: 0; right: 0;
+            padding: 0.35rem 1rem; text-align: center; z-index: 8999;
+            font-family: 'Courier New', monospace; font-size: 0.72rem;
+            font-weight: bold; letter-spacing: 0.08em; color: #000;
+            background: linear-gradient(90deg, #00f5ff, #ff00ff, #00ff41, #ff8800, #00f5ff);
+            background-size: 300% 100%;
+            animation: cp-banner-anim 4s linear infinite;
+        }
+        @keyframes cp-banner-anim { 0%{background-position:0% 0%} 100%{background-position:300% 0%} }
+        html.cyberpunk #cp-banner { display: block; }
+        /* Matrix rain canvas */
+        #cp-matrix {
+            display: none; position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none; z-index: 8998; opacity: 0.07;
+        }
+        html.cyberpunk #cp-matrix { display: block; }
+
+        @media (max-width: 640px) {
+            .bft-ls-grid { grid-template-columns: 1fr 1fr; }
+            .bft-ls-card.bft-final { grid-column: 1 / -1; }
+        }
+        @media (max-width: 480px) {
+            .bft-play-body { padding: 1.2rem 0.9rem; }
+            .bft-play-hdr { flex-wrap: wrap; padding: 0.5rem 0.9rem; }
+            .bft-pbar-wrap { display: none; }
+            .bft-acts { gap: 0.4rem; }
+            .bft-btn { padding: 0.48rem 0.85rem; font-size: 0.76rem; }
+            .bft-ls-grid { grid-template-columns: 1fr; }
+        }
+
+
+        /* ============================================================
+           QUICK DESCRIPTIONS SECTION
+           ============================================================ */
+        #quickdesc { padding: 2rem 0 3rem; }
+        .qdesc-intro { max-width: 780px; margin: 0 auto 2rem; padding: 0 1.25rem; text-align: center; }
+        .qdesc-intro h2 { font-family: 'Cinzel', serif; color: #4a1a28; font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .qdesc-intro p { color: #555; font-size: 0.95rem; }
+        .qdesc-type-bar {
+            display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;
+            max-width: 780px; margin: 0 auto 1.75rem; padding: 0 1.25rem;
+        }
+        .qdesc-filter-btn {
+            padding: 0.35rem 1rem; font-size: 0.8rem; font-family: 'Cinzel', serif;
+            letter-spacing: 0.06em; background: #f8f5f0; color: #4a1a28;
+            border: 1px solid #d8cfc8; cursor: pointer; border-radius: 2px;
+            transition: all 0.15s;
+        }
+        .qdesc-filter-btn:hover { background: #4a1a28; color: #f8f5f0; border-color: #4a1a28; }
+        .qdesc-filter-btn.active { background: #4a1a28; color: #f8f5f0; border-color: #4a1a28; }
+        .qdesc-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1rem; max-width: 1100px; margin: 0 auto; padding: 0 1.25rem;
+        }
+        .qdesc-card {
+            background: #fdfaf7; border: 1px solid #e0d8ce; padding: 1.15rem 1.25rem;
+            border-radius: 3px; display: flex; flex-direction: column; gap: 0.5rem;
+        }
+        .qdesc-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; }
+        .qdesc-name { font-family: 'Cinzel', serif; color: #4a1a28; font-size: 0.9rem; letter-spacing: 0.03em; line-height: 1.3; }
+        .qdesc-badge {
+            font-size: 0.65rem; font-family: 'Cinzel', serif; letter-spacing: 0.07em;
+            padding: 0.18rem 0.55rem; border-radius: 2px; white-space: nowrap; flex-shrink: 0;
+        }
+        .qdesc-badge-white  { background: #f5f0e8; color: #7a6540; border: 1px solid #d8cfc8; }
+        .qdesc-badge-red    { background: #f5eded; color: #6b1c2e; border: 1px solid #e0c8c8; }
+        .qdesc-badge-rose   { background: #fdf0f3; color: #a04060; border: 1px solid #e8c8d0; }
+        .qdesc-badge-spark  { background: #f0f5f8; color: #2a5a7a; border: 1px solid #c8dce8; }
+        .qdesc-pos { font-size: 0.68rem; color: #999; font-family: 'Cinzel', serif; letter-spacing: 0.05em; }
+        .qdesc-text { color: #2c2c2c; font-size: 0.88rem; line-height: 1.65; }
+
+        [data-theme="dark"] #quickdesc { background: #0a0a0f; }
+        [data-theme="dark"] .qdesc-intro h2 { color: #c4a875; }
+        [data-theme="dark"] .qdesc-intro p { color: #b8b4ac; }
+        [data-theme="dark"] .qdesc-filter-btn { background: #1a1025; color: #c4a875; border-color: #2a1a35; }
+        [data-theme="dark"] .qdesc-filter-btn:hover,
+        [data-theme="dark"] .qdesc-filter-btn.active { background: #4a0e1a; color: #e8e4dc; border-color: #6b1c2e; }
+        [data-theme="dark"] .qdesc-card { background: #100a1a; border-color: #2a1a35; }
+        [data-theme="dark"] .qdesc-name { color: #c4a875; }
+        [data-theme="dark"] .qdesc-text { color: #d8d4cc; }
+        [data-theme="dark"] .qdesc-pos { color: #666; }
+        [data-theme="dark"] .qdesc-badge-white  { background: #1a1510; color: #c4a875; border-color: #3a3020; }
+        [data-theme="dark"] .qdesc-badge-red    { background: #180810; color: #e8a0b0; border-color: #3a1a20; }
+        [data-theme="dark"] .qdesc-badge-rose   { background: #160810; color: #e8a0b8; border-color: #382028; }
+        [data-theme="dark"] .qdesc-badge-spark  { background: #080c18; color: #a0c8e8; border-color: #1a2a3a; }
 
         @media (max-width: 480px) {
-            .typemaster-title { font-size: 1.3rem; }
-            .typemaster-controls { flex-wrap: wrap; justify-content: center; }
-            .typemaster-nav-btn { padding: 0.45rem 0.85rem; }
-            .tm-category { font-size: 0.85rem; }
-            .tm-input { font-size: 0.88rem; }
+            .qdesc-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ============================================================
+           GUEST COMMENTS SECTION
+           ============================================================ */
+        #guestcomments { padding: 2rem 0 3rem; }
+        .gc-intro { max-width: 780px; margin: 0 auto 2rem; padding: 0 1.25rem; text-align: center; }
+        .gc-intro h2 { font-family: 'Cinzel', serif; color: #4a1a28; font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .gc-intro p { color: #555; font-size: 0.95rem; }
+        .gc-list { max-width: 820px; margin: 0 auto; padding: 0 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+        .gc-item {
+            border: 1px solid #e0d8ce; background: #fdfaf7; border-radius: 3px; overflow: hidden;
+        }
+        .gc-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.9rem 1.15rem; cursor: pointer; user-select: none;
+            gap: 0.75rem; transition: background 0.15s;
+        }
+        .gc-header:hover { background: #f5f0ea; }
+        .gc-item.gc-open .gc-header { background: #f5ede8; border-bottom: 1px solid #e0d8ce; }
+        .gc-item-left { display: flex; align-items: center; gap: 0.75rem; }
+        .gc-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+        .gc-dot-white  { background: #c4a875; }
+        .gc-dot-red    { background: #6b1c2e; }
+        .gc-dot-rose   { background: #c4607a; }
+        .gc-dot-spark  { background: #4a7a9a; }
+        .gc-dot-beer   { background: #8a7030; }
+        .gc-item-name { font-family: 'Cinzel', serif; color: #4a1a28; font-size: 0.88rem; letter-spacing: 0.03em; }
+        .gc-arrow { color: #888; font-size: 0.7rem; transition: transform 0.2s; flex-shrink: 0; }
+        .gc-item.gc-open .gc-arrow { transform: rotate(90deg); }
+        .gc-comments { display: none; padding: 0.85rem 1.15rem 1.15rem; }
+        .gc-item.gc-open .gc-comments { display: flex; flex-direction: column; gap: 0.55rem; }
+        .gc-comment {
+            display: flex; gap: 0.65rem; align-items: flex-start;
+            padding: 0.55rem 0.75rem; background: #fff; border-left: 3px solid #c4a875;
+            font-size: 0.87rem; color: #2c2c2c; line-height: 1.55;
+        }
+        .gc-comment-icon { font-size: 0.85rem; color: #c4a875; flex-shrink: 0; margin-top: 0.1rem; }
+        .gc-comment-text { flex: 1; }
+        .gc-type-header {
+            font-family: 'Cinzel', serif; font-size: 0.72rem; color: #999;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            padding: 0.3rem 1.15rem 0.6rem; margin-top: 0.5rem;
+        }
+
+        [data-theme="dark"] #guestcomments { background: #0a0a0f; }
+        [data-theme="dark"] .gc-intro h2 { color: #c4a875; }
+        [data-theme="dark"] .gc-intro p { color: #b8b4ac; }
+        [data-theme="dark"] .gc-item { background: #100a1a; border-color: #2a1a35; }
+        [data-theme="dark"] .gc-header:hover { background: #1a1028; }
+        [data-theme="dark"] .gc-item.gc-open .gc-header { background: #1a0e28; border-bottom-color: #2a1a35; }
+        [data-theme="dark"] .gc-item-name { color: #c4a875; }
+        [data-theme="dark"] .gc-arrow { color: #666; }
+        [data-theme="dark"] .gc-comments { background: transparent; }
+        [data-theme="dark"] .gc-comment { background: #0d0818; border-left-color: #4a0e1a; color: #d8d4cc; }
+        [data-theme="dark"] .gc-comment-icon { color: #c4a875; }
+        [data-theme="dark"] .gc-type-header { color: #555; }
+
+        /* ============================================================
+           STAFF PICKS / RECOMMENDATIONS SECTION
+           ============================================================ */
+        #recommendations { padding: 2rem 0 3rem; }
+        .rec-intro { max-width: 780px; margin: 0 auto 2.5rem; padding: 0 1.25rem; text-align: center; }
+        .rec-intro h2 { font-family: 'Cinzel', serif; color: #4a1a28; font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .rec-intro p { color: #555; font-size: 0.95rem; }
+        .rec-body { max-width: 900px; margin: 0 auto; padding: 0 1.25rem; }
+        .rec-category { margin-bottom: 2.5rem; }
+        .rec-cat-header {
+            display: flex; align-items: center; gap: 0.75rem;
+            margin-bottom: 1.1rem; padding-bottom: 0.5rem;
+            border-bottom: 2px solid #c4a875;
+        }
+        .rec-cat-icon { font-size: 1.4rem; }
+        .rec-cat-title {
+            font-family: 'Cinzel', serif; color: #4a1a28; font-size: 1.1rem;
+            letter-spacing: 0.08em; text-transform: uppercase;
+        }
+        .rec-cat-count { font-size: 0.75rem; color: #999; font-family: 'Cinzel', serif; letter-spacing: 0.05em; }
+        .rec-picks { display: flex; flex-direction: column; gap: 1rem; }
+        .rec-pick {
+            background: #fdfaf7; border: 1px solid #e0d8ce;
+            padding: 1.25rem 1.4rem; border-radius: 3px;
+            display: grid; grid-template-columns: auto 1fr;
+            gap: 0 1.1rem; align-items: start;
+        }
+        .rec-rank {
+            font-family: 'Cinzel', serif; font-size: 1.8rem; color: #c4a875;
+            line-height: 1; grid-row: span 2; align-self: center;
+            min-width: 1.6rem; text-align: center;
+        }
+        .rec-pick-top { display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap; }
+        .rec-pick-name { font-family: 'Cinzel', serif; color: #4a1a28; font-size: 1rem; letter-spacing: 0.03em; }
+        .rec-pick-vintage { font-size: 0.78rem; color: #888; font-family: 'Cinzel', serif; }
+        .rec-pick-origin { font-size: 0.75rem; color: #888; }
+        .rec-reason {
+            color: #2c2c2c; font-size: 0.87rem; line-height: 1.65;
+            margin-top: 0.35rem;
+        }
+        .rec-reason em { color: #4a1a28; font-style: normal; font-weight: 600; }
+
+        [data-theme="dark"] #recommendations { background: #0a0a0f; }
+        [data-theme="dark"] .rec-intro h2 { color: #c4a875; }
+        [data-theme="dark"] .rec-intro p { color: #b8b4ac; }
+        [data-theme="dark"] .rec-cat-header { border-bottom-color: #4a0e1a; }
+        [data-theme="dark"] .rec-cat-title { color: #c4a875; }
+        [data-theme="dark"] .rec-cat-count { color: #555; }
+        [data-theme="dark"] .rec-pick { background: #100a1a; border-color: #2a1a35; }
+        [data-theme="dark"] .rec-rank { color: #c4a875; }
+        [data-theme="dark"] .rec-pick-name { color: #c4a875; }
+        [data-theme="dark"] .rec-pick-vintage { color: #666; }
+        [data-theme="dark"] .rec-pick-origin { color: #666; }
+        [data-theme="dark"] .rec-reason { color: #d8d4cc; }
+        [data-theme="dark"] .rec-reason em { color: #e8c080; }
+
+        @media (max-width: 480px) {
+            .rec-pick { grid-template-columns: 1fr; }
+            .rec-rank { font-size: 1.3rem; }
         }
 
     </style>
@@ -5025,6 +5677,9 @@
 
     <nav>
         <a href="#techsheets" class="active" onclick="navigateToSection('techsheets', this, event)">Wine List</a>
+        <a href="#recommendations" onclick="navigateToSection('recommendations', this, event)">Staff Picks</a>
+        <a href="#quickdesc" onclick="navigateToSection('quickdesc', this, event)">Quick Descriptions</a>
+        <a href="#guestcomments" onclick="navigateToSection('guestcomments', this, event)">Guest Comments</a>
         <a href="#quickref" onclick="navigateToSection('quickref', this, event)">Quick Reference</a>
         <a href="#flashcards" onclick="navigateToSection('flashcards', this, event)">Wine Quiz</a>
         <a href="#checklist" onclick="navigateToSection('checklist', this, event)">Opening Checklist</a>
@@ -6159,78 +6814,112 @@
             </div>
         </section>
 
-        <!-- ===== TYPEMASTER — Easter Egg Section (no nav link — click "Ardoa" title 5×) ===== -->
+        <!-- ===== BRUTE FORCE TRAINER — Easter Egg Game (click "Ardoa" 5× to enter) ===== -->
         <section id="typemaster">
-            <div class="typemaster-wrap">
 
-                <div class="typemaster-top">
-                    <div>
-                        <h2 class="typemaster-title">Wine Mastery Challenge</h2>
-                        <p class="typemaster-subtitle">Type every field exactly — accents required, case doesn't matter</p>
-                    </div>
-                    <button class="typemaster-close-btn" onclick="showSection('techsheets')">✕ Exit</button>
+            <!-- Layer 1: INTRO CINEMATIC -->
+            <div class="bft-layer" id="bft-intro">
+                <canvas id="bft-intro-canvas"></canvas>
+                <div class="bft-intro-title" id="bft-intro-title">ARDOA</div>
+                <div class="bft-intro-subtitle" id="bft-intro-sub">BRUTE FORCE TRAINER</div>
+                <div class="bft-intro-press" id="bft-intro-press">PRESS ANY KEY OR CLICK TO CONTINUE</div>
+            </div>
+
+            <!-- Layer 2: TITLE SCREEN -->
+            <div class="bft-layer" id="bft-title">
+                <div class="bft-scanlines"></div>
+                <div class="bft-title-ring"></div>
+                <div class="bft-title-ring2"></div>
+                <div class="bft-title-logo">ARDOA</div>
+                <div class="bft-title-sub">BRUTE FORCE TRAINER</div>
+                <div class="bft-title-press">▶ PRESS ENTER OR CLICK TO PLAY ◀</div>
+                <div class="bft-title-hint">// secret: neon //</div>
+            </div>
+
+            <!-- Layer 3: LEVEL SELECT -->
+            <div class="bft-layer" id="bft-levelsel">
+                <div class="bft-ls-title">SELECT LEVEL</div>
+                <div class="bft-ls-subtitle">Master each group of wines to advance</div>
+                <div class="bft-ls-grid" id="bft-ls-grid"><!-- filled by JS --></div>
+                <div class="bft-ls-trap" id="bft-ls-trap">⚠ WARNING: EXIT DISABLED — BEAT LEVEL 7 TO RETURN TO THE SITE ⚠</div>
+            </div>
+
+            <!-- Layer 4: PLAYING -->
+            <div class="bft-layer" id="bft-playing">
+                <div class="bft-play-hdr">
+                    <div class="bft-play-badge" id="bft-play-badge">LEVEL 1</div>
+                    <div class="bft-pbar-wrap"><div class="bft-pbar-fill" id="bft-pbar-fill"></div></div>
+                    <div class="bft-play-ctr" id="bft-play-ctr">1 / 4</div>
                 </div>
-
-                <!-- Special Characters Reference -->
-                <div class="typemaster-chars-panel">
-                    <div class="typemaster-chars-toggle" onclick="tmToggleChars()">
-                        <span id="tmCharsArrow">▶</span> Special Characters Guide
-                    </div>
-                    <div class="typemaster-chars-content" id="tmCharsContent">
-                        <div class="typemaster-chars-tabs">
-                            <button class="typemaster-chars-tab tm-tab-active" id="tmTabMac" onclick="tmShowCharTab('mac')">Mac</button>
-                            <button class="typemaster-chars-tab" id="tmTabPc" onclick="tmShowCharTab('pc')">Windows / PC</button>
-                        </div>
-                        <div id="tmCharsMac">
-                            <table class="typemaster-chars-table">
-                                <tr><th>Char</th><th>Key Sequence</th><th>Where it appears</th></tr>
-                                <tr><td>é</td><td>⌥E → E</td><td>Pouilly-Fumé, Supérieur, Crémant, Salnés</td></tr>
-                                <tr><td>è</td><td>⌥` → E</td><td>Verquière, Penedès, Mourvèdre</td></tr>
-                                <tr><td>â</td><td>⌥I → A</td><td>Château</td></tr>
-                                <tr><td>ô</td><td>⌥I → O</td><td>Côtes, Rhône, François</td></tr>
-                                <tr><td>ç</td><td>⌥C</td><td>François</td></tr>
-                                <tr><td>ä</td><td>⌥U → A</td><td>Täglich (Braunewell)</td></tr>
-                                <tr><td>ñ</td><td>⌥N → N</td><td>Albariño</td></tr>
-                                <tr><td>í</td><td>⌥E → I</td><td>Mont-Rubí, Rías Baixas</td></tr>
-                                <tr><td>á</td><td>⌥E → A</td><td>Rías Baixas, Salnés</td></tr>
-                            </table>
-                            <p class="typemaster-chars-note">⌥ = Option key. Hold Option, tap the first key, release, then tap the second key.</p>
-                            <p class="typemaster-chars-note">Shortcut: On modern Macs you can hold any vowel key and a popup appears — click the number for the accented version.</p>
-                        </div>
-                        <div id="tmCharsPc" style="display:none">
-                            <table class="typemaster-chars-table">
-                                <tr><th>Char</th><th>Alt Code (Numpad)</th><th>Where it appears</th></tr>
-                                <tr><td>é</td><td>Alt + 0233</td><td>Pouilly-Fumé, Supérieur, Crémant, Salnés</td></tr>
-                                <tr><td>è</td><td>Alt + 0232</td><td>Verquière, Penedès, Mourvèdre</td></tr>
-                                <tr><td>â</td><td>Alt + 0226</td><td>Château</td></tr>
-                                <tr><td>ô</td><td>Alt + 0244</td><td>Côtes, Rhône, François</td></tr>
-                                <tr><td>ç</td><td>Alt + 0231</td><td>François</td></tr>
-                                <tr><td>ä</td><td>Alt + 0228</td><td>Täglich (Braunewell)</td></tr>
-                                <tr><td>ñ</td><td>Alt + 0241</td><td>Albariño</td></tr>
-                                <tr><td>í</td><td>Alt + 0237</td><td>Mont-Rubí, Rías Baixas</td></tr>
-                                <tr><td>á</td><td>Alt + 0225</td><td>Rías Baixas, Salnés</td></tr>
-                            </table>
-                            <p class="typemaster-chars-note">Hold Alt and type the number on the NUMERIC KEYPAD (not the top row). Num Lock must be ON.</p>
-                            <p class="typemaster-chars-note">Alternative: Open Windows Character Map (search "charmap" in Start) or copy-paste from this table.</p>
-                        </div>
-                    </div>
+                <div class="bft-play-body">
+                    <div id="bft-card"><!-- filled by JS --></div>
                 </div>
-
-                <!-- Navigation controls -->
-                <div class="typemaster-controls">
-                    <button class="typemaster-nav-btn" id="tmPrevBtn" onclick="tmNavigate(-1)">← Prev</button>
-                    <div class="typemaster-progress-info">
-                        <div>Item <strong id="tmCurrent">—</strong> of <strong id="tmTotal">—</strong></div>
-                        <div class="typemaster-mastered-count">★ Mastered: <span id="tmMastered">0</span></div>
-                    </div>
-                    <button class="typemaster-nav-btn" id="tmNextBtn" onclick="tmNavigate(1)">Next →</button>
+                <div class="bft-play-foot">
+                    <button class="bft-nav-btn" id="bft-prev-btn" onclick="bftPrev()">◀ PREV</button>
+                    <button class="bft-submit-btn" id="bft-submit-btn" onclick="bftCheckLevel()">SUBMIT LEVEL</button>
+                    <button class="bft-nav-btn" id="bft-next-btn" onclick="bftNext()">NEXT ▶</button>
                 </div>
+            </div>
 
-                <!-- Challenge card (filled by JS) -->
-                <div class="typemaster-card" id="tmCard">
-                    <div class="tm-category">Click "Ardoa" in the header 5 times to begin</div>
+            <!-- Layer 5: LEVEL WIN -->
+            <div class="bft-layer" id="bft-levelwin">
+                <canvas class="bft-lw-canvas" id="bft-lw-canvas"></canvas>
+                <div class="bft-lw-inner">
+                    <div class="bft-lw-title" id="bft-lw-title">LEVEL CLEARED!</div>
+                    <div class="bft-lw-sub" id="bft-lw-sub">Wines Mastered</div>
+                    <button class="bft-lw-btn" id="bft-lw-btn" onclick="bftAfterLevelWin()">CONTINUE ▶</button>
                 </div>
+            </div>
 
+            <!-- Layer 6: GAME WIN -->
+            <div class="bft-layer" id="bft-gamewin">
+                <canvas class="bft-gw-canvas" id="bft-gw-canvas"></canvas>
+                <div class="bft-gw-inner">
+                    <div class="bft-gw-title">YOU HAVE CONQUERED<br>THE BRUTE FORCE TRAINER</div>
+                    <div class="bft-gw-loading" id="bft-gw-loading">INITIALIZING ARDOA_OS v2.0...</div>
+                    <div class="bft-gw-bar-wrap"><div class="bft-gw-bar" id="bft-gw-bar"></div></div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Quick Descriptions Section -->
+        <section id="quickdesc">
+            <div class="qdesc-intro">
+                <h2>Quick Descriptions</h2>
+                <p>The two-sentence version of every wine — what it is, and why it matters</p>
+            </div>
+            <div class="qdesc-type-bar">
+                <button class="qdesc-filter-btn active" onclick="filterQDesc('all', this)">All Wines</button>
+                <button class="qdesc-filter-btn" onclick="filterQDesc('white', this)">Whites</button>
+                <button class="qdesc-filter-btn" onclick="filterQDesc('red', this)">Reds</button>
+                <button class="qdesc-filter-btn" onclick="filterQDesc('rose', this)">Rosés</button>
+                <button class="qdesc-filter-btn" onclick="filterQDesc('sparkling', this)">Sparkling</button>
+            </div>
+            <div class="qdesc-grid" id="qdescGrid">
+                <!-- filled by JS -->
+            </div>
+        </section>
+
+        <!-- Guest Comments Section -->
+        <section id="guestcomments">
+            <div class="gc-intro">
+                <h2>What Guests Say</h2>
+                <p>The 7 most common reactions, questions, and compliments you'll hear — know what's coming and how to respond</p>
+            </div>
+            <div class="gc-list" id="gcList">
+                <!-- filled by JS -->
+            </div>
+        </section>
+
+        <!-- Staff Picks / Recommendations Section -->
+        <section id="recommendations">
+            <div class="rec-intro">
+                <h2>Staff Picks</h2>
+                <p>The wines we reach for first — curated recommendations with honest reasons why</p>
+            </div>
+            <div class="rec-body" id="recBody">
+                <!-- filled by JS -->
             </div>
         </section>
 
@@ -7022,6 +7711,451 @@
             }
         ];
 
+        // ============================================================
+        // QUICK DESCRIPTIONS — 2 sentences per wine (rendered in #quickdesc)
+        // ============================================================
+        var wineQuickDescs = {
+            "Famiglia Boron Pinot Grigio": "From northeastern Italy's Veneto, this is the quintessential aperitivo white — crisp green apple, lemon zest, white flowers, and a clean mineral finish. Light, lively, and endlessly refreshing, it's the wine that says summer no matter the season.",
+            "Jean Aubron Folle Blanche": "Made from Folle Blanche, an ancient Loire grape once used to produce Cognac, this rare find delivers electric acidity, oyster shell minerality, and razor-sharp citrus. Bone-dry and striking — one of the Loire's best-kept secrets.",
+            "Pouilly-Fumé Dezat": "From silex (flint) soils along the Loire River, this world-class Sauvignon Blanc is a study in precision — citrus, gunsmoke, white flowers, and a laser-sharp mineral finish that lingers. The gold standard pairing for goat cheese, and a benchmark of French white wine at its finest.",
+            "Presqu'ile Chardonnay": "Grown in California's fog-cooled Santa Maria Valley by a sustainable estate winery, this Chardonnay sits beautifully between rich and lean — green apple and citrus with a silky butter note and toasty oak that never overpowers. It's the Chardonnay that converts Chardonnay skeptics.",
+            "Marola Albariño Rías Baixas": "From Galicia's dramatic Atlantic coastline in northwestern Spain, this Albariño bursts with white peach, apricot, and saline sea-spray minerality — made for seafood but irresistible on its own. It's summer by the sea, bottled.",
+            "Folly by Mascaronne Rosé Côtes de Provence": "An organic estate rosé from Provence — the holy land of rosé — where honeyed nectarine, white flowers, and mineral freshness combine in a wine that's pale, dry, and effortlessly beautiful. Tony Parker co-created this cuvée, and it absolutely lives up to the billing.",
+            "Gorghi Tondi Rosa Dei Venti": "Made from 100% Nerello Mascalese on Sicily's windswept organic estate, the 'Rose of the Winds' is pale coral pink with wild strawberry, citrus blossom, and saline sea-spray on every sip. Rare, expressive, and tasting like a Mediterranean vacation.",
+            "Braunewell Unser Täglich Scheurebe": "A joyful aromatic German white from Rheinhessen, bursting with pink grapefruit, passionfruit, and elderflower — like a tropical garden in a glass. Lower in alcohol and alive with acidity, it's the ultimate spicy-food companion and the crowd-pleasing aperitif nobody sees coming.",
+            "Ercole Barbera del Monferrato": "From Piedmont's rolling hills, this lively Barbera leads with bright cherry, raspberry, and dried herbs, then delivers naturally high acidity and low tannins that make every sip feel fresh and food-friendly. Honest Italian charm in a bottle — the kind of red you never want to put down.",
+            "Gorghi Tondi Dume Frappato": "Sicily's most joyful red, certified organic and lighter than you'd expect — fresh cherry, wild strawberry, rose petals, and a whisper of Mediterranean herbs with a silky, effortless texture. Chill it slightly and drink it freely; this is Beaujolais's Italian cousin.",
+            "Garnatxa Meretat Mont-Rubí": "Old-vine Catalan Grenache from high-altitude organic Penedès, where sun, slate, and cool mountain nights produce ripe raspberries, warm herbs, white pepper, and garrigue spice with soft, generous tannins. One of Spain's most immediately loveable reds — approachable, expressive, and full of soul.",
+            "Red Tail Ridge RTR Estate Vineyard": "Grown on the shores of Seneca Lake in New York's Finger Lakes by a UC Davis PhD viticulturist, this Burgundian Pinot Noir delivers red cherry, raspberry, violet, smoke, and silky tannins in a wine of remarkable elegance. Rated 92 points by Wine Enthusiast — proof that New York produces world-class Pinot Noir.",
+            "Massimo Ribeira Sacra": "Mencía from Europe's most dramatic vineyards — hand-harvested on 60-degree slate terraces above the Sil River canyon — delivers ethereal red berries, violets, wet slate minerality, and vibrant acidity in a medium-bodied wine of striking finesse. Often compared to Pinot Noir, and easy to see why.",
+            "Colle Corviano Montepulciano d'Abruzzo": "A true Italian crowd-pleaser from Abruzzo's Adriatic coast — dark cherry, plum, dried oregano, and black pepper wrapped in a medium-full body with smooth, food-friendly tannins. Rich, honest, and outstanding value; this is the wine that makes everyone at the table happy.",
+            "Domaine de la Petite Roche Anjou Cabernet Franc": "Loire Valley Cabernet Franc at its most expressive — red currant, fresh raspberry, violet, and that signature green-herb note that Cab Franc lovers chase, with bright acidity and light enough tannins to serve slightly chilled. Vibrant, versatile, and one of France's most underrated reds.",
+            "Château Roc Meynard Bordeaux Supérieur": "A five-generation family estate on Bordeaux's Right Bank, this 2019 Merlot-dominant blend offers classic Claret character — red fruits, subtle wet stone, gentle oak, and soft approachable tannins. Elegant, ready to drink, and the definition of why Bordeaux became the world's most famous wine region.",
+            "Encomienda de Cervera Horten": "Spain's signature grape from the vast Castilla-La Mancha plateau, where extremes of heat and cold naturally concentrate flavors — this Tempranillo brings red cherry, plum, leather, and vanilla with a smooth, satisfying finish. Classic, reliable, and the perfect introduction to the world of Spanish red wine.",
+            "Les Cousins L'Inconscient": "Dark, powerful, and made from the gut rather than the spreadsheet — this bold Montsant blend of Grenache, Carignan, and Cabernet Sauvignon brings blackberry, Mediterranean herbs, slate mineral, and licorice from old vines on extreme slopes. Decant it, let it breathe, and prepare to be genuinely impressed.",
+            "L.A. Cetto Cabernet Sauvignon": "Mexico's most storied winery has been perfecting Cabernet Sauvignon in Baja California's Valle de Guadalupe since 1928, and this bottle proves they've mastered it — dark blackcurrant, cedar, dark chocolate, and polished tannins with a long, satisfying finish. A proud cultural ambassador and a genuine conversation starter.",
+            "Orsa Cabernet Sauvignon": "Chile's Central Valley delivers what Cabernet does best — blackcurrant, plum, a hint of eucalyptus, and smooth tannins in a clean, full-bodied wine that over-delivers at its price. Unfussy, approachable, and exactly what you want when someone just says 'I'll have a Cab.'",
+            "Rocca di Castagnoli Chianti Classico": "From a 10th-century fortress estate in the historic heart of Tuscany's Chianti Classico zone, this Sangiovese-dominant wine delivers red cherry, dried oregano, leather, and firm acidity in the proudly Italian way. The Black Rooster seal is a promise of authenticity — this is Tuscany in a glass.",
+            "Palmeri Navalta Farnacha": "Old-vine Garnacha grown at 800–1,000 meters in the mountainous Calatayud region of Aragón, where extreme altitude and a superb 2018 vintage combined to produce something truly special — dark fruit, ripe spice, mineral depth, and velvety tannins. Powerful, complex, and one of Spain's most exciting hidden gems.",
+            "Domaine Verquière Plan de Dieu": "From the 'Plain of God' in the Southern Rhône — where medieval monks first planted vines on heat-storing river stones — this GSM blend from a third-generation family delivers dark blackberry, black cherry, garrigue herbs, black pepper, and a long, warming finish. Rich, soulful, and built for the table.",
+            "Cims de Porrera Vi de Vila Priorat": "Co-founded by a legendary Catalan protest singer and one of Priorat's five revival pioneers, this wine is made from ancient vines clinging to 40–60% grade llicorella slate slopes — one of Spain's most extreme and celebrated terroirs. Intense and profound: bramble fruit, violets, black pepper, balsamic, and a mineral finish that stays with you long after the glass is empty.",
+            "François Montand Blanc de Blancs": "Traditional-method sparkling wine from France's Jura region — 100% Chardonnay — with crisp green apple, citrus blossom, brioche, and fine persistent bubbles that rival Champagne at a fraction of the price. Elegant, celebratory, and impeccably dry.",
+            "L.A. Cetto Brut": "From the same Baja California estate that produces their acclaimed Cabernet Sauvignon, this brut sparkling wine blends Chenin Blanc and Colombard for fresh pear, green apple, tropical hints, and lively crisp bubbles. A proud ambassador for Mexican winemaking — and endlessly fun to pour.",
+            "Tiamo Prosecco Split": "A single-serve split of organic Italian Prosecco — 100% Glera grape from the Veneto — with soft frothy bubbles, fresh green apple, white peach, and delicate florals. The perfect aperitivo companion: light, joyful, and impossible not to smile at."
+        };
+
+        // ============================================================
+        // GUEST COMMENTS — Top 7 things guests say about each wine/beer
+        // ============================================================
+        var wineComments = {
+            "Famiglia Boron Pinot Grigio": [
+                "This is exactly what I was looking for — light, clean, nothing too heavy.",
+                "I'm not usually a white wine person but this is really refreshing.",
+                "Can I get another glass? It just goes down so easy.",
+                "Is this the same thing as Pinot Gris? What's the difference?",
+                "This would be perfect with the prosciutto — what do you think?",
+                "I had something like this in Italy last summer, it brings me right back.",
+                "It's not too acidic, I like that. Some whites really pucker me up."
+            ],
+            "Jean Aubron Folle Blanche": [
+                "What is a Folle Blanche? I've never heard of it.",
+                "This is so sharp and clean — almost like biting into a lemon in the best way.",
+                "I love how minerally this is. It reminds me of oysters.",
+                "It's almost electric on the palate — I wasn't expecting that.",
+                "Is this related to Cognac? I read somewhere that Folle Blanche was used in Cognac.",
+                "This is really unique. I've never tasted anything quite like it.",
+                "The acidity is incredible — would this be good with something rich like cheese?"
+            ],
+            "Pouilly-Fumé Dezat": [
+                "Is this a Sancerre? It tastes very similar to something I had in France.",
+                "I can smell something almost smoky — is that from the grape or the oak?",
+                "This is beautifully dry. Perfect with the goat cheese.",
+                "What does 'Fumé' mean? Is this smoked somehow?",
+                "The minerality is stunning — I can taste the flint in this.",
+                "Loire Sauvignon Blanc is so different from New Zealand — this is sharper and more precise.",
+                "This might be the best white wine I've had in a while."
+            ],
+            "Presqu'ile Chardonnay": [
+                "I usually avoid Chardonnay but this doesn't taste like the oaky buttery ones I hate.",
+                "Where is Santa Maria Valley? Is that like Napa?",
+                "There's this beautiful creamy texture but it's still fresh — how do they do that?",
+                "Is this Burgundy-style? It has that kind of restraint to it.",
+                "The fruit is so clean — I can taste apple and peach but it's not sweet at all.",
+                "This would go perfectly with the Saint Angel cheese — really?",
+                "I've been trying to find a balanced California Chardonnay, this is exactly it."
+            ],
+            "Marola Albariño Rías Baixas": [
+                "This is briny, right? Like I can almost taste the ocean in it.",
+                "Albariño is such a perfect summer wine. I could drink this all day.",
+                "What does Rías Baixas mean? Is that the region or the grape?",
+                "This would be incredible with seafood. Do you pair it with anything on the menu?",
+                "I love how the acidity cuts right through — even with something fatty.",
+                "I had this in Galicia once and it tasted exactly like this. Taking me back.",
+                "There's a slight peach note in this I wasn't expecting. Really nice."
+            ],
+            "Folly by Mascaronne Rosé Côtes de Provence": [
+                "This color is gorgeous — it's almost translucent.",
+                "Tony Parker's rosé? The basketball player? That's actually really cool.",
+                "This is so dry! I thought rosé was always sweet.",
+                "It's light but has real flavor — I love the nectarine note.",
+                "Is this what they drink on the French Riviera? It tastes like it should be.",
+                "This is the kind of rosé I want to drink all summer on a patio.",
+                "What's the difference between Provence rosé and regular rosé?"
+            ],
+            "Gorghi Tondi Rosa Dei Venti": [
+                "Rose of the Winds — what a name. Does that mean anything?",
+                "This is pale, right? I like that. The really bright pink rosés scare me off.",
+                "I can taste something almost salty in this — like sea spray. Is that the terroir?",
+                "Sicily makes rosé? I thought they mainly did big reds.",
+                "The wild strawberry note is beautiful — it's delicate but present.",
+                "This is organic? You can almost taste the difference — it feels very pure.",
+                "Which rosé do you prefer, this one or the Provence one? Hard choice."
+            ],
+            "Braunewell Unser Täglich Scheurebe": [
+                "What is Scheurebe? I've never seen it on a menu before.",
+                "This is incredibly aromatic — I can smell it from across the table.",
+                "It reminds me a bit of Riesling but more tropical. What's it made from?",
+                "Is there passionfruit in this? It's like drinking a fruit salad in the best way.",
+                "'Our Daily' — that's a fun name. It's definitely daily-drinking quality.",
+                "The alcohol is surprisingly low — I could drink this all evening.",
+                "This is great with spicy food? Really? I wouldn't have guessed that."
+            ],
+            "Ercole Barbera del Monferrato": [
+                "This is really bright and tangy — I like that. Not heavy at all.",
+                "Barbera — is that from the same region as Barolo?",
+                "The acidity is amazing, it really wakes up your palate.",
+                "I love how food-friendly this is. It just goes with everything.",
+                "It's like a lighter red that still has real flavor — perfect for me.",
+                "I thought Italian reds were all heavy and tannic — this is totally different.",
+                "Can I get this slightly chilled? Someone told me that's how Italians drink it."
+            ],
+            "Gorghi Tondi Dume Frappato": [
+                "This is light but it still tastes like a red wine — how?",
+                "I love the rose petal note in this. It's almost like a floral perfume.",
+                "Frappato — is this a Sicilian thing? I've never had it before.",
+                "This reminds me of a light Pinot Noir but more summery.",
+                "Do you serve this chilled? I feel like it would be amazing slightly cold.",
+                "The cherry flavor is so fresh — it doesn't taste cooked or jammy at all.",
+                "I would have never thought Sicily made a wine like this. Incredible."
+            ],
+            "Garnatxa Meretat Mont-Rubí": [
+                "Garnatxa — is that Grenache? I thought Grenache was French.",
+                "I love how soft and round the tannins are. Very approachable.",
+                "There's this herbal note — almost like thyme or rosemary. Is that the garrigue thing?",
+                "Penedès is where Cava is from, right? I didn't know they made still wines here.",
+                "This would be great with the chorizo — the pepper notes match perfectly.",
+                "For an organic wine this has so much depth. You can taste the old vines.",
+                "It's ripe but not overdone — I hate when Spanish reds are too jammy. This is perfect."
+            ],
+            "Red Tail Ridge RTR Estate Vineyard": [
+                "New York Pinot Noir? I didn't know the Finger Lakes did this well.",
+                "This is almost Burgundian — it has that earthy, floral quality.",
+                "92 points from Wine Enthusiast — that's serious. And this is from New York?",
+                "The tannins are so silky. This is drinking beautifully right now.",
+                "I can smell violets and something smoky — it's really complex.",
+                "Wait, the winemaker has a PhD in grape genetics? That's incredible.",
+                "This would be amazing with the Duck Rillettes. Or the pâté?"
+            ],
+            "Massimo Ribeira Sacra": [
+                "Heroic viticulture — I read about this region. The slopes are insane, right?",
+                "This is so elegant for a Spanish red. It's almost like a Pinot Noir.",
+                "Mencía — I've heard this is Spain's answer to Pinot Noir. Is that fair?",
+                "The minerality in this is incredible — it's like tasting the slate.",
+                "I love that it's bright and fresh but still has depth.",
+                "Ribeira Sacra — the Sacred Riverbank. Medieval monks planted these terraces?",
+                "This is one of the most interesting wines on your list. I'm really glad I tried it."
+            ],
+            "Colle Corviano Montepulciano d'Abruzzo": [
+                "Wait, is this from the town of Montepulciano in Tuscany?",
+                "This is great value for the depth of flavor it has.",
+                "I love the dark cherry and the herby note — oregano, right?",
+                "This is really versatile. I feel like it would go with everything.",
+                "The tannins are smooth but there's still some structure. Nice balance.",
+                "It's not trying too hard — it's just a really solid, satisfying red.",
+                "I always get confused between Montepulciano the grape and Montepulciano the place."
+            ],
+            "Domaine de la Petite Roche Anjou Cabernet Franc": [
+                "Cab Franc is so underrated. This shows why it deserves more attention.",
+                "There's a green pepper note in here — is that a flaw or intentional?",
+                "This is much lighter than a Cabernet Sauvignon. Same family?",
+                "The raspberry and violet together are stunning. Really perfumed.",
+                "Loire reds are such a secret — why doesn't everyone drink these?",
+                "Can I serve this slightly chilled? Someone mentioned you can with Cab Franc.",
+                "This would be perfect with the Duck Rillettes — the acidity just cuts through everything."
+            ],
+            "Château Roc Meynard Bordeaux Supérieur": [
+                "This is a Right Bank Bordeaux — so Merlot-dominant? What's the difference?",
+                "The 2019 vintage was supposed to be great in Bordeaux. Is this one of those?",
+                "It has that classic Bordeaux feel — earthy, structured, a bit reserved.",
+                "I love the soft tannins on this. It's approachable but still elegant.",
+                "Bordeaux Supérieur — is that better than regular Bordeaux AOC?",
+                "There's something almost cedar and herbal in the finish. Very classic.",
+                "My go-to at dinner parties is always Bordeaux — this fits that perfectly."
+            ],
+            "Encomienda de Cervera Horten": [
+                "This is Tempranillo — so like a Rioja style?",
+                "I love the leather and tobacco notes in this. Very classic Spanish.",
+                "Castilla-La Mancha — isn't that where Don Quixote takes place?",
+                "The cherry and plum are front and center but it's not too fruit-forward. Balanced.",
+                "Great value for the quality. Tempranillo always over-delivers.",
+                "This pairs perfectly with the chorizo — very classic.",
+                "It's full-bodied but smooth. No sharp edges on this one."
+            ],
+            "Les Cousins L'Inconscient": [
+                "L'Inconscient — the unconscious. That's a wild name for a wine.",
+                "This is bold. Can I get a glass of water too? In a good way.",
+                "Montsant is like Priorat's neighbor, right? Same slate soils?",
+                "I need to decant this. Can you give me a few minutes?",
+                "The licorice note at the end is really interesting. Very Mediterranean.",
+                "Old-vine Grenache and Carignan — that combination is everything.",
+                "This is the most powerful wine on your list, isn't it? Well, besides the Priorat."
+            ],
+            "L.A. Cetto Cabernet Sauvignon": [
+                "Mexican wine? I've never had that before. Tell me about it.",
+                "Valle de Guadalupe is just south of San Diego, right? Mediterranean climate?",
+                "This is actually really impressive for the price. Dark fruit, smooth tannins.",
+                "It tastes like a Napa Cab but with something more interesting going on.",
+                "I love the dark chocolate note in the finish.",
+                "L.A. Cetto has been around since 1928? That's older than most California wineries.",
+                "This changes how I think about Mexican wine. I had no idea."
+            ],
+            "Orsa Cabernet Sauvignon": [
+                "I just want a good Cab — easy, reliable, nothing crazy.",
+                "Chile does Cabernet really well for the price. This is no exception.",
+                "Is there a slight eucalyptus note in here? Someone told me Chilean Cabs have that.",
+                "Smooth and fruit-forward — exactly what I was looking for.",
+                "The tannins are really polished. Good everyday drinking wine.",
+                "Chile's Central Valley — hot days, cool nights from the Andes. I've read about that.",
+                "This is great with the steak — wait, you do the chorizo, right? Still works."
+            ],
+            "Rocca di Castagnoli Chianti Classico": [
+                "The Black Rooster seal — I always look for that. It means Chianti Classico, right?",
+                "Sangiovese is such a great food wine. The acidity is beautiful with Italian cured meats.",
+                "This estate dates back to the 10th century? Wild.",
+                "Chianti Classico versus regular Chianti — what's the actual difference?",
+                "I love the dried herb note in this. Very Tuscan.",
+                "This is serious wine but still totally approachable. Great balance.",
+                "I have to pair this with the Pecorino Toscano. Tuscan cheese with Tuscan wine — yes."
+            ],
+            "Palmeri Navalta Farnacha": [
+                "This is a 2018 — is it holding up well? Old-vine Garnacha ages beautifully.",
+                "Old vines, high altitude Aragón — this is the kind of thing you don't find everywhere.",
+                "The tannins are incredibly velvety. What does that come from?",
+                "This is powerful. I can feel the 14.5% but it's well-integrated.",
+                "Calatayud — I've never heard of that region. How do you pronounce it?",
+                "The dark fruit concentration is incredible. This is not messing around.",
+                "I want to pair this with something big — the blue cheese? Bold choice."
+            ],
+            "Domaine Verquière Plan de Dieu": [
+                "Plan de Dieu — Plain of God. That name is incredible.",
+                "Southern Rhône is Grenache-based, right? This is a GSM blend?",
+                "I love the garrigue note — that herbal, wild scrubby thing.",
+                "The pepper on the finish is so distinctive. Grenache does that.",
+                "This is full and warming but not heavy-handed. Really well-made.",
+                "Côtes du Rhône Villages — what makes this different from regular Côtes du Rhône?",
+                "This is the kind of wine I want with a big charcuterie board. Perfect."
+            ],
+            "Cims de Porrera Vi de Vila Priorat": [
+                "Priorat is Spain's Burgundy, right? One of only two regions with the top classification?",
+                "A protest singer and a wine pioneer co-founded this? That's a great story.",
+                "The llicorella slate — you can actually taste the minerality. It's unlike anything.",
+                "This is at 15% alcohol but it doesn't taste boozy at all. Amazing.",
+                "Vi de Vila means Wine of the Village — like Burgundy's village wines. Beautiful concept.",
+                "Old vines on 60-degree slopes — harvested by hand with harnesses. That's dedication.",
+                "This is the most complex wine you have. I want to sit with this for an hour."
+            ],
+            "François Montand Blanc de Blancs": [
+                "This is Crémant, not Champagne — what's the difference exactly?",
+                "The bubbles are so fine and persistent. Really elegant.",
+                "100% Chardonnay sparkling — that's a Blanc de Blancs. Love that style.",
+                "The Jura is such a fascinating region. They do Vin Jaune there too, right?",
+                "This is as good as a lot of Champagne I've had at twice the price.",
+                "I love the brioche note — very classic traditional method character.",
+                "This is perfect for starting the evening. Light, clean, celebratory."
+            ],
+            "L.A. Cetto Brut": [
+                "Mexican sparkling wine? Tell me everything.",
+                "Chenin Blanc and Colombard — that's an interesting combination.",
+                "The bubbles are lively and the acidity is great. Very food-friendly.",
+                "This is from the same winery as the Cabernet Sauvignon? They really do it all.",
+                "It's brut — so this is dry, right? Not sweet at all?",
+                "Valle de Guadalupe sparkling wine — I wouldn't have guessed this was from Mexico.",
+                "This would be great as an aperitivo. Light and festive."
+            ],
+            "Tiamo Prosecco Split": [
+                "'Tiamo' means I love you. Best wine name on the menu.",
+                "I love that it's a split — just the right amount for one glass.",
+                "Is this organic? I love supporting sustainable producers.",
+                "Prosecco is always the right answer at the start of the evening.",
+                "The soft frothy bubbles are so different from Champagne — more relaxed.",
+                "Apple and peach — very fresh. Not too sweet either.",
+                "I feel like you have to start a night out with Prosecco. It sets the mood."
+            ]
+        };
+
+        // Beer comments
+        var beerComments = {
+            "Edmund's Oast Something Cold Blonde": [
+                "A local beer — I love supporting Charleston breweries.",
+                "This is so clean and easy-drinking. Perfect for a hot day.",
+                "What style is this exactly? Blonde Ale — is that like a lager?",
+                "Edmund's Oast is great. Their food is incredible too.",
+                "Low ABV? I appreciate that when I'm drinking all night.",
+                "This is a great starter — nothing overwhelming, just refreshing.",
+                "The subtle sweetness is nice. Not bitter at all, I like that."
+            ],
+            "Citra Ass Down Double IPA": [
+                "8.2%? That's a serious Double IPA. What hops are in here?",
+                "I can smell the tropical fruit from here. Is that the Citra hops?",
+                "This is dangerous — it drinks way too easily for the ABV.",
+                "The bitterness is balanced really well for a DIPA.",
+                "Against the Grain Brewery — that's Louisville, right? Great name.",
+                "I love how the mango and passionfruit come through. Very modern IPA.",
+                "If you like IPAs this is the most interesting beer on the list."
+            ],
+            "Shore Leave Lager": [
+                "Westbrook is one of my favorites. They make great stuff.",
+                "Sometimes you just want a simple, well-made lager. This is exactly that.",
+                "Mt. Pleasant — that's right across the bridge, right? Very local.",
+                "The dry finish is perfect. Not leaving that heavy feeling.",
+                "This is what I give people who say they don't like craft beer.",
+                "Sessionable and refreshing — I could have three of these.",
+                "Clean and crisp — great palate cleanser between bites."
+            ],
+            "Revelry Poke the Bear": [
+                "Revelry is a Charleston staple. Brown Ale is so underrated.",
+                "I love the toasted bread and caramel notes. Very cozy.",
+                "Is this malty? I prefer malty over hoppy — this is perfect.",
+                "Brown Ales always feel like fall in a glass, even in summer.",
+                "The chocolate hint at the end is really nice. Subtle but there.",
+                "This pairs really well with the charcuterie — the richness works.",
+                "5.5% is a good ABV for a session beer. You can have a couple."
+            ],
+            "Burial Surf Wax IPA": [
+                "Burial Beer is seriously underrated. Asheville makes incredible craft beer.",
+                "The hop aroma on this is insane — I can smell it from across the bar.",
+                "West Coast style IPA — does that mean more bitter and piney than New England style?",
+                "The pine and citrus combination is classic. Very well done.",
+                "I love the dry finish on this. Clean and hoppy.",
+                "6% is a great ABV for an IPA — sessionable without sacrificing flavor.",
+                "Their branding is so good too — the dark, gothic artwork. Very Asheville."
+            ],
+            "Revelry Lefty Loosey IPA": [
+                "Lefty Loosey — great name. Is that a wrenching reference?",
+                "6.5% and it drinks really smooth. That grapefruit note is fresh.",
+                "The tropical hop character is nice — not too aggressive.",
+                "This is their flagship IPA right? I can see why.",
+                "Really balanced for an IPA. The malt sweetness helps.",
+                "Charleston IPA on the list — I always try to go local.",
+                "This is my go-to when I want something hoppy but not a fist in the face."
+            ],
+            "Blue Moon Belgian White (Non-Alcoholic)": [
+                "Non-alcoholic but it actually tastes like Blue Moon — impressive.",
+                "Is there really 0.5% ABV? Is that considered non-alcoholic?",
+                "The orange peel and coriander are still there — very recognizable.",
+                "I'm not drinking tonight but I still want something interesting. Perfect.",
+                "I love that you have a non-alcoholic option that's actually good.",
+                "The creamy mouthfeel surprised me — it's not watery like some NA beers.",
+                "It's the same recipe just without the alcohol? How do they do that?"
+            ],
+            "Exner Spanish Cider": [
+                "Spanish cider from Asturias — this is so different from American cider.",
+                "It's funky. In a good way. What makes it so different?",
+                "The tart apple and the slight funkiness together is really interesting.",
+                "I heard they pour this from a height in Spain to aerate it. Can you do that?",
+                "It's dry! I expected cider to be sweet. This is completely dry.",
+                "I love how it's unfiltered — it looks a bit hazy and wild.",
+                "This is honestly the most interesting thing on your drinks list. Very unique."
+            ]
+        };
+
+        // ============================================================
+        // STAFF PICKS — Curated recommendations with reasons
+        // ============================================================
+        var staffPicks = [
+            {
+                category: 'Red Wines',
+                icon: '🍷',
+                picks: [
+                    {
+                        name: "Red Tail Ridge RTR Estate Vineyard Pinot Noir",
+                        vintage: "2019",
+                        origin: "Finger Lakes, New York",
+                        pos: 12,
+                        reason: "This is the wine that stops people mid-conversation. <em>92 points from Wine Enthusiast</em>, made by a PhD viticulturist on the shores of Seneca Lake, and it drinks like a Burgundy Premier Cru at a fraction of the price. The silky tannins, red cherry, violet, and smoke all come together in a wine of genuine elegance. When a guest asks for something truly special, this is our answer."
+                    },
+                    {
+                        name: "Cims de Porrera Vi de Vila Priorat",
+                        vintage: "2020",
+                        origin: "Priorat DOQ, Spain",
+                        pos: 24,
+                        reason: "Spain's most extreme wine from one of the world's most dramatic terroirs — old vines on 40–60° slate slopes, <em>co-founded by a legendary protest singer</em>, from the only region in Spain alongside Rioja to hold the highest DOQ classification. The complexity in this glass is staggering: bramble fruit, violets, black pepper, balsamic, and a mineral finish from the llicorella slate that lingers for minutes. For the guest who wants the most interesting bottle on the list, this is it."
+                    },
+                    {
+                        name: "Massimo Ribeira Sacra",
+                        vintage: "2023",
+                        origin: "Ribeira Sacra DO, Spain",
+                        pos: 13,
+                        reason: "Harvested by hand on <em>60-degree slate canyon terraces</em> above the Sil River using harnesses and cables — 'heroic viticulture' at its most literal. The result is a Mencía of ethereal elegance: raspberry, violets, wet stone, and fresh acidity in a medium-bodied wine that guests describe as 'Pinot Noir but Spanish.' One of the most compelling stories and one of the most delicious wines on our list."
+                    }
+                ]
+            },
+            {
+                category: 'White Wines',
+                icon: '🥂',
+                picks: [
+                    {
+                        name: "Pouilly-Fumé Dezat",
+                        vintage: "2024",
+                        origin: "Loire Valley, France",
+                        pos: 3,
+                        reason: "Sauvignon Blanc from the flint soils of the Loire River — this is the benchmark. <em>Citrus, gunsmoke, white flowers</em>, and razor-sharp acidity that finishes with a mineral length you can't get from any other region on earth. This is what wine means when people talk about terroir. And paired with the Black Truffle Goat cheese? It might be the best ten dollars of food and wine you ever spend."
+                    },
+                    {
+                        name: "Presqu'ile Chardonnay",
+                        vintage: "2023",
+                        origin: "Santa Maria Valley, California",
+                        pos: 4,
+                        reason: "The Chardonnay that converts Chardonnay skeptics. <em>Sustainable estate farming</em> in California's fog-cooled Santa Maria Valley produces a wine with green apple freshness, a silky butter note, and toasty oak that never overpowers. It lives in the beautiful space between a lean Burgundy and a rich California Chardonnay — and it's the reason we always have someone say 'I don't usually like Chardonnay, but I love this.'"
+                    },
+                    {
+                        name: "Marola Albariño Rías Baixas",
+                        vintage: "2023",
+                        origin: "Rías Baixas, Galicia, Spain",
+                        pos: 5,
+                        reason: "Spain's finest white grape from the Atlantic coast of Galicia, and this one absolutely delivers — white peach, apricot, and <em>that distinctive saline sea-spray minerality</em> that makes Albariño unlike any other wine in the world. It pairs with everything on the food menu, makes any guest immediately happy, and tells a story: the rainy Celtic corner of Spain where vines grow on pergolas above the Atlantic fog. Crowd-pleaser doesn't do it justice."
+                    }
+                ]
+            },
+            {
+                category: 'Rosé Wine',
+                icon: '🌸',
+                picks: [
+                    {
+                        name: "Folly by Mascaronne Rosé Côtes de Provence",
+                        vintage: "2024",
+                        origin: "Côtes de Provence, France",
+                        pos: 6,
+                        reason: "Provence is the birthplace of dry rosé as we know it, and this organic estate wine — <em>co-created with NBA legend Tony Parker</em> — is exactly what that means: pale and luminous with honeyed nectarine, white flowers, and bone-dry mineral freshness. Four grape varieties, hand-harvested at dawn, certified organic. It looks beautiful, tastes beautiful, and comes with one of the best stories on the menu. When someone says 'I'll have a rosé,' this is always the right pour."
+                    }
+                ]
+            },
+            {
+                category: 'Sparkling Wine',
+                icon: '✨',
+                picks: [
+                    {
+                        name: "François Montand Blanc de Blancs",
+                        vintage: "NV",
+                        origin: "Crémant du Jura, France",
+                        pos: null,
+                        reason: "Traditional-method sparkling wine from France's Jura region — 100% Chardonnay, secondary fermentation in the bottle, the exact same process as Champagne — at a price that makes it possible to actually drink regularly. <em>Fine persistent bubbles, crisp green apple, citrus blossom, and a brioche note</em> that finishes clean and dry. This is the kind of sparkling wine that makes guests ask 'wait, this is not Champagne?' It's the best conversation opener on the menu."
+                    }
+                ]
+            }
+        ];
+
+
         // Food Data
         const cheeses = [
             {
@@ -7587,6 +8721,11 @@
 
         // Section Navigation - with iOS Safari repaint trigger
         function showSection(sectionId, btn) {
+            // BFT nav guard: block navigation during game (until Level 7 beaten)
+            if (typeof bftNavLocked !== 'undefined' && bftNavLocked && sectionId !== 'typemaster') {
+                if (typeof bftWarnNav === 'function') bftWarnNav();
+                return;
+            }
             document.querySelectorAll('section').forEach(s => {
                 s.classList.remove('active');
                 s.style.display = ''; // clear inline override, CSS default (none) takes over
@@ -9730,182 +10869,951 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
         }
 
         // ============================================================
-        // TYPEMASTER — Easter Egg Wine Mastery Typing Challenge
-        // Reveal: click the "Ardoa" header title 5 times within 3 s
+        // BRUTE FORCE TRAINER — Full-Screen Easter Egg Game Engine
+        // Trigger: click the "Ardoa" title 5× within 3 seconds
+        // Secret bypass (on title screen): type "neon"
         // ============================================================
-        var tmItems = null;
-        var tmIndex = 0;
-        var tmMastered = {};
 
-        function tmBuildItems() {
-            var items = [];
-            wines.filter(function(w) { return w.type !== 'sparkling'; }).forEach(function(w, i) {
-                items.push({ type: 'wine', pos: i + 1, data: w });
-            });
-            wines.filter(function(w) { return w.type === 'sparkling'; }).forEach(function(w, i) {
-                items.push({ type: 'sparkling', pos: i + 1, data: w });
-            });
-            beers.forEach(function(b, i) {
-                items.push({ type: 'beer', pos: i + 1, data: b });
-            });
-            return items;
-        }
+        var BFT = {
+            state: 'idle',
+            level: 0,
+            cardIndex: 0,
+            levelItems: [],
+            mastered: {},
+            beaten: {},
+            gameBeaten: false,
+            bypassBuf: '',
+            audioCtx: null,
+            masterGain: null,
+            audioMuted: false,
+            audioBeat: null,
+            audioNextBar: 0,
+            audioBarDur: 0,
+            audioBarCount: 0,
+            audioPatIdx: 0,
+            audioArpIdx: 0,
+            audioSilence: 0,
+            matrixRunning: false,
+            matrixFrame: null,
+            introKeyH: null,
+            titleKeyH: null,
+            introCleanup: null,
+            navGuardActive: false
+        };
 
-        function tmInit() {
-            if (!tmItems) tmItems = tmBuildItems();
-            tmIndex = 0;
-            tmRenderCurrent();
-        }
+        // Level definitions: 6 × 4 wines + 1 final boss (all 24)
+        var bftDefs = [
+            { name: 'LEVEL 1', label: 'Wines 1–4',  wines: '1–4'  },
+            { name: 'LEVEL 2', label: 'Wines 5–8',  wines: '5–8'  },
+            { name: 'LEVEL 3', label: 'Wines 9–12', wines: '9–12' },
+            { name: 'LEVEL 4', label: 'Wines 13–16',wines: '13–16'},
+            { name: 'LEVEL 5', label: 'Wines 17–20',wines: '17–20'},
+            { name: 'LEVEL 6', label: 'Wines 21–24',wines: '21–24'},
+            { name: 'FINAL BOSS', label: 'ALL 24 WINES', wines: '1–24', final: true }
+        ];
 
-        function tmFields(item) {
-            if (item.type === 'beer') {
-                return [
-                    { key: 'name',     label: 'Name',     value: item.data.name },
-                    { key: 'brewery',  label: 'Brewery',  value: item.data.brewery },
-                    { key: 'location', label: 'Location', value: item.data.location },
-                    { key: 'style',    label: 'Style',    value: item.data.style }
-                ];
+        function bftGetItems(lvl) {
+            var reg = wines.filter(function(w){ return w.type !== 'sparkling'; });
+            if (lvl === 6) {
+                return reg.map(function(w,i){ return {type:'wine', pos:i+1, data:w}; });
             }
+            var s = lvl * 4;
+            return reg.slice(s, s+4).map(function(w,i){ return {type:'wine', pos:s+i+1, data:w}; });
+        }
+
+        // ---- Entry point ----
+        function bftInit() {
+            BFT.state = 'idle';
+            BFT.bypassBuf = '';
+            bftLockNav();
+            bftShowLayer('bft-intro');
+            BFT.state = 'intro';
+            bftRunIntro();
+            bftAudioInit();
+            bftAudioPlay();
+            bftAudioCtrlShow();
+        }
+
+        // ---- Layer management ----
+        function bftShowLayer(id) {
+            document.querySelectorAll('#typemaster .bft-layer').forEach(function(l){
+                l.classList.remove('bft-show');
+            });
+            var t = document.getElementById(id);
+            if (t) t.classList.add('bft-show');
+        }
+
+        // ---- Nav lock ----
+        var bftNavLocked = false;
+        function bftLockNav() {
+            bftNavLocked = true;
+            BFT.navGuardActive = true;
+        }
+        function bftUnlockNav() {
+            bftNavLocked = false;
+            BFT.navGuardActive = false;
+        }
+        function bftWarnNav() {
+            var trap = document.getElementById('bft-ls-trap');
+            if (trap) {
+                trap.style.color = '#ff0000';
+                trap.style.borderColor = '#ff0000';
+                setTimeout(function(){ trap.style.color=''; trap.style.borderColor=''; }, 1400);
+            }
+            // Screen flash
+            var flash = document.createElement('div');
+            flash.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(255,0,80,0.12);z-index:99990;pointer-events:none;';
+            document.body.appendChild(flash);
+            setTimeout(function(){ flash.remove(); }, 300);
+        }
+
+        // ---- INTRO CINEMATIC ----
+        function bftRunIntro() {
+            var canvas = document.getElementById('bft-intro-canvas');
+            if (!canvas) return;
+            var ctx = canvas.getContext('2d');
+            var titleEl  = document.getElementById('bft-intro-title');
+            var subEl    = document.getElementById('bft-intro-sub');
+            var pressEl  = document.getElementById('bft-intro-press');
+            var running  = true;
+            var phase    = 0;
+            var pTimer   = 0;
+            var bolts    = [];
+            var frameN   = 0;
+
+            function resize(){
+                canvas.width  = canvas.offsetWidth  || window.innerWidth;
+                canvas.height = canvas.offsetHeight || window.innerHeight;
+            }
+            resize();
+            var resizeH = function(){ resize(); };
+            window.addEventListener('resize', resizeH);
+
+            function genBolt(x1,y1,x2,y2,depth){
+                if(depth<=0) return [[x1,y1,x2,y2]];
+                var mx=(x1+x2)/2+(Math.random()-0.5)*Math.abs(y2-y1)*0.5;
+                var my=(y1+y2)/2;
+                var segs=[];
+                segs=segs.concat(genBolt(x1,y1,mx,my,depth-1));
+                segs=segs.concat(genBolt(mx,my,x2,y2,depth-1));
+                if(Math.random()>0.65 && depth>3){
+                    var bx=mx+(Math.random()-0.5)*80;
+                    var by=my+Math.random()*80;
+                    segs=segs.concat(genBolt(mx,my,bx,by,depth-2));
+                }
+                return segs;
+            }
+            function newBolt(){
+                var x=Math.random()*canvas.width;
+                var colors=['#7af8ff','#c0a0ff','#ffffff','#a0d0ff'];
+                return {
+                    segs: genBolt(x,0,x+(Math.random()-0.5)*120,canvas.height,8),
+                    alpha:1, life:0, maxLife:12+Math.random()*18,
+                    color: colors[Math.floor(Math.random()*colors.length)],
+                    w: 1+Math.random()*2
+                };
+            }
+
+            function draw(){
+                if(!running) return;
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                ctx.fillStyle='#000';
+                ctx.fillRect(0,0,canvas.width,canvas.height);
+
+                // Draw bolts
+                bolts.forEach(function(b){
+                    var a = b.alpha*(1-b.life/b.maxLife);
+                    ctx.strokeStyle=b.color; ctx.lineWidth=b.w; ctx.globalAlpha=a;
+                    ctx.beginPath();
+                    b.segs.forEach(function(s){ ctx.moveTo(s[0],s[1]); ctx.lineTo(s[2],s[3]); });
+                    ctx.stroke();
+                    // bright core
+                    ctx.strokeStyle='#ffffff'; ctx.lineWidth=b.w*0.35; ctx.globalAlpha=a*0.45;
+                    ctx.beginPath();
+                    b.segs.forEach(function(s){ ctx.moveTo(s[0],s[1]); ctx.lineTo(s[2],s[3]); });
+                    ctx.stroke();
+                    ctx.globalAlpha=1;
+                    b.life++;
+                });
+                bolts = bolts.filter(function(b){ return b.life<b.maxLife; });
+
+                // Phase progression
+                pTimer++;
+                if(phase===0 && pTimer>40){
+                    phase=1; pTimer=0;
+                    for(var i=0;i<6;i++) bolts.push(newBolt());
+                }
+                if(phase===1){
+                    if(Math.random()>0.55) bolts.push(newBolt());
+                    if(pTimer>70){ phase=2; pTimer=0; titleEl.classList.add('bft-vis'); }
+                }
+                if(phase===2){
+                    if(Math.random()>0.7) bolts.push(newBolt());
+                    if(pTimer>55){ phase=3; pTimer=0; subEl.classList.add('bft-vis'); }
+                }
+                if(phase===3){
+                    if(Math.random()>0.45) bolts.push(newBolt());
+                    if(pTimer>100){ phase=4; pTimer=0; pressEl.style.display='block'; }
+                }
+                if(phase>=4){
+                    if(Math.random()>0.78) bolts.push(newBolt());
+                }
+
+                requestAnimationFrame(draw);
+            }
+            requestAnimationFrame(draw);
+
+            BFT.introCleanup = function(){
+                running=false;
+                window.removeEventListener('resize',resizeH);
+            };
+
+            function advance(){
+                if(phase<3) return;
+                if(BFT.introCleanup) BFT.introCleanup();
+                document.getElementById('bft-intro').removeEventListener('click', advance);
+                if(BFT.introKeyH){ document.removeEventListener('keydown',BFT.introKeyH); BFT.introKeyH=null; }
+                bftShowTitle();
+            }
+            document.getElementById('bft-intro').addEventListener('click', advance);
+            BFT.introKeyH = function(e){
+                if(phase>=2){ document.removeEventListener('keydown',BFT.introKeyH); BFT.introKeyH=null; advance(); }
+            };
+            document.addEventListener('keydown', BFT.introKeyH);
+        }
+
+        // ---- TITLE SCREEN ----
+        function bftShowTitle(){
+            bftShowLayer('bft-title');
+            BFT.state='title';
+            BFT.bypassBuf='';
+
+            function advance(){
+                if(BFT.state!=='title') return;
+                if(BFT.titleKeyH){ document.removeEventListener('keydown',BFT.titleKeyH); BFT.titleKeyH=null; }
+                var el = document.getElementById('bft-title');
+                if(el) el.removeEventListener('click',titleClick);
+                bftShowLevelSelect();
+            }
+            function titleClick(){ advance(); }
+            document.getElementById('bft-title').addEventListener('click', titleClick, {once:true});
+
+            BFT.titleKeyH = function(e){
+                if(BFT.state!=='title') return;
+                BFT.bypassBuf += e.key.toLowerCase();
+                if(BFT.bypassBuf.length>12) BFT.bypassBuf=BFT.bypassBuf.slice(-12);
+                if(BFT.bypassBuf.includes('neon')){
+                    document.removeEventListener('keydown',BFT.titleKeyH); BFT.titleKeyH=null;
+                    bftActivateCyberpunk(true);
+                    return;
+                }
+                if(e.key==='Enter'||e.key===' '){ advance(); }
+            };
+            document.addEventListener('keydown', BFT.titleKeyH);
+        }
+
+        // ---- LEVEL SELECT ----
+        function bftShowLevelSelect(){
+            bftShowLayer('bft-levelsel');
+            BFT.state='levelsel';
+            var grid=document.getElementById('bft-ls-grid');
+            var html='';
+            bftDefs.forEach(function(def,i){
+                var beaten=!!BFT.beaten[i];
+                var cls='bft-ls-card'+(beaten?' bft-beaten':'')+(def.final?' bft-final':'');
+                html+='<div class="'+cls+'" onclick="bftStartLevel('+i+')">';
+                html+='<div class="bft-ls-num">'+def.name+'</div>';
+                html+='<div class="bft-ls-name">'+(def.final?'⚡ ':'')+def.label+(def.final?' ⚡':'')+'</div>';
+                html+='<div class="bft-ls-desc">Wines '+def.wines+'</div>';
+                if(beaten) html+='<div class="bft-ls-badge">✓ BEATEN</div>';
+                html+='</div>';
+            });
+            grid.innerHTML=html;
+            forceRepaint(grid);
+            var trap=document.getElementById('bft-ls-trap');
+            if(trap) trap.style.display=BFT.gameBeaten?'none':'block';
+        }
+
+        // ---- PLAYING ----
+        function bftStartLevel(lvl){
+            BFT.level=lvl;
+            BFT.cardIndex=0;
+            BFT.levelItems=bftGetItems(lvl);
+            if(!BFT.mastered[lvl]) BFT.mastered[lvl]={};
+            bftShowLayer('bft-playing');
+            BFT.state='playing';
+            bftRenderCard();
+        }
+
+        function bftWineFields(item){
             return [
-                { key: 'name',        label: 'Name',        value: item.data.name },
-                { key: 'vintage',     label: 'Vintage',     value: item.data.vintage },
-                { key: 'grape',       label: 'Grape(s)',    value: item.data.grape },
-                { key: 'region',      label: 'Region',      value: item.data.region },
-                { key: 'appellation', label: 'Appellation', value: item.data.appellation },
-                { key: 'country',     label: 'Country',     value: item.data.country }
+                {key:'name',        label:'NAME',        value:item.data.name},
+                {key:'vintage',     label:'VINTAGE',     value:item.data.vintage},
+                {key:'grape',       label:'GRAPE(S)',    value:item.data.grape},
+                {key:'region',      label:'REGION',      value:item.data.region},
+                {key:'appellation', label:'APPELLATION', value:item.data.appellation},
+                {key:'country',     label:'COUNTRY',     value:item.data.country}
             ];
         }
 
-        function tmRenderCurrent() {
-            if (!tmItems || !tmItems.length) return;
-            var item = tmItems[tmIndex];
-            var card = document.getElementById('tmCard');
-            var isMastered = !!tmMastered[tmIndex];
+        function bftRenderCard(){
+            var items=BFT.levelItems;
+            if(!items||!items.length) return;
+            var item=items[BFT.cardIndex];
+            var lvl=BFT.level;
+            var mastered=BFT.mastered[lvl]||{};
+            var isMastered=!!mastered[BFT.cardIndex];
+            var def=bftDefs[lvl];
+            var masteredCnt=Object.keys(mastered).length;
+            var total=items.length;
+            var pct=Math.round(masteredCnt/total*100);
 
-            var typeLabel = item.type === 'wine'      ? 'Enomatic Wine — Position ' + item.pos :
-                            item.type === 'sparkling' ? 'Sparkling Wine — ' + item.pos :
-                                                        'Beer — ' + item.pos;
-            var fields = tmFields(item);
+            document.getElementById('bft-play-badge').textContent=def.name+' — WINE #'+item.pos;
+            document.getElementById('bft-play-ctr').textContent=(BFT.cardIndex+1)+' / '+total;
+            document.getElementById('bft-pbar-fill').style.width=pct+'%';
 
-            var fieldsHTML = fields.map(function(f) {
-                return '<div class="tm-field">' +
-                    '<div class="tm-label">' + f.label + '</div>' +
-                    '<div class="tm-input-row">' +
-                    '<input type="text" class="tm-input" id="tmInput-' + f.key + '" ' +
-                        'autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ' +
-                        'placeholder="Type here…">' +
-                    '<span class="tm-feedback" id="tmFb-' + f.key + '"></span>' +
+            var sub=document.getElementById('bft-submit-btn');
+            if(masteredCnt===total){ sub.classList.add('bft-ready'); sub.textContent='⚡ SUBMIT LEVEL ⚡'; }
+            else { sub.classList.remove('bft-ready'); sub.textContent='SUBMIT LEVEL'; }
+
+            var fields=bftWineFields(item);
+            var fHTML=fields.map(function(f){
+                var v=isMastered?f.value.replace(/"/g,'&quot;'):'';
+                var cls=isMastered?' bft-ok':'';
+                return '<div class="bft-field">'+
+                    '<div class="bft-label">'+f.label+'</div>'+
+                    '<div class="bft-irow">'+
+                    '<input type="text" class="bft-input'+cls+'" id="bftIn-'+f.key+'" value="'+v+'" '+
+                    'autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Type here...">'+
+                    '<span class="bft-fb '+(isMastered?'bft-fb-ok':'')+'" id="bftFb-'+f.key+'">'+(isMastered?'✓':'')+'</span>'+
                     '</div></div>';
             }).join('');
 
-            card.innerHTML =
-                '<div class="tm-category">' + typeLabel + '</div>' +
-                '<div class="tm-fields">' + fieldsHTML + '</div>' +
-                '<div class="tm-actions">' +
-                    '<button class="tm-btn-check" onclick="tmCheck()">Check Answers</button>' +
-                    '<button class="tm-btn-reveal" onclick="tmReveal()">Reveal All</button>' +
-                    '<button class="tm-btn-clear" onclick="tmClearAll()">Clear All</button>' +
-                '</div>' +
-                '<p class="tm-hint">Accents must match exactly (é ≠ e, ô ≠ o, ä ≠ a, ñ ≠ n). Case is ignored.</p>' +
-                (isMastered ? '<div class="tm-mastered-banner">★ Mastered!</div>' : '');
+            var card=document.getElementById('bft-card');
+            card.dataset.fields=JSON.stringify(fields);
+            card.innerHTML=
+                '<div class="bft-card-title">// WINE #'+item.pos+' — POSITION '+item.pos+' ON ENOMATIC</div>'+
+                '<div class="bft-fields">'+fHTML+'</div>'+
+                '<div class="bft-acts">'+
+                '<button class="bft-btn bft-btn-check" onclick="bftCheck()">CHECK</button>'+
+                '<button class="bft-btn bft-btn-reveal" onclick="bftReveal()">REVEAL</button>'+
+                '<button class="bft-btn bft-btn-clear" onclick="bftClear()">CLEAR</button>'+
+                '</div>'+
+                '<p class="bft-hint">Accents required (é≠e, ô≠o, ä≠a, ñ≠n). Case ignored.</p>'+
+                (isMastered?'<div class="bft-mastered-tag">✓ MASTERED</div>':'');
 
-            card.dataset.fields = JSON.stringify(fields);
-
-            document.getElementById('tmCurrent').textContent = tmIndex + 1;
-            document.getElementById('tmTotal').textContent = tmItems.length;
-            document.getElementById('tmMastered').textContent = Object.keys(tmMastered).length;
-            document.getElementById('tmPrevBtn').disabled = tmIndex === 0;
-            document.getElementById('tmNextBtn').disabled = tmIndex === tmItems.length - 1;
+            document.getElementById('bft-prev-btn').disabled=(BFT.cardIndex===0);
+            document.getElementById('bft-next-btn').disabled=(BFT.cardIndex===items.length-1);
             forceRepaint(card);
         }
 
-        function tmNavigate(dir) {
-            var next = tmIndex + dir;
-            if (next < 0 || next >= (tmItems ? tmItems.length : 0)) return;
-            tmIndex = next;
-            tmRenderCurrent();
-        }
-
-        function tmCheck() {
-            var card = document.getElementById('tmCard');
-            var fields = JSON.parse(card.dataset.fields || '[]');
-            var allCorrect = true;
-            fields.forEach(function(f) {
-                var input = document.getElementById('tmInput-' + f.key);
-                var fb    = document.getElementById('tmFb-' + f.key);
-                if (!input || !fb) return;
-                var correct = input.value.trim().toLowerCase() === f.value.trim().toLowerCase();
-                input.classList.toggle('tm-correct',   correct);
-                input.classList.toggle('tm-incorrect', !correct);
-                fb.textContent = correct ? '✓' : '✗';
-                fb.className = 'tm-feedback ' + (correct ? 'tm-fb-correct' : 'tm-fb-incorrect');
-                if (!correct) allCorrect = false;
+        function bftCheck(){
+            var card=document.getElementById('bft-card');
+            var fields=JSON.parse(card.dataset.fields||'[]');
+            var lvl=BFT.level;
+            var allOk=true;
+            fields.forEach(function(f){
+                var inp=document.getElementById('bftIn-'+f.key);
+                var fb=document.getElementById('bftFb-'+f.key);
+                if(!inp||!fb) return;
+                var ok=inp.value.trim().toLowerCase()===f.value.trim().toLowerCase();
+                inp.classList.toggle('bft-ok',ok);
+                inp.classList.toggle('bft-ng',!ok);
+                fb.textContent=ok?'✓':'✗';
+                fb.className='bft-fb '+(ok?'bft-fb-ok':'bft-fb-ng');
+                if(!ok) allOk=false;
             });
-            if (allCorrect) {
-                tmMastered[tmIndex] = true;
-                document.getElementById('tmMastered').textContent = Object.keys(tmMastered).length;
-                var banner = card.querySelector('.tm-mastered-banner');
-                if (!banner) {
-                    banner = document.createElement('div');
-                    banner.className = 'tm-mastered-banner';
-                    banner.textContent = '★ Mastered!';
-                    card.appendChild(banner);
+            if(allOk){
+                if(!BFT.mastered[lvl]) BFT.mastered[lvl]={};
+                BFT.mastered[lvl][BFT.cardIndex]=true;
+                var banner=card.querySelector('.bft-mastered-tag');
+                if(!banner){ banner=document.createElement('div'); banner.className='bft-mastered-tag'; banner.textContent='✓ MASTERED'; card.appendChild(banner); }
+                var cnt=Object.keys(BFT.mastered[lvl]).length;
+                document.getElementById('bft-pbar-fill').style.width=Math.round(cnt/BFT.levelItems.length*100)+'%';
+                if(cnt===BFT.levelItems.length){
+                    var sub=document.getElementById('bft-submit-btn');
+                    sub.classList.add('bft-ready'); sub.textContent='⚡ SUBMIT LEVEL ⚡';
                 }
             }
         }
 
-        function tmReveal() {
-            var card = document.getElementById('tmCard');
-            var fields = JSON.parse(card.dataset.fields || '[]');
-            fields.forEach(function(f) {
-                var input = document.getElementById('tmInput-' + f.key);
-                if (input) input.value = f.value;
+        function bftReveal(){
+            var card=document.getElementById('bft-card');
+            var fields=JSON.parse(card.dataset.fields||'[]');
+            fields.forEach(function(f){
+                var inp=document.getElementById('bftIn-'+f.key);
+                if(inp) inp.value=f.value;
             });
-            tmCheck();
+            bftCheck();
         }
 
-        function tmClearAll() {
-            var card = document.getElementById('tmCard');
-            var fields = JSON.parse(card.dataset.fields || '[]');
-            fields.forEach(function(f) {
-                var input = document.getElementById('tmInput-' + f.key);
-                var fb    = document.getElementById('tmFb-' + f.key);
-                if (input) {
-                    input.value = '';
-                    input.classList.remove('tm-correct', 'tm-incorrect');
-                }
-                if (fb) {
-                    fb.textContent = '';
-                    fb.className = 'tm-feedback';
-                }
+        function bftClear(){
+            var card=document.getElementById('bft-card');
+            var fields=JSON.parse(card.dataset.fields||'[]');
+            fields.forEach(function(f){
+                var inp=document.getElementById('bftIn-'+f.key);
+                var fb=document.getElementById('bftFb-'+f.key);
+                if(inp){ inp.value=''; inp.classList.remove('bft-ok','bft-ng'); }
+                if(fb){ fb.textContent=''; fb.className='bft-fb'; }
             });
         }
 
-        function tmToggleChars() {
-            var content = document.getElementById('tmCharsContent');
-            var arrow   = document.getElementById('tmCharsArrow');
-            if (!content || !arrow) return;
-            var isOpen = content.classList.toggle('open');
-            arrow.textContent = isOpen ? '▼' : '▶';
+        function bftPrev(){
+            if(BFT.cardIndex>0){ BFT.cardIndex--; bftRenderCard(); }
+        }
+        function bftNext(){
+            if(BFT.cardIndex<BFT.levelItems.length-1){ BFT.cardIndex++; bftRenderCard(); }
         }
 
-        function tmShowCharTab(tab) {
-            var macDiv = document.getElementById('tmCharsMac');
-            var pcDiv  = document.getElementById('tmCharsPc');
-            var macBtn = document.getElementById('tmTabMac');
-            var pcBtn  = document.getElementById('tmTabPc');
-            if (!macDiv || !pcDiv) return;
-            if (tab === 'mac') {
-                macDiv.style.display = 'block';
-                pcDiv.style.display  = 'none';
-                macBtn.classList.add('tm-tab-active');
-                pcBtn.classList.remove('tm-tab-active');
+        function bftCheckLevel(){
+            var lvl=BFT.level;
+            var cnt=Object.keys(BFT.mastered[lvl]||{}).length;
+            if(cnt<BFT.levelItems.length){
+                var sub=document.getElementById('bft-submit-btn');
+                var orig=sub.textContent;
+                sub.textContent='ANSWER ALL WINES FIRST!';
+                sub.style.color='#ff2060';
+                setTimeout(function(){ sub.textContent=orig; sub.style.color=''; },2000);
+                // Navigate to first un-mastered
+                for(var i=0;i<BFT.levelItems.length;i++){
+                    if(!BFT.mastered[lvl][i]){ BFT.cardIndex=i; bftRenderCard(); break; }
+                }
+                return;
+            }
+            BFT.beaten[lvl]=true;
+            if(lvl===6){ BFT.gameBeaten=true; bftGameWin(); }
+            else { bftLevelWin(lvl); }
+        }
+
+        // ---- LEVEL WIN ----
+        function bftLevelWin(lvl){
+            bftShowLayer('bft-levelwin');
+            BFT.state='levelwin';
+            var def=bftDefs[lvl];
+            document.getElementById('bft-lw-title').textContent=def.name+' CLEARED!';
+            document.getElementById('bft-lw-sub').textContent='Wines '+def.wines+' Mastered';
+            bftParticles('bft-lw-canvas', 120, ['#00e87a','#7af8ff','#ff4dd2','#ffe000','#4a6fff']);
+        }
+        function bftAfterLevelWin(){ bftShowLevelSelect(); }
+
+        // ---- PARTICLE SYSTEM ----
+        function bftParticles(canvasId, count, colors){
+            var canvas=document.getElementById(canvasId);
+            if(!canvas) return;
+            var ctx=canvas.getContext('2d');
+            canvas.width=canvas.offsetWidth||window.innerWidth;
+            canvas.height=canvas.offsetHeight||window.innerHeight;
+            var ps=[];
+            for(var i=0;i<count;i++){
+                ps.push({
+                    x:canvas.width/2+(Math.random()-0.5)*80,
+                    y:canvas.height*0.45,
+                    vx:(Math.random()-0.5)*13,
+                    vy:-4-Math.random()*11,
+                    a:1, size:2+Math.random()*5,
+                    color:colors[Math.floor(Math.random()*colors.length)],
+                    g:0.28+Math.random()*0.18
+                });
+            }
+            function animate(){
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                var alive=false;
+                ps.forEach(function(p){
+                    if(p.a<=0) return; alive=true;
+                    p.x+=p.vx; p.y+=p.vy; p.vy+=p.g; p.a-=0.012;
+                    ctx.globalAlpha=Math.max(0,p.a);
+                    ctx.fillStyle=p.color;
+                    ctx.fillRect(p.x,p.y,p.size,p.size);
+                });
+                ctx.globalAlpha=1;
+                if(alive) requestAnimationFrame(animate);
+            }
+            requestAnimationFrame(animate);
+        }
+
+        // ---- GAME WIN ----
+        function bftGameWin(){
+            bftShowLayer('bft-gamewin');
+            BFT.state='gamewin';
+            var canvas=document.getElementById('bft-gw-canvas');
+            bftWinFireworks(canvas);
+            var bar=document.getElementById('bft-gw-bar');
+            var loadEl=document.getElementById('bft-gw-loading');
+            var msgs=['DECRYPTING WINE DATABASE...','LOADING NEON PROTOCOLS...','BYPASSING SECURITY MATRIX...','INITIALIZING CYBERPUNK MODE...','REPROGRAMMING REALITY...','ARDOA_OS v2.0 ONLINE.'];
+            var prog=0, mIdx=0;
+            var iv=setInterval(function(){
+                prog+=1.1;
+                bar.style.width=Math.min(prog,100)+'%';
+                if(prog>(mIdx+1)*(100/msgs.length) && mIdx<msgs.length-1){
+                    mIdx++; loadEl.textContent=msgs[mIdx];
+                }
+                if(prog>=100){
+                    clearInterval(iv);
+                    setTimeout(function(){ bftActivateCyberpunk(false); },1300);
+                }
+            },38);
+        }
+
+        function bftWinFireworks(canvas){
+            if(!canvas) return;
+            var ctx=canvas.getContext('2d');
+            canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+            var ps=[];
+            var cols=['#00f5ff','#ff00ff','#00ff41','#ffe000','#ff0055','#7af8ff','#ffffff'];
+            function burst(x,y,n){
+                for(var i=0;i<n;i++){
+                    var a=Math.random()*Math.PI*2, sp=2+Math.random()*9;
+                    ps.push({x:x,y:y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,a:1,sz:2+Math.random()*4,c:cols[Math.floor(Math.random()*cols.length)],g:0.08});
+                }
+            }
+            burst(canvas.width*0.3, canvas.height*0.35, 70);
+            setTimeout(function(){ burst(canvas.width*0.7, canvas.height*0.3, 70); },350);
+            setTimeout(function(){ burst(canvas.width*0.5, canvas.height*0.55, 90); },700);
+            setTimeout(function(){ burst(canvas.width*0.2, canvas.height*0.5, 55); },1050);
+            setTimeout(function(){ burst(canvas.width*0.8, canvas.height*0.45, 55); },1350);
+            function draw(){
+                ctx.fillStyle='rgba(0,0,0,0.07)';
+                ctx.fillRect(0,0,canvas.width,canvas.height);
+                ps.forEach(function(p){
+                    if(p.a<=0) return;
+                    p.x+=p.vx; p.y+=p.vy; p.vy+=p.g; p.a-=0.007;
+                    ctx.globalAlpha=Math.max(0,p.a);
+                    ctx.fillStyle=p.c; ctx.shadowColor=p.c; ctx.shadowBlur=4;
+                    ctx.fillRect(p.x,p.y,p.sz,p.sz);
+                });
+                ctx.globalAlpha=1; ctx.shadowBlur=0;
+                ps=ps.filter(function(p){ return p.a>0; });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        }
+
+        // ---- CYBERPUNK ACTIVATION ----
+        function bftActivateCyberpunk(bypass){
+            BFT.gameBeaten=true;
+            BFT.state='cyberpunk';
+            bftUnlockNav();
+            document.documentElement.classList.add('cyberpunk');
+            document.documentElement.removeAttribute('data-theme');
+            bftAudioStop();
+            bftAudioHide();
+            bftCyberpunkDroneStart();
+            localStorage.setItem('ardoa-cyberpunk','1');
+            // Navigate to wine list
+            var tm=document.getElementById('typemaster');
+            if(tm){ tm.classList.remove('active'); tm.style.display=''; }
+            // Call original showSection
+            var secs=document.querySelectorAll('section');
+            secs.forEach(function(s){ s.classList.remove('active'); s.style.display=''; });
+            var tech=document.getElementById('techsheets');
+            if(tech){ tech.classList.add('active'); tech.style.display='block'; forceRepaint(tech); }
+            var navLink=document.querySelector('nav a[href="#techsheets"]');
+            if(navLink){ document.querySelectorAll('nav a').forEach(function(a){ a.classList.remove('active'); }); navLink.classList.add('active'); }
+            window.scrollTo(0,0);
+            // Unlock message
+            var msg=bypass?'⚡ NEON BYPASS ACTIVATED — ARDOA_OS v2.0 UNLOCKED ⚡':'⚡ BRUTE FORCE TRAINER CONQUERED — ARDOA_OS v2.0 ONLINE ⚡';
+            var ov=document.createElement('div');
+            ov.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.88);display:flex;align-items:center;justify-content:center;z-index:99999;font-family:Courier New,monospace;font-size:clamp(1rem,3vw,1.5rem);color:#00f5ff;text-align:center;padding:2rem;letter-spacing:0.08em;text-shadow:0 0 20px #00f5ff;';
+            ov.textContent=msg;
+            document.body.appendChild(ov);
+            setTimeout(function(){
+                ov.style.transition='opacity 0.9s'; ov.style.opacity='0';
+                setTimeout(function(){ ov.remove(); },950);
+                bftCyberpunkEasterEggs();
+            },2800);
+        }
+
+        // ---- CYBERPUNK EASTER EGGS ----
+        function bftCyberpunkEasterEggs(){
+            bftStartMatrixRain();
+            // Logo triple-click: glitch burst
+            var logo=document.getElementById('ardoaTitle');
+            if(logo){
+                var cpC=0,cpT=null;
+                logo.addEventListener('click',function(){
+                    cpC++;
+                    if(cpT) clearTimeout(cpT);
+                    cpT=setTimeout(function(){ cpC=0; },1800);
+                    if(cpC>=3){ cpC=0; bftCpGlitch(); }
+                });
+            }
+            // Konami code → toggle matrix rain
+            var kSeq=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+            var kIdx=0;
+            document.addEventListener('keydown',function(e){
+                if(e.key===kSeq[kIdx]){ kIdx++; if(kIdx===kSeq.length){ kIdx=0; bftToggleMatrix(); } }
+                else kIdx=0;
+            });
+            // Type "hack" for terminal
+            var hBuf='';
+            document.addEventListener('keydown',function(e){
+                if(!document.documentElement.classList.contains('cyberpunk')) return;
+                hBuf+=e.key.toLowerCase();
+                if(hBuf.length>10) hBuf=hBuf.slice(-10);
+                if(hBuf.includes('hack')){ hBuf=''; bftCpTerminal(); }
+            });
+        }
+
+        function bftCpGlitch(){
+            var els=[document.getElementById('ardoaTitle')];
+            var cols=['#00f5ff','#ff00ff','#00ff41','#ff0055'];
+            var i=0;
+            var iv=setInterval(function(){
+                els.forEach(function(el){ if(el) el.style.color=cols[i%cols.length]; });
+                i++;
+                if(i>10){ clearInterval(iv); els.forEach(function(el){ if(el) el.style.color=''; }); }
+            },55);
+            // Screen flash
+            var fl=document.createElement('div');
+            fl.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;z-index:99998;pointer-events:none;';
+            document.body.appendChild(fl);
+            var fi=0;
+            var fv=setInterval(function(){
+                fl.style.background=['rgba(0,245,255,0.08)','rgba(255,0,255,0.08)','rgba(0,255,65,0.06)','transparent'][fi%4];
+                fi++;
+                if(fi>12){ clearInterval(fv); fl.remove(); }
+            },50);
+        }
+
+        function bftCpTerminal(){
+            var lines=['ACCESSING ARDOA_OS v2.0...','WINE DATABASE: 24 ENTRIES FOUND','ENOMATIC STATUS: ONLINE','GRAPE VARIETAL SCAN: COMPLETE','TASTING NOTES: DECRYPTED','REGION MATRIX: LOADED','','> ALL SYSTEMS NOMINAL — ENJOY YOUR SHIFT'];
+            var term=document.createElement('div');
+            term.style.cssText='position:fixed;bottom:1.5rem;left:1.5rem;right:1.5rem;max-width:580px;background:rgba(0,0,0,0.92);border:1px solid #00f5ff;padding:1rem 1.25rem;font-family:Courier New,monospace;font-size:0.78rem;color:#00ff41;z-index:99997;box-shadow:0 0 18px rgba(0,245,255,0.25);line-height:1.8;';
+            document.body.appendChild(term);
+            var li=0;
+            var iv=setInterval(function(){
+                if(li<lines.length){ term.innerHTML+=lines[li]+'<br>'; li++; }
+                else{
+                    clearInterval(iv);
+                    setTimeout(function(){ term.style.transition='opacity 0.5s'; term.style.opacity='0'; setTimeout(function(){ term.remove(); },550); },2000);
+                }
+            },110);
+        }
+
+        // ---- MATRIX RAIN ----
+        function bftStartMatrixRain(){
+            var canvas=document.getElementById('cp-matrix');
+            if(!canvas) return;
+            var ctx=canvas.getContext('2d');
+            function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+            resize();
+            window.addEventListener('resize',resize);
+            var cols=Math.floor(canvas.width/16);
+            var drops=[];
+            for(var i=0;i<cols;i++) drops.push(Math.random()*-80);
+            var chars='アイウエオカキクケコサシスセソタチツテトABCDEF0123456789';
+            BFT.matrixRunning=true;
+            function draw(){
+                if(!BFT.matrixRunning) return;
+                ctx.fillStyle='rgba(2,2,14,0.06)';
+                ctx.fillRect(0,0,canvas.width,canvas.height);
+                ctx.fillStyle='#00ff41';
+                ctx.font='13px Courier New';
+                for(var i=0;i<drops.length;i++){
+                    var c=chars[Math.floor(Math.random()*chars.length)];
+                    ctx.fillText(c,i*16,drops[i]*16);
+                    if(drops[i]*16>canvas.height && Math.random()>0.975) drops[i]=0;
+                    drops[i]+=0.5;
+                }
+                BFT.matrixFrame=requestAnimationFrame(draw);
+            }
+            BFT.matrixFrame=requestAnimationFrame(draw);
+        }
+        function bftToggleMatrix(){
+            if(BFT.matrixRunning){
+                BFT.matrixRunning=false;
+                if(BFT.matrixFrame) cancelAnimationFrame(BFT.matrixFrame);
+                var c=document.getElementById('cp-matrix');
+                if(c){ var x=c.getContext('2d'); x.clearRect(0,0,c.width,c.height); c.style.opacity='0'; }
             } else {
-                macDiv.style.display = 'none';
-                pcDiv.style.display  = 'block';
-                macBtn.classList.remove('tm-tab-active');
-                pcBtn.classList.add('tm-tab-active');
+                var c=document.getElementById('cp-matrix');
+                if(c) c.style.opacity='0.07';
+                bftStartMatrixRain();
             }
+        }
+
+        // ---- WEB AUDIO ENGINE ----
+        function bftAudioInit(){
+            if(BFT.audioCtx) return;
+            try {
+                BFT.audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+                BFT.masterGain=BFT.audioCtx.createGain();
+                BFT.masterGain.gain.value=0.35;
+                BFT.masterGain.connect(BFT.audioCtx.destination);
+            } catch(e){ BFT.audioCtx=null; }
+        }
+
+        function bftKick(t){
+            if(!BFT.audioCtx||BFT.audioMuted) return;
+            var o=BFT.audioCtx.createOscillator();
+            var g=BFT.audioCtx.createGain();
+            o.frequency.setValueAtTime(155,t);
+            o.frequency.exponentialRampToValueAtTime(0.001,t+0.52);
+            g.gain.setValueAtTime(0.88,t);
+            g.gain.exponentialRampToValueAtTime(0.001,t+0.52);
+            o.connect(g); g.connect(BFT.masterGain);
+            o.start(t); o.stop(t+0.53);
+        }
+        function bftSnare(t){
+            if(!BFT.audioCtx||BFT.audioMuted) return;
+            var sz=BFT.audioCtx.sampleRate*0.13;
+            var buf=BFT.audioCtx.createBuffer(1,sz,BFT.audioCtx.sampleRate);
+            var d=buf.getChannelData(0);
+            for(var i=0;i<sz;i++) d[i]=Math.random()*2-1;
+            var src=BFT.audioCtx.createBufferSource(); src.buffer=buf;
+            var f=BFT.audioCtx.createBiquadFilter(); f.type='bandpass'; f.frequency.value=2800; f.Q.value=0.6;
+            var g=BFT.audioCtx.createGain();
+            g.gain.setValueAtTime(0.32,t); g.gain.exponentialRampToValueAtTime(0.001,t+0.13);
+            src.connect(f); f.connect(g); g.connect(BFT.masterGain); src.start(t);
+        }
+        function bftHat(t,vol){
+            if(!BFT.audioCtx||BFT.audioMuted) return;
+            var sz=BFT.audioCtx.sampleRate*0.038;
+            var buf=BFT.audioCtx.createBuffer(1,sz,BFT.audioCtx.sampleRate);
+            var d=buf.getChannelData(0);
+            for(var i=0;i<sz;i++) d[i]=Math.random()*2-1;
+            var src=BFT.audioCtx.createBufferSource(); src.buffer=buf;
+            var f=BFT.audioCtx.createBiquadFilter(); f.type='highpass'; f.frequency.value=9500;
+            var g=BFT.audioCtx.createGain();
+            g.gain.setValueAtTime(vol||0.13,t); g.gain.exponentialRampToValueAtTime(0.001,t+0.038);
+            src.connect(f); f.connect(g); g.connect(BFT.masterGain); src.start(t);
+        }
+        function bftNote(freq,type,t,dur,vol,dec){
+            if(!BFT.audioCtx||BFT.audioMuted) return;
+            var o=BFT.audioCtx.createOscillator();
+            var g=BFT.audioCtx.createGain();
+            o.type=type||'sine'; o.frequency.value=freq;
+            g.gain.setValueAtTime(vol||0.3,t);
+            g.gain.exponentialRampToValueAtTime(0.001,t+(dec||dur));
+            o.connect(g); g.connect(BFT.masterGain);
+            o.start(t); o.stop(t+dur+0.05);
+        }
+
+        var bftBassPats=[
+            [55,0,55,0,55,0,73.4,0,55,0,55,0,82.4,73.4,55,0],
+            [55,0,82.4,0,55,0,55,73.4,55,0,82.4,0,73.4,0,55,0],
+            [73.4,0,73.4,82.4,55,0,55,0,73.4,0,73.4,82.4,61.7,0,55,0],
+            [55,0,55,82.4,0,55,0,55,73.4,0,55,0,82.4,73.4,55,0]
+        ];
+        var bftArpPats=[
+            [220,277.2,329.6,440,554.4,440,329.6,277.2],
+            [220,0,329.6,0,440,0,554.4,0],
+            [329.6,440,0,329.6,440,554.4,0,440],
+            [220,261.6,329.6,392,493.9,392,329.6,261.6]
+        ];
+
+        function bftScheduleBar(t){
+            if(!BFT.audioCtx||BFT.audioMuted) return;
+            if(BFT.audioSilence>0){ BFT.audioSilence--; return; }
+            var bpm=128, step=(60/bpm)/4;
+            var bp=bftBassPats[BFT.audioPatIdx%bftBassPats.length];
+            var ap=bftArpPats[BFT.audioArpIdx%bftArpPats.length];
+            for(var i=0;i<16;i++){
+                var st=t+i*step;
+                if(i===0||i===8) bftKick(st);
+                if(i===6||i===14) bftKick(st);
+                if(i===4||i===12) bftSnare(st);
+                if(i%2===0) bftHat(st,0.17);
+                else bftHat(st,0.07);
+                if(bp[i]) bftNote(bp[i],'sawtooth',st,step*0.82,0.22,step*0.45);
+                if(i%2===0 && ap[i/2]) bftNote(ap[i/2],'square',st,step*0.38,0.055,step*0.38);
+            }
+        }
+        function bftAudioScheduler(){
+            if(!BFT.audioCtx) return;
+            var bpm=128;
+            BFT.audioBarDur=(60/bpm)*4;
+            while(BFT.audioNextBar < BFT.audioCtx.currentTime + BFT.audioBarDur*2){
+                bftScheduleBar(BFT.audioNextBar);
+                BFT.audioNextBar+=BFT.audioBarDur;
+                BFT.audioBarCount++;
+                if(BFT.audioBarCount%8===0){ BFT.audioPatIdx++; BFT.audioArpIdx++; }
+                if(BFT.audioBarCount%14===0){ BFT.audioSilence=2; }
+            }
+            BFT.audioBeat=setTimeout(bftAudioScheduler,200);
+        }
+        function bftAudioPlay(){
+            if(!BFT.audioCtx) return;
+            if(BFT.audioCtx.state==='suspended') BFT.audioCtx.resume();
+            BFT.audioBarCount=0;
+            BFT.audioNextBar=BFT.audioCtx.currentTime+0.12;
+            bftAudioScheduler();
+        }
+        function bftAudioStop(){
+            if(BFT.audioBeat){ clearTimeout(BFT.audioBeat); BFT.audioBeat=null; }
+            if(BFT.audioCtx) try{ BFT.audioCtx.suspend(); }catch(e){}
+        }
+        function bftAudioToggleMute(){
+            BFT.audioMuted=!BFT.audioMuted;
+            var btn=document.getElementById('bft-audio-mute');
+            if(btn) btn.textContent=BFT.audioMuted?'🔇':'🔊';
+            if(BFT.masterGain) BFT.masterGain.gain.value=BFT.audioMuted?0:0.35;
+        }
+        function bftAudioCtrlShow(){
+            var el=document.getElementById('bft-audio-ctrl');
+            if(el) el.classList.add('bft-audio-on');
+        }
+        function bftAudioHide(){
+            var el=document.getElementById('bft-audio-ctrl');
+            if(el) el.classList.remove('bft-audio-on');
+        }
+
+        // Cyberpunk ambient drone
+        function bftCyberpunkDroneStart(){
+            try{
+                if(!BFT.audioCtx){
+                    BFT.audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+                    BFT.masterGain=BFT.audioCtx.createGain();
+                    BFT.masterGain.gain.value=0.12;
+                    BFT.masterGain.connect(BFT.audioCtx.destination);
+                }
+                if(BFT.audioCtx.state==='suspended') BFT.audioCtx.resume();
+                [55,82.4,110,165,220].forEach(function(freq){
+                    var o=BFT.audioCtx.createOscillator();
+                    var g=BFT.audioCtx.createGain();
+                    var vo=BFT.audioCtx.createOscillator();
+                    var vg=BFT.audioCtx.createGain();
+                    o.type='sine'; o.frequency.value=freq;
+                    vo.frequency.value=0.25+Math.random()*0.15; vg.gain.value=0.8;
+                    vo.connect(vg); vg.connect(o.frequency);
+                    g.gain.setValueAtTime(0,BFT.audioCtx.currentTime);
+                    g.gain.linearRampToValueAtTime(0.035,BFT.audioCtx.currentTime+4);
+                    o.connect(g); g.connect(BFT.masterGain);
+                    vo.start(); o.start();
+                });
+            } catch(e){}
+        }
+
+        // ---- CYBERPUNK MODE PERSISTENCE ----
+        function bftCheckCyberpunkRestore(){
+            if(localStorage.getItem('ardoa-cyberpunk')==='1'){
+                BFT.gameBeaten=true;
+                document.documentElement.classList.add('cyberpunk');
+                document.documentElement.removeAttribute('data-theme');
+                bftCyberpunkDroneStart();
+                setTimeout(function(){ bftCyberpunkEasterEggs(); },500);
+            }
+        }
+
+        // ============================================================
+        // RENDER: Quick Descriptions
+        // ============================================================
+        function renderQuickDescs(filter) {
+            filter = filter || 'all';
+            var grid = document.getElementById('qdescGrid');
+            if (!grid) return;
+            var typeLabel = { white: 'White', red: 'Red', rose: 'Rosé', sparkling: 'Sparkling' };
+            var typeClass = { white: 'qdesc-badge-white', red: 'qdesc-badge-red', rose: 'qdesc-badge-rose', sparkling: 'qdesc-badge-spark' };
+            var list = wines.filter(function(w) {
+                return filter === 'all' || w.type === filter;
+            });
+            if (!list.length) { grid.innerHTML = '<p style="color:#999;padding:1rem;">No wines found.</p>'; return; }
+            var html = '';
+            list.forEach(function(w) {
+                var desc = wineQuickDescs[w.name] || '';
+                if (!desc) return;
+                var parts = desc.split('. ');
+                var s1 = parts[0] + '.';
+                var s2 = parts.slice(1).join('. ');
+                var posLabel = w.type === 'sparkling' ? 'Sparkling' : 'Position ' + (wines.filter(function(x){ return x.type !== 'sparkling'; }).indexOf(w) + 1);
+                var badge = typeLabel[w.type] || w.type;
+                var badgeClass = typeClass[w.type] || 'qdesc-badge-white';
+                html += '<div class="qdesc-card">';
+                html += '<div class="qdesc-card-top">';
+                html += '<div><div class="qdesc-pos">' + posLabel + '</div><div class="qdesc-name">' + w.name + '</div></div>';
+                html += '<span class="qdesc-badge ' + badgeClass + '">' + badge + '</span>';
+                html += '</div>';
+                html += '<div class="qdesc-text">' + s1 + ' ' + s2 + '</div>';
+                html += '</div>';
+            });
+            grid.innerHTML = html || '<p style="color:#999;padding:1rem;">No descriptions available.</p>';
+            forceRepaint(grid);
+        }
+
+        function filterQDesc(type, btn) {
+            document.querySelectorAll('.qdesc-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+            if (btn) btn.classList.add('active');
+            renderQuickDescs(type);
+        }
+
+        // ============================================================
+        // RENDER: Guest Comments
+        // ============================================================
+        function renderGuestComments() {
+            var list = document.getElementById('gcList');
+            if (!list) return;
+            var html = '';
+            var typeLabel = { white: 'White Wine', red: 'Red Wine', rose: 'Rosé', sparkling: 'Sparkling', ale: 'Ale', ipa: 'IPA', lager: 'Lager', other: 'Other' };
+            var dotClass = { white: 'gc-dot-white', red: 'gc-dot-red', rose: 'gc-dot-rose', sparkling: 'gc-dot-spark', ale: 'gc-dot-beer', ipa: 'gc-dot-beer', lager: 'gc-dot-beer', other: 'gc-dot-beer' };
+
+            // Group by type section headers
+            var sections = [
+                { label: 'Enomatic Wines (Positions 1–24)', items: wines.filter(function(w){ return w.type !== 'sparkling'; }), isWine: true },
+                { label: 'Sparkling Wines', items: wines.filter(function(w){ return w.type === 'sparkling'; }), isWine: true },
+                { label: 'Beers & Cider', items: beers, isWine: false }
+            ];
+
+            sections.forEach(function(sec) {
+                html += '<div class="gc-type-header">' + sec.label + '</div>';
+                sec.items.forEach(function(item) {
+                    var comments = sec.isWine ? (wineComments[item.name] || []) : (beerComments[item.name] || []);
+                    if (!comments.length) return;
+                    var t = item.type || 'white';
+                    var dc = dotClass[t] || 'gc-dot-beer';
+                    html += '<div class="gc-item" onclick="gcToggle(this)">';
+                    html += '<div class="gc-header">';
+                    html += '<div class="gc-item-left"><span class="gc-dot ' + dc + '"></span>';
+                    html += '<span class="gc-item-name">' + item.name + '</span></div>';
+                    html += '<span class="gc-arrow">▶</span>';
+                    html += '</div>';
+                    html += '<div class="gc-comments">';
+                    comments.forEach(function(c) {
+                        html += '<div class="gc-comment"><span class="gc-comment-icon">💬</span><span class="gc-comment-text">' + c + '</span></div>';
+                    });
+                    html += '</div></div>';
+                });
+            });
+
+            list.innerHTML = html;
+            forceRepaint(list);
+        }
+
+        function gcToggle(el) {
+            el.classList.toggle('gc-open');
+        }
+
+        // ============================================================
+        // RENDER: Staff Picks / Recommendations
+        // ============================================================
+        function renderRecommendations() {
+            var body = document.getElementById('recBody');
+            if (!body) return;
+            var html = '';
+            staffPicks.forEach(function(cat) {
+                html += '<div class="rec-category">';
+                html += '<div class="rec-cat-header">';
+                html += '<span class="rec-cat-icon">' + cat.icon + '</span>';
+                html += '<span class="rec-cat-title">' + cat.category + '</span>';
+                if (cat.picks.length > 1) {
+                    html += '<span class="rec-cat-count">Top ' + cat.picks.length + '</span>';
+                }
+                html += '</div>';
+                html += '<div class="rec-picks">';
+                cat.picks.forEach(function(pick, i) {
+                    html += '<div class="rec-pick">';
+                    html += '<div class="rec-rank">' + (cat.picks.length > 1 ? (i + 1) : '★') + '</div>';
+                    html += '<div class="rec-pick-top">';
+                    html += '<span class="rec-pick-name">' + pick.name + '</span>';
+                    if (pick.vintage) html += '<span class="rec-pick-vintage">' + pick.vintage + '</span>';
+                    html += '</div>';
+                    html += '<div class="rec-pick-origin">' + pick.origin + (pick.pos ? ' &nbsp;·&nbsp; Position ' + pick.pos : '') + '</div>';
+                    html += '<div class="rec-reason">' + pick.reason + '</div>';
+                    html += '</div>';
+                });
+                html += '</div></div>';
+            });
+            body.innerHTML = html;
+            forceRepaint(body);
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -9924,25 +11832,36 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
                 renderVarietals();
                 renderChecklist();
                 renderTimeclock();
+                renderQuickDescs();
+                renderGuestComments();
+                renderRecommendations();
 
-                // Easter egg: click the "Ardoa" title 5× within 3 s to reveal Typemaster
+                // Easter egg: click "Ardoa" title 5× within 3 s → Brute Force Trainer
                 (function() {
                     var clicks = 0, timer = null;
                     var title = document.getElementById('ardoaTitle');
                     if (!title) return;
                     title.style.cursor = 'default';
                     title.addEventListener('click', function() {
+                        // If cyberpunk mode is active, handle cp easter egg instead
+                        if (document.documentElement.classList.contains('cyberpunk')) return;
                         clicks++;
                         if (timer) clearTimeout(timer);
                         timer = setTimeout(function() { clicks = 0; }, 3000);
                         if (clicks >= 5) {
                             clicks = 0;
                             clearTimeout(timer);
-                            showSection('typemaster');
-                            tmInit();
+                            // Only enter game if not already active
+                            if (BFT.state === 'idle' || BFT.state === 'cyberpunk') {
+                                showSection('typemaster');
+                                bftInit();
+                            }
                         }
                     });
                 })();
+
+                // Restore cyberpunk mode if previously unlocked
+                bftCheckCyberpunkRestore();
 
                 // Force iOS Safari to paint dynamically inserted card content.
                 // Without this, innerHTML content may remain invisible because
@@ -9973,5 +11892,14 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
             }
         });
     </script>
+    <!-- Cyberpunk mode elements (hidden until cyberpunk unlocked) -->
+    <div id="cp-banner">// ARDOA_OS v2.0 — CYBERPUNK MODE ACTIVE — WINE DATABASE DECRYPTED — ALL SYSTEMS NOMINAL //</div>
+    <canvas id="cp-matrix"></canvas>
+
+    <!-- BFT Audio Controls (shown during game) -->
+    <div id="bft-audio-ctrl">
+        <button class="bft-abtn" id="bft-audio-mute" onclick="bftAudioToggleMute()" title="Mute/Unmute">🔊</button>
+    </div>
+
 </body>
 </html>
