@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ardoa Wine Bar - Study Guide</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=VT323&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -5302,77 +5302,93 @@
         .bft-abtn:hover { border-color: #7af8ff; box-shadow: 0 0 8px rgba(122,248,255,0.35); }
 
         /* ---- CYBERPUNK SITE TRANSFORMATION ---- */
-        /* Applied to <html class="cyberpunk"> */
+        /* Applied to <html class="cyberpunk"> — unlocked via Brute Force Trainer */
         html.cyberpunk {
-            --cp-bg:  #02020e;
-            --cp-bg2: #05051a;
-            --cp-bg3: #08082a;
-            --cp-c:   #00f5ff;
-            --cp-m:   #ff00ff;
-            --cp-g:   #00ff41;
-            --cp-o:   #ff8800;
-            --cp-r:   #ff0055;
-            --cp-y:   #ffe000;
-            --cp-t:   #c4d4ff;
-            --cp-t2:  #6070a0;
-            --cp-bd:  #1a1a60;
+            --cp-bg:   #02020e;
+            --cp-bg2:  #05051a;
+            --cp-bg3:  #080820;
+            --cp-c:    #00f5ff;
+            --cp-m:    #ff00ff;
+            --cp-g:    #00ff41;
+            --cp-o:    #ff8800;
+            --cp-r:    #ff0055;
+            --cp-y:    #ffe000;
+            --cp-t:    #c4d4ff;
+            --cp-t2:   #5060a0;
+            --cp-bd:   #0d2040;
+            --cp-font: 'VT323', 'Courier New', monospace;
         }
         html.cyberpunk body {
             background: var(--cp-bg) !important;
             color: var(--cp-t) !important;
+            font-family: var(--cp-font) !important;
         }
         html.cyberpunk .background-layer,
         html.cyberpunk .fog-layer,
-        html.cyberpunk .vines-overlay {
-            opacity: 0 !important;
-        }
+        html.cyberpunk .vines-overlay { opacity: 0 !important; }
+
+        /* HEADER */
         html.cyberpunk header {
             background: var(--cp-bg2) !important;
-            border-bottom: 1px solid var(--cp-c) !important;
-            box-shadow: 0 0 30px rgba(0,245,255,0.12) !important;
+            border-bottom: 2px solid var(--cp-c) !important;
+            box-shadow: 0 0 30px rgba(0,245,255,0.18) !important;
         }
         html.cyberpunk #ardoaTitle {
-            font-family: 'Courier New', monospace !important;
+            font-family: var(--cp-font) !important;
             color: var(--cp-c) !important;
-            letter-spacing: 0.3em !important;
-            text-shadow: 0 0 12px var(--cp-c), 0 0 25px var(--cp-c) !important;
+            letter-spacing: 0.35em !important;
+            text-shadow: 0 0 10px var(--cp-c), 0 0 22px var(--cp-c), 0 0 45px rgba(0,245,255,0.4) !important;
         }
         html.cyberpunk .site-tagline {
             color: var(--cp-m) !important;
-            font-family: 'Courier New', monospace !important;
-            letter-spacing: 0.12em !important;
+            font-family: var(--cp-font) !important;
+            letter-spacing: 0.14em !important;
             text-shadow: 0 0 8px var(--cp-m) !important;
         }
-        html.cyberpunk .sticky-nav {
+
+        /* NAV — fixed selector: HTML uses <nav> and <a>, not .sticky-nav / .nav-link */
+        html.cyberpunk nav {
             background: var(--cp-bg2) !important;
-            border-bottom: 1px solid var(--cp-bd) !important;
-            box-shadow: none !important;
+            border-bottom: 1px solid var(--cp-c) !important;
+            box-shadow: 0 2px 24px rgba(0,245,255,0.2) !important;
         }
-        html.cyberpunk .nav-link {
+        html.cyberpunk nav a {
             color: var(--cp-t2) !important;
-            font-family: 'Courier New', monospace !important;
-            font-size: 0.75rem !important;
-            letter-spacing: 0.06em !important;
+            font-family: var(--cp-font) !important;
+            font-size: 1rem !important;
+            letter-spacing: 0.05em !important;
             text-transform: uppercase !important;
             border-bottom: 2px solid transparent !important;
+            transition: color 0.15s, text-shadow 0.15s !important;
         }
-        html.cyberpunk .nav-link:hover,
-        html.cyberpunk .nav-link.active {
+        html.cyberpunk nav a:hover,
+        html.cyberpunk nav a.active {
             color: var(--cp-c) !important;
             border-bottom-color: var(--cp-c) !important;
-            text-shadow: 0 0 7px var(--cp-c) !important;
+            text-shadow: 0 0 7px var(--cp-c), 0 0 16px rgba(0,245,255,0.5) !important;
+            background: rgba(0,245,255,0.05) !important;
         }
+
+        /* SECTIONS + HEADINGS */
         html.cyberpunk section { background: var(--cp-bg) !important; }
         html.cyberpunk h2 {
-            font-family: 'Courier New', monospace !important;
+            font-family: var(--cp-font) !important;
             color: var(--cp-c) !important;
-            text-shadow: 0 0 10px rgba(0,245,255,0.4) !important;
-            letter-spacing: 0.12em !important;
+            text-shadow: 0 0 10px rgba(0,245,255,0.5) !important;
+            letter-spacing: 0.15em !important;
         }
         html.cyberpunk h3 {
-            font-family: 'Courier New', monospace !important;
+            font-family: var(--cp-font) !important;
             color: var(--cp-m) !important;
+            letter-spacing: 0.08em !important;
         }
+        html.cyberpunk p, html.cyberpunk li,
+        html.cyberpunk td, html.cyberpunk th,
+        html.cyberpunk label, html.cyberpunk span {
+            font-family: var(--cp-font) !important;
+        }
+
+        /* WINE / BEER / FOOD / FAQ CARDS */
         html.cyberpunk .wine-card,
         html.cyberpunk .beer-card,
         html.cyberpunk .food-card,
@@ -5383,59 +5399,129 @@
         html.cyberpunk .wine-card:hover,
         html.cyberpunk .beer-card:hover {
             border-color: var(--cp-c) !important;
-            box-shadow: 0 0 14px rgba(0,245,255,0.18) !important;
+            box-shadow: 0 0 16px rgba(0,245,255,0.18) !important;
         }
         html.cyberpunk .wine-name,
         html.cyberpunk .beer-name {
             color: var(--cp-c) !important;
-            font-family: 'Courier New', monospace !important;
-            font-size: 0.92rem !important;
+            font-family: var(--cp-font) !important;
+            font-size: 1.05rem !important;
+            letter-spacing: 0.04em !important;
         }
         html.cyberpunk .wine-vintage,
         html.cyberpunk .beer-style {
             background: var(--cp-bg2) !important;
             color: var(--cp-m) !important;
             border: 1px solid var(--cp-m) !important;
-            font-family: 'Courier New', monospace !important;
+            font-family: var(--cp-font) !important;
         }
         html.cyberpunk .wine-position-num {
             color: var(--cp-g) !important;
-            font-family: 'Courier New', monospace !important;
+            font-family: var(--cp-font) !important;
         }
         html.cyberpunk .wine-grape,
         html.cyberpunk .wine-region,
         html.cyberpunk .wine-appellation {
             color: var(--cp-t2) !important;
-            font-family: 'Courier New', monospace !important;
-            font-size: 0.78rem !important;
+            font-family: var(--cp-font) !important;
+            font-size: 0.88rem !important;
         }
+
+        /* QUICK DESCRIPTIONS */
+        html.cyberpunk .qdesc-intro h2,
+        html.cyberpunk .qdesc-intro p { color: var(--cp-t) !important; }
+        html.cyberpunk .qdesc-card {
+            background: var(--cp-bg3) !important;
+            border: 1px solid var(--cp-bd) !important;
+        }
+        html.cyberpunk .qdesc-card:hover {
+            border-color: var(--cp-c) !important;
+            box-shadow: 0 0 12px rgba(0,245,255,0.15) !important;
+        }
+        html.cyberpunk .qdesc-name { color: var(--cp-c) !important; font-family: var(--cp-font) !important; letter-spacing: 0.04em !important; }
+        html.cyberpunk .qdesc-pos { color: var(--cp-g) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .qdesc-s1, html.cyberpunk .qdesc-s2 { color: var(--cp-t) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .qdesc-badge-white { background: var(--cp-bg2) !important; color: var(--cp-t2) !important; border-color: var(--cp-bd) !important; }
+        html.cyberpunk .qdesc-badge-red   { background: var(--cp-bg2) !important; color: var(--cp-m) !important;  border-color: var(--cp-m)  !important; }
+        html.cyberpunk .qdesc-badge-rose  { background: var(--cp-bg2) !important; color: var(--cp-r) !important;  border-color: var(--cp-r)  !important; }
+        html.cyberpunk .qdesc-badge-spark { background: var(--cp-bg2) !important; color: var(--cp-c) !important;  border-color: var(--cp-c)  !important; }
+        html.cyberpunk .qdesc-filter-btn {
+            background: var(--cp-bg2) !important; color: var(--cp-t2) !important;
+            border: 1px solid var(--cp-bd) !important; font-family: var(--cp-font) !important;
+        }
+        html.cyberpunk .qdesc-filter-btn.active,
+        html.cyberpunk .qdesc-filter-btn:hover {
+            background: var(--cp-bg3) !important; color: var(--cp-c) !important;
+            border-color: var(--cp-c) !important; box-shadow: 0 0 8px rgba(0,245,255,0.2) !important;
+        }
+
+        /* GUEST COMMENTS */
+        html.cyberpunk .gc-intro h2 { color: var(--cp-c) !important; }
+        html.cyberpunk .gc-intro p  { color: var(--cp-t2) !important; }
+        html.cyberpunk .gc-item {
+            background: var(--cp-bg3) !important;
+            border: 1px solid var(--cp-bd) !important;
+        }
+        html.cyberpunk .gc-header:hover { background: rgba(0,245,255,0.04) !important; }
+        html.cyberpunk .gc-item.gc-open .gc-header {
+            background: rgba(0,245,255,0.06) !important;
+            border-bottom-color: var(--cp-c) !important;
+        }
+        html.cyberpunk .gc-item-name { color: var(--cp-c) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .gc-arrow { color: var(--cp-t2) !important; }
+        html.cyberpunk .gc-comment {
+            background: var(--cp-bg2) !important;
+            border-left-color: var(--cp-c) !important;
+            color: var(--cp-t) !important;
+            font-family: var(--cp-font) !important;
+        }
+        html.cyberpunk .gc-comment-icon { color: var(--cp-c) !important; }
+        html.cyberpunk .gc-response {
+            background: var(--cp-bg) !important;
+            border-left-color: var(--cp-m) !important;
+            color: var(--cp-t2) !important;
+            font-family: var(--cp-font) !important;
+        }
+        html.cyberpunk .gc-response-icon { color: var(--cp-m) !important; }
+        html.cyberpunk .gc-type-header { color: var(--cp-t2) !important; font-family: var(--cp-font) !important; }
+
+        /* STAFF PICKS */
+        html.cyberpunk .rec-intro h2 { color: var(--cp-c) !important; }
+        html.cyberpunk .rec-intro p  { color: var(--cp-t2) !important; }
+        html.cyberpunk .rec-pick {
+            background: var(--cp-bg3) !important;
+            border: 1px solid var(--cp-bd) !important;
+        }
+        html.cyberpunk .rec-pick:hover { border-color: var(--cp-c) !important; box-shadow: 0 0 12px rgba(0,245,255,0.15) !important; }
+        html.cyberpunk .rec-cat-title { color: var(--cp-c) !important; font-family: var(--cp-font) !important; letter-spacing: 0.1em !important; }
+        html.cyberpunk .rec-pick-name { color: var(--cp-c) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .rec-rank { color: var(--cp-g) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .rec-origin { color: var(--cp-t2) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .rec-reason { color: var(--cp-t) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .rec-reason em { color: var(--cp-m) !important; }
+
+        /* FOOTER */
         html.cyberpunk footer {
             background: var(--cp-bg2) !important;
             border-top: 1px solid var(--cp-bd) !important;
             color: var(--cp-t2) !important;
+            font-family: var(--cp-font) !important;
         }
+
+        /* SCROLLBAR */
         html.cyberpunk ::-webkit-scrollbar { width: 5px; }
         html.cyberpunk ::-webkit-scrollbar-track { background: var(--cp-bg); }
         html.cyberpunk ::-webkit-scrollbar-thumb { background: var(--cp-bd); }
         html.cyberpunk ::-webkit-scrollbar-thumb:hover { background: var(--cp-c); }
+
+        /* HIDE THEME TOGGLE */
         html.cyberpunk .theme-toggle { display: none !important; }
-        /* CP banner */
-        #cp-banner {
-            display: none; position: fixed; top: 0; left: 0; right: 0;
-            padding: 0.35rem 1rem; text-align: center; z-index: 8999;
-            font-family: 'Courier New', monospace; font-size: 0.72rem;
-            font-weight: bold; letter-spacing: 0.08em; color: #000;
-            background: linear-gradient(90deg, #00f5ff, #ff00ff, #00ff41, #ff8800, #00f5ff);
-            background-size: 300% 100%;
-            animation: cp-banner-anim 4s linear infinite;
-        }
-        @keyframes cp-banner-anim { 0%{background-position:0% 0%} 100%{background-position:300% 0%} }
-        html.cyberpunk #cp-banner { display: block; }
+
         /* Matrix rain canvas */
         #cp-matrix {
             display: none; position: fixed; top: 0; left: 0;
             width: 100%; height: 100%;
-            pointer-events: none; z-index: 8998; opacity: 0.07;
+            pointer-events: none; z-index: 8998; opacity: 0.08;
         }
         html.cyberpunk #cp-matrix { display: block; }
 
@@ -5549,6 +5635,14 @@
         }
         .gc-comment-icon { font-size: 0.85rem; color: #c4a875; flex-shrink: 0; margin-top: 0.1rem; }
         .gc-comment-text { flex: 1; }
+        .gc-comment-pair { display: flex; flex-direction: column; gap: 0.2rem; }
+        .gc-response {
+            display: flex; gap: 0.65rem; align-items: flex-start;
+            padding: 0.45rem 0.75rem 0.45rem 1.5rem; background: #f5f0ea; border-left: 3px solid #6b1c2e;
+            font-size: 0.84rem; color: #3a2a2a; line-height: 1.5;
+        }
+        .gc-response-icon { font-size: 0.82rem; color: #6b1c2e; flex-shrink: 0; margin-top: 0.1rem; }
+        .gc-response-text { flex: 1; font-style: italic; }
         .gc-type-header {
             font-family: 'Cinzel', serif; font-size: 0.72rem; color: #999;
             letter-spacing: 0.1em; text-transform: uppercase;
@@ -5566,6 +5660,8 @@
         [data-theme="dark"] .gc-comments { background: transparent; }
         [data-theme="dark"] .gc-comment { background: #0d0818; border-left-color: #4a0e1a; color: #d8d4cc; }
         [data-theme="dark"] .gc-comment-icon { color: #c4a875; }
+        [data-theme="dark"] .gc-response { background: #120818; border-left-color: #6b1c2e; color: #c8c4bc; }
+        [data-theme="dark"] .gc-response-icon { color: #a04060; }
         [data-theme="dark"] .gc-type-header { color: #555; }
 
         /* ============================================================
@@ -8066,6 +8162,331 @@
                 "It's dry! I expected cider to be sweet. This is completely dry.",
                 "I love how it's unfiltered — it looks a bit hazy and wild.",
                 "This is honestly the most interesting thing on your drinks list. Very unique."
+            ]
+        };
+
+
+        // ============================================================
+        // BARTENDER RESPONSES — paired with each guest comment
+        // ============================================================
+        var wineResponses = {
+            "Famiglia Boron Pinot Grigio": [
+                "That's exactly what Veneto Pinot Grigio does best — effortless and refreshing. No surprises, just pleasure.",
+                "Pinot Grigio is a great entry point. If you ever want to go further, we've got more adventurous whites when you're ready.",
+                "Absolutely — and that's the whole point of this style. Very honest, very drinkable.",
+                "Same grape, different styles. Italian Pinot Grigio is lean and crisp. Alsatian Pinot Gris is rounder, richer, sometimes off-dry. This is the lighter Italian version.",
+                "Great call. The saltiness of the prosciutto and the clean acidity are made for each other. Go for it.",
+                "That's the magic of wine — the best travel companion money can buy.",
+                "This one's pretty gentle on acid. If you ever want something even rounder, the Presqu'ile Chardonnay is beautifully creamy."
+            ],
+            "Jean Aubron Folle Blanche": [
+                "It's a nearly forgotten Loire grape — used historically in Cognac distillation, but as a table wine it's electric. Very sharp, very mineral. We love having it on the list.",
+                "That's Folle Blanche — high acid, very pure. The Muscadet region's proximity to the Atlantic gives it that oceanic quality.",
+                "That connection is very real. The Muscadet region sits at the mouth of the Loire where it meets the Atlantic. Oysters and this wine are a classic pairing.",
+                "That's the terroir and the grape working together. It's not for everyone, but if you love it, you really love it.",
+                "Exactly right — it was the primary Cognac grape before phylloxera wiped most of it out. Ugni Blanc replaced it. This is one of the rare survivors still made as a still wine.",
+                "It has no close reference point — that's why we stock it. It makes people stop and think.",
+                "Yes, especially a creamy fresh cheese. The acidity cuts right through the fat. Try it with the Saint Angel."
+            ],
+            "Pouilly-Fumé Dezat": [
+                "Very close relatives — both Loire Sauvignon Blanc from silex soils, just a few miles apart on either side of the river. Pouilly-Fumé tends toward more mineral and smoke. Sancerre is often a touch more aromatic.",
+                "No oak at all — it's unwooded. That smokiness comes from the silex, the flint soils the vines grow in. Fumé actually means 'smoked' in French, and it refers to that mineral quality.",
+                "Absolutely the classic pairing. Crottin de Chavignol — a goat cheese from literally down the road — is the traditional match. Goat cheese and Sauvignon Blanc are natural partners.",
+                "It means 'smoked' in French, but the wine isn't smoked — it references the gunflint soils the vines grow in. Those soils impart a mineral, almost smoky character.",
+                "That's pure terroir. The silex soils here are what make Pouilly-Fumé distinct from Sauvignon Blanc grown anywhere else.",
+                "Night and day. Marlborough SB is tropical and exuberant. Loire SB is restrained, mineral, and more intellectual. Both are great in their own right.",
+                "I'm glad you found it. Dezat is a small family producer doing things the right way — not a lot of fanfare, just really honest wine."
+            ],
+            "Presqu'ile Chardonnay": [
+                "That's Santa Maria Valley doing its thing — very cool climate for California, almost Burgundian in some years. The winemaker specifically avoids heavy oak to let the fruit speak.",
+                "Very different from Napa. Santa Maria is further south near Santa Barbara, and much cooler — open to the Pacific. Lower alcohol, higher acid, much more Burgundy in spirit.",
+                "Partial malolactic fermentation. They convert some sharp malic acid to softer lactic acid for that creaminess, but leave some intact for freshness. It's a careful balancing act.",
+                "Very much in the Burgundian tradition — focused, mineral-edged, letting the terroir come through rather than burying it in oak. If you love Burgundy, Presqu'ile is worth knowing.",
+                "That's the cool climate working. Cold nights slow ripening, so the fruit stays precise and focused rather than jammy. Dry wine, vivid fruit.",
+                "Absolutely. The richness of triple crème needs the acid to cut through it. It's a beautiful pairing.",
+                "Presqu'ile is exactly the answer to that search. It shows what California can do when it doesn't try to be everything at once."
+            ],
+            "Marola Albariño Rías Baixas": [
+                "That's the Rías Baixas doing its work. The vineyards are on granite near the Atlantic — the salt air and mineral soils come straight through.",
+                "It really is. High acid, lower alcohol, totally refreshing. Portugal calls the same grape Alvarinho and uses it in Vinho Verde. Same family.",
+                "Rías Baixas (ree-as BY-shas) is the appellation in Galicia, the northwest corner of Spain. Albariño is the grape. The rías are drowned river valleys along the coast — similar to fjords.",
+                "The charcuterie board works beautifully — especially anything briny or salty. The prosciutto and the minerality play off each other really well.",
+                "That's Albariño's superpower. High natural acid that refreshes the palate instead of coating it. One of the best food wines on the list.",
+                "Galicia is one of the most underrated parts of Spain. The food, the wine, the coast — incredible. Glad this brings that back for you.",
+                "Albariño has a beautiful range — usually lemon and grapefruit up front, but there's often a stone fruit note underneath. The peach is real."
+            ],
+            "Folly by Mascaronne Rosé Côtes de Provence": [
+                "Provence rosé is pressed very gently — just enough skin contact to get that pale salmon. The color tells you something about the style: delicate, dry, precise.",
+                "He bought into Château Mascaronne — serious wine, serious pedigree. The estate goes back centuries. The NBA connection makes for a good story, but the wine stands completely on its own.",
+                "That's a really common misconception. Provence rosé is almost always bone dry — actually the driest rosé style in the world. The sweetness perception comes from the fruit, not sugar.",
+                "That's Grenache and Cinsault giving you the stone fruit character. The Vermentino in the blend adds the herbal, floral lift.",
+                "Exactly what they pour at lunch overlooking the Mediterranean. There's a reason Provence rosé has that association — it was built for that lifestyle.",
+                "It's designed for exactly that. Provence rosé is one of the most universally food-friendly wines — works with seafood, vegetables, light meats, cheese, everything.",
+                "Provence rosé is almost always dry and blended from specific grapes — Grenache, Cinsault, Mourvèdre. 'Regular rosé' can be anything. Provence has a very distinct, deliberate identity."
+            ],
+            "Gorghi Tondi Rosa Dei Venti": [
+                "The estate sits on the western tip of Sicily where several winds converge — the sirocco from Africa, the tramontane from the north. They named the wine after those winds. Very poetic.",
+                "Exactly — and pale color tells you it's going to be dry and delicate, not sweet and aggressive. Sicilian rosé tends to run pale because they're working toward the same refinement as Provence.",
+                "The estate is basically on the coast — very close to the Mediterranean. Salt air, sea breezes, warm but not hot. That saline quality is real terroir.",
+                "Sicily does both incredibly well. The volcanic soils and sea influence give everything a unique character. Nero d'Avola and Nerello Mascalese make beautiful rosés when handled right.",
+                "That's Nerello Mascalese — it has this lifted, almost Burgundian quality. Delicate red fruit and a floral edge. Very elegant for a Sicilian wine.",
+                "Gorghi Tondi has been farming organically for years. The land is protected, no synthetic inputs. The wine is genuinely pure.",
+                "Honestly depends on what you're eating. The Folly is more herbal and mineral — great with food. The Rosa Dei Venti is rounder and fruitier — lovely on its own. Both are wonderful."
+            ],
+            "Braunewell Unser Täglich Scheurebe": [
+                "It's a rare German hybrid — a cross between Silvaner and Riesling, created in 1916. Has Riesling's aromatics but with more tropical character. Very low production, mostly drunk in Germany.",
+                "That's Scheurebe's signature. One of the most perfumed white grapes in the world. This producer keeps it elegantly in check.",
+                "You're exactly right — it's a Riesling cross. Same high acid, low alcohol structure, but the tropical and passionfruit notes come from the Silvaner parent.",
+                "Passionfruit is the hallmark of Scheurebe. It's unmistakable once you know it. And unlike many aromatic whites, the acidity keeps it from being cloying.",
+                "The Braunewell family made this to be exactly that — a go-to everyday wine. Low alcohol, very drinkable, not taking itself too seriously.",
+                "That's the German approach to white wine — preserve freshness and drinkability over ripeness. Lower alcohol means you can have a second or third glass without feeling it.",
+                "The residual sugar and low alcohol are what make aromatic whites work with spice. The sweetness cools the heat, the acid refreshes. One of the best pairings in wine."
+            ],
+            "Ercole Barbera del Monferrato": [
+                "Barbera is built that way — very high natural acidity, low tannins, lots of bright red fruit. It's one of the most food-friendly reds in Italy.",
+                "Same general area — Piedmont. Barolo and Barbera grow practically side by side in the Langhe hills. Barolo is king, but Barbera is what locals actually drink every day.",
+                "That's Barbera's calling card. Naturally high acid, almost no tannin. It's a palate cleanser and a food enabler at the same time.",
+                "Italians have been pairing it with everything from pizza to pasta to charcuterie for centuries. It's the ultimate versatile red.",
+                "Barbera fills that gap perfectly — between a light Pinot Noir and something fuller. Bright, juicy, satisfying.",
+                "Barolo and Brunello get all the press, but Italy makes some of the most versatile light-bodied reds in the world. Barbera, Frappato, Dolcetto — all worth exploring.",
+                "Absolutely — about 60°F is ideal. It brings out the fresh cherry and tones down any warmth from the alcohol. Very Italian way to drink it."
+            ],
+            "Gorghi Tondi Dume Frappato": [
+                "Frappato is naturally light-bodied and low tannin, but it has real red fruit character — fresh cherry, rose petal, a little spice. Light doesn't mean thin.",
+                "That's pure Frappato. It's one of the most aromatic red grapes in Italy — roses and strawberries are the signatures. Very distinctive.",
+                "Yes, native to southeastern Sicily, mostly around Vittoria. It's also the lighter component in Cerasuolo di Vittoria, one of Sicily's DOCG wines, blended with Nero d'Avola.",
+                "That's the most common comparison. Both are light, aromatic, and food-friendly. But Frappato has its own identity — more floral, more Mediterranean.",
+                "Yes — we recommend it slightly cool, around 58–62°F. It brings out the freshness and makes the cherry even more vibrant. Very summer-friendly.",
+                "That's the cool coastal influence at Gorghi Tondi. Sea breezes keep the grapes from overripening. Everything tastes fresh and alive.",
+                "Sicily surprises people all the time. It's not just Nero d'Avola and big reds — there's huge range here, and it's all getting better every year."
+            ],
+            "Garnatxa Meretat Mont-Rubí": [
+                "Same grape, different name. Grenache is French, Garnacha is Spanish, Garnatxa is Catalan — all one thing. And it actually originated in Spain — the French adopted it.",
+                "Old-vine Garnatxa does that — the roots dig deep and find water more efficiently, making for riper, more velvety fruit. Organic farming doesn't hurt either.",
+                "Exactly — garrigue is the wild scrubland all over Mediterranean wine country. Thyme, lavender, rosemary, wild herbs. The vines absorb that character from the environment.",
+                "Penedès produces Cava but also serious still wines, especially from native varieties like Garnatxa and Xarel·lo. Mont-Rubí specifically is a subzone known for old-vine reds.",
+                "Perfect pairing — the spice in the chorizo and the herbal, peppery notes in the wine are natural partners. The fat in the chorizo softens the tannins too.",
+                "Old vines produce less fruit but what they produce is concentrated and expressive. Combined with organic farming — no synthetic intervention — you get a very honest wine.",
+                "The altitude in Mont-Rubí saves it from overripeness — cool nights, warm days. That diurnal shift keeps the acid up and the fruit precise."
+            ],
+            "Red Tail Ridge RTR Estate Vineyard": [
+                "The Finger Lakes is one of America's most underrated wine regions. The lakes moderate the climate — cooler and more continental than most expect. It produces Riesling and Pinot Noir that rival much more famous regions.",
+                "That's the goal for Nancy Irelan at Red Tail Ridge — Burgundy is the reference point. Cool climate, restraint, terroir-driven. Very different from California Pinot Noir.",
+                "It absolutely is. The critical world has been paying more attention to the Finger Lakes over the past decade. Red Tail Ridge consistently punches well above its weight.",
+                "2019 was an excellent vintage in the Finger Lakes — warm and dry enough to fully ripen the Pinot. It's at a beautiful drinking window right now.",
+                "That violet note is classic Pinot Noir. The smokiness might come from fermentation or a touch of new oak — Nancy uses small amounts very carefully. Adds complexity without dominating.",
+                "Nancy Irelan is one of the most scientifically rigorous winemakers in the country. That academic background translates to incredibly careful, data-driven decisions in the vineyard and winery.",
+                "Both are excellent calls. Duck and Pinot Noir are a classic match — the acidity cuts the fat, the earthiness mirrors the richness of the meat. Go with your instinct."
+            ],
+            "Massimo Ribeira Sacra": [
+                "Some of the steepest vineyards in the world — up to 80% gradient. Everything done by hand, sometimes with harnesses. The effort shows in every glass.",
+                "Mencía is often called Spain's Pinot Noir for exactly that reason — light-bodied, aromatic, with beautiful red fruit and minerality. The granite and slate soils amplify it.",
+                "It's a fair comparison in style — both are light, aromatic, and highly terroir-expressive. But Mencía has its own identity: a bit more savory, more mineral, distinctly Iberian.",
+                "The llicorella slate and granite soils throughout Ribeira Sacra give all the wines that stony, electric quality. It's one of the most mineral-driven regions in Spain.",
+                "That's the cool microclimate of the Sil river gorge — deep valleys create shade and cool air, slowing ripening. You get full flavor development without losing the freshness.",
+                "The Cistercians and Benedictines built these terraces starting in the 12th century. The wine culture there goes back over a thousand years. The monks absolutely knew what they were doing.",
+                "It's one of our favorites too. Ribeira Sacra is still relatively unknown outside Spain, so every time someone discovers it here it feels like a small victory."
+            ],
+            "Colle Corviano Montepulciano d'Abruzzo": [
+                "Classic confusion — Montepulciano d'Abruzzo is the grape, grown in Abruzzo on the Adriatic side of Italy. Vino Nobile di Montepulciano is a Sangiovese from a Tuscan town. Completely different wines, genuinely confusing naming.",
+                "Abruzzo is one of the best value regions in Italy. Good soils, good climate, lower profile than Tuscany or Piedmont, so prices stay honest.",
+                "Oregano, dried herbs, a little tobacco. Very central Italian character. The Montepulciano grape has that savory, rustic quality that pairs beautifully with bold food.",
+                "It's one of the most food-friendly reds on the list — enough acid to cut fat, enough tannin for structure, not so assertive it fights with anything.",
+                "Colle Corviano farms organically and the wine spends time in oak to smooth the tannins. You get structure without roughness.",
+                "Sometimes that's exactly what you want. Not every wine needs to be a statement. This one is honest and dependable, and that's plenty.",
+                "You're not alone — it's one of wine's most confusing naming conventions. Just remember: Abruzzo = the grape. Tuscany = the town. Two totally different wines."
+            ],
+            "Domaine de la Petite Roche Anjou Cabernet Franc": [
+                "It really is underrated. Most people know it as a blending grape in Bordeaux, but in the Loire Valley it's the star — expressive, aromatic, and elegant on its own.",
+                "It's intentional and varietal — that pyrazine character is Cabernet Franc's signature in cooler climates. Green pepper and herbs. Not a flaw at all — it's the grape expressing itself.",
+                "Cab Franc is actually the parent of Cabernet Sauvignon — crossed with Sauvignon Blanc to create it. Much lighter, less tannic, more aromatic. Very different experience.",
+                "That's Loire Cab Franc at its best — lifted aromas, fresh fruit, floral top notes. One of the most perfumed red grapes.",
+                "Loire reds fly under the radar while Bordeaux and Burgundy get all the attention. Better for us.",
+                "Absolutely — about 60°F is ideal. It brings out the freshness and the raspberry fruit. Loire reds in general benefit from a slight chill.",
+                "That's the classic pairing. Cab Franc's acidity and the herbal notes cut beautifully through the richness of the rillettes. Excellent choice."
+            ],
+            "Château Roc Meynard Bordeaux Supérieur": [
+                "Right Bank — Saint-Émilion, Pomerol side — is Merlot-dominant: rounder, plummier, more approachable young. Left Bank is Cabernet Sauvignon-dominant: firmer, more structured, needs more aging.",
+                "2019 was excellent across Bordeaux — warm, dry, ideal ripening conditions. Good concentration and freshness. This one is drinking well.",
+                "That's Right Bank Bordeaux — a little restraint, a little earth, soft tannins but still backbone. It opens up beautifully with some air.",
+                "Merlot-dominant blends are generally more immediately approachable than Cabernet-heavy ones. This is drinking really well right now.",
+                "It means stricter requirements — lower yields, higher minimum alcohol. Not necessarily better, but it signals more attention paid in the vineyard.",
+                "That's Cabernet Franc in the blend giving you that savory, herbal quality. Cedar often comes from oak aging. Very classic Bordeaux characteristics.",
+                "It's reliable and crowd-pleasing in the best way — enough complexity to impress, approachable enough that everyone enjoys it."
+            ],
+            "Encomienda de Cervera Horten": [
+                "Similar grape, different region. Rioja is the famous Tempranillo appellation. Castilla-La Mancha is broader, less regulated, often better value. Same grape, less prestige markup.",
+                "Those secondary aromas come from oak aging — Tempranillo is very oak-receptive and those notes develop beautifully with time in barrel.",
+                "Exactly — Cervantes set Don Quixote in La Mancha. The wine name references the medieval knightly orders from the same region. Great literary connection.",
+                "That's the oak integration — it tames the fruit and adds structure. Tempranillo can be jammy when overripe, but this is well-balanced.",
+                "It's one of Spain's great contributions to the wine world. Even modest Tempranillo has real complexity and character. It's hard to make bad wine from this grape.",
+                "You can't go wrong. Tempranillo and cured Spanish meats have been a pairing for centuries. The earthy, savory notes in both are natural partners.",
+                "The time in oak rounds everything out. The tannins are there for structure but they're not aggressive. This is a crowd-pleaser."
+            ],
+            "Les Cousins L'Inconscient": [
+                "The French winemakers named it after Freud's concept — a wine that bypasses your rational defenses and hits you directly in the gut. Montsant wines do have a way of doing that.",
+                "Of course — and yes, this is one of the bigger wines on the list. Old-vine Grenache and Carignan from slate soils. It rewards patience — give it 10 minutes in the glass.",
+                "Montsant literally wraps around Priorat. Same llicorella slate, same extreme conditions. The main difference is prestige — and price. Many argue Montsant overdelivers for the cost.",
+                "Absolutely — it opens up dramatically with air. I can pour it now and let it breathe in the glass. It'll evolve beautifully over 20 minutes.",
+                "Grenache on slate soils almost always has that licorice character. Combined with Carignan's earthy spice, it creates the distinctive Priorat-Montsant signature.",
+                "Those two grapes have grown together in the south of France and Catalonia for centuries. They're complementary — Grenache gives richness and fruit, Carignan gives structure and spice.",
+                "Close — the Priorat edges it on intensity. But this holds its own. Old vines, extreme soils, careful winemaking. It's serious wine."
+            ],
+            "L.A. Cetto Cabernet Sauvignon": [
+                "Valle de Guadalupe is just south of Ensenada — same Mediterranean climate, same coastal influence as Napa. L.A. Cetto has been there since 1928 and makes some of Mexico's best wine.",
+                "About 90 minutes south of San Diego. Warm days, cool Pacific nights, great drainage. The terroir is genuinely similar to northern Baja's Californian neighbors.",
+                "That's Valle de Guadalupe — the climate is perfect for Cabernet, and the cost of production is lower than Napa. Genuinely great value.",
+                "The Mexican terroir adds something distinctive — a bit more savory, a bit more earthy. It's familiar enough to love but different enough to make you think.",
+                "Dark fruit and chocolate are classic Cabernet Sauvignon characteristics in warmer climates. The Valle de Guadalupe warmth gives the fruit full, lush ripeness.",
+                "They're pioneers. Italian immigrants established the winery and have been growing vines in Baja ever since. Very long history by New World standards.",
+                "That's the most common reaction. Valle de Guadalupe is a revelation for people who haven't encountered it. Spread the word."
+            ],
+            "Orsa Cabernet Sauvignon": [
+                "That's exactly what this is. Chilean Central Valley Cab — clean, fruit-forward, smooth. No drama, just good wine.",
+                "Chile's climate is perfectly suited for Cabernet — the Andes keep the nights cold, and the long sunny days ripen the fruit fully. Consistent quality at honest prices.",
+                "You've got a good palate — many Chilean Cabs do have that eucalyptus or mint character. It comes partly from cool nights and partly from the native trees that grow near the vineyards.",
+                "Chilean Cab leans into that style. Ripe dark fruit, polished tannins, easy to drink. Not the most complex wine on the list but it delivers exactly what it promises.",
+                "That's Chile doing what it does well — approachable, crowd-pleasing wine at a fair price. A workhorse in the best sense.",
+                "The diurnal shift is huge there — sometimes 40–50 degree temperature swings between day and night. That preserves the acid and keeps the fruit fresh even in a warm climate.",
+                "Absolutely works with chorizo — Cab and cured meat is a classic. The tannins cut the fat perfectly."
+            ],
+            "Rocca di Castagnoli Chianti Classico": [
+                "The Gallo Nero — Black Rooster — is the symbol of the Chianti Classico Consortium. If you see it on the bottle, it's the real deal from the historic zone between Florence and Siena.",
+                "Sangiovese is one of the most food-friendly grapes in the world. High acid, medium tannin — it practically demands a table full of food.",
+                "It's a medieval castle estate in Gaiole in Chianti — one of the original Chianti Classico communes. The land has been producing wine for over a thousand years.",
+                "Chianti Classico is the historic core between Florence and Siena — stricter regulations, higher minimum Sangiovese percentage, longer aging. Regular Chianti is broader and less regulated.",
+                "Dried herbs, leather, cherry, and tobacco are the hallmarks of good Chianti Classico. Savory and earthy in the best Tuscan tradition.",
+                "Rocca di Castagnoli makes accessible wine — not overwrought or extracted. This is Chianti the way it was meant to be: elegant, food-friendly, honest.",
+                "The local pairing instinct is always right. Pecorino Toscano and Chianti Classico are one of the great regional combinations. Go for it."
+            ],
+            "Palmeri Navalta Farnacha": [
+                "Old-vine Garnacha from high altitude actually ages very well — the concentration and structure hold it together for a long time. 2018 is just entering its prime.",
+                "Calatayud is one of Spain's hidden gems — very old vine Garnacha at 2,000 to 3,000 feet elevation. The combination produces wines of remarkable concentration and elegance.",
+                "Old vines produce fewer grapes but the fruit is more concentrated and the tannins more refined. Combined with careful oak aging, you get that velvet texture.",
+                "That's the altitude and old vines — fully ripe fruit has high natural sugar, which converts to high alcohol. But when the fruit concentration matches, it doesn't feel hot.",
+                "Ka-la-ta-YOOD. It's in Aragón, northeast Spain — one of the highest wine regions in the country. Dramatically under-the-radar for the quality.",
+                "High altitude plus extreme age of vines plus warm days — the flavor concentration is remarkable. This is a big, serious wine.",
+                "That is bold but it can work — the Gorgonzola's funk and creaminess against the Garnacha's power and fruit. If you're going to go big, go all the way."
+            ],
+            "Domaine Verquière Plan de Dieu": [
+                "The locals had a story about how the land was so fertile and sunny they called it God's plain. It's one of the named villages within Côtes du Rhône Villages, which means stricter standards.",
+                "Yes — Grenache, Syrah, Mourvèdre, the classic Rhône trio. Grenache is usually dominant, providing richness and fruit, with Syrah and Mourvèdre adding structure and spice.",
+                "It's one of the most evocative aromas in wine. Lavender, thyme, rosemary, wild herbs from the scrubland. It comes through in all the southern Rhône wines and tells you exactly where you are.",
+                "White pepper is actually Grenache's signature — more so than Syrah, which tends toward black pepper. It's a varietal characteristic from the grape itself.",
+                "Domaine Verquière is a serious producer — old family estate, sustainable farming, careful winemaking. They make wines with character but not brute force.",
+                "Villages appellation requires lower yields, higher minimum alcohol, and the grapes must come from specific named villages like Plan de Dieu. More concentration, more character.",
+                "That's the natural home of this wine. Rich, savory, herbal — it loves cured meat, cheese, olives. Southern France in a glass."
+            ],
+            "Cims de Porrera Vi de Vila Priorat": [
+                "Exactly — DOQ is Catalonia's version of the highest classification, shared only with Rioja in Spain. Priorat earned it based on the unique llicorella soil and extreme quality potential.",
+                "Lluís Llach — one of Catalonia's most important protest singers during the Franco era — co-founded the estate with Carles Pastrana of Clos de l'Obac. Culture and wine together.",
+                "Llicorella is decomposed slate and quartz — very poor soils that force the vines to dig deep. The mineral character you taste is real and direct. It's the most distinctive soil influence in Spain.",
+                "When the fruit concentration and the structure are this high, the alcohol integrates completely. You feel the body and warmth but there's no hot finish. That's great winemaking.",
+                "Priorat has adopted a Burgundy-style hierarchy: Vi de Finca, Vi de Paratge, Vi de Vila. It gives the wines context and identity within the appellation. Very thoughtful.",
+                "Heroic viticulture in the truest sense. No machinery can work those slopes. Every decision is made by hand. The yield is tiny and the effort is enormous. You taste all of that.",
+                "Please do — order a cheese plate and let it breathe. It evolves dramatically over the course of a glass. This is a wine for a long conversation."
+            ],
+            "François Montand Blanc de Blancs": [
+                "Same traditional method — secondary fermentation in the bottle, aged on the lees. The difference is geography: Champagne is a protected region. Crémant is the same method used elsewhere in France — different terroir, different grapes, similar process.",
+                "That's the traditional method at work — the CO2 is produced in the bottle during secondary fermentation, creating finer, more integrated bubbles than tank-method sparkling wines.",
+                "Blanc de Blancs means white wine from white grapes — so yes, all Chardonnay. Crisp, focused, more citrus-driven than a blend. Classic and elegant.",
+                "Yes — Vin Jaune is one of the most unusual wines in the world. Oxidized in a partial barrel for six years minimum, it tastes like a dry, nutty Sherry. Fascinating if you've never had it.",
+                "That's the dirty secret of Crémant. Same method, different address, fraction of the price. François Montand makes a very honest, high-quality Crémant du Jura.",
+                "That brioche comes from autolysis — the wine spending time on the dead yeast cells after secondary fermentation. The longer it sits, the more complex that toasty, bready character becomes.",
+                "Sparkling wine as an aperitif is one of the great traditions. Cleans the palate, lifts the mood, makes everything feel like an occasion."
+            ],
+            "L.A. Cetto Brut": [
+                "L.A. Cetto in Valle de Guadalupe, Baja California — same climate as their Cabernet. They make this Brut from Chenin Blanc and Colombard, traditional sparkling grapes. Very fresh, very different.",
+                "Both are naturally high-acid grapes — perfect for sparkling wine. Chenin gives the body and texture, Colombard the freshness and lift. It's an unusual but smart blend.",
+                "High-acid sparkling works with almost everything — the CO2 and acid act as palate cleansers. Especially great with anything salty, fatty, or fried.",
+                "L.A. Cetto is a full-service winery — they've been perfecting their range since 1928. It's remarkable that a single estate in Mexico produces both an excellent red and a sparkling wine.",
+                "Brut means the wine has very low residual sugar — typically less than 12 grams per liter. You'll taste fruit but it's dry. Brut is the most common sparkling style for good reason.",
+                "The terroir and winemaking quality speak for themselves. Once you know the climate there, it makes perfect sense. It's a serious wine region.",
+                "Perfect aperitivo wine. The Italians say never start a meal without bubbles — this is our Baja California answer to that tradition."
+            ],
+            "Tiamo Prosecco Split": [
+                "It's a great name for an organic Prosecco — simple, warm, fun. Very Italian. And yes, the wine delivers on the charm.",
+                "Splits are perfect when you want a glass of bubbles without committing to a full bottle. Fresh, festive, just enough.",
+                "Certified organic — no synthetic pesticides or fertilizers in the vineyard. Tiamo is one of the best-known organic Prosecco producers. The commitment to the land shows.",
+                "Prosecco is one of the most occasion-friendly wines in the world. It doesn't take itself too seriously and it makes everything feel a little more festive.",
+                "Prosecco is made by the Charmat method — secondary fermentation in a tank rather than a bottle. The bubbles are softer and less integrated. It's designed to be fresh and approachable, not complex.",
+                "Glera, the grape, naturally gives those fresh orchard fruit notes. This is a drier style with just enough fruit sweetness to balance.",
+                "I completely agree. There's something about the bubbles that signals the start of something good. It's celebratory without being over the top."
+            ]
+        };
+
+        var beerResponses = {
+            "Edmund's Oast Something Cold Blonde": [
+                "Edmund's Oast is one of our favorites — they're right up the road on Morrison Drive and they care deeply about the craft. Supporting them feels right.",
+                "Blonde ales are built for that — minimal bitterness, crisp finish, very drinkable. The 'Something Cold' name says it all.",
+                "Blonde ale is ale-fermented but designed to drink like a lager — clean, light, refreshing. Less complex than most ales, more character than most lagers.",
+                "One of the best restaurants in Charleston. If you haven't had dinner there, it's worth a visit. Their beer and food program is serious.",
+                "4.5% is a great sessionable ABV — you can have several over the course of an evening without it catching up to you. That's intentional with a beer called 'Something Cold.'",
+                "Perfect choice for starting out. It opens the palate without dominating anything. Great with our salty snacks too.",
+                "That's the malt character in a blonde ale — a little biscuity sweetness without any hop bitterness. It's designed to please a wide range of palates."
+            ],
+            "Citra Ass Down Double IPA": [
+                "Citra hops — hence the name. One of the most aromatic hops available, known for tropical and citrus character. The name is also a bit of a joke — it'll knock you down if you're not careful.",
+                "100% Citra hops — they have an incredibly intense tropical and citrus aroma. Even before you taste it, you're getting mango, passionfruit, grapefruit. It's entirely by design.",
+                "That's the craft of a well-made DIPA. The goal is to hide the alcohol behind flavor. Against the Grain does it well. Just pace yourself.",
+                "Many DIPAs are hop bombs with abrasive bitterness. This one has enough malt sweetness to balance the IBUs. Drinkable and approachable despite the strength.",
+                "Based in Louisville, Kentucky — literally inside a baseball stadium, which is a great detail. The name fits their approach: they do things their own way.",
+                "That's the new-school American IPA style — hop-forward tropical flavors instead of the aggressive pine-and-resin bitterness of older IPAs. Much more crowd-pleasing.",
+                "It's definitely the most expressive. If you're an IPA person, this is your beer. Just remember — 8.2% adds up quickly."
+            ],
+            "Shore Leave Lager": [
+                "Westbrook is great — they're right across the Cooper River in Mount Pleasant. Very solid brewery, consistent quality across their whole lineup.",
+                "Exactly the point. Shore Leave is a 'craft' take on the classic lager — clean, crisp, unpretentious. Lager done right is honestly harder than it looks.",
+                "Just across the Ravenel Bridge — about 10 minutes away. About as local as it gets for us.",
+                "That's what makes lagers so sessionable — the clean fermentation profile leaves no residual sweetness or heavy mouthfeel. Very refreshing.",
+                "Agreed — people who say they don't like craft beer usually mean they don't like aggressive IPAs or heavy stouts. A well-made lager is universally approachable.",
+                "At 4.9%, you could. That's the beauty of a well-made session beer — flavorful but not overwhelming.",
+                "Lager with food is underrated. The clean carbonation and dry finish reset the palate between bites beautifully."
+            ],
+            "Revelry Poke the Bear": [
+                "Revelry has been part of the Charleston craft scene for years — they're a staple on our list for a reason. And yes, brown ales are criminally underrated.",
+                "That's the crystal and chocolate malts doing their work. Brown ales are malt-forward by design — warm, toasty, a little sweet. Very comforting.",
+                "Classic brown ale profile — malt-dominant, minimal hop bitterness. If you want more in that direction, the Shore Leave is lighter or this for something richer.",
+                "There's definitely a cozy, seasonal quality to brown ales. The caramel and toast notes just evoke that feeling. Great any time of year though.",
+                "Just a touch of roast from the darker malts — not as prominent as a stout but enough to add complexity. A nice finishing note.",
+                "Brown ales are great food beers — the malt sweetness and caramel notes complement cured meats and cheeses beautifully. Better pairing than most people expect from beer.",
+                "Right in the sweet spot — enough alcohol to feel like a proper beer, sessionable enough to have with a meal over an evening."
+            ],
+            "Burial Surf Wax IPA": [
+                "Asheville is one of the best craft beer cities in the country — more breweries per capita than almost anywhere. Burial is one of the standouts. Their gothic branding matches their serious approach to quality.",
+                "That's the West Coast IPA style — very hop-forward aromatics, fresh pine and citrus. They don't hold back.",
+                "Exactly the difference. West Coast IPA is clearer, drier, with assertive bitterness and pine or citrus aromas. New England IPA is hazy, softer, tropical fruit, less bitterness. Very different philosophies.",
+                "West Coast IPA at its best. The balance between hop bitterness and the malt body is what makes it work — enough sweetness to balance the resin.",
+                "That dry finish is the West Coast calling card. The fermentation is pushed to dryness so the hops have nothing to hide behind. Clean and uncompromising.",
+                "Most IPAs sit between 6–7.5% for that reason. Strong enough to carry the hop character, not so strong it's a one-and-done.",
+                "Burial's artwork is genuinely striking — every beer gets a unique piece. It fits the Asheville counterculture vibe perfectly. Art and craft in equal measure."
+            ],
+            "Revelry Lefty Loosey IPA": [
+                "Almost certainly — it's the old mechanic's mnemonic: righty tighty, lefty loosey. The name has that casual, approachable energy that fits their style.",
+                "That smoothness comes from the hop selection — they're using varieties that emphasize citrus and tropical fruit over bitterness. Very modern IPA technique.",
+                "That's the balance Revelry is going for — approachable enough for people who are IPA-curious but still satisfying for hop heads. A nice middle ground.",
+                "It represents their house style well — well-balanced, local, approachable. A good ambassador for what they do.",
+                "Malt balance is the key to a drinkable IPA. Without enough malt backbone, hop bitterness becomes harsh. Revelry gets that right.",
+                "We like having local on the list for exactly that reason. Fresh beer from down the road just hits differently.",
+                "Perfect description of the approachable IPA sweet spot. Hop presence without aggression. That's the goal."
+            ],
+            "Blue Moon Belgian White (Non-Alcoholic)": [
+                "The technology for NA beer has gotten remarkably good. They use the same recipe and remove the alcohol through gentle vacuum distillation rather than just making weak beer.",
+                "In the US, anything under 0.5% is legally non-alcoholic. For reference, many ripe fruit juices and breads have similar trace alcohol levels. It's effectively zero.",
+                "Those are added flavorings, so they survive the alcohol removal process completely intact. The wheat character is there too — it's a very faithful reproduction.",
+                "That's exactly what a good NA option is for. You shouldn't have to choose between not drinking and having something enjoyable in hand.",
+                "We think the NA option should be as thoughtful as everything else on the list. Blue Moon NA is one of the better ones — recognizable and genuinely satisfying.",
+                "Wheat beers have a fuller mouthfeel naturally, and the malts hold up well after alcohol removal. Lighter-style NA beers can be thin, but this has real substance.",
+                "Fermented normally, then the alcohol is removed via dealcoholization — usually vacuum distillation or spinning cone technology. The flavor compounds mostly remain. Science in service of drinking."
+            ],
+            "Exner Spanish Cider": [
+                "Sidra Natural from Asturias is its own centuries-old tradition — very different from commercial American cider or British cider. It's wild-fermented, unfiltered, with just a little natural CO2.",
+                "Wild fermentation with indigenous yeasts — no inoculation, no filtration. The funkiness comes from those wild yeasts and the natural oxidation during the escanciado pour. Very intentional.",
+                "That combination is what sidra is all about. The wild yeasts produce lactic acid and earthy, barnyard notes alongside the apple. It's an acquired taste that rewards curiosity.",
+                "The escanciado — pouring from above the head — aerates the cider and activates the CO2. It also looks incredible. We can give it a try if you want the full experience.",
+                "Sidra Natural is fermented completely dry — all the sugar converts to alcohol. Very different from American commercial cider which is typically sweetened. Much more wine-like.",
+                "Most people haven't had it. Sidra Natural barely exists outside of Asturias and Basque Country. We're proud to have it on the list — it's a genuine tradition.",
+                "Great with cheese — especially aged, funky cheeses like Manchego or blue. Also excellent with anything salty or briny. The acidity and funkiness cut through richness beautifully."
             ]
         };
 
@@ -11766,9 +12187,16 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
                     html += '<span class="gc-item-name">' + item.name + '</span></div>';
                     html += '<span class="gc-arrow">▶</span>';
                     html += '</div>';
+                    var responses = sec.isWine ? (wineResponses[item.name] || []) : (beerResponses[item.name] || []);
                     html += '<div class="gc-comments">';
-                    comments.forEach(function(c) {
+                    comments.forEach(function(c, i) {
+                        var resp = responses[i] || null;
+                        html += '<div class="gc-comment-pair">';
                         html += '<div class="gc-comment"><span class="gc-comment-icon">💬</span><span class="gc-comment-text">' + c + '</span></div>';
+                        if (resp) {
+                            html += '<div class="gc-response"><span class="gc-response-icon">🍷</span><span class="gc-response-text">' + resp + '</span></div>';
+                        }
+                        html += '</div>';
                     });
                     html += '</div></div>';
                 });
@@ -11893,7 +12321,6 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
         });
     </script>
     <!-- Cyberpunk mode elements (hidden until cyberpunk unlocked) -->
-    <div id="cp-banner">// ARDOA_OS v2.0 — CYBERPUNK MODE ACTIVE — WINE DATABASE DECRYPTED — ALL SYSTEMS NOMINAL //</div>
     <canvas id="cp-matrix"></canvas>
 
     <!-- BFT Audio Controls (shown during game) -->
