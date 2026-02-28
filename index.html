@@ -5526,6 +5526,18 @@
             border-color: var(--cp-c) !important; box-shadow: 0 0 8px rgba(0,245,255,0.2) !important;
         }
 
+        /* WINE ARCHIVE */
+        html.cyberpunk .archive-card { background: var(--cp-bg2) !important; border-color: var(--cp-bd) !important; border-left-color: var(--cp-t2) !important; }
+        html.cyberpunk .archive-card-header { background: var(--cp-bg3) !important; border-bottom-color: var(--cp-bd) !important; }
+        html.cyberpunk .archive-card-name { color: var(--cp-t2) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .archive-card-meta { color: var(--cp-t2) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .archive-badge { background: var(--cp-bg3) !important; color: var(--cp-t2) !important; border: 1px solid var(--cp-bd) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .archive-replaced-by { color: var(--cp-g) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .archive-detail-label { color: var(--cp-c) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .archive-detail-value { color: var(--cp-t) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .archive-tasting { background: var(--cp-bg3) !important; border-left-color: var(--cp-t2) !important; color: var(--cp-t) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .archive-notes { color: var(--cp-t2) !important; font-family: var(--cp-font) !important; }
+
         /* GUEST COMMENTS */
         html.cyberpunk .gc-intro h2 { color: var(--cp-c) !important; }
         html.cyberpunk .gc-intro p  { color: var(--cp-t2) !important; }
@@ -5668,6 +5680,126 @@
         @media (max-width: 480px) {
             .qdesc-grid { grid-template-columns: 1fr; }
         }
+
+        /* ============================================================
+           WINE ARCHIVE SECTION
+           ============================================================ */
+        #winearchive { padding: 2rem 0 3rem; }
+        .wine-archive-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 1.25rem;
+        }
+        .archive-card {
+            background: #f5f0ea;
+            border: 1px solid #d4c8b8;
+            border-left: 4px solid #8a7060;
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+            user-select: none;
+        }
+        .archive-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1rem 1.2rem;
+            background: #ede7de;
+            border-bottom: 1px solid #d4c8b8;
+        }
+        .archive-card-title-block { flex: 1; }
+        .archive-card-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.05rem;
+            color: #3a2a1a;
+            margin: 0 0 0.2rem 0;
+        }
+        .archive-card-meta {
+            font-size: 0.82rem;
+            color: #7a6a5a;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .archive-badge {
+            display: inline-block;
+            background: #8a7060;
+            color: #f5f0ea;
+            font-size: 0.72rem;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.05em;
+            padding: 0.15rem 0.55rem;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+        .archive-replaced-by {
+            font-size: 0.8rem;
+            color: #5a7040;
+            font-style: italic;
+            margin-top: 0.2rem;
+        }
+        .archive-arrow {
+            color: #8a7060;
+            font-size: 0.8rem;
+            transition: transform 0.2s;
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+        }
+        .archive-card.open .archive-arrow { transform: rotate(90deg); }
+        .archive-card-body {
+            display: none;
+            padding: 1rem 1.2rem;
+        }
+        .archive-card.open .archive-card-body { display: block; }
+        .archive-detail-row {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+        .archive-detail-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            color: #7a6a5a;
+            min-width: 90px;
+            padding-top: 0.05rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .archive-detail-value { color: #2a2018; flex: 1; }
+        .archive-tasting {
+            margin: 0 0 0.75rem 0;
+            padding: 0.6rem 0.9rem;
+            background: #ede7de;
+            border-left: 3px solid #8a7060;
+            font-style: italic;
+            font-size: 0.875rem;
+            color: #3a2a1a;
+            border-radius: 0 3px 3px 0;
+        }
+        .archive-notes {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            color: #4a3a2a;
+            line-height: 1.6;
+        }
+        [data-theme="dark"] .archive-card { background: #16100c; border-color: #3a2e24; border-left-color: #6a5848; }
+        [data-theme="dark"] .archive-card-header { background: #1e1812; border-bottom-color: #3a2e24; }
+        [data-theme="dark"] .archive-card-name { color: #c4a875; }
+        [data-theme="dark"] .archive-card-meta { color: #8a7a6a; }
+        [data-theme="dark"] .archive-badge { background: #6a5848; color: #c4a875; }
+        [data-theme="dark"] .archive-replaced-by { color: #7a9a60; }
+        [data-theme="dark"] .archive-arrow { color: #8a7060; }
+        [data-theme="dark"] .archive-detail-label { color: #8a7a6a; }
+        [data-theme="dark"] .archive-detail-value { color: #c8c0b4; }
+        [data-theme="dark"] .archive-tasting { background: #1e1812; border-left-color: #6a5848; color: #c4a875; }
+        [data-theme="dark"] .archive-notes { color: #a09080; }
 
         /* ============================================================
            GUEST COMMENTS SECTION
@@ -5862,6 +5994,7 @@
         <a href="#foodpairings" onclick="navigateToSection('foodpairings', this, event)">Food Pairings</a>
         <a href="#varietals" onclick="navigateToSection('varietals', this, event)">Wine Varietals</a>
         <a href="#timeclock" onclick="navigateToSection('timeclock', this, event)">Time Clock</a>
+        <a href="#winearchive" onclick="navigateToSection('winearchive', this, event)">Wine Archive</a>
     </nav>
 
     <main>
@@ -7090,6 +7223,15 @@
             </div>
         </section>
 
+        <!-- Wine Archive Section -->
+        <section id="winearchive">
+            <div class="section-header" style="max-width:820px;margin:0 auto 1.5rem;padding:0 1.25rem;text-align:center;">
+                <h2 style="font-family:'Cinzel',serif;color:#6a5040;font-size:1.8rem;margin-bottom:0.5rem;">Wine Archive</h2>
+                <p style="color:#7a6a5a;font-size:0.95rem;">Wines previously on the Enomatic list — removed from rotation but preserved for reference. Some may return.</p>
+            </div>
+            <div id="wineArchiveList" class="wine-archive-list"></div>
+        </section>
+
     </main>
 
     <footer>
@@ -7548,27 +7690,27 @@
             },
             // Position 19
             {
-                name: "L.A. Cetto",
-                vintage: "2022",
+                name: "Long Valley Ranch",
+                vintage: "2023",
                 type: "red",
                 grape: "100% Cabernet Sauvignon",
-                grapeDetail: "Cabernet Sauvignon thrives in Valle de Guadalupe's warm, Mediterranean-like climate. Mexico's premier wine region produces rich, fruit-forward Cabernet with Old World structure.",
-                region: "Valle de Guadalupe, Baja California",
-                appellation: "Valle de Guadalupe DO",
-                country: "Mexico",
-                winemaker: "L.A. Cetto - Mexico's largest and most internationally acclaimed winery, founded in 1928 by Italian immigrant Angelo Cetto in Valle de Guadalupe. Now in its third generation, L.A. Cetto has won hundreds of medals at international competitions and is widely credited with putting Mexican wine on the world map. The family pioneered quality winemaking in Baja California, importing French varietals and European techniques while embracing the unique Valle de Guadalupe terroir—Mediterranean climate, Pacific Ocean breezes, and mineral-rich soils just 70 miles south of San Diego.",
-                tasting: "Dark blackcurrant, ripe plum, cedar, hints of dark chocolate and tobacco. Medium to full body with firm but polished tannins and a long, satisfying finish.",
-                food: "Chorizo, Manchego, Ewephoria, Salchichon De Bellota, The Mighty Spicy flatbread",
+                grapeDetail: "Cabernet Sauvignon from Monterey County's warm inland valleys — estate-grown fruit with the structure and freshness that California's Central Coast climate produces so naturally.",
+                region: "Monterey County, California",
+                appellation: "Monterey County AVA",
+                country: "USA",
+                winemaker: "Long Valley Ranch — An estate vineyard producer in Monterey County, California's largest wine-producing county by acreage. Monterey sits along the Central Coast between San Francisco and Los Angeles, where the Salinas Valley channels cool Pacific air inland, moderating temperatures even in the warmest growing zones. Long Valley Ranch's estate vineyards in the warmer southern reaches of the county yield ripe, structured Cabernet Sauvignon with characteristic Central Coast freshness — California fruit richness with a cool-climate edge.",
+                tasting: "Dark cherry, ripe blackcurrant, cassis, hints of cedar and dried herbs. Medium to full body with smooth, well-integrated tannins and a clean, food-friendly finish.",
+                food: "Chorizo, Manchego, Ewephoria, Red Wine Cheddar, The Mighty Spicy flatbread",
                 foodPairings: [
-                    { item: "Chorizo", why: "Smoky paprika spice meets the wine's dark fruit and firm structure—bold on bold" },
-                    { item: "Manchego", why: "Nutty sheep cheese softens the tannins while complementing the wine's dark fruit" },
-                    { item: "Ewephoria", why: "Caramelized butterscotch notes balance the wine's firm structure and warm finish" },
-                    { item: "Salchichon De Bellota", why: "Rich Ibérico pork fat softens tannins; spice echoes the wine's warm finish" },
-                    { item: "The Mighty Spicy flatbread", why: "Bold wine matches bold flavors—the dark fruit tempers the heat from chorizo and spicy cheddar" }
+                    { item: "Chorizo", why: "Smoky paprika and dark fruit is a natural pairing — the wine's structure handles the richness" },
+                    { item: "Manchego", why: "Nutty sheep's milk cheese softens the tannins and echoes the wine's warm, ripe character" },
+                    { item: "Ewephoria", why: "Caramelized butterscotch notes balance the Cabernet's structure and dark fruit" },
+                    { item: "Red Wine Cheddar", why: "Wine-infused cheese creates harmony with the Cabernet's cassis and cedar character" },
+                    { item: "The Mighty Spicy flatbread", why: "Bold, spicy flavors stand up to this medium-full bodied wine" }
                 ],
                 alcohol: "13.5%",
                 serving: "Room temperature (62-65°F / 17-18°C)",
-                notes: "Valle de Guadalupe is Mexico's premier wine region, located in Baja California just 70 miles south of San Diego. With a Mediterranean climate nearly identical to Southern France, it's ideal for Cabernet Sauvignon. L.A. Cetto was founded in 1928—nearly a century of winemaking history—making it one of Mexico's oldest and most storied producers. The winery helped prove that Mexico could produce world-class wines at a time when most dismissed the country as a wine region. Today, Valle de Guadalupe is increasingly recognized internationally for quality wines at excellent value."
+                notes: "Monterey County is California's largest wine-producing county by acreage — a sprawling Central Coast region stretching from Salinas in the north to Paso Robles in the south. The Salinas Valley is famous for its 'wind tunnel' effect: cool Pacific air funnels inland every afternoon, keeping temperatures 20–30 degrees cooler than the Central Valley even on hot days. This diurnal shift — warm mornings, cool afternoons and nights — gives Monterey wines natural freshness and acidity even in ripe varieties like Cabernet Sauvignon. Long Valley Ranch's estate fruit benefits from this climate, producing a Cab that's ripe and approachable without sacrificing structure or food-friendliness."
             },
             // Position 20
             {
@@ -7786,6 +7928,38 @@
             }
         ];
 
+        // ============================================================
+        // ARCHIVED WINES — Wines removed from the Enomatic rotation
+        // These may return to the menu in the future.
+        // ============================================================
+        const archivedWines = [
+            {
+                name: "L.A. Cetto",
+                vintage: "2022",
+                type: "red",
+                grape: "100% Cabernet Sauvignon",
+                grapeDetail: "Cabernet Sauvignon thrives in Valle de Guadalupe's warm, Mediterranean-like climate. Mexico's premier wine region produces rich, fruit-forward Cabernet with Old World structure.",
+                region: "Valle de Guadalupe, Baja California",
+                appellation: "Valle de Guadalupe DO",
+                country: "Mexico",
+                winemaker: "L.A. Cetto - Mexico's largest and most internationally acclaimed winery, founded in 1928 by Italian immigrant Angelo Cetto in Valle de Guadalupe. Now in its third generation, L.A. Cetto has won hundreds of medals at international competitions and is widely credited with putting Mexican wine on the world map. The family pioneered quality winemaking in Baja California, importing French varietals and European techniques while embracing the unique Valle de Guadalupe terroir—Mediterranean climate, Pacific Ocean breezes, and mineral-rich soils just 70 miles south of San Diego.",
+                tasting: "Dark blackcurrant, ripe plum, cedar, hints of dark chocolate and tobacco. Medium to full body with firm but polished tannins and a long, satisfying finish.",
+                food: "Chorizo, Manchego, Ewephoria, Salchichon De Bellota, The Mighty Spicy flatbread",
+                foodPairings: [
+                    { item: "Chorizo", why: "Smoky paprika spice meets the wine's dark fruit and firm structure—bold on bold" },
+                    { item: "Manchego", why: "Nutty sheep cheese softens the tannins while complementing the wine's dark fruit" },
+                    { item: "Ewephoria", why: "Caramelized butterscotch notes balance the wine's firm structure and warm finish" },
+                    { item: "Salchichon De Bellota", why: "Rich Ibérico pork fat softens tannins; spice echoes the wine's warm finish" },
+                    { item: "The Mighty Spicy flatbread", why: "Bold wine matches bold flavors—the dark fruit tempers the heat from chorizo and spicy cheddar" }
+                ],
+                alcohol: "13.5%",
+                serving: "Room temperature (62-65°F / 17-18°C)",
+                notes: "Valle de Guadalupe is Mexico's premier wine region, located in Baja California just 70 miles south of San Diego. With a Mediterranean climate nearly identical to Southern France, it's ideal for Cabernet Sauvignon. L.A. Cetto was founded in 1928—nearly a century of winemaking history—making it one of Mexico's oldest and most storied producers. The winery helped prove that Mexico could produce world-class wines at a time when most dismissed the country as a wine region. Today, Valle de Guadalupe is increasingly recognized internationally for quality wines at excellent value.",
+                archivedDate: "February 2026",
+                replacedBy: "Long Valley Ranch"
+            }
+        ];
+
         // Beer Data
         const beers = [
             {
@@ -7901,6 +8075,7 @@
             "Encomienda de Cervera Horten": "Spain's signature grape from the vast Castilla-La Mancha plateau, where extremes of heat and cold naturally concentrate flavors — this Tempranillo brings red cherry, plum, leather, and vanilla with a smooth, satisfying finish. Classic, reliable, and the perfect introduction to the world of Spanish red wine.",
             "Les Cousins L'Inconscient": "Dark, powerful, and made from the gut rather than the spreadsheet — this bold Montsant blend of Grenache, Carignan, and Cabernet Sauvignon brings blackberry, Mediterranean herbs, slate mineral, and licorice from old vines on extreme slopes. Decant it, let it breathe, and prepare to be genuinely impressed.",
             "L.A. Cetto": "Mexico's most storied winery has been perfecting Cabernet Sauvignon in Baja California's Valle de Guadalupe since 1928, and this bottle proves they've mastered it — dark blackcurrant, cedar, dark chocolate, and polished tannins with a long, satisfying finish. A proud cultural ambassador and a genuine conversation starter.",
+            "Long Valley Ranch": "From Monterey County's estate vineyards — California's largest wine-producing county — this 2023 Cabernet Sauvignon delivers dark cherry, ripe blackcurrant, and cassis with smooth, well-integrated tannins and a clean, food-friendly finish. The Salinas Valley's cool Pacific breezes give this Central Coast Cab a freshness and structure that sets it apart.",
             "Orsa": "From Mendocino County, California's northernmost premium wine region, this Cabernet delivers ripe blackcurrant and dark cherry with smooth, polished tannins and a cedar-edged finish. Warm inland valleys and clean north coast air produce a Cab that's approachable and food-friendly without sacrificing structure.",
             "Rocca di Castagnoli Chianti Classico": "From a 10th-century fortress estate in the historic heart of Tuscany's Chianti Classico zone, this Sangiovese-dominant wine delivers red cherry, dried oregano, leather, and firm acidity in the proudly Italian way. The Black Rooster seal is a promise of authenticity — this is Tuscany in a glass.",
             "Palmeri Navalta Farnacha": "Old-vine Garnacha grown at 800–1,000 meters in the mountainous Calatayud region of Aragón, where extreme altitude and a superb 2018 vintage combined to produce something truly special — dark fruit, ripe spice, mineral depth, and velvety tannins. Powerful, complex, and one of Spain's most exciting hidden gems.",
@@ -8085,6 +8260,15 @@
                 "I love the dark chocolate note in the finish.",
                 "L.A. Cetto has been around since 1928? That's older than most California wineries.",
                 "This changes how I think about Mexican wine. I had no idea."
+            ],
+            "Long Valley Ranch": [
+                "Monterey County — I didn't realize they made Cabernet there. Isn't it mostly Pinot Noir country?",
+                "Estate vineyards — does that mean they grow their own grapes on the same property?",
+                "Dark cherry, ripe blackcurrant — this is a really solid Cab. Nice and smooth.",
+                "It's got that California fruit richness but there's something a little fresher about it than most Cabs I've had.",
+                "Is this a good wine to pair with the chorizo? I'm trying to decide.",
+                "Monterey is the largest wine county in California? I never would have guessed that.",
+                "2023 is a really young vintage — is this ready to drink or should I be thinking about aging it?"
             ],
             "Orsa": [
                 "I just want a good Cab — easy, reliable, nothing crazy.",
@@ -8411,6 +8595,15 @@
                 "Dark fruit and chocolate are classic Cabernet Sauvignon characteristics in warmer climates. The Valle de Guadalupe warmth gives the fruit full, lush ripeness.",
                 "They're pioneers. Italian immigrants established the winery and have been growing vines in Baja ever since. Very long history by New World standards.",
                 "That's the most common reaction. Valle de Guadalupe is a revelation for people who haven't encountered it. Spread the word."
+            ],
+            "Long Valley Ranch": [
+                "Great question — Monterey County is actually California's largest wine-producing county by acreage. It's most famous for Pinot Noir and Chardonnay in the cooler northern zones, but the warmer southern valleys grow excellent Cabernet Sauvignon.",
+                "Exactly right — estate means they own the vines and the winery on the same property. It gives them control over the whole process from grape to glass, and you often see that consistency in the wine.",
+                "Monterey Cabernet tends to have that California ripeness but with a bit more freshness than Napa — the Salinas Valley channels Pacific air inland all afternoon, which keeps the temperatures moderate even on warm days.",
+                "That freshness is the Salinas Valley 'wind tunnel' effect — cool Pacific air funnels inland every afternoon, dropping temperatures 20–30 degrees by evening. It preserves the acidity and gives the wine that clean, structured finish.",
+                "Absolutely — Cab and chorizo is one of the great pairings. The tannins cut right through the fat and the dark fruit plays beautifully with the smoky paprika.",
+                "It is — California's largest by acreage but much of it is sold to blenders from other regions. Estate wines like this that stay in the county and focus on quality are worth seeking out.",
+                "2023 is young but drinking well now — Monterey Cabernet is built for food and approachability. If you want to age it a few years it'll develop beautifully, but there's no reason to wait."
             ],
             "Orsa": [
                 "That's exactly what this is. Mendocino County Cab — clean, fruit-forward, smooth. No drama, just good wine.",
@@ -12308,6 +12501,56 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
             forceRepaint(body);
         }
 
+        // ============================================================
+        // RENDER: Wine Archive
+        // ============================================================
+        function renderWineArchive() {
+            var list = document.getElementById('wineArchiveList');
+            if (!list) return;
+            if (!archivedWines || !archivedWines.length) {
+                list.innerHTML = '<p style="text-align:center;color:#8a7060;padding:2rem;font-style:italic;">No archived wines yet.</p>';
+                return;
+            }
+            var html = '';
+            archivedWines.forEach(function(w) {
+                html += '<div class="archive-card" onclick="this.classList.toggle(\'open\')">';
+                html += '<div class="archive-card-header">';
+                html += '<div class="archive-card-title-block">';
+                html += '<div class="archive-card-name">' + w.name + ' <span style="font-weight:normal;font-size:0.88rem;">' + w.vintage + '</span></div>';
+                html += '<div class="archive-card-meta">';
+                html += '<span class="archive-badge">Archived</span>';
+                html += '<span>' + w.grape + '</span>';
+                html += '<span>&middot;</span><span>' + w.region + '</span>';
+                if (w.archivedDate) html += '<span>&middot;</span><span>' + w.archivedDate + '</span>';
+                html += '</div>';
+                if (w.replacedBy) html += '<div class="archive-replaced-by">Replaced by: ' + w.replacedBy + '</div>';
+                html += '</div>';
+                html += '<span class="archive-arrow">&#9654;</span>';
+                html += '</div>';
+                html += '<div class="archive-card-body">';
+                html += '<div class="archive-tasting">' + w.tasting + '</div>';
+                var details = [
+                    ['Country', w.country],
+                    ['Appellation', w.appellation],
+                    ['Alcohol', w.alcohol],
+                    ['Serving', w.serving],
+                    ['Food', w.food],
+                ];
+                details.forEach(function(d) {
+                    if (!d[1]) return;
+                    html += '<div class="archive-detail-row">';
+                    html += '<span class="archive-detail-label">' + d[0] + '</span>';
+                    html += '<span class="archive-detail-value">' + d[1] + '</span>';
+                    html += '</div>';
+                });
+                html += '<div class="archive-detail-row"><span class="archive-detail-label">Producer</span><span class="archive-detail-value">' + w.winemaker + '</span></div>';
+                if (w.notes) html += '<div class="archive-notes">' + w.notes + '</div>';
+                html += '</div></div>';
+            });
+            list.innerHTML = html;
+            forceRepaint(list);
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             try {
                 initTheme();
@@ -12327,6 +12570,7 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
                 renderQuickDescs();
                 renderGuestComments();
                 renderRecommendations();
+                renderWineArchive();
 
                 // Easter egg: click "Ardoa" title 5× within 3 s → Brute Force Trainer
                 (function() {
