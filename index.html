@@ -5682,6 +5682,153 @@
         }
 
         /* ============================================================
+           TECH SHEETS SECTION
+           ============================================================ */
+        #sheets { padding: 2rem 0 3rem; }
+        .ts-intro { max-width: 820px; margin: 0 auto 2rem; padding: 0 1.25rem; text-align: center; }
+        .ts-intro h2 { font-family: 'Cinzel', serif; color: #4a1a28; font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .ts-intro p { color: #555; font-size: 0.95rem; }
+
+        .ts-gallery { display: flex; flex-direction: column; gap: 1rem; max-width: 820px; margin: 0 auto; padding: 0 1.25rem; }
+        .ts-gallery-card {
+            background: #fdfaf7; border: 1px solid #ddd5c8;
+            border-left: 4px solid #6b1c2e;
+            border-radius: 6px; overflow: hidden;
+            display: flex; align-items: center; gap: 1.25rem; padding: 1rem 1.25rem;
+        }
+        .ts-gallery-thumb-wrap { flex-shrink: 0; cursor: pointer; }
+        .ts-gallery-thumb {
+            width: 72px; height: 92px; object-fit: cover; border-radius: 3px;
+            border: 1px solid #ddd5c8; display: block;
+        }
+        .ts-thumb-placeholder {
+            width: 72px; height: 92px; background: #ede7de; border: 1px solid #d4c8b8;
+            border-radius: 3px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; color: #8a7060;
+        }
+        .ts-gallery-info { flex: 1; min-width: 0; }
+        .ts-gallery-name { font-family: 'Cinzel', serif; font-size: 1rem; color: #4a1a28; margin-bottom: 0.2rem; }
+        .ts-gallery-vintage { font-size: 0.82rem; color: #6b1c2e; font-weight: 600; }
+        .ts-gallery-meta { font-size: 0.82rem; color: #7a6a5a; margin-bottom: 0.8rem; }
+        .ts-view-btn {
+            display: inline-flex; align-items: center; gap: 0.35rem;
+            padding: 0.42rem 0.9rem; background: #4a1a28; color: #e8e4dc;
+            border: none; border-radius: 3px; font-size: 0.78rem; font-family: 'Cinzel', serif;
+            cursor: pointer; text-transform: uppercase; letter-spacing: 0.06em;
+        }
+        .ts-view-btn:hover { background: #6b1c2e; }
+        .ts-empty { text-align: center; color: #8a7060; font-style: italic; padding: 2rem; }
+
+        /* Wine card tech sheet button */
+        .wine-card-footer {
+            padding: 0.6rem 1rem; background: #f5f0ea;
+            border-top: 1px solid #e0d8ce;
+        }
+        .ts-card-btn {
+            font-size: 0.75rem; color: #6b1c2e; background: none;
+            border: 1px solid #c4a875; border-radius: 3px;
+            padding: 0.22rem 0.7rem; cursor: pointer;
+            font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 0.04em;
+        }
+        .ts-card-btn:hover { background: #6b1c2e; color: #e8e4dc; border-color: #6b1c2e; }
+
+        /* Tech sheet modal/lightbox */
+        .ts-modal-overlay {
+            display: none; position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0; z-index: 9000;
+            background: rgba(0,0,0,0.87); overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .ts-modal-overlay.open { display: block; }
+        .ts-modal {
+            background: #fdfaf7; max-width: 820px; margin: 1.5rem auto 3rem;
+            border-radius: 6px; overflow: hidden;
+        }
+        .ts-modal-header {
+            display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+            padding: 1rem 1.25rem; background: #ede7de; border-bottom: 1px solid #d4c8b8;
+            position: sticky; top: 0; z-index: 1;
+        }
+        .ts-modal-title { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #4a1a28; margin: 0 0 0.15rem; }
+        .ts-modal-subtitle { font-size: 0.82rem; color: #7a6a5a; }
+        .ts-modal-close {
+            background: none; border: none; font-size: 1.6rem; cursor: pointer;
+            color: #4a1a28; line-height: 1; padding: 0 0.25rem; flex-shrink: 0;
+        }
+        .ts-modal-close:hover { color: #6b1c2e; }
+        .ts-modal-image-wrap { padding: 1rem 1.25rem 0.5rem; }
+        .ts-modal-image { width: 100%; height: auto; display: block; border: 1px solid #d4c8b8; border-radius: 3px; }
+        .ts-modal-img-placeholder {
+            width: 100%; min-height: 300px; background: #f0ebe4; border: 1px dashed #c4a875;
+            border-radius: 3px; display: flex; align-items: center; justify-content: center;
+            text-align: center; color: #8a7060; font-style: italic; font-size: 0.9rem;
+            padding: 2rem;
+        }
+        .ts-modal-summary { padding: 1rem 1.25rem 1.5rem; }
+        .ts-summary-divider {
+            display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;
+            font-family: 'Cinzel', serif; font-size: 0.75rem; color: #6b1c2e;
+            text-transform: uppercase; letter-spacing: 0.1em;
+        }
+        .ts-summary-divider-line { flex: 1; height: 1px; background: #d4c8b8; }
+        .ts-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.65rem; margin-bottom: 1.25rem; }
+        .ts-stat { background: #f5f0ea; border: 1px solid #d4c8b8; border-radius: 4px; padding: 0.6rem 0.85rem; }
+        .ts-stat-label { font-family: 'Cinzel', serif; font-size: 0.68rem; color: #7a6a5a; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.2rem; }
+        .ts-stat-value { font-size: 0.9rem; color: #2a1a0a; font-weight: 600; }
+        .ts-summary-text { font-size: 0.88rem; color: #3a2a1a; line-height: 1.75; }
+
+        /* Dark mode */
+        [data-theme="dark"] .ts-intro h2 { color: #c4a875; }
+        [data-theme="dark"] .ts-intro p { color: #a09080; }
+        [data-theme="dark"] .ts-gallery-card { background: #16100c; border-color: #3a2e24; border-left-color: #6b1c2e; }
+        [data-theme="dark"] .ts-gallery-name { color: #c4a875; }
+        [data-theme="dark"] .ts-gallery-vintage { color: #a04060; }
+        [data-theme="dark"] .ts-gallery-meta { color: #8a7a6a; }
+        [data-theme="dark"] .ts-gallery-thumb { border-color: #3a2e24; }
+        [data-theme="dark"] .ts-thumb-placeholder { background: #1e1812; border-color: #3a2e24; color: #6a5848; }
+        [data-theme="dark"] .ts-view-btn { background: #6b1c2e; color: #c4a875; }
+        [data-theme="dark"] .ts-view-btn:hover { background: #8a2040; }
+        [data-theme="dark"] .wine-card-footer { background: #120818; border-top-color: #2a1830; }
+        [data-theme="dark"] .ts-card-btn { color: #c4a875; border-color: #4a3828; }
+        [data-theme="dark"] .ts-card-btn:hover { background: #6b1c2e; color: #e8e4dc; border-color: #6b1c2e; }
+        [data-theme="dark"] .ts-modal { background: #16100c; }
+        [data-theme="dark"] .ts-modal-header { background: #1e1812; border-bottom-color: #3a2e24; }
+        [data-theme="dark"] .ts-modal-title { color: #c4a875; }
+        [data-theme="dark"] .ts-modal-subtitle { color: #8a7a6a; }
+        [data-theme="dark"] .ts-modal-close { color: #c4a875; }
+        [data-theme="dark"] .ts-modal-image { border-color: #3a2e24; }
+        [data-theme="dark"] .ts-modal-img-placeholder { background: #1e1812; border-color: #4a3828; color: #6a5848; }
+        [data-theme="dark"] .ts-summary-divider { color: #a04060; }
+        [data-theme="dark"] .ts-summary-divider-line { background: #3a2e24; }
+        [data-theme="dark"] .ts-stat { background: #1e1812; border-color: #3a2e24; }
+        [data-theme="dark"] .ts-stat-label { color: #8a7a6a; }
+        [data-theme="dark"] .ts-stat-value { color: #c4a875; }
+        [data-theme="dark"] .ts-summary-text { color: #c8c0b4; }
+
+        /* Cyberpunk overrides */
+        html.cyberpunk #sheets .ts-intro h2 { color: var(--cp-c) !important; text-shadow: 0 0 10px var(--cp-c) !important; }
+        html.cyberpunk #sheets .ts-intro p { color: var(--cp-t2) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .ts-gallery-card { background: var(--cp-bg2) !important; border-color: var(--cp-bd) !important; border-left-color: var(--cp-m) !important; }
+        html.cyberpunk .ts-gallery-name { color: var(--cp-c) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .ts-gallery-vintage { color: var(--cp-m) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .ts-gallery-meta { color: var(--cp-t2) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .ts-view-btn { background: var(--cp-bg3) !important; color: var(--cp-c) !important; border: 1px solid var(--cp-c) !important; font-family: var(--cp-font) !important; box-shadow: 0 0 8px rgba(0,245,255,0.2) !important; }
+        html.cyberpunk .wine-card-footer { background: var(--cp-bg2) !important; border-top-color: var(--cp-bd) !important; }
+        html.cyberpunk .ts-card-btn { color: var(--cp-c) !important; border-color: var(--cp-bd) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .ts-card-btn:hover { background: var(--cp-bg3) !important; border-color: var(--cp-c) !important; }
+        html.cyberpunk .ts-modal { background: var(--cp-bg2) !important; }
+        html.cyberpunk .ts-modal-header { background: var(--cp-bg3) !important; border-bottom-color: var(--cp-bd) !important; }
+        html.cyberpunk .ts-modal-title { color: var(--cp-c) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .ts-modal-subtitle { color: var(--cp-t2) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .ts-modal-close { color: var(--cp-c) !important; }
+        html.cyberpunk .ts-summary-divider { color: var(--cp-m) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .ts-summary-divider-line { background: var(--cp-bd) !important; }
+        html.cyberpunk .ts-stat { background: var(--cp-bg3) !important; border-color: var(--cp-bd) !important; }
+        html.cyberpunk .ts-stat-label { color: var(--cp-c) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .ts-stat-value { color: var(--cp-t) !important; font-family: var(--cp-font) !important; }
+        html.cyberpunk .ts-summary-text { color: var(--cp-t2) !important; font-family: var(--cp-font) !important; }
+
+        /* ============================================================
            WINE ARCHIVE SECTION
            ============================================================ */
         #winearchive { padding: 2rem 0 3rem; }
@@ -5995,6 +6142,7 @@
         <a href="#varietals" onclick="navigateToSection('varietals', this, event)">Wine Varietals</a>
         <a href="#timeclock" onclick="navigateToSection('timeclock', this, event)">Time Clock</a>
         <a href="#winearchive" onclick="navigateToSection('winearchive', this, event)">Wine Archive</a>
+        <a href="#sheets" onclick="navigateToSection('sheets', this, event)">Tech Sheets</a>
     </nav>
 
     <main>
@@ -7232,7 +7380,33 @@
             <div id="wineArchiveList" class="wine-archive-list"></div>
         </section>
 
+        <!-- Tech Sheets Section -->
+        <section id="sheets">
+            <div class="ts-intro">
+                <h2>Producer Tech Sheets</h2>
+                <p>Official specification sheets from the winery — the ground truth on every bottle. Click any sheet to view it in full detail.</p>
+            </div>
+            <div class="ts-gallery" id="tsGallery">
+                <!-- filled by JS -->
+            </div>
+        </section>
+
     </main>
+
+    <!-- Tech Sheet Lightbox Modal -->
+    <div class="ts-modal-overlay" id="tsModalOverlay" onclick="tsMaybeClose(event)">
+        <div class="ts-modal" id="tsModal">
+            <div class="ts-modal-header">
+                <div>
+                    <div class="ts-modal-title" id="tsModalTitle"></div>
+                    <div class="ts-modal-subtitle" id="tsModalSubtitle"></div>
+                </div>
+                <button class="ts-modal-close" onclick="closeTechSheetModal()" aria-label="Close">&times;</button>
+            </div>
+            <div class="ts-modal-image-wrap" id="tsModalImageWrap"></div>
+            <div class="ts-modal-summary" id="tsModalSummary"></div>
+        </div>
+    </div>
 
     <footer>
         <p>Ardoa Wine Bar - Study Guide</p>
@@ -8757,6 +8931,26 @@
         // ============================================================
         // STAFF PICKS — Curated recommendations with reasons
         // ============================================================
+        // ============================================================
+        // TECH SHEETS — Producer spec sheets. Add image + summary per wine.
+        // Image path is relative to index.html, e.g. "techsheets/long-valley-ranch.jpg"
+        // ============================================================
+        var techSheets = {
+            "Long Valley Ranch": {
+                image: "techsheets/long-valley-ranch.jpg",
+                vintage: "2023",
+                region: "Monterey County, California",
+                grape: "Cabernet Sauvignon",
+                stats: [
+                    { label: "Alcohol", value: "13.9%" },
+                    { label: "pH", value: "3.61" },
+                    { label: "Titratable Acidity", value: "6.2 g/L" },
+                    { label: "Oak Aging", value: "12 months · 35% new French, American & Hungarian oak" }
+                ],
+                summary: "Long Valley Ranch's tech sheet confirms an estate Cabernet Sauvignon from the far southern reaches of Monterey County's Salinas Valley — the 'Long Valley' that novelist John Steinbeck named. The analytical profile shows a well-structured wine: 13.9% ABV, pH 3.61, and TA 6.2 g/L. Key winemaking details from the sheet: grapes are harvested at night and in the early morning to preserve delicate aromatics, then aged 12 months in 35% new French, American, and Hungarian oak. The diurnal temperature swing can drop as much as 50°F each afternoon as cold Pacific air funnels down the valley — the sheet credits this extreme shift for the long, even ripening that builds depth. Producer tasting notes verbatim: blackberries and ripe plums, well-integrated with notes of tobacco and cedar and hints of fresh tarragon, with a plush round mouth-feel, soft tannin structure, and a lingering sweet oak finish."
+            }
+        };
+
         var staffPicks = [
             {
                 category: 'Red Wines',
@@ -9500,6 +9694,8 @@
                             <div class="wine-detail-value">${wine.notes}</div>
                         </div>
                     </div>
+                </div>
+                    ${techSheets[wine.name] ? `<div class="wine-card-footer"><button class="ts-card-btn" onclick="event.stopPropagation();openTechSheetModal('${wine.name.replace(/'/g, "\\'")}')">&#128196; Producer Tech Sheet</button></div>` : ''}
                 </div>
             `).join('');
         }
@@ -12502,6 +12698,81 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
         }
 
         // ============================================================
+        // RENDER + LOGIC: Tech Sheets
+        // ============================================================
+        function renderTechSheets() {
+            var gallery = document.getElementById('tsGallery');
+            if (!gallery) return;
+            var names = Object.keys(techSheets);
+            if (!names.length) {
+                gallery.innerHTML = '<p class="ts-empty">No tech sheets uploaded yet. Add images to the techsheets/ folder and update the techSheets data object.</p>';
+                return;
+            }
+            var html = '';
+            names.forEach(function(name) {
+                var ts = techSheets[name];
+                html += '<div class="ts-gallery-card">';
+                html += '<div class="ts-gallery-thumb-wrap" onclick="openTechSheetModal('' + name.replace(/'/g, "\'") + '')">';
+                html += '<img class="ts-gallery-thumb" src="' + ts.image + '" alt="' + name + ' tech sheet" onerror="this.outerHTML='<div class=ts-thumb-placeholder>📄</div>'">';
+                html += '</div>';
+                html += '<div class="ts-gallery-info">';
+                html += '<div class="ts-gallery-name">' + name + '</div>';
+                html += '<div class="ts-gallery-vintage">' + ts.vintage + '</div>';
+                html += '<div class="ts-gallery-meta">' + ts.grape + ' &nbsp;·&nbsp; ' + ts.region + '</div>';
+                html += '<button class="ts-view-btn" onclick="openTechSheetModal('' + name.replace(/'/g, "\'") + '')">📄 View Tech Sheet</button>';
+                html += '</div>';
+                html += '</div>';
+            });
+            gallery.innerHTML = html;
+            forceRepaint(gallery);
+        }
+
+        function openTechSheetModal(name) {
+            var ts = techSheets[name];
+            if (!ts) return;
+            var overlay = document.getElementById('tsModalOverlay');
+            var titleEl = document.getElementById('tsModalTitle');
+            var subtitleEl = document.getElementById('tsModalSubtitle');
+            var imageWrap = document.getElementById('tsModalImageWrap');
+            var summaryEl = document.getElementById('tsModalSummary');
+            if (!overlay) return;
+
+            titleEl.textContent = name + ' — ' + ts.vintage;
+            subtitleEl.textContent = ts.grape + ' · ' + ts.region;
+
+            // Image or placeholder
+            imageWrap.innerHTML = '<img class="ts-modal-image" src="' + ts.image + '" alt="' + name + ' tech sheet" onerror="this.outerHTML='<div class=ts-modal-img-placeholder>Image not found.<br><br>Place the tech sheet image at:<br><strong>' + ts.image + '</strong><br>(relative to index.html)</div>'">';
+
+            // Stats + summary
+            var statsHtml = '';
+            if (ts.stats && ts.stats.length) {
+                statsHtml += '<div class="ts-stats-grid">';
+                ts.stats.forEach(function(s) {
+                    statsHtml += '<div class="ts-stat"><div class="ts-stat-label">' + s.label + '</div><div class="ts-stat-value">' + s.value + '</div></div>';
+                });
+                statsHtml += '</div>';
+            }
+            summaryEl.innerHTML = '<div class="ts-summary-divider"><div class="ts-summary-divider-line"></div>Staff Summary<div class="ts-summary-divider-line"></div></div>' + statsHtml + (ts.summary ? '<p class="ts-summary-text">' + ts.summary + '</p>' : '');
+
+            overlay.classList.add('open');
+            overlay.scrollTop = 0;
+            document.body.style.overflow = 'hidden';
+            forceRepaint(overlay);
+        }
+
+        function closeTechSheetModal() {
+            var overlay = document.getElementById('tsModalOverlay');
+            if (overlay) overlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function tsMaybeClose(e) {
+            if (e.target === document.getElementById('tsModalOverlay')) {
+                closeTechSheetModal();
+            }
+        }
+
+        // ============================================================
         // RENDER: Wine Archive
         // ============================================================
         function renderWineArchive() {
@@ -12551,6 +12822,11 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
             forceRepaint(list);
         }
 
+        // Close tech sheet modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeTechSheetModal();
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             try {
                 initTheme();
@@ -12571,6 +12847,7 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
                 renderGuestComments();
                 renderRecommendations();
                 renderWineArchive();
+                renderTechSheets();
 
                 // Easter egg: click "Ardoa" title 5× within 3 s → Brute Force Trainer
                 (function() {
