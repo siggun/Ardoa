@@ -9694,8 +9694,7 @@
                             <div class="wine-detail-value">${wine.notes}</div>
                         </div>
                     </div>
-                </div>
-                    ${techSheets[wine.name] ? `<div class="wine-card-footer"><button class="ts-card-btn" onclick="event.stopPropagation();openTechSheetModal('${wine.name.replace(/'/g, "\\'")}')">&#128196; Producer Tech Sheet</button></div>` : ''}
+                ${techSheets[wine.name] ? '<div class="wine-card-footer"><button class="ts-card-btn" onclick="event.stopPropagation();openTechSheetModal(\''+wine.name+'\')">&#128196; Producer Tech Sheet</button></div>' : ''}
                 </div>
             `).join('');
         }
@@ -12711,19 +12710,29 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
             var html = '';
             names.forEach(function(name) {
                 var ts = techSheets[name];
-                html += '<div class="ts-gallery-card">';
-                html += '<div class="ts-gallery-thumb-wrap" onclick="openTechSheetModal('' + name.replace(/'/g, "\'") + '')">';
-                html += '<img class="ts-gallery-thumb" src="' + ts.image + '" alt="' + name + ' tech sheet" onerror="this.outerHTML='<div class=ts-thumb-placeholder>📄</div>'">';
+                html += '<div class="ts-gallery-card" data-tsname="' + name + '">';
+                html += '<div class="ts-gallery-thumb-wrap">';
+                html += '<img class="ts-gallery-thumb" src="' + ts.image + '" alt="' + name + ' tech sheet">';
                 html += '</div>';
                 html += '<div class="ts-gallery-info">';
                 html += '<div class="ts-gallery-name">' + name + '</div>';
                 html += '<div class="ts-gallery-vintage">' + ts.vintage + '</div>';
-                html += '<div class="ts-gallery-meta">' + ts.grape + ' &nbsp;·&nbsp; ' + ts.region + '</div>';
-                html += '<button class="ts-view-btn" onclick="openTechSheetModal('' + name.replace(/'/g, "\'") + '')">📄 View Tech Sheet</button>';
+                html += '<div class="ts-gallery-meta">' + ts.grape + ' &nbsp;&middot;&nbsp; ' + ts.region + '</div>';
+                html += '<button class="ts-view-btn">&#128196; View Tech Sheet</button>';
                 html += '</div>';
                 html += '</div>';
             });
             gallery.innerHTML = html;
+            gallery.querySelectorAll('.ts-gallery-card').forEach(function(card) {
+                card.addEventListener('click', function() {
+                    openTechSheetModal(this.getAttribute('data-tsname'));
+                });
+            });
+            gallery.querySelectorAll('.ts-gallery-thumb').forEach(function(img) {
+                img.addEventListener('error', function() {
+                    this.parentNode.innerHTML = '<div class="ts-thumb-placeholder">&#128196;</div>';
+                });
+            });
             forceRepaint(gallery);
         }
 
@@ -12741,7 +12750,19 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
             subtitleEl.textContent = ts.grape + ' · ' + ts.region;
 
             // Image or placeholder
-            imageWrap.innerHTML = '<img class="ts-modal-image" src="' + ts.image + '" alt="' + name + ' tech sheet" onerror="this.outerHTML='<div class=ts-modal-img-placeholder>Image not found.<br><br>Place the tech sheet image at:<br><strong>' + ts.image + '</strong><br>(relative to index.html)</div>'">';
+            imageWrap.innerHTML = '';
+            var imgEl = document.createElement('img');
+            imgEl.className = 'ts-modal-image';
+            imgEl.alt = name + ' tech sheet';
+            imgEl.onerror = function() {
+                var ph = document.createElement('div');
+                ph.className = 'ts-modal-img-placeholder';
+                ph.innerHTML = 'Image not found.<br><br>Place the tech sheet image at:<br><strong>' + ts.image + '</strong><br>(relative to index.html)';
+                imageWrap.innerHTML = '';
+                imageWrap.appendChild(ph);
+            };
+            imgEl.src = ts.image;
+            imageWrap.appendChild(imgEl);
 
             // Stats + summary
             var statsHtml = '';
