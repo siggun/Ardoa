@@ -4164,6 +4164,7 @@
         <a href="#pronunciations" onclick="navigateToSection('pronunciations', this, event)">Pronunciations</a>
         <a href="#foodpairings" onclick="navigateToSection('foodpairings', this, event)">Food Pairings</a>
         <a href="#winearchive" onclick="navigateToSection('winearchive', this, event)">Wine Archive</a>
+        <a href="#guestfaq" onclick="navigateToSection('guestfaq', this, event)">Guest FAQ</a>
     </nav>
 
     <main>
@@ -5169,6 +5170,15 @@
             <div id="wineArchiveList" class="wine-archive-list"></div>
         </section>
 
+        <!-- Guest FAQ Section -->
+        <section id="guestfaq">
+            <div class="section-header" style="max-width:820px;margin:0 auto 1.5rem;padding:0 1.25rem;text-align:center;">
+                <h2 style="font-family:'Cinzel',serif;color:#c4a875;font-size:1.8rem;margin-bottom:0.5rem;">Guest FAQ</h2>
+                <p style="color:#a08060;font-size:0.95rem;">Real questions from guests — answered by your team.</p>
+            </div>
+            <div id="guestFAQList" style="max-width:820px;margin:0 auto;padding:0 1.25rem;"></div>
+        </section>
+
     </main>
 
     <footer>
@@ -5894,6 +5904,14 @@
                 notes: "Valle de Guadalupe is Mexico's premier wine region, located in Baja California just 70 miles south of San Diego. With a Mediterranean climate nearly identical to Southern France, it's ideal for Cabernet Sauvignon. L.A. Cetto was founded in 1928—nearly a century of winemaking history—making it one of Mexico's oldest and most storied producers. The winery helped prove that Mexico could produce world-class wines at a time when most dismissed the country as a wine region. Today, Valle de Guadalupe is increasingly recognized internationally for quality wines at excellent value.",
                 archivedDate: "February 2026",
                 replacedBy: "Long Valley Ranch"
+            }
+        ];
+
+        // Guest FAQ Data — add new { q, a } objects as guest questions come in
+        const guestFAQs = [
+            {
+                q: "What are your jammiest red wines?",
+                a: "Our top three jammiest reds are: <strong>Domaine Verquière Plan de Dieu</strong> (a full-bodied Southern Rhône GSM blend bursting with blackberry, black cherry, and spice — the quintessential jammy Grenache), <strong>Palmeri Navalta Farnacha</strong> (concentrated old-vine Garnacha from Spain with ripe cherry, blackberry, and a long warm finish), and <strong>Les Cousins L\'Inconscient</strong> (a bold Priorat-style Grenache/Carignan blend with dark plum, blackberry, and Mediterranean herbs). All three are warm-climate, full-bodied, and dark-fruited — if you want something rich and fruit-forward, these are your picks."
             }
         ];
 
@@ -8599,6 +8617,18 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
             forceRepaint(list);
         }
 
+        function renderGuestFAQ() {
+            var list = document.getElementById('guestFAQList');
+            if (!list) return;
+            list.innerHTML = guestFAQs.map(function(item) {
+                return '<div style="background:#1a1025;border:1px solid #3a2040;border-radius:8px;padding:1.25rem 1.5rem;margin-bottom:1rem;">' +
+                    '<div style="font-family:\'Cinzel\',serif;color:#c4a875;font-size:1rem;margin-bottom:0.75rem;">Q: ' + item.q + '</div>' +
+                    '<div style="color:#e8e4dc;font-size:0.95rem;line-height:1.65;">A: ' + item.a + '</div>' +
+                    '</div>';
+            }).join('');
+            forceRepaint(list);
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             try {
                 initTheme();
@@ -8614,6 +8644,7 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
                 renderChecklist();
                 renderQuickDescs();
                 renderWineArchive();
+                renderGuestFAQ();
 
                 // Easter egg: click "Ardoa" title 5× within 3 s → Brute Force Trainer
                 (function() {
