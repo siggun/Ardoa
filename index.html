@@ -3858,10 +3858,11 @@
         html.cyberpunk .qdesc-name { color: var(--cp-c) !important; font-family: var(--cp-font) !important; letter-spacing: 0.04em !important; }
         html.cyberpunk .qdesc-pos { color: var(--cp-g) !important; font-family: var(--cp-font) !important; }
         html.cyberpunk .qdesc-s1, html.cyberpunk .qdesc-s2 { color: var(--cp-t) !important; font-family: var(--cp-font) !important; }
-        html.cyberpunk .qdesc-badge-white { background: var(--cp-bg2) !important; color: var(--cp-t2) !important; border-color: var(--cp-bd) !important; }
-        html.cyberpunk .qdesc-badge-red   { background: var(--cp-bg2) !important; color: var(--cp-m) !important;  border-color: var(--cp-m)  !important; }
-        html.cyberpunk .qdesc-badge-rose  { background: var(--cp-bg2) !important; color: var(--cp-r) !important;  border-color: var(--cp-r)  !important; }
-        html.cyberpunk .qdesc-badge-spark { background: var(--cp-bg2) !important; color: var(--cp-c) !important;  border-color: var(--cp-c)  !important; }
+        html.cyberpunk .qdesc-badge-white  { background: var(--cp-bg2) !important; color: var(--cp-t2) !important; border-color: var(--cp-bd) !important; }
+        html.cyberpunk .qdesc-badge-red    { background: var(--cp-bg2) !important; color: var(--cp-m) !important;  border-color: var(--cp-m)  !important; }
+        html.cyberpunk .qdesc-badge-rose   { background: var(--cp-bg2) !important; color: var(--cp-r) !important;  border-color: var(--cp-r)  !important; }
+        html.cyberpunk .qdesc-badge-spark  { background: var(--cp-bg2) !important; color: var(--cp-c) !important;  border-color: var(--cp-c)  !important; }
+        html.cyberpunk .qdesc-badge-orange { background: var(--cp-bg2) !important; color: var(--cp-t2) !important; border-color: var(--cp-bd) !important; }
         html.cyberpunk .qdesc-filter-btn {
             background: var(--cp-bg2) !important; color: var(--cp-t2) !important;
             border: 1px solid var(--cp-bd) !important; font-family: var(--cp-font) !important;
@@ -3962,6 +3963,7 @@
         .qdesc-badge-red    { background: #f5eded; color: #6b1c2e; border: 1px solid #e0c8c8; }
         .qdesc-badge-rose   { background: #fdf0f3; color: #a04060; border: 1px solid #e8c8d0; }
         .qdesc-badge-spark  { background: #f0f5f8; color: #2a5a7a; border: 1px solid #c8dce8; }
+        .qdesc-badge-orange { background: #fdf0e0; color: #a06010; border: 1px solid #e8d0a0; }
         .qdesc-pos { font-size: 0.68rem; color: #999; font-family: 'Cinzel', serif; letter-spacing: 0.05em; }
         .qdesc-text { color: #2c2c2c; font-size: 0.88rem; line-height: 1.65; }
 
@@ -3979,6 +3981,7 @@
         [data-theme="dark"] .qdesc-badge-red    { background: #180810; color: #e8a0b0; border-color: #3a1a20; }
         [data-theme="dark"] .qdesc-badge-rose   { background: #160810; color: #e8a0b8; border-color: #382028; }
         [data-theme="dark"] .qdesc-badge-spark  { background: #080c18; color: #a0c8e8; border-color: #1a2a3a; }
+        [data-theme="dark"] .qdesc-badge-orange { background: #1a1008; color: #d4902a; border-color: #3a2810; }
 
         @media (max-width: 480px) {
             .qdesc-grid { grid-template-columns: 1fr; }
@@ -4184,7 +4187,7 @@
                 <button class="filter-btn red" onclick="filterWines('red', this)">Red</button>
                 <button class="filter-btn white" onclick="filterWines('white', this)">White</button>
                 <button class="filter-btn rose" onclick="filterWines('rose', this)">Rosé</button>
-                <!-- <button class="filter-btn orange" onclick="filterWines('orange', this)">Orange</button> -->
+                <button class="filter-btn orange" onclick="filterWines('orange', this)">Orange</button>
                 <button class="filter-btn sparkling" onclick="filterWines('sparkling', this)">Sparkling</button>
             </div>
 
@@ -5152,6 +5155,7 @@
                 <button class="qdesc-filter-btn" onclick="filterQDesc('white', this)">Whites</button>
                 <button class="qdesc-filter-btn" onclick="filterQDesc('red', this)">Reds</button>
                 <button class="qdesc-filter-btn" onclick="filterQDesc('rose', this)">Rosés</button>
+                <button class="qdesc-filter-btn" onclick="filterQDesc('orange', this)">Orange</button>
                 <button class="qdesc-filter-btn" onclick="filterQDesc('sparkling', this)">Sparkling</button>
             </div>
             <div class="qdesc-grid" id="qdescGrid">
@@ -5343,28 +5347,28 @@
             },
             // Position 7
             {
-                name: "Gorghi Tondi Rosa Dei Venti",
-                vintage: "2023",
-                type: "rose",
-                grape: "100% Nerello Mascalese",
-                grapeDetail: "Nerello Mascalese (neh-REL-oh mas-kah-LEH-zeh) is Sicily's most elegant red grape, best known for Etna Rosso. As a rosé, it yields a delicate pale pink wine with floral aromatics and saline minerality.",
-                region: "Sicily",
-                appellation: "Sicilia DOC",
-                country: "Italy",
-                pronunciation: "GOR-gee TON-dee ROH-zah DAY VEN-tee · Nerello Mascalese: neh-REL-oh mas-kah-LEH-zeh",
-                winemaker: "Gorghi Tondi - An organic estate in western Sicily near Marsala. 'Rosa Dei Venti' means 'Rose of the Winds'—a nod to the constant Mediterranean sea breezes that cool the vineyards and keep vines healthy without chemicals. Gorghi Tondi is passionate about reviving Sicily's indigenous grape varieties, believing they best express the island's sun-drenched Mediterranean character. Certified organic, all grapes are hand-harvested and direct-pressed to achieve the delicate pale color and fresh aromatics.",
-                tasting: "Pale coral pink. Wild strawberry, white peach, citrus blossom, and saline sea spray on the nose. Light-bodied with vibrant acidity and a clean, mineral finish.",
-                food: "Prosciutto di Parma, Petit Basque, Hummus, Antipasto Vegetable Blend, The Veg flatbread",
+                name: "Grape Abduction Company Orange",
+                vintage: "2024",
+                type: "orange",
+                grape: "Pinot Blanc, Pinot Grigio, Riesling",
+                grapeDetail: "Orange wine (also called skin-contact white) is made by leaving white grape skins in contact with the juice during fermentation — exactly how red wine is made. The result is a wine with white grape aromas, red-wine texture and tannins, and a golden-amber hue. This single-vineyard blend is grown in Štajerska (SHTAH-yer-skah), Slovenia's largest wine region, using natural farming with no chemical inputs.",
+                region: "Štajerska, Slovenia",
+                appellation: "Štajerska",
+                country: "Slovenia",
+                pronunciation: "Štajerska: SHTAH-yer-skah",
+                winemaker: "Gönc Winery — Made by Peter Gönc, a 4th-generation winemaker based in Ptuj, the oldest city in Slovenia. The family has been making wine since 1936. The Grape Abduction Company is their natural wine label, imported to the US by JP Bourgeois (Asheville, NC). Grapes are naturally farmed on a single hillside vineyard at 300 feet elevation, fermented with native yeasts, and aged 5 months in stainless steel with minimal sulfites.",
+                tasting: "A light amber color with an aromatically rich nose of ripe golden apple, quince, sweet brown spice, and hints of honey. On the palate, the wine is round with flavors from the nose and a good minerality. The finish is smooth and lingering with highlighted notes of sweet brown spices.",
+                food: "Gruyere, Petit Basque, Mimolette, Prosciutto di Parma, Tapenade",
                 foodPairings: [
-                    { item: "Prosciutto di Parma", why: "Delicate pink fruit and saline minerality mirror the ham's sweetness; acidity cuts through salt" },
-                    { item: "Petit Basque", why: "Mild sheep's milk cheese pairs naturally with the wine's floral and citrus notes" },
-                    { item: "Hummus", why: "Light, refreshing Sicilian rosé makes the perfect Mediterranean aperitif companion" },
-                    { item: "Antipasto Vegetable Blend", why: "Italian pickled vegetables echo the wine's bright acidity and Mediterranean character" },
-                    { item: "The Veg flatbread", why: "Fresh vegetable flavors complement this mineral-driven Sicilian rosé perfectly" }
+                    { item: "Gruyere", why: "Nutty aged Gruyere meets the wine's honey and brown spice notes — a classic pairing with this skin-contact alpine-adjacent wine" },
+                    { item: "Petit Basque", why: "Mild sheep's milk cheese lets the wine's golden apple and quince aromatics shine without competing" },
+                    { item: "Mimolette", why: "Caramelized butterscotch depth of aged Mimolette harmonizes with the wine's warm amber character and lingering spice" },
+                    { item: "Prosciutto di Parma", why: "The wine's textural grip and honey notes cut through the ham's salt and fat beautifully" },
+                    { item: "Tapenade", why: "Mediterranean olive and herb flavors echo the wine's earthy minerality and round, savory palate" }
                 ],
-                alcohol: "12.5%",
-                serving: "Well chilled (46-50°F / 8-10°C)",
-                notes: "Nerello Mascalese (neh-REH-loh mahs-kah-LEH-zeh) is Sicily's most celebrated grape, famous for volcanic Etna Rosso—sometimes compared to Burgundy for its elegance and age-worthiness. As a rosé, it expresses delicate red berry fruit, citrus blossom, and a distinctive saline minerality shaped by Mediterranean sea winds. 'Rosa Dei Venti' means 'Rose of the Winds'—a compass rose navigating wine lovers to something unexpected and beautiful. Gorghi Tondi's organic farming and proximity to the Sicilian coast give this rosé an unmistakably fresh, seaside character."
+                alcohol: "12%",
+                serving: "Slightly chilled (52–55°F / 11–13°C)",
+                notes: "Orange wine is one of the most exciting categories in natural wine — and this is a perfect entry point. Made by leaving white grape skins in contact with the juice (the same method used for red wine), the result is amber-hued, textural, and layered in a way that no conventional white can match. The Grape Abduction Company is the natural wine project of Gönc Winery, run by 4th-generation winemaker Peter Gönc from Ptuj, Slovenia — the oldest city in the country. Štajerska is Slovenia's largest wine region, prized for cool-climate aromatic whites that handle skin contact beautifully. Single vineyard, naturally farmed at 300 feet elevation, native yeast fermented, 5 months in stainless steel. No fuss, no tricks — pure Slovenian terroir."
             },
             // Position 8
             {
@@ -5881,6 +5885,31 @@
         // ============================================================
         const archivedWines = [
             {
+                name: "Gorghi Tondi Rosa Dei Venti",
+                vintage: "2023",
+                type: "rose",
+                grape: "100% Nerello Mascalese",
+                grapeDetail: "Nerello Mascalese (neh-REL-oh mas-kah-LEH-zeh) is Sicily's most elegant red grape, best known for Etna Rosso. As a rosé, it yields a delicate pale pink wine with floral aromatics and saline minerality.",
+                region: "Sicily",
+                appellation: "Sicilia DOC",
+                country: "Italy",
+                winemaker: "Gorghi Tondi - An organic estate in western Sicily near Marsala. 'Rosa Dei Venti' means 'Rose of the Winds'—a nod to the constant Mediterranean sea breezes that cool the vineyards and keep vines healthy without chemicals. Gorghi Tondi is passionate about reviving Sicily's indigenous grape varieties, believing they best express the island's sun-drenched Mediterranean character. Certified organic, all grapes are hand-harvested and direct-pressed to achieve the delicate pale color and fresh aromatics.",
+                tasting: "Pale coral pink. Wild strawberry, white peach, citrus blossom, and saline sea spray on the nose. Light-bodied with vibrant acidity and a clean, mineral finish.",
+                food: "Prosciutto di Parma, Petit Basque, Hummus, Antipasto Vegetable Blend, The Veg flatbread",
+                foodPairings: [
+                    { item: "Prosciutto di Parma", why: "Delicate pink fruit and saline minerality mirror the ham's sweetness; acidity cuts through salt" },
+                    { item: "Petit Basque", why: "Mild sheep's milk cheese pairs naturally with the wine's floral and citrus notes" },
+                    { item: "Hummus", why: "Light, refreshing Sicilian rosé makes the perfect Mediterranean aperitif companion" },
+                    { item: "Antipasto Vegetable Blend", why: "Italian pickled vegetables echo the wine's bright acidity and Mediterranean character" },
+                    { item: "The Veg flatbread", why: "Fresh vegetable flavors complement this mineral-driven Sicilian rosé perfectly" }
+                ],
+                alcohol: "12.5%",
+                serving: "Well chilled (46-50°F / 8-10°C)",
+                notes: "Nerello Mascalese (neh-REH-loh mahs-kah-LEH-zeh) is Sicily's most celebrated grape, famous for volcanic Etna Rosso—sometimes compared to Burgundy for its elegance and age-worthiness. As a rosé, it expresses delicate red berry fruit, citrus blossom, and a distinctive saline minerality shaped by Mediterranean sea winds. 'Rosa Dei Venti' means 'Rose of the Winds'—a compass rose navigating wine lovers to something unexpected and beautiful. Gorghi Tondi's organic farming and proximity to the Sicilian coast give this rosé an unmistakably fresh, seaside character.",
+                archivedDate: "March 2026",
+                replacedBy: "Grape Abduction Company Orange"
+            },
+            {
                 name: "L.A. Cetto",
                 vintage: "2022",
                 type: "red",
@@ -6017,7 +6046,7 @@
             "Presqu'ile": "Grown in California's fog-cooled Santa Maria Valley by a sustainable estate winery, this Chardonnay sits beautifully between rich and lean — green apple and citrus with a silky butter note and toasty oak that never overpowers. It's the Chardonnay that converts Chardonnay skeptics.",
             "Marola Rías Baixas": "From Galicia's dramatic Atlantic coastline in northwestern Spain, this Albariño bursts with white peach, apricot, and saline sea-spray minerality — made for seafood but irresistible on its own. It's summer by the sea, bottled.",
             "Folly by Mascaronne Rosé Côtes de Provence": "An organic estate rosé from Provence — the holy land of rosé — where honeyed nectarine, white flowers, and mineral freshness combine in a wine that's pale, dry, and effortlessly beautiful. Tony Parker co-created this cuvée, and it absolutely lives up to the billing.",
-            "Gorghi Tondi Rosa Dei Venti": "Made from 100% Nerello Mascalese on Sicily's windswept organic estate, the 'Rose of the Winds' is pale coral pink with wild strawberry, citrus blossom, and saline sea-spray on every sip. Rare, expressive, and tasting like a Mediterranean vacation.",
+            "Grape Abduction Company Orange": "From Gönc Winery's natural wine project in Štajerska, Slovenia, this skin-contact Pinot Blanc/Pinot Grigio/Riesling blend is amber-hued with golden apple, quince, honey, and sweet brown spice — textural and round in a way no conventional white can match. Orange wine at its most approachable.",
             "Braunewell Unser Täglich": "A joyful aromatic German white from Rheinhessen, bursting with pink grapefruit, passionfruit, and elderflower — like a tropical garden in a glass. Lower in alcohol and alive with acidity, it's the ultimate spicy-food companion and the crowd-pleasing aperitif nobody sees coming.",
             "Ercole Barbera del Monferrato": "From Piedmont's rolling hills, this lively Barbera leads with bright cherry, raspberry, and dried herbs, then delivers naturally high acidity and low tannins that make every sip feel fresh and food-friendly. Honest Italian charm in a bottle — the kind of red you never want to put down.",
             "Gorghi Tondi Dume": "Sicily's most joyful red, certified organic and lighter than you'd expect — fresh cherry, wild strawberry, rose petals, and a whisper of Mediterranean herbs with a silky, effortless texture. Chill it slightly and drink it freely; this is Beaujolais's Italian cousin.",
@@ -8531,8 +8560,8 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
             filter = filter || 'all';
             var grid = document.getElementById('qdescGrid');
             if (!grid) return;
-            var typeLabel = { white: 'White', red: 'Red', rose: 'Rosé', sparkling: 'Sparkling' };
-            var typeClass = { white: 'qdesc-badge-white', red: 'qdesc-badge-red', rose: 'qdesc-badge-rose', sparkling: 'qdesc-badge-spark' };
+            var typeLabel = { white: 'White', red: 'Red', rose: 'Rosé', sparkling: 'Sparkling', orange: 'Orange' };
+            var typeClass = { white: 'qdesc-badge-white', red: 'qdesc-badge-red', rose: 'qdesc-badge-rose', sparkling: 'qdesc-badge-spark', orange: 'qdesc-badge-orange' };
             var list = wines.filter(function(w) {
                 return filter === 'all' || w.type === filter;
             });
