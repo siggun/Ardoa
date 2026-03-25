@@ -296,6 +296,21 @@
             border-color: #c0b8b0;
         }
 
+        .staged-banner {
+            background: #2a1a0a;
+            color: #c4a875;
+            text-align: center;
+            padding: 0.5rem 1rem;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            border-bottom: 2px solid #c4a875;
+        }
+        .wine-card.staged {
+            border: 2px dashed #c4a875;
+        }
+
         .wine-card-header {
             padding: 1.5rem;
             color: #ffffff;
@@ -5883,6 +5898,61 @@
                 alcohol: "11%",
                 serving: "Well chilled (38-45°F / 3-7°C)",
                 notes: "Prosecco is Italy's answer to Champagne, though made differently using the Charmat method for tank fermentation. The DOC (Denominazione di Origine Controllata) designation was established in 2009 to protect the Prosecco name and ensure quality standards. Prosecco must contain at least 85% Glera grapes, with the remaining 15% from other approved local varieties."
+            },
+            // ── STAGED WINES — on deck, not yet in the Enomatic ──
+            {
+                name: "L.A. Cetto Sierra Blanca Sauvignon Blanc",
+                vintage: "2023",
+                type: "white",
+                grape: "100% Sauvignon Blanc",
+                grapeDetail: "Sauvignon Blanc thrives in Valle de Guadalupe's Mediterranean climate, where warm days and cool Pacific-influenced nights preserve the grape's signature bright acidity and aromatic intensity.",
+                region: "Valle de Guadalupe, Baja California",
+                appellation: "Valle de Guadalupe",
+                country: "Mexico",
+                pronunciation: "lah SEH-toh see-EH-rah BLAHN-kah",
+                winemaker: "L.A. Cetto - Founded in 1928 by Italian immigrant Don Angelo Cetto from the Trentino region, L.A. Cetto is Mexico's largest and most internationally recognized winery. Now in its third generation under Luis Alberto Cetto, the estate spans over 1,100 hectares in the Valle de Guadalupe — Baja California's premier wine region. 'Sierra Blanca' is their innovative line featuring conical tank fermentation and Stelvin (screwcap) closure, a first for Mexican wines. The legendary Italian-born winemaker Camillo Magoni shaped the estate's winemaking philosophy for decades, proving that Baja California's sandy soils, Pacific fog, and Mediterranean climate could rival Old World terroirs.",
+                tasting: "Bright straw yellow with green highlights. Vibrant citrus aromas of lime and grapefruit, freshly cut grass, and basil on the nose. Unctuous on the palate with firm acidity, tropical hints of pineapple and green melon, and a clean mineral finish.",
+                food: "Black Truffle Goat, Petit Basque, Hummus, The Veg flatbread, Bresaola",
+                foodPairings: [
+                    { item: "Black Truffle Goat", why: "Citrus-driven Sauvignon Blanc and goat cheese is a timeless pairing — the wine's acidity cuts through the earthy richness" },
+                    { item: "Petit Basque", why: "Mild sheep's milk cheese complements the wine's herbal and citrus character" },
+                    { item: "Hummus", why: "Bright, refreshing wine with firm acidity is a natural match for creamy chickpea dip" },
+                    { item: "The Veg flatbread", why: "Herbal, grassy notes in the wine echo fresh vegetable flavors" },
+                    { item: "Bresaola", why: "Lean, delicate cured beef won't overpower the wine; acidity brightens each bite" }
+                ],
+                alcohol: "12.5%",
+                serving: "Well chilled (45-50°F / 7-10°C)",
+                notes: "Valle de Guadalupe is Mexico's answer to Napa Valley — a sun-drenched valley just 20 miles from the Pacific coast near Ensenada, Baja California. Cool morning fog rolls in from the ocean, moderating temperatures and preserving acidity in the grapes, while hot afternoons concentrate flavor. The sandy, well-drained soils naturally stress the vines, producing smaller berries with more intense character. L.A. Cetto's Sierra Blanca line uses innovative conical fermentation tanks and was the first Mexican wine to use screwcap closures, prioritizing freshness and fruit purity over tradition. Mexico's wine history actually predates California's — Spanish missionaries planted the first vines here in the 1500s.",
+                staged: true,
+                replacesWine: "Pouilly-Fumé Dezat",
+                replacesPosition: 11
+            },
+            {
+                name: "L.A. Cetto Sierra Blanca Tempranillo",
+                vintage: "2021",
+                type: "red",
+                grape: "100% Tempranillo",
+                grapeDetail: "Tempranillo is Spain's noble grape, but thrives in Valle de Guadalupe's similar Mediterranean climate — warm days, cool nights, and well-drained soils produce a fruit-forward, approachable expression of this classic variety.",
+                region: "Valle de Guadalupe, Baja California",
+                appellation: "Valle de Guadalupe",
+                country: "Mexico",
+                pronunciation: "lah SEH-toh see-EH-rah BLAHN-kah tem-prah-NEE-yoh",
+                winemaker: "L.A. Cetto - Founded in 1928 by Italian immigrant Don Angelo Cetto from the Trentino region, L.A. Cetto is Mexico's largest and most internationally recognized winery. Now in its third generation under Luis Alberto Cetto, the estate spans over 1,100 hectares in the Valle de Guadalupe. The Sierra Blanca Tempranillo comes from 20-25 year old vines on the Sierra Blanca mountain slopes, aged 12 months in American oak barrels. All grapes are estate-grown, hand-picked, and manually selected — L.A. Cetto neither buys nor sells any of their harvest, ensuring complete control from vine to bottle.",
+                tasting: "Beautiful ruby color, clean and bright. Red fruits, spices, hints of dates and toasted bread on the nose. Fruity and balanced on the palate with good structure, pleasant tannins, notes of cherry cola, pipe tobacco, red currants, and chocolate dusted with pepper.",
+                food: "Chorizo, Manchego, Ewephoria, Red Wine Cheddar, Salchichon De Bellota",
+                foodPairings: [
+                    { item: "Chorizo", why: "Tempranillo with chorizo — a classic pairing that transcends borders; the wine's fruit and spice complement smoky paprika" },
+                    { item: "Manchego", why: "Nutty sheep's milk cheese softens the tannins and echoes the wine's warm, spiced character" },
+                    { item: "Ewephoria", why: "Caramelized butterscotch notes balance the wine's structure and cherry fruit" },
+                    { item: "Red Wine Cheddar", why: "Wine-infused cheese creates harmony with the Tempranillo's red fruit and spice" },
+                    { item: "Salchichon De Bellota", why: "Premium Ibérico pork matches this food-friendly, medium-bodied red beautifully" }
+                ],
+                alcohol: "13%",
+                serving: "Room temperature (62-65°F / 17-18°C)",
+                notes: "This Tempranillo scored 89 points from Wine Country International. Valle de Guadalupe's terroir gives Tempranillo a distinctly New World expression — more fruit-forward and approachable than its Spanish counterparts, but with the same food-friendly structure. The 12 months in American oak adds subtle vanilla and toast without overwhelming the fruit. L.A. Cetto's estate vineyards sit at elevation on the Sierra Blanca mountain slopes, where the altitude and Pacific influence create a diurnal temperature swing that preserves acidity even in warm vintages. Fun fact: Mexico's wine country is on the same latitude as the Mediterranean, Morocco, and parts of southern Spain — ideal Tempranillo territory.",
+                staged: true,
+                replacesWine: "Encomienda de Cervera Horten",
+                replacesPosition: 17
             }
         ];
 
@@ -5940,6 +6010,57 @@
                 notes: "Monterey County is California's largest wine-producing county by acreage — a sprawling Central Coast region stretching from Salinas in the north to Paso Robles in the south. The Salinas Valley is famous for its 'wind tunnel' effect: cool Pacific air funnels inland every afternoon, keeping temperatures 20–30 degrees cooler than the Central Valley even on hot days. This diurnal shift — warm mornings, cool afternoons and nights — gives Monterey wines natural freshness and acidity even in ripe varieties like Cabernet Sauvignon. Long Valley Ranch's estate fruit benefits from this climate, producing a Cab that's ripe and approachable without sacrificing structure or food-friendliness.",
                 archivedDate: "March 2026",
                 replacedBy: "L.A. Cetto"
+            },
+            {
+                name: "Pouilly-Fumé Dezat",
+                vintage: "2024",
+                type: "white",
+                grape: "100% Sauvignon Blanc",
+                grapeDetail: "Pouilly-Fumé is always 100% Sauvignon Blanc - the 'Fumé' refers to the smoky/flinty character from silex soils, not oak.",
+                region: "Pouilly-Fumé, Loire Valley",
+                appellation: "Pouilly-Fumé AOC",
+                country: "France",
+                pronunciation: "poo-YEE foo-MAY deh-ZAH",
+                winemaker: "Domaine Dezat - A multi-generational family estate in Pouilly-sur-Loire, with roots going back several centuries. The Dezat family owns prime vineyard parcels on the famous silex (flint) soils that give Pouilly-Fumé its distinctive smoky minerality. They practice sustainable viticulture, hand-harvest their grapes, and ferment in temperature-controlled stainless steel to preserve the wine's crystalline purity. The family motto: let the terroir speak through the wine.",
+                tasting: "Citrus (grapefruit, lemon), flint/gunsmoke, white flowers, gooseberry. Bone-dry with razor-sharp acidity, pronounced minerality, and a long, clean finish.",
+                food: "Black Truffle Goat, Petit Basque, Hummus, The Veg flatbread, Bresaola",
+                foodPairings: [
+                    { item: "Black Truffle Goat", why: "THE classic pairing - Loire Sauvignon Blanc and goat cheese are legendary together" },
+                    { item: "Petit Basque", why: "Sheep cheese's mild nuttiness complements the wine's mineral precision" },
+                    { item: "Hummus", why: "Clean, refreshing wine cuts through the tahini richness" },
+                    { item: "The Veg flatbread", why: "Herbal, citrus-driven wine loves fresh vegetable flavors" },
+                    { item: "Bresaola", why: "Lean beef doesn't overpower the wine; acidity brightens the delicate meat" }
+                ],
+                alcohol: "13%",
+                serving: "Well chilled (45-50°F / 7-10°C)",
+                notes: "Pouilly-Fumé and Sancerre face each other across the Loire River—both make world-class Sauvignon Blanc but from different soils. The 'fumé' (smoky) name comes from the gunflint character created by silex (flint) soils—strike two pieces together and smell the sulfurous smoke! Loire Sauvignon is bone-dry with laser acidity, unlike sweeter New Zealand styles. Classic pairing secret: Loire Sauvignon + goat cheese (chèvre) is one of wine's most perfect matches.",
+                archivedDate: "March 2026",
+                replacedBy: "L.A. Cetto Sierra Blanca Sauvignon Blanc"
+            },
+            {
+                name: "Encomienda de Cervera Horten",
+                vintage: "2023",
+                type: "red",
+                grape: "100% Tempranillo",
+                grapeDetail: "Tempranillo is Spain's noble grape - the backbone of Rioja and Ribera del Duero, known for cherry fruit and aging potential.",
+                region: "Castilla-La Mancha",
+                appellation: "Castilla-La Mancha DO",
+                country: "Spain",
+                winemaker: "Encomienda de Cervera - A historic estate in Castilla-La Mancha, taking its name from an ancient 'encomienda' (medieval land grant from the Spanish crown). The estate dates back centuries and now produces modern, accessible wines from Spain's vast central plateau. 'Horten' refers to their prized garden vineyard parcels, where old-vine Tempranillo grows on chalky, limestone-rich soils. The extreme continental climate (scorching summers, cold winters) stresses vines naturally, concentrating flavors without irrigation.",
+                tasting: "Red cherry, plum, leather, hints of vanilla and tobacco. Medium to full body with moderate tannins and a smooth finish.",
+                food: "Chorizo, Manchego, Ewephoria, Red Wine Cheddar, Salchichon De Bellota",
+                foodPairings: [
+                    { item: "Chorizo", why: "Spanish Tempranillo with Spanish chorizo - classic regional pairing" },
+                    { item: "Manchego", why: "Spain's famous sheep cheese with Spain's noble grape - perfect harmony" },
+                    { item: "Ewephoria", why: "Caramelized notes complement the wine's vanilla and soft tannins" },
+                    { item: "Red Wine Cheddar", why: "Wine-infused cheese echoes the Tempranillo's fruit character" },
+                    { item: "Salchichon De Bellota", why: "Premium Ibérico pork matches this food-friendly Spanish red" }
+                ],
+                alcohol: "13.5%",
+                serving: "Room temperature (62-65°F / 17-18°C)",
+                notes: "Tempranillo (tem-prah-NEE-yo) is Spain's noble grape—the backbone of Rioja, Ribera del Duero, and many other regions. The name comes from 'temprano' (early) because it ripens earlier than other Spanish varieties. Castilla-La Mancha is the world's largest wine region by vineyard area—a vast plateau south of Madrid that Don Quixote famously tilted at windmills in. The region offers incredible value: quality wine at everyday prices.",
+                archivedDate: "March 2026",
+                replacedBy: "L.A. Cetto Sierra Blanca Tempranillo"
             }
         ];
 
@@ -6696,9 +6817,10 @@
             }
 
             grid.innerHTML = wines.map((wine, idx) => `
-                <div class="wine-card ${wine.type}" data-type="${wine.type}">
+                <div class="wine-card ${wine.type}${wine.staged ? ' staged' : ''}" data-type="${wine.type}">
+                    ${wine.staged ? `<div class="staged-banner">On Deck — Replacing ${wine.replacesWine} (Position ${wine.replacesPosition})</div>` : ''}
                     <div class="wine-card-header">
-                        <div class="wine-pos">No. ${idx + 1}</div>
+                        <div class="wine-pos">${wine.staged ? 'Staged' : 'No. ' + (idx + 1)}</div>
                         <h3>${wine.name}</h3>
                         <div class="vintage">${wine.vintage}</div>
                         <div class="producer">${getProducerName(wine.winemaker)}</div>
