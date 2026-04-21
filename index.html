@@ -5168,6 +5168,7 @@
                 <div class="inventory-actions">
                     <button onclick="saveInventory()">Save</button>
                     <button onclick="copyInventory()">Copy</button>
+                    <button onclick="resetInventoryToDefault()">Reset to Default</button>
                     <button onclick="clearInventory()">Clear</button>
                 </div>
                 <textarea id="inventoryText" class="inventory-textarea" placeholder="Paste or type one product name per line..." oninput="saveInventory()" spellcheck="false"></textarea>
@@ -6774,6 +6775,23 @@
         const INVENTORY_KEY = 'ardoa-inventory';
         let inventoryStatusTimer = null;
 
+        function buildDefaultInventory() {
+            const sections = [
+                ['WINES', (typeof wines !== 'undefined' ? wines : []).map(w => w.name)],
+                ['BEERS', (typeof beers !== 'undefined' ? beers : []).map(b => b.name)],
+                ['CHEESES', (typeof cheeses !== 'undefined' ? cheeses : []).map(c => c.name)],
+                ['CHARCUTERIE', (typeof charcuterie !== 'undefined' ? charcuterie : []).map(c => c.name)],
+                ['FLATBREADS', (typeof flatbreads !== 'undefined' ? flatbreads : []).map(f => f.name)],
+                ['TAPAS', (typeof tapas !== 'undefined' ? tapas : []).map(t => t.name)],
+                ['PATES', (typeof pates !== 'undefined' ? pates : []).map(p => p.name)],
+                ['DESSERTS', (typeof desserts !== 'undefined' ? desserts : []).map(d => d.name)]
+            ];
+            return sections
+                .filter(s => s[1].length > 0)
+                .map(s => s[0] + '\n' + s[1].join('\n'))
+                .join('\n\n');
+        }
+
         function setInventoryStatus(msg) {
             const el = document.getElementById('inventoryStatus');
             if (!el) return;
@@ -6787,11 +6805,19 @@
         function loadInventory() {
             const ta = document.getElementById('inventoryText');
             if (!ta) return;
-            try {
-                ta.value = localStorage.getItem(INVENTORY_KEY) || '';
-            } catch (e) {
-                ta.value = '';
-            }
+            let saved = null;
+            try { saved = localStorage.getItem(INVENTORY_KEY); } catch (e) {}
+            // null => never saved: seed with default. "" => intentionally cleared: leave empty.
+            ta.value = (saved === null) ? buildDefaultInventory() : saved;
+        }
+
+        function resetInventoryToDefault() {
+            const ta = document.getElementById('inventoryText');
+            if (!ta) return;
+            if (ta.value && !confirm('Replace the current list with the default product list?')) return;
+            ta.value = buildDefaultInventory();
+            try { localStorage.setItem(INVENTORY_KEY, ta.value); } catch (e) {}
+            setInventoryStatus('Reset to default');
         }
 
         function saveInventory() {
