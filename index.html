@@ -3236,6 +3236,84 @@
         [data-theme="dark"] .checklist-checkbox-row { color: #e8e4dc; border-bottom-color: #1a1025; }
         [data-theme="dark"] .checklist-checkbox-row input[type="checkbox"] { accent-color: #c4a875; }
 
+        /* === Inventory (plain product list) === */
+        .inventory-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        .inventory-container h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--pale-gold);
+            text-align: center;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .inventory-container .section-subtitle {
+            text-align: center;
+            color: var(--mist);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .inventory-actions {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .inventory-actions button {
+            font-family: 'Cinzel', serif;
+            background: #4a1a28;
+            color: #ffffff;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+            margin: 0 0.25rem 0.5rem;
+        }
+        .inventory-actions button:hover {
+            background: #6b2d3e;
+        }
+        .inventory-textarea {
+            width: 100%;
+            min-height: 60vh;
+            box-sizing: border-box;
+            padding: 1rem;
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #2c2c2c;
+            background: #ffffff;
+            border: 1px solid #d8cfc2;
+            resize: vertical;
+            -webkit-appearance: none;
+            appearance: none;
+            outline: none;
+        }
+        .inventory-textarea:focus {
+            border-color: #6b2d3e;
+        }
+        .inventory-status {
+            text-align: center;
+            color: var(--mist);
+            font-size: 0.85rem;
+            font-style: italic;
+            min-height: 1.2em;
+            margin-top: 0.5rem;
+        }
+
+        [data-theme="dark"] .inventory-container h2 { color: #c4a875; }
+        [data-theme="dark"] .inventory-container .section-subtitle { color: #b8b4ac; }
+        [data-theme="dark"] .inventory-actions button { background: #c4a875; color: #0a0a0f; }
+        [data-theme="dark"] .inventory-actions button:hover { background: #d4c4a8; }
+        [data-theme="dark"] .inventory-textarea { background: #141018; color: #e8e4dc; border-color: #2a1a25; }
+        [data-theme="dark"] .inventory-textarea:focus { border-color: #c4a875; }
+        [data-theme="dark"] .inventory-status { color: #b8b4ac; }
+
 
         /* === BRUTE FORCE TRAINER — Full Screen Game Overlay === */
         #typemaster {
@@ -4166,6 +4244,7 @@
         <a href="#quickref" onclick="navigateToSection('quickref', this, event)">Quick Reference</a>
         <a href="#flashcards" onclick="navigateToSection('flashcards', this, event)">Wine Quiz</a>
         <a href="#checklist" onclick="navigateToSection('checklist', this, event)">Opening Checklist</a>
+        <a href="#inventory" onclick="navigateToSection('inventory', this, event)">Inventory</a>
         <a href="#beerlist" onclick="navigateToSection('beerlist', this, event)">Beer List</a>
         <a href="#food" onclick="navigateToSection('food', this, event)">Food Menu</a>
         <a href="#onlineflashcards" onclick="navigateToSection('onlineflashcards', this, event)">Online Flashcards</a>
@@ -5079,6 +5158,20 @@
                 <div id="checklistContent">
                     <!-- Checklist groups inserted by JavaScript -->
                 </div>
+            </div>
+        </section>
+
+        <section id="inventory">
+            <div class="inventory-container">
+                <h2>Inventory</h2>
+                <p class="section-subtitle">A plain list of every product we carry — paste, edit, and save</p>
+                <div class="inventory-actions">
+                    <button onclick="saveInventory()">Save</button>
+                    <button onclick="copyInventory()">Copy</button>
+                    <button onclick="clearInventory()">Clear</button>
+                </div>
+                <textarea id="inventoryText" class="inventory-textarea" placeholder="Paste or type one product name per line..." oninput="saveInventory()" spellcheck="false"></textarea>
+                <div id="inventoryStatus" class="inventory-status" aria-live="polite"></div>
             </div>
         </section>
 
@@ -6675,6 +6768,76 @@
             if (event) event.preventDefault();
             window.location.hash = sectionId;
             showSection(sectionId, element);
+        }
+
+        // === Inventory (plain product list) ===
+        const INVENTORY_KEY = 'ardoa-inventory';
+        let inventoryStatusTimer = null;
+
+        function setInventoryStatus(msg) {
+            const el = document.getElementById('inventoryStatus');
+            if (!el) return;
+            el.textContent = msg;
+            if (inventoryStatusTimer) clearTimeout(inventoryStatusTimer);
+            inventoryStatusTimer = setTimeout(function() {
+                if (el.textContent === msg) el.textContent = '';
+            }, 2000);
+        }
+
+        function loadInventory() {
+            const ta = document.getElementById('inventoryText');
+            if (!ta) return;
+            try {
+                ta.value = localStorage.getItem(INVENTORY_KEY) || '';
+            } catch (e) {
+                ta.value = '';
+            }
+        }
+
+        function saveInventory() {
+            const ta = document.getElementById('inventoryText');
+            if (!ta) return;
+            try {
+                localStorage.setItem(INVENTORY_KEY, ta.value);
+                setInventoryStatus('Saved');
+            } catch (e) {
+                setInventoryStatus('Unable to save');
+            }
+        }
+
+        function clearInventory() {
+            const ta = document.getElementById('inventoryText');
+            if (!ta) return;
+            if (!ta.value || confirm('Clear the entire inventory list?')) {
+                ta.value = '';
+                try { localStorage.setItem(INVENTORY_KEY, ''); } catch (e) {}
+                setInventoryStatus('Cleared');
+                ta.focus();
+            }
+        }
+
+        function copyInventory() {
+            const ta = document.getElementById('inventoryText');
+            if (!ta) return;
+            const text = ta.value;
+            if (!text) { setInventoryStatus('Nothing to copy'); return; }
+            const done = function() { setInventoryStatus('Copied to clipboard'); };
+            const fail = function() {
+                try {
+                    ta.focus();
+                    ta.select();
+                    document.execCommand('copy');
+                    ta.setSelectionRange(ta.value.length, ta.value.length);
+                    done();
+                } catch (e) {
+                    setInventoryStatus('Copy failed — select and copy manually');
+                }
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(done).catch(fail);
+            } else {
+                fail();
+            }
         }
 
         // Render Wine Cards
@@ -8682,6 +8845,7 @@ h1{font-size:11px;text-align:center;margin-bottom:2px;border-bottom:1px solid #0
                 renderQuickDescs();
                 renderWineArchive();
                 renderGuestFAQ();
+                loadInventory();
 
                 // Easter egg: click "Ardoa" title 5× within 3 s → Brute Force Trainer
                 (function() {
