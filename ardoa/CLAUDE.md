@@ -1,30 +1,35 @@
-# Ardoa Wine Bar — Staff Reference Site
+# Ardoa Wine Bar — Wine Study Platform
 
 ## The Soul of This Project
 
-This is a lean, fast, single-page reference tool built for wine bar staff. It lives on their phones in a dim, noisy bar — pulled up mid-shift when a guest asks "what are the tasting notes on that Frappato?" The answer needs to appear instantly, with no login, no loading spinner, no friction.
+This is a **comprehensive wine study platform** — a single destination where someone can go deep on any wine in the Ardoa program. The primary use case is off-shift study: a staff member at home, on the couch, wanting to genuinely understand a wine. What grape is it? Where is it from, and why does that place matter? What did the producer do to make it? What does the tech sheet say? What have serious critics said about this specific vintage?
 
-The philosophy is **ruthless simplicity**. Every feature that was added then stripped away — quiz games, timers, time clocks, food pairing matrices — made the site heavier and harder to maintain without making staff meaningfully better at their jobs. What remains is exactly what staff need: wine info, beer info, food descriptions, wine regions, pronunciations. That's it.
+The goal is to have everything in one place so the studier never has to bounce between tabs. The wine entry, the producer's story and winemaking process, a link to the tech sheet PDF, vetted vintage-specific critic notes, and the broader context of the wine's region — all reachable from one screen.
 
-**When in doubt, do less. A focused tool used daily beats a feature-rich tool ignored.**
+**Secondary use**: mid-shift reference. A staff member at a table with a guest waiting can pull this up and get tasting notes and key facts quickly. That matters and should be supported, but it is not the primary design driver.
+
+The features that were stripped out — quiz games, timers, time clocks, food pairing matrices — were cut because they didn't serve either of these goals. That bar stays: only add things that make the wine study experience richer or the mid-shift reference faster. Decoration for its own sake doesn't belong here, but impressive frontend craft that makes the experience feel worthy of the subject matter is welcome.
 
 ---
 
 ## Who Uses This and How
 
-- **Floor staff** — on an iPhone or Android, in Safari, during a shift. They need tasting notes and wine facts fast. They are not sitting down to study; they are standing at a table with a guest waiting.
-- **The manager** — on a laptop, adding or archiving wines a few times a month by running `add_wine.py`, pasting the output into `index.html`, and pushing to GitHub.
-- **No customers** — this is internal training material, not a public-facing menu.
+**Primary — the off-shift studier:**
+A staff member at home, before a shift, or during a break who wants to actually learn the wines. They have time to read. They want depth: where the region is, what makes the vintage interesting, how the wine was made, what the producer's philosophy is, what critics said. This person is the main audience every design and content decision should serve.
 
-This context should inform every decision. If a change makes the site slower to load, harder to navigate on a small screen, or harder to maintain — it's the wrong change.
+**Secondary — the mid-shift looker:**
+A staff member at a table, guest waiting, needing tasting notes or a quick fact. Speed matters here. The site should accommodate this without sacrificing the depth that serves the primary user.
+
+**The manager:**
+Adds and archives wines a few times a month using `add_wine.py`, reviews the output, pastes it into the site, and pushes to GitHub. Occasionally updates the food menu or region content directly.
+
+**No customers** — internal training material, not a public-facing menu.
 
 ---
 
 ## Explicit Rules
 
 ### NEVER
-- Add npm packages, build tools, or anything that requires a build step
-- Split content into multiple HTML files or introduce a backend
 - Use `rgba()` backgrounds on card elements — breaks iOS Safari compositing
 - Use `::before` / `::after` pseudo-elements on card elements — same reason
 - Use `backdrop-filter` on the sticky nav — conflicts with `position: sticky` on iOS
@@ -32,25 +37,25 @@ This context should inform every decision. If a change makes the site slower to 
 - Call `innerHTML` without immediately calling `forceRepaint()` after — content renders invisible on iOS
 - Remove the legacy CSS variable aliases (`--burgundy`, `--gold`, `--cream`, `--charcoal`) — still in active use in Wine Regions styles
 - Add the `food` or `foodPairings` fields back to wine objects — deliberately removed
-- Add a feature that wasn't explicitly requested — this project is actively being simplified
+- Add a feature that doesn't serve deep study or mid-shift reference
 
 ### ALWAYS
-- Call `forceRepaint(el)` after every `innerHTML` assignment
+- Call `forceRepaint(el)` after every `innerHTML` assignment (current single-file architecture)
 - Use opaque hex colors on card backgrounds
-- Keep everything in `index.html` — no exceptions
 - Test visual changes in actual Safari or on an iOS device — Chrome DevTools emulation does not reproduce iOS compositor bugs
+
+### ARCHITECTURE NOTE
+The site is currently a single HTML file but **multi-page is acceptable** — there is no requirement to stay single-file. If splitting into multiple pages makes the study experience better or enables features that aren't practical in one file, do it. The single-file approach was a convenience constraint, not a design principle. Frontend effects, animations (outside of card elements), and more ambitious UI are welcome if they serve the experience.
 
 ---
 
 ## Why These Constraints Exist
 
-**Single file, no build step:** Staff serve this as a GitHub Pages URL, and sometimes as a local file on a phone with no internet. Zero dependencies means zero failure modes. A React app with a broken CDN goes blank; this file cannot fail to load.
-
-**No rgba() on cards, no pseudo-elements, no backdrop-filter:** iOS Safari's GPU compositor creates invisible layers when `position: relative` is combined with transparent backgrounds. This produced blank wine cards that looked fine in Chrome but were completely invisible on iPhones. The fix is opaque hex colors everywhere on cards — no exceptions discovered the hard way.
+**No rgba() on cards, no pseudo-elements, no backdrop-filter:** iOS Safari's GPU compositor creates invisible layers when `position: relative` is combined with transparent backgrounds. This produced blank wine cards that looked fine in Chrome but were completely invisible on iPhones. The fix is opaque hex colors everywhere on cards — no exceptions, discovered the hard way.
 
 **forceRepaint() after innerHTML:** iOS Safari doesn't always schedule a compositor paint pass after dynamic DOM insertion. The helper toggles `display: none` then `display: block` to force a reflow and paint. Without it, sections load as blank white boxes on older iPhones.
 
-**No food/pairing fields:** Wine entries previously included `food` and `foodPairings` fields with pairing recommendations. These were removed because (1) pairing advice belongs in staff training, not a quick-reference tool, and (2) they were opinionated in ways that confused more than helped.
+**No food/pairing fields on wine objects:** Wine entries previously included `food` and `foodPairings` fields. Removed because pairing suggestions are subjective, go stale as the menu changes, and aren't what someone studying a wine actually needs to know.
 
 ---
 
@@ -147,6 +152,21 @@ Every entry in `wines` and `archivedWines` must follow this shape exactly. This 
     notes: "Barbera is Piedmont's most-planted grape (ahead of Nebbiolo), covering over 50% of the region's vineyards. Its naturally high acidity and low tannins make it incredibly food-friendly. Fun fact: Barbera was once considered a 'peasant grape' but has risen to prominence thanks to modern winemaking. The Monferrato DOC was established in 1994 and sits between the famous Langhe and Asti zones.",
     // 3-4 sentences of educational/fun facts: grape history, regional context, producer story, interesting trivia.
     // This is what staff repeat to guests. Make it memorable.
+
+    // ── Study-depth fields (add when research finds them) ──────────────────
+
+    // winemaking: "Harvested by hand in early October. Fermented in stainless steel at controlled
+    //              temperature for 12 days. No oak aging — bottled after 4 months to preserve freshness.",
+    // How the wine was actually made: harvest method, fermentation, aging vessel/duration, filtration.
+    // Use the producer's tech sheet as the source. Omit if not found.
+
+    // techSheetUrl: "https://example.com/tech-sheet-2024.pdf",
+    // Direct link to the producer's PDF tech sheet for this vintage. Omit if not found.
+
+    // criticNotes: "Wine Enthusiast 92pts (2024): \"Bright and lively with laser-sharp acidity...\"",
+    // Vetted, vintage-specific critic note. Must state the vintage explicitly.
+    // Acceptable sources: Wine Enthusiast, Wine Spectator, Decanter, Jancis Robinson, CellarTracker.
+    // Omit entirely rather than include a note that doesn't confirm the vintage.
 }
 ```
 
@@ -158,7 +178,7 @@ Every entry in `wines` and `archivedWines` must follow this shape exactly. This 
 
 ## Writing Style Guide
 
-The voice is **educated but approachable** — a knowledgeable sommelier talking to a curious newcomer, not writing a textbook. Staff use this to answer guest questions, so the language should be something they can actually repeat at a table.
+The voice is **educated but approachable** — a knowledgeable sommelier writing for a curious student who genuinely wants to understand wine, not just pass a test. The primary reader is studying on their own time, so depth is welcome. Avoid textbook dryness but also avoid dumbing things down. The goal is the feeling of a great conversation with someone who really knows their stuff.
 
 **Tasting notes:**
 - Lead with fruit and aromatics, close with structure
@@ -254,14 +274,13 @@ The `forceRepaint(el)` helper is defined in the script block. It toggles `displa
 ## What "Done" Looks Like
 
 A correct change to this project:
-- Touches only `index.html` (plus `CLAUDE.md` or `add_wine.py` when relevant)
-- Introduces no new external dependencies
-- Adds no unrequested features
+- Serves the off-shift studier (depth, completeness) or the mid-shift reference user (speed, clarity) — ideally both
 - Renders correctly in Safari on an iPhone — not just Chrome on desktop
-- Keeps total file size reasonable (the site should load in under 2 seconds on a slow bar wifi connection)
+- Adds no unrequested features
+- If it's a new wine entry: includes winemaking, techSheetUrl, and criticNotes fields when the research found them
 
 A bad change:
-- Adds a framework "just to make it easier"
-- Splits the site into multiple files
-- Adds a feature because it seemed useful, not because it was asked for
+- Adds visual complexity that makes the content harder to read
+- Adds a feature that doesn't serve study or reference
 - Works in Chrome but breaks on iOS
+- Introduces depth of content that wasn't sourced — fabricated winemaking notes or unverified critic scores are worse than blank fields
