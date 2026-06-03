@@ -1,12 +1,12 @@
 # Ardoa Wine Bar - Staff Study Guide
 
-An interactive training website for Ardoa Wine Bar staff. Covers wines, beers, food, pairings, wine regions, and daily operations tools — all in a single HTML file with no dependencies.
+An interactive training website for Ardoa Wine Bar staff. Covers wines, beers, food, pairings, wine regions, and daily operations tools — backed by a FastAPI + PostgreSQL API with an admin interface for managing content.
 
 ## Features
 
 ### Study & Training
-- **Wine List** - 24 wines in the Enomatic system with tasting notes, pairings, and tech sheets
-- **Beer List** - 8 craft beers with descriptions
+- **Wine List** - Wines in the Enomatic system with tasting notes, pairings, and tech sheets
+- **Beer List** - Craft beers with descriptions
 - **Food Menu** - Cheeses, charcuterie, flatbreads, tapas, pates, and desserts
 - **Wine Quiz** - Randomized multiple-choice questions to test knowledge
 - **Online Flashcards** - Interactive flip-card study mode for wines, beers, and food
@@ -24,36 +24,82 @@ An interactive training website for Ardoa Wine Bar staff. Covers wines, beers, f
 - **Opening Checklist** - Pre-shift checklist for opening procedures
 - **Timers** - Kitchen/service countdown timers
 
+### Admin (`/admin.html`)
+- Add, edit, archive, and delete wines, beers, and food items
+- **AI Wine Research** — type a wine name and Claude fills in tasting notes, region, pairings, ABV, and more automatically
+- Password-protected (HTTP Basic Auth)
+
 ## Tech Stack
 
-- Pure vanilla HTML, CSS, and JavaScript (~9,500 lines)
-- No frameworks, no build tools, no dependencies
-- Single-file architecture (`index.html`)
-- External fonts: Google Fonts (Cinzel + Crimson Text)
+- **Frontend**: Vanilla HTML/CSS/JavaScript (`index.html`) — no frameworks, no build tools
+- **Backend**: Python + FastAPI served on Railway
+- **Database**: PostgreSQL (Railway add-on)
+- **AI**: Anthropic Claude API for wine research
+- **Fonts**: Google Fonts (Cinzel + Crimson Text)
 
-## Getting Started
+## File Structure
 
-Open `index.html` in a web browser. No build step or server required.
-
-For local development with a live server:
-
-```bash
-# Python 3
-python -m http.server 8000
-
-# Node.js (npx)
-npx serve .
+```
+/
+├── index.html          # Public staff training site
+├── admin.html          # Admin content management interface
+├── backend/
+│   ├── main.py         # FastAPI app entry point
+│   ├── models.py       # SQLModel DB models (Wine, Beer, FoodItem)
+│   ├── database.py     # DB engine and session
+│   ├── auth.py         # HTTP Basic Auth
+│   ├── routers/        # API route handlers (wines, beers, food)
+│   ├── services/       # AI research service (Anthropic SDK)
+│   ├── seed.py         # One-time DB seed script
+│   ├── seed_data.py    # Original wine/beer/food data as Python
+│   └── requirements.txt
+├── Procfile            # Railway process definition
+└── railway.toml        # Railway deploy config
 ```
 
-Then open `http://localhost:8000` in your browser.
+## API Endpoints
 
-## Deployment
+Public (no auth):
+- `GET /api/wines` — active wines with food pairings
+- `GET /api/wines/archived` — archived wines
+- `GET /api/beers` — all beers
+- `GET /api/food` — all food grouped by category
+- `GET /api/health` — health check
 
-Deploy to any static hosting service:
-- GitHub Pages
-- Netlify
-- Vercel
-- Any web server that serves static files
+Admin (HTTP Basic Auth required):
+- `POST/PUT/DELETE /api/wines/{id}` — wine CRUD
+- `PATCH /api/wines/{id}/archive` — archive a wine
+- `PATCH /api/wines/{id}/restore` — restore archived wine
+- `POST /api/wines/research` — AI research: `{"name": "wine name"}` → prefilled wine object
+- Same CRUD pattern for `/api/beers` and `/api/food/item/{id}`
+
+## Local Development
+
+```bash
+pip install -r backend/requirements.txt
+
+# Run with SQLite (no Postgres needed locally)
+DATABASE_URL=sqlite:///./dev.db ADMIN_PASSWORD=secret ANTHROPIC_API_KEY=sk-... \
+  uvicorn backend.main:app --reload
+
+# Seed the database with existing wine/beer/food data
+DATABASE_URL=sqlite:///./dev.db python -m backend.seed
+```
+
+Open `http://localhost:8000` for the public site, `http://localhost:8000/admin.html` for the admin.
+
+## Railway Deployment
+
+1. Connect this repo to a Railway project
+2. Add the **PostgreSQL** plugin — `DATABASE_URL` is injected automatically
+3. Set environment variables in the Railway dashboard:
+   - `ADMIN_PASSWORD` — password for the admin interface
+   - `ANTHROPIC_API_KEY` — your Claude API key
+   - `ALLOWED_ORIGINS` — comma-separated allowed origins (e.g. `https://your-app.up.railway.app`)
+4. After the first deploy, run the seed job once:
+   ```
+   python -m backend.seed
+   ```
 
 ## Browser Support
 
@@ -63,18 +109,6 @@ Tested and optimized for:
 - Safari (desktop and iOS) — significant effort went into iOS Safari compatibility
 
 > **Note for iOS users:** If the site shows a blank page in a third-party browser app, open it in Safari directly.
-
-## Development
-
-All content lives in `index.html`. No build step — edit and refresh.
-
-- **CSS**: lines 1–4789
-- **HTML**: lines 4790–5973
-- **JavaScript / data**: lines 5974–9526
-
-To add a wine, beer, or food item: find the corresponding JS array in the script section and add an entry. The render functions handle the rest.
-
-Time Clock and Opening Checklist state persist via `localStorage`.
 
 ## License
 
