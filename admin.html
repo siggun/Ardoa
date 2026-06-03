@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ardoa Admin</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, sans-serif; background: #0f0f14; color: #e0ddd6; min-height: 100vh; }
+  header { background: #1a1025; border-bottom: 1px solid #6b1c2e; padding: .75rem 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  header h1 { font-size: 1.1rem; color: #c4a875; letter-spacing: .05em; }
+  header span { font-size: .8rem; color: #888; }
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid #333; background: #12121a; }
+  .tab-btn { padding: .6rem 1.4rem; background: none; border: none; color: #888; cursor: pointer; font-size: .9rem; border-bottom: 2px solid transparent; }
+  .tab-btn.active { color: #c4a875; border-bottom-color: #c4a875; }
+  .tab-content { display: none; padding: 1.5rem; }
+  .tab-content.active { display: block; }
+  .toolbar { display: flex; gap: .75rem; margin-bottom: 1rem; align-items: center; flex-wrap: wrap; }
+  .btn { padding: .45rem .9rem; border: none; border-radius: 4px; cursor: pointer; font-size: .85rem; font-weight: 500; }
+  .btn-primary { background: #6b1c2e; color: #e0ddd6; }
+  .btn-primary:hover { background: #8a2340; }
+  .btn-secondary { background: #2a2535; color: #c4a875; border: 1px solid #4a3f6b; }
+  .btn-secondary:hover { background: #3a3548; }
+  .btn-danger { background: #4a1010; color: #e88; border: 1px solid #6b2020; }
+  .btn-danger:hover { background: #6b1818; }
+  .btn-sm { padding: .3rem .6rem; font-size: .78rem; }
+  table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+  th { background: #1a1a28; color: #c4a875; text-align: left; padding: .5rem .75rem; font-weight: 600; border-bottom: 1px solid #333; }
+  td { padding: .5rem .75rem; border-bottom: 1px solid #222; vertical-align: middle; }
+  tr:hover td { background: #1a1a28; }
+  .badge { display: inline-block; padding: .15rem .45rem; border-radius: 3px; font-size: .72rem; font-weight: 600; text-transform: uppercase; }
+  .badge-red { background: #4a1a1a; color: #e88; }
+  .badge-white { background: #1a1a2a; color: #aad; }
+  .badge-rose { background: #3a1a2a; color: #e8a; }
+  .badge-orange { background: #2a1a0a; color: #d8a; }
+  .badge-sparkling { background: #1a2a1a; color: #ada; }
+  /* Modal */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.75); z-index: 1000; align-items: flex-start; justify-content: center; padding: 2rem 1rem; overflow-y: auto; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: #1a1a28; border: 1px solid #4a3f6b; border-radius: 8px; width: 100%; max-width: 700px; padding: 1.5rem; position: relative; }
+  .modal h2 { color: #c4a875; margin-bottom: 1.25rem; font-size: 1.05rem; }
+  .modal-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: #888; font-size: 1.2rem; cursor: pointer; }
+  .modal-close:hover { color: #e0ddd6; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+  .form-grid .full { grid-column: 1/-1; }
+  label { display: block; font-size: .78rem; color: #888; margin-bottom: .25rem; }
+  input[type=text], input[type=number], textarea, select {
+    width: 100%; background: #0f0f18; border: 1px solid #333; border-radius: 4px;
+    color: #e0ddd6; padding: .4rem .6rem; font-size: .85rem; font-family: inherit;
+  }
+  input[type=text]:focus, textarea:focus, select:focus { outline: none; border-color: #6b1c2e; }
+  textarea { resize: vertical; min-height: 70px; }
+  .pairings-list { display: flex; flex-direction: column; gap: .5rem; margin-bottom: .5rem; }
+  .pairing-row { display: grid; grid-template-columns: 1fr 2fr auto; gap: .4rem; align-items: center; }
+  .pairing-row button { padding: .3rem .5rem; background: #4a1010; border: none; border-radius: 3px; color: #e88; cursor: pointer; }
+  .research-section { background: #12121e; border: 1px solid #333; border-radius: 6px; padding: 1rem; margin-bottom: 1rem; }
+  .research-section h3 { font-size: .85rem; color: #c4a875; margin-bottom: .75rem; }
+  .research-row { display: flex; gap: .5rem; }
+  .research-row input { flex: 1; }
+  .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid #555; border-top-color: #c4a875; border-radius: 50%; animation: spin .7s linear infinite; vertical-align: middle; margin-right: .4rem; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .msg { padding: .5rem .75rem; border-radius: 4px; font-size: .82rem; margin-bottom: .75rem; }
+  .msg-ok { background: #0a2a0a; color: #6d6; border: 1px solid #1a4a1a; }
+  .msg-err { background: #2a0a0a; color: #e66; border: 1px solid #4a1a1a; }
+  .archived-badge { background: #2a1a08; color: #c8a; border-radius: 3px; padding: .15rem .4rem; font-size: .72rem; }
+  .section-sub-tabs { display: flex; gap: .5rem; margin-bottom: 1rem; }
+  .sub-tab-btn { background: #1a1a28; border: 1px solid #333; color: #888; padding: .35rem .8rem; border-radius: 4px; cursor: pointer; font-size: .82rem; }
+  .sub-tab-btn.active { color: #c4a875; border-color: #6b1c2e; }
+  #auth-modal { z-index: 2000; }
+  .order-btns { display: flex; flex-direction: column; gap: 2px; }
+  .order-btns button { background: #1a1a28; border: 1px solid #333; color: #888; padding: 0 .35rem; cursor: pointer; font-size: .7rem; border-radius: 2px; }
+  .order-btns button:hover { color: #c4a875; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚙ Ardoa Admin</h1>
+  <span id="auth-status">Not authenticated</span>
+  <button class="btn btn-secondary btn-sm" onclick="promptAuth()" style="margin-left:auto">Change Password</button>
+  <a href="/" class="btn btn-secondary btn-sm">← Public Site</a>
+</header>
+
+<div id="global-msg"></div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('wines')">Wines</button>
+  <button class="tab-btn" onclick="switchTab('beers')">Beers</button>
+  <button class="tab-btn" onclick="switchTab('food')">Food</button>
+</div>
+
+<!-- ========== WINES TAB ========== -->
+<div id="tab-wines" class="tab-content active">
+  <div class="section-sub-tabs">
+    <button class="sub-tab-btn active" onclick="switchWineSubTab('active')">Active Wines</button>
+    <button class="sub-tab-btn" onclick="switchWineSubTab('archived')">Archived</button>
+  </div>
+  <div id="wine-active-section">
+    <div class="toolbar">
+      <button class="btn btn-primary" onclick="openWineModal()">+ Add Wine</button>
+      <button class="btn btn-secondary btn-sm" onclick="loadWines()">↻ Refresh</button>
+    </div>
+    <div id="wines-msg"></div>
+    <table id="wines-table">
+      <thead><tr><th>#</th><th>Name</th><th>Vintage</th><th>Type</th><th>Country</th><th>Actions</th></tr></thead>
+      <tbody id="wines-tbody"></tbody>
+    </table>
+  </div>
+  <div id="wine-archived-section" style="display:none">
+    <div class="toolbar"><button class="btn btn-secondary btn-sm" onclick="loadArchivedWines()">↻ Refresh</button></div>
+    <table>
+      <thead><tr><th>Name</th><th>Vintage</th><th>Type</th><th>Archived</th><th>Replaced By</th><th>Actions</th></tr></thead>
+      <tbody id="archived-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ========== BEERS TAB ========== -->
+<div id="tab-beers" class="tab-content">
+  <div class="toolbar">
+    <button class="btn btn-primary" onclick="openBeerModal()">+ Add Beer</button>
+    <button class="btn btn-secondary btn-sm" onclick="loadBeers()">↻ Refresh</button>
+  </div>
+  <div id="beers-msg"></div>
+  <table>
+    <thead><tr><th>#</th><th>Name</th><th>Brewery</th><th>Style</th><th>ABV</th><th>Actions</th></tr></thead>
+    <tbody id="beers-tbody"></tbody>
+  </table>
+</div>
+
+<!-- ========== FOOD TAB ========== -->
+<div id="tab-food" class="tab-content">
+  <div class="toolbar">
+    <select id="food-category-select" onchange="loadFoodCategory(this.value)">
+      <option value="cheese">Cheese</option>
+      <option value="charcuterie">Charcuterie</option>
+      <option value="flatbread">Flatbreads</option>
+      <option value="tapas">Tapas</option>
+      <option value="pate">Patés</option>
+      <option value="dessert">Desserts</option>
+    </select>
+    <button class="btn btn-primary" onclick="openFoodModal()">+ Add Item</button>
+    <button class="btn btn-secondary btn-sm" onclick="loadFoodCategory(currentFoodCat)">↻ Refresh</button>
+  </div>
+  <div id="food-msg"></div>
+  <table>
+    <thead><tr><th>#</th><th>Name</th><th>Type</th><th>Price</th><th>Actions</th></tr></thead>
+    <tbody id="food-tbody"></tbody>
+  </table>
+</div>
+
+<!-- ========== AUTH MODAL ========== -->
+<div class="modal-overlay" id="auth-modal">
+  <div class="modal" style="max-width:360px">
+    <h2>Admin Login</h2>
+    <p style="font-size:.82rem;color:#888;margin-bottom:1rem;">Enter credentials to make changes.</p>
+    <div style="display:flex;flex-direction:column;gap:.75rem;">
+      <div><label>Username</label><input type="text" id="auth-user" value="admin" autocomplete="username"></div>
+      <div><label>Password</label><input type="text" id="auth-pass" autocomplete="current-password"></div>
+      <button class="btn btn-primary" onclick="saveAuth()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== WINE MODAL ========== -->
+<div class="modal-overlay" id="wine-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('wine-modal')">✕</button>
+    <h2 id="wine-modal-title">Add Wine</h2>
+    <div class="research-section">
+      <h3>🔍 AI Research</h3>
+      <div class="research-row">
+        <input type="text" id="research-name" placeholder="e.g. Caymus Cabernet Sauvignon 2022">
+        <button class="btn btn-primary" onclick="runResearch()">Research</button>
+      </div>
+      <div id="research-msg" style="margin-top:.5rem;font-size:.8rem;color:#888;"></div>
+    </div>
+    <div id="wine-form-msg"></div>
+    <div class="form-grid">
+      <div><label>Name *</label><input type="text" id="wf-name"></div>
+      <div><label>Vintage *</label><input type="text" id="wf-vintage" placeholder="2022 or NV"></div>
+      <div><label>Type *</label>
+        <select id="wf-type">
+          <option value="red">Red</option>
+          <option value="white">White</option>
+          <option value="rose">Rosé</option>
+          <option value="orange">Orange</option>
+          <option value="sparkling">Sparkling</option>
+        </select>
+      </div>
+      <div><label>Grape</label><input type="text" id="wf-grape"></div>
+      <div class="full"><label>Grape Detail</label><textarea id="wf-grape-detail" rows="2"></textarea></div>
+      <div><label>Region</label><input type="text" id="wf-region"></div>
+      <div><label>Appellation</label><input type="text" id="wf-appellation"></div>
+      <div><label>Country</label><input type="text" id="wf-country"></div>
+      <div><label>Alcohol</label><input type="text" id="wf-alcohol" placeholder="13%"></div>
+      <div class="full"><label>Winemaker</label><textarea id="wf-winemaker" rows="2"></textarea></div>
+      <div class="full"><label>Tasting Notes</label><textarea id="wf-tasting" rows="3"></textarea></div>
+      <div class="full"><label>Food Pairing Summary</label><input type="text" id="wf-food"></div>
+      <div class="full"><label>Serving</label><input type="text" id="wf-serving"></div>
+      <div class="full"><label>Notes (educational)</label><textarea id="wf-notes" rows="3"></textarea></div>
+      <div class="full"><label>Pronunciation</label><input type="text" id="wf-pronunciation"></div>
+      <div><label><input type="checkbox" id="wf-pgo"> Pronunciation guide only</label></div>
+    </div>
+    <div style="margin-top:1rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;">
+        <label style="font-size:.85rem;color:#c4a875">Food Pairings</label>
+        <button class="btn btn-secondary btn-sm" onclick="addPairingRow()">+ Add Pairing</button>
+      </div>
+      <div class="pairings-list" id="pairings-list"></div>
+    </div>
+    <div style="margin-top:1.25rem;display:flex;gap:.75rem;justify-content:flex-end">
+      <button class="btn btn-secondary" onclick="closeModal('wine-modal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveWine()">Save Wine</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== ARCHIVE MODAL ========== -->
+<div class="modal-overlay" id="archive-modal">
+  <div class="modal" style="max-width:420px">
+    <button class="modal-close" onclick="closeModal('archive-modal')">✕</button>
+    <h2>Archive Wine</h2>
+    <div style="display:flex;flex-direction:column;gap:.75rem;margin-top:.5rem">
+      <div><label>Archived Date</label><input type="text" id="arch-date" placeholder="March 2026"></div>
+      <div><label>Replaced By (optional)</label><input type="text" id="arch-replaced"></div>
+      <div style="display:flex;gap:.75rem;justify-content:flex-end;margin-top:.5rem">
+        <button class="btn btn-secondary" onclick="closeModal('archive-modal')">Cancel</button>
+        <button class="btn btn-danger" onclick="confirmArchive()">Archive</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== BEER MODAL ========== -->
+<div class="modal-overlay" id="beer-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('beer-modal')">✕</button>
+    <h2 id="beer-modal-title">Add Beer</h2>
+    <div id="beer-form-msg"></div>
+    <div class="form-grid">
+      <div><label>Name *</label><input type="text" id="bf-name"></div>
+      <div><label>Brewery</label><input type="text" id="bf-brewery"></div>
+      <div><label>Location</label><input type="text" id="bf-location"></div>
+      <div><label>Style</label><input type="text" id="bf-style"></div>
+      <div><label>Type</label>
+        <select id="bf-type">
+          <option value="ale">Ale</option>
+          <option value="ipa">IPA</option>
+          <option value="lager">Lager</option>
+          <option value="stout">Stout</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div><label>ABV</label><input type="text" id="bf-abv" placeholder="5.0%"></div>
+      <div><label>Body</label><input type="text" id="bf-body" placeholder="Light / Medium / Full"></div>
+      <div class="full"><label>Tasting Notes</label><textarea id="bf-tasting" rows="2"></textarea></div>
+      <div class="full"><label>Notes</label><textarea id="bf-notes" rows="2"></textarea></div>
+    </div>
+    <div style="margin-top:1.25rem;display:flex;gap:.75rem;justify-content:flex-end">
+      <button class="btn btn-secondary" onclick="closeModal('beer-modal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveBeer()">Save Beer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== FOOD MODAL ========== -->
+<div class="modal-overlay" id="food-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('food-modal')">✕</button>
+    <h2 id="food-modal-title">Add Food Item</h2>
+    <div id="food-form-msg"></div>
+    <div class="form-grid">
+      <div><label>Category</label>
+        <select id="ff-category">
+          <option value="cheese">Cheese</option>
+          <option value="charcuterie">Charcuterie</option>
+          <option value="flatbread">Flatbread</option>
+          <option value="tapas">Tapas</option>
+          <option value="pate">Paté</option>
+          <option value="dessert">Dessert</option>
+        </select>
+      </div>
+      <div><label>Price</label><input type="text" id="ff-price" placeholder="$9"></div>
+      <div><label>Name *</label><input type="text" id="ff-name"></div>
+      <div><label>Type / Subtitle</label><input type="text" id="ff-type"></div>
+      <div><label>Origin</label><input type="text" id="ff-origin"></div>
+      <div><label>Pronunciation</label><input type="text" id="ff-pronunciation"></div>
+      <div class="full"><label>Description</label><textarea id="ff-description" rows="3"></textarea></div>
+      <div class="full"><label>Wine Pairings</label><textarea id="ff-pairings" rows="2"></textarea></div>
+    </div>
+    <div style="margin-top:1.25rem;display:flex;gap:.75rem;justify-content:flex-end">
+      <button class="btn btn-secondary" onclick="closeModal('food-modal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveFoodItem()">Save Item</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== Auth =====
+var authHeader = sessionStorage.getItem('ardoa-auth') || '';
+
+function getAuthHeader() { return authHeader; }
+
+function promptAuth() {
+  document.getElementById('auth-modal').classList.add('open');
+}
+
+function saveAuth() {
+  var u = document.getElementById('auth-user').value.trim();
+  var p = document.getElementById('auth-pass').value.trim();
+  authHeader = 'Basic ' + btoa(u + ':' + p);
+  sessionStorage.setItem('ardoa-auth', authHeader);
+  document.getElementById('auth-modal').classList.remove('open');
+  document.getElementById('auth-status').textContent = 'Logged in as ' + u;
+}
+
+function apiFetch(url, opts) {
+  opts = opts || {};
+  opts.headers = Object.assign({ 'Content-Type': 'application/json' }, opts.headers || {});
+  if (authHeader) opts.headers['Authorization'] = authHeader;
+  return fetch(url, opts).then(function(r) {
+    if (r.status === 401) { promptAuth(); throw new Error('Not authenticated'); }
+    if (!r.ok) return r.json().then(function(e) { throw new Error(e.detail || r.statusText); });
+    return r.json();
+  });
+}
+
+// ===== Tab switching =====
+function switchTab(name) {
+  document.querySelectorAll('.tab-btn').forEach(function(b, i) {
+    b.classList.toggle('active', ['wines','beers','food'][i] === name);
+  });
+  document.querySelectorAll('.tab-content').forEach(function(s) { s.classList.remove('active'); });
+  document.getElementById('tab-' + name).classList.add('active');
+  if (name === 'wines') loadWines();
+  else if (name === 'beers') loadBeers();
+  else if (name === 'food') loadFoodCategory(currentFoodCat);
+}
+
+// ===== Modal helpers =====
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function showMsg(elId, msg, isErr) {
+  var el = document.getElementById(elId);
+  if (!el) return;
+  el.innerHTML = '<div class="msg ' + (isErr ? 'msg-err' : 'msg-ok') + '">' + msg + '</div>';
+  setTimeout(function() { el.innerHTML = ''; }, 4000);
+}
+
+// ===== WINES =====
+var wineEditId = null;
+var archiveTargetId = null;
+
+function switchWineSubTab(which) {
+  document.querySelectorAll('.sub-tab-btn').forEach(function(b, i) {
+    b.classList.toggle('active', ['active','archived'][i] === which);
+  });
+  document.getElementById('wine-active-section').style.display = which === 'active' ? '' : 'none';
+  document.getElementById('wine-archived-section').style.display = which === 'archived' ? '' : 'none';
+  if (which === 'archived') loadArchivedWines();
+  else loadWines();
+}
+
+function loadWines() {
+  apiFetch('/api/wines').then(function(wines) {
+    var tbody = document.getElementById('wines-tbody');
+    tbody.innerHTML = wines.map(function(w, i) {
+      return '<tr>' +
+        '<td>' +
+          '<div class="order-btns">' +
+            '<button onclick="reorderWine(' + w.id + ',' + (w.display_order - 1) + ')" title="Move up">▲</button>' +
+            '<button onclick="reorderWine(' + w.id + ',' + (w.display_order + 1) + ')" title="Move down">▼</button>' +
+          '</div>' +
+        '</td>' +
+        '<td>' + esc(w.name) + '</td>' +
+        '<td>' + esc(w.vintage) + '</td>' +
+        '<td><span class="badge badge-' + w.type + '">' + w.type + '</span></td>' +
+        '<td>' + esc(w.country) + '</td>' +
+        '<td style="display:flex;gap:.4rem;flex-wrap:wrap">' +
+          '<button class="btn btn-secondary btn-sm" onclick="editWine(' + JSON.stringify(JSON.stringify(w)) + ')">Edit</button>' +
+          '<button class="btn btn-secondary btn-sm" onclick="archiveWine(' + w.id + ')">Archive</button>' +
+          '<button class="btn btn-danger btn-sm" onclick="deleteWine(' + w.id + ',\'' + esc(w.name) + '\')">Delete</button>' +
+        '</td></tr>';
+    }).join('');
+  }).catch(function(e) { showMsg('wines-msg', e.message, true); });
+}
+
+function loadArchivedWines() {
+  apiFetch('/api/wines/archived').then(function(wines) {
+    var tbody = document.getElementById('archived-tbody');
+    tbody.innerHTML = wines.map(function(w) {
+      return '<tr>' +
+        '<td>' + esc(w.name) + '</td>' +
+        '<td>' + esc(w.vintage) + '</td>' +
+        '<td><span class="badge badge-' + w.type + '">' + w.type + '</span></td>' +
+        '<td>' + esc(w.archived_date || '') + '</td>' +
+        '<td>' + esc(w.replaced_by || '') + '</td>' +
+        '<td>' +
+          '<button class="btn btn-secondary btn-sm" onclick="restoreWine(' + w.id + ')">Restore</button> ' +
+          '<button class="btn btn-danger btn-sm" onclick="deleteWine(' + w.id + ',\'' + esc(w.name) + '\')">Delete</button>' +
+        '</td></tr>';
+    }).join('');
+  });
+}
+
+function openWineModal(wine) {
+  wineEditId = wine ? wine.id : null;
+  document.getElementById('wine-modal-title').textContent = wine ? 'Edit Wine' : 'Add Wine';
+  var fields = { name:'', vintage:'', type:'red', grape:'', 'grape-detail':'', region:'', appellation:'', country:'', winemaker:'', tasting:'', food:'', serving:'', notes:'', pronunciation:'', alcohol:'' };
+  if (wine) {
+    fields.name = wine.name; fields.vintage = wine.vintage; fields.type = wine.type;
+    fields.grape = wine.grape; fields['grape-detail'] = wine.grape_detail;
+    fields.region = wine.region; fields.appellation = wine.appellation;
+    fields.country = wine.country; fields.winemaker = wine.winemaker;
+    fields.tasting = wine.tasting; fields.food = wine.food;
+    fields.serving = wine.serving; fields.notes = wine.notes;
+    fields.pronunciation = wine.pronunciation || '';
+    fields.alcohol = wine.alcohol || '';
+    document.getElementById('wf-pgo').checked = wine.pronunciation_guide_only;
+  } else {
+    document.getElementById('wf-pgo').checked = false;
+  }
+  Object.keys(fields).forEach(function(k) {
+    var el = document.getElementById('wf-' + k);
+    if (el) el.value = fields[k];
+  });
+  // Pairings
+  var pl = document.getElementById('pairings-list');
+  pl.innerHTML = '';
+  if (wine && wine.food_pairings) {
+    wine.food_pairings.forEach(function(p) { addPairingRow(p.item, p.why); });
+  }
+  document.getElementById('research-msg').textContent = '';
+  document.getElementById('wine-form-msg').innerHTML = '';
+  openModal('wine-modal');
+}
+
+function editWine(jsonStr) {
+  openWineModal(JSON.parse(jsonStr));
+}
+
+function addPairingRow(item, why) {
+  var row = document.createElement('div');
+  row.className = 'pairing-row';
+  row.innerHTML = '<input type="text" placeholder="Food item" value="' + esc(item||'') + '">' +
+    '<input type="text" placeholder="Why it pairs well" value="' + esc(why||'') + '">' +
+    '<button onclick="this.parentNode.remove()" title="Remove">✕</button>';
+  document.getElementById('pairings-list').appendChild(row);
+}
+
+function getPairings() {
+  return Array.from(document.querySelectorAll('#pairings-list .pairing-row')).map(function(row) {
+    var inputs = row.querySelectorAll('input');
+    return { item: inputs[0].value, why: inputs[1].value };
+  }).filter(function(p) { return p.item.trim(); });
+}
+
+function getWineFormData() {
+  return {
+    name: v('wf-name'), vintage: v('wf-vintage'), type: v('wf-type'),
+    grape: v('wf-grape'), grape_detail: v('wf-grape-detail'),
+    region: v('wf-region'), appellation: v('wf-appellation'),
+    country: v('wf-country'), winemaker: v('wf-winemaker'),
+    tasting: v('wf-tasting'), food: v('wf-food'),
+    serving: v('wf-serving'), notes: v('wf-notes'),
+    pronunciation: v('wf-pronunciation'), alcohol: v('wf-alcohol'),
+    pronunciation_guide_only: document.getElementById('wf-pgo').checked,
+    food_pairings: getPairings(),
+  };
+}
+
+function saveWine() {
+  var data = getWineFormData();
+  if (!data.name || !data.vintage) { showMsg('wine-form-msg', 'Name and vintage are required.', true); return; }
+  var url = wineEditId ? '/api/wines/' + wineEditId : '/api/wines';
+  var method = wineEditId ? 'PUT' : 'POST';
+  apiFetch(url, { method: method, body: JSON.stringify(data) }).then(function() {
+    closeModal('wine-modal');
+    loadWines();
+    showMsg('wines-msg', (wineEditId ? 'Wine updated.' : 'Wine added.'));
+  }).catch(function(e) { showMsg('wine-form-msg', e.message, true); });
+}
+
+function archiveWine(id) {
+  archiveTargetId = id;
+  document.getElementById('arch-date').value = new Date().toLocaleDateString('en-US', { month:'long', year:'numeric' });
+  document.getElementById('arch-replaced').value = '';
+  openModal('archive-modal');
+}
+
+function confirmArchive() {
+  var data = { archived_date: v('arch-date'), replaced_by: v('arch-replaced') || null };
+  apiFetch('/api/wines/' + archiveTargetId + '/archive', { method: 'PATCH', body: JSON.stringify(data) }).then(function() {
+    closeModal('archive-modal');
+    loadWines();
+    showMsg('wines-msg', 'Wine archived.');
+  }).catch(function(e) { showMsg('wines-msg', e.message, true); });
+}
+
+function restoreWine(id) {
+  apiFetch('/api/wines/' + id + '/restore', { method: 'PATCH', body: '{}' }).then(function() {
+    loadArchivedWines();
+    showMsg('wines-msg', 'Wine restored.');
+  }).catch(function(e) { showMsg('wines-msg', e.message, true); });
+}
+
+function deleteWine(id, name) {
+  if (!confirm('Delete "' + name + '"? This cannot be undone.')) return;
+  apiFetch('/api/wines/' + id, { method: 'DELETE' }).then(function() {
+    loadWines();
+    showMsg('wines-msg', 'Wine deleted.');
+  }).catch(function(e) { showMsg('wines-msg', e.message, true); });
+}
+
+function reorderWine(id, newOrder) {
+  apiFetch('/api/wines/' + id + '/reorder', { method: 'PATCH', body: JSON.stringify({ new_order: newOrder }) }).then(loadWines).catch(function(e) { showMsg('wines-msg', e.message, true); });
+}
+
+// ===== AI Research =====
+function runResearch() {
+  var name = document.getElementById('research-name').value.trim();
+  if (!name) return;
+  var msgEl = document.getElementById('research-msg');
+  msgEl.innerHTML = '<span class="spinner"></span> Researching…';
+  apiFetch('/api/wines/research', { method: 'POST', body: JSON.stringify({ name: name }) }).then(function(data) {
+    msgEl.textContent = '✓ Research complete — form populated';
+    populateWineForm(data);
+  }).catch(function(e) { msgEl.textContent = '✗ ' + e.message; });
+}
+
+function populateWineForm(data) {
+  var map = {
+    'wf-name': data.name, 'wf-vintage': data.vintage, 'wf-type': data.type,
+    'wf-grape': data.grape, 'wf-grape-detail': data.grape_detail || data.grapeDetail || '',
+    'wf-region': data.region, 'wf-appellation': data.appellation,
+    'wf-country': data.country, 'wf-winemaker': data.winemaker,
+    'wf-tasting': data.tasting, 'wf-food': data.food,
+    'wf-serving': data.serving, 'wf-notes': data.notes,
+    'wf-pronunciation': data.pronunciation || '', 'wf-alcohol': data.alcohol || '',
+  };
+  Object.keys(map).forEach(function(k) { var el = document.getElementById(k); if (el) el.value = map[k] || ''; });
+  var pl = document.getElementById('pairings-list');
+  pl.innerHTML = '';
+  (data.food_pairings || data.foodPairings || []).forEach(function(p) { addPairingRow(p.item, p.why); });
+}
+
+// ===== BEERS =====
+var beerEditId = null;
+
+function loadBeers() {
+  apiFetch('/api/beers').then(function(beers) {
+    var tbody = document.getElementById('beers-tbody');
+    tbody.innerHTML = beers.map(function(b) {
+      return '<tr>' +
+        '<td>' + b.display_order + '</td>' +
+        '<td>' + esc(b.name) + '</td>' +
+        '<td>' + esc(b.brewery) + '</td>' +
+        '<td>' + esc(b.style) + '</td>' +
+        '<td>' + esc(b.abv) + '</td>' +
+        '<td style="display:flex;gap:.4rem">' +
+          '<button class="btn btn-secondary btn-sm" onclick="editBeer(' + JSON.stringify(JSON.stringify(b)) + ')">Edit</button>' +
+          '<button class="btn btn-danger btn-sm" onclick="deleteBeer(' + b.id + ',\'' + esc(b.name) + '\')">Delete</button>' +
+        '</td></tr>';
+    }).join('');
+  }).catch(function(e) { showMsg('beers-msg', e.message, true); });
+}
+
+function openBeerModal(beer) {
+  beerEditId = beer ? beer.id : null;
+  document.getElementById('beer-modal-title').textContent = beer ? 'Edit Beer' : 'Add Beer';
+  var fields = { name:'', brewery:'', location:'', style:'', type:'ale', abv:'', body:'', tasting:'', notes:'' };
+  if (beer) Object.keys(fields).forEach(function(k) { fields[k] = beer[k] || ''; });
+  Object.keys(fields).forEach(function(k) { var el = document.getElementById('bf-' + k); if (el) el.value = fields[k]; });
+  document.getElementById('beer-form-msg').innerHTML = '';
+  openModal('beer-modal');
+}
+
+function editBeer(jsonStr) { openBeerModal(JSON.parse(jsonStr)); }
+
+function saveBeer() {
+  var data = { name:v('bf-name'), brewery:v('bf-brewery'), location:v('bf-location'), style:v('bf-style'), type:v('bf-type'), abv:v('bf-abv'), body:v('bf-body'), tasting:v('bf-tasting'), notes:v('bf-notes') };
+  if (!data.name) { showMsg('beer-form-msg', 'Name is required.', true); return; }
+  var url = beerEditId ? '/api/beers/' + beerEditId : '/api/beers';
+  apiFetch(url, { method: beerEditId ? 'PUT' : 'POST', body: JSON.stringify(data) }).then(function() {
+    closeModal('beer-modal'); loadBeers(); showMsg('beers-msg', beerEditId ? 'Beer updated.' : 'Beer added.');
+  }).catch(function(e) { showMsg('beer-form-msg', e.message, true); });
+}
+
+function deleteBeer(id, name) {
+  if (!confirm('Delete "' + name + '"?')) return;
+  apiFetch('/api/beers/' + id, { method: 'DELETE' }).then(function() { loadBeers(); showMsg('beers-msg', 'Beer deleted.'); }).catch(function(e) { showMsg('beers-msg', e.message, true); });
+}
+
+// ===== FOOD =====
+var foodEditId = null;
+var currentFoodCat = 'cheese';
+
+function loadFoodCategory(cat) {
+  currentFoodCat = cat;
+  apiFetch('/api/food/' + cat).then(function(items) {
+    var tbody = document.getElementById('food-tbody');
+    tbody.innerHTML = items.map(function(item) {
+      return '<tr>' +
+        '<td>' + item.display_order + '</td>' +
+        '<td>' + esc(item.name) + '</td>' +
+        '<td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(item.type) + '</td>' +
+        '<td>' + esc(item.price || '') + '</td>' +
+        '<td style="display:flex;gap:.4rem">' +
+          '<button class="btn btn-secondary btn-sm" onclick="editFood(' + JSON.stringify(JSON.stringify(item)) + ')">Edit</button>' +
+          '<button class="btn btn-danger btn-sm" onclick="deleteFood(' + item.id + ',\'' + esc(item.name) + '\')">Delete</button>' +
+        '</td></tr>';
+    }).join('');
+  }).catch(function(e) { showMsg('food-msg', e.message, true); });
+}
+
+function openFoodModal(item) {
+  foodEditId = item ? item.id : null;
+  document.getElementById('food-modal-title').textContent = item ? 'Edit Food Item' : 'Add Food Item';
+  var fields = { category: currentFoodCat, name:'', price:'', type:'', origin:'', pronunciation:'', description:'', pairings:'' };
+  if (item) Object.keys(fields).forEach(function(k) { fields[k] = item[k] || ''; });
+  Object.keys(fields).forEach(function(k) { var el = document.getElementById('ff-' + k); if (el) el.value = fields[k]; });
+  document.getElementById('food-form-msg').innerHTML = '';
+  openModal('food-modal');
+}
+
+function editFood(jsonStr) { openFoodModal(JSON.parse(jsonStr)); }
+
+function saveFoodItem() {
+  var data = { category:v('ff-category'), name:v('ff-name'), price:v('ff-price')||null, type:v('ff-type'), origin:v('ff-origin')||null, pronunciation:v('ff-pronunciation')||null, description:v('ff-description'), pairings:v('ff-pairings')||null };
+  if (!data.name) { showMsg('food-form-msg', 'Name is required.', true); return; }
+  var url = foodEditId ? '/api/food/item/' + foodEditId : '/api/food';
+  apiFetch(url, { method: foodEditId ? 'PUT' : 'POST', body: JSON.stringify(data) }).then(function() {
+    closeModal('food-modal'); loadFoodCategory(currentFoodCat); showMsg('food-msg', foodEditId ? 'Item updated.' : 'Item added.');
+  }).catch(function(e) { showMsg('food-form-msg', e.message, true); });
+}
+
+function deleteFood(id, name) {
+  if (!confirm('Delete "' + name + '"?')) return;
+  apiFetch('/api/food/item/' + id, { method: 'DELETE' }).then(function() { loadFoodCategory(currentFoodCat); showMsg('food-msg', 'Item deleted.'); }).catch(function(e) { showMsg('food-msg', e.message, true); });
+}
+
+// ===== Helpers =====
+function v(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+
+// ===== Init =====
+if (authHeader) {
+  var u = authHeader ? atob(authHeader.replace('Basic ','')).split(':')[0] : '';
+  document.getElementById('auth-status').textContent = 'Logged in as ' + u;
+} else {
+  promptAuth();
+}
+loadWines();
+</script>
+</body>
+</html>
