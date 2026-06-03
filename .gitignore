@@ -17,3 +17,7 @@ Desktop.ini
 
 # Local environment / notes
 *.local
+__pycache__/
+*.pyc
+*.pyo
+dev.db
