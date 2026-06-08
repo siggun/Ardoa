@@ -4,8 +4,9 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from sqlalchemy import text
 
-from backend.database import create_db_and_tables
+from backend.database import create_db_and_tables, engine
 from backend.routers import beers, food, wines
 
 
@@ -34,7 +35,17 @@ app.include_router(food.router)
 
 @app.get("/api/health")
 def health():
-    return {"status": "ok"}
+    try:
+        with engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
+        db_status = "connected"
+    except Exception:
+        db_status = "error"
+    return {
+        "status": "ok",
+        "db": db_status,
+        "db_backend": engine.url.get_backend_name(),
+    }
 
 
 # Static files mount LAST so /api/* routes take precedence
