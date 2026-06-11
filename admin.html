@@ -299,20 +299,34 @@
 <script>
 // ===== Auth =====
 var authHeader = sessionStorage.getItem('ardoa-auth') || '';
+var authResolvers = []; // pending callbacks waiting for credentials
 
 function getAuthHeader() { return authHeader; }
 
 function promptAuth() {
   document.getElementById('auth-modal').classList.add('open');
+  // Focus the username field (or password if username already filled)
+  var uEl = document.getElementById('auth-user');
+  var pEl = document.getElementById('auth-pass');
+  setTimeout(function() { (uEl.value ? pEl : uEl).focus(); }, 50);
+}
+
+// Returns a Promise that resolves once the user saves credentials
+function waitForAuth() {
+  return new Promise(function(resolve) { authResolvers.push(resolve); });
 }
 
 function saveAuth() {
   var u = document.getElementById('auth-user').value.trim();
   var p = document.getElementById('auth-pass').value.trim();
+  if (!u || !p) return;
   authHeader = 'Basic ' + btoa(u + ':' + p);
   sessionStorage.setItem('ardoa-auth', authHeader);
   document.getElementById('auth-modal').classList.remove('open');
   document.getElementById('auth-status').textContent = 'Logged in as ' + u;
+  // Resolve any requests that were waiting for credentials
+  var pending = authResolvers.splice(0);
+  pending.forEach(function(fn) { fn(); });
 }
 
 function apiFetch(url, opts) {
@@ -320,7 +334,18 @@ function apiFetch(url, opts) {
   opts.headers = Object.assign({ 'Content-Type': 'application/json' }, opts.headers || {});
   if (authHeader) opts.headers['Authorization'] = authHeader;
   return fetch(url, opts).then(function(r) {
-    if (r.status === 401) { promptAuth(); throw new Error('Not authenticated'); }
+    if (r.status === 401) {
+      promptAuth();
+      // Wait for credentials, then retry the same request once
+      return waitForAuth().then(function() {
+        var retryOpts = { method: opts.method || 'GET', headers: Object.assign({}, opts.headers, { 'Authorization': authHeader }) };
+        if (opts.body) retryOpts.body = opts.body;
+        return fetch(url, retryOpts).then(function(r2) {
+          if (!r2.ok) return r2.json().then(function(e) { throw new Error(e.detail || r2.statusText); });
+          return r2.json();
+        });
+      });
+    }
     if (!r.ok) return r.json().then(function(e) { throw new Error(e.detail || r.statusText); });
     return r.json();
   });
