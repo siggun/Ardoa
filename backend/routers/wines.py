@@ -27,9 +27,14 @@ class WineIn(BaseModel):
     appellation: str = ""
     country: str = ""
     winemaker: str = ""
-    tasting: str = ""
     alcohol: str = ""
-    notes: str = ""
+    body: str = ""
+    aromatics: str = ""
+    palate: str = ""
+    structure: str = ""
+    finish: str = ""
+    winemaking: str = ""
+    story: str = ""
     pronunciation: Optional[str] = None
     pronunciation_guide_only: bool = False
     tech_sheet_url: Optional[str] = None
@@ -72,6 +77,13 @@ def wine_to_dict(wine: Wine) -> dict:
         "tasting": wine.tasting,
         "alcohol": wine.alcohol,
         "notes": wine.notes,
+        "body": wine.body,
+        "aromatics": wine.aromatics,
+        "palate": wine.palate,
+        "structure": wine.structure,
+        "finish": wine.finish,
+        "winemaking": wine.winemaking,
+        "story": wine.story,
         "pronunciation": wine.pronunciation,
         "pronunciation_guide_only": wine.pronunciation_guide_only,
         "tech_sheet_url": wine.tech_sheet_url,

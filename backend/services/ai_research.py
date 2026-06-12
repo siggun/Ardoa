@@ -15,26 +15,35 @@ CRITICAL ACCURACY RULES:
 - If you are not confident about a specific field (e.g. exact vintage ABV), say so with a reasonable range rather than inventing a precise figure.
 - Producer names, regions, and countries are the most hallucination-prone fields — double-check these against what you know about the real producer before writing.
 
+Write everything the way a great wine bar server would describe the wine to a guest at the
+table — specific, vivid, and useful, never generic wine-speak.
+
 Return ONLY valid JSON — no markdown, no explanation. The JSON must have exactly these fields:
 {
   "name": "Full wine name as it should appear on the wine list",
   "vintage": "Year as a string, e.g. '2022', or 'NV' if non-vintage",
   "type": "One of: red, white, rose, orange, sparkling",
   "grape": "Grape variety or blend, e.g. '100% Cabernet Sauvignon'",
-  "grape_detail": "2-3 sentence description of the grape variety's character and origin",
+  "grape_detail": "2-3 sentences on the grape variety's character and why it matters here",
   "region": "Actual sub-region and region of this specific producer, e.g. 'Vipava Valley, Slovenia'",
-  "appellation": "Official appellation/AOC/DOC/PDO if one exists, or empty string",
+  "appellation": "Official appellation/AOC/DOC/PDO/AVA if one exists, or empty string",
   "country": "Actual country of origin of this specific producer",
-  "winemaker": "Producer name and brief 1-sentence note about their actual winemaking philosophy",
-  "tasting": "Tasting note: aromas and flavors in 2-3 sentences, specific and evocative",
+  "winemaker": "Producer name and a brief 1-sentence note about who they are and their philosophy",
+  "body": "Style and body in one line: light/medium/full-bodied, dry/off-dry/sweet, still/sparkling. e.g. 'Full-bodied, dry, still red'",
+  "aromatics": "The nose — what it smells like: fruit, floral, herbal, earthy, oak, spice. 1-2 sentences, specific.",
+  "palate": "The palate — what it actually tastes like and how it echoes or differs from the nose. 1-2 sentences.",
+  "structure": "The technical backbone: acidity (crisp/bright vs round), tannin (for reds — grippy/soft/smooth), and alcohol/weight. 1-2 sentences.",
+  "finish": "How long flavors linger and how it leaves the mouth (clean, lingering, warming). 1 sentence.",
+  "winemaking": "Notable winemaking details when relevant: oak aging, fermentation method, skin contact, organic/biodynamic. Keep it tight; empty string if nothing stands out.",
+  "story": "A hook a server can use — something memorable about the producer, the region's character, or why this wine is special. 2-3 sentences that turn the description into a recommendation.",
   "alcohol": "ABV as string, e.g. '13.5%'",
-  "notes": "Educational paragraph (3-5 sentences) about the wine's history, style, or what makes it special",
   "pronunciation": "Phonetic pronunciation if the name is non-English, e.g. 'ehr-KOH-leh bar-BEHR-ah', or empty string",
   "pronunciation_guide_only": false,
   "tech_sheet_url": "Direct URL to the producer's tech sheet or winery website if known, otherwise empty string"
 }
 
-Keep tasting notes vivid and specific — no generic wine-speak. Accuracy over completeness: a blank field is better than a wrong one."""
+Accuracy over completeness: a blank field is better than a wrong one. Keep each field focused —
+a server should be able to glance at any one line and use it immediately."""
 
 
 def _build_user_message(wine_name, producer, region, varietal, vintage):

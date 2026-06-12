@@ -393,6 +393,13 @@
             font-style: italic;
         }
 
+        .tech-sheet-link {
+            color: var(--pale-gold);
+            text-decoration: none;
+            border-bottom: 1px solid var(--pale-gold);
+        }
+        .tech-sheet-link:hover { opacity: 0.8; }
+
         /* Food Pairing Items in Wine Cards */
         .wine-card .pairing-item {
             margin-bottom: 0.5rem;
@@ -3529,7 +3536,20 @@
                 return name;
             }
 
-            grid.innerHTML = wines.map((wine, idx) => `
+            // Render a labeled detail block only when the field has content
+            function detail(label, value, sub) {
+                if (!value) return '';
+                return `
+                        <div class="wine-detail">
+                            <div class="wine-detail-label">${label}</div>
+                            <div class="wine-detail-value">${value}</div>
+                            ${sub ? `<div class="blend-detail">${sub}</div>` : ''}
+                        </div>`;
+            }
+
+            grid.innerHTML = wines.map((wine, idx) => {
+                const origin = [wine.region, wine.country].filter(Boolean).join(', ');
+                return `
                 <div class="wine-card ${wine.type}" data-type="${wine.type}">
                     <div class="wine-card-header">
                         <div class="wine-pos">No. ${idx + 1}</div>
@@ -3544,38 +3564,34 @@
                             <div class="pronunciation">${wine.pronunciation}</div>
                         </div>
                         ` : ''}
-                        <div class="wine-detail">
-                            <div class="wine-detail-label">Grape(s)</div>
-                            <div class="wine-detail-value"><strong>${wine.grape}</strong></div>
-                            <div class="blend-detail">${wine.grapeDetail}</div>
-                        </div>
-                        <div class="wine-detail">
-                            <div class="wine-detail-label">Tasting Notes</div>
-                            <div class="wine-detail-value">${wine.tasting}</div>
-                        </div>
-                        <div class="wine-detail">
-                            <div class="wine-detail-label">Region</div>
-                            <div class="wine-detail-value">${wine.region}, ${wine.country}</div>
-                            <div class="blend-detail">${wine.appellation}</div>
-                        </div>
-                        <div class="wine-detail">
-                            <div class="wine-detail-label">Winemaker / Producer</div>
-                            <div class="wine-detail-value">${wine.winemaker}</div>
-                        </div>
+                        ${detail('Origin', origin, wine.appellation)}
+                        ${detail('Grape(s)', `<strong>${wine.grape}</strong>`, wine.grapeDetail)}
+                        ${detail('Style / Body', wine.body)}
+                        ${detail('Aromatics', wine.aromatics)}
+                        ${detail('Palate', wine.palate)}
+                        ${detail('Structure', wine.structure)}
+                        ${detail('Finish', wine.finish)}
+                        ${detail('Winemaking', wine.winemaking)}
+                        ${detail('Winemaker / Producer', wine.winemaker)}
+                        ${detail('The Story', wine.story)}
+                        ${wine.alcohol ? `
                         <div class="wine-detail">
                             <div class="wine-detail-label">Technical Details</div>
                             <div class="tech-specs">
                                 <div class="tech-spec"><span class="tech-spec-label">Alcohol:</span> ${wine.alcohol}</div>
-                                <div class="tech-spec"><span class="tech-spec-label">Serving:</span> ${wine.serving}</div>
                             </div>
                         </div>
+                        ` : ''}
+                        ${wine.techSheetUrl ? `
                         <div class="wine-detail">
-                            <div class="wine-detail-label">Key Facts</div>
-                            <div class="wine-detail-value">${wine.notes}</div>
+                            <div class="wine-detail-label">Tech Sheet</div>
+                            <div class="wine-detail-value"><a href="${wine.techSheetUrl}" target="_blank" rel="noopener" class="tech-sheet-link">View producer tech sheet &rarr;</a></div>
                         </div>
+                        ` : ''}
                     </div>
                 </div>
-            `).join('');
+            `;
+            }).join('');
         }
 
         // Filter Wines
@@ -4685,6 +4701,7 @@
                 pronunciationGuideOnly: w.pronunciation_guide_only,
                 archivedDate: w.archived_date,
                 replacedBy: w.replaced_by,
+                techSheetUrl: w.tech_sheet_url,
             });
         }
 

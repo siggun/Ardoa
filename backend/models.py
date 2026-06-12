@@ -33,6 +33,14 @@ class Wine(SQLModel, table=True):
     alcohol: str = Field(default="")
     serving: str = Field(default="")
     notes: str = Field(default="")
+    # Guest-facing tasting breakdown
+    body: str = Field(default="")
+    aromatics: str = Field(default="")
+    palate: str = Field(default="")
+    structure: str = Field(default="")
+    finish: str = Field(default="")
+    winemaking: str = Field(default="")
+    story: str = Field(default="")
     pronunciation: Optional[str] = None
     pronunciation_guide_only: bool = Field(default=False)
     tech_sheet_url: Optional[str] = None
