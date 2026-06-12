@@ -196,18 +196,10 @@
       <div><label>Alcohol</label><input type="text" id="wf-alcohol" placeholder="13%"></div>
       <div class="full"><label>Winemaker</label><textarea id="wf-winemaker" rows="2"></textarea></div>
       <div class="full"><label>Tasting Notes</label><textarea id="wf-tasting" rows="3"></textarea></div>
-      <div class="full"><label>Food Pairing Summary</label><input type="text" id="wf-food"></div>
-      <div class="full"><label>Serving</label><input type="text" id="wf-serving"></div>
       <div class="full"><label>Notes (educational)</label><textarea id="wf-notes" rows="3"></textarea></div>
+      <div class="full"><label>Tech Sheet URL</label><input type="url" id="wf-tech-sheet-url" placeholder="https://producer.com/tech-sheet.pdf"></div>
       <div class="full"><label>Pronunciation</label><input type="text" id="wf-pronunciation"></div>
       <div><label><input type="checkbox" id="wf-pgo"> Pronunciation guide only</label></div>
-    </div>
-    <div style="margin-top:1rem">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;">
-        <label style="font-size:.85rem;color:#c4a875">Food Pairings</label>
-        <button class="btn btn-secondary btn-sm" onclick="addPairingRow()">+ Add Pairing</button>
-      </div>
-      <div class="pairings-list" id="pairings-list"></div>
     </div>
     <div style="margin-top:1.25rem;display:flex;gap:.75rem;justify-content:flex-end">
       <button class="btn btn-secondary" onclick="closeModal('wine-modal')">Cancel</button>
@@ -433,16 +425,16 @@ function loadArchivedWines() {
 function openWineModal(wine) {
   wineEditId = wine ? wine.id : null;
   document.getElementById('wine-modal-title').textContent = wine ? 'Edit Wine' : 'Add Wine';
-  var fields = { name:'', vintage:'', type:'red', grape:'', 'grape-detail':'', region:'', appellation:'', country:'', winemaker:'', tasting:'', food:'', serving:'', notes:'', pronunciation:'', alcohol:'' };
+  var fields = { name:'', vintage:'', type:'red', grape:'', 'grape-detail':'', region:'', appellation:'', country:'', winemaker:'', tasting:'', notes:'', pronunciation:'', alcohol:'', 'tech-sheet-url':'' };
   if (wine) {
     fields.name = wine.name; fields.vintage = wine.vintage; fields.type = wine.type;
     fields.grape = wine.grape; fields['grape-detail'] = wine.grape_detail;
     fields.region = wine.region; fields.appellation = wine.appellation;
     fields.country = wine.country; fields.winemaker = wine.winemaker;
-    fields.tasting = wine.tasting; fields.food = wine.food;
-    fields.serving = wine.serving; fields.notes = wine.notes;
+    fields.tasting = wine.tasting; fields.notes = wine.notes;
     fields.pronunciation = wine.pronunciation || '';
     fields.alcohol = wine.alcohol || '';
+    fields['tech-sheet-url'] = wine.tech_sheet_url || '';
     document.getElementById('wf-pgo').checked = wine.pronunciation_guide_only;
   } else {
     document.getElementById('wf-pgo').checked = false;
@@ -451,12 +443,6 @@ function openWineModal(wine) {
     var el = document.getElementById('wf-' + k);
     if (el) el.value = fields[k];
   });
-  // Pairings
-  var pl = document.getElementById('pairings-list');
-  pl.innerHTML = '';
-  if (wine && wine.food_pairings) {
-    wine.food_pairings.forEach(function(p) { addPairingRow(p.item, p.why); });
-  }
   document.getElementById('research-msg').textContent = '';
   document.getElementById('wine-form-msg').innerHTML = '';
   openModal('wine-modal');
@@ -488,11 +474,11 @@ function getWineFormData() {
     grape: v('wf-grape'), grape_detail: v('wf-grape-detail'),
     region: v('wf-region'), appellation: v('wf-appellation'),
     country: v('wf-country'), winemaker: v('wf-winemaker'),
-    tasting: v('wf-tasting'), food: v('wf-food'),
-    serving: v('wf-serving'), notes: v('wf-notes'),
+    tasting: v('wf-tasting'), notes: v('wf-notes'),
     pronunciation: v('wf-pronunciation'), alcohol: v('wf-alcohol'),
+    tech_sheet_url: v('wf-tech-sheet-url') || null,
     pronunciation_guide_only: document.getElementById('wf-pgo').checked,
-    food_pairings: getPairings(),
+    food_pairings: [],
   };
 }
 
@@ -561,14 +547,11 @@ function populateWineForm(data) {
     'wf-grape': data.grape, 'wf-grape-detail': data.grape_detail || data.grapeDetail || '',
     'wf-region': data.region, 'wf-appellation': data.appellation,
     'wf-country': data.country, 'wf-winemaker': data.winemaker,
-    'wf-tasting': data.tasting, 'wf-food': data.food,
-    'wf-serving': data.serving, 'wf-notes': data.notes,
+    'wf-tasting': data.tasting, 'wf-notes': data.notes,
     'wf-pronunciation': data.pronunciation || '', 'wf-alcohol': data.alcohol || '',
+    'wf-tech-sheet-url': data.tech_sheet_url || '',
   };
   Object.keys(map).forEach(function(k) { var el = document.getElementById(k); if (el) el.value = map[k] || ''; });
-  var pl = document.getElementById('pairings-list');
-  pl.innerHTML = '';
-  (data.food_pairings || data.foodPairings || []).forEach(function(p) { addPairingRow(p.item, p.why); });
 }
 
 // ===== BEERS =====

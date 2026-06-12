@@ -35,6 +35,7 @@ class Wine(SQLModel, table=True):
     notes: str = Field(default="")
     pronunciation: Optional[str] = None
     pronunciation_guide_only: bool = Field(default=False)
+    tech_sheet_url: Optional[str] = None
 
     food_pairings: List[WineFoodPairing] = Relationship(back_populates="wine")
 

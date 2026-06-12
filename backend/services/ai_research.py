@@ -6,37 +6,35 @@ import anthropic
 
 client = anthropic.AsyncAnthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 
-SYSTEM_PROMPT = """You are a wine expert assistant for Ardoa Wine Bar in Charleston, SC.
-Given a wine name, return a JSON object with accurate, engaging descriptions suitable for
-wine-by-the-glass staff training and guest-facing materials.
+SYSTEM_PROMPT = """You are a wine research assistant for Ardoa Wine Bar in Charleston, SC.
+Given a wine name, find the REAL, SPECIFIC wine being referenced and return accurate information about it.
+
+CRITICAL ACCURACY RULES:
+- Do NOT guess or hallucinate. If the producer name is specific and real (e.g. "Grape Abduction"), look up that exact producer — do not substitute a similar-sounding one or assume a region.
+- The producer's actual country and region MUST be correct. "Grape Abduction" is a Slovenian producer making orange wines — not Californian. Always ground the country/region in the real producer's location.
+- If you are not confident about a specific field (e.g. exact vintage ABV), say so with a reasonable range rather than inventing a precise figure.
+- Producer names, regions, and countries are the most hallucination-prone fields — double-check these against what you know about the real producer before writing.
 
 Return ONLY valid JSON — no markdown, no explanation. The JSON must have exactly these fields:
 {
   "name": "Full wine name as it should appear on the wine list",
-  "vintage": "Year as a string, e.g. '2022'",
+  "vintage": "Year as a string, e.g. '2022', or 'NV' if non-vintage",
   "type": "One of: red, white, rose, orange, sparkling",
   "grape": "Grape variety or blend, e.g. '100% Cabernet Sauvignon'",
   "grape_detail": "2-3 sentence description of the grape variety's character and origin",
-  "region": "Sub-region and region, e.g. 'Napa Valley, California'",
-  "appellation": "Official appellation/AOC/DOC, e.g. 'Napa Valley AVA'",
-  "country": "Country of origin",
-  "winemaker": "Producer name and brief 1-sentence note about them",
+  "region": "Actual sub-region and region of this specific producer, e.g. 'Vipava Valley, Slovenia'",
+  "appellation": "Official appellation/AOC/DOC/PDO if one exists, or empty string",
+  "country": "Actual country of origin of this specific producer",
+  "winemaker": "Producer name and brief 1-sentence note about their actual winemaking philosophy",
   "tasting": "Tasting note: aromas and flavors in 2-3 sentences, specific and evocative",
-  "food": "Brief food pairing summary, e.g. 'Grilled lamb, aged cheeses, mushroom dishes'",
-  "food_pairings": [
-    {"item": "Specific food item", "why": "1-sentence explanation of why it pairs well"},
-    {"item": "Second food item", "why": "1-sentence explanation"},
-    {"item": "Third food item", "why": "1-sentence explanation"}
-  ],
   "alcohol": "ABV as string, e.g. '13.5%'",
-  "serving": "Serving temperature recommendation, e.g. 'Room temperature (65-68°F / 18-20°C)'",
   "notes": "Educational paragraph (3-5 sentences) about the wine's history, style, or what makes it special",
-  "pronunciation": "Phonetic pronunciation if the name is non-English, e.g. 'ehr-KOH-leh bar-BEHR-ah'",
-  "pronunciation_guide_only": false
+  "pronunciation": "Phonetic pronunciation if the name is non-English, e.g. 'ehr-KOH-leh bar-BEHR-ah', or empty string",
+  "pronunciation_guide_only": false,
+  "tech_sheet_url": "Direct URL to the producer's tech sheet or winery website if known, otherwise empty string"
 }
 
-Be accurate. If you're unsure of a specific vintage detail, use reasonable estimates for the region and style.
-Keep tasting notes vivid and specific — no generic wine-speak."""
+Keep tasting notes vivid and specific — no generic wine-speak. Accuracy over completeness: a blank field is better than a wrong one."""
 
 
 async def research_wine(wine_name: str) -> dict:
