@@ -51,6 +51,10 @@ class ReorderIn(BaseModel):
     new_order: int
 
 
+class PositionIn(BaseModel):
+    position: Optional[int] = None
+
+
 class ResearchIn(BaseModel):
     name: str
     producer: str = ""
@@ -162,6 +166,7 @@ def archive_wine(wine_id: int, data: ArchiveIn, session: Session = Depends(get_s
     wine.is_archived = True
     wine.archived_date = data.archived_date
     wine.replaced_by = data.replaced_by
+    wine.position = None  # free the Enomatic slot
     session.commit()
     session.refresh(wine)
     return wine_to_dict(wine)
@@ -194,6 +199,31 @@ def reorder_wine(wine_id: int, data: ReorderIn, session: Session = Depends(get_s
     wine.display_order = data.new_order
     session.commit()
     return {"ok": True}
+
+
+@router.patch("/{wine_id}/position", dependencies=[Depends(admin_required)])
+def set_position(wine_id: int, data: PositionIn, session: Session = Depends(get_session)):
+    wine = session.get(Wine, wine_id)
+    if not wine:
+        raise HTTPException(status_code=404, detail="Wine not found")
+    if data.position is not None and not (1 <= data.position <= 24):
+        raise HTTPException(status_code=400, detail="Position must be between 1 and 24")
+    if data.position is not None:
+        # Bump whatever active wine currently holds this slot back to waiting
+        occupant = session.exec(
+            select(Wine).where(
+                Wine.position == data.position,
+                Wine.is_archived == False,
+                Wine.id != wine_id,
+            )
+        ).first()
+        if occupant:
+            occupant.position = None
+            session.add(occupant)
+    wine.position = data.position
+    session.commit()
+    session.refresh(wine)
+    return wine_to_dict(wine)
 
 
 @router.delete("/{wine_id}", dependencies=[Depends(admin_required)])

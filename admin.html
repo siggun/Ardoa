@@ -57,6 +57,7 @@
   .research-section h3 { font-size: .85rem; color: #c4a875; margin-bottom: .75rem; }
   .slot-badge { display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:#4a0e1a;border:1px solid #6b1c2e;color:#c4a875;font-weight:700;font-size:.9rem; }
   .slot-empty { color:#555;font-size:.8rem; }
+  .slot-select { padding:.3rem .4rem;background:#12121e;border:1px solid #4a0e1a;border-radius:4px;color:#c4a875;font-size:.82rem; }
   .research-row { display: flex; gap: .5rem; }
   .research-row input { flex: 1; }
   .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
@@ -403,30 +404,74 @@ function switchWineSubTab(which) {
   else loadWines();
 }
 
-function wineRow(w) {
-  var slotCell = w.position != null
-    ? '<span class="slot-badge">' + w.position + '</span>'
-    : '<span class="slot-empty">—</span>';
+// Common action buttons for a wine row
+function wineActions(w) {
+  return '<button class="btn btn-secondary btn-sm" onclick="editWine(' + JSON.stringify(JSON.stringify(w)) + ')">Edit</button>' +
+    '<button class="btn btn-secondary btn-sm" onclick="archiveWine(' + w.id + ')">Archive</button>' +
+    '<button class="btn btn-danger btn-sm" onclick="deleteWine(' + w.id + ',\'' + esc(w.name) + '\')">Delete</button>';
+}
+
+// A filled in-machine slot row
+function filledSlotRow(slot, w) {
   return '<tr>' +
-    '<td style="text-align:center">' + slotCell + '</td>' +
+    '<td style="text-align:center"><span class="slot-badge">' + slot + '</span></td>' +
     '<td>' + esc(w.name) + '</td>' +
     '<td>' + esc(w.vintage) + '</td>' +
     '<td><span class="badge badge-' + w.type + '">' + w.type + '</span></td>' +
     '<td>' + esc(w.country) + '</td>' +
     '<td style="display:flex;gap:.4rem;flex-wrap:wrap">' +
-      '<button class="btn btn-secondary btn-sm" onclick="editWine(' + JSON.stringify(JSON.stringify(w)) + ')">Edit</button>' +
-      '<button class="btn btn-secondary btn-sm" onclick="archiveWine(' + w.id + ')">Archive</button>' +
-      '<button class="btn btn-danger btn-sm" onclick="deleteWine(' + w.id + ',\'' + esc(w.name) + '\')">Delete</button>' +
+      '<button class="btn btn-secondary btn-sm" onclick="setPosition(' + w.id + ',null)">Unload</button>' +
+      wineActions(w) +
     '</td></tr>';
+}
+
+// An empty in-machine slot row
+function emptySlotRow(slot) {
+  return '<tr style="opacity:.55">' +
+    '<td style="text-align:center"><span class="slot-badge" style="background:#1a1018;border-color:#333;color:#777">' + slot + '</span></td>' +
+    '<td colspan="4" class="slot-empty">Empty</td>' +
+    '<td></td></tr>';
+}
+
+// A waiting wine row with an "assign to slot" dropdown
+function waitingRow(w, occupied) {
+  var opts = '<option value="">Load into slot…</option>';
+  for (var n = 1; n <= 24; n++) {
+    opts += '<option value="' + n + '">Slot ' + n + (occupied[n] ? ' (swap out ' + esc(occupied[n]) + ')' : '') + '</option>';
+  }
+  return '<tr>' +
+    '<td><select class="slot-select" onchange="if(this.value)setPosition(' + w.id + ',parseInt(this.value))">' + opts + '</select></td>' +
+    '<td>' + esc(w.name) + '</td>' +
+    '<td>' + esc(w.vintage) + '</td>' +
+    '<td><span class="badge badge-' + w.type + '">' + w.type + '</span></td>' +
+    '<td>' + esc(w.country) + '</td>' +
+    '<td style="display:flex;gap:.4rem;flex-wrap:wrap">' + wineActions(w) + '</td></tr>';
+}
+
+function setPosition(id, pos) {
+  apiFetch('/api/wines/' + id + '/position', { method: 'PATCH', body: JSON.stringify({ position: pos }) })
+    .then(loadWines)
+    .then(function() { showMsg('wines-msg', pos ? 'Loaded into slot ' + pos + '.' : 'Moved to waiting.'); })
+    .catch(function(e) { showMsg('wines-msg', e.message, true); });
 }
 
 function loadWines() {
   apiFetch('/api/wines').then(function(wines) {
-    var inMachine = wines.filter(function(w) { return w.position != null; })
-      .sort(function(a, b) { return a.position - b.position; });
+    var bySlot = {};
+    var occupiedNames = {};
+    wines.forEach(function(w) {
+      if (w.position != null) { bySlot[w.position] = w; occupiedNames[w.position] = w.name; }
+    });
     var waiting = wines.filter(function(w) { return w.position == null; });
-    document.getElementById('wines-tbody').innerHTML = inMachine.map(wineRow).join('');
-    document.getElementById('wines-waiting-tbody').innerHTML = waiting.map(wineRow).join('');
+
+    var machineHtml = '';
+    for (var n = 1; n <= 24; n++) {
+      machineHtml += bySlot[n] ? filledSlotRow(n, bySlot[n]) : emptySlotRow(n);
+    }
+    document.getElementById('wines-tbody').innerHTML = machineHtml;
+    document.getElementById('wines-waiting-tbody').innerHTML =
+      waiting.length ? waiting.map(function(w) { return waitingRow(w, occupiedNames); }).join('')
+                     : '<tr><td colspan="6" class="slot-empty">No wines waiting.</td></tr>';
   }).catch(function(e) { showMsg('wines-msg', e.message, true); });
 }
 
