@@ -57,6 +57,8 @@
   .research-section h3 { font-size: .85rem; color: #c4a875; margin-bottom: .75rem; }
   .research-row { display: flex; gap: .5rem; }
   .research-row input { flex: 1; }
+  .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+  .research-grid input:first-child { grid-column: 1 / -1; }
   .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid #555; border-top-color: #c4a875; border-radius: 50%; animation: spin .7s linear infinite; vertical-align: middle; margin-right: .4rem; }
   @keyframes spin { to { transform: rotate(360deg); } }
   .msg { padding: .5rem .75rem; border-radius: 4px; font-size: .82rem; margin-bottom: .75rem; }
@@ -169,8 +171,15 @@
     <h2 id="wine-modal-title">Add Wine</h2>
     <div class="research-section">
       <h3>🔍 AI Research</h3>
-      <div class="research-row">
-        <input type="text" id="research-name" placeholder="e.g. Caymus Cabernet Sauvignon 2022">
+      <p style="font-size:.78rem;color:#888;margin-bottom:.6rem;">Fill in whatever you know — the more you provide, the more accurate the result. Anything you enter here is treated as fact and won't be overridden.</p>
+      <div class="research-grid">
+        <input type="text" id="research-name" placeholder="Wine name *">
+        <input type="text" id="research-producer" placeholder="Producer / winery">
+        <input type="text" id="research-region" placeholder="Region or country">
+        <input type="text" id="research-varietal" placeholder="Grape / varietal">
+        <input type="text" id="research-vintage" placeholder="Vintage (e.g. 2022 or NV)">
+      </div>
+      <div class="research-row" style="margin-top:.5rem;">
         <button class="btn btn-primary" onclick="runResearch()">Research</button>
       </div>
       <div id="research-msg" style="margin-top:.5rem;font-size:.8rem;color:#888;"></div>
@@ -533,9 +542,16 @@ function reorderWine(id, newOrder) {
 function runResearch() {
   var name = document.getElementById('research-name').value.trim();
   if (!name) return;
+  var payload = {
+    name: name,
+    producer: document.getElementById('research-producer').value.trim(),
+    region: document.getElementById('research-region').value.trim(),
+    varietal: document.getElementById('research-varietal').value.trim(),
+    vintage: document.getElementById('research-vintage').value.trim(),
+  };
   var msgEl = document.getElementById('research-msg');
   msgEl.innerHTML = '<span class="spinner"></span> Researching…';
-  apiFetch('/api/wines/research', { method: 'POST', body: JSON.stringify({ name: name }) }).then(function(data) {
+  apiFetch('/api/wines/research', { method: 'POST', body: JSON.stringify(payload) }).then(function(data) {
     msgEl.textContent = '✓ Research complete — form populated';
     populateWineForm(data);
   }).catch(function(e) { msgEl.textContent = '✗ ' + e.message; });

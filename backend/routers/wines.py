@@ -47,6 +47,10 @@ class ReorderIn(BaseModel):
 
 class ResearchIn(BaseModel):
     name: str
+    producer: str = ""
+    region: str = ""
+    varietal: str = ""
+    vintage: str = ""
 
 
 def wine_to_dict(wine: Wine) -> dict:
@@ -192,5 +196,11 @@ def delete_wine(wine_id: int, session: Session = Depends(get_session)):
 
 @router.post("/research", dependencies=[Depends(admin_required)])
 async def research_wine_endpoint(data: ResearchIn):
-    result = await research_wine(data.name)
+    result = await research_wine(
+        data.name,
+        producer=data.producer,
+        region=data.region,
+        varietal=data.varietal,
+        vintage=data.vintage,
+    )
     return result

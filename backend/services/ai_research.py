@@ -37,12 +37,47 @@ Return ONLY valid JSON — no markdown, no explanation. The JSON must have exact
 Keep tasting notes vivid and specific — no generic wine-speak. Accuracy over completeness: a blank field is better than a wrong one."""
 
 
-async def research_wine(wine_name: str) -> dict:
+def _build_user_message(wine_name, producer, region, varietal, vintage):
+    lines = [f"Research this wine: {wine_name}"]
+    known = []
+    if producer:
+        known.append(f"- Producer / winery: {producer}")
+    if region:
+        known.append(f"- Region or country: {region}")
+    if varietal:
+        known.append(f"- Grape / varietal: {varietal}")
+    if vintage:
+        known.append(f"- Vintage: {vintage}")
+    if known:
+        lines.append("")
+        lines.append(
+            "The following details are CONFIRMED FACTS provided by staff. Treat them "
+            "as authoritative ground truth — your output MUST be consistent with them "
+            "and must NOT contradict them (especially producer, region, and country):"
+        )
+        lines.extend(known)
+        lines.append("")
+        lines.append(
+            "Use these facts to identify the exact wine, then fill in the remaining "
+            "fields accurately. If a confirmed fact conflicts with your assumptions, "
+            "the confirmed fact wins."
+        )
+    return "\n".join(lines)
+
+
+async def research_wine(
+    wine_name: str,
+    producer: str = "",
+    region: str = "",
+    varietal: str = "",
+    vintage: str = "",
+) -> dict:
+    user_message = _build_user_message(wine_name, producer, region, varietal, vintage)
     message = await client.messages.create(
         model="claude-sonnet-4-6",
         max_tokens=2000,
         system=SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": f"Research this wine: {wine_name}"}],
+        messages=[{"role": "user", "content": user_message}],
     )
     raw = message.content[0].text.strip()
     # Strip markdown code fences if Claude added them
