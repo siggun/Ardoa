@@ -29,6 +29,7 @@ engine = create_engine(DATABASE_URL, connect_args=connect_args)
 # any columns that are missing on startup, so deploys never go empty again.
 WINE_ADDED_COLUMNS = {
     "tech_sheet_url": "VARCHAR",
+    "position": "INTEGER",
     "body": "VARCHAR",
     "aromatics": "VARCHAR",
     "palate": "VARCHAR",

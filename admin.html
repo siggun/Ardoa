@@ -55,6 +55,8 @@
   .pairing-row button { padding: .3rem .5rem; background: #4a1010; border: none; border-radius: 3px; color: #e88; cursor: pointer; }
   .research-section { background: #12121e; border: 1px solid #333; border-radius: 6px; padding: 1rem; margin-bottom: 1rem; }
   .research-section h3 { font-size: .85rem; color: #c4a875; margin-bottom: .75rem; }
+  .slot-badge { display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:#4a0e1a;border:1px solid #6b1c2e;color:#c4a875;font-weight:700;font-size:.9rem; }
+  .slot-empty { color:#555;font-size:.8rem; }
   .research-row { display: flex; gap: .5rem; }
   .research-row input { flex: 1; }
   .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
@@ -103,9 +105,15 @@
       <button class="btn btn-secondary btn-sm" onclick="loadWines()">↻ Refresh</button>
     </div>
     <div id="wines-msg"></div>
+    <h3 style="font-size:.8rem;color:#c4a875;letter-spacing:.1em;text-transform:uppercase;margin:1rem 0 .4rem;">In Machine (Enomatic slots 1–24)</h3>
     <table id="wines-table">
-      <thead><tr><th>#</th><th>Name</th><th>Vintage</th><th>Type</th><th>Country</th><th>Actions</th></tr></thead>
+      <thead><tr><th style="width:60px">Slot</th><th>Name</th><th>Vintage</th><th>Type</th><th>Country</th><th>Actions</th></tr></thead>
       <tbody id="wines-tbody"></tbody>
+    </table>
+    <h3 style="font-size:.8rem;color:#888;letter-spacing:.1em;text-transform:uppercase;margin:1.5rem 0 .4rem;">Waiting (not yet loaded)</h3>
+    <table>
+      <thead><tr><th style="width:60px">Slot</th><th>Name</th><th>Vintage</th><th>Type</th><th>Country</th><th>Actions</th></tr></thead>
+      <tbody id="wines-waiting-tbody"></tbody>
     </table>
   </div>
   <div id="wine-archived-section" style="display:none">
@@ -197,6 +205,7 @@
           <option value="sparkling">Sparkling</option>
         </select>
       </div>
+      <div><label>Enomatic Slot # <span style="color:#888;font-size:.78rem">(1–24, blank if waiting or sparkling)</span></label><input type="number" id="wf-position" min="1" max="24" placeholder="—"></div>
       <div><label>Grape</label><input type="text" id="wf-grape"></div>
       <div class="full"><label>Grape Detail</label><textarea id="wf-grape-detail" rows="2"></textarea></div>
       <div><label>Region</label><input type="text" id="wf-region"></div>
@@ -394,27 +403,30 @@ function switchWineSubTab(which) {
   else loadWines();
 }
 
+function wineRow(w) {
+  var slotCell = w.position != null
+    ? '<span class="slot-badge">' + w.position + '</span>'
+    : '<span class="slot-empty">—</span>';
+  return '<tr>' +
+    '<td style="text-align:center">' + slotCell + '</td>' +
+    '<td>' + esc(w.name) + '</td>' +
+    '<td>' + esc(w.vintage) + '</td>' +
+    '<td><span class="badge badge-' + w.type + '">' + w.type + '</span></td>' +
+    '<td>' + esc(w.country) + '</td>' +
+    '<td style="display:flex;gap:.4rem;flex-wrap:wrap">' +
+      '<button class="btn btn-secondary btn-sm" onclick="editWine(' + JSON.stringify(JSON.stringify(w)) + ')">Edit</button>' +
+      '<button class="btn btn-secondary btn-sm" onclick="archiveWine(' + w.id + ')">Archive</button>' +
+      '<button class="btn btn-danger btn-sm" onclick="deleteWine(' + w.id + ',\'' + esc(w.name) + '\')">Delete</button>' +
+    '</td></tr>';
+}
+
 function loadWines() {
   apiFetch('/api/wines').then(function(wines) {
-    var tbody = document.getElementById('wines-tbody');
-    tbody.innerHTML = wines.map(function(w, i) {
-      return '<tr>' +
-        '<td>' +
-          '<div class="order-btns">' +
-            '<button onclick="reorderWine(' + w.id + ',' + (w.display_order - 1) + ')" title="Move up">▲</button>' +
-            '<button onclick="reorderWine(' + w.id + ',' + (w.display_order + 1) + ')" title="Move down">▼</button>' +
-          '</div>' +
-        '</td>' +
-        '<td>' + esc(w.name) + '</td>' +
-        '<td>' + esc(w.vintage) + '</td>' +
-        '<td><span class="badge badge-' + w.type + '">' + w.type + '</span></td>' +
-        '<td>' + esc(w.country) + '</td>' +
-        '<td style="display:flex;gap:.4rem;flex-wrap:wrap">' +
-          '<button class="btn btn-secondary btn-sm" onclick="editWine(' + JSON.stringify(JSON.stringify(w)) + ')">Edit</button>' +
-          '<button class="btn btn-secondary btn-sm" onclick="archiveWine(' + w.id + ')">Archive</button>' +
-          '<button class="btn btn-danger btn-sm" onclick="deleteWine(' + w.id + ',\'' + esc(w.name) + '\')">Delete</button>' +
-        '</td></tr>';
-    }).join('');
+    var inMachine = wines.filter(function(w) { return w.position != null; })
+      .sort(function(a, b) { return a.position - b.position; });
+    var waiting = wines.filter(function(w) { return w.position == null; });
+    document.getElementById('wines-tbody').innerHTML = inMachine.map(wineRow).join('');
+    document.getElementById('wines-waiting-tbody').innerHTML = waiting.map(wineRow).join('');
   }).catch(function(e) { showMsg('wines-msg', e.message, true); });
 }
 
@@ -439,13 +451,14 @@ function loadArchivedWines() {
 function openWineModal(wine) {
   wineEditId = wine ? wine.id : null;
   document.getElementById('wine-modal-title').textContent = wine ? 'Edit Wine' : 'Add Wine';
-  var fields = { name:'', vintage:'', type:'red', grape:'', 'grape-detail':'', region:'', appellation:'', country:'', winemaker:'', alcohol:'', body:'', aromatics:'', palate:'', structure:'', finish:'', winemaking:'', story:'', pronunciation:'', 'tech-sheet-url':'' };
+  var fields = { name:'', vintage:'', type:'red', grape:'', 'grape-detail':'', region:'', appellation:'', country:'', winemaker:'', alcohol:'', body:'', aromatics:'', palate:'', structure:'', finish:'', winemaking:'', story:'', pronunciation:'', 'tech-sheet-url':'', position:'' };
   if (wine) {
     fields.name = wine.name; fields.vintage = wine.vintage; fields.type = wine.type;
     fields.grape = wine.grape; fields['grape-detail'] = wine.grape_detail;
     fields.region = wine.region; fields.appellation = wine.appellation;
     fields.country = wine.country; fields.winemaker = wine.winemaker;
     fields.alcohol = wine.alcohol || '';
+    fields.position = wine.position != null ? wine.position : '';
     fields.body = wine.body || ''; fields.aromatics = wine.aromatics || '';
     fields.palate = wine.palate || ''; fields.structure = wine.structure || '';
     fields.finish = wine.finish || ''; fields.winemaking = wine.winemaking || '';
@@ -491,6 +504,7 @@ function getWineFormData() {
     grape: v('wf-grape'), grape_detail: v('wf-grape-detail'),
     region: v('wf-region'), appellation: v('wf-appellation'),
     country: v('wf-country'), winemaker: v('wf-winemaker'),
+    position: document.getElementById('wf-position').value ? parseInt(document.getElementById('wf-position').value) : null,
     alcohol: v('wf-alcohol'),
     body: v('wf-body'), aromatics: v('wf-aromatics'), palate: v('wf-palate'),
     structure: v('wf-structure'), finish: v('wf-finish'),

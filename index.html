@@ -3552,7 +3552,7 @@
                 return `
                 <div class="wine-card ${wine.type}" data-type="${wine.type}">
                     <div class="wine-card-header">
-                        <div class="wine-pos">No. ${idx + 1}</div>
+                        <div class="wine-pos">${wine.position != null ? 'Slot ' + wine.position : ''}</div>
                         <h3>${wine.name}</h3>
                         <div class="vintage">${wine.vintage}</div>
                         <div class="producer">${getProducerName(wine.winemaker)}</div>
@@ -4698,6 +4698,7 @@
                 foodPairings: (w.food_pairings || []).map(function(p) {
                     return { item: p.item, why: p.why };
                 }),
+                position: w.position,
                 pronunciationGuideOnly: w.pronunciation_guide_only,
                 archivedDate: w.archived_date,
                 replacedBy: w.replaced_by,

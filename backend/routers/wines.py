@@ -26,6 +26,7 @@ class WineIn(BaseModel):
     region: str = ""
     appellation: str = ""
     country: str = ""
+    position: Optional[int] = None
     winemaker: str = ""
     alcohol: str = ""
     body: str = ""
@@ -65,6 +66,7 @@ def wine_to_dict(wine: Wine) -> dict:
         "is_archived": wine.is_archived,
         "archived_date": wine.archived_date,
         "replaced_by": wine.replaced_by,
+        "position": wine.position,
         "name": wine.name,
         "vintage": wine.vintage,
         "type": wine.type,

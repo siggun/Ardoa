@@ -18,6 +18,7 @@ class Wine(SQLModel, table=True):
     is_archived: bool = Field(default=False, index=True)
     archived_date: Optional[str] = None
     replaced_by: Optional[str] = None
+    position: Optional[int] = None  # Enomatic slot 1-24; null = waiting or sparkling
 
     name: str
     vintage: str
