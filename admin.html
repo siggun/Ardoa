@@ -116,6 +116,11 @@
       <thead><tr><th style="width:60px">Slot</th><th>Name</th><th>Vintage</th><th>Type</th><th>Country</th><th>Actions</th></tr></thead>
       <tbody id="wines-waiting-tbody"></tbody>
     </table>
+    <h3 style="font-size:.8rem;color:#888;letter-spacing:.1em;text-transform:uppercase;margin:1.5rem 0 .4rem;">Sparkling (not in machine)</h3>
+    <table>
+      <thead><tr><th>Name</th><th>Vintage</th><th>Type</th><th>Country</th><th>Actions</th></tr></thead>
+      <tbody id="wines-sparkling-tbody"></tbody>
+    </table>
   </div>
   <div id="wine-archived-section" style="display:none">
     <div class="toolbar"><button class="btn btn-secondary btn-sm" onclick="loadArchivedWines()">↻ Refresh</button></div>
@@ -448,6 +453,16 @@ function waitingRow(w, occupied) {
     '<td style="display:flex;gap:.4rem;flex-wrap:wrap">' + wineActions(w) + '</td></tr>';
 }
 
+// A sparkling wine row (no slot column — never goes in the machine)
+function sparklingRow(w) {
+  return '<tr>' +
+    '<td>' + esc(w.name) + '</td>' +
+    '<td>' + esc(w.vintage) + '</td>' +
+    '<td><span class="badge badge-' + w.type + '">' + w.type + '</span></td>' +
+    '<td>' + esc(w.country) + '</td>' +
+    '<td style="display:flex;gap:.4rem;flex-wrap:wrap">' + wineActions(w) + '</td></tr>';
+}
+
 function setPosition(id, pos) {
   apiFetch('/api/wines/' + id + '/position', { method: 'PATCH', body: JSON.stringify({ position: pos }) })
     .then(loadWines)
@@ -462,7 +477,8 @@ function loadWines() {
     wines.forEach(function(w) {
       if (w.position != null) { bySlot[w.position] = w; occupiedNames[w.position] = w.name; }
     });
-    var waiting = wines.filter(function(w) { return w.position == null; });
+    var sparkling = wines.filter(function(w) { return w.type === 'sparkling'; });
+    var waiting = wines.filter(function(w) { return w.position == null && w.type !== 'sparkling'; });
 
     var machineHtml = '';
     for (var n = 1; n <= 24; n++) {
@@ -472,6 +488,9 @@ function loadWines() {
     document.getElementById('wines-waiting-tbody').innerHTML =
       waiting.length ? waiting.map(function(w) { return waitingRow(w, occupiedNames); }).join('')
                      : '<tr><td colspan="6" class="slot-empty">No wines waiting.</td></tr>';
+    document.getElementById('wines-sparkling-tbody').innerHTML =
+      sparkling.length ? sparkling.map(sparklingRow).join('')
+                       : '<tr><td colspan="5" class="slot-empty">No sparkling wines.</td></tr>';
   }).catch(function(e) { showMsg('wines-msg', e.message, true); });
 }
 
