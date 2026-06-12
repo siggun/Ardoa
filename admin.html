@@ -397,6 +397,7 @@ function showMsg(elId, msg, isErr) {
 
 // ===== WINES =====
 var wineEditId = null;
+var wineRegistry = {};
 var archiveTargetId = null;
 
 function switchWineSubTab(which) {
@@ -411,7 +412,7 @@ function switchWineSubTab(which) {
 
 // Common action buttons for a wine row
 function wineActions(w) {
-  return '<button class="btn btn-secondary btn-sm" onclick="editWine(' + JSON.stringify(JSON.stringify(w)) + ')">Edit</button>' +
+  return '<button class="btn btn-secondary btn-sm" onclick="editWine(' + w.id + ')">Edit</button>' +
     '<button class="btn btn-secondary btn-sm" onclick="archiveWine(' + w.id + ')">Archive</button>' +
     '<button class="btn btn-danger btn-sm" onclick="deleteWine(' + w.id + ',\'' + esc(w.name) + '\')">Delete</button>';
 }
@@ -472,9 +473,11 @@ function setPosition(id, pos) {
 
 function loadWines() {
   apiFetch('/api/wines').then(function(wines) {
+    wineRegistry = {};
     var bySlot = {};
     var occupiedNames = {};
     wines.forEach(function(w) {
+      wineRegistry[w.id] = w;
       if (w.position != null) { bySlot[w.position] = w; occupiedNames[w.position] = w.name; }
     });
     var sparkling = wines.filter(function(w) { return w.type === 'sparkling'; });
@@ -542,8 +545,8 @@ function openWineModal(wine) {
   openModal('wine-modal');
 }
 
-function editWine(jsonStr) {
-  openWineModal(JSON.parse(jsonStr));
+function editWine(id) {
+  openWineModal(wineRegistry[id]);
 }
 
 function addPairingRow(item, why) {
