@@ -111,37 +111,78 @@ def _extract_json(text: str) -> dict:
     raise ValueError("No JSON object found in research response")
 
 
-async def research_wine(
+def _shorten_url(url: str, limit: int = 60) -> str:
+    url = re.sub(r"^https?://(www\.)?", "", url)
+    return url if len(url) <= limit else url[: limit - 1] + "…"
+
+
+async def research_wine_stream(
     wine_name: str,
     producer: str = "",
     region: str = "",
     varietal: str = "",
     vintage: str = "",
-) -> dict:
+):
+    """Async generator yielding progress events while Claude researches the wine.
+
+    Yields dicts of {"type": "status", "message": ...} as the model searches and
+    reads pages, then a final {"type": "result", "data": {...}} with the parsed
+    wine fields.
+    """
     user_message = _build_user_message(wine_name, producer, region, varietal, vintage)
     messages = [{"role": "user", "content": user_message}]
 
-    # Server-side web tools run their own loop; if Claude pauses (hits the
-    # internal tool-iteration limit) we resend to let it continue. Bound the
-    # number of continuations so a runaway never hangs the request.
-    message = None
+    final_message = None
     for _ in range(6):
-        message = await client.messages.create(
+        # Track partial tool-input JSON per content block so we can surface the
+        # actual search query / fetched URL once the block finishes.
+        partial = {}
+        async with client.messages.stream(
             model="claude-sonnet-4-6",
             max_tokens=4000,
             system=SYSTEM_PROMPT,
             tools=WEB_TOOLS,
             messages=messages,
-        )
-        if message.stop_reason == "pause_turn":
+        ) as stream:
+            async for event in stream:
+                etype = getattr(event, "type", None)
+                if etype == "content_block_start":
+                    block = event.content_block
+                    btype = getattr(block, "type", None)
+                    if btype == "server_tool_use":
+                        partial[event.index] = {"name": getattr(block, "name", ""), "json": ""}
+                        if block.name == "web_search":
+                            yield {"type": "status", "message": "🔍 Searching the web…"}
+                        elif block.name == "web_fetch":
+                            yield {"type": "status", "message": "📄 Reading a page…"}
+                    elif btype == "text":
+                        yield {"type": "status", "message": "✍️ Writing up the tasting notes…"}
+                elif etype == "content_block_delta":
+                    delta = event.delta
+                    if getattr(delta, "type", None) == "input_json_delta" and event.index in partial:
+                        partial[event.index]["json"] += delta.partial_json
+                elif etype == "content_block_stop":
+                    p = partial.pop(event.index, None)
+                    if p:
+                        try:
+                            inp = json.loads(p["json"] or "{}")
+                        except json.JSONDecodeError:
+                            inp = {}
+                        if p["name"] == "web_search" and inp.get("query"):
+                            yield {"type": "status", "message": "🔍 Searched: " + inp["query"]}
+                        elif p["name"] == "web_fetch" and inp.get("url"):
+                            yield {"type": "status", "message": "📄 Read: " + _shorten_url(inp["url"])}
+            final_message = await stream.get_final_message()
+
+        if final_message.stop_reason == "pause_turn":
             messages = [
                 {"role": "user", "content": user_message},
-                {"role": "assistant", "content": message.content},
+                {"role": "assistant", "content": final_message.content},
             ]
             continue
         break
 
     text = "".join(
-        block.text for block in message.content if getattr(block, "type", None) == "text"
+        block.text for block in final_message.content if getattr(block, "type", None) == "text"
     )
-    return _extract_json(text)
+    yield {"type": "result", "data": _extract_json(text)}

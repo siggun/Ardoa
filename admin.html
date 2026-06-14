@@ -646,20 +646,59 @@ function runResearch() {
   if (!label) { alert('Please fill in at least one field before researching.'); return; }
   if (!confirm('Run AI research on "' + label + '"?\n\nThis sends a request to Claude and uses API tokens (a small cost per lookup).')) return;
   var msgEl = document.getElementById('research-msg');
-  msgEl.innerHTML = '<span class="spinner"></span> Researching…';
-  apiFetch('/api/wines/research', { method: 'POST', body: JSON.stringify(payload) }).then(function(data) {
-    populateWineForm(data);
-    var conf = (data.confidence || '').toLowerCase();
-    var color = conf === 'high' ? '#6bbf59' : conf === 'low' ? '#d9534f' : '#c4a875';
-    var html = '✓ Form populated.';
-    if (data.identification) {
-      html += '<div style="margin-top:.4rem;color:' + color + ';">' +
-        (conf ? '<strong>Confidence: ' + esc(conf) + '</strong> — ' : '') +
-        esc(data.identification) +
-        '</div><div style="margin-top:.3rem;color:#888;">Double-check this is the right wine before saving.</div>';
+  msgEl.innerHTML = '<span class="spinner"></span> Starting research…';
+
+  // Stream live progress: the backend sends Server-Sent Events as Claude works
+  // (searching the web, reading the tech sheet, writing notes), then a final result.
+  fetch('/api/wines/research', {
+    method: 'POST',
+    headers: Object.assign({ 'Content-Type': 'application/json' }, authHeader ? { 'Authorization': authHeader } : {}),
+    body: JSON.stringify(payload),
+  }).then(function(resp) {
+    if (resp.status === 401) { promptAuth(); throw new Error('Please log in, then run research again.'); }
+    if (!resp.ok || !resp.body) throw new Error('Research failed (' + resp.status + ').');
+    var reader = resp.body.getReader();
+    var decoder = new TextDecoder();
+    var buf = '';
+    function pump() {
+      return reader.read().then(function(r) {
+        if (r.done) return;
+        buf += decoder.decode(r.value, { stream: true });
+        var parts = buf.split('\n\n');
+        buf = parts.pop();
+        parts.forEach(function(chunk) {
+          var line = chunk.replace(/^data: ?/, '').trim();
+          if (!line) return;
+          var ev;
+          try { ev = JSON.parse(line); } catch (e) { return; }
+          if (ev.type === 'status') {
+            msgEl.innerHTML = '<span class="spinner"></span> ' + esc(ev.message);
+          } else if (ev.type === 'result') {
+            renderResearchResult(ev.data);
+          } else if (ev.type === 'error') {
+            msgEl.textContent = '✗ ' + ev.message;
+          }
+        });
+        return pump();
+      });
     }
-    msgEl.innerHTML = html;
+    return pump();
   }).catch(function(e) { msgEl.textContent = '✗ ' + e.message; });
+}
+
+function renderResearchResult(data) {
+  var msgEl = document.getElementById('research-msg');
+  populateWineForm(data);
+  var conf = (data.confidence || '').toLowerCase();
+  var color = conf === 'high' ? '#6bbf59' : conf === 'low' ? '#d9534f' : '#c4a875';
+  var html = '✓ Form populated.';
+  if (data.identification) {
+    html += '<div style="margin-top:.4rem;color:' + color + ';">' +
+      (conf ? '<strong>Confidence: ' + esc(conf) + '</strong> — ' : '') +
+      esc(data.identification) +
+      '</div><div style="margin-top:.3rem;color:#888;">Double-check this is the right wine before saving.</div>';
+  }
+  msgEl.innerHTML = html;
 }
 
 function populateWineForm(data) {

@@ -1,12 +1,14 @@
+import json
 from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from sqlmodel import Session, select
 
 from backend.auth import admin_required
 from backend.database import get_session
+from backend.services.ai_research import research_wine_stream
 from backend.models import Wine, WineFoodPairing
-from backend.services.ai_research import research_wine
 
 router = APIRouter(prefix="/api/wines", tags=["wines"])
 
@@ -238,11 +240,21 @@ def delete_wine(wine_id: int, session: Session = Depends(get_session)):
 
 @router.post("/research", dependencies=[Depends(admin_required)])
 async def research_wine_endpoint(data: ResearchIn):
-    result = await research_wine(
-        data.name,
-        producer=data.producer,
-        region=data.region,
-        varietal=data.varietal,
-        vintage=data.vintage,
+    async def event_stream():
+        try:
+            async for event in research_wine_stream(
+                data.name,
+                producer=data.producer,
+                region=data.region,
+                varietal=data.varietal,
+                vintage=data.vintage,
+            ):
+                yield f"data: {json.dumps(event)}\n\n"
+        except Exception as e:
+            yield f"data: {json.dumps({'type': 'error', 'message': str(e)})}\n\n"
+
+    return StreamingResponse(
+        event_stream(),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )
-    return result
