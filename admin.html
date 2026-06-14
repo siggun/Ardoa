@@ -187,7 +187,7 @@
       <h3>🔍 AI Research</h3>
       <p style="font-size:.78rem;color:#888;margin-bottom:.6rem;">Fill in whatever you know — the more you provide, the more accurate the result. Anything you enter here is treated as fact and won't be overridden.</p>
       <div class="research-grid">
-        <input type="text" id="research-name" placeholder="Wine name *">
+        <input type="text" id="research-name" placeholder="Wine name">
         <input type="text" id="research-producer" placeholder="Producer / winery">
         <input type="text" id="research-region" placeholder="Region or country">
         <input type="text" id="research-varietal" placeholder="Grape / varietal">
@@ -640,16 +640,16 @@ function reorderWine(id, newOrder) {
 
 // ===== AI Research =====
 function runResearch() {
-  var name = document.getElementById('research-name').value.trim();
-  if (!name) return;
-  if (!confirm('Run AI research on "' + name + '"?\n\nThis sends a request to Claude and uses API tokens (a small cost per lookup).')) return;
   var payload = {
-    name: name,
+    name: document.getElementById('research-name').value.trim(),
     producer: document.getElementById('research-producer').value.trim(),
     region: document.getElementById('research-region').value.trim(),
     varietal: document.getElementById('research-varietal').value.trim(),
     vintage: document.getElementById('research-vintage').value.trim(),
   };
+  var label = [payload.name, payload.producer, payload.varietal, payload.region, payload.vintage].filter(Boolean).join(', ');
+  if (!label) { alert('Please fill in at least one field before researching.'); return; }
+  if (!confirm('Run AI research on "' + label + '"?\n\nThis sends a request to Claude and uses API tokens (a small cost per lookup).')) return;
   var msgEl = document.getElementById('research-msg');
   msgEl.innerHTML = '<span class="spinner"></span> Researching…';
   apiFetch('/api/wines/research', { method: 'POST', body: JSON.stringify(payload) }).then(function(data) {

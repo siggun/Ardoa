@@ -56,7 +56,7 @@ class PositionIn(BaseModel):
 
 
 class ResearchIn(BaseModel):
-    name: str
+    name: str = ""
     producer: str = ""
     region: str = ""
     varietal: str = ""
