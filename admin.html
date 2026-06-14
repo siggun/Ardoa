@@ -413,7 +413,11 @@ function switchWineSubTab(which) {
 
 // Common action buttons for a wine row
 function wineActions(w) {
-  return '<button class="btn btn-secondary btn-sm" onclick="editWine(' + w.id + ')">Edit</button>' +
+  var sheet = w.tech_sheet_url
+    ? '<button class="btn btn-secondary btn-sm" onclick="window.open(\'' + esc(w.tech_sheet_url) + '\',\'_blank\',\'noopener\')" title="Open producer tech sheet in a new tab">Tech Sheet</button>'
+    : '';
+  return sheet +
+    '<button class="btn btn-secondary btn-sm" onclick="editWine(' + w.id + ')">Edit</button>' +
     '<button class="btn btn-secondary btn-sm" onclick="archiveWine(' + w.id + ')">Archive</button>' +
     '<button class="btn btn-danger btn-sm" onclick="deleteWine(' + w.id + ',\'' + esc(w.name) + '\')">Delete</button>';
 }
