@@ -108,17 +108,17 @@
     <div id="wines-msg"></div>
     <h3 style="font-size:.8rem;color:#c4a875;letter-spacing:.1em;text-transform:uppercase;margin:1rem 0 .4rem;">In Machine (Enomatic slots 1–24)</h3>
     <table id="wines-table">
-      <thead><tr><th style="width:60px">Slot</th><th>Name</th><th>Vintage</th><th>Type</th><th>Country</th><th>Actions</th></tr></thead>
+      <thead><tr><th style="width:60px">Slot</th><th>Name</th><th>Vintage</th><th>Type</th><th>Varietal</th><th>Country</th><th>Actions</th></tr></thead>
       <tbody id="wines-tbody"></tbody>
     </table>
     <h3 style="font-size:.8rem;color:#888;letter-spacing:.1em;text-transform:uppercase;margin:1.5rem 0 .4rem;">Waiting (not yet loaded)</h3>
     <table>
-      <thead><tr><th style="width:170px">Slot</th><th>Name</th><th>Vintage</th><th>Type</th><th>Country</th><th>Actions</th></tr></thead>
+      <thead><tr><th style="width:170px">Slot</th><th>Name</th><th>Vintage</th><th>Type</th><th>Varietal</th><th>Country</th><th>Actions</th></tr></thead>
       <tbody id="wines-waiting-tbody"></tbody>
     </table>
     <h3 style="font-size:.8rem;color:#888;letter-spacing:.1em;text-transform:uppercase;margin:1.5rem 0 .4rem;">Sparkling (not in machine)</h3>
     <table>
-      <thead><tr><th>Name</th><th>Vintage</th><th>Type</th><th>Country</th><th>Actions</th></tr></thead>
+      <thead><tr><th>Name</th><th>Vintage</th><th>Type</th><th>Varietal</th><th>Country</th><th>Actions</th></tr></thead>
       <tbody id="wines-sparkling-tbody"></tbody>
     </table>
   </div>
@@ -425,6 +425,7 @@ function filledSlotRow(slot, w) {
     '<td>' + esc(w.name) + '</td>' +
     '<td>' + esc(w.vintage) + '</td>' +
     '<td><span class="badge badge-' + w.type + '">' + w.type + '</span></td>' +
+    '<td>' + esc(w.grape) + '</td>' +
     '<td>' + esc(w.country) + '</td>' +
     '<td style="display:flex;gap:.4rem;flex-wrap:wrap">' +
       '<button class="btn btn-secondary btn-sm" onclick="setPosition(' + w.id + ',null)">Unload</button>' +
@@ -436,7 +437,7 @@ function filledSlotRow(slot, w) {
 function emptySlotRow(slot) {
   return '<tr style="opacity:.55">' +
     '<td style="text-align:center"><span class="slot-badge" style="background:#1a1018;border-color:#333;color:#777">' + slot + '</span></td>' +
-    '<td colspan="4" class="slot-empty">Empty</td>' +
+    '<td colspan="5" class="slot-empty">Empty</td>' +
     '<td></td></tr>';
 }
 
@@ -451,6 +452,7 @@ function waitingRow(w, occupied) {
     '<td>' + esc(w.name) + '</td>' +
     '<td>' + esc(w.vintage) + '</td>' +
     '<td><span class="badge badge-' + w.type + '">' + w.type + '</span></td>' +
+    '<td>' + esc(w.grape) + '</td>' +
     '<td>' + esc(w.country) + '</td>' +
     '<td style="display:flex;gap:.4rem;flex-wrap:wrap">' + wineActions(w) + '</td></tr>';
 }
@@ -461,6 +463,7 @@ function sparklingRow(w) {
     '<td>' + esc(w.name) + '</td>' +
     '<td>' + esc(w.vintage) + '</td>' +
     '<td><span class="badge badge-' + w.type + '">' + w.type + '</span></td>' +
+    '<td>' + esc(w.grape) + '</td>' +
     '<td>' + esc(w.country) + '</td>' +
     '<td style="display:flex;gap:.4rem;flex-wrap:wrap">' + wineActions(w) + '</td></tr>';
 }
@@ -491,10 +494,10 @@ function loadWines() {
     document.getElementById('wines-tbody').innerHTML = machineHtml;
     document.getElementById('wines-waiting-tbody').innerHTML =
       waiting.length ? waiting.map(function(w) { return waitingRow(w, occupiedNames); }).join('')
-                     : '<tr><td colspan="6" class="slot-empty">No wines waiting.</td></tr>';
+                     : '<tr><td colspan="7" class="slot-empty">No wines waiting.</td></tr>';
     document.getElementById('wines-sparkling-tbody').innerHTML =
       sparkling.length ? sparkling.map(sparklingRow).join('')
-                       : '<tr><td colspan="5" class="slot-empty">No sparkling wines.</td></tr>';
+                       : '<tr><td colspan="6" class="slot-empty">No sparkling wines.</td></tr>';
   }).catch(function(e) { showMsg('wines-msg', e.message, true); });
 }
 
