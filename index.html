@@ -3558,7 +3558,7 @@
                         <div class="producer">${getProducerName(wine.winemaker)}</div>
                     </div>
                     <div class="wine-card-body">
-                        ${wine.pronunciation && !wine.pronunciationGuideOnly ? `
+                        ${wine.pronunciation ? `
                         <div class="wine-detail">
                             <div class="wine-detail-label">Pronunciation</div>
                             <div class="pronunciation">${wine.pronunciation}</div>
@@ -4699,7 +4699,6 @@
                     return { item: p.item, why: p.why };
                 }),
                 position: w.position,
-                pronunciationGuideOnly: w.pronunciation_guide_only,
                 archivedDate: w.archived_date,
                 replacedBy: w.replaced_by,
                 techSheetUrl: w.tech_sheet_url,

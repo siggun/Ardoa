@@ -43,7 +43,6 @@ class Wine(SQLModel, table=True):
     winemaking: str = Field(default="")
     story: str = Field(default="")
     pronunciation: Optional[str] = None
-    pronunciation_guide_only: bool = Field(default=False)
     tech_sheet_url: Optional[str] = None
 
     food_pairings: List[WineFoodPairing] = Relationship(back_populates="wine")

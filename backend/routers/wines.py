@@ -37,7 +37,6 @@ class WineIn(BaseModel):
     winemaking: str = ""
     story: str = ""
     pronunciation: Optional[str] = None
-    pronunciation_guide_only: bool = False
     tech_sheet_url: Optional[str] = None
     food_pairings: List[FoodPairingIn] = []
 
@@ -91,7 +90,6 @@ def wine_to_dict(wine: Wine) -> dict:
         "winemaking": wine.winemaking,
         "story": wine.story,
         "pronunciation": wine.pronunciation,
-        "pronunciation_guide_only": wine.pronunciation_guide_only,
         "tech_sheet_url": wine.tech_sheet_url,
         "food_pairings": [
             {"id": p.id, "item": p.item, "why": p.why, "sort_order": p.sort_order}

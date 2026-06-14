@@ -50,7 +50,6 @@ def seed_wines(session: Session):
             serving=data.get("serving", ""),
             notes=data.get("notes", ""),
             pronunciation=data.get("pronunciation"),
-            pronunciation_guide_only=data.get("pronunciationGuideOnly", False),
         )
         session.add(wine)
         session.flush()

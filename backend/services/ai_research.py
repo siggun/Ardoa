@@ -40,7 +40,6 @@ Return ONLY valid JSON — no markdown, no explanation. The JSON must have exact
   "story": "A hook a server can use — something memorable about the producer, the region's character, or why this wine is special. 2-3 sentences that turn the description into a recommendation.",
   "alcohol": "ABV as string, e.g. '13.5%'",
   "pronunciation": "Phonetic pronunciation if the name is non-English, e.g. 'ehr-KOH-leh bar-BEHR-ah', or empty string",
-  "pronunciation_guide_only": false,
   "tech_sheet_url": "Direct URL to the producer's tech sheet or winery website if known, otherwise empty string"
 }
 

@@ -228,7 +228,6 @@
       <div class="full"><label>Story / hook</label><textarea id="wf-story" rows="3"></textarea></div>
       <div class="full"><label>Tech Sheet URL</label><div style="display:flex;gap:.5rem;align-items:stretch"><input type="url" id="wf-tech-sheet-url" placeholder="https://producer.com/tech-sheet.pdf" style="flex:1;min-width:0"><button type="button" class="btn btn-secondary btn-sm" onclick="copyTechSheet(this)" title="Copy URL to clipboard" style="white-space:nowrap">Copy</button></div></div>
       <div class="full"><label>Pronunciation</label><input type="text" id="wf-pronunciation"></div>
-      <div><label><input type="checkbox" id="wf-pgo"> Pronunciation guide only</label></div>
     </div>
     <div style="margin-top:1.25rem;display:flex;gap:.75rem;justify-content:flex-end">
       <button class="btn btn-secondary" onclick="closeModal('wine-modal')">Cancel</button>
@@ -540,9 +539,6 @@ function openWineModal(wine) {
     fields.story = wine.story || '';
     fields.pronunciation = wine.pronunciation || '';
     fields['tech-sheet-url'] = wine.tech_sheet_url || '';
-    document.getElementById('wf-pgo').checked = wine.pronunciation_guide_only;
-  } else {
-    document.getElementById('wf-pgo').checked = false;
   }
   Object.keys(fields).forEach(function(k) {
     var el = document.getElementById('wf-' + k);
@@ -586,7 +582,6 @@ function getWineFormData() {
     winemaking: v('wf-winemaking'), story: v('wf-story'),
     pronunciation: v('wf-pronunciation'),
     tech_sheet_url: v('wf-tech-sheet-url') || null,
-    pronunciation_guide_only: document.getElementById('wf-pgo').checked,
     food_pairings: [],
   };
 }
