@@ -20,6 +20,8 @@ table — specific, vivid, and useful, never generic wine-speak.
 
 Return ONLY valid JSON — no markdown, no explanation. The JSON must have exactly these fields:
 {
+  "identification": "State plainly which single real wine you identified and the key evidence, e.g. 'Torre Mora \\'Cauru\\' Etna Rosso DOC 2023 — a red from Nerello Mascalese. Matched on producer + appellation; \\'Cauru\\' is the cuvée name, not a grape.' This is for staff to sanity-check your pick.",
+  "confidence": "high, medium, or low — how sure you are this is the exact wine. Use low if the clues are sparse or conflicting.",
   "name": "Full wine name as it should appear on the wine list",
   "vintage": "Year as a string, e.g. '2022', or 'NV' if non-vintage",
   "type": "One of: red, white, rose, orange, sparkling",
@@ -47,30 +49,35 @@ a server should be able to glance at any one line and use it immediately."""
 
 
 def _build_user_message(wine_name, producer, region, varietal, vintage):
-    lines = [f"Research this wine: {wine_name}"]
-    known = []
+    lines = ["Identify the single real wine that best matches ALL of these clues taken together:"]
+    lines.append("")
+    if wine_name:
+        lines.append(f"- Wine name / bottling: {wine_name}")
     if producer:
-        known.append(f"- Producer / winery: {producer}")
+        lines.append(f"- Producer / winery: {producer}")
     if region:
-        known.append(f"- Region or country: {region}")
+        lines.append(f"- Region or appellation: {region}")
     if varietal:
-        known.append(f"- Grape / varietal: {varietal}")
+        lines.append(f"- Grape / varietal (as entered by staff): {varietal}")
     if vintage:
-        known.append(f"- Vintage: {vintage}")
-    if known:
-        lines.append("")
-        lines.append(
-            "The following details are CONFIRMED FACTS provided by staff. Treat them "
-            "as authoritative ground truth — your output MUST be consistent with them "
-            "and must NOT contradict them (especially producer, region, and country):"
-        )
-        lines.extend(known)
-        lines.append("")
-        lines.append(
-            "Use these facts to identify the exact wine, then fill in the remaining "
-            "fields accurately. If a confirmed fact conflicts with your assumptions, "
-            "the confirmed fact wins."
-        )
+        lines.append(f"- Vintage: {vintage}")
+    lines.append("")
+    lines.append(
+        "How to weight these clues:\n"
+        "- PRODUCER and REGION/APPELLATION are strong anchors — the wine you return "
+        "MUST come from this producer and be consistent with this region/country. "
+        "Do not substitute a different producer or relocate them.\n"
+        "- The WINE NAME and VARIETAL fields are hints that staff may have entered "
+        "imprecisely. A word placed in the varietal box is often NOT a grape — it may "
+        "be the cuvée name, the bottling/proprietary name, or the appellation. If the "
+        "entered 'varietal' is not a real grape, or doesn't grow in this region, treat "
+        "it as the wine's name/cuvée and infer the ACTUAL grape from the real wine.\n"
+        "- Reconcile everything to one specific bottling. If the clues genuinely "
+        "conflict (e.g. a grape that cannot exist in that appellation), trust the "
+        "producer + region, flag it in 'identification', and set confidence to low.\n"
+        "Use the 'identification' and 'confidence' fields to report exactly what you "
+        "landed on so staff can catch a wrong match."
+    )
     return "\n".join(lines)
 
 

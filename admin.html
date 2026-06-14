@@ -653,8 +653,17 @@ function runResearch() {
   var msgEl = document.getElementById('research-msg');
   msgEl.innerHTML = '<span class="spinner"></span> Researching…';
   apiFetch('/api/wines/research', { method: 'POST', body: JSON.stringify(payload) }).then(function(data) {
-    msgEl.textContent = '✓ Research complete — form populated';
     populateWineForm(data);
+    var conf = (data.confidence || '').toLowerCase();
+    var color = conf === 'high' ? '#6bbf59' : conf === 'low' ? '#d9534f' : '#c4a875';
+    var html = '✓ Form populated.';
+    if (data.identification) {
+      html += '<div style="margin-top:.4rem;color:' + color + ';">' +
+        (conf ? '<strong>Confidence: ' + esc(conf) + '</strong> — ' : '') +
+        esc(data.identification) +
+        '</div><div style="margin-top:.3rem;color:#888;">Double-check this is the right wine before saving.</div>';
+    }
+    msgEl.innerHTML = html;
   }).catch(function(e) { msgEl.textContent = '✗ ' + e.message; });
 }
 
