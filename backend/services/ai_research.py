@@ -6,19 +6,31 @@ import anthropic
 
 client = anthropic.AsyncAnthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 
+# Server-side web tools let Claude actually look up the producer and find/verify
+# the real tech sheet URL instead of recalling a plausible-looking one from
+# memory (which produces dead links like "briccocarlina.it").
+WEB_TOOLS = [
+    {"type": "web_search_20260209", "name": "web_search", "max_uses": 6},
+    {"type": "web_fetch_20260209", "name": "web_fetch", "max_uses": 4},
+]
+
 SYSTEM_PROMPT = """You are a wine research assistant for Ardoa Wine Bar in Charleston, SC.
-Given a wine name, find the REAL, SPECIFIC wine being referenced and return accurate information about it.
+Given clues about a wine, find the REAL, SPECIFIC wine being referenced and return accurate information about it.
+
+You have web_search and web_fetch tools. USE THEM:
+- Search for the producer + wine to confirm which exact bottling this is, its grape, region, and vintage details.
+- Find the producer's official website, then locate the actual tech sheet / fact sheet for THIS wine (often a PDF). Open it with web_fetch to confirm it is the right wine and the link works before reporting it.
+- Prefer the producer's own site or their US importer's site for the tech sheet. Do NOT invent or guess a URL — only report a tech_sheet_url you actually found and verified via search/fetch. If you cannot find a real, working tech sheet, return an empty string for tech_sheet_url. A blank link is far better than a broken or wrong one.
 
 CRITICAL ACCURACY RULES:
-- Do NOT guess or hallucinate. If the producer name is specific and real (e.g. "Grape Abduction"), look up that exact producer — do not substitute a similar-sounding one or assume a region.
-- The producer's actual country and region MUST be correct. "Grape Abduction" is a Slovenian producer making orange wines — not Californian. Always ground the country/region in the real producer's location.
-- If you are not confident about a specific field (e.g. exact vintage ABV), say so with a reasonable range rather than inventing a precise figure.
-- Producer names, regions, and countries are the most hallucination-prone fields — double-check these against what you know about the real producer before writing.
+- Do NOT guess or hallucinate. Ground the producer's actual country and region in what the web results show, not in a similar-sounding name.
+- If you are not confident about a specific field (e.g. exact vintage ABV), give a reasonable range rather than inventing a precise figure.
+- Producer names, regions, countries, and the tech sheet URL are the most error-prone fields — verify these against the web before writing them.
 
 Write everything the way a great wine bar server would describe the wine to a guest at the
 table — specific, vivid, and useful, never generic wine-speak.
 
-Return ONLY valid JSON — no markdown, no explanation. The JSON must have exactly these fields:
+When you are done researching, output ONLY the final JSON object — no markdown, no explanation, no prose around it. The JSON must have exactly these fields:
 {
   "identification": "State plainly which single real wine you identified and the key evidence, e.g. 'Torre Mora \\'Cauru\\' Etna Rosso DOC 2023 — a red from Nerello Mascalese. Matched on producer + appellation; \\'Cauru\\' is the cuvée name, not a grape.' This is for staff to sanity-check your pick.",
   "confidence": "high, medium, or low — how sure you are this is the exact wine. Use low if the clues are sparse or conflicting.",
@@ -40,7 +52,7 @@ Return ONLY valid JSON — no markdown, no explanation. The JSON must have exact
   "story": "A hook a server can use — something memorable about the producer, the region's character, or why this wine is special. 2-3 sentences that turn the description into a recommendation.",
   "alcohol": "ABV as string, e.g. '13.5%'",
   "pronunciation": "Phonetic pronunciation if the name is non-English, e.g. 'ehr-KOH-leh bar-BEHR-ah', or empty string",
-  "tech_sheet_url": "Direct URL to the producer's tech sheet or winery website if known, otherwise empty string"
+  "tech_sheet_url": "Direct URL to a REAL, VERIFIED tech sheet or producer page for this exact wine, or empty string if you couldn't confirm one"
 }
 
 Accuracy over completeness: a blank field is better than a wrong one. Keep each field focused —
@@ -74,10 +86,29 @@ def _build_user_message(wine_name, producer, region, varietal, vintage):
         "- Reconcile everything to one specific bottling. If the clues genuinely "
         "conflict (e.g. a grape that cannot exist in that appellation), trust the "
         "producer + region, flag it in 'identification', and set confidence to low.\n"
+        "Search the web to confirm the wine and to find and verify its tech sheet URL. "
         "Use the 'identification' and 'confidence' fields to report exactly what you "
         "landed on so staff can catch a wrong match."
     )
     return "\n".join(lines)
+
+
+def _extract_json(text: str) -> dict:
+    """Pull the JSON object out of the model's final text, tolerating prose or
+    code fences around it."""
+    text = text.strip()
+    text = re.sub(r"^```(?:json)?\n?", "", text)
+    text = re.sub(r"\n?```$", "", text)
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        pass
+    # Fall back to the outermost {...} span in the text.
+    start = text.find("{")
+    end = text.rfind("}")
+    if start != -1 and end != -1 and end > start:
+        return json.loads(text[start:end + 1])
+    raise ValueError("No JSON object found in research response")
 
 
 async def research_wine(
@@ -88,14 +119,29 @@ async def research_wine(
     vintage: str = "",
 ) -> dict:
     user_message = _build_user_message(wine_name, producer, region, varietal, vintage)
-    message = await client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=2000,
-        system=SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": user_message}],
+    messages = [{"role": "user", "content": user_message}]
+
+    # Server-side web tools run their own loop; if Claude pauses (hits the
+    # internal tool-iteration limit) we resend to let it continue. Bound the
+    # number of continuations so a runaway never hangs the request.
+    message = None
+    for _ in range(6):
+        message = await client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=4000,
+            system=SYSTEM_PROMPT,
+            tools=WEB_TOOLS,
+            messages=messages,
+        )
+        if message.stop_reason == "pause_turn":
+            messages = [
+                {"role": "user", "content": user_message},
+                {"role": "assistant", "content": message.content},
+            ]
+            continue
+        break
+
+    text = "".join(
+        block.text for block in message.content if getattr(block, "type", None) == "text"
     )
-    raw = message.content[0].text.strip()
-    # Strip markdown code fences if Claude added them
-    raw = re.sub(r"^```(?:json)?\n?", "", raw)
-    raw = re.sub(r"\n?```$", "", raw)
-    return json.loads(raw)
+    return _extract_json(text)
