@@ -319,7 +319,8 @@
 
 <script>
 // ===== Auth =====
-var authHeader = sessionStorage.getItem('ardoa-auth') || '';
+// Persist in localStorage so login survives browser restarts (log in once).
+var authHeader = localStorage.getItem('ardoa-auth') || '';
 var authResolvers = []; // pending callbacks waiting for credentials
 
 function getAuthHeader() { return authHeader; }
@@ -342,7 +343,7 @@ function saveAuth() {
   var p = document.getElementById('auth-pass').value.trim();
   if (!u || !p) return;
   authHeader = 'Basic ' + btoa(u + ':' + p);
-  sessionStorage.setItem('ardoa-auth', authHeader);
+  localStorage.setItem('ardoa-auth', authHeader);
   document.getElementById('auth-modal').classList.remove('open');
   document.getElementById('auth-status').textContent = 'Logged in as ' + u;
   // Resolve any requests that were waiting for credentials
@@ -634,6 +635,7 @@ function reorderWine(id, newOrder) {
 function runResearch() {
   var name = document.getElementById('research-name').value.trim();
   if (!name) return;
+  if (!confirm('Run AI research on "' + name + '"?\n\nThis sends a request to Claude and uses API tokens (a small cost per lookup).')) return;
   var payload = {
     name: name,
     producer: document.getElementById('research-producer').value.trim(),
