@@ -10,11 +10,14 @@ client = anthropic.AsyncAnthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 # the real tech sheet URL instead of recalling a plausible-looking one from
 # memory (which produces dead links like "briccocarlina.it").
 WEB_TOOLS = [
-    {"type": "web_search_20260209", "name": "web_search", "max_uses": 6},
-    {"type": "web_fetch_20260209", "name": "web_fetch", "max_uses": 4},
+    {"type": "web_search_20260209", "name": "web_search", "max_uses": 3},
+    {"type": "web_fetch_20260209", "name": "web_fetch", "max_uses": 2, "max_content_tokens": 8000},
 ]
 
-SYSTEM_PROMPT = """You are a wine research assistant for Ardoa Wine Bar in Charleston, SC.
+# Cache-control on the system prompt so the large instruction block is only
+# billed as input tokens on the first call; subsequent calls within the cache
+# window (~5 min) pay the cheaper cached rate.
+SYSTEM_PROMPT = [{"type": "text", "text": """You are a wine research assistant for Ardoa Wine Bar in Charleston, SC.
 Given clues about a wine, find the REAL, SPECIFIC wine being referenced and return accurate information about it.
 
 You have web_search and web_fetch tools. USE THEM:
@@ -56,7 +59,7 @@ When you are done researching, output ONLY the final JSON object — no markdown
 }
 
 Accuracy over completeness: a blank field is better than a wrong one. Keep each field focused —
-a server should be able to glance at any one line and use it immediately."""
+a server should be able to glance at any one line and use it immediately.""", "cache_control": {"type": "ephemeral"}}]
 
 
 def _build_user_message(wine_name, producer, region, varietal, vintage):
@@ -143,6 +146,7 @@ async def research_wine_stream(
             system=SYSTEM_PROMPT,
             tools=WEB_TOOLS,
             messages=messages,
+            betas=["prompt-caching-2024-07-31"],
         ) as stream:
             async for event in stream:
                 etype = getattr(event, "type", None)
