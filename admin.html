@@ -689,6 +689,10 @@ function runResearch() {
 function renderResearchResult(data) {
   var msgEl = document.getElementById('research-msg');
   populateWineForm(data);
+  // Clear the research inputs so the next lookup starts fresh (the results now
+  // live in the form fields below).
+  ['research-name', 'research-producer', 'research-region', 'research-varietal', 'research-vintage']
+    .forEach(function(id) { var el = document.getElementById(id); if (el) el.value = ''; });
   var conf = (data.confidence || '').toLowerCase();
   var color = conf === 'high' ? '#6bbf59' : conf === 'low' ? '#d9534f' : '#c4a875';
   var html = '✓ Form populated.';
