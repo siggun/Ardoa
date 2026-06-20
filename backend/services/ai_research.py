@@ -146,7 +146,6 @@ async def research_wine_stream(
             system=SYSTEM_PROMPT,
             tools=WEB_TOOLS,
             messages=messages,
-            betas=["prompt-caching-2024-07-31"],
         ) as stream:
             async for event in stream:
                 etype = getattr(event, "type", None)
