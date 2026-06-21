@@ -26,10 +26,15 @@ NEW_WINE_COLUMNS = [
 
 
 def add_column(conn, table: str, column: str, col_type: str):
+    # Each ALTER runs in its own transaction so a failure on one column (e.g.
+    # "already exists") doesn't abort the rest. In PostgreSQL the first error
+    # poisons the whole transaction otherwise.
     try:
         conn.execute(text(f'ALTER TABLE "{table}" ADD COLUMN "{column}" {col_type}'))
+        conn.commit()
         print(f"  + {table}.{column}")
     except Exception as e:
+        conn.rollback()
         msg = str(e).lower()
         if "duplicate" in msg or "already exists" in msg or "42701" in msg:
             print(f"  ~ {table}.{column} (already exists)")
@@ -42,9 +47,12 @@ def main():
         print("Migrating wine table…")
         for col, ctype in NEW_WINE_COLUMNS:
             add_column(conn, "wine", col, ctype)
-        conn.commit()
     print("Done.")
 
 
 if __name__ == "__main__":
-    main()
+    # Never let a migration hiccup stop the web server from booting.
+    try:
+        main()
+    except Exception as e:
+        print(f"Migration skipped due to error: {e}", file=sys.stderr)
