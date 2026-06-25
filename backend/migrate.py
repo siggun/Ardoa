@@ -47,6 +47,17 @@ def main():
         print("Migrating wine table…")
         for col, ctype in NEW_WINE_COLUMNS:
             add_column(conn, "wine", col, ctype)
+        # pronunciation_guide_only was removed from the model but still exists
+        # in the DB with NOT NULL and no default — every INSERT fails without this.
+        try:
+            conn.execute(text(
+                "ALTER TABLE wine ALTER COLUMN pronunciation_guide_only SET DEFAULT false"
+            ))
+            conn.commit()
+            print("  ~ wine.pronunciation_guide_only: default set to false")
+        except Exception as e:
+            conn.rollback()
+            print(f"  ~ wine.pronunciation_guide_only default (skipped): {e}")
     print("Done.")
 
 
