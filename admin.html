@@ -423,7 +423,7 @@ function wineActions(w) {
   return sheet +
     '<button class="btn btn-secondary btn-sm" onclick="editWine(' + w.id + ')">Edit</button>' +
     '<button class="btn btn-secondary btn-sm" onclick="archiveWine(' + w.id + ')">Archive</button>' +
-    '<button class="btn btn-danger btn-sm" onclick="deleteWine(' + w.id + ',\'' + esc(w.name) + '\')">Delete</button>';
+    '<button class="btn btn-danger btn-sm" onclick="deleteWine(' + w.id + ')">Delete</button>';
 }
 
 // A filled in-machine slot row
@@ -513,6 +513,7 @@ function loadArchivedWines() {
   apiFetch('/api/wines/archived').then(function(wines) {
     var tbody = document.getElementById('archived-tbody');
     tbody.innerHTML = wines.map(function(w) {
+      wineRegistry[w.id] = w;  // so deleteWine can look up the name
       return '<tr>' +
         '<td>' + esc(w.name) + '</td>' +
         '<td>' + esc(w.vintage) + '</td>' +
@@ -521,7 +522,7 @@ function loadArchivedWines() {
         '<td>' + esc(w.replaced_by || '') + '</td>' +
         '<td>' +
           '<button class="btn btn-secondary btn-sm" onclick="restoreWine(' + w.id + ')">Restore</button> ' +
-          '<button class="btn btn-danger btn-sm" onclick="deleteWine(' + w.id + ',\'' + esc(w.name) + '\')">Delete</button>' +
+          '<button class="btn btn-danger btn-sm" onclick="deleteWine(' + w.id + ')">Delete</button>' +
         '</td></tr>';
     }).join('');
   });
@@ -626,8 +627,14 @@ function restoreWine(id) {
   }).catch(function(e) { showMsg('wines-msg', e.message, true); });
 }
 
-function deleteWine(id, name) {
-  if (!confirm('Delete "' + name + '"? This cannot be undone.')) return;
+function deleteWine(id) {
+  // Look up the name from the registry — passing it through the onclick
+  // attribute breaks when the name contains apostrophes (e.g. 'Cauru').
+  var w = wineRegistry[id];
+  var name = w ? w.name : 'this wine';
+  // Two-step confirmation guards against an accidental single click.
+  if (!confirm('Delete "' + name + '"?\n\nThis permanently removes the wine and cannot be undone.')) return;
+  if (!confirm('Are you sure? This is your last chance to cancel.\n\nClick OK to permanently delete "' + name + '".')) return;
   apiFetch('/api/wines/' + id, { method: 'DELETE' }).then(function() {
     loadWines();
     showMsg('wines-msg', 'Wine deleted.');
