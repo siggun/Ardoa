@@ -126,18 +126,22 @@ def get_wine(wine_id: int, session: Session = Depends(get_session)):
 
 @router.post("", dependencies=[Depends(admin_required)])
 def create_wine(data: WineIn, session: Session = Depends(get_session)):
-    max_order = session.exec(select(Wine.display_order).order_by(Wine.display_order.desc())).first()
-    wine = Wine(
-        **{k: v for k, v in data.model_dump().items() if k != "food_pairings"},
-        display_order=(max_order or 0) + 1,
-    )
-    session.add(wine)
-    session.flush()
-    for i, p in enumerate(data.food_pairings):
-        session.add(WineFoodPairing(wine_id=wine.id, item=p.item, why=p.why, sort_order=i))
-    session.commit()
-    session.refresh(wine)
-    return wine_to_dict(wine)
+    try:
+        max_order = session.exec(select(Wine.display_order).order_by(Wine.display_order.desc())).first()
+        wine = Wine(
+            **{k: v for k, v in data.model_dump().items() if k != "food_pairings"},
+            display_order=(max_order or 0) + 1,
+        )
+        session.add(wine)
+        session.flush()
+        for i, p in enumerate(data.food_pairings):
+            session.add(WineFoodPairing(wine_id=wine.id, item=p.item, why=p.why, sort_order=i))
+        session.commit()
+        session.refresh(wine)
+        return wine_to_dict(wine)
+    except Exception as e:
+        session.rollback()
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.put("/{wine_id}", dependencies=[Depends(admin_required)])
@@ -145,17 +149,20 @@ def update_wine(wine_id: int, data: WineIn, session: Session = Depends(get_sessi
     wine = session.get(Wine, wine_id)
     if not wine:
         raise HTTPException(status_code=404, detail="Wine not found")
-    for k, v in data.model_dump(exclude={"food_pairings"}).items():
-        setattr(wine, k, v)
-    # Replace pairings
-    for p in wine.food_pairings:
-        session.delete(p)
-    session.flush()
-    for i, p in enumerate(data.food_pairings):
-        session.add(WineFoodPairing(wine_id=wine.id, item=p.item, why=p.why, sort_order=i))
-    session.commit()
-    session.refresh(wine)
-    return wine_to_dict(wine)
+    try:
+        for k, v in data.model_dump(exclude={"food_pairings"}).items():
+            setattr(wine, k, v)
+        for p in wine.food_pairings:
+            session.delete(p)
+        session.flush()
+        for i, p in enumerate(data.food_pairings):
+            session.add(WineFoodPairing(wine_id=wine.id, item=p.item, why=p.why, sort_order=i))
+        session.commit()
+        session.refresh(wine)
+        return wine_to_dict(wine)
+    except Exception as e:
+        session.rollback()
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.patch("/{wine_id}/archive", dependencies=[Depends(admin_required)])

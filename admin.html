@@ -395,8 +395,9 @@ function closeModal(id) { document.getElementById(id).classList.remove('open'); 
 function showMsg(elId, msg, isErr) {
   var el = document.getElementById(elId);
   if (!el) return;
-  el.innerHTML = '<div class="msg ' + (isErr ? 'msg-err' : 'msg-ok') + '">' + msg + '</div>';
-  setTimeout(function() { el.innerHTML = ''; }, 4000);
+  el.innerHTML = '<div class="msg ' + (isErr ? 'msg-err' : 'msg-ok') + '">' + msg + (isErr ? ' <span style="float:right;cursor:pointer;opacity:.6" onclick="this.parentNode.parentNode.innerHTML=\'\'">✕</span>' : '') + '</div>';
+  if (!isErr) setTimeout(function() { el.innerHTML = ''; }, 4000);
+  // Errors stay until dismissed so they can be read / screenshotted
 }
 
 // ===== WINES =====
