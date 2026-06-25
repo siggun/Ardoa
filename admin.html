@@ -653,42 +653,50 @@ function runResearch() {
   var msgEl = document.getElementById('research-msg');
   msgEl.innerHTML = '<span class="spinner"></span> Starting research…';
 
-  // Stream live progress: the backend sends Server-Sent Events as Claude works
-  // (searching the web, reading the tech sheet, writing notes), then a final result.
-  fetch('/api/wines/research', {
-    method: 'POST',
-    headers: Object.assign({ 'Content-Type': 'application/json' }, authHeader ? { 'Authorization': authHeader } : {}),
-    body: JSON.stringify(payload),
-  }).then(function(resp) {
-    if (resp.status === 401) { promptAuth(); throw new Error('Please log in, then run research again.'); }
-    if (!resp.ok || !resp.body) throw new Error('Research failed (' + resp.status + ').');
-    var reader = resp.body.getReader();
-    var decoder = new TextDecoder();
-    var buf = '';
-    function pump() {
-      return reader.read().then(function(r) {
-        if (r.done) return;
-        buf += decoder.decode(r.value, { stream: true });
-        var parts = buf.split('\n\n');
-        buf = parts.pop();
-        parts.forEach(function(chunk) {
-          var line = chunk.replace(/^data: ?/, '').trim();
-          if (!line) return;
-          var ev;
-          try { ev = JSON.parse(line); } catch (e) { return; }
-          if (ev.type === 'status') {
-            msgEl.innerHTML = '<span class="spinner"></span> ' + esc(ev.message);
-          } else if (ev.type === 'result') {
-            renderResearchResult(ev.data);
-          } else if (ev.type === 'error') {
-            msgEl.textContent = '✗ ' + ev.message;
-          }
-        });
-        return pump();
-      });
-    }
-    return pump();
-  }).catch(function(e) { msgEl.textContent = '✗ ' + e.message; });
+  // Job-queue pattern: POST starts the job server-side (returns job_id immediately),
+  // then we poll GET /research/{job_id} every 2 seconds for status updates.
+  // The job keeps running on the server even if the browser tab sleeps or the
+  // network drops — no tokens wasted on reconnect.
+  var headers = Object.assign({ 'Content-Type': 'application/json' }, authHeader ? { 'Authorization': authHeader } : {});
+  fetch('/api/wines/research', { method: 'POST', headers: headers, body: JSON.stringify(payload) })
+    .then(function(r) {
+      if (r.status === 401) { promptAuth(); throw new Error('Please log in, then try again.'); }
+      if (!r.ok) return r.text().then(function(t) { throw new Error('Failed to start research (' + r.status + '): ' + t.slice(0,200)); });
+      return r.json();
+    })
+    .then(function(body) {
+      var jobId = body.job_id;
+      var seenCount = 0;
+      var pollHeaders = authHeader ? { 'Authorization': authHeader } : {};
+      function poll() {
+        fetch('/api/wines/research/' + jobId, { headers: pollHeaders })
+          .then(function(r) { return r.json(); })
+          .then(function(job) {
+            // Show any new status messages since last poll
+            var newEvents = job.events.slice(seenCount);
+            seenCount = job.events.length;
+            if (newEvents.length) {
+              var last = newEvents[newEvents.length - 1];
+              msgEl.innerHTML = '<span class="spinner"></span> ' + esc(last.message);
+            }
+            if (job.status === 'done') {
+              renderResearchResult(job.result);
+            } else if (job.status === 'error') {
+              msgEl.textContent = '✗ ' + (job.error || 'Research failed.');
+            } else {
+              // Still running — poll again in 2 seconds
+              setTimeout(poll, 2000);
+            }
+          })
+          .catch(function(e) {
+            // Network blip — keep polling, the job is still running server-side
+            msgEl.innerHTML = '<span class="spinner"></span> Connection interrupted, retrying…';
+            setTimeout(poll, 3000);
+          });
+      }
+      setTimeout(poll, 2000);
+    })
+    .catch(function(e) { msgEl.textContent = '✗ ' + e.message; });
 }
 
 function renderResearchResult(data) {

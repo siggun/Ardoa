@@ -1,7 +1,8 @@
+import asyncio
 import json
+import uuid
 from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException
-from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from sqlmodel import Session, select
 
@@ -11,6 +12,38 @@ from backend.services.ai_research import research_wine_stream
 from backend.models import Wine, WineFoodPairing
 
 router = APIRouter(prefix="/api/wines", tags=["wines"])
+
+# In-memory job store. Jobs live until the server restarts (Railway recycles
+# containers infrequently). Each entry: {status, events, result, error}
+_jobs: dict = {}
+
+
+def _new_job() -> str:
+    jid = str(uuid.uuid4())
+    _jobs[jid] = {"status": "running", "events": [], "result": None, "error": None}
+    return jid
+
+
+async def _run_job(jid: str, data):
+    try:
+        async for event in research_wine_stream(
+            data.name,
+            producer=data.producer,
+            region=data.region,
+            varietal=data.varietal,
+            vintage=data.vintage,
+        ):
+            if event.get("type") == "result":
+                _jobs[jid]["result"] = event["data"]
+                _jobs[jid]["status"] = "done"
+            elif event.get("type") == "error":
+                _jobs[jid]["error"] = event["message"]
+                _jobs[jid]["status"] = "error"
+            else:
+                _jobs[jid]["events"].append(event)
+    except Exception as e:
+        _jobs[jid]["error"] = str(e)
+        _jobs[jid]["status"] = "error"
 
 
 class FoodPairingIn(BaseModel):
@@ -246,22 +279,26 @@ def delete_wine(wine_id: int, session: Session = Depends(get_session)):
 
 
 @router.post("/research", dependencies=[Depends(admin_required)])
-async def research_wine_endpoint(data: ResearchIn):
-    async def event_stream():
-        try:
-            async for event in research_wine_stream(
-                data.name,
-                producer=data.producer,
-                region=data.region,
-                varietal=data.varietal,
-                vintage=data.vintage,
-            ):
-                yield f"data: {json.dumps(event)}\n\n"
-        except Exception as e:
-            yield f"data: {json.dumps({'type': 'error', 'message': str(e)})}\n\n"
+async def start_research(data: ResearchIn):
+    """Start a research job and return a job_id immediately.
+    The job runs in the background — poll GET /research/{job_id} for progress.
+    This means a dropped connection (laptop sleep, network blip) never wastes tokens.
+    """
+    jid = _new_job()
+    asyncio.create_task(_run_job(jid, data))
+    return {"job_id": jid}
 
-    return StreamingResponse(
-        event_stream(),
-        media_type="text/event-stream",
-        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
-    )
+
+@router.get("/research/{job_id}", dependencies=[Depends(admin_required)])
+def poll_research(job_id: str):
+    """Poll for job status. Returns accumulated status events plus the final
+    result once done. The client drains 'events' by passing ?after=N."""
+    job = _jobs.get(job_id)
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found")
+    return {
+        "status": job["status"],      # running | done | error
+        "events": job["events"],      # list of {type:status, message:...}
+        "result": job["result"],      # filled when status==done
+        "error": job["error"],        # filled when status==error
+    }
