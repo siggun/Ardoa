@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from sqlalchemy import text
+from sqlalchemy import inspect, text
 
 from backend.database import create_db_and_tables, engine
 from backend.migrate import main as run_migrations
@@ -36,6 +36,22 @@ app.add_middleware(
 app.include_router(wines.router)
 app.include_router(beers.router)
 app.include_router(food.router)
+
+
+@app.get("/api/debug/schema")
+def debug_schema():
+    """Reports the actual columns in the live wine table so we can confirm the
+    migration ran. Visit this URL in a browser to see ground truth."""
+    try:
+        cols = [c["name"] for c in inspect(engine).get_columns("wine")]
+        needed = ["body", "aromatics", "palate", "structure", "finish",
+                  "winemaking", "story", "tech_sheet_url", "pronunciation"]
+        return {
+            "wine_columns": cols,
+            "missing": [c for c in needed if c not in cols],
+        }
+    except Exception as e:
+        return {"error": str(e)}
 
 
 @app.get("/api/health")
