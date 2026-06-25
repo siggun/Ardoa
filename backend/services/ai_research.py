@@ -63,35 +63,40 @@ a server should be able to glance at any one line and use it immediately.""", "c
 
 
 def _build_user_message(wine_name, producer, region, varietal, vintage):
-    lines = ["Identify the single real wine that best matches ALL of these clues taken together:"]
+    lines = [
+        "A bar staff member read the following off a wine bottle and typed it into "
+        "a form. They may have put things in the wrong fields, misspelled names, or "
+        "confused the producer with the wine name. Treat ALL of these as rough clues "
+        "— not guaranteed facts — and use web search to identify the single real wine "
+        "that best fits the overall picture."
+    ]
     lines.append("")
     if wine_name:
-        lines.append(f"- Wine name / bottling: {wine_name}")
+        lines.append(f"- 'Wine name' field: {wine_name}")
     if producer:
-        lines.append(f"- Producer / winery: {producer}")
+        lines.append(f"- 'Producer' field: {producer}")
     if region:
-        lines.append(f"- Region or appellation: {region}")
+        lines.append(f"- 'Region' field: {region}")
     if varietal:
-        lines.append(f"- Grape / varietal (as entered by staff): {varietal}")
+        lines.append(f"- 'Varietal/grape' field: {varietal}")
     if vintage:
-        lines.append(f"- Vintage: {vintage}")
+        lines.append(f"- 'Vintage' field: {vintage}")
     lines.append("")
     lines.append(
-        "How to weight these clues:\n"
-        "- PRODUCER and REGION/APPELLATION are strong anchors — the wine you return "
-        "MUST come from this producer and be consistent with this region/country. "
-        "Do not substitute a different producer or relocate them.\n"
-        "- The WINE NAME and VARIETAL fields are hints that staff may have entered "
-        "imprecisely. A word placed in the varietal box is often NOT a grape — it may "
-        "be the cuvée name, the bottling/proprietary name, or the appellation. If the "
-        "entered 'varietal' is not a real grape, or doesn't grow in this region, treat "
-        "it as the wine's name/cuvée and infer the ACTUAL grape from the real wine.\n"
-        "- Reconcile everything to one specific bottling. If the clues genuinely "
-        "conflict (e.g. a grape that cannot exist in that appellation), trust the "
-        "producer + region, flag it in 'identification', and set confidence to low.\n"
-        "Search the web to confirm the wine and to find and verify its tech sheet URL. "
-        "Use the 'identification' and 'confidence' fields to report exactly what you "
-        "landed on so staff can catch a wrong match."
+        "How to interpret these clues:\n"
+        "- Any value could be in the wrong field. A word in 'Producer' might actually "
+        "be the wine's label name, and vice versa. A word in 'Varietal' might be a "
+        "cuvée name, appellation, or brand — not a grape.\n"
+        "- Use the COMBINATION of all clues to triangulate the most likely wine. "
+        "Search the web for the words together and see what comes up — that's often "
+        "more reliable than trusting any single field.\n"
+        "- The VINTAGE and COUNTRY/REGION are usually the most reliably entered "
+        "fields since they're hard to confuse.\n"
+        "- If you identify the wine but some clues don't fit perfectly (e.g. a word "
+        "that turned out to be the label name, not the producer), explain it in "
+        "'identification' so staff can verify.\n"
+        "- Set confidence to 'low' if the clues are sparse or contradictory.\n"
+        "Search the web to confirm the wine and find its real tech sheet URL."
     )
     return "\n".join(lines)
 
