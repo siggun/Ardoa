@@ -7,12 +7,17 @@ from fastapi.staticfiles import StaticFiles
 from sqlalchemy import text
 
 from backend.database import create_db_and_tables, engine
+from backend.migrate import main as run_migrations
 from backend.routers import beers, food, wines
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     create_db_and_tables()
+    try:
+        run_migrations()
+    except Exception as e:
+        print(f"Migration warning (non-fatal): {e}")
     yield
 
 
