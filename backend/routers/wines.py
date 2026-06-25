@@ -24,8 +24,11 @@ def _new_job() -> str:
     return jid
 
 
+RESEARCH_TIMEOUT_SECONDS = 600  # 10 min safety cap on a single research job
+
+
 async def _run_job(jid: str, data):
-    try:
+    async def _drive():
         async for event in research_wine_stream(
             data.name,
             producer=data.producer,
@@ -41,6 +44,15 @@ async def _run_job(jid: str, data):
                 _jobs[jid]["status"] = "error"
             else:
                 _jobs[jid]["events"].append(event)
+
+    try:
+        await asyncio.wait_for(_drive(), timeout=RESEARCH_TIMEOUT_SECONDS)
+    except asyncio.TimeoutError:
+        _jobs[jid]["error"] = (
+            "Research timed out after 10 minutes. The wine may be hard to find — "
+            "try adding more details (producer, region) and run it again."
+        )
+        _jobs[jid]["status"] = "error"
     except Exception as e:
         _jobs[jid]["error"] = str(e)
         _jobs[jid]["status"] = "error"

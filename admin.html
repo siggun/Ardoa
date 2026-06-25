@@ -651,7 +651,23 @@ function runResearch() {
   if (!label) { alert('Please fill in at least one field before researching.'); return; }
   if (!confirm('Run AI research on "' + label + '"?\n\nThis sends a request to Claude and uses API tokens (a small cost per lookup).')) return;
   var msgEl = document.getElementById('research-msg');
-  msgEl.innerHTML = '<span class="spinner"></span> Starting research…';
+
+  // Live elapsed timer: a 1-second tick re-renders the current status line with
+  // how long the job has been running, so you can see it's working (not frozen).
+  var startTime = Date.now();
+  var currentMsg = 'Starting research…';
+  function fmtElapsed() {
+    var s = Math.floor((Date.now() - startTime) / 1000);
+    var m = Math.floor(s / 60);
+    return m > 0 ? (m + 'm ' + (s % 60) + 's') : (s + 's');
+  }
+  function renderStatus() {
+    msgEl.innerHTML = '<span class="spinner"></span> ' + esc(currentMsg) +
+      ' <span style="opacity:.6">(' + fmtElapsed() + ')</span>';
+  }
+  renderStatus();
+  var timerId = setInterval(renderStatus, 1000);
+  function stopTimer() { clearInterval(timerId); }
 
   // Job-queue pattern: POST starts the job server-side (returns job_id immediately),
   // then we poll GET /research/{job_id} every 2 seconds for status updates.
@@ -676,12 +692,14 @@ function runResearch() {
             var newEvents = job.events.slice(seenCount);
             seenCount = job.events.length;
             if (newEvents.length) {
-              var last = newEvents[newEvents.length - 1];
-              msgEl.innerHTML = '<span class="spinner"></span> ' + esc(last.message);
+              currentMsg = newEvents[newEvents.length - 1].message;
+              renderStatus();
             }
             if (job.status === 'done') {
+              stopTimer();
               renderResearchResult(job.result);
             } else if (job.status === 'error') {
+              stopTimer();
               msgEl.textContent = '✗ ' + (job.error || 'Research failed.');
             } else {
               // Still running — poll again in 2 seconds
@@ -690,13 +708,14 @@ function runResearch() {
           })
           .catch(function(e) {
             // Network blip — keep polling, the job is still running server-side
-            msgEl.innerHTML = '<span class="spinner"></span> Connection interrupted, retrying…';
+            currentMsg = 'Connection interrupted, retrying…';
+            renderStatus();
             setTimeout(poll, 3000);
           });
       }
       setTimeout(poll, 2000);
     })
-    .catch(function(e) { msgEl.textContent = '✗ ' + e.message; });
+    .catch(function(e) { stopTimer(); msgEl.textContent = '✗ ' + e.message; });
 }
 
 function renderResearchResult(data) {
